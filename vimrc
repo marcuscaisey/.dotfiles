@@ -41,6 +41,8 @@ Plug 'justinmk/vim-sneak'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'bkad/camelcasemotion'
 
+" Text objects
+Plug 'wellle/targets.vim'
 call plug#end()
 
 
