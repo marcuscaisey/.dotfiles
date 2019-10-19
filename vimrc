@@ -43,6 +43,8 @@ Plug 'bkad/camelcasemotion'
 
 " Text objects
 Plug 'wellle/targets.vim'
+Plug 'michaeljsmith/vim-indent-object'
+
 call plug#end()
 
 
