@@ -1,0 +1,99 @@
+#!/bin/bash
+
+errors_path=~/.dotfiles/errors
+cecho() { echo "$(tput setaf ${ci:-1})$1$(tput sgr0)" && ci=$(( (${ci:-1} % 6) + 1 )); }
+
+if [ "$1" = "debian" -o "$1" = "ubuntu" -o "$1" = "mac" ]; then os="$1"; else cecho "Invalid os given\n" && exit 1; fi
+
+if [ "$os" = "debian" -o "$os" = "ubuntu" ]; then
+    cecho "Updating package list..."
+    sudo apt update  2> >(tee -a $errors_path)
+
+    cecho "Upgrading packages..."
+    sudo apt upgrade -y  2> >(tee -a $errors_path)
+
+    if [ "$os" = debian ]; then
+        cecho "Installing curl..."
+        debian_pkgs='curl'
+        for pkg in $debian_pkgs; do
+            sudo apt install -y $pkg 2> >(tee -a $errors_path)
+        done
+    fi
+
+    cecho "Installing zsh, tmux, htop, cmake, ranger, vim, node, npm, fd, ripgrep..."
+    shared_pkgs='zsh tmux htop cmake ranger vim nodejs npm fd-find ripgrep'
+    for pkg in $shared_pkgs; do
+        sudo apt install -y $pkg 2> >(tee -a $errors_path)
+    done
+
+    cecho "Installing rust..."
+    { curl https://sh.rustup.rs -sSf | sh -s -- -y; } 2> >(tee -a $errors_path)
+
+    if [ $? -eq 0 ]; then
+        cecho "Installing exa..."
+        ~/.cargo/bin/cargo install exa 2> >(tee -a $errors_path)
+
+        cecho "Installing bat..."
+        ~/.cargo/bin/cargo install bat 2> >(tee -a $errors_path)
+    fi
+
+    cecho "Installing fzf..."
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install 2> >(tee -a $errors_path)
+
+elif [ "$os" = "mac" ]; then
+    cecho "Installing homebrew..."
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 2> >(tee -a $errors_path)
+
+    cecho "Installing zsh, git, tmux, htop, exa, vim, sed, grep, ranger, node, npm, fzf, fd, bat, ripgrep, vim..."
+    brew install zsh git tmux htop exa vim gnu-sed grep ranger nodejs npm fzf fd bat ripgrep vim 2> >(tee -a $errors_path)
+
+    cecho "Setting up fzf..."
+    $(brew --prefix)/opt/fzf/install 2> >(tee -a $errors_path)
+fi
+
+cecho "Installing Oh My Zsh..."
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended 2> >(tee -a $errors_path)
+
+cecho "Installing Oh My Zsh plugins: fast-syntax-highlighting, zsh-autosuggestions..."
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 2> >(tee -a $errors_path)
+git clone https://github.com/zdharma/fast-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting 2> >(tee -a $errors_path)
+
+cecho "Installing pure prompt zsh theme..."
+npm install --global pure-prompt 2> >(tee -a $errors_path)
+
+cecho "Installing improved nano syntax highlighting files..."
+git clone https://github.com/scopatz/nanorc.git ~/.nano 2> >(tee -a $errors_path)
+
+cecho "Installing tmux plugin manager..."
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 2> >(tee -a $errors_path)
+
+cecho "Installing tmux-256color terminfo"
+curl -LO http://invisible-island.net/datafiles/current/terminfo.src.gz 2> >(tee -a $errors_path)
+gunzip terminfo.src.gz 2> >(tee -a $errors_path)
+tic -x terminfo.src 2> >(tee -a $errors_path)
+rm terminfo.src 2> >(tee -a $errors_path)
+
+cecho "Installing pyenv..."
+{ curl https://pyenv.run | bash; } 2> >(tee -a $errors_path)
+
+cecho "Backing up and removing old dotfiles..."
+{ [ -f ~/.nanorc ] && cp -iv ~/.nanorc ~/.nanorc.old && rm -v ~/.nanorc; } 2> >(tee -a $errors_path)
+{ [ -f ~/.tmux.conf ] && cp -iv ~/.tmux.conf ~/.tmux.conf.old && rm -v ~/.tmux.conf; } 2> >(tee -a $errors_path)
+{ [ -f ~/.zshrc ] && cp -iv ~/.zshrc ~/.zshrc.old && rm -v ~/.zshrc; } 2> >(tee -a $errors_path)
+{ [ -f ~/.config/htop/htoprc ] && cp -iv ~/.config/htop/htoprc ~/.config/htop/htoprc.old && rm -v ~/.config/htop/htoprc; } 2> >(tee -a $errors_path)
+
+cecho "Symlinking to new dotfiles..."
+ln -isv ~/.dotfiles/nanorc ~/.nanorc 2> >(tee -a $errors_path)
+ln -isv ~/.dotfiles/tmux.conf ~/.tmux.conf 2> >(tee -a $errors_path)
+ln -isv ~/.dotfiles/zshrc ~/.zshrc 2> >(tee -a $errors_path)
+ln -isv ~/.dotfiles/vimrc ~/.vimrc 2> >(tee -a $errors_path)
+{ mkdir -pv ~/.config/htop && ln -isv ~/.dotfiles/htoprc ~/.config/htop/htoprc; } 2> >(tee -a $errors_path)
+
+cecho "Symlinking scripts directory..."
+ln -siv ~/.dotfiles/scripts ~/.scripts 2> >(tee -a $errors_path)
+
+cecho "Changing login shell..."
+chsh -s $(which zsh) 2> >(tee -a $errors_path)
+
+cecho "$(tput bold)Installation complete. Starting zsh..."
+exec zsh
