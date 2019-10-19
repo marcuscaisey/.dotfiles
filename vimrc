@@ -14,7 +14,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'shmup/vim-sql-syntax'
 
 " Theme
-Plug 'ryanoasis/vim-devicons'
 Plug 'dracula/vim'
 
 " UI
