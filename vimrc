@@ -38,6 +38,7 @@ Plug 'junegunn/vim-easy-align'
 
 " Motion
 Plug 'justinmk/vim-sneak'
+Plug 'nelstrom/vim-visual-star-search'
 
 call plug#end()
 
