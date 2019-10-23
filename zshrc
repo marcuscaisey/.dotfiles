@@ -10,6 +10,7 @@ plugins=(
   docker
   fast-syntax-highlighting
   git
+  kubectl
   osx
   per-directory-history
   zsh-autosuggestions
