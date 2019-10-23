@@ -7,6 +7,7 @@ ZSH_THEME=""
 
 plugins=(
   colored-man-pages
+  docker
   fast-syntax-highlighting
   git
   osx
