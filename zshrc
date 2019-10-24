@@ -10,6 +10,7 @@ plugins=(
   docker
   fast-syntax-highlighting
   git
+  helm
   kubectl
   osx
   per-directory-history
