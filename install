@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 errors_path=~/.dotfiles/errors
 cecho() { echo "$(tput setaf ${ci:-1})$1$(tput sgr0)" && ci=$(( (${ci:-1} % 6) + 1 )); }
