@@ -13,16 +13,16 @@ if [ "$os" = "debian" -o "$os" = "ubuntu" ]; then
     sudo apt upgrade -y  2> >(tee -a $errors_path)
 
     if [ "$os" = debian ]; then
-        cecho "Installing curl..."
         debian_pkgs='curl'
         for pkg in $debian_pkgs; do
+            cecho "Installing $pkg..."
             sudo apt install -y $pkg 2> >(tee -a $errors_path)
         done
     fi
 
-    cecho "Installing zsh, tmux, htop, cmake, ranger, vim, node, npm, fd, ripgrep..."
     shared_pkgs='zsh tmux htop cmake ranger vim nodejs npm fd-find ripgrep'
     for pkg in $shared_pkgs; do
+        cecho "Installing $pkg..."
         sudo apt install -y $pkg 2> >(tee -a $errors_path)
     done
 
@@ -30,11 +30,11 @@ if [ "$os" = "debian" -o "$os" = "ubuntu" ]; then
     { curl https://sh.rustup.rs -sSf | sh -s -- -y; } 2> >(tee -a $errors_path)
 
     if [ $? -eq 0 ]; then
-        cecho "Installing exa..."
-        ~/.cargo/bin/cargo install exa 2> >(tee -a $errors_path)
-
-        cecho "Installing bat..."
-        ~/.cargo/bin/cargo install bat 2> >(tee -a $errors_path)
+        rust_pkgs="exa bat"
+        for pkg in $rust_pkgs; do
+            cecho "Installing $pkg..."
+            ~/.cargo/bin/cargo install exa 2> >(tee -a $errors_path)
+        done
     fi
 
     cecho "Installing fzf..."
@@ -44,8 +44,11 @@ elif [ "$os" = "mac" ]; then
     cecho "Installing homebrew..."
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 2> >(tee -a $errors_path)
 
-    cecho "Installing zsh, git, tmux, htop, exa, vim, sed, grep, ranger, node, npm, fzf, fd, bat, ripgrep, vim..."
-    brew install zsh git tmux htop exa vim gnu-sed grep ranger nodejs npm fzf fd bat ripgrep vim 2> >(tee -a $errors_path)
+    pkgs="zsh git tmux htop exa vim sed grep ranger node npm fzf fd bat ripgrep vim"
+    for pkg in $pkgs; do
+        cecho "Installing $pkg..."
+        brew install $pkg 2> >(tee -a $errors_path)
+    done
 
     cecho "Setting up fzf..."
     $(brew --prefix)/opt/fzf/install 2> >(tee -a $errors_path)
