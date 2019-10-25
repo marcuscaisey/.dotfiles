@@ -20,7 +20,7 @@ if [ "$os" = "debian" -o "$os" = "ubuntu" ]; then
         done
     fi
 
-    shared_pkgs='zsh tmux htop cmake ranger vim nodejs npm fd-find ripgrep'
+    shared_pkgs='zsh tmux htop cmake ranger vim fd-find ripgrep'
     for pkg in $shared_pkgs; do
         cecho "Installing $pkg..."
         sudo apt install -y $pkg 2> >(tee -a $errors_path)
@@ -44,7 +44,7 @@ elif [ "$os" = "mac" ]; then
     cecho "Installing homebrew..."
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 2> >(tee -a $errors_path)
 
-    pkgs="zsh git tmux htop exa vim sed grep ranger node npm fzf fd bat ripgrep vim"
+    pkgs="zsh git tmux htop exa vim sed grep ranger fzf fd bat ripgrep vim"
     for pkg in $pkgs; do
         cecho "Installing $pkg..."
         brew install $pkg 2> >(tee -a $errors_path)
