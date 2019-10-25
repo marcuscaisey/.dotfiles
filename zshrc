@@ -103,7 +103,7 @@ cl() { cd $1 && ls; }
 # Use fd for find instead of default find
 # if [ $(uname) = "Linux" ]; then fdbin=fdfind; else fdbin=fd; fi
 fdbin=fd
-export FZF_DEFAULT_COMMAND="$fdbin --follow --type f --exclude __pycache__"
+export FZF_DEFAULT_COMMAND="$fdbin --follow --type f --exclude .git"
 
 # Use ~~ for completion trigger instead of **
 export FZF_COMPLETION_TRIGGER='~~'
