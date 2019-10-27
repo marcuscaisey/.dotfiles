@@ -131,9 +131,18 @@ let g:lightline = {
   \         ['readonly', 'filename'],
   \     ],
   \ },
+  \ 'component_function': {
+  \     'filename': 'LightlineFilename',
+  \ },
   \ 'separator': {'left': '', 'right': ''},
   \ 'subseparator': {'left': '', 'right': ''},
   \ }
+
+function! LightlineFilename()
+    let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+    let modified = &modified ? ' +' : ''
+    return filename . modified
+endfunction
 
 " vim-polyglot
 let g:python_highlight_all = 1 " Enable all python syntax highlighting features
