@@ -3,7 +3,7 @@
 #############
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="dracula"
+ZSH_THEME="common"
 
 plugins=(
   colored-man-pages
@@ -119,7 +119,7 @@ export FZF_CTRL_T_OPTS="--preview 'if [ ! -d {} ]; then bat --color=always --sty
 #########
 # pyenv #
 #########
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+# export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
