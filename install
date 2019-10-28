@@ -61,9 +61,8 @@ cecho "Installing Oh My Zsh plugins: fast-syntax-highlighting, zsh-autosuggestio
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 2> >(tee -a $errors_path)
 git clone https://github.com/zdharma/fast-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting 2> >(tee -a $errors_path)
 
-cecho "Installing dracula zsh theme..."
-git clone https://github.com/dracula/zsh.git ~/.oh-my-zsh/themes/dracula
-ln -s ~/.oh-my-zsh/themes/dracula/dracula.zsh-theme ~/.oh-my-zsh/themes
+cecho "Installing common zsh theme..."
+wget -O $ZSH_CUSTOM/themes/common.zsh-theme https://raw.githubusercontent.com/jackharrisonsherlock/common/master/common.zsh-theme
 
 cecho "Installing improved nano syntax highlighting files..."
 git clone https://github.com/scopatz/nanorc.git ~/.nano 2> >(tee -a $errors_path)
