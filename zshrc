@@ -14,6 +14,7 @@ plugins=(
   kubectl
   osx
   per-directory-history
+  terraform
   zsh-autosuggestions
 )
 
