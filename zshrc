@@ -24,7 +24,7 @@ source $ZSH/oh-my-zsh.sh
 ##########
 # prompt #
 ##########
-export PROMPT=' %{$fg_bold[blue]%}%c%{$reset_color%} $(git_prompt_info)'
+export PROMPT='%{$fg_bold[blue]%}%c%{$reset_color%} $(git_prompt_info)'
 export ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[cyan]%}("
 export ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
 export ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[cyan]%}) %{$fg[yellow]%}✗"
