@@ -156,7 +156,7 @@ let g:polyglot_disabled = ['yaml']
 
 " fzf.vim
 nnoremap <silent> <c-p> :Files<cr>
-nnoremap <silent> <leader>b :Buffers<cr>
+nnoremap <silent> <c-b> :Buffers<cr>
 nnoremap <silent> <leader>rg :Rg<cr>
 
 " vim-easy-align
@@ -165,6 +165,10 @@ xmap ga <Plug>(EasyAlign)
 
 " vim-sneak
 highlight link Sneak IncSearch
+
+" camelcasemotion
+let g:camelcasemotion_key = '<leader>'
+
 
 " =============================================================================
 "                                    misc
