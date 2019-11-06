@@ -30,6 +30,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 Plug 'jiangmiao/auto-pairs'
+Plug 'lifepillar/vim-mucomplete'
 
 " Verb
 Plug 'tpope/vim-commentary'
@@ -80,10 +81,21 @@ inoremap AA <esc>A
 inoremap CC <esc><right>C
 inoremap DD <esc><right>D
 
+" Tab closes the autocomplete menu and moves the cursor out of paired
+" characters
 let g:tab_out_chars = [')', ']', '}',  "'",  '"',  '`']
-inoremap <silent> <expr> <tab> index(g:tab_out_chars, getline('.')[col('.') - 1]) != -1
+inoremap <silent> <expr> <tab> pumvisible()
+  \ ? '<c-e>'
+  \ : index(g:tab_out_chars, getline('.')[col('.') - 1]) != -1
   \ ? '<right>'
   \ : '<tab>'
+
+" Enter commits the highlighted autocomplete suggestion
+inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
+
+" Need to map something to MuCompleteFwd so that vim-mucomplete doesn't try to
+" map to tab
+inoremap <plug>(Nop) <plug>(MUcompleteFwd)
 
 
 " ==============================================================================
@@ -168,6 +180,14 @@ highlight link Sneak IncSearch
 
 " camelcasemotion
 let g:camelcasemotion_key = '<leader>'
+
+" vim-mucomplete
+set completeopt+=menuone,noinsert
+set shortmess+=c
+set belloff+=ctrlg
+let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#completion_delay = 0
+let g:mucomplete#minimum_prefix_length = 1
 
 
 " =============================================================================
