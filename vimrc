@@ -188,6 +188,10 @@ set belloff+=ctrlg
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#completion_delay = 0
 let g:mucomplete#minimum_prefix_length = 1
+let g:mucomplete#chains = {
+  \ 'default' : ['path', 'c-n'],
+  \ 'vim'     : ['cmd', 'keyn']
+  \ }
 
 
 " =============================================================================
