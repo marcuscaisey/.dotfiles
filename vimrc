@@ -20,6 +20,8 @@ Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'machakann/vim-highlightedyank'
+Plug 'mengelbrecht/lightline-bufferline'
+Plug 'ryanoasis/vim-devicons'
 
 " Search
 Plug '~/.fzf'
@@ -103,6 +105,7 @@ inoremap <plug>(Nop) <plug>(MUcompleteFwd)
 " ==============================================================================
 set number
 set laststatus=2
+set showtabline=2
 set noshowmode
 set incsearch
 set nohlsearch
@@ -149,18 +152,26 @@ let g:lightline = {
   \         ['readonly', 'filename'],
   \     ],
   \ },
-  \ 'component_function': {
-  \     'filename': 'LightlineFilename',
-  \ },
+  \ 'tabline': {'left': [['buffers']], 'right': []},
+  \ 'component_function': {'filename': 'LightlineFilename'},
+  \ 'component_expand': {'buffers': 'lightline#bufferline#buffers'},
+  \ 'component_type': {'buffers': 'tabsel'},
   \ 'separator': {'left': '', 'right': ''},
   \ 'subseparator': {'left': '', 'right': ''},
   \ }
 
 function! LightlineFilename()
-    let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+    let filename = expand('%:t')
+    let filename = filename !=# '' ? filename : '*'
+    let icon = &filetype !=# ''
+      \ ? WebDevIconsGetFileTypeSymbol()
+      \ : WebDevIconsGetFileTypeSymbol('')
     let modified = &modified ? ' +' : ''
-    return filename . modified
+    return icon . ' ' . filename . modified
 endfunction
+
+" lightline-bufferline
+let g:lightline#bufferline#enable_devicons = 1
 
 " vim-polyglot
 let g:python_highlight_all = 1 " Enable all python syntax highlighting features
