@@ -30,7 +30,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 Plug 'jiangmiao/auto-pairs'
-Plug 'lifepillar/vim-mucomplete'
+Plug 'maralla/completor.vim'
 
 " Verb
 Plug 'tpope/vim-commentary'
@@ -181,17 +181,11 @@ highlight link Sneak IncSearch
 " camelcasemotion
 let g:camelcasemotion_key = '<leader>'
 
-" vim-mucomplete
-set completeopt+=menuone,noinsert
+" completor.vim
+let g:completor_complete_options = 'menuone,noinsert'
+let g:completor_min_chars = 1
 set shortmess+=c
 set belloff+=ctrlg
-let g:mucomplete#enable_auto_at_startup = 1
-let g:mucomplete#completion_delay = 0
-let g:mucomplete#minimum_prefix_length = 1
-let g:mucomplete#chains = {
-  \ 'default' : ['path', 'c-n'],
-  \ 'vim'     : ['cmd', 'keyn']
-  \ }
 
 
 " =============================================================================
