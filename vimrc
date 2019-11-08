@@ -179,7 +179,7 @@ let g:polyglot_disabled = ['yaml']
 
 " fzf.vim
 nnoremap <silent> <c-p> :Files<cr>
-nnoremap <silent> <leader>p :Buffers<cr>
+nnoremap <silent> <leader>j :Buffers<cr>
 nnoremap <silent> <leader>rg :Rg<cr>
 
 " vim-easy-align
