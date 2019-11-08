@@ -95,10 +95,8 @@ inoremap <silent> <expr> <tab> pumvisible()
 " Enter commits the highlighted autocomplete suggestion
 inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
 
-" Need to map something to MuCompleteFwd so that vim-mucomplete doesn't try to
-" map to tab
-inoremap <plug>(Nop) <plug>(MUcompleteFwd)
-
+nnoremap <leader>n :bn<cr>
+nnoremap <leader>p :bp<cr>
 
 " ==============================================================================
 "                                   settings
