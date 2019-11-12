@@ -98,6 +98,9 @@ inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>p :bp<cr>
 
+nnoremap <silent> <leader>y :set paste!<cr>
+
+
 " ==============================================================================
 "                                   settings
 " ==============================================================================
