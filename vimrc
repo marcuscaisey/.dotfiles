@@ -22,6 +22,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'ryanoasis/vim-devicons'
+Plug 'edkolev/tmuxline.vim'
 
 " Search
 Plug '~/.fzf'
