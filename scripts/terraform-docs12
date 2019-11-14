@@ -99,28 +99,22 @@ TERRAFORM_DOCS_AWK='
 }
 '
 
-options="${@:1: $# - 1}"
-paths=""
+options=()
+paths=()
 
-if [ "$#" -gt 0 ]; then
-    path_arg=${@: -1}
-    if [ -f $path_arg ]; then
-        paths=$path_arg
-    elif [ -d $path_arg ]; then
-        paths=$(find $path_arg -type f -maxdepth 1)
+for arg in $@; do
+    if [ -f $arg ]; then
+        paths+=($arg)
+    elif [ -d $arg ]; then
+        paths+=$(find $arg -type f -maxdepth 1)
     else
-        # We'll assume that if the last argument isn't a path, then it's an
-        # option
-        options+=" $path_arg"
+        options+=($arg)
     fi
-fi
+done
 
-if [ "$paths" != "" ]; then
-    # Could pass in $paths to awk even if it's empty, but then terraform-docs
-    # would behave as if it was passed an empty file which would not be the
-    # behaviour that the caller expected.
-    terraform-docs $options <(cat $paths | awk "$TERRAFORM_DOCS_AWK")
+if [ ${#paths[@]} -gt 0 ]; then
+    terraform-docs ${options[@]} <(cat ${paths[@]} | awk "$TERRAFORM_DOCS_AWK")
 else
-    terraform-docs $options
+    terraform-docs ${options[@]}
 fi
 
