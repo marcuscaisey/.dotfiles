@@ -137,6 +137,7 @@ set clipboard=unnamed
 set mouse=a
 set scrolloff=5
 set colorcolumn=80
+set updatetime=100
 
 
 " =============================================================================
