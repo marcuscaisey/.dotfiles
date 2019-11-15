@@ -212,4 +212,4 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 au BufWritePre * %s/\s\+$//e
 
 " Use 2 space tabs for yaml files
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType yaml,html* setlocal ts=2 sts=2 sw=2 expandtab
