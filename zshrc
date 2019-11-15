@@ -34,6 +34,8 @@ export ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[cyan]%}) %{$fg[green]%}✔"
 ########
 # path #
 ########
+export GOPATH=$HOME/go
+
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -43,6 +45,7 @@ if [ $(uname) = "Darwin" ]; then
 fi
 export PATH="$HOME/.scripts:$PATH"
 export PATH="$HOME/.pyenv/bin:$PATH"
+export PATH="/usr/local/go/bin:$GOPATH/bin:$PATH"
 
 
 ###########
