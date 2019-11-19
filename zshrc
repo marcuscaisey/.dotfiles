@@ -68,12 +68,6 @@ alias ranger="source ranger"
 # on linux, fd is called fdfind
 # if [ $(uname) = "Linux" ]; then alias fd="fdfind"; fi
 
-alias bi="brew install"
-alias biy="brew install -y"
-alias bud="brew update"
-alias bug="brew upgrade"
-alias bugy="brew upgrade -y"
-
 alias py=python
 alias bpy=bpython
 
