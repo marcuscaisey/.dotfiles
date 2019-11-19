@@ -16,6 +16,7 @@ plugins=(
   per-directory-history
   pip
   terraform
+  ubuntu
   zsh-autosuggestions
 )
 
@@ -72,12 +73,6 @@ alias biy="brew install -y"
 alias bud="brew update"
 alias bug="brew upgrade"
 alias bugy="brew upgrade -y"
-
-alias ai="sudo apt install"
-alias aiy="sudo apt install -y"
-alias aud="sudo apt update"
-alias aug="sudo apt upgrade"
-alias augy="sudo apt upgrade -y"
 
 alias py=python
 alias bpy=bpython
