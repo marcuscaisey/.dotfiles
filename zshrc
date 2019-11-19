@@ -14,6 +14,7 @@ plugins=(
   kubectl
   osx
   per-directory-history
+  pip
   terraform
   zsh-autosuggestions
 )
@@ -80,8 +81,6 @@ alias augy="sudo apt upgrade -y"
 
 alias py=python
 alias bpy=bpython
-alias pi="pip install"
-alias pf="pip freeze"
 
 alias tf=terraform
 
