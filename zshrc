@@ -1,6 +1,6 @@
-#############
-# oh my zsh #
-#############
+################################################################################
+#                                  oh my zsh
+################################################################################
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME=""
@@ -21,9 +21,9 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 
-##########
-# prompt #
-##########
+################################################################################
+#                                    prompt
+################################################################################
 export PROMPT='%{$fg_bold[blue]%}%c%{$reset_color%} $(git_prompt_info)'
 export ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[cyan]%}("
 export ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
@@ -31,9 +31,9 @@ export ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[cyan]%}) %{$fg[yellow]%}✗"
 export ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[cyan]%}) %{$fg[green]%}✔"
 
 
-########
-# path #
-########
+################################################################################
+#                                     path
+################################################################################
 export GOPATH=$HOME/go
 
 export PATH="$HOME/.local/bin:$PATH"
@@ -48,9 +48,9 @@ export PATH="$HOME/.pyenv/bin:$PATH"
 export PATH="/usr/local/go/bin:$GOPATH/bin:$PATH"
 
 
-###########
-# aliases #
-###########
+################################################################################
+#                                   aliases
+################################################################################
 alias ls="exa"
 alias lsl="ls -l"
 alias lsa="ls -a"
@@ -86,9 +86,9 @@ alias pf="pip freeze"
 alias tf=terraform
 
 
-#############
-# functions #
-#############
+################################################################################
+#                                  functions
+################################################################################
 # mkc dir
 #     Create directory 'dir' and cd into it.
 mkc() { mkdir -p $1 && cd $1; }
@@ -102,9 +102,9 @@ hbt() { which $2 | sed -E 's/(.+)/#!\1\n/' > $1 && chmod +x $1; }
 cl() { cd $1 && ls; }
 
 
-#######
-# fzf #
-#######
+################################################################################
+#                                     fzf
+################################################################################
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Use fd for find instead of default find
@@ -130,17 +130,17 @@ export FZF_CTRL_T_COMMAND='fd --follow --exclude .git'
 export FZF_CTRL_T_OPTS="--preview 'if [ ! -d {} ]; then bat --color=always --style=numbers {}; else echo Directory: {}; fi'"
 
 
-#########
-# pyenv #
-#########
+################################################################################
+#                                    pyenv
+################################################################################
 # export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 
-#############
-# key binds #
-#############
+################################################################################
+#                                  key binds
+################################################################################
 bindkey '^P' up-line-or-beginning-search
 bindkey '^N' down-line-or-beginning-search
 bindkey '^ ' autosuggest-accept
