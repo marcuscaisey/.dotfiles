@@ -208,5 +208,8 @@ set belloff+=ctrlg
 " Jump to last position when opening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
+" Trim trailing whitespace on write
+au BufWritePre * %s/\s\+$//e
+
 " Use 2 space tabs for yaml files
 autocmd FileType yaml,html* setlocal ts=2 sts=2 sw=2 expandtab
