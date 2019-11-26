@@ -106,39 +106,37 @@ nnoremap <silent> <leader>y :set paste!<cr>
 " ==============================================================================
 "                                   settings
 " ==============================================================================
-set number
-set laststatus=2
-set showtabline=2
-set noshowmode
-set incsearch
-set nohlsearch
-set showcmd
-set splitbelow
-set splitright
-set signcolumn=yes
-set cursorline
 let g:onedark_termcolors=16
 let g:onedark_terminal_italics=1
 color onedark
-set termguicolors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-syntax on
 filetype plugin indent on
 set autoindent
-set fileformat=unix
-set encoding=utf-8
-set noswapfile
-set hidden
-set tabstop=4
-set shiftwidth=4
-set expandtab
 set backspace=indent,eol,start
 set clipboard=unnamed
-set mouse=a
-set scrolloff=5
 set colorcolumn=80
+set cursorline
+set encoding=utf-8
+set expandtab
+set fileformat=unix
+set hidden
+set incsearch
+set laststatus=2
+set mouse=a
+set nohlsearch
+set noshowmode
+set noswapfile
+set number
+set scrolloff=5
+set shiftwidth=4
+set showcmd
+set showtabline=2
+set signcolumn=yes
+set splitbelow
+set splitright
+set tabstop=4
+set termguicolors
 set updatetime=100
+syntax on
 
 
 " =============================================================================
@@ -217,3 +215,7 @@ au BufWritePre * if expand('%:e') !=# 'diff' | %s/\s\+$//e | endif
 
 " Use 2 space tabs for yaml files
 autocmd FileType yaml,html* setlocal ts=2 sts=2 sw=2 expandtab
+
+" Fix colours in tmux
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
