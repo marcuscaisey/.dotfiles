@@ -95,7 +95,7 @@ inoremap <silent> <expr> <tab> pumvisible()
   \ : '<tab>'
 
 " Enter commits the highlighted autocomplete suggestion
-inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
+inoremap <expr> <cr> pumvisible() ? '<c-y>' : '<cr>'
 
 nnoremap <leader>n :bn<cr>
 nnoremap <leader>p :bp<cr>
