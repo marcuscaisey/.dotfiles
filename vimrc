@@ -34,6 +34,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 Plug 'jiangmiao/auto-pairs'
 Plug 'maralla/completor.vim'
+Plug 'tpope/vim-fugitive'
 
 " Verb
 Plug 'tpope/vim-commentary'
@@ -200,6 +201,9 @@ let g:completor_complete_options = 'menuone,noinsert'
 let g:completor_min_chars = 1
 set shortmess+=c
 set belloff+=ctrlg
+
+" vim-fugitive
+nmap <silent> <expr> <leader>gb &filetype ==# 'fugitiveblame' ? 'gq' : ':Gblame<cr>'
 
 
 " =============================================================================
