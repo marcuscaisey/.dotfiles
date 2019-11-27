@@ -119,6 +119,7 @@ set encoding=utf-8
 set expandtab
 set fileformat=unix
 set hidden
+set ignorecase
 set incsearch
 set laststatus=2
 set mouse=a
@@ -131,6 +132,7 @@ set shiftwidth=4
 set showcmd
 set showtabline=2
 set signcolumn=yes
+set smartcase
 set splitbelow
 set splitright
 set tabstop=4
@@ -190,6 +192,7 @@ xmap ga <Plug>(EasyAlign)
 
 " vim-sneak
 highlight link Sneak IncSearch
+let g:sneak#use_ic_scs = 1
 
 " camelcasemotion
 let g:camelcasemotion_key = '<leader>'
