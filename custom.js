@@ -1,7 +1,8 @@
 // Configure CodeMirror Keymap
 require([
     'nbextensions/vim_binding/vim_binding',   // depends your installation
-], function() {
+    'base/js/namespace',
+], function(vim_binding, ns) {
     CodeMirror.Vim.map("jj", "<Esc>", "insert")
 
     CodeMirror.Vim.map("gk", "gg", "normal")
@@ -19,5 +20,10 @@ require([
     CodeMirror.Vim.map("AA", "<Esc>A", "insert")
     CodeMirror.Vim.map("CC", "<Esc><Right>C", "insert")
     CodeMirror.Vim.map("DD", "<Esc><Right>D", "insert")
-});
 
+    vim_binding.on_ready_callbacks.push(function() {
+        var km = ns.keyboard_manager;
+         km.edit_shortcuts.add_shortcut('ctrl-c', CodeMirror.prototype.leaveNormalMode, true);
+         km.edit_shortcuts.events.trigger('rebuild.QuickHelp');
+    });
+});
