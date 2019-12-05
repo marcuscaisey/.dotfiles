@@ -63,9 +63,6 @@ cecho "Installing Oh My Zsh plugins: fast-syntax-highlighting, zsh-autosuggestio
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zdharma/fast-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
 
-cecho "Installing improved nano syntax highlighting files..."
-git clone https://github.com/scopatz/nanorc.git ~/.nano
-
 cecho "Installing tmux plugin manager..."
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
@@ -79,12 +76,10 @@ cecho "Installing pyenv..."
 curl https://pyenv.run | bash
 
 cecho "Backing up and removing old dotfiles..."
-[ -f ~/.nanorc ] && cp -iv ~/.nanorc ~/.nanorc.old && rm -v ~/.nanorc;
 [ -f ~/.tmux.conf ] && cp -iv ~/.tmux.conf ~/.tmux.conf.old && rm -v ~/.tmux.conf;
 [ -f ~/.zshrc ] && cp -iv ~/.zshrc ~/.zshrc.old && rm -v ~/.zshrc;
 
 cecho "Symlinking to new dotfiles..."
-ln -isv ~/.dotfiles/nanorc ~/.nanorc
 ln -isv ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -isv ~/.dotfiles/zshrc ~/.zshrc
 ln -isv ~/.dotfiles/vimrc ~/.vimrc
