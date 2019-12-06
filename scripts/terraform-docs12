@@ -1,120 +1,133 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python
 
-# This script runs terraform-docs on Terraform 0.12 variables/outputs files
-# which are incompatible with terraform-docs v0.6.0 by converting them into a
-# legacy format first.
+import pathlib
+import re
+import subprocess
+import sys
+import tempfile
+from typing import Generator, Iterable, List, Tuple
 
-# This awk script is a modified version of the script at
-# https://github.com/cloudposse/build-harness/blob/master/bin/terraform-docs.awk
-# which converts Terraform 0.12 variables/outputs to something suitable for
-# terraform-docs. It's modified to print the structure of objects with type =
-# object, rather than just object. I.e. object({ name = string, age = number })
-# instead of just object.
-# FIXME: object structure is only picked up when it's defined on one line
-TERRAFORM_DOCS_AWK='
-{
-  if ( $0 ~ /\{/ ) {
-    braceCnt++
-  }
 
-  if ( $0 ~ /\}/ ) {
-    braceCnt--
-  }
+class Patterns:
+    """Named regex patterns used to parse lines of Terraform."""
 
-  # [START] variable or output block started
-  if ($0 ~ /^[[:space:]]*(variable|output)[[:space:]][[:space:]]*"(.*?)"/) {
-    # Normalize the braceCnt (should be 1 now)
-    braceCnt = 1
-    # [CLOSE] "default" block
-    if (blockDefCnt > 0) {
-      blockDefCnt = 0
-    }
-    blockCnt++
-    print $0
-  }
+    arg_type_pair = r'(?:(?<={|,)\s*|^\s*)(\w+)\s*(?:=|:)\s*([\w()\s]+?)\s*(?=}|,|\n)'
+    arg_value = r'(?<==).+'
+    type_definition = r'\s*type( |=)'
+    variable_output_block = r'^\s*(variable|output)\s*"\w+"\s*{\s*$'
+    whitespace = r'\s+'
 
-  # [START] multiline default statement started
-  if (blockCnt > 0) {
-    if ($0 ~ /^[[:space:]][[:space:]]*(default)[[:space:]][[:space:]]*=/) {
-      if ($3 ~ "null") {
-        print "  default = \"null\""
-      } else {
-        print $0
-        blockDefCnt++
-        blockDefStart=1
-      }
-    }
-  }
 
-  # [PRINT] single line "description"
-  if (blockCnt > 0) {
-    if (blockDefCnt == 0) {
-      if ($0 ~ /^[[:space:]][[:space:]]*description[[:space:]][[:space:]]*=/) {
-        # [CLOSE] "default" block
-        if (blockDefCnt > 0) {
-          blockDefCnt = 0
-        }
-        print $0
-      }
-    }
-  }
+def main(args: List[str]) -> None:
+    """`terraform-docs v0.6.0` is not compatible with Terraform 0.12 code.
+    Therefore convert the files at the paths given as arguments to
+    `terraform-docs12` to Terraform 0.11 syntax, save them in a temporary
+    directory, and then run `terraform-docs` on those files with same options
+    provided to `terraform-docs12`.
+    """
+    first_path_index = get_first_path_index(args)
+    paths = map(pathlib.Path, args[first_path_index:])
 
-  # [PRINT] single line "type"
-  if (blockCnt > 0) {
-    if ($0 ~ /^[[:space:]][[:space:]]*type[[:space:]][[:space:]]*=/ ) {
-      # [CLOSE] "default" block
-      if (blockDefCnt > 0) {
-        blockDefCnt = 0
-      }
-      type=$3
-      if (type ~ "object") {
-          printf "  type = \""; for (i = 3; i < NF; i++) printf $i  " "; printf $NF; print "\""
-      } else {
-          # legacy quoted types: "string", "list", and "map"
-          if ($3 ~ /^[[:space:]]*"(.*?)"[[:space:]]*$/) {
-            print "  type = " $3
-          } else {
-            print "  type = \"" $3 "\""
-          }
-      }
-    }
-  }
+    with tempfile.TemporaryDirectory() as temp_dir:
+        temp_paths = []
 
-  # [CLOSE] variable/output block
-  if (blockCnt > 0) {
-    if (braceCnt == 0 && blockCnt > 0) {
-      blockCnt--
-      print $0
-    }
-  }
+        for path in paths:
+            if path.is_file():
+                output = temp_dir / path
+                temp_paths.append(str(output))
+                convert_file(path, output)
 
-  # [PRINT] Multiline "default" statement
-  if (blockCnt > 0 && blockDefCnt > 0) {
-    if (blockDefStart == 1) {
-      blockDefStart = 0
-    } else {
-      print $0
-    }
-  }
-}
-'
+            elif path.is_dir():
+                for subpath in path.iterdir():
+                    if subpath.is_file() and not subpath.name.startswith('.'):
+                        output = temp_dir / subpath
+                        output.parent.mkdir(parents=True, exist_ok=True)
+                        temp_paths.append(str(output))
+                        convert_file(subpath, output)
 
-options=()
-paths=()
+        args[first_path_index:] = temp_paths
+        subprocess.call(['terraform-docs', *args])
 
-for arg in $@; do
-    if [ -f $arg ]; then
-        paths+=($arg)
-    elif [ -d $arg ]; then
-        paths+=$(find $arg -type f -maxdepth 1)
-    else
-        options+=($arg)
-    fi
-done
 
-if [ ${#paths[@]} -gt 0 ]; then
-    terraform-docs ${options[@]} <(cat ${paths[@]} | awk "$TERRAFORM_DOCS_AWK")
-else
-    terraform-docs ${options[@]}
-fi
+def get_first_path_index(args: List[str]) -> int:
+    """Return the index of the first path in the list of arguments (assumed
+    to the first element which isn't a documented option/argument).
+    """
+    index = 0
+    try:
+        while args[index].startswith('-'):
+            index += 1
+        for pattern in ('json|markdown|md', 'document|table'):
+            if re.match(pattern, args[index]):
+                index += 1
+    except IndexError:
+        return index
 
+    return index
+
+
+def convert_file(file: pathlib.Path, output: pathlib.Path) -> None:
+    """Convert `file` into Terraform 0.11 compatible syntax and save it in
+    `output`.
+    """
+    with file.open() as f, output.open('w') as g:
+        g.writelines(convert_lines(f))
+
+
+# FIXME: Add parsing of single line variables
+def convert_lines(lines: Iterable[str]) -> Generator[str, None, None]:
+    """Return a generator which yields `lines` converted into Terraform 0.11
+    compatible syntax.
+
+    The conversions which need to be made are as follows:
+        - All types need to be quoted
+        - Object literals given as types need to be converted to a single line
+        - Default values of null need to be quoted
+
+    Note:
+        The logic of this parsing is loosely based on that used in a script
+        which does a similar thing but doesn't deal with the types of object
+        args: https://github.com/cloudposse/build-harness/blob/master/bin/terraform-docs.awk.
+    """
+    variable_output_block_brace_count = 0
+    object_block_bracket_count = 0
+    for line in lines:
+        converted_line = ''
+
+        if variable_output_block_brace_count:
+            variable_output_block_brace_count += line.count('')
+
+            if re.match(Patterns.type_definition, line):
+                match = re.search(Patterns.arg_value, line)
+                if match:
+                    type_ = re.sub(Patterns.whitespace, '', match.group(0))
+                    if 'object' not in type_:
+                        converted_line = f'type = "{type_}"\n'
+                    else:
+                        object_block_bracket_count += line.count('(')
+                        arg_types: List[Tuple[str, str]] = []
+
+            if re.sub(Patterns.whitespace, '', line) == 'default=null':
+                converted_line = 'default = "null"\n'
+
+            if object_block_bracket_count:
+                arg_types += re.findall(Patterns.arg_type_pair, line)
+                object_block_bracket_count -= line.count(')')
+                if not object_block_bracket_count:
+                    args = ', '.join(f'{arg}: {type_.replace(" ", "")}' for arg, type_ in arg_types)
+                    converted_line = f'type = "object({{ {args} }})"\n'
+
+            variable_output_block_brace_count -= line.count('')
+
+        if re.match(Patterns.variable_output_block, line):
+            variable_output_block_brace_count = 1
+
+        if not object_block_bracket_count and not converted_line:
+            converted_line = line
+
+        yield converted_line
+
+
+if __name__ == '__main__':
+    args = sys.argv[1:]
+    main(args)
