@@ -5,7 +5,7 @@ import re
 import subprocess
 import sys
 import tempfile
-from typing import Generator, Iterable, List, Tuple
+from typing import Generator, Iterable, List, Sequence, Tuple
 
 
 class Patterns:
@@ -18,7 +18,7 @@ class Patterns:
     whitespace = r'\s+'
 
 
-def main(args: List[str]) -> None:
+def main(args: Sequence[str]) -> None:
     """`terraform-docs v0.6.0` is not compatible with Terraform 0.12 code.
     Therefore convert the files at the paths given as arguments to
     `terraform-docs12` to Terraform 0.11 syntax, save them in a temporary
@@ -45,11 +45,11 @@ def main(args: List[str]) -> None:
                         temp_paths.append(str(output))
                         convert_file(subpath, output)
 
-        args[first_path_index:] = temp_paths
-        subprocess.call(['terraform-docs', *args])
+        new_args = (*args[:first_path_index], *temp_paths)
+        subprocess.call(['terraform-docs', *new_args])
 
 
-def get_first_path_index(args: List[str]) -> int:
+def get_first_path_index(args: Sequence[str]) -> int:
     """Return the index of the first path in the list of arguments (assumed
     to the first element which isn't a documented option/argument).
     """
@@ -85,9 +85,10 @@ def convert_lines(lines: Iterable[str]) -> Generator[str, None, None]:
         - Default values of null need to be quoted
 
     Note:
-        The logic of this parsing is loosely based on that used in a script
-        which does a similar thing but doesn't deal with the types of object
-        args: https://github.com/cloudposse/build-harness/blob/master/bin/terraform-docs.awk.
+        The logic of this parsing is loosely based on that used in a cytopia's
+        script which does a similar thing but doesn't preserve all lines or
+        object type information:
+        https://github.com/cytopia/docker-terraform-docs/blob/master/data/terraform-docs.awk.
     """
     variable_output_block_brace_count = 0
     object_block_bracket_count = 0
