@@ -96,7 +96,7 @@ def convert_lines(lines: Iterable[str]) -> Generator[str, None, None]:
         converted_line = ''
 
         if variable_output_block_brace_count:
-            variable_output_block_brace_count += line.count('')
+            variable_output_block_brace_count += line.count('{')
 
             if re.match(Patterns.type_definition, line):
                 match = re.search(Patterns.arg_value, line)
@@ -118,7 +118,7 @@ def convert_lines(lines: Iterable[str]) -> Generator[str, None, None]:
                     args = ', '.join(f'{arg}: {type_.replace(" ", "")}' for arg, type_ in arg_types)
                     converted_line = f'type = "object({{ {args} }})"\n'
 
-            variable_output_block_brace_count -= line.count('')
+            variable_output_block_brace_count -= line.count('}')
 
         if re.match(Patterns.variable_output_block, line):
             variable_output_block_brace_count = 1
