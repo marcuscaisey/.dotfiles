@@ -26,24 +26,25 @@ def main(args: Sequence[str]) -> None:
     provided to `terraform-docs12`.
     """
     first_path_index = get_first_path_index(args)
-    paths = map(pathlib.Path, args[first_path_index:])
+    path_args = map(pathlib.Path, args[first_path_index:])
 
+    to_convert = []
+    for arg in path_args:
+        if arg.is_file():
+            to_convert.append(arg)
+
+        elif arg.is_dir():
+            for subpath in arg.iterdir():
+                if subpath.is_file() and not subpath.name.startswith('.'):
+                    to_convert.append(subpath)
+
+    temp_paths = []
     with tempfile.TemporaryDirectory() as temp_dir:
-        temp_paths = []
-
-        for path in paths:
-            if path.is_file():
-                output = temp_dir / path
-                temp_paths.append(str(output))
-                convert_file(path, output)
-
-            elif path.is_dir():
-                for subpath in path.iterdir():
-                    if subpath.is_file() and not subpath.name.startswith('.'):
-                        output = temp_dir / subpath
-                        output.parent.mkdir(parents=True, exist_ok=True)
-                        temp_paths.append(str(output))
-                        convert_file(subpath, output)
+        for path in to_convert:
+            output = temp_dir / path
+            output.parent.mkdir(parents=True, exist_ok=True)
+            temp_paths.append(str(output))
+            convert_file(path, output)
 
         new_args = (*args[:first_path_index], *temp_paths)
         subprocess.call(['terraform-docs', *new_args])
