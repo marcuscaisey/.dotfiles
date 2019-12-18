@@ -68,9 +68,6 @@ alias rmr="rm -r"
 # cd to last open directory when quitting ranger
 alias ranger="source ranger"
 
-# on linux, fd is called fdfind
-# if [ $(uname) = "Linux" ]; then alias fd="fdfind"; fi
-
 alias py=python
 alias bpy=bpython
 
@@ -99,9 +96,7 @@ cl() { cd $1 && ls; }
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Use fd for find instead of default find
-# if [ $(uname) = "Linux" ]; then fdbin=fdfind; else fdbin=fd; fi
-fdbin=fd
-export FZF_DEFAULT_COMMAND="$fdbin --follow --type f --exclude .git"
+export FZF_DEFAULT_COMMAND="fd --follow --type f --exclude .git"
 
 # Use ~~ for completion trigger instead of **
 export FZF_COMPLETION_TRIGGER='~~'
