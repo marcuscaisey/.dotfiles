@@ -22,6 +22,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# hack
+complete -C aws_completer aws
+
 
 ################################################################################
 #                                    prompt
