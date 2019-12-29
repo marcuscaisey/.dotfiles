@@ -14,7 +14,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'shmup/vim-sql-syntax'
 
 " Theme
-Plug 'joshdick/onedark.vim'
+Plug 'dracula/vim'
 
 " UI
 Plug 'itchyny/lightline.vim'
@@ -106,9 +106,7 @@ nnoremap <silent> <leader>y :set paste!<cr>
 " ==============================================================================
 "                                   settings
 " ==============================================================================
-let g:onedark_termcolors=16
-let g:onedark_terminal_italics=1
-color onedark
+color dracula
 filetype plugin indent on
 set autoindent
 set backspace=indent,eol,start
@@ -149,7 +147,7 @@ autocmd FileType sql setlocal commentstring=--\ %s
 
 " Lightline
 let g:lightline = {
-  \ 'colorscheme': 'onedark',
+  \ 'colorscheme': 'dracula',
   \ 'active': {
   \     'left': [
   \         ['mode', 'paste'],
