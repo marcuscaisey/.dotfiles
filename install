@@ -83,6 +83,7 @@ cecho "Symlinking to new dotfiles..."
 ln -isv ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -isv ~/.dotfiles/zshrc ~/.zshrc
 ln -isv ~/.dotfiles/vimrc ~/.vimrc
+ln -isv ~/.dotfiles/ideavimrc ~/.ideavimrc
 mkdir -pv ~/.jupyter/custom && ln -isv ~/.dotfiles/jupyter-custom.js ~/.jupyter/custom/custom.js
 
 cecho "Symlinking scripts directory..."
