@@ -29,12 +29,22 @@ complete -C aws_completer aws
 ################################################################################
 #                                    prompt
 ################################################################################
-export PROMPT='%{$fg_bold[blue]%}%c%{$reset_color%} $(git_prompt_info)'
+source ~/.scripts/kube-ps1.sh
+
 export ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[cyan]%}("
 export ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
 export ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[cyan]%}) %{$fg[yellow]%}✗"
 export ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[cyan]%}) %{$fg[green]%}✔"
 
+export KUBE_PS1_PREFIX="%{$fg_bold[cyan]%}("
+export KUBE_PS1_SYMBOL_ENABLE=false
+export KUBE_PS1_DIVIDER="%{$fg_bold[cyan]%}:"
+export KUBE_PS1_SUFFIX="%{$fg_bold[cyan]%}) "
+export KUBE_PS1_NS_COLOR=yellow
+
+export PROMPT='%{$fg_bold[blue]%}%c%{$reset_color%} $(kube_ps1)$(git_prompt_info)'
+
+kubeoff  # disable kube-ps1 by default
 
 ################################################################################
 #                                     path
