@@ -3,3 +3,4 @@ set surround
 set multiple-cursors
 set commentary
 set clipboard=
+set ideajoin
