@@ -83,8 +83,6 @@ nnoremap Y y$
 
 inoremap II <esc>I
 inoremap AA <esc>A
-inoremap CC <esc><right>C
-inoremap DD <esc><right>D
 
 " Tab closes the autocomplete menu and moves the cursor out of paired
 " characters
