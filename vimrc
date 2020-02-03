@@ -35,6 +35,7 @@ Plug 'tpope/vim-repeat'
 Plug 'jiangmiao/auto-pairs'
 Plug 'maralla/completor.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'ConradIrwin/vim-bracketed-paste'
 
 " Verb
 Plug 'tpope/vim-commentary'
@@ -99,8 +100,6 @@ inoremap <expr> <cr> pumvisible() ? '<c-y>' : '<cr>'
 
 nnoremap <silent> <leader>n :bn<cr>
 nnoremap <silent> <leader>p :bp<cr>
-
-nnoremap <silent> <leader>y :set paste!<cr>
 
 
 " ==============================================================================
