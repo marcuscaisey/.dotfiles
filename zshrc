@@ -8,6 +8,7 @@ ZSH_THEME=""
 plugins=(
   colored-man-pages
   docker
+  docker-compose
   fast-syntax-highlighting
   git
   helm
