@@ -13,6 +13,7 @@ plugins=(
   git
   helm
   kubectl
+  kube-ps1
   osx
   per-directory-history
   pip
@@ -32,8 +33,6 @@ autoload -U compinit && compinit
 ################################################################################
 #                                    prompt
 ################################################################################
-source ~/.scripts/kube-ps1.sh
-
 export ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[cyan]%}("
 export ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
 export ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[cyan]%}) %{$fg[yellow]%}✗"
