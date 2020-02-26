@@ -17,6 +17,8 @@ plugins=(
   osx
   per-directory-history
   pip
+  ripgrep
+  sublime
   terraform
   ubuntu
   zsh-autosuggestions
