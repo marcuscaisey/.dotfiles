@@ -6,9 +6,11 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""
 
 plugins=(
+  alias-finder
   colored-man-pages
   docker
   docker-compose
+  dotenv
   fast-syntax-highlighting
   git
   helm
@@ -19,6 +21,7 @@ plugins=(
   pip
   ripgrep
   sublime
+  sudo
   terraform
   ubuntu
   zsh-autosuggestions
