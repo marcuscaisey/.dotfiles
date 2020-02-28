@@ -8,4 +8,4 @@ My config files for basic config on debian/ubuntu/macOS and an installer script 
 
 2. Install everything : `~/.dotfiles/install` with `debian`, `ubuntu` or `mac` argument.
 
-Install errors are logged to ~/.dotfiles/errors
+Install errors are logged to `~/.dotfiles/errors`
