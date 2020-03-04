@@ -13,6 +13,7 @@ plugins=(
   dotenv
   fast-syntax-highlighting
   git
+  gitignore
   helm
   kubectl
   kube-ps1
