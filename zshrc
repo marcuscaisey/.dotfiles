@@ -8,6 +8,7 @@ ZSH_THEME=""
 plugins=(
   alias-finder
   colored-man-pages
+  django
   docker
   docker-compose
   dotenv
