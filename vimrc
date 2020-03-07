@@ -14,7 +14,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'shmup/vim-sql-syntax'
 
 " Theme
-Plug 'dracula/vim'
+Plug 'lucasprag/simpleblack'
 
 " UI
 Plug 'itchyny/lightline.vim'
@@ -103,7 +103,7 @@ nnoremap <silent> <leader>p :bp<cr>
 " ==============================================================================
 "                                   settings
 " ==============================================================================
-color dracula
+color simpleblack
 filetype plugin indent on
 set autoindent
 set backspace=indent,eol,start
@@ -144,7 +144,7 @@ autocmd FileType sql setlocal commentstring=--\ %s
 
 " Lightline
 let g:lightline = {
-  \ 'colorscheme': 'dracula',
+  \ 'colorscheme': 'simpleblack',
   \ 'active': {
   \     'left': [
   \         ['mode', 'paste'],
@@ -171,6 +171,16 @@ endfunction
 
 " lightline-bufferline
 let g:lightline#bufferline#enable_devicons = 1
+
+" tmuxline
+let g:tmuxline_preset = {
+  \ 'a': '#S',
+  \ 'y': ['%Y-%m-%d', '%H:%M'],
+  \ 'z': '#H',
+  \ 'win': ['#I','#W'],
+  \ 'cwin': ['#I','#W'],
+  \ 'options': {'status-justify': 'left'},
+  \ }
 
 " vim-polyglot
 let g:python_highlight_all = 1 " Enable all python syntax highlighting features
