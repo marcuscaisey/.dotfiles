@@ -6,7 +6,7 @@ Copy this file to $XDG_CONFIG_HOME/ptpython/config.py
 from __future__ import unicode_literals
 
 from prompt_toolkit.application.current import get_app
-from prompt_toolkit.filters import Condition, ViInsertMode, has_completions
+from prompt_toolkit.filters import Condition, ViInsertMode, has_completions, completion_is_selected
 from prompt_toolkit.key_binding.key_processor import KeyPress
 from prompt_toolkit.keys import Keys
 from pygments.token import Token
@@ -156,6 +156,12 @@ def configure(repl):
     def _(event):
         b = event.current_buffer
         b.cancel_completion()
+
+    # Type 'Enter' to accept a completion
+    @repl.add_key_binding(Keys.Enter, filter=completion_is_selected)
+    def _(event):
+        b = event.current_buffer
+        b.complete_state = None
 
     # Type 'c-space' to accept auto-suggestion
     @repl.add_key_binding("c-space", filter=suggestion_available)
