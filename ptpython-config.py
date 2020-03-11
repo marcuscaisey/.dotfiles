@@ -6,7 +6,12 @@ Copy this file to $XDG_CONFIG_HOME/ptpython/config.py
 from __future__ import unicode_literals
 
 from prompt_toolkit.application.current import get_app
-from prompt_toolkit.filters import Condition, ViInsertMode, has_completions, completion_is_selected
+from prompt_toolkit.filters import (
+    Condition,
+    ViInsertMode,
+    has_completions,
+    completion_is_selected,
+)
 from prompt_toolkit.key_binding.key_processor import KeyPress
 from prompt_toolkit.keys import Keys
 from pygments.token import Token
@@ -124,7 +129,7 @@ def configure(repl):
     # repl.color_depth = 'DEPTH_1_BIT'  # Monochrome.
     # repl.color_depth = 'DEPTH_4_BIT'  # ANSI colors only.
     # repl.color_depth = "DEPTH_8_BIT"  # The default, 256 colors.
-    repl.color_depth = 'DEPTH_24_BIT'  # True color.
+    repl.color_depth = "DEPTH_24_BIT"  # True color.
 
     # Syntax.
     repl.enable_syntax_highlighting = True
@@ -182,7 +187,7 @@ def configure(repl):
 
     # Typing 'jj' in Vi Insert mode, should send escape. (Go back to navigation
     # mode.)
-    @repl.add_key_binding('j', 'j', filter=ViInsertMode())
+    @repl.add_key_binding("j", "j", filter=ViInsertMode())
     def _(event):
         " Map 'jj' to Escape. "
         event.cli.key_processor.feed(KeyPress(Keys.Escape))
