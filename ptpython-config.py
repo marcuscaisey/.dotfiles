@@ -152,7 +152,7 @@ def configure(repl):
     """
 
     # Type 'c-space' to accept auto-suggestion
-    @repl.add_key_binding(Keys.Tab, filter=suggestion_available)
+    @repl.add_key_binding("c-space", filter=suggestion_available)
     def _(event):
         b = event.current_buffer
         suggestion = b.suggestion
