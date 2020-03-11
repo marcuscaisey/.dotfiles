@@ -5,15 +5,24 @@ Copy this file to $XDG_CONFIG_HOME/ptpython/config.py
 """
 from __future__ import unicode_literals
 
-from prompt_toolkit.filters import ViInsertMode
+from prompt_toolkit.application.current import get_app
+from prompt_toolkit.filters import Condition, ViInsertMode
 from prompt_toolkit.key_binding.key_processor import KeyPress
 from prompt_toolkit.keys import Keys
 from pygments.token import Token
 
 from ptpython.layout import CompletionVisualisation
 
-
 __all__ = ("configure",)
+
+
+@Condition
+def suggestion_available():
+    app = get_app()
+    return (
+        app.current_buffer.suggestion is not None
+        and app.current_buffer.document.is_cursor_at_the_end
+    )
 
 
 def configure(repl):
@@ -142,10 +151,12 @@ def configure(repl):
         event.current_buffer.validate_and_handle()
     """
 
-    # Map c-space to c-e (to accept auto-suggestion)
-    @repl.add_key_binding("c-space")
+    # Type 'c-space' to accept auto-suggestion
+    @repl.add_key_binding(Keys.Tab, filter=suggestion_available)
     def _(event):
-        event.cli.key_processor.feed(KeyPress(Keys.ControlE))
+        b = event.current_buffer
+        suggestion = b.suggestion
+        b.insert_text(suggestion.text)
 
     # Map c-p to up
     @repl.add_key_binding("c-p")
