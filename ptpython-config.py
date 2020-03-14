@@ -175,6 +175,12 @@ def configure(repl):
         suggestion = b.suggestion
         b.insert_text(suggestion.text)
 
+    # Type 'c-space' to bring up autocomplete
+    @repl.add_key_binding("c-space", filter=~suggestion_available)
+    def _(event):
+        b = event.current_buffer
+        b.start_completion(select_first=False)
+
     # Map c-p to up
     @repl.add_key_binding("c-p")
     def _(event):
