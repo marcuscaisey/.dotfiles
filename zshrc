@@ -25,6 +25,7 @@ plugins=(
   sublime
   sudo
   terraform
+  tmux
   ubuntu
   zsh-autosuggestions
 )
