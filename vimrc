@@ -217,9 +217,6 @@ au BufWritePre * if expand('%:e') !=# 'diff' | %s/\s\+$//e | endif
 " Use 2 space tabs for yaml files
 autocmd FileType yaml,html* setlocal ts=2 sts=2 sw=2 expandtab
 
-" Save all buffers when focus is lost
-:au FocusLost * silent! wa
-
 " Fix colours in tmux
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
