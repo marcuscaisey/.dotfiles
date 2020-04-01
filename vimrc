@@ -21,7 +21,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mengelbrecht/lightline-bufferline'
-Plug 'ryanoasis/vim-devicons'
 Plug 'edkolev/tmuxline.vim'
 
 " Search
@@ -162,15 +161,9 @@ let g:lightline = {
 function! LightlineFilename()
     let filename = expand('%:t')
     let filename = filename !=# '' ? filename : '*'
-    let icon = &filetype !=# ''
-      \ ? WebDevIconsGetFileTypeSymbol()
-      \ : WebDevIconsGetFileTypeSymbol('')
     let modified = &modified ? ' +' : ''
-    return icon . ' ' . filename . modified
+    return filename . modified
 endfunction
-
-" lightline-bufferline
-let g:lightline#bufferline#enable_devicons = 1
 
 " tmuxline
 let g:tmuxline_preset = {
