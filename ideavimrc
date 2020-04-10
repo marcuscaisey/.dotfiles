@@ -4,3 +4,4 @@ set multiple-cursors
 set commentary
 set clipboard=ideaput
 set ideajoin
+set ReplaceWithRegister
