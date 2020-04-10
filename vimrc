@@ -35,6 +35,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'maralla/completor.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'vim-scripts/ReplaceWithRegister'
 
 " Verb
 Plug 'tpope/vim-commentary'
