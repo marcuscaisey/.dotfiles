@@ -5,3 +5,4 @@ set commentary
 set clipboard=ideaput
 set ideajoin
 set ReplaceWithRegister
+set argtextobj
