@@ -6,3 +6,4 @@ set clipboard=ideaput
 set ideajoin
 set ReplaceWithRegister
 set argtextobj
+set textobj-entire

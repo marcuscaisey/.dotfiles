@@ -51,6 +51,8 @@ Plug 'bkad/camelcasemotion'
 Plug 'wellle/targets.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'vim-scripts/argtextobj.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
 
 call plug#end()
 
