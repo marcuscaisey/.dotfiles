@@ -139,5 +139,18 @@
         "key": "setting.command_mode"
       }
     ]
+  },
+  {
+    "keys": [
+      "tab"
+    ],
+    "command": "hide_auto_complete",
+    "context": [
+      {
+        "key": "auto_complete_visible",
+        "operator": "equal",
+        "operand": true
+      }
+    ]
   }
 ]
