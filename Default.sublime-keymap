@@ -18,7 +18,7 @@
       {
         "key": "following_text",
         "operator": "regex_contains",
-        "operand": "^[();\\[\\]<\\>\"{'},/]",
+        "operand": "^[();\\[\\]<\\>escapedQuote{'},/]",
         "match_all": true
       }
     ]
@@ -152,5 +152,15 @@
         "operand": true
       }
     ]
+  },
+  {
+    "keys": [
+      "ctrl+r"
+    ],
+    "command": "redo",
+    "context": [
+      {
+        "key": "setting.command_mode"
+      }
+    ]
   }
-]
