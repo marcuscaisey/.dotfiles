@@ -7,3 +7,6 @@ set ideajoin
 set ReplaceWithRegister
 set argtextobj
 set textobj-entire
+
+nnoremap [<space> :action EditorStartNewLineBefore<cr>
+nnoremap ]<space> :action EditorStartNewLine<cr>
