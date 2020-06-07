@@ -28,6 +28,7 @@ plugins=(
   tmux
   ubuntu
   zsh-autosuggestions
+  zsh-nvm
 )
 
 source $ZSH/oh-my-zsh.sh
