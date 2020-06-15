@@ -55,6 +55,8 @@ export KUBE_PS1_SUFFIX="%{$fg_bold[cyan]%}) "
 export KUBE_PS1_NS_COLOR=yellow
 
 export PROMPT='%{$fg_bold[blue]%}%c%{$reset_color%} $(kube_ps1)$(git_prompt_info)'
+export PROMPT="%{$fg_bold[magenta]%}[$USER@%m] ${PROMPT}"
+
 
 kubeoff  # disable kube-ps1 by default
 
