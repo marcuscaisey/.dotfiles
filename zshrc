@@ -11,32 +11,18 @@ plugins=(
   django
   docker
   docker-compose
-  dotenv
   fast-syntax-highlighting
   git
   gitignore
-  helm
-  kubectl
-  kube-ps1
   osx
   per-directory-history
-  pip
-  ripgrep
   sublime
-  sudo
-  terraform
   tmux
-  ubuntu
   zsh-autosuggestions
   zsh-nvm
 )
 
 source $ZSH/oh-my-zsh.sh
-
-# hack
-complete -C aws_completer aws
-
-autoload -U compinit && compinit
 
 
 ################################################################################
@@ -48,17 +34,8 @@ export ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
 export ZSH_THEME_GIT_PROMPT_DIRTY="$git_branch_format) %{$fg[yellow]%}✗"
 export ZSH_THEME_GIT_PROMPT_CLEAN="$git_branch_format) %{$fg[green]%}✔"
 
-export KUBE_PS1_PREFIX="%{$fg_bold[cyan]%}("
-export KUBE_PS1_SYMBOL_ENABLE=false
-export KUBE_PS1_DIVIDER="%{$fg_bold[cyan]%}:"
-export KUBE_PS1_SUFFIX="%{$fg_bold[cyan]%}) "
-export KUBE_PS1_NS_COLOR=yellow
+export PROMPT='%{$fg_bold[magenta]%}[$USER@%m] %{$fg_bold[blue]%}%c%{$reset_color%} $(git_prompt_info)'
 
-export PROMPT='%{$fg_bold[blue]%}%c%{$reset_color%} $(kube_ps1)$(git_prompt_info)'
-export PROMPT="%{$fg_bold[magenta]%}[$USER@%m] ${PROMPT}"
-
-
-kubeoff  # disable kube-ps1 by default
 
 ################################################################################
 #                                     path
@@ -93,25 +70,6 @@ alias rmr="rm -r"
 alias ranger="source ranger"
 
 alias py=python
-alias bpy=bpython
-
-alias tf=terraform
-
-
-################################################################################
-#                                  functions
-################################################################################
-# mkc dir
-#     Create directory 'dir' and cd into it.
-mkc() { mkdir -p $1 && cd $1; }
-
-# hbt fname exc
-#     Create an executable file 'fname' and add a hashbang to 'exc'.
-hbt() { which $2 | sed -E 's/(.+)/#!\1\n/' > $1 && chmod +x $1; }
-
-# cd dir
-#     cd to 'dir' and then ls.
-cl() { cd $1 && ls; }
 
 
 ################################################################################
