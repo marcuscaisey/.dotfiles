@@ -106,7 +106,8 @@ nnoremap <silent> <leader>p :bp<cr>
 " ==============================================================================
 "                                   settings
 " ==============================================================================
-color simpleblack
+packadd! dracula_pro
+colorscheme dracula_pro
 filetype plugin indent on
 set autoindent
 set backspace=indent,eol,start
@@ -147,7 +148,7 @@ autocmd FileType sql setlocal commentstring=--\ %s
 
 " Lightline
 let g:lightline = {
-  \ 'colorscheme': 'simpleblack',
+  \ 'colorscheme': 'dracula_pro',
   \ 'active': {
   \     'left': [
   \         ['mode', 'paste'],
