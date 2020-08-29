@@ -226,8 +226,8 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Trim trailing whitespace on write
 au BufWritePre * if expand('%:e') !=# 'diff' | %s/\s\+$//e | endif
 
-" Use 2 space tabs for yaml,html,css,js files
-autocmd FileType yaml,html*,css,javascript setlocal ts=2 sts=2 sw=2 expandtab
+" Use 2 space tabs for yaml,html,css,js,json files
+autocmd FileType yaml,html*,css,javascript,json setlocal ts=2 sts=2 sw=2 expandtab
 
 " Fix colours in tmux
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
