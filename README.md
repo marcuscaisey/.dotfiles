@@ -1,11 +1,10 @@
 # .dotfiles
 
-My config files for basic config on debian/ubuntu/macOS and an installer script which installs some basic stuff and the config files.
+My config files for basic config on macOS and an installer script which installs everything.
 
 ## Usage
 
 1. Clone the repo: `git clone https://github.com/marcuscaisey/.dotfiles ~/.dotfiles`.
 
-2. Install everything : `~/.dotfiles/install` with `debian`, `ubuntu` or `mac` argument.
+2. Install everything : `~/.dotfiles/install`
 
-Install errors are logged to `~/.dotfiles/errors`
