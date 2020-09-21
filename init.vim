@@ -262,7 +262,7 @@ nmap <silent> <expr> <leader>gb &filetype ==# 'fugitiveblame' ? 'gq' : ':Gblame<
 " Semshi
 let g:semshi#error_sign = 0
 
-function PythonHighlights()
+function! PythonHighlights()
     highlight! link semshiGlobal DraculaGreen
     highlight! link semshiImported DraculaOrange
     highlight! link semshiParameter DraculaCyan
