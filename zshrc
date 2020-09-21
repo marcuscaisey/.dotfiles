@@ -34,7 +34,7 @@ export ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
 export ZSH_THEME_GIT_PROMPT_DIRTY="$git_branch_format) %{$fg[yellow]%}✗"
 export ZSH_THEME_GIT_PROMPT_CLEAN="$git_branch_format) %{$fg[green]%}✔"
 
-export PROMPT='%{$fg_bold[magenta]%}[$USER@%m] %{$fg_bold[blue]%}%c%{$reset_color%} $(git_prompt_info)'
+export PROMPT='%{$fg_bold[blue]%}%c%{$reset_color%} $(git_prompt_info)'
 
 
 ################################################################################
