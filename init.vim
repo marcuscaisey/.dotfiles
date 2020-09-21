@@ -161,9 +161,6 @@ let g:lightline = {
   \ },
   \ 'component_function': {
   \     'filename': 'LightlineFilename',
-  \     'filetype': 'LightlineFiletype',
-  \     'fileformat': 'LightlineFileformat',
-  \     'encoding': 'LightlineEncoding',
   \ },
   \ 'component_expand': {
   \     'buffers': 'lightline#bufferline#buffers',
@@ -199,18 +196,6 @@ function! LightlineFilename()
     let filename = filename != '' ? filename : '*'
     let modified = &modified ? ' ✎' : ''
     return WebDevIconsGetFileTypeSymbol() . ' ' . filename . modified
-endfunction
-
-function! LightlineFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . &filetype : 'no ft') : ''
-endfunction
-
-function! LightlineFileformat()
-    return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol() . ' ' . &fileformat) : ''
-endfunction
-
-function! LightlineEncoding()
-    return winwidth(0) > 70 ? &encoding : ''
 endfunction
 
 function! LightlineGitBranch()
