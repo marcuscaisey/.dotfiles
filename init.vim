@@ -97,7 +97,7 @@ inoremap AA <esc>A
 
 " Tab closes the autocomplete menu and moves the cursor out of paired
 " characters
-inoremap <silent> <expr> <tab> s:should_tab_out() ? '<right>' : '<tab>'
+inoremap <silent> <expr> <tab> <SID>should_tab_out() ? '<right>' : '<tab>'
 
 function! s:should_tab_out()
   let brackets = [')', ']', '}']
@@ -310,4 +310,4 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " Set Python syntax highlighting colours
-autocmd Filetype python call s:python_highlights()
+autocmd Filetype python call <SID>python_highlights()
