@@ -37,7 +37,7 @@ curl https://pyenv.run | bash
 cecho "Symlinking to new dotfiles..."
 ln -isv ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -isv ~/.dotfiles/zshrc ~/.zshrc
-mkdir -pv ~/.config/nvim && ln -isv ~/.dotfiles/init.vim ~/.config/nvim/init.vim
+mkdir -pv ~/.config/nvim && ln -isv ~/.dotfiles/init.vim ~/.dotfiles/coc-settings.json ~/.config/nvim
 mkdir -pv ~/.jupyter/custom && ln -isv ~/.dotfiles/jupyter-custom.js ~/.jupyter/custom/custom.js
 mkdir -pv ~/.ptpython && ln -isv ~/.dotfiles/ptpython-config.py ~/.ptpython/config.py
 

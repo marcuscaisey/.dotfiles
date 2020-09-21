@@ -60,6 +60,7 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'liuchengxu/vista.vim'
 let g:ale_disable_lsp = 1
 Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
