@@ -95,7 +95,14 @@ _fzf_compgen_dir() {
 
 # Use ctrl + t to fuzzy search all files/directories (excluding .git) with preview in current directory
 export FZF_CTRL_T_COMMAND='fd --follow --exclude .git'
-export FZF_CTRL_T_OPTS="--preview 'if [ ! -d {} ]; then bat --theme=ansi-dark --color=always --style=numbers {}; else echo Directory: {}; fi'"
+export FZF_CTRL_T_OPTS="--preview 'if [ ! -d {} ]; then bat --color=always {}; else echo Directory: {}; fi'"
+
+
+################################################################################
+#                                     bat
+################################################################################
+export BAT_THEME="Dracula"
+export BAT_STYLE="numbers"
 
 
 ################################################################################
