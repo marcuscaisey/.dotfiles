@@ -141,13 +141,13 @@ set noshowmode
 set noswapfile
 set number
 set scrolloff=5
-set shiftwidth=4
+set shiftwidth=2
 set showtabline=2
 set signcolumn=yes
 set smartcase
 set splitbelow
 set splitright
-set tabstop=4
+set tabstop=2
 set termguicolors
 set updatetime=100
 
@@ -303,9 +303,6 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 
 " Trim trailing whitespace on write
 autocmd BufWritePre * if expand('%:e') !=# 'diff' | %s/\s\+$//e | endif
-
-" Use 2 space tabs for yaml,html,css,js,json files
-autocmd FileType yaml,html*,css,javascript,json setlocal ts=2 sts=2 sw=2 expandtab
 
 " Fix colours in tmux
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
