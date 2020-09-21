@@ -98,11 +98,27 @@ inoremap AA <esc>A
 " Tab closes the autocomplete menu and moves the cursor out of paired
 " characters
 let g:tab_out_chars = [')', ']', '}',  "'",  '"',  '`']
-inoremap <silent> <expr> <tab> pumvisible()
-  \ ? '<c-e>'
-  \ : index(g:tab_out_chars, getline('.')[col('.') - 1]) != -1
-  \ ? '<right>'
-  \ : '<tab>'
+inoremap <silent> <expr> <tab> ShouldTabOut() ? '<right>' : '<tab>'
+
+function! ShouldTabOut()
+  let brackets = [')', ']', '}']
+  let quotes = ["'",  '"',  '`']
+
+  let preceding_chars = getline('.')[:col('.') - 2]
+  let current_char = getline('.')[col('.') - 1]
+
+  if index(brackets, current_char) != -1
+    return 1
+
+  elseif index(quotes, current_char) != -1
+    let num_preceding_quotes = strlen(preceding_chars) -
+          \ strlen(substitute(preceding_chars, current_char, '', 'g'))
+    return num_preceding_quotes % 2 == 1
+
+  else
+    return 0
+  endif
+endfunction
 
 nnoremap <silent> <leader>n :bn<cr>
 nnoremap <silent> <leader>p :bp<cr>
