@@ -276,6 +276,10 @@ noremap <silent> ]e :ALENextWrap<cr>
 noremap <silent> [e :ALEPreviousWrap<cr>
 noremap <silent> <leader>f :ALEFix<cr>
 
+" Vista.vim
+let g:vista_default_executive = 'coc'
+nnoremap <silent> <c-t> :Vista!!<cr>
+
 " coc-fzf
 let g:coc_fzf_preview = 'right:50%'
 nnoremap <silent> <c-s> :CocFzfList symbols<cr>
