@@ -16,7 +16,6 @@ plugins=(
   gitignore
   osx
   per-directory-history
-  sublime
   tmux
   zsh-autosuggestions
   zsh-nvm
@@ -38,23 +37,6 @@ export PROMPT='%{$fg_bold[blue]%}%c%{$reset_color%} $(git_prompt_info)'
 
 
 ################################################################################
-#                                     path
-################################################################################
-export GOPATH=$HOME/go
-
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-if [ $(uname) = "Darwin" ]; then
-    export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-    export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
-fi
-export PATH="$HOME/.scripts:$PATH"
-export PATH="$HOME/.pyenv/bin:$PATH"
-export PATH="/usr/local/go/bin:$GOPATH/bin:$PATH"
-
-
-################################################################################
 #                                   aliases
 ################################################################################
 alias ls="exa"
@@ -65,9 +47,6 @@ alias lsla=lsal
 alias l="ls -algh"
 
 alias rmr="rm -r"
-
-# cd to last open directory when quitting ranger
-alias ranger="source ranger"
 
 alias py=python
 
@@ -109,6 +88,7 @@ export BAT_STYLE="numbers"
 #                                    pyenv
 ################################################################################
 # export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 

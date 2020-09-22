@@ -5,7 +5,7 @@ cecho() { echo "$(tput setaf ${ci:-1})$1$(tput sgr0)" && ci=$(( (${ci:-1} % 6) +
 cecho "Installing homebrew..."
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-pkgs="zsh git tmux exa sed grep ranger fzf fd bat ripgrep vim nvim"
+pkgs="zsh git tmux exa fzf fd bat ripgrep nvim"
 for pkg in $pkgs; do
     cecho "Installing $pkg..."
     brew install $pkg
