@@ -95,30 +95,6 @@ nnoremap Y y$
 inoremap II <esc>I
 inoremap AA <esc>A
 
-" Tab closes the autocomplete menu and moves the cursor out of paired
-" characters
-inoremap <silent> <expr> <tab> <SID>should_tab_out() ? '<right>' : '<tab>'
-
-function! s:should_tab_out()
-  let brackets = [')', ']', '}']
-  let quotes = ["'",  '"',  '`']
-
-  let preceding_chars = getline('.')[:col('.') - 2]
-  let current_char = getline('.')[col('.') - 1]
-
-  if index(brackets, current_char) != -1
-    return 1
-
-  elseif index(quotes, current_char) != -1
-    let num_preceding_quotes = strlen(preceding_chars) -
-          \ strlen(substitute(preceding_chars, current_char, '', 'g'))
-    return num_preceding_quotes % 2 == 1
-
-  else
-    return 0
-  endif
-endfunction
-
 nnoremap <silent> <leader>n :bn<cr>
 nnoremap <silent> <leader>p :bp<cr>
 
@@ -142,7 +118,7 @@ set number
 set scrolloff=5
 set shiftwidth=2
 set showtabline=2
-set signcolumn=yes
+set signcolumn=number
 set smartcase
 set splitbelow
 set splitright
@@ -258,7 +234,8 @@ let g:sneak#use_ic_scs = 1
 let g:camelcasemotion_key = '<leader>'
 
 " vim-fugitive
-nmap <silent> <expr> <leader>gb &filetype ==# 'fugitiveblame' ? 'gq' : ':Gblame<cr>'
+nmap <silent> <expr> <leader>gb &filetype ==# 'fugitiveblame'
+      \ ? 'gq' : ':Gblame<cr>'
 
 " Semshi
 let g:semshi#error_sign = 0
@@ -273,7 +250,8 @@ function! s:python_highlights()
   highlight! link semshiAttribute DraculaFgBold
   highlight! link semshiSelf DraculaPurple
   let yellow = g:dracula_pro#palette.yellow
-  exec 'highlight! semshiUnresolved  cterm=undercurl ctermfg=' . yellow[1] . ' gui=undercurl guifg=' . yellow[0]
+  exec 'highlight! semshiUnresolved  cterm=undercurl ctermfg=' . yellow[1]
+        \ . ' gui=undercurl guifg=' . yellow[0]
   highlight! link semshiSelected DraculaSelection
 endfunction
 
@@ -289,7 +267,8 @@ let g:ale_fixers = {
 
 let g:ale_python_black_options = '--line-length 120'
 let g:ale_python_flake8_options = '--max-line-length 120'
-let g:ale_python_isort_options = '--line-length 120 --multi-line VERTICAL_HANGING_INDENT --trailing-comma'
+let g:ale_python_isort_options = '--line-length 120 '
+      \ . '--multi-line VERTICAL_HANGING_INDENT --trailing-comma'
 
 noremap <silent> ]e :ALENextWrap<cr>
 noremap <silent> [e :ALEPreviousWrap<cr>
@@ -297,10 +276,78 @@ noremap <silent> <leader>f :ALEFix<cr>
 
 
 " =============================================================================
+"                                  coc.nvim
+" =============================================================================
+" Some servers have issues with backup files, see #649.
+set nowritebackup
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Tab closes the autocomplete menu and moves the cursor out of paired
+" characters
+inoremap <silent> <expr> <tab> pumvisible()
+      \ ? '<c-e>' :
+      \ <SID>should_tab_out() ? '<right>' :
+      \ '<tab>'
+
+" Return true if character under the cursor is either:
+" - a closing bracket
+" - a quote and there are an odd number of preceding quotes (ie the quote is
+"   a closing quote)
+function! s:should_tab_out()
+  let brackets = [')', ']', '}']
+  let quotes = ["'",  '"',  '`']
+
+  let preceding_chars = getline('.')[:col('.') - 2]
+  let current_char = getline('.')[col('.') - 1]
+
+  if index(quotes, current_char) != -1
+    let num_preceding_quotes = strlen(preceding_chars) -
+          \ strlen(substitute(preceding_chars, current_char, '', 'g'))
+    return num_preceding_quotes % 2 == 1
+  else
+    return index(brackets, current_char) != -1
+  endif
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> complete_info()['selected'] != -1 ? '<c-y>' : '<c-g>u<cr>'
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gb <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<cr>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocActionAsync('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <silent> <leader>rn <Plug>(coc-rename)
+
+
+" =============================================================================
 "                                    misc
 " =============================================================================
 " Jump to last position when opening a file
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$")
+      \ | exe "normal! g'\"" | endif
 
 " Trim trailing whitespace on write
 autocmd BufWritePre * if expand('%:e') !=# 'diff' | %s/\s\+$//e | endif

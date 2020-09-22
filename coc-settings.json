@@ -1,3 +1,5 @@
 {
-  "diagnostic.displayByAle": true
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "diagnostic.displayByAle": true,
+  "python.jediEnabled": false
 }
