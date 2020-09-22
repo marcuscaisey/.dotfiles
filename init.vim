@@ -61,6 +61,8 @@ Plug 'liuchengxu/vista.vim'
 let g:ale_disable_lsp = 1
 Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'antoinemadec/coc-fzf'
+
 
 call plug#end()
 
@@ -273,6 +275,10 @@ let g:ale_python_isort_options = '--line-length 120 '
 noremap <silent> ]e :ALENextWrap<cr>
 noremap <silent> [e :ALEPreviousWrap<cr>
 noremap <silent> <leader>f :ALEFix<cr>
+
+" coc-fzf
+let g:coc_fzf_preview = 'right:50%'
+nnoremap <silent> <c-s> :CocFzfList symbols<cr>
 
 
 " =============================================================================
