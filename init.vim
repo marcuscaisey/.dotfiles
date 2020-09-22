@@ -226,6 +226,7 @@ let g:cpp_concepts_highlight = 1
 nnoremap <silent> <c-p> :Files<cr>
 nnoremap <silent> <c-b> :Buffers<cr>
 nnoremap <silent> <c-g> :Rg<cr>
+nnoremap <silent> <c-f> :BLines<cr>
 
 " vim-easy-align
 nmap <silent> ga <Plug>(EasyAlign)
