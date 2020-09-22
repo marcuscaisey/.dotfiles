@@ -271,6 +271,9 @@ let g:ale_fixers = {
 \ 'python': ['isort', 'black'],
 \ }
 
+let g:ale_sign_warning = g:lightline#ale#indicator_warnings
+let g:ale_sign_error = g:lightline#ale#indicator_errors
+
 let g:ale_python_black_options = '--line-length 120'
 let g:ale_python_flake8_options = '--max-line-length 120'
 let g:ale_python_isort_options = '--line-length 120 '
