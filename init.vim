@@ -91,6 +91,11 @@ nnoremap <c-w>j <c-w>J
 nnoremap <c-w>k <c-w>K
 nnoremap <c-w>l <c-w>L
 nnoremap <c-w>h <c-w>H
+nnoremap <c-w>< <c-w>5<
+nnoremap <c-w>> <c-w>5>
+nnoremap <c-w>- <c-w>5-
+nnoremap <c-w>= <c-w>5+
+nnoremap <c-w>e <c-w>=
 
 nnoremap Y y$
 
