@@ -190,13 +190,13 @@ let g:lightline#ale#indicator_errors = "\uf05e "
 function! LightlineFilename()
   let filename = expand('%:t')
   let filename = filename != '' ? filename : '*'
-  let modified = &modified ? ' ✎' : ''
+  let modified = &modified ? " \u270e" : ''
   return WebDevIconsGetFileTypeSymbol() . ' ' . filename . modified
 endfunction
 
 function! LightlineGitBranch()
   let branch = fugitive#head()
-  return branch != '' ? ' ' . branch : ''
+  return branch != '' ? "\ue725 " . branch : ''
 endfunction
 
 " tmuxline
@@ -210,8 +210,6 @@ let g:tmuxline_preset = {
 \ }
 
 " vim-polyglot
-let g:python_highlight_all = 1 " Enable all python syntax highlighting features
-
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
@@ -349,7 +347,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-nmap <silent> <leader>rn <Plug>(coc-rename)
+nnoremap <silent> <leader>rn <Plug>(coc-rename)
 
 
 " =============================================================================
