@@ -282,6 +282,8 @@ noremap <silent> <leader>f :ALEFix<cr>
 
 " Vista.vim
 let g:vista_default_executive = 'coc'
+let g:vista_sidebar_width = 40
+let g:vista_echo_cursor = 0
 nnoremap <silent> <c-t> :Vista!!<cr>
 
 " coc-fzf
@@ -365,6 +367,9 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$")
 
 " Trim trailing whitespace on write
 autocmd BufWritePre * if expand('%:e') !=# 'diff' | %s/\s\+$//e | endif
+
+" Quit if vista is the last open window
+autocmd BufEnter * if (&filetype == 'vista' && winnr('$') == 1) | q | endif
 
 " Fix colours in tmux
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
