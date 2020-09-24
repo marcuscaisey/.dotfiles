@@ -298,7 +298,7 @@ let g:ale_go_golangci_lint_options = ''
 
 noremap <silent> ]e :ALENextWrap<cr>
 noremap <silent> [e :ALEPreviousWrap<cr>
-noremap <silent> <leader>f :ALEFix<cr>
+noremap <silent> <leader>fx :ALEFix<cr>
 
 " Vista.vim
 let g:vista_default_executive = 'coc'
@@ -309,16 +309,6 @@ nnoremap <silent> <c-t> :Vista!!<cr>
 " coc-fzf
 let g:coc_fzf_preview = 'right:50%'
 nnoremap <silent> <c-s> :CocFzfList symbols<cr>
-
-" Hacky way to make files open in new buffers correctly when selecting with
-" <cr>
-command! -nargs=1 Edit edit <args>
-let g:fzf_action = {
-\ 'ctrl-t': 'tab split',
-\ 'ctrl-x': 'split',
-\ 'ctrl-v': 'vsplit',
-\  '': 'Edit',
-\ }
 
 " vim-go
 let g:go_gopls_enabled = 0
@@ -374,7 +364,7 @@ inoremap <expr> <cr> complete_info()['selected'] != -1 ? '<c-y>' : '<c-g>u<cr>'
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gf <Plug>(coc-references)
+nmap <silent> <c-x> <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<cr>
