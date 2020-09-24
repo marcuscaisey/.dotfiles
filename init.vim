@@ -256,6 +256,7 @@ nmap <silent> <expr> <leader>gb &filetype ==# 'fugitiveblame'
 
 " Semshi
 let g:semshi#error_sign = 0
+let g:semshi#mark_selected_nodes = 0
 
 function! s:python_highlights()
   highlight! link semshiGlobal DraculaGreen
