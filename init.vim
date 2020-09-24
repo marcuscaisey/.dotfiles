@@ -62,6 +62,7 @@ let g:ale_disable_lsp = 1
 Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'antoinemadec/coc-fzf'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 
 call plug#end()
@@ -222,6 +223,16 @@ let g:cpp_posix_standard = 1
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_concepts_highlight = 1
 
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+
 " fzf.vim
 nnoremap <silent> <c-p> :Files<cr>
 nnoremap <silent> <c-b> :Buffers<cr>
@@ -264,12 +275,16 @@ endfunction
 " ALE
 let g:ale_linters = {
 \ 'python': ['flake8', 'mypy'],
+\ 'go': ['golangci-lint']
 \ }
 
 let g:ale_fixers = {
 \ '*': ['remove_trailing_lines', 'trim_whitespace'],
 \ 'python': ['isort', 'black'],
+\ 'go': ['gofmt', 'goimports'],
 \ }
+
+let g:ale_fix_on_save = 1
 
 let g:ale_sign_warning = g:lightline#ale#indicator_warnings
 let g:ale_sign_error = g:lightline#ale#indicator_errors
@@ -278,6 +293,8 @@ let g:ale_python_black_options = '--line-length 120'
 let g:ale_python_flake8_options = '--max-line-length 120'
 let g:ale_python_isort_options = '--line-length 120 '
       \ . '--multi-line VERTICAL_HANGING_INDENT --trailing-comma'
+
+let g:ale_go_golangci_lint_options = ''
 
 noremap <silent> ]e :ALENextWrap<cr>
 noremap <silent> [e :ALEPreviousWrap<cr>
@@ -292,6 +309,22 @@ nnoremap <silent> <c-t> :Vista!!<cr>
 " coc-fzf
 let g:coc_fzf_preview = 'right:50%'
 nnoremap <silent> <c-s> :CocFzfList symbols<cr>
+
+" Hacky way to make files open in new buffers correctly when selecting with
+" <cr>
+command! -nargs=1 Edit edit <args>
+let g:fzf_action = {
+\ 'ctrl-t': 'tab split',
+\ 'ctrl-x': 'split',
+\ 'ctrl-v': 'vsplit',
+\  '': 'Edit',
+\ }
+
+" vim-go
+let g:go_gopls_enabled = 0
+let go_def_mapping_enabled = 0
+let g:go_doc_keywordprg_enabled = 0
+let g:go_echo_go_info = 0
 
 
 " =============================================================================
@@ -341,7 +374,7 @@ inoremap <expr> <cr> complete_info()['selected'] != -1 ? '<c-y>' : '<c-g>u<cr>'
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gb <Plug>(coc-references)
+nmap <silent> gf <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<cr>
@@ -357,8 +390,11 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+" Update signature help on jump placeholder.
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
 " Symbol renaming.
-nnoremap <silent> <leader>rn <Plug>(coc-rename)
+nmap <silent> <leader>rn <Plug>(coc-rename)
 
 
 " =============================================================================
@@ -380,3 +416,6 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " Set Python syntax highlighting colours
 autocmd Filetype python call <SID>python_highlights()
+
+" Use 4 space tabs for golang
+autocmd FileType go set tabstop=4 shiftwidth=4 softtabstop=4
