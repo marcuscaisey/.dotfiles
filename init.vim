@@ -310,7 +310,7 @@ nnoremap <silent> <c-t> :Vista!!<cr>
 
 " coc-fzf
 let g:coc_fzf_preview = 'right:50%'
-nnoremap <silent> <c-s> :CocFzfList symbols<cr>
+nnoremap <silent> gs :CocFzfList symbols<cr>
 
 " vim-go
 let g:go_gopls_enabled = 0
