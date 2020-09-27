@@ -287,9 +287,9 @@ let g:ale_fixers = {
 \ }
 
 let g:ale_fix_on_save = 1
-
 let g:ale_sign_warning = g:lightline#ale#indicator_warnings
 let g:ale_sign_error = g:lightline#ale#indicator_errors
+let g:ale_echo_msg_format = '%code: %%s (%linter%)'
 
 let g:ale_python_black_options = '--line-length 120'
 let g:ale_python_flake8_options = '--max-line-length 120'
