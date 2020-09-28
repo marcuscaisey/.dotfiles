@@ -375,7 +375,7 @@ inoremap <expr> <cr> complete_info()['selected'] != -1 ? '<c-y>' : '<c-g>u<cr>'
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> <c-x> <Plug>(coc-references)
+nmap <silent> ge <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<cr>
