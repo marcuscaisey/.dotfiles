@@ -29,6 +29,7 @@ Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 
 " Command
+Plug 'preservim/nerdtree'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
@@ -320,6 +321,14 @@ let g:go_echo_go_info = 0
 let g:go_fmt_autosave = 0
 let g:go_mod_fmt_autosave = 0
 nmap <silent> <leader>gr :GoRun<cr>
+
+" NERDTree
+nnoremap <c-n> :NERDTreeToggle<cr>
+" Quit if NERDTree is last window open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Open NERDTree when vim starts in a directory
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 
 " =============================================================================
