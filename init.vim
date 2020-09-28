@@ -323,7 +323,7 @@ let g:go_mod_fmt_autosave = 0
 nmap <silent> <leader>gr :GoRun<cr>
 
 " NERDTree
-nnoremap <c-n> :NERDTreeToggle<cr>
+nnoremap <silent> <c-n> :NERDTreeToggle<cr>
 " Quit if NERDTree is last window open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Open NERDTree when vim starts in a directory
