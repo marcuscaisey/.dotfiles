@@ -307,7 +307,7 @@ autocmd BufEnter * if (&filetype == 'vista' && winnr('$') == 1) | q | endif
 
 " coc-fzf
 let g:coc_fzf_preview = 'right:50%'
-nnoremap <silent> gs :CocFzfList symbols<cr>
+nnoremap <silent> <c-s> :CocFzfList symbols<cr>
 
 " vim-go
 let g:go_gopls_enabled = 0
