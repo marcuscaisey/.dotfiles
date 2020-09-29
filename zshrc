@@ -14,6 +14,7 @@ plugins=(
   fast-syntax-highlighting
   git
   gitignore
+  golang
   osx
   per-directory-history
   tmux
