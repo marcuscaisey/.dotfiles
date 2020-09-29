@@ -316,6 +316,7 @@ let g:go_doc_keywordprg_enabled = 0
 let g:go_echo_go_info = 0
 let g:go_fmt_autosave = 0
 let g:go_mod_fmt_autosave = 0
+let g:go_template_use_pkg = 1
 nnoremap <silent> <leader>gr :GoRun<cr>
 nnoremap <silent> <leader>gt :GoTest<cr>
 nnoremap <silent> <leader>ggt :GoTestFunc<cr>
