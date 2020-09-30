@@ -294,6 +294,7 @@ let g:ale_python_isort_options = '--line-length 120 '
       \ . '--multi-line VERTICAL_HANGING_INDENT --trailing-comma'
 
 let g:ale_go_golangci_lint_options = ''
+let g:ale_go_golangci_lint_package = 1
 
 noremap <silent> ]e :ALENextWrap<cr>
 noremap <silent> [e :ALEPreviousWrap<cr>
