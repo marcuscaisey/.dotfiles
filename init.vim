@@ -229,6 +229,7 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
 
 " fzf.vim
+let g:fzf_preview_window = 'down:50%'
 nnoremap <silent> <c-p> :Files<cr>
 nnoremap <silent> <c-b> :Buffers<cr>
 nnoremap <silent> <c-g> :Rg<cr>
@@ -306,7 +307,8 @@ nnoremap <silent> <c-t> :Vista!!<cr>
 autocmd BufEnter * if (&filetype == 'vista' && winnr('$') == 1) | q | endif
 
 " coc-fzf
-let g:coc_fzf_preview = 'right:50%'
+let g:coc_fzf_preview = 'down:50%'
+let g:coc_fzf_opts = []
 nnoremap <silent> <c-s> :CocFzfList symbols<cr>
 
 " vim-go
