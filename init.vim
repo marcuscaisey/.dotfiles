@@ -113,6 +113,7 @@ set expandtab
 set fileformat=unix
 set hidden
 set ignorecase
+set inccommand=nosplit
 set mouse=a
 set nohlsearch
 set noshowmode
