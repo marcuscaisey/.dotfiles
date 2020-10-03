@@ -101,6 +101,10 @@ inoremap AA <esc>A
 nnoremap <silent> <leader>n :bn<cr>
 nnoremap <silent> <leader>p :bp<cr>
 
+nnoremap <silent> <leader>qn :cnext<cr>
+nnoremap <silent> <leader>qp :cprevious<cr>
+nnoremap <silent> <leader>qc :cclose<cr>
+
 
 " ==============================================================================
 "                                   settings
