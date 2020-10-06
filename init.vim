@@ -44,6 +44,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'bkad/camelcasemotion'
 Plug 'liuchengxu/vista.vim'
+Plug 'AndrewRadev/splitjoin.vim'
 
 " Text objects
 Plug 'wellle/targets.vim'
