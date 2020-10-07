@@ -325,11 +325,7 @@ let g:go_echo_go_info = 0
 let g:go_fmt_autosave = 0
 let g:go_mod_fmt_autosave = 0
 let g:go_template_use_pkg = 1
-nnoremap <silent> <leader>gr :GoRun<cr>
-nnoremap <silent> <leader>gt :GoTest<cr>
-nnoremap <silent> <leader>ggt :GoTestFunc<cr>
-nnoremap <silent> <leader>gb :GoBuild<cr>
-nnoremap <silent> <leader>ga :GoAlternate<cr>
+nnoremap <silent> <leader>gt :GoAlternate<cr>
 
 " NERDTree
 nnoremap <silent> <c-n> :NERDTreeToggle<cr>
