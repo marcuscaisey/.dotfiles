@@ -11,9 +11,7 @@ endif
 call plug#begin(stdpath('data') . '/plugged')
 
 " Syntax
-let g:polyglot_disabled = ['yaml', 'python']
 Plug 'sheerun/vim-polyglot'
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'shmup/vim-sql-syntax'
 
 " UI
@@ -24,7 +22,6 @@ Plug 'mengelbrecht/lightline-bufferline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'maximbaz/lightline-ale'
-Plug 'antoinemadec/coc-fzf'
 
 " Command
 Plug '~/.fzf'
@@ -43,7 +40,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'bkad/camelcasemotion'
-Plug 'liuchengxu/vista.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/vim-peekaboo'
 
@@ -55,12 +51,6 @@ Plug 'kana/vim-textobj-entire'
 Plug 'tommcdo/vim-exchange'
 Plug 'jeetsukumaran/vim-pythonsense'
 Plug 'Vimjas/vim-python-pep8-indent'
-
-" Completion
-let g:ale_disable_lsp = 1
-Plug 'dense-analysis/ale'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
@@ -100,12 +90,31 @@ nnoremap Y y$
 inoremap II <esc>I
 inoremap AA <esc>A
 
-nnoremap <silent> <leader>n :bn<cr>
-nnoremap <silent> <leader>p :bp<cr>
+nnoremap <silent> L :bn<cr>
+nnoremap <silent> H :bp<cr>
 
-nnoremap <silent> <leader>qn :cnext<cr>
-nnoremap <silent> <leader>qp :cprevious<cr>
-nnoremap <silent> <leader>qc :cclose<cr>
+" Tab moves the cursor out of paired characters
+inoremap <silent> <expr> <tab> <SID>should_tab_out() ? '<right>' : '<tab>'
+
+" Return true if character under the cursor is either:
+" - a closing bracket
+" - a quote and there are an odd number of preceding quotes (ie the quote is
+"   a closing quote)
+function! s:should_tab_out()
+  let brackets = [')', ']', '}']
+  let quotes = ["'",  '"',  '`']
+
+  let preceding_chars = getline('.')[:col('.') - 2]
+  let current_char = getline('.')[col('.') - 1]
+
+  if index(quotes, current_char) != -1
+    let num_preceding_quotes = strlen(preceding_chars) -
+          \ strlen(substitute(preceding_chars, current_char, '', 'g'))
+    return num_preceding_quotes % 2 == 1
+  else
+    return index(brackets, current_char) != -1
+  endif
+endfunction
 
 
 " ==============================================================================
@@ -189,12 +198,6 @@ let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 let g:lightline#bufferline#clickable = 1
 
-" lightline-ale
-let g:lightline#ale#indicator_checking = "\uf110 "
-let g:lightline#ale#indicator_infos = "\uf129 "
-let g:lightline#ale#indicator_warnings = "\uf071 "
-let g:lightline#ale#indicator_errors = "\uf05e "
-
 function! LightlineFilename()
   let filename = expand('%:t')
   let filename = filename != '' ? filename : '*'
@@ -257,78 +260,6 @@ let g:camelcasemotion_key = '<leader>'
 nmap <silent> <expr> <leader>gb &filetype ==# 'fugitiveblame'
       \ ? 'gq' : ':Gblame<cr>'
 
-" Semshi
-let g:semshi#error_sign = 0
-let g:semshi#mark_selected_nodes = 0
-
-function! s:python_highlights()
-  highlight! link semshiGlobal DraculaGreen
-  highlight! link semshiImported DraculaOrange
-  highlight! link semshiParameter DraculaCyan
-  highlight! link semshiParameterUnused DraculaLink
-  highlight! link semshiFree DraculaPurple
-  highlight! link semshiBuiltin DraculaPurple
-  highlight! link semshiAttribute DraculaFgBold
-  highlight! link semshiSelf DraculaPurple
-  let yellow = g:dracula_pro#palette.yellow
-  exec 'highlight! semshiUnresolved  cterm=undercurl ctermfg=' . yellow[1]
-        \ . ' gui=undercurl guifg=' . yellow[0]
-  highlight! link semshiSelected DraculaSelection
-endfunction
-
-" ALE
-let g:ale_linters = {
-\ 'python': ['flake8', 'mypy'],
-\ 'go': ['golangci-lint']
-\ }
-
-let g:ale_fixers = {
-\ '*': ['remove_trailing_lines', 'trim_whitespace'],
-\ 'python': ['isort', 'black'],
-\ 'go': ['gofmt', 'goimports'],
-\ 'gomod': ['gomod'],
-\ }
-
-let g:ale_fix_on_save = 1
-let g:ale_sign_warning = g:lightline#ale#indicator_warnings
-let g:ale_sign_error = g:lightline#ale#indicator_errors
-let g:ale_echo_msg_format = '%code: %%s (%linter%)'
-
-let g:ale_python_black_options = '--line-length 120'
-let g:ale_python_flake8_options = '--max-line-length 120'
-let g:ale_python_isort_options = '--line-length 120 '
-      \ . '--multi-line VERTICAL_HANGING_INDENT --trailing-comma'
-
-let g:ale_go_golangci_lint_options = ''
-let g:ale_go_golangci_lint_package = 1
-
-noremap <silent> ]e :ALENextWrap<cr>
-noremap <silent> [e :ALEPreviousWrap<cr>
-noremap <silent> <leader>fx :ALEFix<cr>
-
-" Vista.vim
-let g:vista_default_executive = 'coc'
-let g:vista_sidebar_width = 40
-let g:vista_echo_cursor = 0
-nnoremap <silent> <c-t> :Vista!!<cr>
-" Quit if vista is the last open window
-autocmd BufEnter * if (&filetype == 'vista' && winnr('$') == 1) | q | endif
-
-" coc-fzf
-let g:coc_fzf_preview = 'right:50%'
-let g:coc_fzf_opts = []
-nnoremap <silent> <c-s> :CocFzfList symbols<cr>
-
-" vim-go
-let g:go_gopls_enabled = 0
-let go_def_mapping_enabled = 0
-let g:go_doc_keywordprg_enabled = 0
-let g:go_echo_go_info = 0
-let g:go_fmt_autosave = 0
-let g:go_mod_fmt_autosave = 0
-let g:go_template_use_pkg = 1
-nnoremap <silent> <leader>gt :GoAlternate<cr>
-
 " NERDTree
 nnoremap <silent> <c-n> :NERDTreeToggle<cr>
 " Quit if NERDTree is last window open
@@ -337,76 +268,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 let g:NERDTreeQuitOnOpen = 1
-
-
-" =============================================================================
-"                                  coc.nvim
-" =============================================================================
-" Some servers have issues with backup files, see #649.
-set nowritebackup
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-" Tab closes the autocomplete menu and moves the cursor out of paired
-" characters
-inoremap <silent> <expr> <tab> pumvisible()
-      \ ? '<c-e>' :
-      \ <SID>should_tab_out() ? '<right>' :
-      \ '<tab>'
-
-" Return true if character under the cursor is either:
-" - a closing bracket
-" - a quote and there are an odd number of preceding quotes (ie the quote is
-"   a closing quote)
-function! s:should_tab_out()
-  let brackets = [')', ']', '}']
-  let quotes = ["'",  '"',  '`']
-
-  let preceding_chars = getline('.')[:col('.') - 2]
-  let current_char = getline('.')[col('.') - 1]
-
-  if index(quotes, current_char) != -1
-    let num_preceding_quotes = strlen(preceding_chars) -
-          \ strlen(substitute(preceding_chars, current_char, '', 'g'))
-    return num_preceding_quotes % 2 == 1
-  else
-    return index(brackets, current_char) != -1
-  endif
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> complete_info()['selected'] != -1 ? '<c-y>' : '<c-g>u<cr>'
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gR <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<cr>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocActionAsync('doHover')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Update signature help on jump placeholder.
-autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-
-" Symbol renaming.
-nmap <silent> <leader>rn <Plug>(coc-rename)
 
 
 " =============================================================================
@@ -422,9 +283,6 @@ autocmd BufWritePre * if expand('%:e') !=# 'diff' | %s/\s\+$//e | endif
 " Fix colours in tmux
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-
-" Set Python syntax highlighting colours
-autocmd Filetype python call <SID>python_highlights()
 
 " Use 4 space tabs for golang
 autocmd FileType go set tabstop=4 shiftwidth=4 softtabstop=4
