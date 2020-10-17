@@ -18,6 +18,7 @@ plugins=(
   osx
   per-directory-history
   tmux
+  vscode
   zsh-autosuggestions
   zsh-nvm
 )
