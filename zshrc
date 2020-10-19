@@ -8,18 +8,15 @@ ZSH_THEME=""
 plugins=(
   alias-finder
   colored-man-pages
-  django
   docker
   docker-compose
   fast-syntax-highlighting
   git
   gitignore
   golang
-  osx
   per-directory-history
   tmux
   zsh-autosuggestions
-  zsh-nvm
 )
 
 source $ZSH/oh-my-zsh.sh
