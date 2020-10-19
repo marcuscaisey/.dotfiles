@@ -15,6 +15,7 @@ plugins=(
   gitignore
   golang
   per-directory-history
+  please
   tmux
   zsh-autosuggestions
 )
