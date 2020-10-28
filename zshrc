@@ -11,7 +11,7 @@ plugins=(
   docker
   docker-compose
   fast-syntax-highlighting
-  git
+  gitfast
   gitignore
   golang
   per-directory-history
