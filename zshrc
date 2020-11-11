@@ -15,6 +15,7 @@ plugins=(
   gitfast
   gitignore
   golang
+  kubectl
   per-directory-history
   please
   tmux
