@@ -99,7 +99,7 @@ eval "$(pyenv virtualenv-init -)"
 ################################################################################
 #                                    golang
 ################################################################################
-export PATH="$HOME/go/bin:$PATH"
+export GOPATH="$HOME/core3:$HOME/core3/src/plz-out/gen/third_party/go:$HOME/core3/src/plz-out/gen/third_party/go/kubernetes:$HOME/core3/src/plz-out/gen/third_party/go/operator-sdk"
 
 
 ################################################################################
