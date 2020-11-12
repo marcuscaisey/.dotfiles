@@ -103,7 +103,7 @@ export GOPATH="$HOME/core3:$HOME/core3/src/plz-out/gen/third_party/go:$HOME/core
 
 
 ################################################################################
-#				     cargo
+#                                    cargo
 ################################################################################
 export PATH="$HOME/.cargo/bin:$PATH"
 
