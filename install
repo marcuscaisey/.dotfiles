@@ -2,21 +2,6 @@
 
 cecho() { echo "$(tput setaf ${ci:-1})$1$(tput sgr0)" && ci=$(( (${ci:-1} % 6) + 1 )); }
 
-pkgs="zsh git tmux cargo"
-for pkg in $pkgs; do
-    cecho "Installing $pkg..."
-    sudo apt install $pkg
-done
-
-cargo_pkgs="exa fd-find bat ripgrep"
-for pkg in $cargo_pkgs; do
-    cecho "Installing $pkg..."
-    cargo install $pkg
-done
-
-cecho "Installing fzf..."
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
-
 cecho "Installing Oh My Zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 
@@ -25,27 +10,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zdharma/fast-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
 git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
 
-cecho "Installing tmux plugin manager..."
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-cecho "Installing tmux-256color terminfo"
-curl -LO http://invisible-island.net/datafiles/current/terminfo.src.gz \
-    && gunzip terminfo.src.gz \
-    && tic -x terminfo.src \
-    && rm terminfo.src
-
-cecho "Installing pyenv..."
-curl https://pyenv.run | bash
-
 cecho "Symlinking to new dotfiles..."
-ln -isv ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -isv ~/.dotfiles/zshrc ~/.zshrc
 mkdir -pv ~/.config/nvim && ln -isv ~/.dotfiles/init.vim ~/.dotfiles/coc-settings.json ~/.config/nvim
-mkdir -pv ~/.jupyter/custom && ln -isv ~/.dotfiles/jupyter-custom.js ~/.jupyter/custom/custom.js
-mkdir -pv ~/.ptpython && ln -isv ~/.dotfiles/ptpython-config.py ~/.ptpython/config.py
-
-cecho "Changing login shell..."
-chsh -s $(which zsh)
 
 cecho "$(tput bold)Installation complete. Starting zsh..."
 exec zsh
