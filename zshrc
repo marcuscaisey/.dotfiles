@@ -62,6 +62,7 @@ alias py=python
 alias vim=nvim
 
 alias oops="grb -i HEAD~2"
+alias c="cd ~/core3/src"
 
 
 ################################################################################
