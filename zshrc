@@ -63,7 +63,7 @@ alias vim=nvim
 
 alias oops="grb -i HEAD~2"
 alias c="cd ~/core3/src"
-alias fixconflicts="vim $(git diff --name-only --diff-filter=U)"
+alias conflicts='vim $(git diff --name-only --diff-filter=U)'
 
 
 ################################################################################
