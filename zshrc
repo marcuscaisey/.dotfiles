@@ -102,10 +102,18 @@ export BAT_STYLE="numbers"
 
 
 ################################################################################
+#                                    pyenv
+################################################################################
+# export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+
+################################################################################
 #                                    golang
 ################################################################################
 export GOPATH="$HOME/core3:$HOME/core3/src/plz-out/gen/third_party/go:$HOME/core3/src/plz-out/gen/third_party/go/kubernetes:$HOME/core3/src/plz-out/gen/third_party/go/operator-sdk"
-export PATH="$HOME/core3/bin:$PATH"
 
 
 ################################################################################

@@ -34,6 +34,9 @@ curl -LO http://invisible-island.net/datafiles/current/terminfo.src.gz \
     && tic -x terminfo.src \
     && rm terminfo.src
 
+cecho "Installing pyenv..."
+curl https://pyenv.run | bash
+
 cecho "Symlinking to new dotfiles..."
 ln -isv ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -isv ~/.dotfiles/zshrc ~/.zshrc
