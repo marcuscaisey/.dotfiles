@@ -100,12 +100,9 @@ export BAT_STYLE="numbers"
 
 
 ################################################################################
-#                                    pyenv
+#                                    python
 ################################################################################
-# export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+export PATH="/opt/tm/tools/python/current/usr/bin:$PATH"
 
 
 ################################################################################
