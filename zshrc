@@ -8,7 +8,6 @@ ZSH_THEME=""
 plugins=(
   alias-finder
   colored-man-pages
-  docker
   docker-compose
   fast-syntax-highlighting
   git
