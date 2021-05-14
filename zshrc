@@ -10,7 +10,6 @@ plugins=(
   colored-man-pages
   fast-syntax-highlighting
   git
-  gitfast
   gitignore
   golang
   kubectl
