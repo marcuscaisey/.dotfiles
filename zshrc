@@ -10,7 +10,6 @@ plugins=(
   colored-man-pages
   fast-syntax-highlighting
   git
-  golang
   kubectl
   kube-ps1
   per-directory-history
