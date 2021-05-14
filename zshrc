@@ -61,7 +61,7 @@ alias py=python
 
 alias vim=nvim
 
-alias oops="gaa && gcn!"
+alias oops="gau && gcn!"
 alias c="cd ~/core3/src"
 alias conflicts='vim $(git diff --name-only --diff-filter=U)'
 
