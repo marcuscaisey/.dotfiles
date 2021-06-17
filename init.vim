@@ -261,5 +261,9 @@ autocmd BufWritePre * if expand('%:e') !=# 'diff' | %s/\s\+$//e | endif
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-" Use 4 space tabs for golang
-autocmd FileType go set tabstop=4 shiftwidth=4 softtabstop=4
+" Use 4 space tabs for golang, plz
+autocmd FileType go,bzl set tabstop=4 shiftwidth=4 softtabstop=4
+
+" Set file type as bazel for build_defs files
+autocmd BufNewFile,BufRead *.build_defs set filetype=bzl
+
