@@ -64,6 +64,8 @@ alias t="cd ~/toolchain"
 alias s="cd ~/scratch"
 alias conflicts='vim $(git diff --name-only --diff-filter=U)'
 
+alias black="PYTHONNOUSERSITE=1 black"
+
 
 ################################################################################
 #                                     fzf
