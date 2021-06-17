@@ -213,6 +213,8 @@ let g:go_highlight_fields = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
 
+let g:no_csv_maps = 1
+
 " fzf.vim
 let g:fzf_preview_window = 'right:50%'
 nnoremap <silent> <c-p> :Files<cr>
