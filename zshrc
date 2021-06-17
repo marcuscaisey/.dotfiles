@@ -110,6 +110,7 @@ export PATH="/opt/tm/tools/python/current/usr/bin:$PATH"
 #                                    golang
 ################################################################################
 export GOPATH="$HOME/core3:$HOME/core3/src/plz-out/gen/third_party/go:$HOME/core3/src/plz-out/gen/third_party/go/kubernetes:$HOME/core3/src/plz-out/gen/third_party/go/operator-sdk"
+export PATH="$HOME/core3/bin:$PATH"
 
 
 ################################################################################
