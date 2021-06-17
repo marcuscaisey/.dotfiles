@@ -60,6 +60,7 @@ alias vim=nvim
 
 alias oops="gau && gcn!"
 alias c="cd ~/core3/src"
+alias t="cd ~/toolchain"
 alias conflicts='vim $(git diff --name-only --diff-filter=U)'
 
 
