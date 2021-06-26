@@ -20,6 +20,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'edkolev/tmuxline.vim'
+Plug 'ryanoasis/vim-devicons'
 
 " Command
 Plug '~/.fzf'
@@ -150,7 +151,7 @@ set updatetime=100
 " commentary.vim
 autocmd FileType sql setlocal commentstring=--\ %s
 
-" Lightline
+" lightline
 let g:lightline = {
 \ 'colorscheme': 'dracula_pro',
 \ 'active': {
@@ -161,14 +162,23 @@ let g:lightline = {
 \   'right': [
 \     ['lineinfo'],
 \     ['percent'],
+\     ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos'],
 \   ],
 \ },
 \ 'tabline': {
 \   'left': [['buffers']],
 \   'right': [],
 \ },
+\ 'component_function': {
+\   'filename': 'LightlineFilename',
+\ },
 \ 'component_expand': {
 \   'buffers': 'lightline#bufferline#buffers',
+\   'linter_checking': 'lightline#ale#checking',
+\   'linter_infos': 'lightline#ale#infos',
+\   'linter_warnings': 'lightline#ale#warnings',
+\   'linter_errors': 'lightline#ale#errors',
+\   'gitbranch': 'LightlineGitBranch',
 \ },
 \ 'component_type': {
 \   'buffers': 'tabsel',
@@ -182,8 +192,22 @@ let g:lightline = {
 \ 'subseparator': {'left': '', 'right': ''},
 \ }
 
+function! LightlineFilename()
+  let filename = expand('%:t')
+  let filename = filename != '' ? filename : '*'
+  let modified = &modified ? " \u270e" : ''
+  return WebDevIconsGetFileTypeSymbol() . ' ' . filename . modified
+endfunction
+
+function! LightlineGitBranch()
+  let branch = fugitive#head()
+  return branch != '' ? "\ue725 " . branch : ''
+endfunction
+
 " lightline-bufferline
 let g:lightline#bufferline#clickable = 1
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#unicode_symbols = 1
 
 " tmuxline
 let g:tmuxline_preset = {
