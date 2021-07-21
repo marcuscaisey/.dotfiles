@@ -67,6 +67,8 @@ alias gcfd="git clean -fd"
 
 alias black="PYTHONNOUSERSITE=1 black"
 
+alias bob='kubectl exec bob -c bob -it -- psql'
+
 
 ################################################################################
 #                                     fzf
