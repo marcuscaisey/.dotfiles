@@ -74,7 +74,13 @@ require('packer').startup({
 cmd('autocmd FileType sql setlocal commentstring=--%s')
 
 -- nvim-bufferline.lua
-require('bufferline').setup{}
+require('bufferline').setup{
+  highlights = {
+    buffer_selected = {
+      gui = 'bold',
+    },
+  },
+}
 
 -- nvim-treesitter
 require('nvim-treesitter.configs').setup {
