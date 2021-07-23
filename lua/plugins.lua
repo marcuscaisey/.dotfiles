@@ -80,6 +80,9 @@ require('bufferline').setup{
       gui = 'bold',
     },
   },
+  options = {
+    show_buffer_close_icons = false,
+  },
 }
 
 -- nvim-treesitter
