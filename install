@@ -2,7 +2,7 @@
 
 cecho() { echo "$(tput setaf ${ci:-1})$1$(tput sgr0)" && ci=$(( (${ci:-1} % 6) + 1 )); }
 
-pkgs="zsh git tmux cargo"
+pkgs="zsh git tmux cargo ranger"
 for pkg in $pkgs; do
     cecho "Installing $pkg..."
     sudo apt install $pkg
