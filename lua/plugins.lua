@@ -34,7 +34,10 @@ require('packer').startup({
     -- Command
     -- use '~/.fzf'
     -- use 'junegunn/fzf.vim'
-    -- use 'preservim/nerdtree'
+    use {
+      'kyazdani42/nvim-tree.lua',
+      requires = {'kyazdani42/nvim-web-devicons', opt = true},
+    }
     use 'tpope/vim-unimpaired'
     use 'tpope/vim-eunuch'
     use 'tpope/vim-repeat'
