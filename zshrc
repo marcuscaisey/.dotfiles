@@ -29,8 +29,7 @@ autoload -U compinit && compinit
 git_branch_format="%{$fg_bold[yellow]%}"
 export ZSH_THEME_GIT_PROMPT_PREFIX="$git_branch_format("
 export ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
-export ZSH_THEME_GIT_PROMPT_DIRTY="$git_branch_format) %{$fg[yellow]%}✗"
-export ZSH_THEME_GIT_PROMPT_CLEAN="$git_branch_format) %{$fg[green]%}✔"
+export ZSH_THEME_GIT_PROMPT_CLEAN="$git_branch_format)"
 
 export PROMPT='%{$fg_bold[blue]%}%c%{$reset_color%} $(git_prompt_info)'
 export PROMPT='%B$(kube_ps1)'" $PROMPT"
