@@ -20,8 +20,6 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-autoload -U compinit && compinit
-
 
 ################################################################################
 #                                    prompt
