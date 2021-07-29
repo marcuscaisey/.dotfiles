@@ -1,3 +1,4 @@
+zmodload zsh/zprof
 ################################################################################
 #                                  oh my zsh
 ################################################################################
@@ -24,6 +25,8 @@ source $ZSH/oh-my-zsh.sh
 ################################################################################
 #                                    prompt
 ################################################################################
+export DISABLE_UNTRACKED_FILES_DIRTY="true"
+
 git_branch_format="%{$fg_bold[yellow]%}"
 export ZSH_THEME_GIT_PROMPT_PREFIX="$git_branch_format("
 export ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
