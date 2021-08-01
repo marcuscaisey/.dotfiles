@@ -2,8 +2,6 @@
 
 source ~/.dotfiles/utils.sh
 
-cecho() { echo "$(tput setaf ${ci:-1})$1$(tput sgr0)" && ci=$(( (${ci:-1} % 6) + 1 )); }
-
 if osx; then
   cecho "Installing homebrew..."
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
