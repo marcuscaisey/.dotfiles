@@ -1,9 +1,0 @@
-{
-  "coc.preferences.extensionUpdateCheck": "daily",
-  "coc.source.file.enable": false,
-  "coc.source.buffer.enable": false,
-  "coc.source.around.enable": false,
-  "suggest.noselect": false,
-  "diagnostic.displayByAle": true,
-  "python.jediEnabled": false
-}
