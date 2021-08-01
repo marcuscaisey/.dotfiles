@@ -4,6 +4,8 @@ local galaxyline = require('galaxyline')
 local section = galaxyline.section
 local condition = require('galaxyline.condition')
 
+galaxyline.short_line_list = {'NvimTree'}
+
 local colours = {
   black    = g['dracula_pro#palette'].bg[1],
   gray     = g['dracula_pro#palette'].selection[1],
