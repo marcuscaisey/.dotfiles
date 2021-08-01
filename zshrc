@@ -1,14 +1,4 @@
-###############################################################################
-#                                    utils
-###############################################################################
-osx() {
-  [ $(uname) = "Darwin" ]
-}
-
-linux() {
-  [ $(uname) = "Linux" ]
-}
-
+source utils.sh
 
 ################################################################################
 #                                  oh my zsh
@@ -147,7 +137,9 @@ eval "$(pyenv virtualenv-init -)"
 if linux; then
   export GOPATH="$HOME/core3:$HOME/go:$HOME/core3/src/plz-out/go"
   export PATH="$HOME/core3/bin:$PATH"
-elif osx; then
+fi
+
+if osx; then
   export PATH="$HOME/go/bin:$PATH"
 fi
 

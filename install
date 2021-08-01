@@ -1,26 +1,49 @@
 #!/usr/bin/env bash
 
+source utils.sh
+
 cecho() { echo "$(tput setaf ${ci:-1})$1$(tput sgr0)" && ci=$(( (${ci:-1} % 6) + 1 )); }
 
-cecho "Installing homebrew..."
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if osx; then
+  cecho "Installing homebrew..."
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-pkgs="zsh git tmux exa fzf fd bat ripgrep nvim"
-for pkg in $pkgs; do
-    cecho "Installing $pkg..."
-    brew install $pkg
-done
+  pkgs="zsh git tmux exa fzf fd bat ripgrep nvim ranger"
+  for pkg in $pkgs; do
+      cecho "Installing $pkg..."
+      brew install $pkg
+  done
+fi
 
-cecho "Setting up fzf..."
-$(brew --prefix)/opt/fzf/install
+if linux; then
+  pkgs="zsh git tmux cargo ranger"
+  for pkg in $pkgs; do
+      cecho "Installing $pkg..."
+      sudo apt install $pkg
+  done
+
+  cargo_pkgs="exa fd-find bat ripgrep"
+  for pkg in $cargo_pkgs; do
+      cecho "Installing $pkg..."
+      cargo install $pkg
+  done
+fi
+
+if osx; then
+  cecho "Setting up fzf..."
+  $(brew --prefix)/opt/fzf/install
+fi
+if linux; then
+  cecho "Installing fzf..."
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
+fi
 
 cecho "Installing Oh My Zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 
-cecho "Installing Oh My Zsh plugins: fast-syntax-highlighting, zsh-autosuggestions, zsh-nvm..."
+cecho "Installing Oh My Zsh plugins: fast-syntax-highlighting, zsh-autosuggestions"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zdharma/fast-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
-git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
 
 cecho "Installing tmux plugin manager..."
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -31,15 +54,18 @@ gunzip terminfo.src.gz
 tic -x terminfo.src
 rm terminfo.src
 
-cecho "Installing pyenv..."
-curl https://pyenv.run | bash
+if osx; then
+  cecho "Installing pyenv..."
+  curl https://pyenv.run | bash
+fi
 
 cecho "Symlinking to new dotfiles..."
 ln -isv ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -isv ~/.dotfiles/zshrc ~/.zshrc
-mkdir -pv ~/.config/nvim && ln -isv ~/.dotfiles/init.vim ~/.dotfiles/coc-settings.json ~/.config/nvim
-mkdir -pv ~/.jupyter/custom && ln -isv ~/.dotfiles/jupyter-custom.js ~/.jupyter/custom/custom.js
-mkdir -pv ~/.ptpython && ln -isv ~/.dotfiles/ptpython-config.py ~/.ptpython/config.py
+mkdir -pv ~/.config/nvim && ln -isv ~/.dotfiles/init.lua ~/.config/nvim && ln -isv ~/.dotfiles/lua ~/.config/nvim
+if osx; then
+  mkdir -pv ~/.ptpython && ln -isv ~/.dotfiles/ptpython-config.py ~/.ptpython/config.py
+fi
 
 cecho "Changing login shell..."
 chsh -s $(which zsh)
