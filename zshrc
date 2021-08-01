@@ -1,3 +1,15 @@
+###############################################################################
+#                                    utils
+###############################################################################
+osx() {
+  [ $(uname) = "Darwin" ]
+}
+
+linux() {
+  [ $(uname) = "Linux" ]
+}
+
+
 ################################################################################
 #                                  oh my zsh
 ################################################################################
@@ -8,27 +20,23 @@ ZSH_THEME=""
 plugins=(
   alias-finder
   colored-man-pages
-  django
-  docker
-  docker-compose
   fast-syntax-highlighting
   git
-  gitignore
-  golang
-  osx
   per-directory-history
   please
   tmux
-  vscode
   zsh-autosuggestions
-  zsh-nvm
 )
+
+if linux; then
+  plugins=(kubectl kube-ps1 $plugins)
+fi
 
 source $ZSH/oh-my-zsh.sh
 
 
 ################################################################################
-#                                    prompt
+#                                  git prompt
 ################################################################################
 git_branch_format="%{$fg_bold[yellow]%}"
 export ZSH_THEME_GIT_PROMPT_PREFIX="$git_branch_format("
@@ -40,8 +48,18 @@ export PROMPT='%{$fg_bold[blue]%}%c%{$reset_color%} $(git_prompt_info)'
 
 
 ################################################################################
+#                                   kube-ps1
+################################################################################
+if linux; then
+  export KUBE_PS1_SYMBOL_ENABLE=false
+  export PROMPT='%B$(kube_ps1)'" $PROMPT"
+fi
+
+
+################################################################################
 #                                   aliases
 ################################################################################
+# exa
 alias ls="exa"
 alias lsl="ls -l"
 alias lsa="ls -a"
@@ -54,6 +72,23 @@ alias rmr="rm -r"
 alias py=python
 
 alias vim=nvim
+
+# git
+alias oops="gau && gcn!"
+alias conflicts='vim $(git diff --name-only --diff-filter=U)'
+alias gcfd="git clean -fd"
+
+alias d="cd ~/.dotfiles"
+
+if linux; then
+  alias c="cd ~/core3/src"
+  alias t="cd ~/toolchain"
+  alias s="cd ~/scratch"
+
+  alias black="PYTHONNOUSERSITE=1 black"
+
+  alias bob='kubectl exec bob -c bob -it -- psql'
+fi
 
 
 ################################################################################
@@ -90,6 +125,14 @@ export BAT_STYLE="numbers"
 
 
 ################################################################################
+#                                    python
+################################################################################
+if linux; then
+  export PATH="/opt/tm/tools/python/current/usr/bin:$PATH"
+fi
+
+
+################################################################################
 #                                    pyenv
 ################################################################################
 # export PYENV_VIRTUALENV_DISABLE_PROMPT=1
@@ -101,7 +144,43 @@ eval "$(pyenv virtualenv-init -)"
 ################################################################################
 #                                    golang
 ################################################################################
-export PATH="$HOME/go/bin:$PATH"
+if linux; then
+  export GOPATH="$HOME/core3:$HOME/go:$HOME/core3/src/plz-out/go"
+  export PATH="$HOME/core3/bin:$PATH"
+elif osx; then
+  export PATH="$HOME/go/bin:$PATH"
+fi
+
+
+################################################################################
+#                                    cargo
+################################################################################
+export PATH="$HOME/.cargo/bin:$PATH"
+
+
+################################################################################
+#                                     plz
+################################################################################
+if linux; then
+  alias sef="plz sef"
+fi
+
+
+################################################################################
+#                                     env
+################################################################################
+export EDITOR=nvim
+
+
+################################################################################
+#                                   kubectl
+################################################################################
+if linux; then
+  export KUBECONFIG=$HOME/.kube/config
+  for file in $HOME/.kube/configs/*.yaml; do
+    export KUBECONFIG=$KUBECONFIG:$file
+  done
+fi
 
 
 ################################################################################
