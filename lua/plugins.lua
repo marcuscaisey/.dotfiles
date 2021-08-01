@@ -125,10 +125,10 @@ g.nvim_tree_bindings = {
   {key = 'l', cb = tree_cb("edit")},
 }
 g.nvim_tree_ignore = {'.git'}
-g.nvim_tree_auto_close = true
-g.nvim_tree_quit_on_open = true
-g.nvim_tree_follow = true
-g.nvim_tree_hide_dotfiles = true
-g.nvim_tree_git_hl = true
-g.nvim_tree_highlight_opened_files = true
-g.nvim_tree_group_empty = true
+g.nvim_tree_auto_close = 1
+g.nvim_tree_quit_on_open = 1
+g.nvim_tree_follow = 1
+g.nvim_tree_hide_dotfiles = 1
+g.nvim_tree_git_hl = 1
+g.nvim_tree_highlight_opened_files = 1
+g.nvim_tree_group_empty = 1
