@@ -70,4 +70,4 @@ endfunction
 ]])
 
 -- nvim-tree.lua
-map('n', '<c-n>', ':NvimTreeToggle<cr>', {noremap = true})
+map('n', '<c-n>', ':NvimTreeToggle<cr>', {noremap = true, silent = true})
