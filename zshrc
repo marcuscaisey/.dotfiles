@@ -17,6 +17,7 @@ plugins=(
   golang
   osx
   per-directory-history
+  please
   tmux
   vscode
   zsh-autosuggestions
