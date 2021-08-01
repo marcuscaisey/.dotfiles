@@ -117,3 +117,18 @@ g['sneak#use_ic_scs'] = 1
 
 -- camelcasemotion
 g.camelcasemotion_key = '<leader>'
+
+-- nvim-tree
+local tree_cb = require('nvim-tree.config').nvim_tree_callback
+g.nvim_tree_bindings = {
+  {key = 'h', cb = tree_cb('close_node')},
+  {key = 'l', cb = tree_cb("edit")},
+}
+g.nvim_tree_ignore = {'.git'}
+g.nvim_tree_auto_close = true
+g.nvim_tree_quit_on_open = true
+g.nvim_tree_follow = true
+g.nvim_tree_hide_dotfiles = true
+g.nvim_tree_git_hl = true
+g.nvim_tree_highlight_opened_files = true
+g.nvim_tree_group_empty = true
