@@ -71,3 +71,7 @@ endfunction
 
 -- nvim-tree.lua
 map('n', '<c-n>', ':NvimTreeToggle<cr>', {noremap = true, silent = true})
+
+-- telescope.nvim
+map('n', '<c-p>', ':Telescope find_files previewer=false theme=get_dropdown<cr>', {noremap = true, silent = true})
+map('n', '<c-b>', ':Telescope buffers previewer=false theme=get_dropdown<cr>', {noremap = true, silent = true})
