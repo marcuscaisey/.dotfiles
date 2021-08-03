@@ -34,6 +34,8 @@ map('n', 'Y', 'y$', {noremap = true})
 map('i', 'II', '<esc>I', {noremap = true})
 map('i', 'AA', '<esc>A', {noremap = true})
 
+map('v', '<leader>s', '"9y:%s/<c-r>9/', {noremap = true})
+
 -- nvim-bufferline.lua
 map('n', 'L', ':BufferLineCycleNext<cr>', {noremap = true, silent = true})
 map('n', 'H', ':BufferLineCyclePrev<cr>', {noremap = true, silent = true})
