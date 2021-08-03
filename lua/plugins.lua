@@ -114,7 +114,7 @@ require('nvim-treesitter.configs').setup {
 
 
 -- vim-sneak
-cmd('highlight link Sneak IncSearch')
+cmd('autocmd ColorScheme * highlight! link Sneak IncSearch')
 g['sneak#use_ic_scs'] = 1
 
 -- camelcasemotion
