@@ -37,10 +37,10 @@ o.updatetime = 100
 --                                    misc
 --------------------------------------------------------------------------------
 -- Jump to last position when opening a file
-cmd('autocmd BufReadPost * if line("\'\\"") > 1 && line("\'\\"") <= line("$") | exe "normal! g\'\\"" | endif')
+cmd([[autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
 
 -- Trim trailing whitespace on write
-cmd('autocmd BufWritePre * if expand("%:e") !=# "diff" | %s/\\s\\+$//e | endif')
+cmd([[autocmd BufWritePre * if expand('%:e') !=# 'diff' | %s/\s\+$//e | endif]])
 
 -- Use 4 space tabs for golang
 cmd('autocmd FileType go set tabstop=4 shiftwidth=4 softtabstop=4')
