@@ -4,7 +4,10 @@ local galaxyline = require('galaxyline')
 local section = galaxyline.section
 local condition = require('galaxyline.condition')
 
-galaxyline.short_line_list = {'NvimTree'}
+galaxyline.short_line_list = {
+  'NvimTree',
+  'gitcommit', -- galaxyline is superslow when editing git commits
+}
 
 local colours = {
   black    = g['dracula_pro#palette'].bg[1],
