@@ -2,8 +2,6 @@ local o = vim.o
 local cmd = vim.cmd
 local g = vim.g
 
-cmd('autocmd BufWritePost plugins.lua PackerCompile')
-
 require 'plugins'
 require 'mappings'
 

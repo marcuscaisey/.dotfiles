@@ -9,6 +9,8 @@ if fn.empty(fn.glob(install_path)) > 0 then
   execute 'packadd packer.nvim'
 end
 
+cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])
+
 require('packer').startup({
   function(use)
     -- Syntax
