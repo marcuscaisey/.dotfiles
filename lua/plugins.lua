@@ -136,3 +136,6 @@ g.nvim_tree_hide_dotfiles = 1
 g.nvim_tree_git_hl = 1
 g.nvim_tree_highlight_opened_files = 1
 g.nvim_tree_group_empty = 1
+
+-- vim-gitgutter
+g.gitgutter_close_preview_on_escape = 1
