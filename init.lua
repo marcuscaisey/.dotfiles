@@ -2,6 +2,8 @@ local o = vim.o
 local cmd = vim.cmd
 local g = vim.g
 
+cmd('autocmd BufWritePost init.lua source <afile>')
+
 require 'plugins'
 require 'mappings'
 
