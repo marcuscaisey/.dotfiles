@@ -22,13 +22,13 @@ require('packer').startup({
       'glepnir/galaxyline.nvim',
       branch = 'main',
       config = function() require 'statusline' end,
-      requires = {'kyazdani42/nvim-web-devicons', opt = true},
+      requires = 'kyazdani42/nvim-web-devicons',
     }
     use 'airblade/vim-gitgutter'
     use 'machakann/vim-highlightedyank'
     use {
       'akinsho/nvim-bufferline.lua',
-      requires = {'kyazdani42/nvim-web-devicons', opt = true},
+      requires = 'kyazdani42/nvim-web-devicons',
     }
 
     -- Command
@@ -38,7 +38,7 @@ require('packer').startup({
     }
     use {
       'kyazdani42/nvim-tree.lua',
-      requires = {'kyazdani42/nvim-web-devicons', opt = true},
+      requires = 'kyazdani42/nvim-web-devicons',
     }
     use 'tpope/vim-unimpaired'
     use 'tpope/vim-eunuch'
