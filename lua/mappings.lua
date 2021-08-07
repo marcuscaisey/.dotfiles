@@ -2,6 +2,8 @@ local g = vim.g
 local cmd = vim.cmd
 local map = vim.api.nvim_set_keymap
 
+cmd('autocmd BufWritePost mappings.lua source <afile>')
+
 g.mapleader = ' '
 
 map('i', 'jj', '<esc>', {noremap = true})
