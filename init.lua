@@ -49,3 +49,6 @@ cmd('autocmd FileType lua set tabstop=2 shiftwidth=2')
 
 -- Set file type as bazel for build_defs files
 cmd('autocmd BufNewFile,BufRead *.build_defs set filetype=bzl')
+
+-- Don't comment lines after o/O
+cmd('autocmd BufWinEnter * set formatoptions-=o')
