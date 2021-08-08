@@ -13,6 +13,11 @@ cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])
 
 require('packer').startup({
   function(use)
+    use {
+      'wbthomason/packer.nvim',
+      event = 'VimEnter',
+    }
+    
     -- Syntax
     use {
       'nvim-treesitter/nvim-treesitter',
