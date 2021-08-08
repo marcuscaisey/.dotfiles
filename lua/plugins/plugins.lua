@@ -37,7 +37,10 @@ require('packer').startup({
       'airblade/vim-gitgutter',
       event = 'BufRead',
     }
-    use 'machakann/vim-highlightedyank'
+    use {
+      'machakann/vim-highlightedyank',
+      event = 'TextYankPost',
+    }
     use {
       'akinsho/nvim-bufferline.lua',
       requires = 'kyazdani42/nvim-web-devicons',
