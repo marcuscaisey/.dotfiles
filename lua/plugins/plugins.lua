@@ -19,7 +19,6 @@ require('packer').startup({
     use {
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
-      event = {'BufRead', 'BufNew'},
       config = [[ require 'plugins.nvim_treesitter' ]],
     }
 
@@ -30,14 +29,8 @@ require('packer').startup({
       config = [[ require 'plugins.galaxyline' ]],
       requires = 'kyazdani42/nvim-web-devicons',
     }
-    use {
-      'airblade/vim-gitgutter',
-      event = 'BufRead',
-    }
-    use {
-      'machakann/vim-highlightedyank',
-      event = 'TextYankPost',
-    }
+    use 'airblade/vim-gitgutter'
+    use 'machakann/vim-highlightedyank'
     use {
       'akinsho/nvim-bufferline.lua',
       config = [[ require 'plugins.nvim_bufferline' ]],
@@ -87,7 +80,7 @@ require('packer').startup({
   config = {
     display = {
       open_fn = require('packer.util').float,
-    }
+    },
   },
 })
 
