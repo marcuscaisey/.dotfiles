@@ -36,7 +36,14 @@ require('packer').startup({
     -- Command
     use {
       'nvim-telescope/telescope.nvim',
-      requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+      requires = {
+        'nvim-lua/popup.nvim',
+        'nvim-lua/plenary.nvim',
+        {
+          'nvim-telescope/telescope-fzf-native.nvim',
+          run = 'make',
+        },
+      },
     }
     use {
       'kyazdani42/nvim-tree.lua',
@@ -139,3 +146,34 @@ g.nvim_tree_group_empty = 1
 
 -- vim-gitgutter
 g.gitgutter_close_preview_on_escape = 1
+
+-- telescope.nvim
+local telescope = require('telescope')
+telescope.setup {
+  defaults = {
+    layout_config = {
+      horizontal = {
+        preview_width = 0.6,
+        width = 0.9,
+      },
+    },
+    prompt_prefix = ' 🔍  ',
+    selection_caret = '  ',
+  },
+  pickers = {
+    current_buffer_fuzzy_find = {
+      previewer = false,
+      sorting_strategy = 'ascending',
+    },
+  },
+  extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = 'smart_case',
+    },
+  },
+}
+
+telescope.load_extension('fzf')

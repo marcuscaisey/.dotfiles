@@ -77,5 +77,8 @@ endfunction
 map('n', '<c-n>', ':NvimTreeToggle<cr>', {noremap = true, silent = true})
 
 -- telescope.nvim
-map('n', '<c-p>', ':Telescope find_files previewer=false theme=get_dropdown<cr>', {noremap = true, silent = true})
-map('n', '<c-b>', ':Telescope buffers previewer=false theme=get_dropdown<cr>', {noremap = true, silent = true})
+map('n', '<c-p>', ':Telescope find_files<cr>', {noremap = true, silent = true})
+map('n', '<c-b>', ':Telescope buffers<cr>', {noremap = true, silent = true})
+map('n', '<c-f>', ':Telescope current_buffer_fuzzy_find<cr>', {noremap = true, silent = true})
+map('n', '<c-g>', ':Telescope live_grep<cr>', {noremap = true, silent = true})
+map('n', '<leader>ht', ':Telescope help_tags<cr>', {noremap = true, silent = true})
