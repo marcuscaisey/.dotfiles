@@ -98,6 +98,12 @@ require('bufferline').setup{
     buffer_selected = {
       gui = 'bold',
     },
+    duplicate_selected = {
+      gui = 'bold',
+    },
+    duplicate = {
+      gui = '',
+    },
   },
   options = {
     show_buffer_close_icons = false,
