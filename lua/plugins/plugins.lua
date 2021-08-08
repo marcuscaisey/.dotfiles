@@ -33,7 +33,10 @@ require('packer').startup({
       config = function() require 'plugins.galaxyline' end,
       requires = 'kyazdani42/nvim-web-devicons',
     }
-    use 'airblade/vim-gitgutter'
+    use {
+      'airblade/vim-gitgutter',
+      event = 'BufRead',
+    }
     use 'machakann/vim-highlightedyank'
     use {
       'akinsho/nvim-bufferline.lua',
