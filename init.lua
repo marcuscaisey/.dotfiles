@@ -51,4 +51,4 @@ cmd('autocmd FileType lua set tabstop=2 shiftwidth=2')
 cmd('autocmd BufNewFile,BufRead *.build_defs set filetype=bzl')
 
 -- Don't comment lines after o/O
-cmd('autocmd BufWinEnter * set formatoptions-=o')
+cmd('autocmd BufEnter * set formatoptions-=o')
