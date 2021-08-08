@@ -17,7 +17,7 @@ require('packer').startup({
       'wbthomason/packer.nvim',
       event = 'VimEnter',
     }
-    
+
     -- Syntax
     use {
       'nvim-treesitter/nvim-treesitter',
