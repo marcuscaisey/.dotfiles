@@ -1,8 +1,7 @@
 local g = vim.g
 local fn = vim.fn
-local galaxyline = require('galaxyline')
-local section = galaxyline.section
-local condition = require('galaxyline.condition')
+local galaxyline = require 'galaxyline'
+local condition = require 'galaxyline.condition'
 
 galaxyline.short_line_list = {
   'NvimTree',
@@ -51,7 +50,7 @@ local function highlight(group, fg, bg, gui)
   vim.cmd(cmd)
 end
 
-section.left = {
+galaxyline.section.left = {
   {
     ViMode = {
       provider = function()
@@ -134,7 +133,7 @@ section.left = {
   },
 }
 
-section.right = {
+galaxyline.section.right = {
   {
     LineInfo = {
       provider = 'LineColumn',
@@ -152,6 +151,3 @@ section.right = {
     },
   },
 }
-
-
-

@@ -23,16 +23,14 @@ require('packer').startup({
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
       event = {'BufRead', 'BufNew'},
-      config = function()
-        require 'plugins.nvim_treesitter'
-      end,
+      config = function() require 'plugins.nvim_treesitter' end,
     }
 
     -- UI
     use {
       'glepnir/galaxyline.nvim',
       branch = 'main',
-      config = function() require 'statusline' end,
+      config = function() require 'plugins.galaxyline' end,
       requires = 'kyazdani42/nvim-web-devicons',
     }
     use 'airblade/vim-gitgutter'
