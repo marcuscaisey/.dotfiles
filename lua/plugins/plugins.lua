@@ -23,14 +23,14 @@ require('packer').startup({
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
       event = {'BufRead', 'BufNew'},
-      config = function() require 'plugins.nvim_treesitter' end,
+      config = [[ require 'plugins.nvim_treesitter' ]],
     }
 
     -- UI
     use {
       'glepnir/galaxyline.nvim',
       branch = 'main',
-      config = function() require 'plugins.galaxyline' end,
+      config = [[ require 'plugins.galaxyline' ]],
       requires = 'kyazdani42/nvim-web-devicons',
     }
     use {
@@ -44,7 +44,7 @@ require('packer').startup({
     use {
       'akinsho/nvim-bufferline.lua',
       event = 'VimEnter',
-      config = function() require 'plugins.nvim_bufferline' end,
+      config = [[ require 'plugins.nvim_bufferline' ]],
       requires = 'kyazdani42/nvim-web-devicons',
     }
 
