@@ -43,6 +43,8 @@ require('packer').startup({
     }
     use {
       'akinsho/nvim-bufferline.lua',
+      event = 'VimEnter',
+      config = function() require 'plugins.nvim_bufferline' end,
       requires = 'kyazdani42/nvim-web-devicons',
     }
 
@@ -99,27 +101,6 @@ require('packer').startup({
 --------------------------------------------------------------------------------
 -- commentary.vim
 cmd('autocmd FileType sql setlocal commentstring=--%s')
-
--- nvim-bufferline.lua
-require('bufferline').setup{
-  highlights = {
-    buffer_selected = {
-      gui = 'bold',
-    },
-    duplicate_selected = {
-      gui = 'bold',
-    },
-    duplicate = {
-      gui = '',
-    },
-  },
-  options = {
-    max_name_length = 30,
-    tab_size = 12,
-    show_buffer_close_icons = false,
-    show_close_icon = false,
-  },
-}
 
 -- vim-sneak
 cmd('autocmd ColorScheme * highlight! link Sneak IncSearch')
