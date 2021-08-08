@@ -13,10 +13,7 @@ cmd('autocmd BufWritePost plugins.lua source <afile> | PackerCompile')
 
 require('packer').startup({
   function(use)
-    use {
-      'wbthomason/packer.nvim',
-      event = 'VimEnter',
-    }
+    use 'wbthomason/packer.nvim'
 
     -- Syntax
     use {
@@ -43,7 +40,6 @@ require('packer').startup({
     }
     use {
       'akinsho/nvim-bufferline.lua',
-      event = 'VimEnter',
       config = [[ require 'plugins.nvim_bufferline' ]],
       requires = 'kyazdani42/nvim-web-devicons',
     }
