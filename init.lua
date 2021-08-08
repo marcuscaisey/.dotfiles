@@ -44,8 +44,8 @@ cmd([[autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe
 -- Trim trailing whitespace on write
 cmd([[autocmd BufWritePre * if expand('%:e') !=# 'diff' | %s/\s\+$//e | endif]])
 
--- Use 4 space tabs for golang
-cmd('autocmd FileType go set tabstop=4 shiftwidth=4 softtabstop=4')
+-- Use 2 space tabs for lua
+cmd('autocmd FileType lua set tabstop=2 shiftwidth=2')
 
 -- Set file type as bazel for build_defs files
 cmd('autocmd BufNewFile,BufRead *.build_defs set filetype=bzl')
