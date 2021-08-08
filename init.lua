@@ -24,13 +24,13 @@ o.showmode = false
 o.swapfile =  false
 o.number = true
 o.scrolloff = 5
-o.shiftwidth = 2
+o.shiftwidth = 4
 o.showtabline = 2
 o.signcolumn = 'yes'
 o.smartcase = true
 o.splitbelow = true
 o.splitright = true
-o.tabstop = 2
+o.tabstop = 4
 o.termguicolors = true
 o.updatetime = 100
 
