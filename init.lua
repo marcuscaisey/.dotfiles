@@ -4,7 +4,7 @@ local g = vim.g
 
 cmd('autocmd BufWritePost init.lua source <afile>')
 
-require 'plugins.plugins'
+require 'plugins.packer'
 require 'mappings'
 
 --------------------------------------------------------------------------------
