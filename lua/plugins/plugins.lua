@@ -21,7 +21,11 @@ require('packer').startup({
     -- Syntax
     use {
       'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate'
+      run = ':TSUpdate',
+      event = {'BufRead', 'BufNew'},
+      config = function()
+        require 'plugins.nvim_treesitter'
+      end,
     }
 
     -- UI
@@ -112,28 +116,6 @@ require('bufferline').setup{
     show_close_icon = false,
   },
 }
-
--- nvim-treesitter
-require('nvim-treesitter.configs').setup {
-  ensure_installed = 'maintained',
-  highlight = {
-    enable = true,
-    disable = {'yaml'},
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = 'gnn',
-      node_incremental = 'grn',
-      scope_incremental = 'grc',
-      node_decremental = 'grm',
-    },
-  },
-  indent = {
-    enable = true,
-  },
-}
-
 
 -- vim-sneak
 cmd('autocmd ColorScheme * highlight! link Sneak IncSearch')
