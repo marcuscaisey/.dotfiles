@@ -29,7 +29,10 @@ require('packer').startup({
       config = [[ require 'plugins.galaxyline' ]],
       requires = 'kyazdani42/nvim-web-devicons',
     }
-    use 'airblade/vim-gitgutter'
+    use {
+      'airblade/vim-gitgutter',
+      config = [[ require 'plugins.vim_gitgutter' ]],
+    }
     use 'machakann/vim-highlightedyank'
     use {
       'akinsho/nvim-bufferline.lua',
@@ -40,6 +43,7 @@ require('packer').startup({
     -- Command
     use {
       'nvim-telescope/telescope.nvim',
+      config = [[ require 'plugins.telescope' ]],
       requires = {
         'nvim-lua/popup.nvim',
         'nvim-lua/plenary.nvim',
@@ -51,6 +55,7 @@ require('packer').startup({
     }
     use {
       'kyazdani42/nvim-tree.lua',
+      config = [[ require 'plugins.nvim_tree' ]],
       requires = 'kyazdani42/nvim-web-devicons',
     }
     use 'tpope/vim-unimpaired'
@@ -60,12 +65,21 @@ require('packer').startup({
     use 'tpope/vim-fugitive'
     use 'ConradIrwin/vim-bracketed-paste'
     use 'vim-scripts/ReplaceWithRegister'
-    use 'tpope/vim-commentary'
+    use {
+      'tpope/vim-commentary',
+      config = [[ require 'plugins.vim_commentary' ]],
+    }
     use 'tpope/vim-surround'
     use 'junegunn/vim-easy-align'
-    use 'justinmk/vim-sneak'
+    use {
+      'justinmk/vim-sneak',
+      config = [[ require 'plugins.vim_sneak' ]],
+    }
     use 'nelstrom/vim-visual-star-search'
-    use 'bkad/camelcasemotion'
+    use {
+      'bkad/camelcasemotion',
+      config = [[ require 'plugins.camelcasemotion' ]],
+    }
     use 'AndrewRadev/splitjoin.vim'
     use 'junegunn/vim-peekaboo'
 
@@ -83,66 +97,3 @@ require('packer').startup({
     },
   },
 })
-
-
---------------------------------------------------------------------------------
---                                  settings
---------------------------------------------------------------------------------
--- commentary.vim
-cmd('autocmd FileType sql setlocal commentstring=--%s')
-
--- vim-sneak
-cmd('autocmd ColorScheme * highlight! link Sneak IncSearch')
-g['sneak#use_ic_scs'] = 1
-
--- camelcasemotion
-g.camelcasemotion_key = '<leader>'
-
--- nvim-tree
-local tree_cb = require('nvim-tree.config').nvim_tree_callback
-g.nvim_tree_bindings = {
-  {key = 'h', cb = tree_cb('close_node')},
-  {key = 'l', cb = tree_cb("edit")},
-}
-g.nvim_tree_ignore = {'.git'}
-g.nvim_tree_auto_close = 1
-g.nvim_tree_quit_on_open = 1
-g.nvim_tree_follow = 1
-g.nvim_tree_hide_dotfiles = 1
-g.nvim_tree_git_hl = 1
-g.nvim_tree_highlight_opened_files = 1
-g.nvim_tree_group_empty = 1
-
--- vim-gitgutter
-g.gitgutter_close_preview_on_escape = 1
-
--- telescope.nvim
-local telescope = require('telescope')
-telescope.setup {
-  defaults = {
-    layout_config = {
-      horizontal = {
-        preview_width = 0.6,
-        width = 0.9,
-      },
-    },
-    prompt_prefix = ' 🔍  ',
-    selection_caret = '  ',
-  },
-  pickers = {
-    current_buffer_fuzzy_find = {
-      previewer = false,
-      sorting_strategy = 'ascending',
-    },
-  },
-  extensions = {
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = 'smart_case',
-    },
-  },
-}
-
-telescope.load_extension('fzf')
