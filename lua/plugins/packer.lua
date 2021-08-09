@@ -22,6 +22,12 @@ require('packer').startup({
       config = [[ require 'plugins.nvim_treesitter' ]],
     }
 
+    -- Completion
+    use {
+      'neovim/nvim-lspconfig',
+      config = [[ require 'plugins.nvim_lspconfig' ]],
+    }
+
     -- UI
     use {
       'glepnir/galaxyline.nvim',
