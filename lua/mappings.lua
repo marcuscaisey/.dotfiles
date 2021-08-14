@@ -1,5 +1,6 @@
 local g = vim.g
 local fn = vim.fn
+local api = vim.api
 local cmd = vim.cmd
 local map = vim.api.nvim_set_keymap
 
@@ -50,13 +51,36 @@ map('x', 'ga', '<Plug>(EasyAlign)', {silent = true})
 -- vim-fugitive
 -- nmap <silent> <expr> <leader>gb &filetype ==# 'fugitiveblame' ? 'gq' : ':Gblame<cr>'
 
--- Tab moves the cursor out of paired characters
-map('i', '<tab>', [[v:lua.should_tab_out(getline('.'), col('.')) ? '<right>' : '<tab>']], {silent = true, expr = true, noremap = true})
+-- nvim-tree.lua
+map('n', '<c-n>', ':NvimTreeToggle<cr>', {noremap = true, silent = true})
+
+-- telescope.nvim
+map('n', '<c-p>', ':Telescope find_files<cr>', {noremap = true, silent = true})
+map('n', '<c-b>', ':Telescope buffers<cr>', {noremap = true, silent = true})
+map('n', '<c-f>', ':Telescope current_buffer_fuzzy_find<cr>', {noremap = true, silent = true})
+map('n', '<c-g>', ':Telescope live_grep<cr>', {noremap = true, silent = true})
+map('n', '<leader>ht', ':Telescope help_tags<cr>', {noremap = true, silent = true})
+
+-- nvim-compe
+map('i', '<c-space>', 'compe#complete()', {noremap = true, silent = true, expr = true})
+map('i', '<cr>', [[compe#confirm('<cr>')]], {noremap = true, silent = true, expr = true})
+map('i', '<tab>', [[pumvisible() ? compe#close('<tab>') : v:lua.tab_out()]], {noremap = true, silent = true, expr = true})
+
+-- Returns either <tab> or <right>, depending on whether we need to tab out of
+-- a pair of brackets or not.
+function tab_out()
+  if should_tab_out() then
+    return api.nvim_replace_termcodes('<right>', false, false, true)
+  else
+    return api.nvim_replace_termcodes('<tab>', false, false, true)
+  end
+end
 
 -- Check if we should tab out of a pair of brackets / quotes. Returns true if
--- the next character is a closing bracket or a a quote and we're inside a pair
--- of quotes.
-function should_tab_out(line, col)
+-- the next character is a:
+-- - closing bracket
+-- - quote and we're inside a pair of them
+function should_tab_out()
   local brackets = {
     [')'] = true,
     [']'] = true,
@@ -67,6 +91,9 @@ function should_tab_out(line, col)
     ['"'] = true,
     ['`'] = true
   }
+
+  local line = fn.getline('.')
+  local col = fn.col('.')
   local next_char = line:sub(col, col)
 
   if quotes[next_char] then
@@ -77,13 +104,3 @@ function should_tab_out(line, col)
   end
   return brackets[next_char] == true
 end
-
--- nvim-tree.lua
-map('n', '<c-n>', ':NvimTreeToggle<cr>', {noremap = true, silent = true})
-
--- telescope.nvim
-map('n', '<c-p>', ':Telescope find_files<cr>', {noremap = true, silent = true})
-map('n', '<c-b>', ':Telescope buffers<cr>', {noremap = true, silent = true})
-map('n', '<c-f>', ':Telescope current_buffer_fuzzy_find<cr>', {noremap = true, silent = true})
-map('n', '<c-g>', ':Telescope live_grep<cr>', {noremap = true, silent = true})
-map('n', '<leader>ht', ':Telescope help_tags<cr>', {noremap = true, silent = true})
