@@ -50,6 +50,10 @@ require('packer').startup({
       config = [[ require 'plugins.nvim_bufferline' ]],
       requires = 'kyazdani42/nvim-web-devicons',
     }
+    use {
+      'onsails/lspkind-nvim',
+      config = [[ require 'plugins.lspkind_nvim' ]],
+    }
 
     -- Command
     use {
