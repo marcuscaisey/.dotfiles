@@ -1,4 +1,5 @@
 local g = vim.g
+local fn = vim.fn
 local cmd = vim.cmd
 local map = vim.api.nvim_set_keymap
 
@@ -50,28 +51,32 @@ map('x', 'ga', '<Plug>(EasyAlign)', {silent = true})
 -- nmap <silent> <expr> <leader>gb &filetype ==# 'fugitiveblame' ? 'gq' : ':Gblame<cr>'
 
 -- Tab moves the cursor out of paired characters
-map('i', '<tab>', "ShouldTabOut() ? '<right>' : '<tab>'", {silent = true, expr = true, noremap = true})
+map('i', '<tab>', [[v:lua.should_tab_out(getline('.'), col('.')) ? '<right>' : '<tab>']], {silent = true, expr = true, noremap = true})
 
--- Return true if character under the cursor is either:
--- - a closing bracket
--- - a quote and there are an odd number of preceding quotes (ie the quote is
---   a closing quote)
-cmd([[
-function! ShouldTabOut()
-  let brackets = [')', ']', '}']
-  let quotes = ["'",  '"',  '`']
+-- Check if we should tab out of a pair of brackets / quotes. Returns true if
+-- the next character is a closing bracket or a a quote and we're inside a pair
+-- of quotes.
+function should_tab_out(line, col)
+  local brackets = {
+    [')'] = true,
+    [']'] = true,
+    ['}'] = true,
+  }
+  local quotes = {
+    ["'"] = true,
+    ['"'] = true,
+    ['`'] = true
+  }
+  local next_char = line:sub(col, col)
 
-  let preceding_chars = getline('.')[:col('.') - 2]
-  let current_char = getline('.')[col('.') - 1]
-
-  if index(quotes, current_char) != -1
-    let num_preceding_quotes = strlen(preceding_chars) - strlen(substitute(preceding_chars, current_char, '', 'g'))
+  if quotes[next_char] then
+    local preceding_chars = line:sub(1, col - 1)
+    num_preceding_quotes = select(2, preceding_chars:gsub(next_char, ''))
+    -- if odd number of preceding quotes, then we're currently inside a pair
     return num_preceding_quotes % 2 == 1
-  else
-    return index(brackets, current_char) != -1
-  endif
-endfunction
-]])
+  end
+  return brackets[next_char] == true
+end
 
 -- nvim-tree.lua
 map('n', '<c-n>', ':NvimTreeToggle<cr>', {noremap = true, silent = true})
