@@ -80,10 +80,14 @@ map('i', '<tab>', [[pumvisible() ? compe#close('<tab>') : v:lua.tab_out()]], {ex
 -- a pair of brackets or not.
 function tab_out()
   if should_tab_out() then
-    return api.nvim_replace_termcodes('<right>', false, false, true)
+    return replace_termcodes('<right>')
   else
-    return api.nvim_replace_termcodes('<tab>', false, false, true)
+    return replace_termcodes('<tab>')
   end
+end
+
+local function replace_termcodes(s)
+  return api.nvim_replace_termcodes(s, false, false, true)
 end
 
 -- Check if we should tab out of a pair of brackets / quotes. Returns true if
