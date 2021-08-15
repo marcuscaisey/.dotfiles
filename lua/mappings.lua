@@ -2,69 +2,79 @@ local g = vim.g
 local fn = vim.fn
 local api = vim.api
 local cmd = vim.cmd
-local map = vim.api.nvim_set_keymap
 
 cmd('autocmd BufWritePost mappings.lua source <afile>')
 
 g.mapleader = ' '
 
-map('i', 'jj', '<esc>', {noremap = true})
+local function map(mode, lhs, rhs, opts)
+  local options = {
+    noremap = true,
+    silent = true,
+  }
+  if opts then
+    for k, v in pairs(opts) do options[k] = v end
+  end
+  api.nvim_set_keymap(mode, lhs, rhs, options)
+end
 
-map('n', 'gk', 'gg', {noremap = true})
-map('v', 'gk', 'gg', {noremap = true})
-map('n', 'gj', 'G', {noremap = true})
-map('v', 'gj', 'G', {noremap = true})
-map('n', 'gh', '^', {noremap = true})
-map('v', 'gh', '^', {noremap = true})
-map('n', 'gl', '$', {noremap = true})
-map('v', 'gl', 'g_', {noremap = true})
+map('i', 'jj', '<esc>')
 
-map('n', '<c-j>', '<c-w>j', {noremap = true})
-map('n', '<c-k>', '<c-w>k', {noremap = true})
-map('n', '<c-l>', '<c-w>l', {noremap = true})
-map('n', '<c-h>', '<c-w>h', {noremap = true})
-map('n', '<c-w>j', '<c-w>J', {noremap = true})
-map('n', '<c-w>k', '<c-w>K', {noremap = true})
-map('n', '<c-w>l', '<c-w>L', {noremap = true})
-map('n', '<c-w>h', '<c-w>H', {noremap = true})
-map('n', '<c-w><', '<c-w>5<', {noremap = true})
-map('n', '<c-w>>', '<c-w>5>', {noremap = true})
-map('n', '<c-w>-', '<c-w>5-', {noremap = true})
-map('n', '<c-w>=', '<c-w>5+', {noremap = true})
-map('n', '<c-w>e', '<c-w>=', {noremap = true})
+map('n', 'gk', 'gg')
+map('v', 'gk', 'gg')
+map('n', 'gj', 'G')
+map('v', 'gj', 'G')
+map('n', 'gh', '^')
+map('v', 'gh', '^')
+map('n', 'gl', '$')
+map('v', 'gl', 'g_')
 
-map('n', 'Y', 'y$', {noremap = true})
+map('n', '<c-j>', '<c-w>j')
+map('n', '<c-k>', '<c-w>k')
+map('n', '<c-l>', '<c-w>l')
+map('n', '<c-h>', '<c-w>h')
+map('n', '<c-w>j', '<c-w>J')
+map('n', '<c-w>k', '<c-w>K')
+map('n', '<c-w>l', '<c-w>L')
+map('n', '<c-w>h', '<c-w>H')
+map('n', '<c-w><', '<c-w>5<')
+map('n', '<c-w>>', '<c-w>5>')
+map('n', '<c-w>-', '<c-w>5-')
+map('n', '<c-w>=', '<c-w>5+')
+map('n', '<c-w>e', '<c-w>=')
 
-map('i', 'II', '<esc>I', {noremap = true})
-map('i', 'AA', '<esc>A', {noremap = true})
+map('n', 'Y', 'y$')
 
-map('v', '<leader>s', '"9y:%s/<c-r>9/', {noremap = true})
+map('i', 'II', '<esc>I')
+map('i', 'AA', '<esc>A')
+
+map('v', '<leader>s', '"9y:%s/<c-r>9/')
 
 -- nvim-bufferline.lua
-map('n', 'L', ':BufferLineCycleNext<cr>', {noremap = true, silent = true})
-map('n', 'H', ':BufferLineCyclePrev<cr>', {noremap = true, silent = true})
+map('n', 'L', ':BufferLineCycleNext<cr>')
+map('n', 'H', ':BufferLineCyclePrev<cr>')
 
 -- vim-easy-align
-map('n', 'ga', '<Plug>(EasyAlign)', {silent = true})
-map('x', 'ga', '<Plug>(EasyAlign)', {silent = true})
+map('n', 'ga', '<Plug>(EasyAlign)', {noremap = false})
+map('x', 'ga', '<Plug>(EasyAlign)', {noremap = false})
 
 -- vim-fugitive
 -- nmap <silent> <expr> <leader>gb &filetype ==# 'fugitiveblame' ? 'gq' : ':Gblame<cr>'
 
 -- nvim-tree.lua
-map('n', '<c-n>', ':NvimTreeToggle<cr>', {noremap = true, silent = true})
+map('n', '<c-n>', ':NvimTreeToggle<cr>')
 
 -- telescope.nvim
-map('n', '<c-p>', ':Telescope find_files<cr>', {noremap = true, silent = true})
-map('n', '<c-b>', ':Telescope buffers<cr>', {noremap = true, silent = true})
-map('n', '<c-f>', ':Telescope current_buffer_fuzzy_find<cr>', {noremap = true, silent = true})
-map('n', '<c-g>', ':Telescope live_grep<cr>', {noremap = true, silent = true})
-map('n', '<leader>ht', ':Telescope help_tags<cr>', {noremap = true, silent = true})
+map('n', '<c-p>', ':Telescope find_files<cr>')
+map('n', '<c-b>', ':Telescope buffers<cr>')
+map('n', '<c-f>', ':Telescope current_buffer_fuzzy_find<cr>')
+map('n', '<c-g>', ':Telescope live_grep<cr>')
+map('n', '<leader>ht', ':Telescope help_tags<cr>')
 
 -- nvim-compe
-map('i', '<c-space>', 'compe#complete()', {noremap = true, silent = true, expr = true})
-map('i', '<cr>', [[compe#confirm('<cr>')]], {noremap = true, silent = true, expr = true})
-map('i', '<tab>', [[pumvisible() ? compe#close('<tab>') : v:lua.tab_out()]], {noremap = true, silent = true, expr = true})
+map('i', '<c-space>', 'compe#complete()', {expr = true})
+map('i', '<cr>', [[compe#confirm('<cr>')]], {expr = true})
+map('i', '<tab>', [[pumvisible() ? compe#close('<tab>') : v:lua.tab_out()]], {expr = true})
 
 -- Returns either <tab> or <right>, depending on whether we need to tab out of
 -- a pair of brackets or not.
