@@ -86,7 +86,7 @@ function tab_out()
   end
 end
 
-local function replace_termcodes(s)
+function replace_termcodes(s)
   return api.nvim_replace_termcodes(s, false, false, true)
 end
 
