@@ -118,3 +118,8 @@ function should_tab_out()
   end
   return brackets[next_char] == true
 end
+
+-- nvim-lspconfig
+map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
+map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>')
