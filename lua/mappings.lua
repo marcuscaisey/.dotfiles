@@ -51,8 +51,8 @@ map('i', 'AA', '<esc>A')
 map('v', '<leader>s', '"9y:%s/<c-r>9/')
 
 -- nvim-bufferline.lua
-map('n', 'L', ':BufferLineCycleNext<cr>')
-map('n', 'H', ':BufferLineCyclePrev<cr>')
+map('n', 'L', '<cmd>BufferLineCycleNext<cr>')
+map('n', 'H', '<cmd>BufferLineCyclePrev<cr>')
 
 -- vim-easy-align
 map('n', 'ga', '<Plug>(EasyAlign)', {noremap = false})
@@ -62,14 +62,14 @@ map('x', 'ga', '<Plug>(EasyAlign)', {noremap = false})
 -- nmap <silent> <expr> <leader>gb &filetype ==# 'fugitiveblame' ? 'gq' : ':Gblame<cr>'
 
 -- nvim-tree.lua
-map('n', '<c-n>', ':NvimTreeToggle<cr>')
+map('n', '<c-n>', '<cmd>NvimTreeToggle<cr>')
 
 -- telescope.nvim
-map('n', '<c-p>', ':Telescope find_files<cr>')
-map('n', '<c-b>', ':Telescope buffers<cr>')
-map('n', '<c-f>', ':Telescope current_buffer_fuzzy_find<cr>')
-map('n', '<c-g>', ':Telescope live_grep<cr>')
-map('n', '<leader>ht', ':Telescope help_tags<cr>')
+map('n', '<c-p>', '<cmd>Telescope find_files<cr>')
+map('n', '<c-b>', '<cmd>Telescope buffers<cr>')
+map('n', '<c-f>', '<cmd>Telescope current_buffer_fuzzy_find<cr>')
+map('n', '<c-g>', '<cmd>Telescope live_grep<cr>')
+map('n', '<leader>ht', '<cmd>Telescope help_tags<cr>')
 
 -- nvim-compe
 map('i', '<c-space>', 'compe#complete()', {expr = true})
