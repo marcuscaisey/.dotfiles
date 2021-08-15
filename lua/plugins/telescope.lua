@@ -16,6 +16,9 @@ telescope.setup {
       previewer = false,
       sorting_strategy = 'ascending',
     },
+    lsp_document_symbols = {
+      theme = 'dropdown',
+    }
   },
   extensions = {
     fzf = {
