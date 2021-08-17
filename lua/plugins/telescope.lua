@@ -7,17 +7,28 @@ telescope.setup {
         preview_width = 0.6,
         width = 0.9,
       },
+      vertical = {
+        width = 0.9,
+      },
     },
     prompt_prefix = ' 🔍  ',
     selection_caret = '  ',
   },
   pickers = {
     find_files = {
-      theme = 'dropdown',
+      layout_strategy = 'vertical',
+      layout_config = {
+        mirror = true,
+      },
+      sorting_strategy = "ascending",
       previewer = false,
     },
     buffers = {
-      theme = 'dropdown',
+      layout_strategy = 'vertical',
+      layout_config = {
+        mirror = true,
+      },
+      sorting_strategy = "ascending",
       previewer = false,
     },
     current_buffer_fuzzy_find = {
@@ -25,10 +36,18 @@ telescope.setup {
       sorting_strategy = 'ascending',
     },
     lsp_document_symbols = {
-      theme = 'dropdown',
+      layout_strategy = 'vertical',
+      layout_config = {
+        mirror = true,
+      },
+      sorting_strategy = "ascending",
     },
     lsp_references = {
-      theme = 'dropdown',
+      layout_strategy = 'vertical',
+      layout_config = {
+        mirror = true,
+      },
+      sorting_strategy = "ascending",
     },
   },
   extensions = {
