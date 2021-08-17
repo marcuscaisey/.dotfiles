@@ -29,6 +29,15 @@ telescope.setup {
         mirror = true,
       },
       sorting_strategy = "ascending",
+      sort_lastused = true,
+      mappings = {
+        i = {
+          ["<c-d>"] = "delete_buffer",
+        },
+        n = {
+          ["<c-d>"] = "delete_buffer",
+        },
+      },
       previewer = false,
     },
     current_buffer_fuzzy_find = {
