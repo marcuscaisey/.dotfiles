@@ -70,7 +70,7 @@ map('n', '<c-b>', '<cmd>Telescope buffers<cr>')
 map('n', '<c-f>', '<cmd>Telescope current_buffer_fuzzy_find<cr>')
 map('n', '<c-g>', '<cmd>Telescope live_grep<cr>')
 map('n', '<c-s>', '<cmd>Telescope lsp_document_symbols<cr>')
-map('n', 'ge', '<cmd>Telescope lsp_references<cr>')
+map('n', 'gr', '<cmd>Telescope lsp_references<cr>')
 map('n', '<leader>ht', '<cmd>Telescope help_tags<cr>')
 
 -- nvim-compe
