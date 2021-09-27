@@ -54,6 +54,10 @@ require('packer').startup({
       'onsails/lspkind-nvim',
       config = [[ require 'plugins.lspkind_nvim' ]],
     }
+    use {
+      'ray-x/lsp_signature.nvim',
+      config = [[ require 'plugins.lsp_signature' ]],
+    }
 
     -- Command
     use {
