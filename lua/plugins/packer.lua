@@ -108,6 +108,7 @@ require('packer').startup({
     use 'kana/vim-textobj-user'
     use 'kana/vim-textobj-entire'
     use 'tommcdo/vim-exchange'
+    use 'vim-scripts/argtextobj.vim'
   end,
   config = {
     display = {
