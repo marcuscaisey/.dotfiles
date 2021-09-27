@@ -21,17 +21,17 @@ require('packer').startup({
       run = ':TSUpdate',
       config = [[ require 'plugins.nvim_treesitter' ]],
     }
-    use {
-      'hrsh7th/nvim-compe',
-      config = [[ require 'plugins.nvim_compe' ]],
-    }
-
 
     -- Completion
     use {
       'neovim/nvim-lspconfig',
       config = [[ require 'plugins.nvim_lspconfig' ]],
     }
+    use {
+      'hrsh7th/nvim-cmp',
+      config = [[ require 'plugins.nvim_cmp' ]],
+    }
+    use 'hrsh7th/cmp-nvim-lsp'
 
     -- UI
     use {

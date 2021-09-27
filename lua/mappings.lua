@@ -73,54 +73,6 @@ map('n', '<c-s>', '<cmd>Telescope lsp_document_symbols<cr>')
 map('n', 'ge', '<cmd>Telescope lsp_references<cr>')
 map('n', '<leader>ht', '<cmd>Telescope help_tags<cr>')
 
--- nvim-compe
-map('i', '<c-space>', 'compe#complete()', {expr = true})
-map('i', '<cr>', [[compe#confirm('<cr>')]], {expr = true})
-map('i', '<tab>', [[pumvisible() ? compe#close('<tab>') : v:lua.tab_out()]], {expr = true})
-
--- Returns either <tab> or <right>, depending on whether we need to tab out of
--- a pair of brackets or not.
-function tab_out()
-  if should_tab_out() then
-    return replace_termcodes('<right>')
-  else
-    return replace_termcodes('<tab>')
-  end
-end
-
-function replace_termcodes(s)
-  return api.nvim_replace_termcodes(s, false, false, true)
-end
-
--- Check if we should tab out of a pair of brackets / quotes. Returns true if
--- the next character is a:
--- - closing bracket
--- - quote and we're inside a pair of them
-function should_tab_out()
-  local brackets = {
-    [')'] = true,
-    [']'] = true,
-    ['}'] = true,
-  }
-  local quotes = {
-    ["'"] = true,
-    ['"'] = true,
-    ['`'] = true
-  }
-
-  local line = fn.getline('.')
-  local col = fn.col('.')
-  local next_char = line:sub(col, col)
-
-  if quotes[next_char] then
-    local preceding_chars = line:sub(1, col - 1)
-    num_preceding_quotes = select(2, preceding_chars:gsub(next_char, ''))
-    -- if odd number of preceding quotes, then we're currently inside a pair
-    return num_preceding_quotes % 2 == 1
-  end
-  return brackets[next_char] == true
-end
-
 -- nvim-lspconfig
 map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
 map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
