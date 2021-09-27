@@ -2,6 +2,8 @@ local g = vim.g
 local fn = vim.fn
 local galaxyline = require 'galaxyline'
 local condition = require 'galaxyline.condition'
+local lsp_client = require 'galaxyline.provider_lsp'
+local diagnostic = vim.lsp.diagnostic
 
 galaxyline.short_line_list = {
   'NvimTree',
@@ -135,10 +137,25 @@ galaxyline.section.left = {
 
 galaxyline.section.right = {
   {
+    DiagnosticWarn = {
+      provider = function() return diagnostic.get_count(0, 'Warning') end,
+      highlight = {colours.yellow, colours.bg},
+      icon = '  ',
+      separator = '',
+    },
+  },
+  {
+    DiagnosticError = {
+      provider = function() return diagnostic.get_count(0, 'Error') end,
+      highlight = {colours.red, colours.bg},
+      icon = '   ',
+    },
+  },
+  {
     LineInfo = {
       provider = 'LineColumn',
       highlight = {colours.cyan, colours.bg},
-      separator = ' ',
+      separator = '  ',
       separator_highlight = {colours.cyan, colours.bg},
     },
   },
