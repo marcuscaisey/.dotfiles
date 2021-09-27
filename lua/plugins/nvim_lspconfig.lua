@@ -4,7 +4,7 @@ local highlight = vim.highlight
 
 lspconfig.gopls.setup{
   flags = {
-    debounce_text_changes = 500,
+    debounce_text_changes = 150,
   },
   settings = {
     gopls = {
@@ -12,7 +12,11 @@ lspconfig.gopls.setup{
     },
   },
 }
-lspconfig.pyright.setup{}
+lspconfig.pyright.setup{
+  flags = {
+    debounce_text_changes = 150,
+  },
+}
 
 -- Use icons in theme colour for error / warning signs
 fn.sign_define('LspDiagnosticsSignError', {text = '', texthl = 'LspDiagnosticsError'})
