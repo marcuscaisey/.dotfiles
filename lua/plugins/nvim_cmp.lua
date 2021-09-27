@@ -67,3 +67,7 @@ cmp.setup {
     end,
   },
 }
+
+require('nvim-autopairs.completion.cmp').setup({
+  map_complete = true,
+})

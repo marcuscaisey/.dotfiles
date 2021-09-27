@@ -80,7 +80,10 @@ require('packer').startup({
     use 'tpope/vim-unimpaired'
     use 'tpope/vim-eunuch'
     use 'tpope/vim-repeat'
-    use 'jiangmiao/auto-pairs'
+    use {
+      'windwp/nvim-autopairs',
+      config = [[ require 'plugins.nvim_autopairs' ]],
+    }
     use 'tpope/vim-fugitive'
     use 'ConradIrwin/vim-bracketed-paste'
     use 'vim-scripts/ReplaceWithRegister'
