@@ -1,4 +1,5 @@
 local lspconfig = require 'lspconfig'
+local util = require 'lspconfig.util'
 local fn = vim.fn
 local highlight = vim.highlight
 local cmd = vim.cmd
@@ -12,6 +13,7 @@ lspconfig.gopls.setup{
       directoryFilters = {'-plz-out'},
     },
   },
+  root_dir = util.root_pattern("go.mod", ".git", "BUILD"),
 }
 lspconfig.pyright.setup{
   flags = {
