@@ -117,7 +117,7 @@ export BAT_STYLE="numbers"
 #                                    python
 ################################################################################
 if linux; then
-  export PATH="/opt/tm/tools/python/current/usr/bin:$PATH"
+  export PATH="/opt/tm/tools/python/3.9.6/usr/bin:$PATH"
 fi
 
 
