@@ -104,6 +104,10 @@ require('packer').startup({
     }
     use 'AndrewRadev/splitjoin.vim'
     use 'junegunn/vim-peekaboo'
+    use {
+      'ojroques/vim-oscyank',
+      config = [[ require 'plugins.vim_oscyank' ]],
+    }
 
     -- Text objects
     use 'wellle/targets.vim'
