@@ -19,6 +19,31 @@ lspconfig.pyright.setup{
   flags = {
     debounce_text_changes = 150,
   },
+  root_dir = function(fname)
+    local root_files = {
+      'pyproject.toml',
+      'setup.py',
+      'setup.cfg',
+      'requirements.txt',
+      'Pipfile',
+      'pyrightconfig.json',
+      'BUILD',
+    }
+    return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+  end,
+  settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        diagnosticMode = "workspace",
+        useLibraryCodeForTypes = true,
+        extraPaths = {
+          "/home/mcaisey/core3/src",
+          "/home/mcaisey/core3/src/plz-out/gen",
+        }
+      },
+    },
+  },
 }
 
 -- Use icons in theme colour for error / warning signs
