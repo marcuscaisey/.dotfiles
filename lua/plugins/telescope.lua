@@ -16,19 +16,16 @@ telescope.setup {
   },
   pickers = {
     find_files = {
-      layout_strategy = 'vertical',
-      layout_config = {
-        mirror = true,
-      },
       sorting_strategy = "ascending",
-      previewer = false,
+      layout_config = {
+        preview_width = 0.4,
+      },
     },
     buffers = {
-      layout_strategy = 'vertical',
-      layout_config = {
-        mirror = true,
-      },
       sorting_strategy = "ascending",
+      layout_config = {
+        preview_width = 0.4,
+      },
       sort_lastused = true,
       mappings = {
         i = {
@@ -38,7 +35,6 @@ telescope.setup {
           ["<c-d>"] = "delete_buffer",
         },
       },
-      previewer = false,
     },
     current_buffer_fuzzy_find = {
       previewer = false,
