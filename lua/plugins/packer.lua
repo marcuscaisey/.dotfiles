@@ -85,14 +85,12 @@ require('packer').startup({
       config = [[ require 'plugins.nvim_autopairs' ]],
     }
     use 'tpope/vim-fugitive'
-    use 'ConradIrwin/vim-bracketed-paste'
     use 'vim-scripts/ReplaceWithRegister'
     use {
       'tpope/vim-commentary',
       config = [[ require 'plugins.vim_commentary' ]],
     }
     use 'tpope/vim-surround'
-    use 'junegunn/vim-easy-align'
     use {
       'justinmk/vim-sneak',
       config = [[ require 'plugins.vim_sneak' ]],
@@ -110,10 +108,6 @@ require('packer').startup({
     }
 
     -- Text objects
-    use 'wellle/targets.vim'
-    use 'michaeljsmith/vim-indent-object'
-    use 'kana/vim-textobj-user'
-    use 'kana/vim-textobj-entire'
     use 'tommcdo/vim-exchange'
     use 'vim-scripts/argtextobj.vim'
   end,
