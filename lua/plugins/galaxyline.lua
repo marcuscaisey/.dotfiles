@@ -140,7 +140,7 @@ galaxyline.section.right = {
     DiagnosticWarn = {
       provider = function() return diagnostic.get_count(0, 'Warning') end,
       condition = condition.check_active_lsp,
-      highlight = {colours.yellow, colours.bg},
+      highlight = {colours.orange, colours.bg},
       icon = '  ',
       separator = '',
     },
