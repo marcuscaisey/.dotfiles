@@ -15,6 +15,7 @@ lspconfig.gopls.setup{
   },
   root_dir = util.root_pattern("go.mod", ".git", "BUILD"),
 }
+
 lspconfig.pyright.setup{
   flags = {
     debounce_text_changes = 150,
@@ -45,6 +46,8 @@ lspconfig.pyright.setup{
     },
   },
 }
+
+lspconfig.vimls.setup{}
 
 -- Use icons in theme colour for error / warning signs
 fn.sign_define('LspDiagnosticsSignError', {text = '', texthl = 'LspDiagnosticsError'})
