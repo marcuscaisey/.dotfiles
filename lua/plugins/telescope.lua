@@ -114,6 +114,11 @@ telescope.setup {
         },
       },
     },
+    live_grep = {
+      layout_config = {
+        preview_width = 0.4,
+      },
+    },
     current_buffer_fuzzy_find = {
       previewer = false,
       sorting_strategy = 'ascending',
