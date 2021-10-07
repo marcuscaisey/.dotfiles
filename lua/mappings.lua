@@ -77,3 +77,5 @@ map('n', '<leader>ht', '<cmd>Telescope help_tags<cr>')
 -- nvim-lspconfig
 map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
 map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>')
+map('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>')
+map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>')
