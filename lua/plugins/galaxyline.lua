@@ -137,19 +137,27 @@ galaxyline.section.left = {
 
 galaxyline.section.right = {
   {
+    DiagnosticHint = {
+      provider = function() return diagnostic.get_count(0, 'Hint') end,
+      condition = condition.check_active_lsp,
+      highlight = 'LspDiagnosticsHint',
+      icon = '  ',
+      separator = '',
+    },
+  },
+  {
     DiagnosticWarn = {
       provider = function() return diagnostic.get_count(0, 'Warning') end,
       condition = condition.check_active_lsp,
-      highlight = {colours.orange, colours.bg},
-      icon = '  ',
-      separator = '',
+      highlight = 'LspDiagnosticsWarning',
+      icon = '   ',
     },
   },
   {
     DiagnosticError = {
       provider = function() return diagnostic.get_count(0, 'Error') end,
       condition = condition.check_active_lsp,
-      highlight = {colours.red, colours.bg},
+      highlight = 'LspDiagnosticsError',
       icon = '   ',
     },
   },
