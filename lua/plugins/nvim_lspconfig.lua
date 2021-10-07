@@ -44,10 +44,12 @@ lspconfig.ccls.setup{}
 -- Use icons in theme colour for error / warning signs
 fn.sign_define('LspDiagnosticsSignError', {text = '', texthl = 'LspDiagnosticsError'})
 fn.sign_define('LspDiagnosticsSignWarning', {text = '', texthl = 'LspDiagnosticsWarning'})
+fn.sign_define('LspDiagnosticsSignHint', {text = '', texthl = 'LspDiagnosticsHint'})
 
--- LspDiagnosticsError and LspDiagnosticsWarning are linked to theme groups so link default groups to them as well
+-- LspDiagnosticsError, LspDiagnosticsWarning are linked to theme groups so link default groups to them as well
 highlight.link('LspDiagnosticsDefaultError', 'LspDiagnosticsError', true)
 highlight.link('LspDiagnosticsDefaultWarning', 'LspDiagnosticsWarning', true)
+highlight.link('LspDiagnosticsDefaultHint', 'LspDiagnosticsHint', true)
 
 -- Autoformat go files on save
 cmd([[autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 1000)]])
