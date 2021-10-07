@@ -13,7 +13,9 @@ lspconfig.gopls.setup{
       directoryFilters = {'-plz-out'},
     },
   },
-  root_dir = util.root_pattern("go.mod", ".git", "BUILD"),
+  root_dir = function(fname)
+    return util.root_pattern("go.mod", ".git")(fname) or util.path.dirname(fname)
+  end,
 }
 
 lspconfig.pyright.setup{
