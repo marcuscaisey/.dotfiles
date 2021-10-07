@@ -68,11 +68,11 @@ alias conflicts='vim $(git diff --name-only --diff-filter=U)'
 alias gcfd="git clean -fd"
 
 alias d="cd ~/.dotfiles"
+alias s="cd ~/scratch"
 
 if linux; then
   alias c="cd ~/core3/src"
   alias t="cd ~/toolchain"
-  alias s="cd ~/scratch"
 
   alias black="PYTHONNOUSERSITE=1 black"
 
