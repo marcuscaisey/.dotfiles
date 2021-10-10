@@ -2,7 +2,7 @@ local g = vim.g
 local fn = vim.fn
 local galaxyline = require 'galaxyline'
 local condition = require 'galaxyline.condition'
-local lsp_client = require 'galaxyline.provider_lsp'
+local lsp_client = require 'galaxyline.providers.lsp'
 local diagnostic = vim.lsp.diagnostic
 
 galaxyline.short_line_list = {
@@ -121,7 +121,7 @@ galaxyline.section.left = {
     FileIcon = {
       provider = 'FileIcon',
       condition = condition.buffer_not_empty,
-      highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color, colours.bg},
+      highlight = {require('galaxyline.providers.fileinfo').get_file_icon_color, colours.bg},
     },
   },
   {

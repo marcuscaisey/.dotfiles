@@ -36,8 +36,7 @@ require('packer').startup({
 
     -- UI
     use {
-      'glepnir/galaxyline.nvim',
-      branch = 'main',
+      'NTBBloodbath/galaxyline.nvim',
       config = [[ require 'plugins.galaxyline' ]],
       requires = 'kyazdani42/nvim-web-devicons',
     }
