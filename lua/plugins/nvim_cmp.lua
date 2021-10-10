@@ -55,7 +55,7 @@ cmp.setup {
   mapping = {
     ['<c-space>'] = cmp.mapping.complete(),
     ['<tab>'] = function(fallback)
-      if fn.pumvisible() == 1 then
+      if cmp.visible() then
         cmp.close()
       elseif should_tab_out() then
         feedkeys('<right>', 'i')
