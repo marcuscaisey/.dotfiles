@@ -52,6 +52,9 @@ cmp.setup {
       fn['vsnip#anonymous'](args.body)
     end,
   },
+  confirmation = {
+    default_behavior = cmp.ConfirmBehavior.Replace,
+  },
   mapping = {
     ['<c-space>'] = cmp.mapping.complete(),
     ['<tab>'] = function(fallback)
@@ -63,7 +66,7 @@ cmp.setup {
         fallback()
       end
     end,
-    ['<cr>'] = cmp.mapping.confirm({select = true, behavior = cmp.ConfirmBehavior.Replace}),
+    ['<cr>'] = cmp.mapping.confirm({select = true}),
   },
   formatting = {
     format = require('lspkind').cmp_format(),
