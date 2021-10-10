@@ -166,7 +166,6 @@ galaxyline.section.right = {
       provider = 'LineColumn',
       highlight = {colours.cyan, colours.bg},
       separator = '  ',
-      separator_highlight = {colours.cyan, colours.bg},
     },
   },
   {
