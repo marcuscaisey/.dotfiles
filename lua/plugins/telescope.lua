@@ -1,12 +1,27 @@
 local telescope = require 'telescope'
 local entry_display = require 'telescope.pickers.entry_display'
 local utils = require 'telescope.utils'
+local fn = vim.fn
 
+-- splits a filepath into head / tail where tail is the last path component and
+-- head is everything before it. if tail is in the current working directory,
+-- then head is relative. the home directory is replaced by ~ in head.
+local function split_path(path)
+  local tail = utils.path_tail(path)
+  local head = path:gsub("/" .. tail .. "$", "")
+
+  local cwd = fn.getcwd()
+  if head == cwd then
+    return "", tail
+  end
+
+  head = head:gsub("^" .. cwd .. "/", "")
+  head = head:gsub("^" .. os.getenv("HOME"), "~")
+  return head, tail
+end
 
 -- copied and modified from make_entry.gen_from_quickfix
 local function make_lsp_definitions_entry(entry)
-  local filename = entry.filename or vim.api.nvim_buf_get_name(entry.bufnr)
-
   local displayer = entry_display.create{
     separator = " ",
     items = {
@@ -16,9 +31,7 @@ local function make_lsp_definitions_entry(entry)
   }
 
   local make_display = function(entry)
-    local tail = utils.path_tail(entry.filename)
-    local head = entry.filename:gsub("/" .. tail, ""):gsub(os.getenv("HOME"), "~")
-
+    local head, tail = split_path(entry.filename)
     return displayer{
       tail,
       {head, "TelescopeResultsLineNr"},
@@ -28,10 +41,10 @@ local function make_lsp_definitions_entry(entry)
   return {
     valid = true,
     value = entry,
-    ordinal = filename .. " " .. entry.text,
+    ordinal = entry.filename .. " " .. entry.text,
     display = make_display,
     bufnr = entry.bufnr,
-    filename = filename,
+    filename = entry.filename,
     lnum = entry.lnum,
     col = entry.col,
     text = entry.text,
@@ -42,8 +55,6 @@ end
 
 -- copied and modified from make_entry.gen_from_quickfix
 local function make_lsp_references_entry(entry)
-  local filename = entry.filename or vim.api.nvim_buf_get_name(entry.bufnr)
-
   local displayer = entry_display.create{
     separator = " ",
     items = {
@@ -53,13 +64,13 @@ local function make_lsp_references_entry(entry)
   }
 
   local make_display = function(entry)
-    local tail = utils.path_tail(entry.filename)
+    local head, tail = split_path(entry.filename)
+
     local position = table.concat({ entry.lnum, entry.col }, ":")
-    tail = table.concat({tail, position}, ":")
-    local head = entry.filename:gsub("/" .. tail, ""):gsub(os.getenv("HOME"), "~")
+    local tail_with_position = table.concat({tail, position}, ":")
 
     return displayer{
-      tail,
+      tail_with_position,
       {head, "TelescopeResultsLineNr"},
     }
   end
