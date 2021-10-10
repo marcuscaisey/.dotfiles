@@ -1,4 +1,5 @@
 local cmp = require 'cmp'
+local highlight = vim.highlight
 local o = vim.o
 local fn = vim.fn
 local api = vim.api
@@ -75,3 +76,8 @@ cmp.setup {
 require('nvim-autopairs.completion.cmp').setup({
   map_complete = true,
 })
+
+highlight.link("CmpItemAbbr", "DraculaFg", true)
+highlight.link("CmpItemAbbrMatch", "DraculaCyan", true)
+highlight.link("CmpItemAbbrMatchFuzzy", "DraculaCyan", true)
+highlight.link("CmpItemKind", "DraculaPurple", true)
