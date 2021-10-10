@@ -47,6 +47,11 @@ cmp.setup {
   sources = {
     {name = 'nvim_lsp'},
   },
+  snippet = {
+    expand = function(args)
+      fn['vsnip#anonymous'](args.body)
+    end,
+  },
   mapping = {
     ['<c-space>'] = cmp.mapping.complete(),
     ['<tab>'] = function(fallback)

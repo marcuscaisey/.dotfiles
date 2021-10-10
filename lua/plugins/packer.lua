@@ -31,6 +31,7 @@ require('packer').startup({
       'hrsh7th/nvim-cmp',
       config = [[ require 'plugins.nvim_cmp' ]],
     }
+    use 'hrsh7th/cmp-vsnip'
     use 'hrsh7th/cmp-nvim-lsp'
 
     -- UI
