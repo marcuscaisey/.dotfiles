@@ -63,7 +63,7 @@ cmp.setup {
         fallback()
       end
     end,
-    ['<cr>'] = cmp.mapping.confirm({select = true}),
+    ['<cr>'] = cmp.mapping.confirm({select = true, behavior = cmp.ConfirmBehavior.Replace}),
   },
   formatting = {
     format = function(entry, vim_item)
