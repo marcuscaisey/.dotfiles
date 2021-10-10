@@ -3,7 +3,6 @@ local o = vim.o
 local fn = vim.fn
 local api = vim.api
 
-o.completeopt = "menu,menuone,noselect"
 o.shortmess = o.shortmess .. 'c'
 
 local function replace_termcodes(s)
