@@ -7,7 +7,6 @@ local diagnostic = vim.lsp.diagnostic
 
 galaxyline.short_line_list = {
   'NvimTree',
-  'gitcommit', -- galaxyline is superslow when editing git commits
 }
 
 local colours = {
