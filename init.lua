@@ -33,6 +33,7 @@ o.splitright = true
 o.tabstop = 4
 o.termguicolors = true
 o.updatetime = 100
+o.relativenumber = true
 
 
 --------------------------------------------------------------------------------
