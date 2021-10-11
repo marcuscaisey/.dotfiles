@@ -33,6 +33,7 @@ require('packer').startup({
     }
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/cmp-vsnip'
+    use 'hrsh7th/cmp-nvim-lsp'
 
     -- UI
     use {
