@@ -1,5 +1,4 @@
 local lspconfig = require 'lspconfig'
-local util = require 'lspconfig.util'
 local fn = vim.fn
 local highlight = vim.highlight
 local cmd = vim.cmd
@@ -15,7 +14,7 @@ lspconfig.gopls.setup{
     },
   },
   root_dir = function(fname)
-    return util.root_pattern("go.mod", ".git")(fname) or util.path.dirname(fname)
+    return fn.getcwd()
   end,
 }
 
