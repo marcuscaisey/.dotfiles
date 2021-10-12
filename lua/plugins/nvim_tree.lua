@@ -9,6 +9,9 @@ g.nvim_tree_group_empty = 1
 
 require('nvim-tree').setup{
   auto_close = true,
+  update_focused_file = {
+    enable = true,
+  },
   view = {
     mappings = {
       list = {
