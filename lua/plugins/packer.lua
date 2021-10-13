@@ -57,6 +57,7 @@ require('packer').startup({
       'ray-x/lsp_signature.nvim',
       config = [[ require 'plugins.lsp_signature' ]],
     }
+    use 'mortepau/codicons.nvim'
 
     -- Command
     use {
