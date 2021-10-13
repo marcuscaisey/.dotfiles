@@ -69,7 +69,10 @@ cmp.setup {
     ['<cr>'] = cmp.mapping.confirm({select = true}),
   },
   formatting = {
-    format = require('lspkind').cmp_format({with_text = false}),
+    format = require('lspkind').cmp_format({
+      with_text = false,
+      preset = 'codicons',
+    }),
   },
 }
 
