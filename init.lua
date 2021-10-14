@@ -32,6 +32,7 @@ o.splitbelow = true
 o.splitright = true
 o.tabstop = 4
 o.termguicolors = true
+o.textwidth = 120
 o.updatetime = 100
 
 
