@@ -53,3 +53,5 @@ cmd('autocmd BufNewFile,BufRead *.build_defs set filetype=bzl')
 
 -- Don't comment lines after o/O
 cmd('autocmd BufEnter * set formatoptions-=o')
+
+cmd('autocmd BufRead,BufNewFile BUILD,*.build_def set filetype=please')

@@ -1,3 +1,6 @@
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.python.used_by = "please"
+
 require('nvim-treesitter.configs').setup {
   ensure_installed = 'maintained',
   highlight = {

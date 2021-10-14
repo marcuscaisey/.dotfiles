@@ -1,4 +1,6 @@
 local lspconfig = require 'lspconfig'
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig.util'
 local fn = vim.fn
 local highlight = vim.highlight
 local cmd = vim.cmd
@@ -76,6 +78,16 @@ lspconfig.sumneko_lua.setup {
     },
   },
 }
+
+configs.please = {
+  default_config = {
+    cmd = {'plz', 'tool', 'lps'},
+    filetypes = {'please'},
+    root_dir = util.root_pattern('.plzconfig'),
+  },
+}
+
+lspconfig.please.setup{}
 
 -- Use icons in theme colour for error / warning signs
 fn.sign_define('LspDiagnosticsSignError', {text = '', texthl = 'LspDiagnosticsError'})
