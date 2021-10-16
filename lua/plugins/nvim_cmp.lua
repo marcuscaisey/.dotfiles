@@ -66,7 +66,6 @@ cmp.setup {
         fallback()
       end
     end,
-    ['<cr>'] = cmp.mapping.confirm({select = true}),
   },
   formatting = {
     format = require('lspkind').cmp_format({
