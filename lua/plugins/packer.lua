@@ -106,6 +106,7 @@ require('packer').startup({
       'ojroques/vim-oscyank',
       config = [[ require 'plugins.vim_oscyank' ]],
     }
+    use 'tpope/vim-abolish'
 
     -- Text objects
     use 'tommcdo/vim-exchange'
