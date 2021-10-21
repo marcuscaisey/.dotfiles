@@ -89,6 +89,8 @@ configs.please = {
 
 lspconfig.please.setup{}
 
+lspconfig.yamlls.setup{}
+
 -- Use icons in theme colour for error / warning signs
 fn.sign_define('LspDiagnosticsSignError', {text = '', texthl = 'LspDiagnosticsError'})
 fn.sign_define('LspDiagnosticsSignWarning', {text = '', texthl = 'LspDiagnosticsWarning'})
