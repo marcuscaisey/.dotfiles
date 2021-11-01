@@ -113,6 +113,7 @@ require('packer').startup({
     use 'vim-scripts/argtextobj.vim'
     use 'kana/vim-textobj-user'
     use 'kana/vim-textobj-entire'
+    use 'michaeljsmith/vim-indent-object'
   end,
   config = {
     display = {
