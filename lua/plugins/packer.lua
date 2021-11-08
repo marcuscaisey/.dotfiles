@@ -107,6 +107,10 @@ require('packer').startup({
       config = [[ require 'plugins.vim_oscyank' ]],
     }
     use 'tpope/vim-abolish'
+    use {
+      'sbdchd/neoformat',
+      config = [[ require 'plugins.neoformat' ]],
+    }
 
     -- Text objects
     use 'tommcdo/vim-exchange'
