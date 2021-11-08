@@ -1,4 +1,5 @@
 local cmp = require 'cmp'
+local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 local highlight = vim.highlight
 local o = vim.o
 local fn = vim.fn
@@ -66,6 +67,7 @@ cmp.setup {
         fallback()
       end
     end,
+    ['<cr>'] = cmp.mapping.confirm({select = true}),
   },
   formatting = {
     format = require('lspkind').cmp_format({
@@ -75,9 +77,7 @@ cmp.setup {
   },
 }
 
-require('nvim-autopairs.completion.cmp').setup({
-  map_complete = true,
-})
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
 highlight.link("CmpItemAbbr", "DraculaFg", true)
 highlight.link("CmpItemAbbrMatch", "DraculaCyan", true)
