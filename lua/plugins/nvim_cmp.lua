@@ -58,7 +58,7 @@ cmp.setup {
   },
   mapping = {
     ['<c-space>'] = cmp.mapping.complete(),
-    ['<tab>'] = function(fallback)
+    ['<Tab>'] = function(fallback)
       if cmp.visible() then
         cmp.close()
       elseif should_tab_out() then
