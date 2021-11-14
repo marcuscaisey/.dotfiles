@@ -126,6 +126,8 @@ fi
 ################################################################################
 if linux; then
   export PATH="/opt/tm/tools/python/3.9.6/usr/bin:$PATH"
+  # don't want pip installed stuff to get in the way of toolchain stuff
+  export PATH="$PATH:$HOME/.local/bin"
 fi
 
 
