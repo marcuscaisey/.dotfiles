@@ -45,7 +45,7 @@ cmd([[autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe
 cmd([[autocmd BufWritePre * if expand('%:e') !=# 'diff' | %s/\s\+$//e | endif]])
 
 -- Use 2 space tabs for lua
-cmd('autocmd FileType lua set tabstop=2 shiftwidth=2')
+cmd('autocmd FileType lua,javascript set tabstop=2 shiftwidth=2')
 
 -- Set file type as bazel for build_defs files
 cmd('autocmd BufNewFile,BufRead *.build_defs set filetype=bzl')
