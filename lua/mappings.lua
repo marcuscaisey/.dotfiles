@@ -80,3 +80,6 @@ map('n', 'dK', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>')
 map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>')
 map('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>')
 map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>')
+
+-- symbols-outline.nvim
+map('n', '<leader>o', '<cmd>SymbolsOutline<cr>')

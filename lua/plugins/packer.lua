@@ -111,6 +111,10 @@ require('packer').startup({
       'sbdchd/neoformat',
       config = [[ require 'plugins.neoformat' ]],
     }
+    use {
+      'simrat39/symbols-outline.nvim',
+      config = [[ require 'plugins.symbols_outline' ]],
+    }
 
     -- Text objects
     use 'tommcdo/vim-exchange'
