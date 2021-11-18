@@ -81,5 +81,8 @@ map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>')
 map('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>')
 map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>')
 
+-- neoformat
+map('n', '<leader>fm', '<cmd>Neoformat<cr>')
+
 -- symbols-outline.nvim
 map('n', '<leader>o', '<cmd>SymbolsOutline<cr>')
