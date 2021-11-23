@@ -43,7 +43,11 @@ lspconfig.pyright.setup{
 
 lspconfig.vimls.setup{}
 
-lspconfig.ccls.setup{}
+lspconfig.ccls.setup{
+  root_dir = function()
+    return fn.getcwd()
+  end,
+}
 
 local system_name
 if fn.has("mac") == 1 then
