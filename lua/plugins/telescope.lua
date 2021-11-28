@@ -1,4 +1,5 @@
 local telescope = require 'telescope'
+local layout = require 'telescope.actions.layout'
 local entry_display = require 'telescope.pickers.entry_display'
 local utils = require 'telescope.utils'
 local codicons = require 'codicons'
@@ -150,6 +151,14 @@ telescope.setup {
       },
       vertical = {
         width = 0.9,
+      },
+    },
+    mappings = {
+      i = {
+        ["<c-h>"] = layout.toggle_preview,
+      },
+      n = {
+        ["<c-h>"] = layout.toggle_preview,
       },
     },
     sorting_strategy = 'ascending',
