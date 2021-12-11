@@ -110,11 +110,11 @@ lspconfig.tsserver.setup{
 lspconfig.jsonls.setup{}
 
 -- Use icons in theme colour for error / warning signs
-fn.sign_define('LspDiagnosticsSignError', {text = '', texthl = 'LspDiagnosticsError'})
-fn.sign_define('LspDiagnosticsSignWarning', {text = '', texthl = 'LspDiagnosticsWarning'})
-fn.sign_define('LspDiagnosticsSignHint', {text = '', texthl = 'LspDiagnosticsHint'})
+fn.sign_define('DiagnosticSignError', {text = '', texthl = 'LspDiagnosticsError'})
+fn.sign_define('DiagnosticSignWarn', {text = '', texthl = 'LspDiagnosticsWarning'})
+fn.sign_define('DiagnosticSignHint', {text = '', texthl = 'LspDiagnosticsHint'})
 
--- LspDiagnosticsError, LspDiagnosticsWarning are linked to theme groups so link default groups to them as well
-highlight.link('LspDiagnosticsDefaultError', 'LspDiagnosticsError', true)
-highlight.link('LspDiagnosticsDefaultWarning', 'LspDiagnosticsWarning', true)
-highlight.link('LspDiagnosticsDefaultHint', 'LspDiagnosticsHint', true)
+-- Use theme colours for diagnostic highlights
+highlight.link('DiagnosticError', 'LspDiagnosticsError', true)
+highlight.link('DiagnosticWarn', 'LspDiagnosticsWarning', true)
+highlight.link('DiagnosticHint', 'LspDiagnosticsHint', true)
