@@ -60,7 +60,7 @@ fi
 cecho "Symlinking to new dotfiles..."
 ln -isv ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -isv ~/.dotfiles/zshrc ~/.zshrc
-mkdir -pv ~/.config/nvim && ln -isv ~/.dotfiles/init.lua ~/.config/nvim && ln -isv ~/.dotfiles/lua ~/.config/nvim
+mkdir -pv ~/.config/nvim && ln -isv ~/.dotfiles/nvim/* ~/.config/nvim
 if osx; then
   mkdir -pv ~/.ptpython && ln -isv ~/.dotfiles/ptpython-config.py ~/.ptpython/config.py
 fi
