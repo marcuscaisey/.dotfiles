@@ -8,13 +8,8 @@ cmd('autocmd BufWritePost mappings.lua source <afile>')
 g.mapleader = ' '
 
 local function map(mode, lhs, rhs, opts)
-  local options = {
-    noremap = true,
-    silent = true,
-  }
-  if opts then
-    for k, v in pairs(opts) do options[k] = v end
-  end
+  local options = {noremap = true, silent = true}
+  if opts then for k, v in pairs(opts) do options[k] = v end end
   api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 

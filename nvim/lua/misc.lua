@@ -1,7 +1,8 @@
 local cmd = vim.cmd
 
 -- Jump to last position when opening a file
-cmd([[autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
+cmd(
+    [[autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
 
 -- Trim trailing whitespace on write
 cmd([[autocmd BufWritePre * if expand('%:e') !=# 'diff' | %s/\s\+$//e | endif]])
@@ -16,4 +17,5 @@ cmd('autocmd BufNewFile,BufRead *.build_defs set filetype=bzl')
 cmd('autocmd BufEnter * set formatoptions-=o')
 
 -- Set filetype as please in BUILD files
-cmd('autocmd BufRead,BufNewFile BUILD,*.build_defs,*.build_def,*.build set filetype=please')
+cmd(
+    'autocmd BufRead,BufNewFile BUILD,*.build_defs,*.build_def,*.build set filetype=please')

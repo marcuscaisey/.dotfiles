@@ -1,5 +1,3 @@
 local g = vim.g
 
-g.symbols_outline = {
-    auto_preview = false,
-}
+g.symbols_outline = {auto_preview = false}

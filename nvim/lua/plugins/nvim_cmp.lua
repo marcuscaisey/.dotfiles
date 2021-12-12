@@ -20,16 +20,8 @@ end
 -- - closing bracket
 -- - quote and we're inside a pair of them
 local function should_tab_out()
-  local brackets = {
-    [')'] = true,
-    [']'] = true,
-    ['}'] = true,
-  }
-  local quotes = {
-    ["'"] = true,
-    ['"'] = true,
-    ['`'] = true
-  }
+  local brackets = {[')'] = true, [']'] = true, ['}'] = true}
+  local quotes = {['\''] = true, ['"'] = true, ['`'] = true}
 
   local line = fn.getline('.')
   local col = fn.col('.')
@@ -45,17 +37,9 @@ local function should_tab_out()
 end
 
 cmp.setup {
-  sources = {
-    {name = 'nvim_lsp'},
-  },
-  snippet = {
-    expand = function(args)
-      fn['vsnip#anonymous'](args.body)
-    end,
-  },
-  confirmation = {
-    default_behavior = cmp.ConfirmBehavior.Replace,
-  },
+  sources = {{name = 'nvim_lsp'}},
+  snippet = {expand = function(args) fn['vsnip#anonymous'](args.body) end},
+  confirmation = {default_behavior = cmp.ConfirmBehavior.Replace},
   mapping = {
     ['<c-space>'] = cmp.mapping.complete(),
     ['<Tab>'] = function(fallback)
@@ -67,19 +51,19 @@ cmp.setup {
         fallback()
       end
     end,
-    ['<cr>'] = cmp.mapping.confirm({select = true}),
+    ['<cr>'] = cmp.mapping.confirm({select = true})
   },
   formatting = {
     format = require('lspkind').cmp_format({
       with_text = false,
-      preset = 'codicons',
-    }),
-  },
+      preset = 'codicons'
+    })
+  }
 }
 
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
-highlight.link("CmpItemAbbr", "DraculaFg", true)
-highlight.link("CmpItemAbbrMatch", "DraculaCyan", true)
-highlight.link("CmpItemAbbrMatchFuzzy", "DraculaCyan", true)
-highlight.link("CmpItemKind", "DraculaPurple", true)
+highlight.link('CmpItemAbbr', 'DraculaFg', true)
+highlight.link('CmpItemAbbrMatch', 'DraculaCyan', true)
+highlight.link('CmpItemAbbrMatchFuzzy', 'DraculaCyan', true)
+highlight.link('CmpItemKind', 'DraculaPurple', true)
