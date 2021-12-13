@@ -62,8 +62,3 @@ cmp.setup {
 }
 
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-
-highlight.link('CmpItemAbbr', 'DraculaFg', true)
-highlight.link('CmpItemAbbrMatch', 'DraculaCyan', true)
-highlight.link('CmpItemAbbrMatchFuzzy', 'DraculaCyan', true)
-highlight.link('CmpItemKind', 'DraculaPurple', true)

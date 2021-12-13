@@ -2,7 +2,6 @@ local lspconfig = require 'lspconfig'
 local configs = require 'lspconfig.configs'
 local util = require 'lspconfig.util'
 local fn = vim.fn
-local highlight = vim.highlight
 local api = vim.api
 
 lspconfig.gopls.setup {
@@ -81,16 +80,3 @@ lspconfig.intelephense.setup {}
 lspconfig.tsserver.setup {root_dir = function() return fn.getcwd() end}
 
 lspconfig.jsonls.setup {}
-
--- Use icons in theme colour for error / warning signs
-fn.sign_define('DiagnosticSignError',
-               {text = '', texthl = 'LspDiagnosticsError'})
-fn.sign_define('DiagnosticSignWarn',
-               {text = '', texthl = 'LspDiagnosticsWarning'})
-fn.sign_define('DiagnosticSignHint',
-               {text = '', texthl = 'LspDiagnosticsHint'})
-
--- Use theme colours for diagnostic highlights
-highlight.link('DiagnosticError', 'LspDiagnosticsError', true)
-highlight.link('DiagnosticWarn', 'LspDiagnosticsWarning', true)
-highlight.link('DiagnosticHint', 'LspDiagnosticsHint', true)

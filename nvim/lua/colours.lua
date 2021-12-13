@@ -1,4 +1,5 @@
 local highlight = vim.highlight
+local fn = vim.fn
 
 -- nvim-cmp
 highlight.link('CmpItemKindText', 'DraculaFg', true)
@@ -26,3 +27,21 @@ highlight.link('CmpItemKindStruct', 'DraculaFg', true)
 -- highlight.link('CmpItemKindEvent', 'DraculaPurple', true)
 -- highlight.link('CmpItemKindOperator', 'DraculaPurple', true)
 -- highlight.link('CmpItemKindTypeParameter', 'DraculaPurple', true)
+
+highlight.link('CmpItemAbbr', 'DraculaFg', true)
+highlight.link('CmpItemAbbrMatch', 'DraculaCyan', true)
+highlight.link('CmpItemAbbrMatchFuzzy', 'DraculaCyan', true)
+highlight.link('CmpItemKind', 'DraculaPurple', true)
+
+-- lsp
+fn.sign_define('DiagnosticSignError',
+               {text = '', texthl = 'LspDiagnosticsError'})
+fn.sign_define('DiagnosticSignWarn',
+               {text = '', texthl = 'LspDiagnosticsWarning'})
+fn.sign_define('DiagnosticSignHint',
+               {text = '', texthl = 'LspDiagnosticsHint'})
+
+highlight.link('DiagnosticError', 'LspDiagnosticsError', true)
+highlight.link('DiagnosticWarn', 'LspDiagnosticsWarning', true)
+highlight.link('DiagnosticHint', 'LspDiagnosticsHint', true)
+
