@@ -3,8 +3,6 @@ local fn = vim.fn
 local api = vim.api
 local cmd = vim.cmd
 
-cmd('autocmd BufWritePost mappings.lua source <afile>')
-
 g.mapleader = ' '
 
 local function map(mode, lhs, rhs, opts)
