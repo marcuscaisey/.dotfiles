@@ -29,7 +29,7 @@ local function should_tab_out()
 
   if quotes[next_char] then
     local preceding_chars = line:sub(1, col - 1)
-    num_preceding_quotes = select(2, preceding_chars:gsub(next_char, ''))
+    local num_preceding_quotes = select(2, preceding_chars:gsub(next_char, ''))
     -- if odd number of preceding quotes, then we're currently inside a pair
     return num_preceding_quotes % 2 == 1
   end

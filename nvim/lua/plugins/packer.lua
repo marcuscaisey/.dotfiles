@@ -1,6 +1,4 @@
-local g = vim.g
 local fn = vim.fn
-local cmd = vim.cmd
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local execute = vim.api.nvim_command
 

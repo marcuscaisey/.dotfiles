@@ -8,12 +8,12 @@ local api = vim.api
 lspconfig.gopls.setup {
   flags = {debounce_text_changes = 150},
   settings = {gopls = {directoryFilters = {'-plz-out'}}},
-  root_dir = function(fname) return fn.getcwd() end
+  root_dir = function() return fn.getcwd() end
 }
 
 lspconfig.pyright.setup {
   flags = {debounce_text_changes = 150},
-  root_dir = function(fname) return fn.getcwd() end,
+  root_dir = function() return fn.getcwd() end,
   settings = {
     python = {
       analysis = {
