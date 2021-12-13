@@ -73,7 +73,7 @@ require('packer').startup({
     use 'tpope/vim-repeat'
     use {
       'windwp/nvim-autopairs',
-      config = [[ require 'plugins.nvim_autopairs' ]]
+      config = [[ require('nvim-autopairs').setup{} ]]
     }
     use 'tpope/vim-fugitive'
     use 'vim-scripts/ReplaceWithRegister'
