@@ -1,4 +1,5 @@
 require 'mappings'
 require 'options'
+require 'colours'
 require 'misc'
 require 'plugins.packer'
