@@ -25,11 +25,16 @@ require('packer').startup({
       'neovim/nvim-lspconfig',
       config = [[ require 'plugins.nvim_lspconfig' ]]
     }
-    use {'hrsh7th/nvim-cmp', config = [[ require 'plugins.nvim_cmp' ]]}
-    use 'hrsh7th/vim-vsnip'
-    use 'hrsh7th/cmp-vsnip'
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-nvim-lua'
+    use {
+      'hrsh7th/nvim-cmp',
+      config = [[ require 'plugins.nvim_cmp' ]],
+      requires = {
+        'hrsh7th/vim-vsnip',
+        'hrsh7th/cmp-vsnip',
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-nvim-lua',
+      }
+    }
 
     -- UI
     use {
