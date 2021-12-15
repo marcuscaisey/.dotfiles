@@ -88,7 +88,6 @@ require('packer').startup({
       'bkad/camelcasemotion',
       config = [[ require 'plugins.camelcasemotion' ]]
     }
-    use 'AndrewRadev/splitjoin.vim'
     use 'junegunn/vim-peekaboo'
     use {'ojroques/vim-oscyank', config = [[ require 'plugins.vim_oscyank' ]]}
     use 'tpope/vim-abolish'
