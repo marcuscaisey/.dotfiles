@@ -33,6 +33,8 @@ require('packer').startup({
         'hrsh7th/cmp-vsnip',
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-nvim-lua',
+        'onsails/lspkind-nvim',
+        'mortepau/codicons.nvim',
       }
     }
 
@@ -52,19 +54,19 @@ require('packer').startup({
       config = [[ require 'plugins.nvim_bufferline' ]],
       requires = 'kyazdani42/nvim-web-devicons'
     }
-    use 'onsails/lspkind-nvim'
     use {
       'ray-x/lsp_signature.nvim',
       config = [[ require 'plugins.lsp_signature' ]]
     }
-    use 'mortepau/codicons.nvim'
 
     -- Command
     use {
       'nvim-telescope/telescope.nvim',
       config = [[ require 'plugins.telescope' ]],
       requires = {
-        'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim',
+        'nvim-lua/popup.nvim',
+        'nvim-lua/plenary.nvim',
+        'mortepau/codicons.nvim',
         {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
       }
     }
