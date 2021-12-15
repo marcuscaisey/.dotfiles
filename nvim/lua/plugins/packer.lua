@@ -37,6 +37,10 @@ require('packer').startup({
         'mortepau/codicons.nvim',
       }
     }
+    use {
+      'ray-x/lsp_signature.nvim',
+      config = [[ require 'plugins.lsp_signature' ]]
+    }
 
     -- UI
     use {
@@ -53,10 +57,6 @@ require('packer').startup({
       'akinsho/nvim-bufferline.lua',
       config = [[ require 'plugins.nvim_bufferline' ]],
       requires = 'kyazdani42/nvim-web-devicons'
-    }
-    use {
-      'ray-x/lsp_signature.nvim',
-      config = [[ require 'plugins.lsp_signature' ]]
     }
 
     -- Command
