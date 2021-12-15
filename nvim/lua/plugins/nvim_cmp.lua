@@ -57,6 +57,11 @@ cmp.setup {
       with_text = false,
       preset = 'codicons'
     })
+  },
+  sorting = {
+    comparators = {
+      cmp.config.compare.sort_text,
+    }
   }
 }
 
