@@ -86,23 +86,23 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Use fd for find instead of default find
-export FZF_DEFAULT_COMMAND="fd --follow --type f --exclude .git"
+export FZF_DEFAULT_COMMAND="fd --follow --type f --exclude .git --strip-cwd-prefix"
 
 # Use ~~ for completion trigger instead of **
 export FZF_COMPLETION_TRIGGER='~~'
 
 # Use fd instead of the default find
 _fzf_compgen_path() {
-    fd --hidden --follow --exclude .git . $1
+    fd --hidden --follow --exclude .git --strip-cwd-prefix . $1
 }
 
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
-    fd --type d --hidden --follow --exclude .git . $1
+    fd --type d --hidden --follow --exclude .git --strip-cwd-prefix . $1
 }
 
 # Use ctrl + t to fuzzy search all files/directories (excluding .git) with preview in current directory
-export FZF_CTRL_T_COMMAND='fd --follow --exclude .git'
+export FZF_CTRL_T_COMMAND='fd --follow --strip-cwd-prefix'
 export FZF_CTRL_T_OPTS="--preview 'if [ ! -d {} ]; then bat --color=always {}; else echo Directory: {}; fi'"
 
 
