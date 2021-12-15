@@ -1,35 +1,39 @@
 local lspconfig = require 'lspconfig'
 local configs = require 'lspconfig.configs'
 local util = require 'lspconfig.util'
+local cmp_nvim_lsp = require 'cmp_nvim_lsp'
 local fn = vim.fn
 local api = vim.api
 
-lspconfig.gopls.setup {
-  flags = {debounce_text_changes = 150},
-  settings = {gopls = {directoryFilters = {'-plz-out'}}},
-  root_dir = function() return fn.getcwd() end
-}
-
-lspconfig.pyright.setup {
-  flags = {debounce_text_changes = 150},
-  root_dir = function() return fn.getcwd() end,
-  settings = {
-    python = {
-      analysis = {
-        autoSearchPaths = true,
-        diagnosticMode = 'workspace',
-        useLibraryCodeForTypes = true,
-        extraPaths = {
-          '/home/mcaisey/core3/src', '/home/mcaisey/core3/src/plz-out/gen'
+local servers = {
+  gopls = {
+    settings = {gopls = {directoryFilters = {'-plz-out'}}},
+    root_dir = function() return fn.getcwd() end,
+  },
+  pyright = {
+    root_dir = function() return fn.getcwd() end,
+    settings = {
+      python = {
+        analysis = {
+          autoSearchPaths = true,
+          diagnosticMode = 'workspace',
+          useLibraryCodeForTypes = true,
+          extraPaths = {
+            '/home/mcaisey/core3/src', '/home/mcaisey/core3/src/plz-out/gen'
+          }
         }
       }
     }
-  }
+  },
+  yamlls = {},
+  vimls = {},
+  ccls = {root_dir = function() return fn.getcwd() end},
+  please = {},
+  bashls = {},
+  intelephense = {},
+  tsserver = {root_dir = function() return fn.getcwd() end},
+  jsonls = {},
 }
-
-lspconfig.vimls.setup {}
-
-lspconfig.ccls.setup {root_dir = function() return fn.getcwd() end}
 
 local system_name
 if fn.has('mac') == 1 then
@@ -69,14 +73,12 @@ configs.please = {
   }
 }
 
-lspconfig.please.setup {}
-
-lspconfig.yamlls.setup {}
-
-lspconfig.bashls.setup {}
-
-lspconfig.intelephense.setup {}
-
-lspconfig.tsserver.setup {root_dir = function() return fn.getcwd() end}
-
-lspconfig.jsonls.setup {}
+local capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+for server, config in pairs(servers) do
+  lspconfig[server].setup {
+    capabilities = capabilities,
+    flags = {debounce_text_changes = 150},
+    settings = config.settings,
+    root_dir = config.root_dir,
+  }
+end
