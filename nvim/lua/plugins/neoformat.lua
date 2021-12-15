@@ -1,8 +1,6 @@
 local g = vim.g
 local cmd = vim.cmd
 
-g.neoformat_only_msg_on_error = true
-
 g.neoformat_enabled_python = {'black'}
 
 g.neoformat_enabled_lua = {'luaformat'}
