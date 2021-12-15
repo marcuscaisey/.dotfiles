@@ -101,8 +101,10 @@ require('packer').startup({
     -- Text objects
     use 'tommcdo/vim-exchange'
     use 'vim-scripts/argtextobj.vim'
-    use 'kana/vim-textobj-user'
-    use 'kana/vim-textobj-entire'
+    use {
+      'kana/vim-textobj-entire',
+      requires = {'kana/vim-textobj-user'}
+    }
     use 'michaeljsmith/vim-indent-object'
   end,
   config = {display = {open_fn = require('packer.util').float}}
