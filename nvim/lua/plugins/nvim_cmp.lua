@@ -1,6 +1,5 @@
 local cmp = require 'cmp'
 local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
-local highlight = vim.highlight
 local o = vim.o
 local fn = vim.fn
 local api = vim.api
