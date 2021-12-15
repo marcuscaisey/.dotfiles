@@ -97,9 +97,9 @@ require('packer').startup({
       'simrat39/symbols-outline.nvim',
       config = [[ require 'plugins.symbols_outline' ]]
     }
+    use 'tommcdo/vim-exchange'
 
     -- Text objects
-    use 'tommcdo/vim-exchange'
     use 'vim-scripts/argtextobj.vim'
     use {
       'kana/vim-textobj-entire',
