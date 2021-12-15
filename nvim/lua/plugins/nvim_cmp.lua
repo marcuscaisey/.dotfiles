@@ -38,6 +38,9 @@ end
 cmp.setup {
   sources = {{name = 'nvim_lsp'}},
   snippet = {expand = function(args) fn['vsnip#anonymous'](args.body) end},
+  completion = {
+    completeopt = 'menu,menuone,preview,noinsert',
+  },
   confirmation = {default_behavior = cmp.ConfirmBehavior.Replace},
   mapping = {
     ['<c-space>'] = cmp.mapping.complete(),
