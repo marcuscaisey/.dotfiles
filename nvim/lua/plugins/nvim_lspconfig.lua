@@ -8,7 +8,7 @@ local api = vim.api
 local servers = {
   gopls = {
     settings = {gopls = {directoryFilters = {'-plz-out'}}},
-    root_dir = function() return fn.getcwd() end,
+    root_dir = function() return fn.getcwd() end
   },
   pyright = {
     root_dir = function() return fn.getcwd() end,
@@ -32,7 +32,7 @@ local servers = {
   bashls = {},
   intelephense = {},
   tsserver = {root_dir = function() return fn.getcwd() end},
-  jsonls = {},
+  jsonls = {}
 }
 
 local system_name
@@ -73,12 +73,13 @@ configs.please = {
   }
 }
 
-local capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol
+                                                          .make_client_capabilities())
 for server, config in pairs(servers) do
   lspconfig[server].setup {
     capabilities = capabilities,
     flags = {debounce_text_changes = 150},
     settings = config.settings,
-    root_dir = config.root_dir,
+    root_dir = config.root_dir
   }
 end

@@ -29,12 +29,8 @@ require('packer').startup({
       'hrsh7th/nvim-cmp',
       config = [[ require 'plugins.nvim_cmp' ]],
       requires = {
-        'hrsh7th/vim-vsnip',
-        'hrsh7th/cmp-vsnip',
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-nvim-lua',
-        'onsails/lspkind-nvim',
-        'mortepau/codicons.nvim',
+        'hrsh7th/vim-vsnip', 'hrsh7th/cmp-vsnip', 'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-nvim-lua', 'onsails/lspkind-nvim', 'mortepau/codicons.nvim'
       }
     }
     use {
@@ -64,8 +60,7 @@ require('packer').startup({
       'nvim-telescope/telescope.nvim',
       config = [[ require 'plugins.telescope' ]],
       requires = {
-        'nvim-lua/popup.nvim',
-        'nvim-lua/plenary.nvim',
+        'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim',
         'mortepau/codicons.nvim',
         {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
       }
@@ -107,10 +102,7 @@ require('packer').startup({
 
     -- Text objects
     use 'vim-scripts/argtextobj.vim'
-    use {
-      'kana/vim-textobj-entire',
-      requires = {'kana/vim-textobj-user'}
-    }
+    use {'kana/vim-textobj-entire', requires = {'kana/vim-textobj-user'}}
     use 'michaeljsmith/vim-indent-object'
   end,
   config = {display = {open_fn = require('packer.util').float}}

@@ -38,9 +38,7 @@ end
 cmp.setup {
   sources = {{name = 'nvim_lsp'}},
   snippet = {expand = function(args) fn['vsnip#anonymous'](args.body) end},
-  completion = {
-    completeopt = 'menu,menuone,preview,noinsert',
-  },
+  completion = {completeopt = 'menu,menuone,preview,noinsert'},
   confirmation = {default_behavior = cmp.ConfirmBehavior.Replace},
   mapping = {
     ['<c-space>'] = cmp.mapping.complete(),
@@ -61,11 +59,7 @@ cmp.setup {
       preset = 'codicons'
     })
   },
-  sorting = {
-    comparators = {
-      cmp.config.compare.sort_text,
-    }
-  }
+  sorting = {comparators = {cmp.config.compare.sort_text}}
 }
 
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
