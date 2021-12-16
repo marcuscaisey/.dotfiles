@@ -144,7 +144,10 @@ telescope.setup {
     selection_caret = '  '
   },
   pickers = {
-    find_files = {layout_config = {preview_width = 0.4}},
+    find_files = {
+      layout_config = {preview_width = 0.4},
+      find_command = {'fd', '--type', 'f', '--strip-cwd-prefix'}
+    },
     buffers = {
       layout_config = {preview_width = 0.4},
       sort_lastused = true,
