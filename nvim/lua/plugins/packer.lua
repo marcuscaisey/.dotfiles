@@ -1,6 +1,9 @@
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local execute = vim.api.nvim_command
+local cmd = vim.cmd
+
+cmd('autocmd BufWritePost packer.lua source <afile> | PackerCompile')
 
 if fn.empty(fn.glob(install_path)) > 0 then
   fn.system({
@@ -17,17 +20,17 @@ require('packer').startup({
     use {
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
-      config = function() require 'plugins.nvim_treesitter' end
+      config = function() require 'plugins.treesitter' end
     }
 
     -- Completion
     use {
       'neovim/nvim-lspconfig',
-      config = function() require 'plugins.nvim_lspconfig' end
+      config = function() require 'plugins.lspconfig' end
     }
     use {
       'hrsh7th/nvim-cmp',
-      config = function() require 'plugins.nvim_cmp' end,
+      config = function() require 'plugins.cmp' end,
       requires = {
         'hrsh7th/vim-vsnip', 'hrsh7th/cmp-vsnip', 'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-nvim-lua', 'onsails/lspkind-nvim', 'mortepau/codicons.nvim'
@@ -51,7 +54,7 @@ require('packer').startup({
     }
     use {
       'akinsho/nvim-bufferline.lua',
-      config = function() require 'plugins.nvim_bufferline' end,
+      config = function() require 'plugins.bufferline' end,
       requires = 'kyazdani42/nvim-web-devicons'
     }
 
@@ -67,7 +70,7 @@ require('packer').startup({
     }
     use {
       'kyazdani42/nvim-tree.lua',
-      config = function() require 'plugins.nvim_tree' end,
+      config = function() require 'plugins.tree' end,
       requires = 'kyazdani42/nvim-web-devicons'
     }
     use 'tpope/vim-unimpaired'
@@ -75,19 +78,16 @@ require('packer').startup({
     use 'tpope/vim-repeat'
     use {
       'windwp/nvim-autopairs',
-      config = function() require('nvim-autopairs').setup {} end
+      config = function() require('nvim-autopairs').setup() end
     }
     use 'tpope/vim-fugitive'
     use 'vim-scripts/ReplaceWithRegister'
     use {
       'tpope/vim-commentary',
-      config = function() require 'plugins.vim_commentary' end
+      config = function() require 'plugins.commentary' end
     }
     use 'tpope/vim-surround'
-    use {
-      'justinmk/vim-sneak',
-      config = function() require 'plugins.vim_sneak' end
-    }
+    use {'justinmk/vim-sneak', config = function() require 'plugins.sneak' end}
     use 'nelstrom/vim-visual-star-search'
     use {
       'bkad/camelcasemotion',
@@ -96,7 +96,7 @@ require('packer').startup({
     use 'junegunn/vim-peekaboo'
     use {
       'ojroques/vim-oscyank',
-      config = function() require 'plugins.vim_oscyank' end
+      config = function() require 'plugins.oscyank' end
     }
     use 'tpope/vim-abolish'
     use {
