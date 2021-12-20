@@ -44,7 +44,7 @@ cmp.setup {
     ['<c-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
     ['<c-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
     ['<c-space>'] = cmp.mapping.complete(),
-    ['<Tab>'] = function(fallback)
+    ['<tab>'] = function(fallback)
       if cmp.visible() then
         cmp.abort()
       elseif should_tab_out() then
