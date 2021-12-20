@@ -93,12 +93,12 @@ export FZF_COMPLETION_TRIGGER='~~'
 
 # Use fd instead of the default find
 _fzf_compgen_path() {
-    fd --hidden --follow --exclude .git --strip-cwd-prefix . $1
+    fd --hidden --follow --exclude .git . $1
 }
 
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
-    fd --type d --hidden --follow --exclude .git --strip-cwd-prefix . $1
+    fd --type d --hidden --follow --exclude .git . $1
 }
 
 # Use ctrl + t to fuzzy search all files/directories (excluding .git) with preview in current directory
