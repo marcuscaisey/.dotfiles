@@ -50,7 +50,7 @@ require('packer').startup({
     use {
       'lewis6991/gitsigns.nvim',
       requires = {'nvim-lua/plenary.nvim'},
-      config = function() require('gitsigns').setup() end
+      config = function() require('plugins.gitsigns') end
     }
     use {
       'akinsho/nvim-bufferline.lua',
