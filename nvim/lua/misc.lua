@@ -19,3 +19,11 @@ cmd('autocmd BufEnter * set formatoptions-=o')
 -- Set filetype as please in BUILD files
 cmd(
     'autocmd BufRead,BufNewFile BUILD,*.build_defs,*.build_def,*.build set filetype=please')
+
+-- Highlight yanked text
+cmd([[
+augroup highlight_yank
+  autocmd!
+  au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=1000 }
+augroup END
+]])

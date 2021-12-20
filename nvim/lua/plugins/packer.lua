@@ -49,7 +49,6 @@ require('packer').startup({
       requires = {'nvim-lua/plenary.nvim'},
       config = function() require('gitsigns').setup() end
     }
-    use 'machakann/vim-highlightedyank'
     use {
       'akinsho/nvim-bufferline.lua',
       config = function() require 'plugins.nvim_bufferline' end,
