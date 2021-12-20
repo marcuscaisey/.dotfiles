@@ -161,14 +161,6 @@ telescope.setup {
     lsp_document_symbols = {entry_maker = make_lsp_document_symbols_entry},
     lsp_references = {entry_maker = make_lsp_references_entry},
     lsp_definitions = {entry_maker = make_lsp_definitions_entry}
-  },
-  extensions = {
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = 'smart_case'
-    }
   }
 }
 telescope.load_extension('fzf')
