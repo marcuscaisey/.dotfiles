@@ -41,6 +41,8 @@ cmp.setup {
   completion = {completeopt = 'menu,menuone,preview,noinsert'},
   confirmation = {default_behavior = cmp.ConfirmBehavior.Replace},
   mapping = {
+    ['<c-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
+    ['<c-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
     ['<c-space>'] = cmp.mapping.complete(),
     ['<Tab>'] = function(fallback)
       if cmp.visible() then
