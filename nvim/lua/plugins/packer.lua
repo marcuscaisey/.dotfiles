@@ -45,8 +45,9 @@ require('packer').startup({
       requires = 'kyazdani42/nvim-web-devicons'
     }
     use {
-      'airblade/vim-gitgutter',
-      config = [[ require 'plugins.vim_gitgutter' ]]
+      'lewis6991/gitsigns.nvim',
+      requires = {'nvim-lua/plenary.nvim'},
+      config = function() require('gitsigns').setup() end
     }
     use 'machakann/vim-highlightedyank'
     use {
