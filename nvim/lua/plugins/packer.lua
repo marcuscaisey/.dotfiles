@@ -87,7 +87,6 @@ require('packer').startup({
     }
     use 'tpope/vim-surround'
     use {'justinmk/vim-sneak', config = function() require 'plugins.sneak' end}
-    use 'nelstrom/vim-visual-star-search'
     use {
       'bkad/camelcasemotion',
       config = function() require 'plugins.camelcasemotion' end
