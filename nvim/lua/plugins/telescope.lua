@@ -150,7 +150,8 @@ telescope.setup {
     },
     buffers = {
       layout_config = {preview_width = 0.4},
-      sort_lastused = true,
+      sort_mru = true,
+      ignore_current_buffer = true,
       mappings = {
         i = {['<c-d>'] = 'delete_buffer'},
         n = {['<c-d>'] = 'delete_buffer'}
