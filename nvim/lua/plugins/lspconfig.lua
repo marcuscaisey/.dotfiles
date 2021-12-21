@@ -7,7 +7,7 @@ local api = vim.api
 
 local servers = {
   gopls = {
-    settings = {gopls = {directoryFilters = {'-plz-out'}}},
+    settings = {gopls = {directoryFilters = {'-plz-out'}, linksInHover = false}},
     root_dir = function() return fn.getcwd() end
   },
   pyright = {
