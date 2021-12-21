@@ -45,3 +45,5 @@ highlight.link('DiagnosticError', 'LspDiagnosticsError', true)
 highlight.link('DiagnosticWarn', 'LspDiagnosticsWarning', true)
 highlight.link('DiagnosticHint', 'LspDiagnosticsHint', true)
 
+-- git
+highlight.link('DiffDelete', 'DraculaRed', true)
