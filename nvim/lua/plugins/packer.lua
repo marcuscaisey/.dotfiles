@@ -40,6 +40,11 @@ require('packer').startup({
       'ray-x/lsp_signature.nvim',
       config = function() require 'plugins.lsp_signature' end
     }
+    use {
+      'jose-elias-alvarez/null-ls.nvim',
+      config = function() require 'plugins.null_ls' end,
+      requires = 'nvim-lua/plenary.nvim'
+    }
 
     -- UI
     use {
