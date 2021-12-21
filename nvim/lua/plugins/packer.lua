@@ -80,7 +80,6 @@ require('packer').startup({
       'windwp/nvim-autopairs',
       config = function() require('nvim-autopairs').setup() end
     }
-    use 'tpope/vim-fugitive'
     use 'vim-scripts/ReplaceWithRegister'
     use {
       'tpope/vim-commentary',
