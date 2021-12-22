@@ -21,7 +21,10 @@ require('packer').startup({
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
       config = function() require 'plugins.treesitter' end,
-      requires = 'nvim-treesitter/nvim-treesitter-textobjects'
+      requires = {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        'romgrk/nvim-treesitter-context'
+      }
     }
 
     -- Completion
