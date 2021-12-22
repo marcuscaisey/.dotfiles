@@ -20,7 +20,8 @@ require('packer').startup({
     use {
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
-      config = function() require 'plugins.treesitter' end
+      config = function() require 'plugins.treesitter' end,
+      requires = 'nvim-treesitter/nvim-treesitter-textobjects'
     }
 
     -- Completion
@@ -113,10 +114,6 @@ require('packer').startup({
     use 'tommcdo/vim-exchange'
 
     -- Text objects
-    use {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      config = function() require 'plugins.treesitter_textobjects' end
-    }
     use {'kana/vim-textobj-entire', requires = {'kana/vim-textobj-user'}}
     use 'michaeljsmith/vim-indent-object'
   end,
