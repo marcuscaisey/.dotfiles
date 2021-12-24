@@ -8,7 +8,7 @@ for k, v in pairs(autoformatted_extensions) do autoformatted_extensions[k] = '*.
 cmd(string.format([[
   augroup auto_neoformat
     autocmd!
-    autocmd BufWritePre %s silent Neoformat
+    autocmd BufWritePre %s silent lua AutoNeoformat()
   augroup END
 ]], table.concat(autoformatted_extensions, ',')))
 
@@ -23,5 +23,21 @@ g.neoformat_lua_luaformat = {
 
 g.neoformat_run_all_formatters = true
 
+local auto_formatting_enabled = true
 
+--- Toggles Neoformat auto-formatting for filetypes which configured to be
+-- formatted on save.
+function ToggleAutoNeoformatting()
+  if auto_formatting_enabled then
+    auto_formatting_enabled = false
+    print('Neoformat: disabled autoformatting')
+  else
+    auto_formatting_enabled = true
+    print('Neoformat: enabled autoformatting')
+  end
+end
 
+--- Wrapper around the vimscript Neoformat command which only runs Neoformat if
+-- auto-formatting is currently enabled. Auto-formatting can be toggled by
+-- calling ToggleAutoNeoformatting().
+function AutoNeoformat() if auto_formatting_enabled then cmd('Neoformat') end end
