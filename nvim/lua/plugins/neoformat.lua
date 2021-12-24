@@ -13,7 +13,7 @@ cmd(string.format([[
 ]], table.concat(autoformatted_extensions, ',')))
 
 g.neoformat_enabled_python = {'black'}
-g.neoformat_enabled_lua = {'luaformat'}
+g.neoformat_enabled_lua = {'stylua'}
 g.neoformat_enabled_go = {'gofmt', 'goimports'}
 
 g.neoformat_lua_luaformat = {
