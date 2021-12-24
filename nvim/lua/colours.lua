@@ -47,3 +47,6 @@ highlight.link('DiagnosticHint', 'LspDiagnosticsHint', true)
 
 -- git
 highlight.link('DiffDelete', 'DraculaRed', true)
+
+-- symbols-outline.nvim
+highlight.link('FocusedSymbol', 'DraculaOrangeInverse', true)

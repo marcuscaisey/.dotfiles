@@ -112,7 +112,8 @@ require('packer').startup({
     }
     use {
       'simrat39/symbols-outline.nvim',
-      config = function() require 'plugins.symbols_outline' end
+      config = function() require 'plugins.symbols_outline' end,
+      requires = 'mortepau/codicons.nvim',
     }
     use 'tommcdo/vim-exchange'
 
