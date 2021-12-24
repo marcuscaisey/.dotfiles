@@ -76,4 +76,4 @@ map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>')
 map('n', '<leader>fm', '<cmd>Neoformat<cr>')
 
 -- symbols-outline.nvim
-map('n', '<leader>o', '<cmd>SymbolsOutline<cr>')
+map('n', '<c-m>', '<cmd>SymbolsOutline<cr>')
