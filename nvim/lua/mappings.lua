@@ -39,8 +39,6 @@ map('n', 'Y', 'y$')
 map('i', 'II', '<esc>I')
 map('i', 'AA', '<esc>A')
 
-map('v', '<leader>s', '"9y:%s/<c-r>9/')
-
 -- nvim-bufferline.lua
 map('n', 'L', '<cmd>BufferLineCycleNext<cr>')
 map('n', 'H', '<cmd>BufferLineCyclePrev<cr>')
@@ -76,4 +74,4 @@ map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>')
 map('n', '<leader>fm', '<cmd>Neoformat<cr>')
 
 -- symbols-outline.nvim
-map('n', '<c-m>', '<cmd>SymbolsOutline<cr>')
+map('n', '<leader>s', '<cmd>SymbolsOutline<cr>')
