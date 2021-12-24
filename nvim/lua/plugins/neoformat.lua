@@ -8,7 +8,7 @@ for k, v in pairs(autoformatted_extensions) do autoformatted_extensions[k] = '*.
 cmd(string.format([[
   augroup auto_neoformat
     autocmd!
-    autocmd BufWritePre %s undojoin | silent Neoformat
+    autocmd BufWritePre %s silent Neoformat
   augroup END
 ]], table.concat(autoformatted_extensions, ',')))
 
