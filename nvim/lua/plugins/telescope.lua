@@ -79,7 +79,7 @@ local function make_lsp_references_entry(entry)
 end
 
 local symbol_type_highlights = lsp_utils.for_each_symbol_kind(function(kind)
-  return 'TelescopeResults' .. kind
+  return 'LSPSymbolKind' .. kind
 end)
 
 -- copied and modified from make_entry.gen_from_lsp_symbols
