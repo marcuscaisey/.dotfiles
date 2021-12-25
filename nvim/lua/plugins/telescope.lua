@@ -2,7 +2,7 @@ local telescope = require 'telescope'
 local layout = require 'telescope.actions.layout'
 local entry_display = require 'telescope.pickers.entry_display'
 local utils = require 'telescope.utils'
-local codicons = require 'codicons'
+local lsp_utils = require 'lsp_utils'
 local fn = vim.fn
 
 -- splits a filepath into head / tail where tail is the last path component and
@@ -78,16 +78,9 @@ local function make_lsp_references_entry(entry)
   }
 end
 
-local lsp_type_highlight = {
-  ['Class'] = 'TelescopeResultsClass',
-  ['Constant'] = 'TelescopeResultsConstant',
-  ['Field'] = 'TelescopeResultsField',
-  ['Function'] = 'TelescopeResultsFunction',
-  ['Method'] = 'TelescopeResultsMethod',
-  ['Property'] = 'TelescopeResultsOperator',
-  ['Struct'] = 'TelescopeResultsStruct',
-  ['Variable'] = 'TelescopeResultsVariable'
-}
+local symbol_type_highlights = lsp_utils.for_each_symbol_kind(function(kind)
+  return 'TelescopeResults' .. kind
+end)
 
 -- copied and modified from make_entry.gen_from_lsp_symbols
 local function make_lsp_document_symbols_entry(entry)
@@ -100,11 +93,11 @@ local function make_lsp_document_symbols_entry(entry)
   }
 
   local make_display = function(entry)
-    local icon = codicons.get('symbol-' .. entry.symbol_type:lower())
     return displayer {
       {
-        icon, lsp_type_highlight[entry.symbol_type],
-        lsp_type_highlight[entry.symbol_type]
+        lsp_utils.symbol_icon(entry.symbol_type),
+        symbol_type_highlights[entry.symbol_type],
+        symbol_type_highlights[entry.symbol_type],
       }, entry.symbol_name
     }
   end

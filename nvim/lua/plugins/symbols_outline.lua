@@ -1,11 +1,6 @@
 local g = vim.g
 local lsp_utils = require 'lsp_utils'
 
-local symbols = {}
-for _, symbol_type in ipairs(lsp_utils.symbol_types) do
-  symbols[symbol_type] = { icon = lsp_utils.symbol_icon(symbol_type) }
-end
-
 g.symbols_outline = {
   auto_preview = false,
   position = 'left',
@@ -16,5 +11,8 @@ g.symbols_outline = {
     hover_symbol = 'K',
     toggle_preview = '<c-space>',
   },
-  symbols = symbols,
+  symbols = lsp_utils.for_each_symbol_kind(function(kind)
+    return { icon = lsp_utils.symbol_icon(kind) }
+  end
+  ),
 }
