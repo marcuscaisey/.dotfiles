@@ -5,9 +5,12 @@ local utils = require 'telescope.utils'
 local lsp_utils = require 'lsp_utils'
 local fn = vim.fn
 
--- splits a filepath into head / tail where tail is the last path component and
--- head is everything before it. if tail is in the current working directory,
--- then head is relative. the home directory is replaced by ~ in head.
+--- Splits a filepath into head / tail where tail is the last path component and
+--- head is everything before it. If tail is in the current working directory,
+--- then head is relative. The home directory is replaced by ~ in head.
+--- @param path string Path to split
+--- @return string head
+--- @return string tail
 local function split_path(path)
   local tail = utils.path_tail(path)
   local head = path:gsub('/' .. tail .. '$', '')
@@ -20,121 +23,6 @@ local function split_path(path)
   head = head:gsub('^' .. cwd .. '/', '')
   head = head:gsub('^' .. os.getenv 'HOME', '~')
   return head, tail
-end
-
--- copied and modified from make_entry.gen_from_quickfix
-local function make_lsp_definitions_entry(entry)
-  local displayer = entry_display.create {
-    separator = ' ',
-    items = {
-      { remaining = true },
-      { remaining = true },
-    },
-  }
-
-  local make_display = function(entry)
-    local head, tail = split_path(entry.filename)
-    return displayer {
-      tail,
-      { head, 'TelescopeResultsLineNr' },
-    }
-  end
-
-  return {
-    valid = true,
-    value = entry,
-    ordinal = entry.filename .. ' ' .. entry.text,
-    display = make_display,
-    bufnr = entry.bufnr,
-    filename = entry.filename,
-    lnum = entry.lnum,
-    col = entry.col,
-    text = entry.text,
-    start = entry.start,
-    finish = entry.finish,
-  }
-end
-
--- copied and modified from make_entry.gen_from_quickfix
-local function make_lsp_references_entry(entry)
-  local displayer = entry_display.create {
-    separator = ' ',
-    items = {
-      { remaining = true },
-      { remaining = true },
-    },
-  }
-
-  local make_display = function(entry)
-    local head, tail = split_path(entry.filename)
-
-    local position = table.concat({ entry.lnum, entry.col }, ':')
-    local tail_with_position = table.concat({ tail, position }, ':')
-
-    return displayer {
-      tail_with_position,
-      { head, 'TelescopeResultsLineNr' },
-    }
-  end
-
-  return {
-    valid = true,
-    value = entry,
-    ordinal = entry.filename .. ' ' .. entry.text,
-    display = make_display,
-    bufnr = entry.bufnr,
-    filename = entry.filename,
-    lnum = entry.lnum,
-    col = entry.col,
-    text = entry.text,
-    start = entry.start,
-    finish = entry.finish,
-  }
-end
-
-local symbol_type_highlights = lsp_utils.for_each_symbol_kind(function(kind)
-  return 'LSPSymbolKind' .. kind
-end)
-
--- copied and modified from make_entry.gen_from_lsp_symbols
-local function make_lsp_document_symbols_entry(entry)
-  local displayer = entry_display.create {
-    separator = ' ',
-    items = {
-      { remaining = true }, -- symbol type icon
-      { remaining = true }, -- symbol
-    },
-  }
-
-  local make_display = function(entry)
-    return displayer {
-      {
-        lsp_utils.symbol_codicon(entry.symbol_type),
-        symbol_type_highlights[entry.symbol_type],
-        symbol_type_highlights[entry.symbol_type],
-      },
-      entry.symbol_name,
-    }
-  end
-
-  local filename = entry.filename or vim.api.nvim_buf_get_name(entry.bufnr)
-  local symbol_msg = entry.text:gsub('.* | ', '')
-  local symbol_type, symbol_name = symbol_msg:match '%[(.+)%]%s+(.*)'
-  local ordinal = symbol_name .. ' ' .. (symbol_type or 'unknown')
-
-  return {
-    valid = true,
-    value = entry,
-    ordinal = ordinal,
-    display = make_display,
-    filename = filename,
-    lnum = entry.lnum,
-    col = entry.col,
-    symbol_name = symbol_name,
-    symbol_type = symbol_type,
-    start = entry.start,
-    finish = entry.finish,
-  }
 end
 
 telescope.setup {
@@ -190,13 +78,117 @@ telescope.setup {
       previewer = false,
     },
     lsp_document_symbols = {
-      entry_maker = make_lsp_document_symbols_entry,
+      -- copied and modified from make_entry.gen_from_lsp_symbols
+      entry_maker = function(entry)
+        local displayer = entry_display.create {
+          separator = ' ',
+          items = {
+            { remaining = true }, -- symbol type icon
+            { remaining = true }, -- symbol
+          },
+        }
+
+        local make_display = function(entry)
+          return displayer {
+            {
+              lsp_utils.symbol_codicon(entry.symbol_type),
+              'LSPSymbolKind' .. entry.symbol_type,
+            },
+            entry.symbol_name,
+          }
+        end
+
+        local filename = entry.filename or vim.api.nvim_buf_get_name(entry.bufnr)
+        local symbol_msg = entry.text:gsub('.* | ', '')
+        local symbol_type, symbol_name = symbol_msg:match '%[(.+)%]%s+(.*)'
+        local ordinal = symbol_name .. ' ' .. (symbol_type or 'unknown')
+
+        return {
+          valid = true,
+          value = entry,
+          ordinal = ordinal,
+          display = make_display,
+          filename = filename,
+          lnum = entry.lnum,
+          col = entry.col,
+          symbol_name = symbol_name,
+          symbol_type = symbol_type,
+          start = entry.start,
+          finish = entry.finish,
+        }
+      end,
     },
     lsp_references = {
-      entry_maker = make_lsp_references_entry,
+      -- copied and modified from make_entry.gen_from_quickfix
+      entry_maker = function(entry)
+        local displayer = entry_display.create {
+          separator = ' ',
+          items = {
+            { remaining = true },
+            { remaining = true },
+          },
+        }
+
+        local make_display = function(entry)
+          local head, tail = split_path(entry.filename)
+
+          local position = table.concat({ entry.lnum, entry.col }, ':')
+          local tail_with_position = table.concat({ tail, position }, ':')
+
+          return displayer {
+            tail_with_position,
+            { head, 'TelescopeResultsLineNr' },
+          }
+        end
+
+        return {
+          valid = true,
+          value = entry,
+          ordinal = entry.filename .. ' ' .. entry.text,
+          display = make_display,
+          bufnr = entry.bufnr,
+          filename = entry.filename,
+          lnum = entry.lnum,
+          col = entry.col,
+          text = entry.text,
+          start = entry.start,
+          finish = entry.finish,
+        }
+      end,
     },
     lsp_definitions = {
-      entry_maker = make_lsp_definitions_entry,
+      -- copied and modified from make_entry.gen_from_quickfix
+      entry_maker = function(entry)
+        local displayer = entry_display.create {
+          separator = ' ',
+          items = {
+            { remaining = true },
+            { remaining = true },
+          },
+        }
+
+        local make_display = function(entry)
+          local head, tail = split_path(entry.filename)
+          return displayer {
+            tail,
+            { head, 'TelescopeResultsLineNr' },
+          }
+        end
+
+        return {
+          valid = true,
+          value = entry,
+          ordinal = entry.filename .. ' ' .. entry.text,
+          display = make_display,
+          bufnr = entry.bufnr,
+          filename = entry.filename,
+          lnum = entry.lnum,
+          col = entry.col,
+          text = entry.text,
+          start = entry.start,
+          finish = entry.finish,
+        }
+      end,
     },
   },
 }
