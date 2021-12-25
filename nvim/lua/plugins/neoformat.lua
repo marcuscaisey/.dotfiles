@@ -14,14 +14,12 @@ cmd(string.format([[
 
 g.neoformat_enabled_python = {'black'}
 g.neoformat_enabled_lua = {'stylua'}
-g.neoformat_enabled_go = {'gofmt', 'goimports'}
+g.neoformat_enabled_go = {'goimports'}
 
 g.neoformat_lua_luaformat = {
   exe = 'lua-format',
   args = {'--column-limit', '120', '--indent-width', '2', '--double-quote-to-single-quote'}
 }
-
-g.neoformat_run_all_formatters = true
 
 local auto_formatting_enabled = true
 
