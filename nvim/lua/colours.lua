@@ -26,7 +26,7 @@ highlight.link('LSPSymbolKindKey', 'DraculaRed', true)
 highlight.link('LSPSymbolKindNull', 'DraculaRed', true)
 highlight.link('LSPSymbolKindEnumMember', 'DraculaCyan', true)
 highlight.link('LSPSymbolKindStruct', 'DraculaFg', true)
-highlight.link('LSPSymbolKindEvent', 'DraculaRed', true)
+highlight.link('LSPSymbolKindEvent', 'DraculaFg', true)
 highlight.link('LSPSymbolKindOperator', 'DraculaRed', true)
 highlight.link('LSPSymbolKindTypeParameter', 'DraculaCyan', true)
 
