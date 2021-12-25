@@ -109,7 +109,7 @@ local function make_lsp_document_symbols_entry(entry)
   local make_display = function(entry)
     return displayer {
       {
-        lsp_utils.symbol_icon(entry.symbol_type),
+        lsp_utils.symbol_codicon(entry.symbol_type),
         symbol_type_highlights[entry.symbol_type],
         symbol_type_highlights[entry.symbol_type],
       },

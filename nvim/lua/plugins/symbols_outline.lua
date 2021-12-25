@@ -13,7 +13,7 @@ g.symbols_outline = {
   },
   symbols = lsp_utils.for_each_symbol_kind(function(kind)
     return {
-      icon = lsp_utils.symbol_icon(kind),
+      icon = lsp_utils.symbol_codicon(kind),
       hl = 'LSPSymbolKind' .. kind,
     }
   end),

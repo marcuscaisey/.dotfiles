@@ -35,10 +35,10 @@ local function pascal_to_snake_case(s)
   return s:gsub('(%l)(%u)', '%1-%2'):lower()
 end
 
---- Returns the icon for a given LSP symbol kind.
+--- Returns a codicon for a given LSP symbol kind.
 --- @param kind string LSP SymbolKind as defined in the protocol (https://microsoft.github.io/language-server-protocol/specifications/specification-3-17/#symbolKind)
 --- @return string
-M.symbol_icon = function(kind)
+M.symbol_codicon = function(kind)
   return codicons.get('symbol-' .. pascal_to_snake_case(kind))
 end
 

@@ -18,8 +18,16 @@ end
 -- - closing bracket
 -- - quote and we're inside a pair of them
 local function should_tab_out()
-  local brackets = { [')'] = true, [']'] = true, ['}'] = true }
-  local quotes = { ["'"] = true, ['"'] = true, ['`'] = true }
+  local brackets = {
+    [')'] = true,
+    [']'] = true,
+    ['}'] = true,
+  }
+  local quotes = {
+    ["'"] = true,
+    ['"'] = true,
+    ['`'] = true,
+  }
 
   local line = fn.getline '.'
   local col = fn.col '.'
@@ -35,14 +43,20 @@ local function should_tab_out()
 end
 
 cmp.setup {
-  sources = { { name = 'nvim_lsp' } },
+  sources = {
+    { name = 'nvim_lsp' },
+  },
   snippet = {
     expand = function(args)
       fn['vsnip#anonymous'](args.body)
     end,
   },
-  completion = { completeopt = 'menu,menuone,preview,noinsert' },
-  confirmation = { default_behavior = cmp.ConfirmBehavior.Replace },
+  completion = {
+    completeopt = 'menu,menuone,preview,noinsert',
+  },
+  confirmation = {
+    default_behavior = cmp.ConfirmBehavior.Replace,
+  },
   mapping = {
     ['<c-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<c-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
@@ -64,7 +78,9 @@ cmp.setup {
       preset = 'codicons',
     },
   },
-  sorting = { comparators = { cmp.config.compare.sort_text } },
+  sorting = {
+    comparators = { cmp.config.compare.sort_text },
+  },
 }
 
 cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())

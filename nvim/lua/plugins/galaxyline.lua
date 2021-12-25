@@ -112,11 +112,13 @@ galaxyline.section.left = {
       separator_highlight = { colours.fg, colours.bg },
     },
   },
-  { Space = {
-    provider = function()
-      return ' '
-    end,
-  } },
+  {
+    Space = {
+      provider = function()
+        return ' '
+      end,
+    },
+  },
   {
     FileIcon = {
       provider = 'FileIcon',
