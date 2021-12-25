@@ -1,8 +1,8 @@
 local o = vim.o
 local cmd = vim.cmd
 
-cmd('packadd dracula_pro')
-cmd('colorscheme dracula_pro')
+cmd 'packadd dracula_pro'
+cmd 'colorscheme dracula_pro'
 o.clipboard = 'unnamed'
 o.cursorline = true
 o.expandtab = true

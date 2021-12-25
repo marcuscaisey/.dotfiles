@@ -4,8 +4,12 @@ local api = vim.api
 g.mapleader = ' '
 
 local function map(mode, lhs, rhs, opts)
-  local options = {noremap = true, silent = true}
-  if opts then for k, v in pairs(opts) do options[k] = v end end
+  local options = { noremap = true, silent = true }
+  if opts then
+    for k, v in pairs(opts) do
+      options[k] = v
+    end
+  end
   api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
@@ -44,8 +48,8 @@ map('n', 'L', '<cmd>BufferLineCycleNext<cr>')
 map('n', 'H', '<cmd>BufferLineCyclePrev<cr>')
 
 -- vim-easy-align
-map('n', 'ga', '<Plug>(EasyAlign)', {noremap = false})
-map('x', 'ga', '<Plug>(EasyAlign)', {noremap = false})
+map('n', 'ga', '<Plug>(EasyAlign)', { noremap = false })
+map('x', 'ga', '<Plug>(EasyAlign)', { noremap = false })
 
 -- vim-fugitive
 -- nmap <silent> <expr> <leader>gb &filetype ==# 'fugitiveblame' ? 'gq' : ':Gblame<cr>'

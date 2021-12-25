@@ -12,7 +12,9 @@ g.symbols_outline = {
     toggle_preview = '<c-space>',
   },
   symbols = lsp_utils.for_each_symbol_kind(function(kind)
-    return { icon = lsp_utils.symbol_icon(kind), hl = 'LSPSymbolKind' .. kind }
-  end
-  ),
+    return {
+      icon = lsp_utils.symbol_icon(kind),
+      hl = 'LSPSymbolKind' .. kind,
+    }
+  end),
 }

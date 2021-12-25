@@ -13,10 +13,12 @@ local function split_path(path)
   local head = path:gsub('/' .. tail .. '$', '')
 
   local cwd = fn.getcwd()
-  if head == cwd then return '', tail end
+  if head == cwd then
+    return '', tail
+  end
 
   head = head:gsub('^' .. cwd .. '/', '')
-  head = head:gsub('^' .. os.getenv('HOME'), '~')
+  head = head:gsub('^' .. os.getenv 'HOME', '~')
   return head, tail
 end
 
@@ -24,12 +26,18 @@ end
 local function make_lsp_definitions_entry(entry)
   local displayer = entry_display.create {
     separator = ' ',
-    items = {{remaining = true}, {remaining = true}}
+    items = {
+      { remaining = true },
+      { remaining = true },
+    },
   }
 
   local make_display = function(entry)
     local head, tail = split_path(entry.filename)
-    return displayer {tail, {head, 'TelescopeResultsLineNr'}}
+    return displayer {
+      tail,
+      { head, 'TelescopeResultsLineNr' },
+    }
   end
 
   return {
@@ -43,7 +51,7 @@ local function make_lsp_definitions_entry(entry)
     col = entry.col,
     text = entry.text,
     start = entry.start,
-    finish = entry.finish
+    finish = entry.finish,
   }
 end
 
@@ -51,16 +59,22 @@ end
 local function make_lsp_references_entry(entry)
   local displayer = entry_display.create {
     separator = ' ',
-    items = {{remaining = true}, {remaining = true}}
+    items = {
+      { remaining = true },
+      { remaining = true },
+    },
   }
 
   local make_display = function(entry)
     local head, tail = split_path(entry.filename)
 
-    local position = table.concat({entry.lnum, entry.col}, ':')
-    local tail_with_position = table.concat({tail, position}, ':')
+    local position = table.concat({ entry.lnum, entry.col }, ':')
+    local tail_with_position = table.concat({ tail, position }, ':')
 
-    return displayer {tail_with_position, {head, 'TelescopeResultsLineNr'}}
+    return displayer {
+      tail_with_position,
+      { head, 'TelescopeResultsLineNr' },
+    }
   end
 
   return {
@@ -74,7 +88,7 @@ local function make_lsp_references_entry(entry)
     col = entry.col,
     text = entry.text,
     start = entry.start,
-    finish = entry.finish
+    finish = entry.finish,
   }
 end
 
@@ -87,9 +101,9 @@ local function make_lsp_document_symbols_entry(entry)
   local displayer = entry_display.create {
     separator = ' ',
     items = {
-      {remaining = true}, -- symbol type icon
-      {remaining = true} -- symbol
-    }
+      { remaining = true }, -- symbol type icon
+      { remaining = true }, -- symbol
+    },
   }
 
   local make_display = function(entry)
@@ -98,7 +112,8 @@ local function make_lsp_document_symbols_entry(entry)
         lsp_utils.symbol_icon(entry.symbol_type),
         symbol_type_highlights[entry.symbol_type],
         symbol_type_highlights[entry.symbol_type],
-      }, entry.symbol_name
+      },
+      entry.symbol_name,
     }
   end
 
@@ -118,43 +133,71 @@ local function make_lsp_document_symbols_entry(entry)
     symbol_name = symbol_name,
     symbol_type = symbol_type,
     start = entry.start,
-    finish = entry.finish
+    finish = entry.finish,
   }
 end
 
 telescope.setup {
   defaults = {
     layout_config = {
-      horizontal = {width = 0.9, prompt_position = 'top', preview_width = 0.5},
-      vertical = {width = 0.9}
+      horizontal = {
+        width = 0.9,
+        prompt_position = 'top',
+        preview_width = 0.5,
+      },
+      vertical = { width = 0.9 },
     },
     mappings = {
-      i = {['<c-h>'] = layout.toggle_preview},
-      n = {['<c-h>'] = layout.toggle_preview}
+      i = {
+        ['<c-h>'] = layout.toggle_preview,
+      },
+      n = {
+        ['<c-h>'] = layout.toggle_preview,
+      },
     },
     sorting_strategy = 'ascending',
     prompt_prefix = ' 🔍  ',
-    selection_caret = '  '
+    selection_caret = '  ',
   },
   pickers = {
     find_files = {
-      layout_config = {preview_width = 0.4},
-      find_command = {'fd', '--type', 'f', '--strip-cwd-prefix'}
+      layout_config = {
+        preview_width = 0.4,
+      },
+      find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix' },
     },
     buffers = {
-      layout_config = {preview_width = 0.4},
+      layout_config = {
+        preview_width = 0.4,
+      },
       sort_mru = true,
       ignore_current_buffer = true,
       mappings = {
-        i = {['<c-d>'] = 'delete_buffer'},
-        n = {['<c-d>'] = 'delete_buffer'}
-      }
+        i = {
+          ['<c-d>'] = 'delete_buffer',
+        },
+        n = {
+          ['<c-d>'] = 'delete_buffer',
+        },
+      },
     },
-    live_grep = {layout_config = {preview_width = 0.4}},
-    current_buffer_fuzzy_find = {previewer = false},
-    lsp_document_symbols = {entry_maker = make_lsp_document_symbols_entry},
-    lsp_references = {entry_maker = make_lsp_references_entry},
-    lsp_definitions = {entry_maker = make_lsp_definitions_entry}
-  }
+    live_grep = {
+      layout_config = {
+        preview_width = 0.4,
+      },
+    },
+    current_buffer_fuzzy_find = {
+      previewer = false,
+    },
+    lsp_document_symbols = {
+      entry_maker = make_lsp_document_symbols_entry,
+    },
+    lsp_references = {
+      entry_maker = make_lsp_references_entry,
+    },
+    lsp_definitions = {
+      entry_maker = make_lsp_definitions_entry,
+    },
+  },
 }
-telescope.load_extension('fzf')
+telescope.load_extension 'fzf'

@@ -9,16 +9,26 @@ g.nvim_tree_group_empty = 1
 require('nvim-tree').setup {
   auto_close = true,
   hide_dotfiles = true,
-  ignore = {'.git'},
-  update_focused_file = {enable = true},
-  filters = {dotfiles = true},
+  ignore = { '.git' },
+  update_focused_file = {
+    enable = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
   view = {
     width = '25%',
     mappings = {
       list = {
-        {key = 'h', cb = tree_cb('close_node')},
-        {key = 'l', cb = tree_cb('edit')}
-      }
-    }
-  }
+        {
+          key = 'h',
+          cb = tree_cb 'close_node',
+        },
+        {
+          key = 'l',
+          cb = tree_cb 'edit',
+        },
+      },
+    },
+  },
 }

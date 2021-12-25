@@ -1,5 +1,4 @@
 local cmp = require 'cmp'
-local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 local o = vim.o
 local fn = vim.fn
 local api = vim.api
@@ -19,11 +18,11 @@ end
 -- - closing bracket
 -- - quote and we're inside a pair of them
 local function should_tab_out()
-  local brackets = {[')'] = true, [']'] = true, ['}'] = true}
-  local quotes = {['\''] = true, ['"'] = true, ['`'] = true}
+  local brackets = { [')'] = true, [']'] = true, ['}'] = true }
+  local quotes = { ["'"] = true, ['"'] = true, ['`'] = true }
 
-  local line = fn.getline('.')
-  local col = fn.col('.')
+  local line = fn.getline '.'
+  local col = fn.col '.'
   local next_char = line:sub(col, col)
 
   if quotes[next_char] then
@@ -36,13 +35,17 @@ local function should_tab_out()
 end
 
 cmp.setup {
-  sources = {{name = 'nvim_lsp'}},
-  snippet = {expand = function(args) fn['vsnip#anonymous'](args.body) end},
-  completion = {completeopt = 'menu,menuone,preview,noinsert'},
-  confirmation = {default_behavior = cmp.ConfirmBehavior.Replace},
+  sources = { { name = 'nvim_lsp' } },
+  snippet = {
+    expand = function(args)
+      fn['vsnip#anonymous'](args.body)
+    end,
+  },
+  completion = { completeopt = 'menu,menuone,preview,noinsert' },
+  confirmation = { default_behavior = cmp.ConfirmBehavior.Replace },
   mapping = {
-    ['<c-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
-    ['<c-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
+    ['<c-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<c-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<c-space>'] = cmp.mapping.complete(),
     ['<tab>'] = function(fallback)
       if cmp.visible() then
@@ -53,15 +56,15 @@ cmp.setup {
         fallback()
       end
     end,
-    ['<cr>'] = cmp.mapping.confirm({select = true})
+    ['<cr>'] = cmp.mapping.confirm { select = true },
   },
   formatting = {
-    format = require('lspkind').cmp_format({
+    format = require('lspkind').cmp_format {
       with_text = false,
-      preset = 'codicons'
-    })
+      preset = 'codicons',
+    },
   },
-  sorting = {comparators = {cmp.config.compare.sort_text}}
+  sorting = { comparators = { cmp.config.compare.sort_text } },
 }
 
-cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())

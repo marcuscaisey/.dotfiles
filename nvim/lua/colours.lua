@@ -48,12 +48,9 @@ highlight.link('CmpItemAbbrMatch', 'DraculaCyan', true)
 highlight.link('CmpItemAbbrMatchFuzzy', 'DraculaCyan', true)
 
 -- diagnostics
-fn.sign_define('DiagnosticSignError',
-               {text = '', texthl = 'LspDiagnosticsError'})
-fn.sign_define('DiagnosticSignWarn',
-               {text = '', texthl = 'LspDiagnosticsWarning'})
-fn.sign_define('DiagnosticSignHint',
-               {text = '', texthl = 'LspDiagnosticsHint'})
+fn.sign_define('DiagnosticSignError', { text = '', texthl = 'LspDiagnosticsError' })
+fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'LspDiagnosticsWarning' })
+fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'LspDiagnosticsHint' })
 
 highlight.link('DiagnosticError', 'LspDiagnosticsError', true)
 highlight.link('DiagnosticWarn', 'LspDiagnosticsWarning', true)
@@ -64,3 +61,6 @@ highlight.link('DiffDelete', 'DraculaRed', true)
 
 -- symbols-outline.nvim
 highlight.link('FocusedSymbol', 'DraculaOrangeInverse', true)
+
+-- sneak
+highlight.link('Sneak', 'IncSearch', true)
