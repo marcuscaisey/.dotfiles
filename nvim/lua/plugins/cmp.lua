@@ -13,10 +13,11 @@ local function feedkeys(keys, mode)
   api.nvim_feedkeys(replace_termcodes(keys), mode, true)
 end
 
--- Check if we should tab out of a pair of brackets / quotes. Returns true if
--- the next character is a:
--- - closing bracket
--- - quote and we're inside a pair of them
+--- Check if we should tab out of a pair of brackets / quotes. Returns true if
+--- the next character is a:
+--- - closing bracket
+--- - quote and we're inside a pair of them
+--- @return boolean
 local function should_tab_out()
   local brackets = {
     [')'] = true,
