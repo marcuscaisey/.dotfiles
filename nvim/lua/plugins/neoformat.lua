@@ -2,7 +2,11 @@ local g = vim.g
 local cmd = vim.cmd
 
 -- Format all files with extensions defined here on save
-local autoformatted_extensions = { 'go', 'lua' }
+local autoformatted_extensions = {
+  'go',
+  'lua',
+  'py',
+}
 
 for k, v in pairs(autoformatted_extensions) do
   autoformatted_extensions[k] = '*.' .. v
