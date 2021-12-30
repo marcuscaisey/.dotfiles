@@ -43,6 +43,8 @@ map('n', 'Y', 'y$')
 map('i', 'II', '<esc>I')
 map('i', 'AA', '<esc>A')
 
+map('n', '<leader>cd', '<cmd>cd %:h<cr>:pwd<cr>')
+
 -- nvim-bufferline.lua
 map('n', 'L', '<cmd>BufferLineCycleNext<cr>')
 map('n', 'H', '<cmd>BufferLineCyclePrev<cr>')
