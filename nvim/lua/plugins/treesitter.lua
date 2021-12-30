@@ -32,6 +32,8 @@ configs.setup {
         ['aa'] = '@parameter.outer',
         ['ic'] = '@call.inner',
         ['ac'] = '@call.outer',
+        ['iC'] = '@class.inner',
+        ['aC'] = '@class.outer',
       },
     },
     move = {
