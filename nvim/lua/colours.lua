@@ -1,6 +1,9 @@
 local highlight = vim.highlight
+local api = vim.api
 local fn = vim.fn
 local lsp_utils = require 'lsp_utils'
+
+local M = {}
 
 -- lsp
 highlight.link('LSPSymbolKindFile', 'DraculaRed', true)
@@ -64,3 +67,27 @@ highlight.link('FocusedSymbol', 'DraculaOrangeInverse', true)
 
 -- sneak
 highlight.link('Sneak', 'IncSearch', true)
+
+--- Parses a given highlight group into a table of guifg and guibg colours.
+--- @param name string
+--- @return table
+local function parse_highlight(name)
+  local highlight_string = api.nvim_exec('highlight ' .. name, true)
+  return {
+    guifg = highlight_string:match 'guifg=(#[%d%a]+)',
+    guibg = highlight_string:match 'guibg=(#[%d%a]+)',
+  }
+end
+
+M.palette = {
+  cyan = parse_highlight('DraculaCyan').guifg,
+  green = parse_highlight('DraculaCyan').guifg,
+  orange = parse_highlight('DraculaOrange').guifg,
+  purple = parse_highlight('DraculaPurple').guifg,
+  red = parse_highlight('DraculaRed').guifg,
+
+  bg = parse_highlight('Normal').guibg,
+  fg = parse_highlight('Normal').guifg,
+}
+
+return M

@@ -1,35 +1,19 @@
-local g = vim.g
 local fn = vim.fn
 local diagnostic = vim.lsp.diagnostic
 local galaxyline = require 'galaxyline'
 local condition = require 'galaxyline.condition'
+local colours = require 'colours'
 
 galaxyline.short_line_list = { 'NvimTree' }
 
-local colours = {
-  black = g['dracula_pro#palette'].bg[1],
-  gray = g['dracula_pro#palette'].selection[1],
-  white = g['dracula_pro#palette'].fg[1],
-  darkblue = g['dracula_pro#palette'].comment[1],
-  cyan = g['dracula_pro#palette'].cyan[1],
-  green = g['dracula_pro#palette'].green[1],
-  orange = g['dracula_pro#palette'].orange[1],
-  purple = g['dracula_pro#palette'].purple[1],
-  red = g['dracula_pro#palette'].red[1],
-  yellow = g['dracula_pro#palette'].yellow[1],
-
-  bg = g['dracula_pro#palette'].bg[1],
-  fg = g['dracula_pro#palette'].fg[1],
-}
-
 local mode_symbol_to_label_colour = {
-  n = { 'Normal', colours.purple },
-  i = { 'Insert', colours.green },
-  c = { 'Command', colours.cyan },
-  v = { 'Visual', colours.orange },
-  V = { 'Visual Line', colours.orange },
-  [''] = { 'Visual Block', colours.orange },
-  R = { 'Replace', colours.red },
+  n = { 'Normal', colours.palette.purple },
+  i = { 'Insert', colours.palette.green },
+  c = { 'Command', colours.palette.cyan },
+  v = { 'Visual', colours.palette.orange },
+  V = { 'Visual Line', colours.palette.orange },
+  [''] = { 'Visual Block', colours.palette.orange },
+  R = { 'Replace', colours.palette.red },
 }
 
 local function mode_label()
@@ -53,8 +37,8 @@ galaxyline.section.left = {
     ViMode = {
       provider = function()
         local colour = mode_colour()
-        highlight('GalaxylineMode', colours.bg, colour)
-        highlight('GalaxylineModeSeparator', colour, colours.bg)
+        highlight('GalaxylineMode', colours.palette.bg, colour)
+        highlight('GalaxylineModeSeparator', colour, colours.palette.bg)
         return '  ' .. mode_label() .. ' '
       end,
       highlight = 'GalaxylineMode',
@@ -68,14 +52,14 @@ galaxyline.section.left = {
         return '  '
       end,
       condition = condition.check_git_workspace,
-      highlight = { colours.orange, colours.bg },
+      highlight = { colours.palette.orange, colours.palette.bg },
     },
   },
   {
     GitBranch = {
       provider = 'GitBranch',
       condition = condition.check_git_workspace,
-      highlight = { colours.fg, colours.bg },
+      highlight = { colours.palette.fg, colours.palette.bg },
     },
   },
   {
@@ -91,7 +75,7 @@ galaxyline.section.left = {
       provider = 'DiffAdd',
       condition = condition.check_git_workspace,
       icon = ' +',
-      highlight = { colours.green, colours.bg },
+      highlight = { colours.palette.green, colours.palette.bg },
     },
   },
   {
@@ -99,7 +83,7 @@ galaxyline.section.left = {
       provider = 'DiffModified',
       condition = condition.check_git_workspace,
       icon = ' ~',
-      highlight = { colours.orange, colours.bg },
+      highlight = { colours.palette.orange, colours.palette.bg },
     },
   },
   {
@@ -107,9 +91,9 @@ galaxyline.section.left = {
       provider = 'DiffRemove',
       condition = condition.check_git_workspace,
       icon = ' -',
-      highlight = { colours.red, colours.bg },
+      highlight = { colours.palette.red, colours.palette.bg },
       separator = '',
-      separator_highlight = { colours.fg, colours.bg },
+      separator_highlight = { colours.palette.fg, colours.palette.bg },
     },
   },
   {
@@ -125,7 +109,7 @@ galaxyline.section.left = {
       condition = condition.buffer_not_empty,
       highlight = {
         require('galaxyline.providers.fileinfo').get_file_icon_color,
-        colours.bg,
+        colours.palette.bg,
       },
     },
   },
@@ -133,9 +117,9 @@ galaxyline.section.left = {
     FileName = {
       provider = 'FileName',
       condition = condition.buffer_not_empty,
-      highlight = { colours.fg, colours.bg },
+      highlight = { colours.palette.fg, colours.palette.bg },
       separator = '',
-      separator_highlight = { colours.fg, colours.bg },
+      separator_highlight = { colours.palette.fg, colours.palette.bg },
     },
   },
 }
@@ -175,16 +159,16 @@ galaxyline.section.right = {
   {
     LineInfo = {
       provider = 'LineColumn',
-      highlight = { colours.cyan, colours.bg },
+      highlight = { colours.palette.cyan, colours.palette.bg },
       separator = '  ',
     },
   },
   {
     PerCent = {
       provider = 'LinePercent',
-      highlight = { colours.bg, colours.purple },
+      highlight = { colours.palette.bg, colours.palette.purple },
       separator = '',
-      separator_highlight = { colours.purple, colours.bg },
+      separator_highlight = { colours.palette.purple, colours.palette.bg },
     },
   },
 }
