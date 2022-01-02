@@ -152,13 +152,6 @@ require('packer').startup {
         require 'plugins.neoformat'
       end,
     }
-    use {
-      'simrat39/symbols-outline.nvim',
-      config = function()
-        require 'plugins.symbols_outline'
-      end,
-      requires = 'mortepau/codicons.nvim',
-    }
     use 'tommcdo/vim-exchange'
     use 'svban/YankAssassin.vim'
 
