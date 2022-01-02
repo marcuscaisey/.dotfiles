@@ -62,12 +62,6 @@ highlight.link('DiagnosticHint', 'LspDiagnosticsHint', true)
 -- git
 highlight.link('DiffDelete', 'DraculaRed', true)
 
--- symbols-outline.nvim
-highlight.link('FocusedSymbol', 'DraculaOrangeInverse', true)
-
--- sneak
-highlight.link('Sneak', 'IncSearch', true)
-
 --- Parses a given highlight group into a table of guifg and guibg colours.
 --- @param name string
 --- @return table
