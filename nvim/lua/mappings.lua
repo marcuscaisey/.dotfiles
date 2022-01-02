@@ -49,13 +49,6 @@ map('n', '<leader>cd', '<cmd>cd %:h<cr>:pwd<cr>')
 map('n', 'L', '<cmd>BufferLineCycleNext<cr>')
 map('n', 'H', '<cmd>BufferLineCyclePrev<cr>')
 
--- vim-easy-align
-map('n', 'ga', '<Plug>(EasyAlign)', { noremap = false })
-map('x', 'ga', '<Plug>(EasyAlign)', { noremap = false })
-
--- vim-fugitive
--- nmap <silent> <expr> <leader>gb &filetype ==# 'fugitiveblame' ? 'gq' : ':Gblame<cr>'
-
 -- nvim-tree.lua
 map('n', '<c-n>', '<cmd>NvimTreeToggle<cr>')
 
@@ -79,6 +72,3 @@ map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>')
 -- neoformat
 map('n', '<leader>fm', '<cmd>Neoformat<cr>')
 map('n', '<leader>ft', '<cmd>lua ToggleAutoNeoformatting()<cr>')
-
--- symbols-outline.nvim
-map('n', '<leader>s', '<cmd>SymbolsOutline<cr>')
