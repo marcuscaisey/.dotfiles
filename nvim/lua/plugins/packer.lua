@@ -160,6 +160,7 @@ require('packer').startup {
       requires = 'mortepau/codicons.nvim',
     }
     use 'tommcdo/vim-exchange'
+    use 'svban/YankAssassin.vim'
 
     -- Text objects
     use {
