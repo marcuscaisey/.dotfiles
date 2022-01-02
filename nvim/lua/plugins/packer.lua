@@ -127,11 +127,17 @@ require('packer').startup {
     }
     use 'tpope/vim-surround'
     use {
-      'justinmk/vim-sneak',
+      'ggandor/lightspeed.nvim',
       config = function()
-        require 'plugins.sneak'
+        require 'plugins.lightspeed'
       end,
     }
+    -- use {
+    --   'justinmk/vim-sneak',
+    --   config = function()
+    --     require 'plugins.sneak'
+    --   end,
+    -- }
     use {
       'bkad/camelcasemotion',
       config = function()
