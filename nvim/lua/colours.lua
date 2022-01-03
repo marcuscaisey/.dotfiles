@@ -127,9 +127,23 @@ highlight.link('LightspeedOneCharMatch', 'DraculaOrangeInverseBold', true)
 highlight.link('LightspeedPendingOpArea', 'DraculaOrangeInverse', true)
 highlight.link('LightspeedUnlabeledMatch', 'DraculaFgBold', true)
 
+-- galaxyline
+local mode_to_colour = {
+  Normal = palette.purple,
+  Insert = palette.green,
+  Command = palette.cyan,
+  Visual = palette.orange,
+  VisualLine = palette.orange,
+  VisualBlock = palette.orange,
+  Replace = palette.red,
+}
+for mode, colour in pairs(mode_to_colour) do
+  highlight_('Galaxyline' .. mode .. 'Mode', { guifg = palette.bg, guibg = colour })
+  highlight_('Galaxyline' .. mode .. 'ModeSeparator', { guifg = colour, guibg = palette.bg })
+end
+
 local M = {
   palette = palette,
-  highlight = highlight_,
 }
 
 return M

@@ -1,29 +1,30 @@
 local fn = vim.fn
 local diagnostic = vim.lsp.diagnostic
+local highlight = vim.highlight
 local galaxyline = require 'galaxyline'
 local condition = require 'galaxyline.condition'
 local colours = require 'colours'
 
 galaxyline.short_line_list = { 'NvimTree' }
 
-local mode_symbol_to_label_colour = {
-  n = { 'Normal', colours.palette.purple },
-  i = { 'Insert', colours.palette.green },
-  c = { 'Command', colours.palette.cyan },
-  v = { 'Visual', colours.palette.orange },
-  V = { 'Visual Line', colours.palette.orange },
-  [''] = { 'Visual Block', colours.palette.orange },
-  R = { 'Replace', colours.palette.red },
+local mode_symbol_to_mode = {
+  n = 'Normal',
+  i = 'Insert',
+  c = 'Command',
+  v = 'Visual',
+  V = 'Visual Line',
+  [''] = 'Visual Block',
+  R = 'Replace',
 }
 
 galaxyline.section.left = {
   {
     ViMode = {
       provider = function()
-        local label, colour = unpack(mode_symbol_to_label_colour[fn.mode()])
-        colours.highlight('GalaxylineMode', { guifg = colours.palette.bg, guibg = colour })
-        colours.highlight('GalaxylineModeSeparator', { guifg = colour, guibg = colours.palette.bg })
-        return '  ' .. label .. ' '
+        local mode = mode_symbol_to_mode[fn.mode()]
+        highlight.link('GalaxylineMode', 'Galaxyline' .. mode:gsub(' ', '') .. 'Mode', true)
+        highlight.link('GalaxylineModeSeparator', 'Galaxyline' .. mode:gsub(' ', '') .. 'ModeSeparator', true)
+        return '  ' .. mode .. ' '
       end,
       highlight = 'GalaxylineMode',
       separator = '',
