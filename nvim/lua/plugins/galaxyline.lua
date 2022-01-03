@@ -16,30 +16,14 @@ local mode_symbol_to_label_colour = {
   R = { 'Replace', colours.palette.red },
 }
 
-local function mode_label()
-  return mode_symbol_to_label_colour[fn.mode()][1]
-end
-
-local function mode_colour()
-  return mode_symbol_to_label_colour[fn.mode()][2]
-end
-
-local function highlight(group, fg, bg, gui)
-  local cmd = string.format('highlight %s guifg=%s guibg=%s', group, fg, bg)
-  if gui ~= nil then
-    cmd = cmd .. ' gui=' .. gui
-  end
-  vim.cmd(cmd)
-end
-
 galaxyline.section.left = {
   {
     ViMode = {
       provider = function()
-        local colour = mode_colour()
-        highlight('GalaxylineMode', colours.palette.bg, colour)
-        highlight('GalaxylineModeSeparator', colour, colours.palette.bg)
-        return '  ' .. mode_label() .. ' '
+        local label, colour = unpack(mode_symbol_to_label_colour[fn.mode()])
+        colours.highlight('GalaxylineMode', { guifg = colours.palette.bg, guibg = colour })
+        colours.highlight('GalaxylineModeSeparator', { guifg = colour, guibg = colours.palette.bg })
+        return '  ' .. label .. ' '
       end,
       highlight = 'GalaxylineMode',
       separator = '',

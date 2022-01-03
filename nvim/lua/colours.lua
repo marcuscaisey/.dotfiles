@@ -1,9 +1,8 @@
 local highlight = vim.highlight
 local api = vim.api
 local fn = vim.fn
+local cmd = vim.cmd
 local lsp_utils = require 'lsp_utils'
-
-local M = {}
 
 -- lsp
 highlight.link('LSPSymbolKindFile', 'DraculaRed', true)
@@ -62,10 +61,14 @@ highlight.link('DiagnosticHint', 'LspDiagnosticsHint', true)
 -- git
 highlight.link('DiffDelete', 'DraculaRed', true)
 
---- Parses a given highlight group into a table of guifg and guibg colours.
+--- @class HighlightColours
+--- @field guifg string|nil
+--- @field guibg string|nil
+
+--- Extracts the guifg and guibg colours from a highlight group.
 --- @param name string
---- @return table
-local function parse_highlight(name)
+--- @return HighlightColours
+local function extract_highlight_colours(name)
   local highlight_string = api.nvim_exec('highlight ' .. name, true)
   return {
     guifg = highlight_string:match 'guifg=(#[%d%a]+)',
@@ -73,15 +76,60 @@ local function parse_highlight(name)
   }
 end
 
-M.palette = {
-  cyan = parse_highlight('DraculaCyan').guifg,
-  green = parse_highlight('DraculaCyan').guifg,
-  orange = parse_highlight('DraculaOrange').guifg,
-  purple = parse_highlight('DraculaPurple').guifg,
-  red = parse_highlight('DraculaRed').guifg,
+local palette = {
+  cyan = extract_highlight_colours('DraculaCyan').guifg,
+  green = extract_highlight_colours('DraculaCyan').guifg,
+  orange = extract_highlight_colours('DraculaOrange').guifg,
+  purple = extract_highlight_colours('DraculaPurple').guifg,
+  red = extract_highlight_colours('DraculaRed').guifg,
+  pink = extract_highlight_colours('DraculaPink').guifg,
 
-  bg = parse_highlight('Normal').guibg,
-  fg = parse_highlight('Normal').guifg,
+  bg = extract_highlight_colours('Normal').guibg,
+  fg = extract_highlight_colours('Normal').guifg,
+}
+
+---@class HighlightArgs
+---@field guifg string|nil
+---@field guibg string|nil
+---@field gui string[]|nil
+
+--- Creates a highlight group.
+---@param group string
+---@param args HighlightArgs
+local function highlight_(group, args)
+  local highlight_cmd = 'highlight ' .. group
+  if args.guifg then
+    highlight_cmd = highlight_cmd .. ' guifg=' .. args.guifg
+  end
+  if args.guibg then
+    highlight_cmd = highlight_cmd .. ' guibg=' .. args.guibg
+  end
+  if args.gui then
+    highlight_cmd = highlight_cmd .. ' gui=' .. table.concat(args.gui, ',')
+  end
+  cmd(highlight_cmd)
+end
+
+-- lightspeed
+highlight_('DraculaOrangeBoldUnderline', { guifg = palette.orange, gui = { 'bold', 'underline' } })
+highlight.link('LightspeedLabel', 'DraculaOrangeBoldUnderline', true)
+highlight.link('LightspeedGreyWash', 'DraculaComment', true)
+highlight_(
+  'DraculaOrangeInverseBoldUnderline',
+  { guifg = palette.bg, guibg = palette.orange, gui = { 'bold', 'underline' } }
+)
+highlight.link('LightspeedShortcut', 'DraculaOrangeInverseBoldUnderline', true)
+highlight.link('LightspeedMaskedChar', 'DraculaRed', true)
+highlight_('DraculaCyanBoldUnderline', { guifg = palette.cyan, gui = { 'bold', 'underline' } })
+highlight.link('LightspeedLabelDistant', 'DraculaCyanBoldUnderline', true)
+highlight_('DraculaOrangeInverseBold', { guifg = palette.bg, guibg = palette.orange, gui = { 'bold' } })
+highlight.link('LightspeedOneCharMatch', 'DraculaOrangeInverseBold', true)
+highlight.link('LightspeedPendingOpArea', 'DraculaOrangeInverse', true)
+highlight.link('LightspeedUnlabeledMatch', 'DraculaFgBold', true)
+
+local M = {
+  palette = palette,
+  highlight = highlight_,
 }
 
 return M
