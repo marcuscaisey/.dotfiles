@@ -3,7 +3,6 @@ local diagnostic = vim.lsp.diagnostic
 local highlight = vim.highlight
 local galaxyline = require 'galaxyline'
 local condition = require 'galaxyline.condition'
-local colours = require 'colours'
 
 galaxyline.short_line_list = { 'NvimTree' }
 
@@ -37,14 +36,13 @@ galaxyline.section.left = {
         return '  '
       end,
       condition = condition.check_git_workspace,
-      highlight = { colours.palette.orange, colours.palette.bg },
+      highlight = 'DiffChange',
     },
   },
   {
     GitBranch = {
       provider = 'GitBranch',
       condition = condition.check_git_workspace,
-      highlight = { colours.palette.fg, colours.palette.bg },
     },
   },
   {
@@ -60,7 +58,7 @@ galaxyline.section.left = {
       provider = 'DiffAdd',
       condition = condition.check_git_workspace,
       icon = ' +',
-      highlight = { colours.palette.green, colours.palette.bg },
+      highlight = 'DiffAdd',
     },
   },
   {
@@ -68,7 +66,7 @@ galaxyline.section.left = {
       provider = 'DiffModified',
       condition = condition.check_git_workspace,
       icon = ' ~',
-      highlight = { colours.palette.orange, colours.palette.bg },
+      highlight = 'DiffChange',
     },
   },
   {
@@ -76,9 +74,8 @@ galaxyline.section.left = {
       provider = 'DiffRemove',
       condition = condition.check_git_workspace,
       icon = ' -',
-      highlight = { colours.palette.red, colours.palette.bg },
+      highlight = 'DiffDelete',
       separator = '',
-      separator_highlight = { colours.palette.fg, colours.palette.bg },
     },
   },
   {
@@ -94,7 +91,6 @@ galaxyline.section.left = {
       condition = condition.buffer_not_empty,
       highlight = {
         require('galaxyline.providers.fileinfo').get_file_icon_color,
-        colours.palette.bg,
       },
     },
   },
@@ -102,9 +98,7 @@ galaxyline.section.left = {
     FileName = {
       provider = 'FileName',
       condition = condition.buffer_not_empty,
-      highlight = { colours.palette.fg, colours.palette.bg },
       separator = '',
-      separator_highlight = { colours.palette.fg, colours.palette.bg },
     },
   },
 }
@@ -116,7 +110,7 @@ galaxyline.section.right = {
         return diagnostic.get_count(0, 'Hint')
       end,
       condition = condition.check_active_lsp,
-      highlight = 'LspDiagnosticsHint',
+      highlight = 'DiagnosticHint',
       icon = '  ',
       separator = '',
     },
@@ -127,7 +121,7 @@ galaxyline.section.right = {
         return diagnostic.get_count(0, 'Warning')
       end,
       condition = condition.check_active_lsp,
-      highlight = 'LspDiagnosticsWarning',
+      highlight = 'DiagnosticWarn',
       icon = '   ',
     },
   },
@@ -137,23 +131,22 @@ galaxyline.section.right = {
         return diagnostic.get_count(0, 'Error')
       end,
       condition = condition.check_active_lsp,
-      highlight = 'LspDiagnosticsError',
+      highlight = 'DiagnosticError',
       icon = '   ',
     },
   },
   {
     LineInfo = {
       provider = 'LineColumn',
-      highlight = { colours.palette.cyan, colours.palette.bg },
       separator = '  ',
     },
   },
   {
     PerCent = {
       provider = 'LinePercent',
-      highlight = { colours.palette.bg, colours.palette.purple },
+      highlight = 'GalaxylineNormalMode',
       separator = '',
-      separator_highlight = { colours.palette.purple, colours.palette.bg },
+      separator_highlight = 'GalaxylineNormalModeSeparator',
     },
   },
 }

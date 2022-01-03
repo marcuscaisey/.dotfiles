@@ -4,6 +4,43 @@ local fn = vim.fn
 local cmd = vim.cmd
 local lsp_utils = require 'lsp_utils'
 
+--- @class HighlightColours
+--- @field guifg string|nil
+--- @field guibg string|nil
+
+--- Extracts the guifg and guibg colours from a highlight group.
+--- @param name string
+--- @return HighlightColours
+local function extract_highlight_colours(name)
+  local highlight_string = api.nvim_exec('highlight ' .. name, true)
+  return {
+    guifg = highlight_string:match 'guifg=(#[%d%a]+)',
+    guibg = highlight_string:match 'guibg=(#[%d%a]+)',
+  }
+end
+
+---@class HighlightArgs
+---@field guifg string|nil
+---@field guibg string|nil
+---@field gui string[]|nil
+
+--- Creates a highlight group.
+---@param group string
+---@param args HighlightArgs
+local function highlight_group(group, args)
+  local highlight_cmd = 'highlight ' .. group
+  if args.guifg then
+    highlight_cmd = highlight_cmd .. ' guifg=' .. args.guifg
+  end
+  if args.guibg then
+    highlight_cmd = highlight_cmd .. ' guibg=' .. args.guibg
+  end
+  if args.gui then
+    highlight_cmd = highlight_cmd .. ' gui=' .. table.concat(args.gui, ',')
+  end
+  cmd(highlight_cmd)
+end
+
 -- lsp
 highlight.link('LSPSymbolKindFile', 'DraculaRed', true)
 highlight.link('LSPSymbolKindModule', 'DraculaFg', true)
@@ -61,21 +98,6 @@ highlight.link('DiagnosticHint', 'LspDiagnosticsHint', true)
 -- git
 highlight.link('DiffDelete', 'DraculaRed', true)
 
---- @class HighlightColours
---- @field guifg string|nil
---- @field guibg string|nil
-
---- Extracts the guifg and guibg colours from a highlight group.
---- @param name string
---- @return HighlightColours
-local function extract_highlight_colours(name)
-  local highlight_string = api.nvim_exec('highlight ' .. name, true)
-  return {
-    guifg = highlight_string:match 'guifg=(#[%d%a]+)',
-    guibg = highlight_string:match 'guibg=(#[%d%a]+)',
-  }
-end
-
 local palette = {
   cyan = extract_highlight_colours('DraculaCyan').guifg,
   green = extract_highlight_colours('DraculaCyan').guifg,
@@ -88,41 +110,19 @@ local palette = {
   fg = extract_highlight_colours('Normal').guifg,
 }
 
----@class HighlightArgs
----@field guifg string|nil
----@field guibg string|nil
----@field gui string[]|nil
-
---- Creates a highlight group.
----@param group string
----@param args HighlightArgs
-local function highlight_(group, args)
-  local highlight_cmd = 'highlight ' .. group
-  if args.guifg then
-    highlight_cmd = highlight_cmd .. ' guifg=' .. args.guifg
-  end
-  if args.guibg then
-    highlight_cmd = highlight_cmd .. ' guibg=' .. args.guibg
-  end
-  if args.gui then
-    highlight_cmd = highlight_cmd .. ' gui=' .. table.concat(args.gui, ',')
-  end
-  cmd(highlight_cmd)
-end
-
 -- lightspeed
-highlight_('DraculaOrangeBoldUnderline', { guifg = palette.orange, gui = { 'bold', 'underline' } })
+highlight_group('DraculaOrangeBoldUnderline', { guifg = palette.orange, gui = { 'bold', 'underline' } })
 highlight.link('LightspeedLabel', 'DraculaOrangeBoldUnderline', true)
 highlight.link('LightspeedGreyWash', 'DraculaComment', true)
-highlight_(
+highlight_group(
   'DraculaOrangeInverseBoldUnderline',
   { guifg = palette.bg, guibg = palette.orange, gui = { 'bold', 'underline' } }
 )
 highlight.link('LightspeedShortcut', 'DraculaOrangeInverseBoldUnderline', true)
 highlight.link('LightspeedMaskedChar', 'DraculaRed', true)
-highlight_('DraculaCyanBoldUnderline', { guifg = palette.cyan, gui = { 'bold', 'underline' } })
+highlight_group('DraculaCyanBoldUnderline', { guifg = palette.cyan, gui = { 'bold', 'underline' } })
 highlight.link('LightspeedLabelDistant', 'DraculaCyanBoldUnderline', true)
-highlight_('DraculaOrangeInverseBold', { guifg = palette.bg, guibg = palette.orange, gui = { 'bold' } })
+highlight_group('DraculaOrangeInverseBold', { guifg = palette.bg, guibg = palette.orange, gui = { 'bold' } })
 highlight.link('LightspeedOneCharMatch', 'DraculaOrangeInverseBold', true)
 highlight.link('LightspeedPendingOpArea', 'DraculaOrangeInverse', true)
 highlight.link('LightspeedUnlabeledMatch', 'DraculaFgBold', true)
@@ -138,12 +138,6 @@ local mode_to_colour = {
   Replace = palette.red,
 }
 for mode, colour in pairs(mode_to_colour) do
-  highlight_('Galaxyline' .. mode .. 'Mode', { guifg = palette.bg, guibg = colour })
-  highlight_('Galaxyline' .. mode .. 'ModeSeparator', { guifg = colour, guibg = palette.bg })
+  highlight_group('Galaxyline' .. mode .. 'Mode', { guifg = palette.bg, guibg = colour })
+  highlight_group('Galaxyline' .. mode .. 'ModeSeparator', { guifg = colour, guibg = palette.bg })
 end
-
-local M = {
-  palette = palette,
-}
-
-return M
