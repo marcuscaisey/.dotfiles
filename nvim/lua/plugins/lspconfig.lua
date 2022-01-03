@@ -63,6 +63,18 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
+-- Don't add ~/.config/nvim to the LSP libraries because that's just a symlink
+-- to ~/.dotfiles/nvim/lua, so when we're in ~/.dotfiles/nvim/lua we end up
+-- with duplicate symbols
+local runtime_files = api.nvim_get_runtime_file('', true)
+local config_dir = fn.expand '~/.config/nvim'
+local lua_library = {}
+for _, file in ipairs(runtime_files) do
+  if file:sub(1, #config_dir) ~= config_dir then
+    table.insert(lua_library, file)
+  end
+end
+
 lspconfig.sumneko_lua.setup {
   cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' },
   settings = {
@@ -75,7 +87,7 @@ lspconfig.sumneko_lua.setup {
         globals = { 'vim' },
       },
       workspace = {
-        library = api.nvim_get_runtime_file('', true),
+        library = lua_library,
       },
     },
   },
