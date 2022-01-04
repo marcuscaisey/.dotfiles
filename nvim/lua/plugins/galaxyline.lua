@@ -105,6 +105,21 @@ galaxyline.section.left = {
 
 galaxyline.section.right = {
   {
+    GetLspClient = {
+      provider = 'GetLspClient',
+      separator = ' ',
+      condition = condition.check_active_lsp,
+    },
+  },
+  {
+    Space = {
+      provider = function()
+        return ' '
+      end,
+      condition = condition.check_active_lsp,
+    },
+  },
+  {
     DiagnosticHint = {
       provider = function()
         return diagnostic.get_count(0, 'Hint')
@@ -112,7 +127,6 @@ galaxyline.section.right = {
       condition = condition.check_active_lsp,
       highlight = 'DiagnosticHint',
       icon = '  ',
-      separator = '',
     },
   },
   {
