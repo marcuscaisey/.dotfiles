@@ -141,3 +141,6 @@ for mode, colour in pairs(mode_to_colour) do
   highlight_group('Galaxyline' .. mode .. 'Mode', { guifg = palette.bg, guibg = colour })
   highlight_group('Galaxyline' .. mode .. 'ModeSeparator', { guifg = colour, guibg = palette.bg })
 end
+
+-- treesitter-context
+highlight.link('TreesitterContext', 'CursorLine', true)
