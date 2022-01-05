@@ -143,4 +143,7 @@ for mode, colour in pairs(mode_to_colour) do
 end
 
 -- treesitter-context
-highlight.link('TreesitterContext', 'CursorLine', true)
+highlight.link('TreesitterContext', 'DraculaBgLighter', true)
+
+--- nvim
+highlight.link('Pmenu', 'DraculaBgLighter', true)
