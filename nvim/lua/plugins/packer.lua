@@ -160,6 +160,7 @@ require('packer').startup {
     }
     use 'tommcdo/vim-exchange'
     use 'svban/YankAssassin.vim'
+    use 'tpope/vim-fugitive'
 
     -- Text objects
     use {
