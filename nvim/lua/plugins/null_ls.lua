@@ -10,6 +10,7 @@ null_ls.setup {
         'revive',
       },
     },
+    null_ls.builtins.diagnostics.flake8,
   },
   on_attach = function(client)
     if client.resolved_capabilities.document_formatting then

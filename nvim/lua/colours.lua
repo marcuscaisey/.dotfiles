@@ -128,10 +128,12 @@ highlight.link('CmpItemAbbrMatchFuzzy', 'Cyan', true)
 highlight.link('DiagnosticError', 'Red', true)
 highlight.link('DiagnosticWarn', 'Orange', true)
 highlight.link('DiagnosticHint', 'Cyan', true)
+highlight.link('DiagnosticInfo', 'Cyan', true)
 
 fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticError' })
 fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticWarn' })
 fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticHint' })
+fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticInfo' })
 
 -- git
 highlight.link('DiffDelete', 'Red', true)

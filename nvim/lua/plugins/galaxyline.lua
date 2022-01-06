@@ -128,7 +128,7 @@ galaxyline.section.right = {
   {
     DiagnosticHint = {
       provider = function()
-        return diagnostic.get_count(0, 'Hint')
+        return diagnostic.get_count(0, 'Hint') + diagnostic.get_count(0, 'Info')
       end,
       condition = condition.hide_in_width,
       highlight = 'DiagnosticHint',
