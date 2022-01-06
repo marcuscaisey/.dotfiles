@@ -17,7 +17,11 @@ nvim_tree.setup {
     enable = true,
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
+    custom = {
+      '.git',
+      '__pycache__',
+    },
   },
   view = {
     width = '25%',

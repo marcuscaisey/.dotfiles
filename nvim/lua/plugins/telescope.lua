@@ -52,7 +52,7 @@ telescope.setup {
       layout_config = {
         preview_width = 0.4,
       },
-      find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix' },
+      find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix', '--follow', '--hidden', '--exclude', '.git' },
     },
     buffers = {
       layout_config = {
