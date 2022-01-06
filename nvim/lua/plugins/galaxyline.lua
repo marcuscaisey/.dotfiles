@@ -108,7 +108,6 @@ galaxyline.section.right = {
     GetLspClient = {
       provider = 'GetLspClient',
       separator = ' ',
-      condition = condition.check_active_lsp,
     },
   },
   {
@@ -116,7 +115,6 @@ galaxyline.section.right = {
       provider = function()
         return ' '
       end,
-      condition = condition.check_active_lsp,
     },
   },
   {
@@ -124,7 +122,6 @@ galaxyline.section.right = {
       provider = function()
         return diagnostic.get_count(0, 'Hint')
       end,
-      condition = condition.check_active_lsp,
       highlight = 'DiagnosticHint',
       icon = '  ',
     },
@@ -134,7 +131,6 @@ galaxyline.section.right = {
       provider = function()
         return diagnostic.get_count(0, 'Warning')
       end,
-      condition = condition.check_active_lsp,
       highlight = 'DiagnosticWarn',
       icon = '   ',
     },
@@ -144,7 +140,6 @@ galaxyline.section.right = {
       provider = function()
         return diagnostic.get_count(0, 'Error')
       end,
-      condition = condition.check_active_lsp,
       highlight = 'DiagnosticError',
       icon = '   ',
     },
