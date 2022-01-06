@@ -112,7 +112,7 @@ lsp_utils.for_each_symbol_kind(function(kind)
   highlight.link('CmpItemKind' .. kind, 'LSPSymbolKind' .. kind)
 end)
 
-highlight.link('CmpItemKindUnit', 'Red', true)
+highlight.link('CmpItemKindUnit', 'Fg', true)
 highlight.link('CmpItemKindValue', 'Orange', true)
 highlight.link('CmpItemKindKeyword', 'Fg', true)
 highlight.link('CmpItemKindSnippet', 'Fg', true)
