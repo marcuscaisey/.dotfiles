@@ -16,6 +16,12 @@ local mode_symbol_to_mode = {
   R = 'Replace',
 }
 
+local function both(a, b)
+  return function()
+    return a() and b()
+  end
+end
+
 galaxyline.section.left = {
   {
     ViMode = {
@@ -35,14 +41,14 @@ galaxyline.section.left = {
       provider = function()
         return '  '
       end,
-      condition = condition.check_git_workspace,
+      condition = both(condition.check_git_workspace, condition.hide_in_width),
       highlight = 'DiffChange',
     },
   },
   {
     GitBranch = {
       provider = 'GitBranch',
-      condition = condition.check_git_workspace,
+      condition = both(condition.check_git_workspace, condition.hide_in_width),
     },
   },
   {
@@ -50,13 +56,13 @@ galaxyline.section.left = {
       provider = function()
         return ' '
       end,
-      condition = condition.check_git_workspace,
+      condition = both(condition.check_git_workspace, condition.hide_in_width),
     },
   },
   {
     DiffAdd = {
       provider = 'DiffAdd',
-      condition = condition.check_git_workspace,
+      condition = both(condition.check_git_workspace, condition.hide_in_width),
       icon = ' +',
       highlight = 'DiffAdd',
     },
@@ -64,7 +70,7 @@ galaxyline.section.left = {
   {
     DiffModified = {
       provider = 'DiffModified',
-      condition = condition.check_git_workspace,
+      condition = both(condition.check_git_workspace, condition.hide_in_width),
       icon = ' ~',
       highlight = 'DiffChange',
     },
@@ -72,7 +78,7 @@ galaxyline.section.left = {
   {
     DiffRemove = {
       provider = 'DiffRemove',
-      condition = condition.check_git_workspace,
+      condition = both(condition.check_git_workspace, condition.hide_in_width),
       icon = ' -',
       highlight = 'DiffDelete',
       separator = '',
@@ -107,6 +113,7 @@ galaxyline.section.right = {
   {
     GetLspClient = {
       provider = 'GetLspClient',
+      condition = condition.hide_in_width,
       separator = ' ',
     },
   },
@@ -115,6 +122,7 @@ galaxyline.section.right = {
       provider = function()
         return ' '
       end,
+      condition = condition.hide_in_width,
     },
   },
   {
@@ -122,6 +130,7 @@ galaxyline.section.right = {
       provider = function()
         return diagnostic.get_count(0, 'Hint')
       end,
+      condition = condition.hide_in_width,
       highlight = 'DiagnosticHint',
       icon = '  ',
     },
@@ -131,6 +140,7 @@ galaxyline.section.right = {
       provider = function()
         return diagnostic.get_count(0, 'Warning')
       end,
+      condition = condition.hide_in_width,
       highlight = 'DiagnosticWarn',
       icon = '   ',
     },
@@ -140,6 +150,7 @@ galaxyline.section.right = {
       provider = function()
         return diagnostic.get_count(0, 'Error')
       end,
+      condition = condition.hide_in_width,
       highlight = 'DiagnosticError',
       icon = '   ',
     },
