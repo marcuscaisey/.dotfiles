@@ -54,6 +54,11 @@ telescope.setup {
       },
       find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix', '--follow', '--hidden', '--exclude', '.git' },
     },
+    oldfiles = {
+      layout_config = {
+        preview_width = 0.4,
+      },
+    },
     buffers = {
       layout_config = {
         preview_width = 0.4,

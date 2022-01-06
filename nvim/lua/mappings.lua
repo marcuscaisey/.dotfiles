@@ -61,6 +61,7 @@ map('n', '<c-s>', '<cmd>Telescope lsp_document_symbols<cr>')
 map('n', 'gd', '<cmd>Telescope lsp_definitions<cr>')
 map('n', 'ge', '<cmd>Telescope lsp_references<cr>')
 map('n', '<leader>ht', '<cmd>Telescope help_tags<cr>')
+map('n', '<leader>of', '<cmd>Telescope oldfiles<cr>')
 
 -- nvim-lspconfig
 map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
