@@ -13,6 +13,10 @@ local lsp_utils = require 'lsp_utils'
 --- @return HighlightColours
 local function extract_highlight_colours(name)
   local highlight_string = api.nvim_exec('highlight ' .. name, true)
+  local linked_highlight_group = highlight_string:match '.+links to (%a+)'
+  if linked_highlight_group ~= nil then
+    return extract_highlight_colours(linked_highlight_group)
+  end
   return {
     guifg = highlight_string:match 'guifg=(#[%d%a]+)',
     guibg = highlight_string:match 'guibg=(#[%d%a]+)',
@@ -41,91 +45,106 @@ local function highlight_group(group, args)
   cmd(highlight_cmd)
 end
 
+-- base highlights
+-- use these highlights everywhere so that they're the only ones i have to
+-- switch out if i change theme
+highlight.link('Cyan', 'DraculaCyan', true)
+highlight.link('Red', 'DraculaRed', true)
+highlight.link('Green', 'DraculaGreen', true)
+highlight.link('Orange', 'DraculaOrange', true)
+highlight.link('Purple', 'DraculaPurple', true)
+highlight.link('Pink', 'DraculaPink', true)
+highlight.link('Fg', 'DraculaFg', true)
+highlight.link('BgLighter', 'DraculaBgLighter', true)
+highlight.link('Comment', 'DraculaComment', true)
+
+local palette = {
+  cyan = extract_highlight_colours('Cyan').guifg,
+  green = extract_highlight_colours('Green').guifg,
+  orange = extract_highlight_colours('Orange').guifg,
+  purple = extract_highlight_colours('Purple').guifg,
+  red = extract_highlight_colours('Red').guifg,
+  pink = extract_highlight_colours('Pink').guifg,
+
+  bg = extract_highlight_colours('Normal').guibg,
+  fg = extract_highlight_colours('Fg').guifg,
+}
+
+highlight_group('OrangeBoldUnderline', { guifg = palette.orange, gui = { 'bold', 'underline' } })
+highlight_group('OrangeInverse', { guifg = palette.bg, guibg = palette.orange })
+highlight_group(
+  'OrangeInverseBoldUnderline',
+  { guifg = palette.bg, guibg = palette.orange, gui = { 'bold', 'underline' } }
+)
+highlight_group('CyanBoldUnderline', { guifg = palette.cyan, gui = { 'bold', 'underline' } })
+highlight_group('OrangeInverseBold', { guifg = palette.bg, guibg = palette.orange, gui = { 'bold' } })
+
 -- lsp
-highlight.link('LSPSymbolKindFile', 'DraculaRed', true)
-highlight.link('LSPSymbolKindModule', 'DraculaFg', true)
-highlight.link('LSPSymbolKindNamespace', 'DraculaRed', true)
-highlight.link('LSPSymbolKindPackage', 'DraculaRed', true)
-highlight.link('LSPSymbolKindClass', 'DraculaOrange', true)
-highlight.link('LSPSymbolKindMethod', 'DraculaPurple', true)
-highlight.link('LSPSymbolKindProperty', 'DraculaCyan', true)
-highlight.link('LSPSymbolKindField', 'DraculaFg', true)
-highlight.link('LSPSymbolKindConstructor', 'DraculaPurple', true)
-highlight.link('LSPSymbolKindEnum', 'DraculaCyan', true)
-highlight.link('LSPSymbolKindInterface', 'DraculaCyan', true)
-highlight.link('LSPSymbolKindFunction', 'DraculaPurple', true)
-highlight.link('LSPSymbolKindVariable', 'DraculaCyan', true)
-highlight.link('LSPSymbolKindConstant', 'DraculaFg', true)
-highlight.link('LSPSymbolKindString', 'DraculaFg', true)
-highlight.link('LSPSymbolKindNumber', 'DraculaRed', true)
-highlight.link('LSPSymbolKindBoolean', 'DraculaFg', true)
-highlight.link('LSPSymbolKindArray', 'DraculaFg', true)
-highlight.link('LSPSymbolKindObject', 'DraculaRed', true)
-highlight.link('LSPSymbolKindKey', 'DraculaFg', true)
-highlight.link('LSPSymbolKindNull', 'DraculaRed', true)
-highlight.link('LSPSymbolKindEnumMember', 'DraculaCyan', true)
-highlight.link('LSPSymbolKindStruct', 'DraculaFg', true)
-highlight.link('LSPSymbolKindEvent', 'DraculaFg', true)
-highlight.link('LSPSymbolKindOperator', 'DraculaRed', true)
-highlight.link('LSPSymbolKindTypeParameter', 'DraculaCyan', true)
+highlight.link('LSPSymbolKindFile', 'Red', true)
+highlight.link('LSPSymbolKindModule', 'Fg', true)
+highlight.link('LSPSymbolKindNamespace', 'Red', true)
+highlight.link('LSPSymbolKindPackage', 'Red', true)
+highlight.link('LSPSymbolKindClass', 'Orange', true)
+highlight.link('LSPSymbolKindMethod', 'Purple', true)
+highlight.link('LSPSymbolKindProperty', 'Cyan', true)
+highlight.link('LSPSymbolKindField', 'Fg', true)
+highlight.link('LSPSymbolKindConstructor', 'Purple', true)
+highlight.link('LSPSymbolKindEnum', 'Cyan', true)
+highlight.link('LSPSymbolKindInterface', 'Cyan', true)
+highlight.link('LSPSymbolKindFunction', 'Purple', true)
+highlight.link('LSPSymbolKindVariable', 'Cyan', true)
+highlight.link('LSPSymbolKindConstant', 'Fg', true)
+highlight.link('LSPSymbolKindString', 'Fg', true)
+highlight.link('LSPSymbolKindNumber', 'Red', true)
+highlight.link('LSPSymbolKindBoolean', 'Fg', true)
+highlight.link('LSPSymbolKindArray', 'Fg', true)
+highlight.link('LSPSymbolKindObject', 'Red', true)
+highlight.link('LSPSymbolKindKey', 'Fg', true)
+highlight.link('LSPSymbolKindNull', 'Red', true)
+highlight.link('LSPSymbolKindEnumMember', 'Cyan', true)
+highlight.link('LSPSymbolKindStruct', 'Fg', true)
+highlight.link('LSPSymbolKindEvent', 'Fg', true)
+highlight.link('LSPSymbolKindOperator', 'Red', true)
+highlight.link('LSPSymbolKindTypeParameter', 'Cyan', true)
 
 -- nvim-cmp
 lsp_utils.for_each_symbol_kind(function(kind)
   highlight.link('CmpItemKind' .. kind, 'LSPSymbolKind' .. kind)
 end)
 
-highlight.link('CmpItemKindUnit', 'DraculaRed', true)
-highlight.link('CmpItemKindValue', 'DraculaOrange', true)
-highlight.link('CmpItemKindKeyword', 'DraculaFg', true)
-highlight.link('CmpItemKindSnippet', 'DraculaFg', true)
-highlight.link('CmpItemKindColor', 'DraculaRed', true)
-highlight.link('CmpItemKindReference', 'DraculaFg', true)
-highlight.link('CmpItemKindFolder', 'DraculaRed', true)
-highlight.link('CmpItemKindText', 'DraculaFg', true)
-highlight.link('CmpItemAbbr', 'DraculaFg', true)
-highlight.link('CmpItemAbbrMatch', 'DraculaCyan', true)
-highlight.link('CmpItemAbbrMatchFuzzy', 'DraculaCyan', true)
+highlight.link('CmpItemKindUnit', 'Red', true)
+highlight.link('CmpItemKindValue', 'Orange', true)
+highlight.link('CmpItemKindKeyword', 'Fg', true)
+highlight.link('CmpItemKindSnippet', 'Fg', true)
+highlight.link('CmpItemKindColor', 'Red', true)
+highlight.link('CmpItemKindReference', 'Fg', true)
+highlight.link('CmpItemKindFolder', 'Red', true)
+highlight.link('CmpItemKindText', 'Fg', true)
+highlight.link('CmpItemAbbr', 'Fg', true)
+highlight.link('CmpItemAbbrMatch', 'Cyan', true)
+highlight.link('CmpItemAbbrMatchFuzzy', 'Cyan', true)
 
 -- diagnostics
-fn.sign_define('DiagnosticSignError', { text = '', texthl = 'LspDiagnosticsError' })
-fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'LspDiagnosticsWarning' })
-fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'LspDiagnosticsHint' })
+highlight.link('DiagnosticError', 'Red', true)
+highlight.link('DiagnosticWarn', 'Orange', true)
+highlight.link('DiagnosticHint', 'Cyan', true)
 
-highlight.link('DiagnosticError', 'LspDiagnosticsError', true)
-highlight.link('DiagnosticWarn', 'LspDiagnosticsWarning', true)
-highlight.link('DiagnosticHint', 'LspDiagnosticsHint', true)
+fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticError' })
+fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticWarn' })
+fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticHint' })
 
 -- git
-highlight.link('DiffDelete', 'DraculaRed', true)
-
-local palette = {
-  cyan = extract_highlight_colours('DraculaCyan').guifg,
-  green = extract_highlight_colours('DraculaCyan').guifg,
-  orange = extract_highlight_colours('DraculaOrange').guifg,
-  purple = extract_highlight_colours('DraculaPurple').guifg,
-  red = extract_highlight_colours('DraculaRed').guifg,
-  pink = extract_highlight_colours('DraculaPink').guifg,
-
-  bg = extract_highlight_colours('Normal').guibg,
-  fg = extract_highlight_colours('Normal').guifg,
-}
+highlight.link('DiffDelete', 'Red', true)
 
 -- lightspeed
-highlight_group('DraculaOrangeBoldUnderline', { guifg = palette.orange, gui = { 'bold', 'underline' } })
-highlight.link('LightspeedLabel', 'DraculaOrangeBoldUnderline', true)
-highlight.link('LightspeedGreyWash', 'DraculaComment', true)
-highlight_group(
-  'DraculaOrangeInverseBoldUnderline',
-  { guifg = palette.bg, guibg = palette.orange, gui = { 'bold', 'underline' } }
-)
-highlight.link('LightspeedShortcut', 'DraculaOrangeInverseBoldUnderline', true)
-highlight.link('LightspeedMaskedChar', 'DraculaRed', true)
-highlight_group('DraculaCyanBoldUnderline', { guifg = palette.cyan, gui = { 'bold', 'underline' } })
-highlight.link('LightspeedLabelDistant', 'DraculaCyanBoldUnderline', true)
-highlight_group('DraculaOrangeInverseBold', { guifg = palette.bg, guibg = palette.orange, gui = { 'bold' } })
-highlight.link('LightspeedOneCharMatch', 'DraculaOrangeInverseBold', true)
-highlight.link('LightspeedPendingOpArea', 'DraculaOrangeInverse', true)
-highlight.link('LightspeedUnlabeledMatch', 'DraculaFgBold', true)
+highlight.link('LightspeedLabel', 'OrangeBoldUnderline', true)
+highlight.link('LightspeedGreyWash', 'Comment', true)
+highlight.link('LightspeedShortcut', 'OrangeInverseBoldUnderline', true)
+highlight.link('LightspeedMaskedChar', 'Red', true)
+highlight.link('LightspeedLabelDistant', 'CyanBoldUnderline', true)
+highlight.link('LightspeedOneCharMatch', 'OrangeInverseBold', true)
+highlight.link('LightspeedPendingOpArea', 'OrangeInverse', true)
+highlight.link('LightspeedUnlabeledMatch', 'FgBold', true)
 
 -- galaxyline
 local mode_to_colour = {
@@ -143,7 +162,7 @@ for mode, colour in pairs(mode_to_colour) do
 end
 
 -- treesitter-context
-highlight.link('TreesitterContext', 'DraculaBgLighter', true)
+highlight.link('TreesitterContext', 'BgLighter', true)
 
 --- nvim
-highlight.link('Pmenu', 'DraculaBgLighter', true)
+highlight.link('Pmenu', 'BgLighter', true)
