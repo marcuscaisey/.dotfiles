@@ -21,6 +21,7 @@ nvim_tree.setup {
     custom = {
       '.git',
       '__pycache__',
+      '.mypy_cache',
     },
   },
   view = {
