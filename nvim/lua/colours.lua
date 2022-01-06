@@ -145,6 +145,7 @@ highlight.link('LightspeedLabelDistant', 'CyanBoldUnderline', true)
 highlight.link('LightspeedOneCharMatch', 'OrangeInverseBold', true)
 highlight.link('LightspeedPendingOpArea', 'OrangeInverse', true)
 highlight.link('LightspeedUnlabeledMatch', 'FgBold', true)
+highlight.link('LightspeedLabelOverlapped', 'Pink', true)
 
 -- galaxyline
 local mode_to_colour = {
