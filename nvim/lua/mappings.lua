@@ -73,3 +73,6 @@ map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>')
 -- neoformat
 map('n', '<leader>fm', '<cmd>Neoformat<cr>')
 map('n', '<leader>ft', '<cmd>lua ToggleAutoNeoformatting()<cr>')
+
+-- vim-fugitive
+map('n', '<leader>gb', '<cmd>:Git blame<cr>')
