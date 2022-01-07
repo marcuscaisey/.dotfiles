@@ -85,6 +85,7 @@ require('packer').startup {
       requires = 'kyazdani42/nvim-web-devicons',
     }
     use 'mortepau/codicons.nvim'
+    use 'stevearc/dressing.nvim'
 
     -- Command
     use {
