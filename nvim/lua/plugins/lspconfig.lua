@@ -43,6 +43,9 @@ local servers = {
     end,
   },
   jsonls = {},
+  java_language_server = {
+    cmd = { 'java_language_server.sh' },
+  },
 }
 
 local system_name
@@ -110,6 +113,7 @@ for server, config in pairs(servers) do
     },
     settings = config.settings,
     root_dir = config.root_dir,
+    cmd = config.cmd,
   }
 end
 
