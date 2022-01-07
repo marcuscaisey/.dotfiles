@@ -1,16 +1,13 @@
 local g = vim.g
-local api = vim.api
+local keymap = vim.keymap
+local lsp = vim.lsp
+local telescope = require 'telescope.builtin'
+local neoformat = require 'plugins.neoformat'
 
 g.mapleader = ' '
 
-local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true, silent = true }
-  if opts then
-    for k, v in pairs(opts) do
-      options[k] = v
-    end
-  end
-  api.nvim_set_keymap(mode, lhs, rhs, options)
+local function map(mode, lhs, rhs)
+  keymap.set(mode, lhs, rhs, { silent = true })
 end
 
 map('i', 'jj', '<esc>')
@@ -53,26 +50,26 @@ map('n', 'H', '<cmd>BufferLineCyclePrev<cr>')
 map('n', '<c-n>', '<cmd>NvimTreeToggle<cr>')
 
 -- telescope.nvim
-map('n', '<c-p>', '<cmd>Telescope find_files<cr>')
-map('n', '<c-b>', '<cmd>Telescope buffers<cr>')
-map('n', '<c-f>', '<cmd>Telescope current_buffer_fuzzy_find<cr>')
-map('n', '<c-g>', '<cmd>Telescope live_grep<cr>')
-map('n', '<c-s>', '<cmd>Telescope lsp_document_symbols<cr>')
-map('n', 'gd', '<cmd>Telescope lsp_definitions<cr>')
-map('n', 'ge', '<cmd>Telescope lsp_references<cr>')
-map('n', '<leader>ht', '<cmd>Telescope help_tags<cr>')
-map('n', '<leader>of', '<cmd>Telescope oldfiles<cr>')
+map('n', '<c-p>', telescope.find_files)
+map('n', '<c-b>', telescope.buffers)
+map('n', '<c-f>', telescope.current_buffer_fuzzy_find)
+map('n', '<c-g>', telescope.live_grep)
+map('n', '<c-s>', telescope.lsp_document_symbols)
+map('n', 'gd', telescope.lsp_definitions)
+map('n', 'ge', telescope.lsp_references)
+map('n', '<leader>ht', telescope.help_tags)
+map('n', '<leader>of', telescope.oldfiles)
 
 -- nvim-lspconfig
-map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
-map('n', 'dK', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>')
-map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>')
-map('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>')
-map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>')
+map('n', 'K', lsp.buf.hover)
+map('n', 'dK', lsp.diagnostic.show_line_diagnostics)
+map('n', '<leader>rn', lsp.buf.rename)
+map('n', ']d', lsp.diagnostic.goto_next)
+map('n', '[d', lsp.diagnostic.goto_prev)
 
 -- neoformat
 map('n', '<leader>fm', '<cmd>Neoformat<cr>')
-map('n', '<leader>ft', '<cmd>lua ToggleAutoNeoformatting()<cr>')
+map('n', '<leader>ft', neoformat.toggle_auto_neoformatting)
 
 -- vim-fugitive
 map('n', '<leader>gb', '<cmd>:Git blame<cr>')

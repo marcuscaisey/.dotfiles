@@ -40,7 +40,7 @@ local auto_formatting_enabled = true
 
 --- Toggles Neoformat auto-formatting for filetypes which configured to be
 -- formatted on save.
-function ToggleAutoNeoformatting()
+local function toggle_auto_neoformatting()
   if auto_formatting_enabled then
     auto_formatting_enabled = false
     print 'Neoformat: disabled autoformatting'
@@ -58,3 +58,7 @@ function AutoNeoformat()
     cmd 'Neoformat'
   end
 end
+
+return {
+  toggle_auto_neoformatting = toggle_auto_neoformatting,
+}
