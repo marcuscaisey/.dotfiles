@@ -1,5 +1,5 @@
 local fn = vim.fn
-local diagnostic = vim.lsp.diagnostic
+local diagnostic = vim.diagnostic
 local highlight = vim.highlight
 local galaxyline = require 'galaxyline'
 local condition = require 'galaxyline.condition'
@@ -20,6 +20,15 @@ local function both(a, b)
   return function()
     return a() and b()
   end
+end
+
+local function diagnostics_count(severity)
+  local diagnostics = diagnostic.get(0, { severity = severity })
+  local count = 0
+  for _ in pairs(diagnostics) do
+    count = count + 1
+  end
+  return count
 end
 
 galaxyline.section.left = {
@@ -128,7 +137,7 @@ galaxyline.section.right = {
   {
     DiagnosticHint = {
       provider = function()
-        return diagnostic.get_count(0, 'Hint') + diagnostic.get_count(0, 'Info')
+        return diagnostics_count(diagnostic.severity.HINT) + diagnostics_count(diagnostic.severity.INFO)
       end,
       condition = condition.hide_in_width,
       highlight = 'DiagnosticHint',
@@ -138,7 +147,7 @@ galaxyline.section.right = {
   {
     DiagnosticWarn = {
       provider = function()
-        return diagnostic.get_count(0, 'Warning')
+        return diagnostics_count(diagnostic.severity.WARN)
       end,
       condition = condition.hide_in_width,
       highlight = 'DiagnosticWarn',
@@ -148,7 +157,7 @@ galaxyline.section.right = {
   {
     DiagnosticError = {
       provider = function()
-        return diagnostic.get_count(0, 'Error')
+        return diagnostics_count(diagnostic.severity.ERROR)
       end,
       condition = condition.hide_in_width,
       highlight = 'DiagnosticError',
