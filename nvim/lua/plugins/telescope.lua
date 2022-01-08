@@ -2,6 +2,8 @@ local telescope = require 'telescope'
 local layout = require 'telescope.actions.layout'
 local entry_display = require 'telescope.pickers.entry_display'
 local utils = require 'telescope.utils'
+local actions = require 'telescope.actions'
+local action_state = require 'telescope.actions.state'
 local lsp_utils = require 'lsp_utils'
 local fn = vim.fn
 
@@ -34,6 +36,20 @@ local function shorten_path(path)
   return path_without_home
 end
 
+local function multi_open(prompt_bufnr)
+  local picker = action_state.get_current_picker(prompt_bufnr)
+  local selections = picker:get_multi_selection()
+
+  if #selections == 0 then
+    return actions.file_edit(prompt_bufnr)
+  end
+
+  actions.close(prompt_bufnr)
+  for _, entry in ipairs(selections) do
+    vim.cmd('edit ' .. entry.value)
+  end
+end
+
 telescope.setup {
   defaults = {
     layout_config = {
@@ -62,10 +78,26 @@ telescope.setup {
         preview_width = 0.4,
       },
       find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix', '--follow', '--hidden', '--exclude', '.git' },
+      mappings = {
+        i = {
+          ['<cr>'] = multi_open,
+        },
+        n = {
+          ['<cr>'] = multi_open,
+        },
+      },
     },
     oldfiles = {
       layout_config = {
         preview_width = 0.4,
+      },
+      mappings = {
+        i = {
+          ['<cr>'] = multi_open,
+        },
+        n = {
+          ['<cr>'] = multi_open,
+        },
       },
       path_display = function(opts, path)
         return shorten_path(path)
