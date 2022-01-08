@@ -6,23 +6,32 @@ local lsp_utils = require 'lsp_utils'
 local fn = vim.fn
 
 --- Splits a filepath into head / tail where tail is the last path component and
---- head is everything before it. If tail is in the current working directory,
---- then head is relative. The home directory is replaced by ~ in head.
---- @param path string Path to split
---- @return string head
---- @return string tail
+--- head is everything before it.
+---@param path string
+---@return string head
+---@return string tail
 local function split_path(path)
   local tail = utils.path_tail(path)
   local head = path:gsub('/' .. tail .. '$', '')
-
-  local cwd = fn.getcwd()
-  if head == cwd then
-    return '', tail
-  end
-
-  head = head:gsub('^' .. cwd .. '/', '')
-  head = head:gsub('^' .. os.getenv 'HOME', '~')
   return head, tail
+end
+
+--- Shortens the given path by either:
+--- - making it relative if it's part of the cwd
+--- - replacing the home directory with ~ if not
+---@param path string
+---@return string
+local function shorten_path(path)
+  local cwd = fn.getcwd()
+  if path == cwd then
+    return ''
+  end
+  local relative_path, replacements = path:gsub('^' .. cwd .. '/', '')
+  if replacements == 1 then
+    return relative_path
+  end
+  local path_without_home = path:gsub('^' .. os.getenv 'HOME', '~')
+  return path_without_home
 end
 
 telescope.setup {
@@ -58,6 +67,9 @@ telescope.setup {
       layout_config = {
         preview_width = 0.4,
       },
+      path_display = function(opts, path)
+        return shorten_path(path)
+      end,
     },
     buffers = {
       layout_config = {
@@ -87,18 +99,12 @@ telescope.setup {
       entry_maker = function(entry)
         local displayer = entry_display.create {
           separator = ' ',
-          items = {
-            { remaining = true }, -- symbol type icon
-            { remaining = true }, -- symbol
-          },
+          items = { { remaining = true }, { remaining = true } },
         }
 
         local make_display = function(entry)
           return displayer {
-            {
-              lsp_utils.symbol_codicon(entry.symbol_type),
-              'LSPSymbolKind' .. entry.symbol_type,
-            },
+            { lsp_utils.symbol_codicon(entry.symbol_type), 'LSPSymbolKind' .. entry.symbol_type },
             entry.symbol_name,
           }
         end
@@ -128,14 +134,12 @@ telescope.setup {
       entry_maker = function(entry)
         local displayer = entry_display.create {
           separator = ' ',
-          items = {
-            { remaining = true },
-            { remaining = true },
-          },
+          items = { { remaining = true }, { remaining = true } },
         }
 
         local make_display = function(entry)
           local head, tail = split_path(entry.filename)
+          head = shorten_path(head)
 
           local position = table.concat({ entry.lnum, entry.col }, ':')
           local tail_with_position = table.concat({ tail, position }, ':')
@@ -166,14 +170,12 @@ telescope.setup {
       entry_maker = function(entry)
         local displayer = entry_display.create {
           separator = ' ',
-          items = {
-            { remaining = true },
-            { remaining = true },
-          },
+          items = { { remaining = true }, { remaining = true } },
         }
 
         local make_display = function(entry)
           local head, tail = split_path(entry.filename)
+          head = shorten_path(head)
           return displayer {
             tail,
             { head, 'TelescopeResultsLineNr' },
