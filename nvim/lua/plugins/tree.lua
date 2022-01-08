@@ -1,13 +1,11 @@
-local g = vim.g
-local tree_cb = require('nvim-tree.config').nvim_tree_callback
 local nvim_tree = require 'nvim-tree'
-local cmd = vim.cmd
+local config = require 'nvim-tree.config'
 
-g.nvim_tree_quit_on_open = 1
-g.nvim_tree_git_hl = 1
-g.nvim_tree_highlight_opened_files = 1
-g.nvim_tree_group_empty = 1
-g.nvim_tree_respect_buf_cwd = 1
+vim.g.nvim_tree_quit_on_open = 1
+vim.g.nvim_tree_git_hl = 1
+vim.g.nvim_tree_highlight_opened_files = 1
+vim.g.nvim_tree_group_empty = 1
+vim.g.nvim_tree_respect_buf_cwd = 1
 
 nvim_tree.setup {
   auto_close = true,
@@ -30,11 +28,11 @@ nvim_tree.setup {
       list = {
         {
           key = 'h',
-          cb = tree_cb 'close_node',
+          cb = config.nvim_tree_callback 'close_node',
         },
         {
           key = 'l',
-          cb = tree_cb 'edit',
+          cb = config.nvim_tree_callback 'edit',
         },
         {
           key = '<c-]>',
@@ -48,5 +46,5 @@ nvim_tree.setup {
 --- Changes the NvimTree cwd and changes the nvim cwd to that as well
 function NvimTreeCD()
   nvim_tree.on_keypress 'cd'
-  cmd('cd ' .. require('nvim-tree.lib').Tree.cwd)
+  vim.cmd('cd ' .. require('nvim-tree.lib').Tree.cwd)
 end

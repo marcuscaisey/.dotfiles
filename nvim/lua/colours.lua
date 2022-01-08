@@ -1,7 +1,4 @@
 local highlight = vim.highlight
-local api = vim.api
-local fn = vim.fn
-local cmd = vim.cmd
 local lsp_utils = require 'lsp_utils'
 
 --- @class HighlightColours
@@ -12,7 +9,7 @@ local lsp_utils = require 'lsp_utils'
 --- @param name string
 --- @return HighlightColours
 local function extract_highlight_colours(name)
-  local highlight_string = api.nvim_exec('highlight ' .. name, true)
+  local highlight_string = vim.api.nvim_exec('highlight ' .. name, true)
   local linked_highlight_group = highlight_string:match '.+links to (%a+)'
   if linked_highlight_group ~= nil then
     return extract_highlight_colours(linked_highlight_group)
@@ -42,7 +39,7 @@ local function highlight_group(group, args)
   if args.gui then
     highlight_cmd = highlight_cmd .. ' gui=' .. table.concat(args.gui, ',')
   end
-  cmd(highlight_cmd)
+  vim.cmd(highlight_cmd)
 end
 
 -- base highlights
@@ -130,10 +127,10 @@ highlight.link('DiagnosticWarn', 'Orange', true)
 highlight.link('DiagnosticHint', 'Cyan', true)
 highlight.link('DiagnosticInfo', 'Cyan', true)
 
-fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticError' })
-fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticWarn' })
-fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticHint' })
-fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticInfo' })
+vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticError' })
+vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticWarn' })
+vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticHint' })
+vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticInfo' })
 
 -- git
 highlight.link('DiffDelete', 'Red', true)

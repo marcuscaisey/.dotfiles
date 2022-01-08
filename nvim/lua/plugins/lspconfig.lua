@@ -1,17 +1,15 @@
 local lspconfig = require 'lspconfig'
-local fn = vim.fn
-local api = vim.api
 
 local servers = {
   gopls = {
     settings = { gopls = { directoryFilters = { '-plz-out' }, linksInHover = false } },
     root_dir = function()
-      return fn.getcwd()
+      return vim.fn.getcwd()
     end,
   },
   pyright = {
     root_dir = function()
-      return fn.getcwd()
+      return vim.fn.getcwd()
     end,
     settings = {
       python = {
@@ -31,7 +29,7 @@ local servers = {
   vimls = {},
   ccls = {
     root_dir = function()
-      return fn.getcwd()
+      return vim.fn.getcwd()
     end,
   },
   please = {},
@@ -39,7 +37,7 @@ local servers = {
   intelephense = {},
   tsserver = {
     root_dir = function()
-      return fn.getcwd()
+      return vim.fn.getcwd()
     end,
   },
   jsonls = {},
@@ -49,11 +47,11 @@ local servers = {
 }
 
 local system_name
-if fn.has 'mac' == 1 then
+if vim.fn.has 'mac' == 1 then
   system_name = 'macOS'
-elseif fn.has 'unix' == 1 then
+elseif vim.fn.has 'unix' == 1 then
   system_name = 'Linux'
-elseif fn.has 'win32' == 1 then
+elseif vim.fn.has 'win32' == 1 then
   system_name = 'Windows'
 else
   print 'Unsupported system for sumneko'
@@ -69,8 +67,8 @@ table.insert(runtime_path, 'lua/?/init.lua')
 -- Don't add ~/.config/nvim to the LSP libraries because that's just a symlink
 -- to ~/.dotfiles/nvim/lua, so when we're in ~/.dotfiles/nvim/lua we end up
 -- with duplicate symbols
-local runtime_files = api.nvim_get_runtime_file('', true)
-local config_dir = fn.expand '~/.config/nvim'
+local runtime_files = vim.api.nvim_get_runtime_file('', true)
+local config_dir = vim.fn.expand '~/.config/nvim'
 local lua_library = {}
 for _, file in ipairs(runtime_files) do
   if file:sub(1, #config_dir) ~= config_dir then

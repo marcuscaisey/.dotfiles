@@ -1,5 +1,6 @@
 local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
 local configs = require 'nvim-treesitter.configs'
+
 parser_config.python.used_by = 'please'
 
 configs.setup {

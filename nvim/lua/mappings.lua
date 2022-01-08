@@ -1,13 +1,10 @@
-local g = vim.g
-local keymap = vim.keymap
-local lsp = vim.lsp
 local telescope = require 'telescope.builtin'
 local neoformat = require 'plugins.neoformat'
 
-g.mapleader = ' '
+vim.g.mapleader = ' '
 
 local function map(mode, lhs, rhs)
-  keymap.set(mode, lhs, rhs, { silent = true })
+  vim.keymap.set(mode, lhs, rhs, { silent = true })
 end
 
 map('i', 'jj', '<esc>')
@@ -61,11 +58,11 @@ map('n', '<leader>ht', telescope.help_tags)
 map('n', '<leader>of', telescope.oldfiles)
 
 -- nvim-lspconfig
-map('n', 'K', lsp.buf.hover)
-map('n', 'dK', lsp.diagnostic.show_line_diagnostics)
-map('n', '<leader>rn', lsp.buf.rename)
-map('n', ']d', lsp.diagnostic.goto_next)
-map('n', '[d', lsp.diagnostic.goto_prev)
+map('n', 'K', vim.lsp.buf.hover)
+map('n', 'dK', vim.lsp.diagnostic.show_line_diagnostics)
+map('n', '<leader>rn', vim.lsp.buf.rename)
+map('n', ']d', vim.lsp.diagnostic.goto_next)
+map('n', '[d', vim.lsp.diagnostic.goto_prev)
 
 -- neoformat
 map('n', '<leader>fm', '<cmd>Neoformat<cr>')

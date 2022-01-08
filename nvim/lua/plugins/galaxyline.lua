@@ -1,4 +1,3 @@
-local fn = vim.fn
 local diagnostic = vim.diagnostic
 local highlight = vim.highlight
 local galaxyline = require 'galaxyline'
@@ -35,7 +34,7 @@ galaxyline.section.left = {
   {
     ViMode = {
       provider = function()
-        local mode = mode_symbol_to_mode[fn.mode()]
+        local mode = mode_symbol_to_mode[vim.fn.mode()]
         highlight.link('GalaxylineMode', 'Galaxyline' .. mode:gsub(' ', '') .. 'Mode', true)
         highlight.link('GalaxylineModeSeparator', 'Galaxyline' .. mode:gsub(' ', '') .. 'ModeSeparator', true)
         return '  ' .. mode .. ' '

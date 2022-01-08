@@ -1,6 +1,3 @@
-local g = vim.g
-local cmd = vim.cmd
-
 -- Format all files with extensions defined here on save
 local autoformatted_extensions = {
   'go',
@@ -11,7 +8,7 @@ local autoformatted_extensions = {
 for k, v in pairs(autoformatted_extensions) do
   autoformatted_extensions[k] = '*.' .. v
 end
-cmd(string.format(
+vim.cmd(string.format(
   [[
   augroup auto_neoformat
     autocmd!
@@ -21,11 +18,11 @@ cmd(string.format(
   table.concat(autoformatted_extensions, ',')
 ))
 
-g.neoformat_enabled_python = { 'black' }
-g.neoformat_enabled_lua = { 'stylua' }
-g.neoformat_enabled_go = { 'goimports' }
+vim.g.neoformat_enabled_python = { 'black' }
+vim.g.neoformat_enabled_lua = { 'stylua' }
+vim.g.neoformat_enabled_go = { 'goimports' }
 
-g.neoformat_lua_luaformat = {
+vim.g.neoformat_lua_luaformat = {
   exe = 'lua-format',
   args = {
     '--column-limit',
@@ -55,7 +52,7 @@ end
 -- calling ToggleAutoNeoformatting().
 function AutoNeoformat()
   if auto_formatting_enabled then
-    cmd 'Neoformat'
+    vim.cmd 'Neoformat'
   end
 end
 
