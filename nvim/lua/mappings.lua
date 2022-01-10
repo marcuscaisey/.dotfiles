@@ -59,10 +59,10 @@ map('n', '<leader>of', telescope.oldfiles)
 
 -- nvim-lspconfig
 map('n', 'K', vim.lsp.buf.hover)
-map('n', 'dK', vim.lsp.diagnostic.show_line_diagnostics)
+map('n', 'dK', vim.diagnostic.open_float)
 map('n', '<leader>rn', vim.lsp.buf.rename)
-map('n', ']d', vim.lsp.diagnostic.goto_next)
-map('n', '[d', vim.lsp.diagnostic.goto_prev)
+map('n', ']d', vim.diagnostic.goto_next)
+map('n', '[d', vim.diagnostic.goto_prev)
 
 -- neoformat
 map('n', '<leader>fm', '<cmd>Neoformat<cr>')
