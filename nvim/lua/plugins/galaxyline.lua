@@ -1,5 +1,3 @@
-local diagnostic = vim.diagnostic
-local highlight = vim.highlight
 local galaxyline = require 'galaxyline'
 local condition = require 'galaxyline.condition'
 
@@ -22,7 +20,7 @@ local function both(a, b)
 end
 
 local function diagnostics_count(severity)
-  local diagnostics = diagnostic.get(0, { severity = severity })
+  local diagnostics = vim.diagnostic.get(0, { severity = severity })
   local count = 0
   for _ in pairs(diagnostics) do
     count = count + 1
@@ -35,8 +33,8 @@ galaxyline.section.left = {
     ViMode = {
       provider = function()
         local mode = mode_symbol_to_mode[vim.fn.mode()]
-        highlight.link('GalaxylineMode', 'Galaxyline' .. mode:gsub(' ', '') .. 'Mode', true)
-        highlight.link('GalaxylineModeSeparator', 'Galaxyline' .. mode:gsub(' ', '') .. 'ModeSeparator', true)
+        vim.highlight.link('GalaxylineMode', 'Galaxyline' .. mode:gsub(' ', '') .. 'Mode', true)
+        vim.highlight.link('GalaxylineModeSeparator', 'Galaxyline' .. mode:gsub(' ', '') .. 'ModeSeparator', true)
         return '  ' .. mode .. ' '
       end,
       highlight = 'GalaxylineMode',
@@ -136,7 +134,7 @@ galaxyline.section.right = {
   {
     DiagnosticHint = {
       provider = function()
-        return diagnostics_count(diagnostic.severity.HINT) + diagnostics_count(diagnostic.severity.INFO)
+        return diagnostics_count(vim.diagnostic.severity.HINT) + diagnostics_count(vim.diagnostic.severity.INFO)
       end,
       condition = condition.hide_in_width,
       highlight = 'DiagnosticHint',
@@ -146,7 +144,7 @@ galaxyline.section.right = {
   {
     DiagnosticWarn = {
       provider = function()
-        return diagnostics_count(diagnostic.severity.WARN)
+        return diagnostics_count(vim.diagnostic.severity.WARN)
       end,
       condition = condition.hide_in_width,
       highlight = 'DiagnosticWarn',
@@ -156,7 +154,7 @@ galaxyline.section.right = {
   {
     DiagnosticError = {
       provider = function()
-        return diagnostics_count(diagnostic.severity.ERROR)
+        return diagnostics_count(vim.diagnostic.severity.ERROR)
       end,
       condition = condition.hide_in_width,
       highlight = 'DiagnosticError',

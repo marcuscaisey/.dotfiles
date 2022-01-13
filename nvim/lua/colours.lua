@@ -1,4 +1,3 @@
-local highlight = vim.highlight
 local lsp_utils = require 'lsp_utils'
 
 --- @class HighlightColours
@@ -45,15 +44,15 @@ end
 -- base highlights
 -- use these highlights everywhere so that they're the only ones i have to
 -- switch out if i change theme
-highlight.link('Cyan', 'DraculaCyan', true)
-highlight.link('Red', 'DraculaRed', true)
-highlight.link('Green', 'DraculaGreen', true)
-highlight.link('Orange', 'DraculaOrange', true)
-highlight.link('Purple', 'DraculaPurple', true)
-highlight.link('Pink', 'DraculaPink', true)
-highlight.link('Fg', 'DraculaFg', true)
-highlight.link('BgLighter', 'DraculaBgLighter', true)
-highlight.link('Comment', 'DraculaComment', true)
+vim.highlight.link('Cyan', 'DraculaCyan', true)
+vim.highlight.link('Red', 'DraculaRed', true)
+vim.highlight.link('Green', 'DraculaGreen', true)
+vim.highlight.link('Orange', 'DraculaOrange', true)
+vim.highlight.link('Purple', 'DraculaPurple', true)
+vim.highlight.link('Pink', 'DraculaPink', true)
+vim.highlight.link('Fg', 'DraculaFg', true)
+vim.highlight.link('BgLighter', 'DraculaBgLighter', true)
+vim.highlight.link('Comment', 'DraculaComment', true)
 
 local palette = {
   cyan = extract_highlight_colours('Cyan').guifg,
@@ -77,55 +76,55 @@ highlight_group('CyanBoldUnderline', { guifg = palette.cyan, gui = { 'bold', 'un
 highlight_group('OrangeInverseBold', { guifg = palette.bg, guibg = palette.orange, gui = { 'bold' } })
 
 -- lsp
-highlight.link('LSPSymbolKindFile', 'Red', true)
-highlight.link('LSPSymbolKindModule', 'Fg', true)
-highlight.link('LSPSymbolKindNamespace', 'Red', true)
-highlight.link('LSPSymbolKindPackage', 'Red', true)
-highlight.link('LSPSymbolKindClass', 'Orange', true)
-highlight.link('LSPSymbolKindMethod', 'Purple', true)
-highlight.link('LSPSymbolKindProperty', 'Cyan', true)
-highlight.link('LSPSymbolKindField', 'Fg', true)
-highlight.link('LSPSymbolKindConstructor', 'Purple', true)
-highlight.link('LSPSymbolKindEnum', 'Cyan', true)
-highlight.link('LSPSymbolKindInterface', 'Cyan', true)
-highlight.link('LSPSymbolKindFunction', 'Purple', true)
-highlight.link('LSPSymbolKindVariable', 'Cyan', true)
-highlight.link('LSPSymbolKindConstant', 'Fg', true)
-highlight.link('LSPSymbolKindString', 'Fg', true)
-highlight.link('LSPSymbolKindNumber', 'Red', true)
-highlight.link('LSPSymbolKindBoolean', 'Fg', true)
-highlight.link('LSPSymbolKindArray', 'Fg', true)
-highlight.link('LSPSymbolKindObject', 'Red', true)
-highlight.link('LSPSymbolKindKey', 'Fg', true)
-highlight.link('LSPSymbolKindNull', 'Red', true)
-highlight.link('LSPSymbolKindEnumMember', 'Cyan', true)
-highlight.link('LSPSymbolKindStruct', 'Fg', true)
-highlight.link('LSPSymbolKindEvent', 'Fg', true)
-highlight.link('LSPSymbolKindOperator', 'Red', true)
-highlight.link('LSPSymbolKindTypeParameter', 'Cyan', true)
+vim.highlight.link('LSPSymbolKindFile', 'Red', true)
+vim.highlight.link('LSPSymbolKindModule', 'Fg', true)
+vim.highlight.link('LSPSymbolKindNamespace', 'Red', true)
+vim.highlight.link('LSPSymbolKindPackage', 'Red', true)
+vim.highlight.link('LSPSymbolKindClass', 'Orange', true)
+vim.highlight.link('LSPSymbolKindMethod', 'Purple', true)
+vim.highlight.link('LSPSymbolKindProperty', 'Cyan', true)
+vim.highlight.link('LSPSymbolKindField', 'Fg', true)
+vim.highlight.link('LSPSymbolKindConstructor', 'Purple', true)
+vim.highlight.link('LSPSymbolKindEnum', 'Cyan', true)
+vim.highlight.link('LSPSymbolKindInterface', 'Cyan', true)
+vim.highlight.link('LSPSymbolKindFunction', 'Purple', true)
+vim.highlight.link('LSPSymbolKindVariable', 'Cyan', true)
+vim.highlight.link('LSPSymbolKindConstant', 'Fg', true)
+vim.highlight.link('LSPSymbolKindString', 'Fg', true)
+vim.highlight.link('LSPSymbolKindNumber', 'Red', true)
+vim.highlight.link('LSPSymbolKindBoolean', 'Fg', true)
+vim.highlight.link('LSPSymbolKindArray', 'Fg', true)
+vim.highlight.link('LSPSymbolKindObject', 'Red', true)
+vim.highlight.link('LSPSymbolKindKey', 'Fg', true)
+vim.highlight.link('LSPSymbolKindNull', 'Red', true)
+vim.highlight.link('LSPSymbolKindEnumMember', 'Cyan', true)
+vim.highlight.link('LSPSymbolKindStruct', 'Fg', true)
+vim.highlight.link('LSPSymbolKindEvent', 'Fg', true)
+vim.highlight.link('LSPSymbolKindOperator', 'Red', true)
+vim.highlight.link('LSPSymbolKindTypeParameter', 'Cyan', true)
 
 -- nvim-cmp
 lsp_utils.for_each_symbol_kind(function(kind)
-  highlight.link('CmpItemKind' .. kind, 'LSPSymbolKind' .. kind)
+  vim.highlight.link('CmpItemKind' .. kind, 'LSPSymbolKind' .. kind)
 end)
 
-highlight.link('CmpItemKindUnit', 'Fg', true)
-highlight.link('CmpItemKindValue', 'Orange', true)
-highlight.link('CmpItemKindKeyword', 'Fg', true)
-highlight.link('CmpItemKindSnippet', 'Fg', true)
-highlight.link('CmpItemKindColor', 'Red', true)
-highlight.link('CmpItemKindReference', 'Fg', true)
-highlight.link('CmpItemKindFolder', 'Red', true)
-highlight.link('CmpItemKindText', 'Fg', true)
-highlight.link('CmpItemAbbr', 'Fg', true)
-highlight.link('CmpItemAbbrMatch', 'Cyan', true)
-highlight.link('CmpItemAbbrMatchFuzzy', 'Cyan', true)
+vim.highlight.link('CmpItemKindUnit', 'Fg', true)
+vim.highlight.link('CmpItemKindValue', 'Orange', true)
+vim.highlight.link('CmpItemKindKeyword', 'Fg', true)
+vim.highlight.link('CmpItemKindSnippet', 'Fg', true)
+vim.highlight.link('CmpItemKindColor', 'Red', true)
+vim.highlight.link('CmpItemKindReference', 'Fg', true)
+vim.highlight.link('CmpItemKindFolder', 'Red', true)
+vim.highlight.link('CmpItemKindText', 'Fg', true)
+vim.highlight.link('CmpItemAbbr', 'Fg', true)
+vim.highlight.link('CmpItemAbbrMatch', 'Cyan', true)
+vim.highlight.link('CmpItemAbbrMatchFuzzy', 'Cyan', true)
 
 -- diagnostics
-highlight.link('DiagnosticError', 'Red', true)
-highlight.link('DiagnosticWarn', 'Orange', true)
-highlight.link('DiagnosticHint', 'Cyan', true)
-highlight.link('DiagnosticInfo', 'Cyan', true)
+vim.highlight.link('DiagnosticError', 'Red', true)
+vim.highlight.link('DiagnosticWarn', 'Orange', true)
+vim.highlight.link('DiagnosticHint', 'Cyan', true)
+vim.highlight.link('DiagnosticInfo', 'Cyan', true)
 
 vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticError' })
 vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticWarn' })
@@ -133,18 +132,18 @@ vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticHin
 vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticInfo' })
 
 -- git
-highlight.link('DiffDelete', 'Red', true)
+vim.highlight.link('DiffDelete', 'Red', true)
 
 -- lightspeed
-highlight.link('LightspeedLabel', 'OrangeBoldUnderline', true)
-highlight.link('LightspeedGreyWash', 'Comment', true)
-highlight.link('LightspeedShortcut', 'OrangeInverseBoldUnderline', true)
-highlight.link('LightspeedMaskedChar', 'Red', true)
-highlight.link('LightspeedLabelDistant', 'CyanBoldUnderline', true)
-highlight.link('LightspeedOneCharMatch', 'OrangeInverseBold', true)
-highlight.link('LightspeedPendingOpArea', 'OrangeInverse', true)
-highlight.link('LightspeedUnlabeledMatch', 'FgBold', true)
-highlight.link('LightspeedLabelOverlapped', 'Pink', true)
+vim.highlight.link('LightspeedLabel', 'OrangeBoldUnderline', true)
+vim.highlight.link('LightspeedGreyWash', 'Comment', true)
+vim.highlight.link('LightspeedShortcut', 'OrangeInverseBoldUnderline', true)
+vim.highlight.link('LightspeedMaskedChar', 'Red', true)
+vim.highlight.link('LightspeedLabelDistant', 'CyanBoldUnderline', true)
+vim.highlight.link('LightspeedOneCharMatch', 'OrangeInverseBold', true)
+vim.highlight.link('LightspeedPendingOpArea', 'OrangeInverse', true)
+vim.highlight.link('LightspeedUnlabeledMatch', 'FgBold', true)
+vim.highlight.link('LightspeedLabelOverlapped', 'Pink', true)
 
 -- galaxyline
 local mode_to_colour = {
@@ -162,7 +161,7 @@ for mode, colour in pairs(mode_to_colour) do
 end
 
 -- treesitter-context
-highlight.link('TreesitterContext', 'BgLighter', true)
+vim.highlight.link('TreesitterContext', 'BgLighter', true)
 
 --- nvim
-highlight.link('Pmenu', 'BgLighter', true)
+vim.highlight.link('Pmenu', 'BgLighter', true)
