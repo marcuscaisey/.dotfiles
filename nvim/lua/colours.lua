@@ -44,12 +44,12 @@ vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticInf
 -- lightspeed
 highlight('LightspeedLabel', { guifg = gruvbox.bright_purple, gui = { 'bold', 'underline' } })
 vim.highlight.link('LightspeedGreyWash', 'Comment', true)
-highlight('LightspeedMaskedChar', { guifg = gruvbox.faded_red })
 highlight('LightspeedShortcut', {
   guifg = gruvbox.dark0,
   guibg = gruvbox.bright_purple,
   gui = { 'bold', 'underline' },
 })
+highlight('LightspeedMaskedChar', { guifg = gruvbox.neutral_red })
 highlight('LightspeedUnlabeledMatch', { guifg = gruvbox.light1, gui = { 'bold' } })
 highlight('LightspeedLabelDistant', { guifg = gruvbox.bright_blue, gui = { 'bold', 'underline' } })
 highlight('LightspeedOneCharMatch', { guifg = gruvbox.dark0, guibg = gruvbox.bright_purple, gui = { 'bold' } })
