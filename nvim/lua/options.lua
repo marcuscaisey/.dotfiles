@@ -1,5 +1,5 @@
 vim.cmd 'packadd dracula_pro'
-vim.cmd 'colorscheme dracula_pro_van_helsing'
+vim.cmd 'colorscheme dracula_pro'
 vim.o.clipboard = 'unnamed'
 vim.o.cursorline = true
 vim.o.expandtab = true

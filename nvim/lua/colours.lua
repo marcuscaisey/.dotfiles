@@ -51,8 +51,6 @@ vim.highlight.link('Orange', 'DraculaOrange', true)
 vim.highlight.link('Purple', 'DraculaPurple', true)
 vim.highlight.link('Pink', 'DraculaPink', true)
 vim.highlight.link('Fg', 'DraculaFg', true)
-vim.highlight.link('BgLighter', 'DraculaBgLighter', true)
-vim.highlight.link('Comment', 'DraculaComment', true)
 
 local palette = {
   cyan = extract_highlight_colours('Cyan').guifg,
@@ -159,9 +157,3 @@ for mode, colour in pairs(mode_to_colour) do
   highlight_group('Galaxyline' .. mode .. 'Mode', { guifg = palette.bg, guibg = colour })
   highlight_group('Galaxyline' .. mode .. 'ModeSeparator', { guifg = colour, guibg = palette.bg })
 end
-
--- treesitter-context
-vim.highlight.link('TreesitterContext', 'BgLighter', true)
-
---- nvim
-vim.highlight.link('Pmenu', 'BgLighter', true)
