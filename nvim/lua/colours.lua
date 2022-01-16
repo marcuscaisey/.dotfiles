@@ -44,19 +44,20 @@ vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticInf
 -- lightspeed
 highlight('LightspeedLabel', { guifg = gruvbox.bright_purple, gui = { 'bold', 'underline' } })
 vim.highlight.link('LightspeedGreyWash', 'Comment', true)
-highlight(
-  'LightspeedShortcut',
-  { guifg = gruvbox.light1, guibg = gruvbox.bright_purple, gui = { 'bold', 'underline' } }
-)
 highlight('LightspeedMaskedChar', { guifg = gruvbox.faded_red })
+highlight('LightspeedShortcut', {
+  guifg = gruvbox.dark0,
+  guibg = gruvbox.bright_purple,
+  gui = { 'bold', 'underline' },
+})
 highlight('LightspeedUnlabeledMatch', { guifg = gruvbox.light1, gui = { 'bold' } })
 highlight('LightspeedLabelDistant', { guifg = gruvbox.bright_blue, gui = { 'bold', 'underline' } })
-highlight('LightspeedOneCharMatch', { guifg = gruvbox.light1, guibg = gruvbox.bright_purple, gui = { 'bold' } })
-highlight('LightspeedPendingOpArea', { guifg = gruvbox.light1, guibg = gruvbox.bright_purple })
+highlight('LightspeedOneCharMatch', { guifg = gruvbox.dark0, guibg = gruvbox.bright_purple, gui = { 'bold' } })
+highlight('LightspeedPendingOpArea', { guifg = gruvbox.dark0, guibg = gruvbox.bright_purple })
 highlight('LightspeedLabelOverlapped', { guifg = gruvbox.faded_purple, gui = { 'underline' } })
 highlight(
   'LightspeedShortcutOverlapped',
-  { guifg = gruvbox.light1, guibg = gruvbox.bright_purple, gui = { 'bold', 'underline' } }
+  { guifg = gruvbox.dark0, guibg = gruvbox.bright_purple, gui = { 'bold', 'underline' } }
 )
 highlight('LightspeedLabelDistantOverlapped', { guifg = gruvbox.faded_blue, gui = { 'underline' } })
 
