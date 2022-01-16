@@ -48,7 +48,7 @@ galaxyline.section.left = {
         return '  '
       end,
       condition = both(condition.check_git_workspace, condition.hide_in_width),
-      highlight = 'DiffChange',
+      highlight = 'GalaxylineGitIcon',
     },
   },
   {
@@ -70,7 +70,7 @@ galaxyline.section.left = {
       provider = 'DiffAdd',
       condition = both(condition.check_git_workspace, condition.hide_in_width),
       icon = ' +',
-      highlight = 'DiffAdd',
+      highlight = 'GalaxylineDiffAdd',
     },
   },
   {
@@ -78,7 +78,7 @@ galaxyline.section.left = {
       provider = 'DiffModified',
       condition = both(condition.check_git_workspace, condition.hide_in_width),
       icon = ' ~',
-      highlight = 'DiffChange',
+      highlight = 'GalaxylineDiffModified',
     },
   },
   {
@@ -86,7 +86,7 @@ galaxyline.section.left = {
       provider = 'DiffRemove',
       condition = both(condition.check_git_workspace, condition.hide_in_width),
       icon = ' -',
-      highlight = 'DiffDelete',
+      highlight = 'GalaxylineDiffRemove',
       separator = '',
     },
   },

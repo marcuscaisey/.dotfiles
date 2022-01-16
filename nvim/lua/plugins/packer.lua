@@ -80,6 +80,7 @@ require('packer').startup {
     }
     use 'mortepau/codicons.nvim'
     use 'stevearc/dressing.nvim'
+    use 'ellisonleao/gruvbox.nvim'
     use {
       'norcalli/nvim-colorizer.lua',
       config = function()

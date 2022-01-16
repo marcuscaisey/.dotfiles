@@ -1,5 +1,4 @@
-vim.cmd 'packadd dracula_pro'
-vim.cmd 'colorscheme dracula_pro'
+vim.cmd 'colorscheme gruvbox'
 vim.o.clipboard = 'unnamed'
 vim.o.cursorline = true
 vim.o.expandtab = true
