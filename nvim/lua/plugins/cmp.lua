@@ -1,7 +1,5 @@
 local cmp = require 'cmp'
 
-vim.o.shortmess = vim.o.shortmess .. 'c'
-
 local function replace_termcodes(s)
   return vim.api.nvim_replace_termcodes(s, false, false, true)
 end
