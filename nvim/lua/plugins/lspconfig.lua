@@ -117,6 +117,9 @@ end
 
 vim.diagnostic.config {
   virtual_text = false,
+  float = {
+    source = 'always',
+  },
   signs = true,
   underline = true,
   update_in_insert = false,
