@@ -7,6 +7,7 @@ local autoformatted_filetypes = {
   go = true,
   lua = true,
   python = true,
+  proto = true,
 }
 
 vim.cmd 'augroup auto_neoformat'
