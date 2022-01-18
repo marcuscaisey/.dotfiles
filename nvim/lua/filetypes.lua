@@ -12,16 +12,11 @@ vim.filetype.add {
   },
 }
 
-local two_space_tab_types = {
-  'lua',
-  'javascript',
-}
-vim.cmd(string.format(
-  [[
-  augroup two_space_tabs
-    autocmd!
-    autocmd FileType %s set tabstop=2 shiftwidth=2
-  augroup END
-]],
-  table.concat(two_space_tab_types, ',')
-))
+vim.cmd 'augroup two_space_tabs'
+vim.cmd 'autocmd FileType lua,javascript set tabstop=2 shiftwidth=2'
+vim.cmd 'augroup END'
+
+vim.cmd 'augroup textwidths'
+vim.cmd 'autocmd FileType python set textwidth=100'
+vim.cmd 'autocmd FileType go,lua set textwidth=120'
+vim.cmd 'augroup END'
