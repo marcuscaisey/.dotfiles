@@ -1,16 +1,16 @@
 # Styles...
-foreground: &foreground "#F8F8F2"
-background: &background "#0B0D0F"
-current_line: &current_line "#414D58"
-selection: &selection "#414D58"
-comment: &comment "#708CA9"
-cyan: &cyan "#80FFEA"
-green: &green "#8AFF80"
-orange: &orange "#FFCA80"
-pink: &pink "#FF80BF"
-purple: &purple "#9580FF"
-red: &red "#FF9580"
-yellow: &yellow "#FFFF80"
+foreground: &foreground "#ebdbb2"
+background: &background "#282828"
+current_line: &current_line "#323836"
+selection: &selection "#3c3836"
+comment: &comment "#928374"
+cyan: &cyan "#83a598"
+green: &green "#b8bb26"
+orange: &orange "#fe8019"
+pink: &pink "#d3869b"
+purple: &purple "#8f3f71"
+red: &red "#fb4934"
+yellow: &yellow "#fabd2f"
 
 # Skin...
 k9s:
