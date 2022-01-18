@@ -22,17 +22,6 @@ vim.g.neoformat_enabled_python = { 'black' }
 vim.g.neoformat_enabled_lua = { 'stylua' }
 vim.g.neoformat_enabled_go = { 'goimports' }
 
-vim.g.neoformat_lua_luaformat = {
-  exe = 'lua-format',
-  args = {
-    '--column-limit',
-    '120',
-    '--indent-width',
-    '2',
-    '--double-quote-to-single-quote',
-  },
-}
-
 local auto_formatting_enabled = true
 
 --- Toggles Neoformat auto-formatting for filetypes which configured to be
