@@ -63,13 +63,13 @@ highlight('LightspeedLabelDistantOverlapped', { guifg = gruvbox.faded_blue, gui 
 
 -- galaxyline
 local mode_to_colour = {
-  Normal = gruvbox.purple,
-  Insert = gruvbox.green,
-  Command = gruvbox.blue,
+  Normal = gruvbox.blue,
+  Insert = gruvbox.bright_green,
+  Command = gruvbox.light3,
   Visual = gruvbox.orange,
   VisualLine = gruvbox.orange,
   VisualBlock = gruvbox.orange,
-  Replace = gruvbox.red,
+  Replace = gruvbox.bright_purple,
 }
 for mode, colour in pairs(mode_to_colour) do
   highlight('Galaxyline' .. mode .. 'Mode', { guifg = gruvbox.dark0, guibg = colour })
