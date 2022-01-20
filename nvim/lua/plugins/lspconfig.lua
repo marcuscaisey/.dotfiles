@@ -17,6 +17,7 @@ local servers = {
           autoSearchPaths = true,
           diagnosticMode = 'workspace',
           useLibraryCodeForTypes = true,
+          typeCheckingMode = 'off',
           extraPaths = {
             '/home/mcaisey/core3/src',
             '/home/mcaisey/core3/src/plz-out/gen',
