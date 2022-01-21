@@ -14,7 +14,7 @@ vim.filetype.add {
 
 vim.cmd 'augroup two_space_tabs'
 vim.cmd '  autocmd!'
-vim.cmd '  autocmd FileType lua,javascript setlocal tabstop=2 shiftwidth=2'
+vim.cmd '  autocmd FileType lua,javascript,json setlocal tabstop=2 shiftwidth=2'
 vim.cmd 'augroup END'
 
 vim.cmd 'augroup textwidths'
