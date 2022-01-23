@@ -1,62 +1,6 @@
 local lspconfig = require 'lspconfig'
 local util = require 'lspconfig.util'
 
-local servers = {
-  gopls = {
-    settings = { gopls = { directoryFilters = { '-plz-out' }, linksInHover = false } },
-    root_dir = function(fname)
-      local go_mod_root = util.root_pattern 'go.mod'(fname)
-      if go_mod_root then
-        return go_mod_root
-      end
-      local plz_root = util.root_pattern '.plzconfig'(fname)
-      if plz_root then
-        vim.env.GOPATH = string.format('%s:%s/..:%s/plz-out/go', plz_root, plz_root, plz_root)
-        vim.env.GO111MODULE = 'off'
-      end
-      return vim.fn.getcwd()
-    end,
-  },
-  pyright = {
-    root_dir = function()
-      return vim.fn.getcwd()
-    end,
-    settings = {
-      python = {
-        analysis = {
-          autoSearchPaths = true,
-          diagnosticMode = 'workspace',
-          useLibraryCodeForTypes = true,
-          typeCheckingMode = 'off',
-          extraPaths = {
-            '/home/mcaisey/core3/src',
-            '/home/mcaisey/core3/src/plz-out/gen',
-          },
-        },
-      },
-    },
-  },
-  yamlls = {},
-  vimls = {},
-  ccls = {
-    root_dir = function()
-      return vim.fn.getcwd()
-    end,
-  },
-  please = {},
-  bashls = {},
-  intelephense = {},
-  tsserver = {
-    root_dir = function()
-      return vim.fn.getcwd()
-    end,
-  },
-  jsonls = {},
-  java_language_server = {
-    cmd = { 'java_language_server.sh' },
-  },
-}
-
 local system_name
 if vim.fn.has 'mac' == 1 then
   system_name = 'macOS'
@@ -110,6 +54,62 @@ require('lspconfig.configs').please = {
     cmd = { 'plz', 'tool', 'lps' },
     filetypes = { 'please' },
     root_dir = require('lspconfig.util').root_pattern '.plzconfig',
+  },
+}
+
+local servers = {
+  gopls = {
+    settings = { gopls = { directoryFilters = { '-plz-out' }, linksInHover = false } },
+    root_dir = function(fname)
+      local go_mod_root = util.root_pattern 'go.mod'(fname)
+      if go_mod_root then
+        return go_mod_root
+      end
+      local plz_root = util.root_pattern '.plzconfig'(fname)
+      if plz_root then
+        vim.env.GOPATH = string.format('%s:%s/..:%s/plz-out/go', plz_root, plz_root, plz_root)
+        vim.env.GO111MODULE = 'off'
+      end
+      return vim.fn.getcwd()
+    end,
+  },
+  pyright = {
+    root_dir = function()
+      return vim.fn.getcwd()
+    end,
+    settings = {
+      python = {
+        analysis = {
+          autoSearchPaths = true,
+          diagnosticMode = 'workspace',
+          useLibraryCodeForTypes = true,
+          typeCheckingMode = 'off',
+          extraPaths = {
+            '/home/mcaisey/core3/src',
+            '/home/mcaisey/core3/src/plz-out/gen',
+          },
+        },
+      },
+    },
+  },
+  yamlls = {},
+  vimls = {},
+  ccls = {
+    root_dir = function()
+      return vim.fn.getcwd()
+    end,
+  },
+  please = {},
+  bashls = {},
+  intelephense = {},
+  tsserver = {
+    root_dir = function()
+      return vim.fn.getcwd()
+    end,
+  },
+  jsonls = {},
+  java_language_server = {
+    cmd = { 'java_language_server.sh' },
   },
 }
 
