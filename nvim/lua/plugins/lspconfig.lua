@@ -1,9 +1,19 @@
 local lspconfig = require 'lspconfig'
+local util = require 'lspconfig.util'
 
 local servers = {
   gopls = {
     settings = { gopls = { directoryFilters = { '-plz-out' }, linksInHover = false } },
-    root_dir = function()
+    root_dir = function(fname)
+      local go_mod_root = util.root_pattern 'go.mod'(fname)
+      if go_mod_root then
+        return go_mod_root
+      end
+      local plz_root = util.root_pattern '.plzconfig'(fname)
+      if plz_root then
+        vim.env.GOPATH = string.format('%s:%s/..:%s/plz-out/go', plz_root, plz_root, plz_root)
+        vim.env.GO111MODULE = 'off'
+      end
       return vim.fn.getcwd()
     end,
   },

@@ -154,15 +154,7 @@ fi
 ################################################################################
 #                                    golang
 ################################################################################
-if linux; then
-  export GOPATH="$HOME/core3:$HOME/go:$HOME/core3/src/plz-out/go"
-  export PATH="$HOME/core3/bin:$PATH"
-  export GO111MODULE=off
-fi
-
-if osx; then
-  export PATH="$HOME/go/bin:$PATH"
-fi
+export PATH="$HOME/go/bin:$PATH"
 
 
 ################################################################################
