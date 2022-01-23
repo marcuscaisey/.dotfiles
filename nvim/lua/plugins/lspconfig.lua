@@ -53,13 +53,18 @@ require('lspconfig.configs').please = {
   default_config = {
     cmd = { 'plz', 'tool', 'lps' },
     filetypes = { 'please' },
-    root_dir = require('lspconfig.util').root_pattern '.plzconfig',
+    root_dir = util.root_pattern '.plzconfig',
   },
 }
 
 local servers = {
   gopls = {
-    settings = { gopls = { directoryFilters = { '-plz-out' }, linksInHover = false } },
+    settings = {
+      gopls = {
+        directoryFilters = { '-plz-out' },
+        linksInHover = false,
+      },
+    },
     root_dir = function(fname)
       local go_mod_root = util.root_pattern 'go.mod'(fname)
       if go_mod_root then
