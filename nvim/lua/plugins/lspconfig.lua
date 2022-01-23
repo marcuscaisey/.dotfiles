@@ -71,8 +71,9 @@ local servers = {
         return go_mod_root
       end
       local plz_root = util.root_pattern '.plzconfig'(fname)
-      if plz_root then
-        vim.env.GOPATH = string.format('%s:%s/..:%s/plz-out/go', plz_root, plz_root, plz_root)
+      local gopath_root = util.root_pattern 'src'(fname)
+      if plz_root and gopath_root then
+        vim.env.GOPATH = string.format('%s:%s/plz-out/go', gopath_root, plz_root)
         vim.env.GO111MODULE = 'off'
       end
       return vim.fn.getcwd()
