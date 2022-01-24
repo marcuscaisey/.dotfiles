@@ -32,7 +32,6 @@ end
 --- autoformatted_filetypes and auto-formatting is currently enabled. Auto-formatting can be toggled by - calling
 --- ToggleAutoNeoformatting().
 function AutoNeoformat()
-  print(autoformatted_filetypes[vim.o.filetype], auto_formatting_enabled)
   if autoformatted_filetypes[vim.o.filetype] and auto_formatting_enabled then
     vim.cmd 'Neoformat'
   end
