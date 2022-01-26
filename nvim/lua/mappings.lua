@@ -1,5 +1,6 @@
 local telescope = require 'telescope.builtin'
 local neoformat = require 'plugins.neoformat'
+local gitsigns = require 'gitsigns.actions'
 
 vim.g.mapleader = ' '
 
@@ -71,3 +72,23 @@ map('n', '<leader>ft', neoformat.toggle_auto_neoformatting)
 
 -- vim-fugitive
 map('n', '<leader>gb', '<cmd>:Git blame<cr>')
+
+-- gitsigns.nvim
+map('n', ']c', gitsigns.next_hunk)
+map('n', '[c', gitsigns.prev_hunk)
+map({ 'n', 'v' }, '<leader>hs', gitsigns.stage_hunk)
+map({ 'n', 'v' }, '<leader>hr', gitsigns.reset_hunk)
+map('n', '<leader>hS', gitsigns.stage_buffer)
+map('n', '<leader>hu', gitsigns.undo_stage_hunk)
+map('n', '<leader>hR', gitsigns.reset_buffer)
+map('n', '<leader>hp', gitsigns.preview_hunk)
+map('n', '<leader>hb', function()
+  gitsigns.blame_line { full = true }
+end)
+map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
+map('n', '<leader>hd', gitsigns.diffthis)
+map('n', '<leader>hD', function()
+  gitsigns.diffthis '~'
+end)
+map('n', '<leader>td', gitsigns.toggle_deleted)
+map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
