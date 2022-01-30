@@ -58,6 +58,7 @@ map('n', 'ge', telescope.lsp_references)
 map('n', '<leader>ht', telescope.help_tags)
 map('n', '<leader>of', telescope.oldfiles)
 map('n', '<leader>t', telescope.builtin)
+map('n', '<leader>r', telescope.resume)
 
 -- nvim-lspconfig
 map('n', 'K', vim.lsp.buf.hover)
