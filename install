@@ -4,7 +4,7 @@ source ~/.dotfiles/utils.sh
 
 if osx; then
   cecho "Installing homebrew..."
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   pkgs="zsh git tmux exa fzf fd bat ripgrep nvim ranger"
   for pkg in $pkgs; do
