@@ -85,4 +85,17 @@ vim.highlight.link('GalaxylineDiffRemove', 'diffRemoved', true)
 vim.highlight.link('SignColumn', 'Normal', true)
 
 -- telescope.nvim
+highlight('TelescopePromptBorder', { guifg = gruvbox.dark1, guibg = gruvbox.dark1 })
+highlight('TelescopePromptTitle', { guifg = gruvbox.light1, guibg = gruvbox.dark1 })
+highlight('TelescopePromptNormal', { guifg = gruvbox.light1, guibg = gruvbox.dark1 })
+vim.highlight.link('TelescopePromptCounter', 'TelescopePromptNormal', true)
+
+highlight('TelescopeResultsBorder', { guifg = gruvbox.dark0_hard, guibg = gruvbox.dark0_hard })
+highlight('TelescopeResultsTitle', { guifg = gruvbox.dark0_hard, guibg = gruvbox.dark0_hard })
+
+highlight('TelescopePreviewBorder', { guifg = gruvbox.dark0_hard, guibg = gruvbox.dark0_hard })
+highlight('TelescopePreviewTitle', { guifg = gruvbox.light1, guibg = gruvbox.dark0_hard })
+
+highlight('TelescopeNormal', { guibg = gruvbox.dark0_hard })
+
 vim.highlight.link('TelescopeSelection', 'CursorLine', true)
