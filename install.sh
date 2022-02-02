@@ -49,7 +49,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 cecho "Installing tmux-256color terminfo"
 curl -LO http://invisible-island.net/datafiles/current/terminfo.src.gz
 gunzip terminfo.src.gz
-tic -x terminfo.src
+tic -xe tmux-256color terminfo.src
 rm terminfo.src
 
 if osx; then
