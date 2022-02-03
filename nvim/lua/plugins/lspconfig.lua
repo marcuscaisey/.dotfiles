@@ -12,9 +12,6 @@ else
   print 'Unsupported system for sumneko'
 end
 
-local sumneko_root_path = '/opt/lua-language-server'
-local sumneko_binary = sumneko_root_path .. '/bin/' .. system_name .. '/lua-language-server'
-
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
@@ -32,7 +29,7 @@ for _, file in ipairs(runtime_files) do
 end
 
 lspconfig.sumneko_lua.setup {
-  cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' },
+  cmd = { 'lua-language-server' },
   settings = {
     Lua = {
       runtime = {
