@@ -164,11 +164,15 @@ require('packer').startup {
       'kana/vim-textobj-entire',
       requires = 'kana/vim-textobj-user',
     }
+
+    -- Misc
+    use 'lewis6991/impatient.nvim'
   end,
   config = {
     display = {
       open_fn = require('packer.util').float,
     },
+    compile_path = vim.fn.stdpath 'config' .. '/lua/packer_compiled.lua',
   },
 }
 
