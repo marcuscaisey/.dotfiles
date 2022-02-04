@@ -72,7 +72,7 @@ cmp.setup {
   },
   formatting = {
     format = require('lspkind').cmp_format {
-      with_text = false,
+      mode = 'symbol',
       preset = 'codicons',
     },
   },
