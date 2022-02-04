@@ -1,28 +1,6 @@
 local lsp_utils = require 'lsp_utils'
 local gruvbox = require 'gruvbox.colors'
 
----@class HighlightArgs
----@field guifg string|nil
----@field guibg string|nil
----@field gui string[]|nil
-
---- Creates a highlight group.
----@param group string
----@param args HighlightArgs
-local function highlight(group, args)
-  local highlight_cmd = 'highlight ' .. group
-  if args.guifg then
-    highlight_cmd = highlight_cmd .. ' guifg=' .. args.guifg
-  end
-  if args.guibg then
-    highlight_cmd = highlight_cmd .. ' guibg=' .. args.guibg
-  end
-  if args.gui then
-    highlight_cmd = highlight_cmd .. ' gui=' .. table.concat(args.gui, ',')
-  end
-  vim.cmd(highlight_cmd)
-end
-
 -- lsp symbol highlights
 lsp_utils.for_each_symbol_kind(function(kind)
   vim.highlight.link('LSPSymbolKind' .. kind, 'CmpItemKind' .. kind)
@@ -42,24 +20,25 @@ vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticHin
 vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticInfo' })
 
 -- lightspeed
-highlight('LightspeedLabel', { guifg = gruvbox.bright_purple, gui = { 'bold', 'underline' } })
+vim.api.nvim_set_hl(0, 'LightspeedLabel', { fg = gruvbox.bright_purple, bold = true, undercurl = true })
 vim.highlight.link('LightspeedGreyWash', 'Comment', true)
-highlight('LightspeedShortcut', {
-  guifg = gruvbox.dark0,
-  guibg = gruvbox.bright_purple,
-  gui = { 'bold', 'underline' },
-})
-highlight('LightspeedMaskedChar', { guifg = gruvbox.neutral_red })
-highlight('LightspeedUnlabeledMatch', { guifg = gruvbox.light1, gui = { 'bold' } })
-highlight('LightspeedLabelDistant', { guifg = gruvbox.bright_blue, gui = { 'bold', 'underline' } })
-highlight('LightspeedOneCharMatch', { guifg = gruvbox.dark0, guibg = gruvbox.bright_purple, gui = { 'bold' } })
-highlight('LightspeedPendingOpArea', { guifg = gruvbox.dark0, guibg = gruvbox.bright_purple })
-highlight('LightspeedLabelOverlapped', { guifg = gruvbox.faded_purple, gui = { 'underline' } })
-highlight(
-  'LightspeedShortcutOverlapped',
-  { guifg = gruvbox.dark0, guibg = gruvbox.bright_purple, gui = { 'bold', 'underline' } }
+vim.api.nvim_set_hl(
+  0,
+  'LightspeedShortcut',
+  { fg = gruvbox.dark0, bg = gruvbox.bright_purple, bold = true, undercurl = true }
 )
-highlight('LightspeedLabelDistantOverlapped', { guifg = gruvbox.faded_blue, gui = { 'underline' } })
+vim.api.nvim_set_hl(0, 'LightspeedMaskedChar', { fg = gruvbox.neutral_red })
+vim.api.nvim_set_hl(0, 'LightspeedUnlabeledMatch', { fg = gruvbox.light1, bold = true })
+vim.api.nvim_set_hl(0, 'LightspeedLabelDistant', { fg = gruvbox.bright_blue, bold = true, undercurl = true })
+vim.api.nvim_set_hl(0, 'LightspeedOneCharMatch', { fg = gruvbox.dark0, bg = gruvbox.bright_purple, bold = true })
+vim.api.nvim_set_hl(0, 'LightspeedPendingOpArea', { fg = gruvbox.dark0, bg = gruvbox.bright_purple })
+vim.api.nvim_set_hl(0, 'LightspeedLabelOverlapped', { fg = gruvbox.faded_purple, undercurl = true })
+vim.api.nvim_set_hl(
+  0,
+  'LightspeedShortcutOverlapped',
+  { fg = gruvbox.dark0, bg = gruvbox.bright_purple, bold = true, undercurl = true }
+)
+vim.api.nvim_set_hl(0, 'LightspeedLabelDistantOverlapped', { fg = gruvbox.faded_blue, undercurl = true })
 
 -- galaxyline
 local mode_to_colour = {
@@ -72,8 +51,8 @@ local mode_to_colour = {
   Replace = gruvbox.bright_purple,
 }
 for mode, colour in pairs(mode_to_colour) do
-  highlight('Galaxyline' .. mode .. 'Mode', { guifg = gruvbox.dark0, guibg = colour })
-  highlight('Galaxyline' .. mode .. 'ModeSeparator', { guifg = colour, guibg = gruvbox.dark0 })
+  vim.api.nvim_set_hl(0, 'Galaxyline' .. mode .. 'Mode', { fg = gruvbox.dark0, bg = colour })
+  vim.api.nvim_set_hl(0, 'Galaxyline' .. mode .. 'ModeSeparator', { fg = colour, bg = gruvbox.dark0 })
 end
 
 vim.highlight.link('GalaxylineGitIcon', 'GruvboxOrange', true)
@@ -85,17 +64,17 @@ vim.highlight.link('GalaxylineDiffRemove', 'diffRemoved', true)
 vim.highlight.link('SignColumn', 'Normal', true)
 
 -- telescope.nvim
-highlight('TelescopePromptBorder', { guifg = gruvbox.dark1, guibg = gruvbox.dark1 })
-highlight('TelescopePromptTitle', { guifg = gruvbox.light1, guibg = gruvbox.dark1 })
-highlight('TelescopePromptNormal', { guifg = gruvbox.light1, guibg = gruvbox.dark1 })
+vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = gruvbox.dark1, bg = gruvbox.dark1 })
+vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = gruvbox.light1, bg = gruvbox.dark1 })
+vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = gruvbox.light1, bg = gruvbox.dark1 })
 vim.highlight.link('TelescopePromptCounter', 'TelescopePromptNormal', true)
 
-highlight('TelescopeResultsBorder', { guifg = gruvbox.dark0_hard, guibg = gruvbox.dark0_hard })
-highlight('TelescopeResultsTitle', { guifg = gruvbox.dark0_hard, guibg = gruvbox.dark0_hard })
+vim.api.nvim_set_hl(0, 'TelescopeResultsBorder', { fg = gruvbox.dark0_hard, bg = gruvbox.dark0_hard })
+vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = gruvbox.dark0_hard, bg = gruvbox.dark0_hard })
 
-highlight('TelescopePreviewBorder', { guifg = gruvbox.dark0_hard, guibg = gruvbox.dark0_hard })
-highlight('TelescopePreviewTitle', { guifg = gruvbox.light1, guibg = gruvbox.dark0_hard })
+vim.api.nvim_set_hl(0, 'TelescopePreviewBorder', { fg = gruvbox.dark0_hard, bg = gruvbox.dark0_hard })
+vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = gruvbox.light1, bg = gruvbox.dark0_hard })
 
-highlight('TelescopeNormal', { guibg = gruvbox.dark0_hard })
+vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = gruvbox.dark0_hard })
 
 vim.highlight.link('TelescopeSelection', 'CursorLine', true)
