@@ -1,6 +1,7 @@
 local telescope = require 'telescope.builtin'
 local neoformat = require 'plugins.neoformat'
 local gitsigns = require 'gitsigns.actions'
+local nvim_tree = require 'nvim-tree'
 
 vim.g.mapleader = ' '
 
@@ -43,7 +44,7 @@ vim.keymap.set('n', 'L', '<cmd>BufferLineCycleNext<cr>', default_opts)
 vim.keymap.set('n', 'H', '<cmd>BufferLineCyclePrev<cr>', default_opts)
 
 -- nvim-tree.lua
-vim.keymap.set('n', '<c-n>', '<cmd>NvimTreeToggle<cr>', default_opts)
+vim.keymap.set('n', '<c-n>', nvim_tree.toggle, default_opts)
 
 -- telescope.nvim
 vim.keymap.set('n', '<c-p>', telescope.find_files, default_opts)
