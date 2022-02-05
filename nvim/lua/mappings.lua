@@ -76,8 +76,14 @@ vim.keymap.set('n', '<leader>gb', '<cmd>:Git blame<cr>', default_opts)
 -- gitsigns.nvim
 vim.keymap.set('n', ']c', gitsigns.next_hunk, default_opts)
 vim.keymap.set('n', '[c', gitsigns.prev_hunk, default_opts)
-vim.keymap.set({ 'n', 'v' }, '<leader>hs', gitsigns.stage_hunk, default_opts)
-vim.keymap.set({ 'n', 'v' }, '<leader>hr', gitsigns.reset_hunk, default_opts)
+vim.keymap.set('n', '<leader>hs', gitsigns.stage_hunk, default_opts)
+vim.keymap.set('v', '<leader>hs', function()
+  gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+end, default_opts)
+vim.keymap.set('n', '<leader>hr', gitsigns.reset_hunk, default_opts)
+vim.keymap.set('v', '<leader>hr', function()
+  gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+end, default_opts)
 vim.keymap.set('n', '<leader>hS', gitsigns.stage_buffer, default_opts)
 vim.keymap.set('n', '<leader>hu', gitsigns.undo_stage_hunk, default_opts)
 vim.keymap.set('n', '<leader>hR', gitsigns.reset_buffer, default_opts)
