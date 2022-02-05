@@ -169,6 +169,17 @@ if linux; then
   alias sef="plz sef"
 fi
 
+_plz_complete_zsh() {
+    local args=("${words[@]:1:$CURRENT}")
+    local IFS=$'\n'
+    local completions=($(GO_FLAGS_COMPLETION=1 ${words[1]} -p -v 0 --noupdate "${args[@]}"))
+    for completion in $completions; do
+        compadd -S '' $completion
+    done
+}
+
+compdef _plz_complete_zsh plz
+
 
 ################################################################################
 #                                     env
@@ -211,21 +222,6 @@ if osx; then
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 fi
-
-
-################################################################################
-#                                    please
-################################################################################
-_plz_complete_zsh() {
-    local args=("${words[@]:1:$CURRENT}")
-    local IFS=$'\n'
-    local completions=($(GO_FLAGS_COMPLETION=1 ${words[1]} -p -v 0 --noupdate "${args[@]}"))
-    for completion in $completions; do
-        compadd -S '' $completion
-    done
-}
-
-compdef _plz_complete_zsh plz
 
 
 ################################################################################
