@@ -65,6 +65,12 @@ vim.keymap.set('n', 'dK', vim.diagnostic.open_float, default_opts)
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, default_opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, default_opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, default_opts)
+vim.keymap.set('n', ']e', function()
+  vim.diagnostic.goto_next { severity = { min = vim.diagnostic.severity.WARN } }
+end, default_opts)
+vim.keymap.set('n', '[e', function()
+  vim.diagnostic.goto_prev { severity = { min = vim.diagnostic.severity.WARN } }
+end, default_opts)
 
 -- neoformat
 vim.keymap.set('n', '<leader>fm', '<cmd>Neoformat<cr>', default_opts)
