@@ -48,3 +48,8 @@ function NvimTreeCD()
   nvim_tree.on_keypress 'cd'
   vim.cmd('cd ' .. require('nvim-tree.lib').Tree.cwd)
 end
+
+vim.cmd 'augroup nvim_tree'
+vim.cmd '  autocmd!'
+vim.cmd '  autocmd BufEnter NvimTree NvimTreeRefresh'
+vim.cmd 'augroup END'
