@@ -164,9 +164,6 @@ require('packer').startup {
       'kana/vim-textobj-entire',
       requires = 'kana/vim-textobj-user',
     }
-
-    -- Misc
-    use 'lewis6991/impatient.nvim'
   end,
   config = {
     display = {
