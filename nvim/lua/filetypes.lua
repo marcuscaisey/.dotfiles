@@ -19,6 +19,6 @@ vim.cmd 'augroup END'
 
 vim.cmd 'augroup textwidths'
 vim.cmd '  autocmd!'
-vim.cmd '  autocmd FileType python setlocal textwidth=100'
-vim.cmd '  autocmd FileType go,lua setlocal textwidth=120'
+vim.cmd '  autocmd FileType python setlocal textwidth=100 | set formatoptions -=t'
+vim.cmd '  autocmd FileType go,lua setlocal textwidth=120 | set formatoptions -=t'
 vim.cmd 'augroup END'
