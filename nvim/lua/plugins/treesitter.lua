@@ -1,7 +1,7 @@
-local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+local parsers = require 'nvim-treesitter.parsers'
 local configs = require 'nvim-treesitter.configs'
 
-parser_config.python.used_by = 'please'
+parsers.filetype_to_parsername.please = 'python'
 
 configs.setup {
   ensure_installed = 'maintained',
