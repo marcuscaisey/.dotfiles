@@ -7,3 +7,9 @@ vim.cmd [[ autocmd BufWritePre * if expand('%:e') !=# 'diff' | %s/\s\+$//e | end
 -- Highlight yanked text
 vim.cmd [[ autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=1000 }]]
 vim.cmd 'augroup END'
+
+vim.cmd 'augroup wollemi'
+vim.cmd '  autocmd!'
+-- Run wollemi on parent directory of go files on save (directory passed as relative path)
+vim.cmd "  autocmd BufWritePost *.go silent execute '!wollemi --log fatal gofmt' fnamemodify(expand('%:h'), ':.')"
+vim.cmd 'augroup END'
