@@ -112,7 +112,6 @@ require('packer').startup {
       end,
       requires = 'kyazdani42/nvim-web-devicons',
     }
-    use 'tpope/vim-unimpaired'
     use 'tpope/vim-eunuch'
     use 'tpope/vim-repeat'
     use {
