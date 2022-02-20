@@ -147,7 +147,6 @@ require('packer').startup {
         require 'plugins.oscyank'
       end,
     }
-    use 'tpope/vim-abolish'
     use {
       'sbdchd/neoformat',
       config = function()
