@@ -59,7 +59,7 @@ vim.keymap.set('n', '<leader>of', telescope.oldfiles, default_opts)
 vim.keymap.set('n', '<leader>t', telescope.builtin, default_opts)
 vim.keymap.set('n', '<leader>r', telescope.resume, default_opts)
 
--- nvim-lspconfig
+-- lsp
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, default_opts)
 vim.keymap.set('n', 'dK', vim.diagnostic.open_float, default_opts)
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, default_opts)
