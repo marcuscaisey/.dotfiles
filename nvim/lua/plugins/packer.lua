@@ -153,7 +153,6 @@ require('packer').startup {
         require 'plugins.neoformat'
       end,
     }
-    use 'tommcdo/vim-exchange'
     use 'svban/YankAssassin.vim'
     use 'tpope/vim-fugitive'
 
