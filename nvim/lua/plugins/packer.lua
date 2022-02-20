@@ -141,7 +141,6 @@ require('packer').startup {
         require 'plugins.camelcasemotion'
       end,
     }
-    use 'junegunn/vim-peekaboo'
     use {
       'ojroques/vim-oscyank',
       config = function()
