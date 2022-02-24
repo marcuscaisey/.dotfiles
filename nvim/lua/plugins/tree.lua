@@ -37,10 +37,6 @@ nvim_tree.setup {
           cb = config.nvim_tree_callback 'edit',
         },
         {
-          key = '<c-]>',
-          cb = ':lua NvimTreeCD() <cr>',
-        },
-        {
           key = '<CR>',
           action = 'edit_in_place',
         },
@@ -48,12 +44,6 @@ nvim_tree.setup {
     },
   },
 }
-
---- Changes the NvimTree cwd and changes the nvim cwd to that as well
-function NvimTreeCD()
-  nvim_tree.on_keypress 'cd'
-  vim.cmd('cd ' .. require('nvim-tree.lib').Tree.cwd)
-end
 
 vim.cmd 'augroup nvim_tree'
 vim.cmd '  autocmd!'
