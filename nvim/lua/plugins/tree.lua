@@ -1,5 +1,7 @@
 local nvim_tree = require 'nvim-tree'
+local view = require 'nvim-tree.view'
 local config = require 'nvim-tree.config'
+local lib = require 'nvim-tree.lib'
 
 vim.g.nvim_tree_quit_on_open = 1
 vim.g.nvim_tree_git_hl = 1
@@ -58,12 +60,32 @@ vim.cmd '  autocmd!'
 vim.cmd '  autocmd BufEnter NvimTree NvimTreeRefresh'
 vim.cmd 'augroup END'
 
+local function open_replacing_current_buffer()
+  if view.is_visible() then
+    return
+  end
+
+  local buf = vim.api.nvim_get_current_buf()
+  local bufname = vim.api.nvim_buf_get_name(buf)
+
+  local cwd
+  if bufname ~= '' then
+    cwd = vim.fn.fnamemodify(bufname, ':p:h')
+  else
+    cwd = vim.loop.cwd()
+  end
+  if not TreeExplorer or cwd ~= TreeExplorer.cwd then
+    lib.init(cwd)
+  end
+  view.open_in_current_win { hijack_current_buf = false, resize = false }
+  require('nvim-tree.renderer').draw()
+end
+
 local function toggle_replace()
-  local view = require 'nvim-tree.view'
   if view.is_visible() then
     view.close()
   else
-    require('nvim-tree').open_replacing_current_buffer()
+    open_replacing_current_buffer()
   end
 end
 
