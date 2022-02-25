@@ -1,6 +1,5 @@
 local nvim_tree = require 'nvim-tree'
 local view = require 'nvim-tree.view'
-local config = require 'nvim-tree.config'
 local lib = require 'nvim-tree.lib'
 
 vim.g.nvim_tree_quit_on_open = 1
