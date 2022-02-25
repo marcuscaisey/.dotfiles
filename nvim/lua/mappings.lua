@@ -1,7 +1,7 @@
 local telescope = require 'telescope.builtin'
 local neoformat = require 'plugins.neoformat'
 local gitsigns = require 'gitsigns.actions'
-local nvim_tree = require 'plugins.tree'
+local nvim_tree = require 'plugins.nvim_tree'
 
 vim.g.mapleader = ' '
 
