@@ -30,11 +30,11 @@ nvim_tree.setup {
       list = {
         {
           key = 'h',
-          cb = config.nvim_tree_callback 'close_node',
+          action = 'close_node',
         },
         {
           key = 'l',
-          cb = config.nvim_tree_callback 'edit',
+          action = 'edit_in_place',
         },
         {
           key = '<CR>',
