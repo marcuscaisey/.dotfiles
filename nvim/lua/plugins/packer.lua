@@ -154,6 +154,7 @@ require('packer').startup {
     }
     use 'svban/YankAssassin.vim'
     use 'tpope/vim-fugitive'
+    use 'tpope/vim-unimpaired'
 
     -- Text objects
     use {
