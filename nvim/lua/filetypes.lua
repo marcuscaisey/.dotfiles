@@ -22,3 +22,9 @@ vim.cmd '  autocmd!'
 vim.cmd '  autocmd FileType python setlocal textwidth=100 | set formatoptions -=t'
 vim.cmd '  autocmd FileType go,lua setlocal textwidth=120 | set formatoptions -=t'
 vim.cmd 'augroup END'
+
+vim.cmd 'augroup gotabs'
+vim.cmd '  autocmd!'
+-- use tabs in go files
+vim.cmd '  autocmd FileType go setlocal noexpandtab'
+vim.cmd 'augroup END'
