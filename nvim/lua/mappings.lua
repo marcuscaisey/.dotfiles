@@ -1,7 +1,7 @@
 local telescope = require 'telescope.builtin'
 local neoformat = require 'plugins.neoformat'
 local gitsigns = require 'gitsigns.actions'
-local nvim_tree = require 'plugins.nvim_tree'
+local neo_tree = require 'neo-tree'
 
 vim.g.mapleader = ' '
 
@@ -43,8 +43,11 @@ vim.keymap.set('n', '<leader>cd', '<cmd>cd %:h<cr>:pwd<cr>', default_opts)
 vim.keymap.set('n', 'L', '<cmd>BufferLineCycleNext<cr>', default_opts)
 vim.keymap.set('n', 'H', '<cmd>BufferLineCyclePrev<cr>', default_opts)
 
--- nvim-tree.lua
-vim.keymap.set('n', '<c-n>', nvim_tree.toggle_replace, default_opts)
+-- neo-tree.nvim
+vim.keymap.set('n', '<c-n>', function()
+  local toggle_if_open = true
+  neo_tree.reveal_in_split('filesystem', toggle_if_open)
+end, default_opts)
 
 -- telescope.nvim
 vim.keymap.set('n', '<c-p>', telescope.find_files, default_opts)

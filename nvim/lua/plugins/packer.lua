@@ -106,11 +106,16 @@ require('packer').startup {
       },
     }
     use {
-      'kyazdani42/nvim-tree.lua',
+      'nvim-neo-tree/neo-tree.nvim',
+      branch = 'v1.x',
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'kyazdani42/nvim-web-devicons',
+        'MunifTanjim/nui.nvim',
+      },
       config = function()
-        require 'plugins.nvim_tree'
+        require 'plugins.neo_tree'
       end,
-      requires = 'kyazdani42/nvim-web-devicons',
     }
     use 'tpope/vim-eunuch'
     use 'tpope/vim-repeat'
