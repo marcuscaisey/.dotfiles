@@ -15,29 +15,38 @@ vim.filetype.add {
 local group = vim.api.nvim_create_augroup('filetypes', { clear = true })
 
 vim.api.nvim_create_autocmd('FileType', {
-  command = 'setlocal tabstop=2 shiftwidth=2',
+  callback = function()
+    vim.bo.tabstop = 2
+    vim.bo.shiftwidth = 2
+  end,
   pattern = { 'lua', 'javascript', 'json', 'jsonc' },
   group = group,
-  desc = 'Use 2 space tabs for some file types',
+  desc = 'Use 2 space tabs',
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  command = 'setlocal textwidth=100 | set formatoptions -=t',
+  callback = function()
+    vim.bo.textwidth = 100
+  end,
   pattern = { 'python' },
   group = group,
-  desc = 'Use 100 textwidth for some file types',
+  desc = 'Use 100 textwidth',
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  command = 'setlocal textwidth=120 | set formatoptions -=t',
+  callback = function()
+    vim.bo.textwidth = 120
+  end,
   pattern = { 'go', 'lua' },
   group = group,
-  desc = 'Use 120 textwidth for some file types',
+  desc = 'Use 120 textwidth',
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  command = 'setlocal noexpandtab',
+  callback = function()
+    vim.bo.expandtab = false
+  end,
   pattern = { 'go' },
   group = group,
-  desc = 'Use tabs for some file types',
+  desc = 'Indent with tabs',
 })
