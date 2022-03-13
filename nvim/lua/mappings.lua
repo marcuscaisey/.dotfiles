@@ -5,6 +5,7 @@ local neo_tree = require 'neo-tree'
 
 vim.g.mapleader = ' '
 
+-- light wrapper around vim.keymap.set which sets default options
 local function map(mode, lhs, rhs, opts)
   local default_opts = { silent = true }
 
