@@ -5,7 +5,7 @@ local comment_characters = {
   please = '#',
 }
 
--- Apply the comment characters for each filetype
+-- Add comment character autocmds
 local group = vim.api.nvim_create_augroup('commentary', { clear = true })
 for filetype, char in pairs(comment_characters) do
   vim.api.nvim_create_autocmd('FileType', {
