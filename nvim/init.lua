@@ -1,5 +1,5 @@
-require 'mappings'
 require 'options'
+require 'mappings'
 require 'colours'
 require 'plugins'
 require 'misc'
