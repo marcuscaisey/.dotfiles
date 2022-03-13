@@ -1,6 +1,10 @@
 vim.g.oscyank_silent = true
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-  command = [[ if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif ]],
+  callback = function()
+    if vim.v.event.operator == 'y' and vim.v.event.regname == '' then
+      vim.cmd 'OSCYankReg "'
+    end
+  end,
   group = vim.api.nvim_create_augroup('oscyank', { clear = true }),
 })
