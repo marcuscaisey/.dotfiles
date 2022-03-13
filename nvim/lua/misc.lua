@@ -1,9 +1,15 @@
 local group = vim.api.nvim_create_augroup('misc', { clear = true })
 
 vim.api.nvim_create_autocmd('BufReadPost', {
-  command = [[ if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif ]],
+  callback = function()
+    local last_line = vim.fn.line [['"]]
+    if last_line ~= 0 then
+      local last_col = vim.fn.col [['"]]
+      vim.api.nvim_win_set_cursor(0, { last_line, last_col })
+    end
+  end,
   group = group,
-  desc = 'Jump to last position when opening a file',
+  desc = 'Jump to last file position',
 })
 
 vim.api.nvim_create_autocmd('BufWritePre', {
