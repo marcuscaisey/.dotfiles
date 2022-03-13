@@ -5,91 +5,101 @@ local neo_tree = require 'neo-tree'
 
 vim.g.mapleader = ' '
 
-local default_opts = { silent = true }
+local function map(mode, lhs, rhs, opts)
+  local default_opts = { silent = true }
 
-vim.keymap.set('i', 'jj', '<esc>', default_opts)
+  opts = opts or {}
+  local merged_opts = default_opts
+  for k, v in pairs(opts) do
+    merged_opts[k] = v
+  end
 
-vim.keymap.set('n', 'gk', 'gg', default_opts)
-vim.keymap.set('v', 'gk', 'gg', default_opts)
-vim.keymap.set('n', 'gj', 'G', default_opts)
-vim.keymap.set('v', 'gj', 'G', default_opts)
-vim.keymap.set('n', 'gh', '^', default_opts)
-vim.keymap.set('v', 'gh', '^', default_opts)
-vim.keymap.set('n', 'gl', '$', default_opts)
-vim.keymap.set('v', 'gl', 'g_', default_opts)
+  vim.keymap.set(mode, lhs, rhs, merged_opts)
+end
 
-vim.keymap.set('n', '<c-j>', '<c-w>j', default_opts)
-vim.keymap.set('n', '<c-k>', '<c-w>k', default_opts)
-vim.keymap.set('n', '<c-l>', '<c-w>l', default_opts)
-vim.keymap.set('n', '<c-h>', '<c-w>h', default_opts)
-vim.keymap.set('n', '<c-w>j', '<c-w>J', default_opts)
-vim.keymap.set('n', '<c-w>k', '<c-w>K', default_opts)
-vim.keymap.set('n', '<c-w>l', '<c-w>L', default_opts)
-vim.keymap.set('n', '<c-w>h', '<c-w>H', default_opts)
-vim.keymap.set('n', '<c-w><', '<c-w>5<', default_opts)
-vim.keymap.set('n', '<c-w>>', '<c-w>5>', default_opts)
-vim.keymap.set('n', '<c-w>-', '<c-w>5-', default_opts)
-vim.keymap.set('n', '<c-w>=', '<c-w>5+', default_opts)
-vim.keymap.set('n', '<c-w>e', '<c-w>=', default_opts)
+map('i', 'jj', '<esc>')
 
-vim.keymap.set('n', 'Y', 'y$', default_opts)
+map('n', 'gk', 'gg')
+map('v', 'gk', 'gg')
+map('n', 'gj', 'G')
+map('v', 'gj', 'G')
+map('n', 'gh', '^')
+map('v', 'gh', '^')
+map('n', 'gl', '$')
+map('v', 'gl', 'g_')
 
-vim.keymap.set('i', 'II', '<esc>I', default_opts)
-vim.keymap.set('i', 'AA', '<esc>A', default_opts)
+map('n', '<c-j>', '<c-w>j')
+map('n', '<c-k>', '<c-w>k')
+map('n', '<c-l>', '<c-w>l')
+map('n', '<c-h>', '<c-w>h')
+map('n', '<c-w>j', '<c-w>J')
+map('n', '<c-w>k', '<c-w>K')
+map('n', '<c-w>l', '<c-w>L')
+map('n', '<c-w>h', '<c-w>H')
+map('n', '<c-w><', '<c-w>5<')
+map('n', '<c-w>>', '<c-w>5>')
+map('n', '<c-w>-', '<c-w>5-')
+map('n', '<c-w>=', '<c-w>5+')
+map('n', '<c-w>e', '<c-w>=')
 
-vim.keymap.set('n', '<leader>cd', '<cmd>cd %:h<cr>:pwd<cr>', default_opts)
+map('n', 'Y', 'y$')
+
+map('i', 'II', '<esc>I')
+map('i', 'AA', '<esc>A')
+
+map('n', '<leader>cd', '<cmd>cd %:h<cr>:pwd<cr>')
 
 -- nvim-bufferline.lua
-vim.keymap.set('n', 'L', '<cmd>BufferLineCycleNext<cr>', default_opts)
-vim.keymap.set('n', 'H', '<cmd>BufferLineCyclePrev<cr>', default_opts)
+map('n', 'L', '<cmd>BufferLineCycleNext<cr>')
+map('n', 'H', '<cmd>BufferLineCyclePrev<cr>')
 
 -- neo-tree.nvim
-vim.keymap.set('n', '<c-n>', function()
+map('n', '<c-n>', function()
   local toggle_if_open = true
   neo_tree.reveal_in_split('filesystem', toggle_if_open)
-end, default_opts)
+end)
 
 -- telescope.nvim
-vim.keymap.set('n', '<c-p>', telescope.find_files, default_opts)
-vim.keymap.set('n', '<c-b>', telescope.buffers, default_opts)
-vim.keymap.set('n', '<c-f>', telescope.current_buffer_fuzzy_find, default_opts)
-vim.keymap.set('n', '<c-g>', telescope.live_grep, default_opts)
-vim.keymap.set('n', '<c-s>', telescope.lsp_document_symbols, default_opts)
-vim.keymap.set('n', 'gd', telescope.lsp_definitions, default_opts)
-vim.keymap.set('n', 'ge', telescope.lsp_references, default_opts)
-vim.keymap.set('n', '<leader>ht', telescope.help_tags, default_opts)
-vim.keymap.set('n', '<leader>of', telescope.oldfiles, default_opts)
-vim.keymap.set('n', '<leader>t', telescope.builtin, default_opts)
-vim.keymap.set('n', '<leader>r', telescope.resume, default_opts)
+map('n', '<c-p>', telescope.find_files)
+map('n', '<c-b>', telescope.buffers)
+map('n', '<c-f>', telescope.current_buffer_fuzzy_find)
+map('n', '<c-g>', telescope.live_grep)
+map('n', '<c-s>', telescope.lsp_document_symbols)
+map('n', 'gd', telescope.lsp_definitions)
+map('n', 'ge', telescope.lsp_references)
+map('n', '<leader>ht', telescope.help_tags)
+map('n', '<leader>of', telescope.oldfiles)
+map('n', '<leader>t', telescope.builtin)
+map('n', '<leader>r', telescope.resume)
 
 -- lsp
-vim.keymap.set('n', 'K', vim.lsp.buf.hover, default_opts)
-vim.keymap.set('n', 'dK', vim.diagnostic.open_float, default_opts)
-vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, default_opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, default_opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, default_opts)
-vim.keymap.set('n', ']e', function()
+map('n', 'K', vim.lsp.buf.hover)
+map('n', 'dK', vim.diagnostic.open_float)
+map('n', '<leader>rn', vim.lsp.buf.rename)
+map('n', ']d', vim.diagnostic.goto_next)
+map('n', '[d', vim.diagnostic.goto_prev)
+map('n', ']e', function()
   vim.diagnostic.goto_next { severity = { min = vim.diagnostic.severity.WARN } }
-end, default_opts)
-vim.keymap.set('n', '[e', function()
+end)
+map('n', '[e', function()
   vim.diagnostic.goto_prev { severity = { min = vim.diagnostic.severity.WARN } }
-end, default_opts)
+end)
 
 -- neoformat
-vim.keymap.set('n', '<leader>fm', '<cmd>Neoformat<cr>', default_opts)
-vim.keymap.set('n', '<leader>ft', neoformat.toggle_auto_neoformatting, default_opts)
+map('n', '<leader>fm', '<cmd>Neoformat<cr>')
+map('n', '<leader>ft', neoformat.toggle_auto_neoformatting)
 
 -- vim-fugitive
-vim.keymap.set('n', '<leader>gb', '<cmd>:Git blame<cr>', default_opts)
+map('n', '<leader>gb', '<cmd>:Git blame<cr>')
 
 -- gitsigns.nvim
-vim.keymap.set('n', ']c', gitsigns.next_hunk, default_opts)
-vim.keymap.set('n', '[c', gitsigns.prev_hunk, default_opts)
-vim.keymap.set('n', '<leader>hr', gitsigns.reset_hunk, default_opts)
-vim.keymap.set('v', '<leader>hr', function()
+map('n', ']c', gitsigns.next_hunk)
+map('n', '[c', gitsigns.prev_hunk)
+map('n', '<leader>hr', gitsigns.reset_hunk)
+map('v', '<leader>hr', function()
   gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
-end, default_opts)
-vim.keymap.set('n', '<leader>hR', gitsigns.reset_buffer, default_opts)
-vim.keymap.set('n', '<leader>hp', gitsigns.preview_hunk, default_opts)
-vim.keymap.set('n', '<leader>td', gitsigns.toggle_deleted, default_opts)
-vim.keymap.set({ 'o', 'x' }, 'ih', gitsigns.select_hunk, default_opts)
+end)
+map('n', '<leader>hR', gitsigns.reset_buffer)
+map('n', '<leader>hp', gitsigns.preview_hunk)
+map('n', '<leader>td', gitsigns.toggle_deleted)
+map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
