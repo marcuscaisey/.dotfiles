@@ -38,14 +38,13 @@ galaxyline.section.left = {
         return '  ' .. mode .. ' '
       end,
       highlight = 'GalaxylineMode',
-      separator = '',
       separator_highlight = 'GalaxylineModeSeparator',
     },
   },
   {
     GitIcon = {
       provider = function()
-        return '  '
+        return '   '
       end,
       condition = both(condition.check_git_workspace, condition.hide_in_width),
       highlight = 'GalaxylineGitIcon',
@@ -87,7 +86,7 @@ galaxyline.section.left = {
       condition = both(condition.check_git_workspace, condition.hide_in_width),
       icon = ' -',
       highlight = 'GalaxylineDiffRemove',
-      separator = '',
+      separator = '|',
     },
   },
   {
@@ -110,7 +109,7 @@ galaxyline.section.left = {
     FileName = {
       provider = 'FileName',
       condition = condition.buffer_not_empty,
-      separator = '',
+      separator = '|',
     },
   },
 }
@@ -120,7 +119,7 @@ galaxyline.section.right = {
     GetLspClient = {
       provider = 'GetLspClient',
       condition = condition.hide_in_width,
-      separator = ' ',
+      separator = '| ',
     },
   },
   {
@@ -164,14 +163,14 @@ galaxyline.section.right = {
   {
     LineInfo = {
       provider = 'LineColumn',
-      separator = '  ',
+      separator = ' | ',
     },
   },
   {
     PerCent = {
       provider = 'LinePercent',
       highlight = 'GalaxylineNormalMode',
-      separator = '',
+      icon = ' ',
       separator_highlight = 'GalaxylineNormalModeSeparator',
     },
   },
