@@ -2,21 +2,7 @@ local telescope = require 'telescope.builtin'
 local neoformat = require 'plugins.neoformat'
 local gitsigns = require 'gitsigns.actions'
 local neo_tree = require 'neo-tree'
-
-vim.g.mapleader = ' '
-
--- light wrapper around vim.keymap.set which sets default options
-local function map(mode, lhs, rhs, opts)
-  local default_opts = { silent = true }
-
-  opts = opts or {}
-  local merged_opts = default_opts
-  for k, v in pairs(opts) do
-    merged_opts[k] = v
-  end
-
-  vim.keymap.set(mode, lhs, rhs, merged_opts)
-end
+local map = require('map_utils').map
 
 map('i', 'jj', '<esc>')
 
