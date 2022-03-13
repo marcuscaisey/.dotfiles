@@ -1,9 +1,6 @@
-local parsers = require 'nvim-treesitter.parsers'
-local configs = require 'nvim-treesitter.configs'
+require('nvim-treesitter.parsers').filetype_to_parsername.please = 'python'
 
-parsers.filetype_to_parsername.please = 'python'
-
-configs.setup {
+require('nvim-treesitter.configs').setup {
   ensure_installed = 'maintained',
   highlight = {
     enable = true,
