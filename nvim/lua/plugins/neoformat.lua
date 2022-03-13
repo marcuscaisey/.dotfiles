@@ -4,17 +4,12 @@ vim.g.neoformat_enabled_go = { 'goimports' }
 
 local auto_formatting_enabled = true
 
---- Wrapper around the vimscript Neoformat command which only runs Neoformat if the filetype is in
---- auto_format_file_types and auto-formatting is currently enabled. Auto-formatting can be toggled
---- by calling ToggleAutoNeoformatting().
-local function auto_neo_format()
-  if require('file_types').auto_format_file_types[vim.o.filetype] and auto_formatting_enabled then
-    vim.cmd 'Neoformat'
-  end
-end
-
 vim.api.nvim_create_autocmd('BufWritePre', {
-  callback = auto_neo_format,
+  callback = function()
+    if require('file_types').auto_format_file_types[vim.o.filetype] and auto_formatting_enabled then
+      vim.cmd 'Neoformat'
+    end
+  end,
   group = vim.api.nvim_create_augroup('neoformat', { clear = true }),
 })
 
