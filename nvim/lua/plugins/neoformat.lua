@@ -2,21 +2,13 @@ vim.g.neoformat_enabled_python = { 'black' }
 vim.g.neoformat_enabled_lua = { 'stylua' }
 vim.g.neoformat_enabled_go = { 'goimports' }
 
--- Format these filetypes on save
-local autoformatted_filetypes = {
-  go = true,
-  lua = true,
-  python = true,
-  proto = true,
-}
-
 local auto_formatting_enabled = true
 
---- Wrapper around the vimscript Neoformat command which only runs Neoformat if the filetype is in -
---- autoformatted_filetypes and auto-formatting is currently enabled. Auto-formatting can be toggled by - calling
---- ToggleAutoNeoformatting().
+--- Wrapper around the vimscript Neoformat command which only runs Neoformat if the filetype is in
+--- auto_format_file_types and auto-formatting is currently enabled. Auto-formatting can be toggled
+--- by calling ToggleAutoNeoformatting().
 local function auto_neo_format()
-  if autoformatted_filetypes[vim.o.filetype] and auto_formatting_enabled then
+  if require('file_types').auto_format_file_types[vim.o.filetype] and auto_formatting_enabled then
     vim.cmd 'Neoformat'
   end
 end
@@ -26,7 +18,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   group = vim.api.nvim_create_augroup('neoformat', { clear = true }),
 })
 
---- Toggles Neoformat auto-formatting for filetypes which configured to be formatted on save.
+--- Toggles Neoformat auto-formatting on save
 local function toggle_auto_neoformatting()
   if auto_formatting_enabled then
     auto_formatting_enabled = false

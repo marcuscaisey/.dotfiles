@@ -40,6 +40,7 @@ require('file_types').setup {
   lua = {
     tab_size = 2,
     text_width = 120,
+    format_on_save = true,
   },
   javascript = {
     tab_size = 2,
@@ -52,9 +53,15 @@ require('file_types').setup {
   },
   python = {
     text_width = 100,
+    format_on_save = true,
   },
   go = {
     text_width = 120,
     indent_with_tabs = true,
+    format_on_save = true,
+  },
+  proto = {
+    text_width = 100,
+    format_on_save = true,
   },
 }
