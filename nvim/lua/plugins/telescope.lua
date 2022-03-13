@@ -126,6 +126,9 @@ telescope.setup {
       },
       n = {
         ['<c-h>'] = layout.toggle_preview,
+        ['<c-c>'] = actions.close,
+        ['<c-n>'] = actions.move_selection_next,
+        ['<c-p>'] = actions.move_selection_previous,
       },
     },
     sorting_strategy = 'ascending',
