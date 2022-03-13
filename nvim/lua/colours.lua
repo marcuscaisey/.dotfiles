@@ -1,18 +1,19 @@
-local utils = require 'utils.lsp'
+local lsp_utils = require 'utils.lsp'
+local highlight = require 'utils.highlight'
 local gruvbox = require 'gruvbox.colors'
 
 -- lsp symbol highlights
-utils.for_each_symbol_kind(function(kind)
-  vim.highlight.link('LSPSymbolKind' .. kind, 'CmpItemKind' .. kind)
+lsp_utils.for_each_symbol_kind(function(kind)
+  highlight.link('LSPSymbolKind' .. kind, 'CmpItemKind' .. kind)
 end)
 
 -- gitsigns.nvim
-vim.highlight.link('GitSignsAdd', 'diffAdded', true)
-vim.highlight.link('GitSignsChange', 'diffChanged', true)
-vim.highlight.link('GitSignsDelete', 'diffRemoved', true)
+highlight.link('GitSignsAdd', 'diffAdded')
+highlight.link('GitSignsChange', 'diffChanged')
+highlight.link('GitSignsDelete', 'diffRemoved')
 
 -- Diagnostics
-vim.highlight.link('DiagnosticInfo', 'DiagnosticHint', true)
+highlight.link('DiagnosticInfo', 'DiagnosticHint')
 
 vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticError' })
 vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticWarn' })
@@ -20,25 +21,23 @@ vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticHin
 vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticInfo' })
 
 -- lightspeed
-vim.api.nvim_set_hl(0, 'LightspeedLabel', { fg = gruvbox.bright_purple, bold = true, undercurl = true })
-vim.highlight.link('LightspeedGreyWash', 'Comment', true)
-vim.api.nvim_set_hl(
-  0,
+highlight.create('LightspeedLabel', { fg = gruvbox.bright_purple, bold = true, undercurl = true })
+highlight.link('LightspeedGreyWash', 'Comment')
+highlight.create(
   'LightspeedShortcut',
   { fg = gruvbox.dark0, bg = gruvbox.bright_purple, bold = true, undercurl = true }
 )
-vim.api.nvim_set_hl(0, 'LightspeedMaskedChar', { fg = gruvbox.neutral_red })
-vim.api.nvim_set_hl(0, 'LightspeedUnlabeledMatch', { fg = gruvbox.light1, bold = true })
-vim.api.nvim_set_hl(0, 'LightspeedLabelDistant', { fg = gruvbox.bright_blue, bold = true, undercurl = true })
-vim.api.nvim_set_hl(0, 'LightspeedOneCharMatch', { fg = gruvbox.dark0, bg = gruvbox.bright_purple, bold = true })
-vim.api.nvim_set_hl(0, 'LightspeedPendingOpArea', { fg = gruvbox.dark0, bg = gruvbox.bright_purple })
-vim.api.nvim_set_hl(0, 'LightspeedLabelOverlapped', { fg = gruvbox.faded_purple, undercurl = true })
-vim.api.nvim_set_hl(
-  0,
+highlight.create('LightspeedMaskedChar', { fg = gruvbox.neutral_red })
+highlight.create('LightspeedUnlabeledMatch', { fg = gruvbox.light1, bold = true })
+highlight.create('LightspeedLabelDistant', { fg = gruvbox.bright_blue, bold = true, undercurl = true })
+highlight.create('LightspeedOneCharMatch', { fg = gruvbox.dark0, bg = gruvbox.bright_purple, bold = true })
+highlight.create('LightspeedPendingOpArea', { fg = gruvbox.dark0, bg = gruvbox.bright_purple })
+highlight.create('LightspeedLabelOverlapped', { fg = gruvbox.faded_purple, undercurl = true })
+highlight.create(
   'LightspeedShortcutOverlapped',
   { fg = gruvbox.dark0, bg = gruvbox.bright_purple, bold = true, undercurl = true }
 )
-vim.api.nvim_set_hl(0, 'LightspeedLabelDistantOverlapped', { fg = gruvbox.faded_blue, undercurl = true })
+highlight.create('LightspeedLabelDistantOverlapped', { fg = gruvbox.faded_blue, undercurl = true })
 
 -- galaxyline
 local mode_to_colour = {
@@ -51,30 +50,25 @@ local mode_to_colour = {
   Replace = gruvbox.bright_purple,
 }
 for mode, colour in pairs(mode_to_colour) do
-  vim.api.nvim_set_hl(0, 'Galaxyline' .. mode .. 'Mode', { fg = gruvbox.dark0, bg = colour })
-  vim.api.nvim_set_hl(0, 'Galaxyline' .. mode .. 'ModeSeparator', { fg = colour, bg = gruvbox.dark0 })
+  highlight.create('Galaxyline' .. mode .. 'Mode', { fg = gruvbox.dark0, bg = colour })
+  highlight.create('Galaxyline' .. mode .. 'ModeSeparator', { fg = colour, bg = gruvbox.dark0 })
 end
-
-vim.highlight.link('GalaxylineGitIcon', 'GruvboxOrange', true)
-vim.highlight.link('GalaxylineDiffAdd', 'diffAdded', true)
-vim.highlight.link('GalaxylineDiffModified', 'diffChanged', true)
-vim.highlight.link('GalaxylineDiffRemove', 'diffRemoved', true)
+highlight.link('GalaxylineGitIcon', 'GruvboxOrange')
+highlight.link('GalaxylineDiffAdd', 'diffAdded')
+highlight.link('GalaxylineDiffModified', 'diffChanged')
+highlight.link('GalaxylineDiffRemove', 'diffRemoved')
 
 -- nvim
-vim.highlight.link('SignColumn', 'Normal', true)
+highlight.link('SignColumn', 'Normal')
 
 -- telescope.nvim
-vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = gruvbox.dark1, bg = gruvbox.dark1 })
-vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = gruvbox.light1, bg = gruvbox.dark1 })
-vim.api.nvim_set_hl(0, 'TelescopePromptNormal', { fg = gruvbox.light1, bg = gruvbox.dark1 })
-vim.highlight.link('TelescopePromptCounter', 'TelescopePromptNormal', true)
-
-vim.api.nvim_set_hl(0, 'TelescopeResultsBorder', { fg = gruvbox.dark0_hard, bg = gruvbox.dark0_hard })
-vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = gruvbox.dark0_hard, bg = gruvbox.dark0_hard })
-
-vim.api.nvim_set_hl(0, 'TelescopePreviewBorder', { fg = gruvbox.dark0_hard, bg = gruvbox.dark0_hard })
-vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = gruvbox.light1, bg = gruvbox.dark0_hard })
-
-vim.api.nvim_set_hl(0, 'TelescopeNormal', { bg = gruvbox.dark0_hard })
-
-vim.highlight.link('TelescopeSelection', 'CursorLine', true)
+highlight.create('TelescopePromptBorder', { fg = gruvbox.dark1, bg = gruvbox.dark1 })
+highlight.create('TelescopePromptTitle', { fg = gruvbox.light1, bg = gruvbox.dark1 })
+highlight.create('TelescopePromptNormal', { fg = gruvbox.light1, bg = gruvbox.dark1 })
+highlight.link('TelescopePromptCounter', 'TelescopePromptNormal')
+highlight.create('TelescopeResultsBorder', { fg = gruvbox.dark0_hard, bg = gruvbox.dark0_hard })
+highlight.create('TelescopeResultsTitle', { fg = gruvbox.dark0_hard, bg = gruvbox.dark0_hard })
+highlight.create('TelescopePreviewBorder', { fg = gruvbox.dark0_hard, bg = gruvbox.dark0_hard })
+highlight.create('TelescopePreviewTitle', { fg = gruvbox.light1, bg = gruvbox.dark0_hard })
+highlight.create('TelescopeNormal', { bg = gruvbox.dark0_hard })
+highlight.link('TelescopeSelection', 'CursorLine')
