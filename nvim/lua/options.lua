@@ -36,7 +36,7 @@ vim.filetype.add {
   },
 }
 
-require('filetypes').setup {
+require('file_types').setup {
   lua = {
     tab_size = 2,
     text_width = 120,

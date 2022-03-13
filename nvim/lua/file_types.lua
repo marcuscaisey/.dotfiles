@@ -1,4 +1,4 @@
-local augroup = vim.api.nvim_create_augroup('per_file_type_settings', { clear = true })
+local augroup = vim.api.nvim_create_augroup('file_types', { clear = true })
 
 local function add_tab_size_autocmd(file_type, tab_size)
   vim.api.nvim_create_autocmd('FileType', {
