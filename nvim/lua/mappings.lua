@@ -2,7 +2,7 @@ local telescope = require 'telescope.builtin'
 local neoformat = require 'plugins.neoformat'
 local gitsigns = require 'gitsigns.actions'
 local neo_tree = require 'neo-tree'
-local map = require('map_utils').map
+local map = require('utils.mappings').map
 
 map('i', 'jj', '<esc>')
 

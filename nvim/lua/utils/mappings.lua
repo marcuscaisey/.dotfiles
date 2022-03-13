@@ -1,5 +1,7 @@
--- light wrapper around vim.keymap.set which sets some default options
-local function map(mode, lhs, rhs, opts)
+local M = {}
+
+-- A light wrapper around vim.keymap.set which sets silent = true by default
+M.map = function(mode, lhs, rhs, opts)
   local default_opts = { silent = true }
 
   opts = opts or {}
@@ -11,6 +13,4 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, merged_opts)
 end
 
-return {
-  map = map,
-}
+return M

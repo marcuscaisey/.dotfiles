@@ -4,7 +4,7 @@ local entry_display = require 'telescope.pickers.entry_display'
 local utils = require 'telescope.utils'
 local actions = require 'telescope.actions'
 local action_state = require 'telescope.actions.state'
-local lsp_utils = require 'lsp_utils'
+local lsp_utils = require 'utils.lsp'
 
 --- Splits a filepath into head / tail where tail is the last path component and
 --- head is everything before it.

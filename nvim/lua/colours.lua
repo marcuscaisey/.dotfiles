@@ -1,8 +1,8 @@
-local lsp_utils = require 'lsp_utils'
+local utils = require 'utils.lsp'
 local gruvbox = require 'gruvbox.colors'
 
 -- lsp symbol highlights
-lsp_utils.for_each_symbol_kind(function(kind)
+utils.for_each_symbol_kind(function(kind)
   vim.highlight.link('LSPSymbolKind' .. kind, 'CmpItemKind' .. kind)
 end)
 
