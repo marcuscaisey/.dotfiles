@@ -13,9 +13,14 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 })
 
 vim.api.nvim_create_autocmd('BufWritePre', {
-  command = [[ if expand('%:e') !=# 'diff' | %s/\s\+$//e | endif ]],
+  callback = function()
+    local file_extension = vim.fn.expand '%:e'
+    if file_extension ~= 'diff' then
+      vim.cmd '%s/\\s\\+$//e'
+    end
+  end,
   group = group,
-  desc = 'Trim trailing whitespace on write',
+  desc = 'Trim trailing whitespace',
 })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
