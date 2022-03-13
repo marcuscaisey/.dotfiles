@@ -1,6 +1,6 @@
 local M = {}
 
--- A light wrapper around vim.keymap.set which sets silent = true by default
+-- A wrapper around vim.keymap.set which sets silent = true by default
 M.map = function(mode, lhs, rhs, opts)
   local default_opts = { silent = true }
 
