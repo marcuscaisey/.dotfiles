@@ -1,21 +1,10 @@
 local lspconfig = require 'lspconfig'
 local util = require 'lspconfig.util'
 
-local system_name
-if vim.fn.has 'mac' == 1 then
-  system_name = 'macOS'
-elseif vim.fn.has 'unix' == 1 then
-  system_name = 'Linux'
-elseif vim.fn.has 'win32' == 1 then
-  system_name = 'Windows'
-else
-  print 'Unsupported system for sumneko'
-end
-
+-- sumneko setup
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
-
 -- Don't add ~/.config/nvim to the LSP libraries because that's just a symlink
 -- to ~/.dotfiles/nvim/lua, so when we're in ~/.dotfiles/nvim/lua we end up
 -- with duplicate symbols
@@ -27,7 +16,6 @@ for _, file in ipairs(runtime_files) do
     table.insert(lua_library, file)
   end
 end
-
 lspconfig.sumneko_lua.setup {
   cmd = { 'lua-language-server' },
   settings = {
