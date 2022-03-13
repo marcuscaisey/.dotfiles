@@ -1,5 +1,13 @@
-vim.cmd 'augroup commentary'
-vim.cmd '  autocmd FileType sql setlocal commentstring=--%s'
-vim.cmd '  autocmd FileType toml setlocal commentstring=#%s'
-vim.cmd '  autocmd FileType please setlocal commentstring=#%s'
-vim.cmd 'augroup END'
+local group = vim.api.nvim_create_augroup('commentary', { clear = true })
+
+vim.api.nvim_create_autocmd('FileType', {
+  command = 'setlocal commentstring=--%s',
+  pattern = { 'sql' },
+  group = group,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  command = 'setlocal commentstring=#%s',
+  pattern = { 'toml', 'please' },
+  group = group,
+})

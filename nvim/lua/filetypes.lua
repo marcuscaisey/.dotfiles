@@ -12,19 +12,32 @@ vim.filetype.add {
   },
 }
 
-vim.cmd 'augroup two_space_tabs'
-vim.cmd '  autocmd!'
-vim.cmd '  autocmd FileType lua,javascript,json,jsonc setlocal tabstop=2 shiftwidth=2'
-vim.cmd 'augroup END'
+local group = vim.api.nvim_create_augroup('filetypes', { clear = true })
 
-vim.cmd 'augroup textwidths'
-vim.cmd '  autocmd!'
-vim.cmd '  autocmd FileType python setlocal textwidth=100 | set formatoptions -=t'
-vim.cmd '  autocmd FileType go,lua setlocal textwidth=120 | set formatoptions -=t'
-vim.cmd 'augroup END'
+vim.api.nvim_create_autocmd('FileType', {
+  command = 'setlocal tabstop=2 shiftwidth=2',
+  pattern = { 'lua', 'javascript', 'json', 'jsonc' },
+  group = group,
+  desc = 'Use 2 space tabs for some file types',
+})
 
-vim.cmd 'augroup gotabs'
-vim.cmd '  autocmd!'
--- use tabs in go files
-vim.cmd '  autocmd FileType go setlocal noexpandtab'
-vim.cmd 'augroup END'
+vim.api.nvim_create_autocmd('FileType', {
+  command = 'setlocal textwidth=100 | set formatoptions -=t',
+  pattern = { 'python' },
+  group = group,
+  desc = 'Use 100 textwidth for some file types',
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  command = 'setlocal textwidth=120 | set formatoptions -=t',
+  pattern = { 'go', 'lua' },
+  group = group,
+  desc = 'Use 120 textwidth for some file types',
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  command = 'setlocal noexpandtab',
+  pattern = { 'go' },
+  group = group,
+  desc = 'Use tabs for some file types',
+})

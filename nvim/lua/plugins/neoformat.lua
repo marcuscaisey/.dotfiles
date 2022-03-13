@@ -10,12 +10,21 @@ local autoformatted_filetypes = {
   proto = true,
 }
 
-vim.cmd 'augroup auto_neoformat'
-vim.cmd '  autocmd!'
-vim.cmd '  autocmd BufWritePre * silent lua AutoNeoformat()'
-vim.cmd 'augroup END'
-
 local auto_formatting_enabled = true
+
+--- Wrapper around the vimscript Neoformat command which only runs Neoformat if the filetype is in -
+--- autoformatted_filetypes and auto-formatting is currently enabled. Auto-formatting can be toggled by - calling
+--- ToggleAutoNeoformatting().
+local function auto_neo_format()
+  if autoformatted_filetypes[vim.o.filetype] and auto_formatting_enabled then
+    vim.cmd 'Neoformat'
+  end
+end
+
+vim.api.nvim_create_autocmd('BufWritePre', {
+  callback = auto_neo_format,
+  group = vim.api.nvim_create_augroup('neoformat', { clear = true }),
+})
 
 --- Toggles Neoformat auto-formatting for filetypes which configured to be formatted on save.
 local function toggle_auto_neoformatting()
@@ -25,15 +34,6 @@ local function toggle_auto_neoformatting()
   else
     auto_formatting_enabled = true
     print 'Neoformat: enabled autoformatting'
-  end
-end
-
---- Wrapper around the vimscript Neoformat command which only runs Neoformat if the filetype is in -
---- autoformatted_filetypes and auto-formatting is currently enabled. Auto-formatting can be toggled by - calling
---- ToggleAutoNeoformatting().
-function AutoNeoformat()
-  if autoformatted_filetypes[vim.o.filetype] and auto_formatting_enabled then
-    vim.cmd 'Neoformat'
   end
 end
 

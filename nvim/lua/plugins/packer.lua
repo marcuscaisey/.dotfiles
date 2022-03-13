@@ -167,4 +167,8 @@ require('packer').startup {
   },
 }
 
-vim.cmd 'autocmd BufWritePost packer.lua source <afile> | PackerCompile'
+vim.api.nvim_create_autocmd('BufWritePost', {
+  command = 'source <afile> | PackerCompile',
+  pattern = { 'packer.lua' },
+  group = vim.api.nvim_create_augroup('packer', { clear = true }),
+})
