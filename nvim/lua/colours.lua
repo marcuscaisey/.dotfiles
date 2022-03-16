@@ -72,3 +72,6 @@ highlight.create('TelescopePreviewBorder', { fg = gruvbox.dark0_hard, bg = gruvb
 highlight.create('TelescopePreviewTitle', { fg = gruvbox.light1, bg = gruvbox.dark0_hard })
 highlight.create('TelescopeNormal', { bg = gruvbox.dark0_hard })
 highlight.link('TelescopeSelection', 'CursorLine')
+
+-- neo-tree.nvim
+highlight.link('NeoTreeSymbolicLinkTarget', 'Comment')
