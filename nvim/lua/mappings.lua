@@ -29,6 +29,9 @@ map('n', '<c-w>-', '<c-w>5-')
 map('n', '<c-w>=', '<c-w>5+')
 map('n', '<c-w>e', '<c-w>=')
 
+map('n', 'n', 'nzz')
+map('n', 'N', 'Nzz')
+
 map('n', 'Y', 'y$')
 
 map('i', 'II', '<esc>I')
