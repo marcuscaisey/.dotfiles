@@ -27,7 +27,6 @@ require('neo-tree').setup {
           highlight = 'NeoTreeSymbolicLinkTarget',
         },
         { 'clipboard' },
-        { 'diagnostics', errors_only = true },
         { 'git_status' },
       },
       file = {
@@ -42,7 +41,6 @@ require('neo-tree').setup {
           highlight = 'NeoTreeSymbolicLinkTarget',
         },
         { 'clipboard' },
-        { 'diagnostics' },
         { 'git_status' },
       },
     },
