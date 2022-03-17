@@ -153,6 +153,10 @@ require('packer').startup {
     use 'svban/YankAssassin.vim'
     use 'tpope/vim-fugitive'
     use 'tpope/vim-unimpaired'
+    use {
+      'ThePrimeagen/harpoon',
+      requires = 'nvim-lua/plenary.nvim',
+    }
 
     -- Text objects
     use {
@@ -166,9 +170,3 @@ require('packer').startup {
     },
   },
 }
-
-vim.api.nvim_create_autocmd('BufWritePost', {
-  command = 'source <afile> | PackerCompile',
-  pattern = { 'packer.lua' },
-  group = vim.api.nvim_create_augroup('packer', { clear = true }),
-})

@@ -2,6 +2,7 @@ local telescope = require 'telescope.builtin'
 local neoformat = require 'plugins.neoformat'
 local gitsigns = require 'gitsigns.actions'
 local neo_tree = require 'neo-tree'
+local harpoon_ui = require 'harpoon.ui'
 local map = require('utils.mappings').map
 
 map('i', 'jj', '<esc>')
@@ -93,3 +94,13 @@ map('n', '<leader>hR', gitsigns.reset_buffer)
 map('n', '<leader>hp', gitsigns.preview_hunk)
 map('n', '<leader>td', gitsigns.toggle_deleted)
 map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
+
+-- harpoon
+map('n', '<leader>ha', require('harpoon.mark').add_file)
+map('n', '<leader>hh', harpoon_ui.toggle_quick_menu)
+map('n', '<leader>1', function()
+  harpoon_ui.nav_file(1)
+end)
+map('n', '<leader>2', function()
+  harpoon_ui.nav_file(2)
+end)
