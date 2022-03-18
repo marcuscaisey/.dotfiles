@@ -98,9 +98,8 @@ map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
 -- harpoon
 map('n', '<leader>ha', require('harpoon.mark').add_file)
 map('n', '<leader>hh', harpoon_ui.toggle_quick_menu)
-map('n', '<leader>1', function()
-  harpoon_ui.nav_file(1)
-end)
-map('n', '<leader>2', function()
-  harpoon_ui.nav_file(2)
-end)
+for n = 1, 4 do
+  map('n', string.format('<leader>%d', n), function()
+    harpoon_ui.nav_file(n)
+  end)
+end
