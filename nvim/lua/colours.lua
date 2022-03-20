@@ -48,6 +48,7 @@ local mode_to_colour = {
   VisualLine = gruvbox.orange,
   VisualBlock = gruvbox.orange,
   Replace = gruvbox.bright_purple,
+  Terminal = gruvbox.bright_aqua,
 }
 for mode, colour in pairs(mode_to_colour) do
   highlight.create('Galaxyline' .. mode .. 'Mode', { fg = gruvbox.dark0, bg = colour })

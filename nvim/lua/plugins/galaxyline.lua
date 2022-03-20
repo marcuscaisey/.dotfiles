@@ -11,6 +11,7 @@ local mode_symbol_to_mode = {
   V = 'Visual Line',
   [''] = 'Visual Block',
   R = 'Replace',
+  t = 'Termainal',
 }
 
 local function both(a, b)
@@ -33,6 +34,10 @@ galaxyline.section.left = {
     ViMode = {
       provider = function()
         local mode = mode_symbol_to_mode[vim.fn.mode()]
+        if not mode then
+          print(string.format('galaxyline ViMode section cannot handle mode: %s', vim.fn.mode()))
+          return ''
+        end
         vim.highlight.link('GalaxylineMode', 'Galaxyline' .. mode:gsub(' ', '') .. 'Mode', true)
         vim.highlight.link('GalaxylineModeSeparator', 'Galaxyline' .. mode:gsub(' ', '') .. 'ModeSeparator', true)
         return '  ' .. mode .. ' '
