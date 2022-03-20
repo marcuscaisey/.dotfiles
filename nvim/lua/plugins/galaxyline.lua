@@ -11,7 +11,7 @@ local mode_symbol_to_mode = {
   V = 'Visual Line',
   [''] = 'Visual Block',
   R = 'Replace',
-  t = 'Termainal',
+  t = 'Terminal',
 }
 
 local function both(a, b)
