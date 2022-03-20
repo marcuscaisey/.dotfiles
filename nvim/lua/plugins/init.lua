@@ -40,7 +40,6 @@ require('packer').startup {
         'hrsh7th/cmp-nvim-lua',
         'hrsh7th/cmp-buffer',
         'onsails/lspkind-nvim',
-        'mortepau/codicons.nvim',
       },
     }
     use {
@@ -72,7 +71,6 @@ require('packer').startup {
       end,
       requires = 'kyazdani42/nvim-web-devicons',
     }
-    use 'mortepau/codicons.nvim'
     use 'stevearc/dressing.nvim'
     use 'ellisonleao/gruvbox.nvim'
     use {
@@ -91,7 +89,6 @@ require('packer').startup {
       requires = {
         'nvim-lua/popup.nvim',
         'nvim-lua/plenary.nvim',
-        'mortepau/codicons.nvim',
         {
           'nvim-telescope/telescope-fzf-native.nvim',
           run = 'make',

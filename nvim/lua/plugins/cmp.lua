@@ -69,12 +69,6 @@ cmp.setup {
     end,
     ['<cr>'] = cmp.mapping.confirm { select = true },
   },
-  formatting = {
-    format = require('lspkind').cmp_format {
-      mode = 'symbol',
-      preset = 'codicons',
-    },
-  },
   sorting = {
     comparators = { cmp.config.compare.sort_text },
   },

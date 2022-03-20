@@ -4,7 +4,7 @@ local gruvbox = require 'gruvbox.colors'
 
 -- lsp symbol highlights
 lsp_utils.for_each_symbol_kind(function(kind)
-  highlight.link('LSPSymbolKind' .. kind, 'CmpItemKind' .. kind)
+  highlight.link('LSPSymbol' .. kind, 'CmpItemKind' .. kind)
 end)
 
 -- gitsigns.nvim

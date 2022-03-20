@@ -1,5 +1,3 @@
-local codicons = require 'codicons'
-
 local M = {}
 
 local symbol_kinds = {
@@ -30,17 +28,6 @@ local symbol_kinds = {
   'Operator',
   'TypeParameter',
 }
-
-local function pascal_to_snake_case(s)
-  return s:gsub('(%l)(%u)', '%1-%2'):lower()
-end
-
---- Returns a codicon for a given LSP symbol kind.
---- @param kind string LSP SymbolKind as defined in the protocol (https://microsoft.github.io/language-server-protocol/specifications/specification-3-17/#symbolKind)
---- @return string
-M.symbol_codicon = function(kind)
-  return codicons.get('symbol-' .. pascal_to_snake_case(kind))
-end
 
 --- Calls the given callback on each LSP symbol kind, returning a table mapping
 --- each kind to its corresponding result.

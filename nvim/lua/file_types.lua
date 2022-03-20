@@ -39,7 +39,7 @@ end
 
 M.auto_format_file_types = {}
 
-M.setup = function (opts)
+M.setup = function(opts)
   M.auto_format_file_types = {}
 
   for file_type, settings in pairs(opts) do
