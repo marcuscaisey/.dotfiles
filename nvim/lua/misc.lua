@@ -3,7 +3,8 @@ local group = vim.api.nvim_create_augroup('misc', { clear = true })
 vim.api.nvim_create_autocmd('BufReadPost', {
   callback = function()
     local last_line = vim.fn.line [['"]]
-    if last_line ~= 0 then
+    local lines = vim.fn.line '$'
+    if last_line ~= 0 and last_line <= lines then
       local last_col = vim.fn.col [['"]]
       vim.api.nvim_win_set_cursor(0, { last_line, last_col })
     end
