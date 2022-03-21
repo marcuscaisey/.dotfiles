@@ -40,10 +40,6 @@ map('i', 'AA', '<esc>A')
 
 map('n', '<leader>cd', '<cmd>cd %:h<cr>:pwd<cr>')
 
--- nvim-bufferline.lua
-map('n', 'L', '<cmd>BufferLineCycleNext<cr>')
-map('n', 'H', '<cmd>BufferLineCyclePrev<cr>')
-
 -- neo-tree.nvim
 map('n', '<c-n>', function()
   local toggle_if_open = true
