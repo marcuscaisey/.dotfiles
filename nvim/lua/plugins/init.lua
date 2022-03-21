@@ -64,13 +64,6 @@ require('packer').startup {
         require 'plugins.gitsigns'
       end,
     }
-    use {
-      'akinsho/nvim-bufferline.lua',
-      config = function()
-        require 'plugins.bufferline'
-      end,
-      requires = 'kyazdani42/nvim-web-devicons',
-    }
     use 'stevearc/dressing.nvim'
     use 'ellisonleao/gruvbox.nvim'
     use {

@@ -12,7 +12,6 @@ vim.o.pumheight = 10
 vim.o.scrolloff = 5
 vim.o.shiftwidth = 4
 vim.o.showmode = false
-vim.o.showtabline = 2
 vim.o.signcolumn = 'yes'
 vim.o.smartcase = true
 vim.o.splitbelow = true
