@@ -40,6 +40,8 @@ map('i', 'AA', '<esc>A')
 
 map('n', '<leader>cd', '<cmd>cd %:h<cr>:pwd<cr>')
 
+map('t', '<esc>', '<c-\\><c-n>')
+
 -- neo-tree.nvim
 map('n', '<c-n>', function()
   local toggle_if_open = true
