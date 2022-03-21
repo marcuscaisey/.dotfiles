@@ -277,10 +277,12 @@ telescope.setup {
     },
     buffers = {
       layout_config = {
-        preview_width = 0.4,
+        width = 0.5,
+        height = 0.5,
       },
       sort_mru = true,
       ignore_current_buffer = true,
+      previewer = false,
       mappings = {
         i = {
           ['<cr>'] = multi_open,
