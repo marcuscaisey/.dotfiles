@@ -81,7 +81,9 @@ fi
 
 # tmux
 # start a new session with the same name as the current git branch
-alias tgb="tmux new-session -s $(git rev-parse --abbrev-ref HEAD)"
+tgb() {
+    tmux new-session -s $(git rev-parse --abbrev-ref HEAD)
+}
 
 
 ################################################################################
