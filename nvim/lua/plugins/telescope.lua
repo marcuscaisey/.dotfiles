@@ -34,6 +34,18 @@ local function shorten_path(path)
   return path_without_home
 end
 
+local function multi_open(prompt_bufnr)
+  local picker = action_state.get_current_picker(prompt_bufnr)
+  local num_selections = #picker:get_multi_selection()
+
+  if num_selections > 1 then
+    actions.send_selected_to_qflist(prompt_bufnr)
+    actions.open_qflist()
+  else
+    actions.file_edit(prompt_bufnr)
+  end
+end
+
 -- displays document symbols as: type name
 local function create_lsp_document_symbols_entry(entry)
   local displayer = entry_display.create {
@@ -156,14 +168,14 @@ telescope.setup {
     mappings = {
       i = {
         ['<c-h>'] = layout.toggle_preview,
-        ['<c-q>'] = actions.send_selected_to_qflist,
+        ['<cr>'] = multi_open,
       },
       n = {
         ['<c-h>'] = layout.toggle_preview,
         ['<c-c>'] = actions.close,
         ['<c-n>'] = actions.move_selection_next,
         ['<c-p>'] = actions.move_selection_previous,
-        ['<c-q>'] = actions.send_selected_to_qflist,
+        ['<cr>'] = multi_open,
       },
     },
     sorting_strategy = 'ascending',
