@@ -88,18 +88,6 @@ require('packer').startup {
         },
       },
     }
-    use {
-      'nvim-neo-tree/neo-tree.nvim',
-      branch = 'v1.x',
-      requires = {
-        'nvim-lua/plenary.nvim',
-        'kyazdani42/nvim-web-devicons',
-        'MunifTanjim/nui.nvim',
-      },
-      config = function()
-        require 'plugins.neo_tree'
-      end,
-    }
     use 'tpope/vim-eunuch'
     use 'tpope/vim-repeat'
     use {

@@ -23,6 +23,7 @@ vim.o.updatetime = 100
 vim.g.did_load_filetypes = 0
 vim.g.do_filetype_lua = 1
 vim.g.mapleader = ' '
+vim.g.netrw_liststyle = 3
 
 vim.filetype.add {
   extension = {

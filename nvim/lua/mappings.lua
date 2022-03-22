@@ -1,7 +1,7 @@
 local telescope = require 'telescope.builtin'
 local neoformat = require 'plugins.neoformat'
 local gitsigns = require 'gitsigns.actions'
-local neo_tree = require 'neo-tree'
+-- local neo_tree = require 'neo-tree'
 local harpoon_ui = require 'harpoon.ui'
 local map = require('utils.mappings').map
 
@@ -51,10 +51,8 @@ map('n', '<leader>q', function()
   end
 end)
 
--- neo-tree.nvim
 map('n', '<c-n>', function()
-  local toggle_if_open = true
-  neo_tree.reveal_in_split('filesystem', toggle_if_open)
+  vim.cmd 'Explore'
 end)
 
 -- telescope.nvim
