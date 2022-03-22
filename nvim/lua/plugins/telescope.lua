@@ -156,14 +156,14 @@ telescope.setup {
     mappings = {
       i = {
         ['<c-h>'] = layout.toggle_preview,
-        ['<c-w>'] = actions.add_selected_to_qflist + actions.open_qflist,
+        ['<c-w>'] = actions.send_selected_to_qflist + actions.open_qflist,
       },
       n = {
         ['<c-h>'] = layout.toggle_preview,
         ['<c-c>'] = actions.close,
         ['<c-n>'] = actions.move_selection_next,
         ['<c-p>'] = actions.move_selection_previous,
-        ['<c-w>'] = actions.add_selected_to_qflist + actions.open_qflist,
+        ['<c-w>'] = actions.send_selected_to_qflist + actions.open_qflist,
       },
     },
     sorting_strategy = 'ascending',
