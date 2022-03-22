@@ -42,6 +42,17 @@ map('n', '<leader>cd', '<cmd>cd %:h<cr>:pwd<cr>')
 
 map('t', '<esc>', '<c-\\><c-n>')
 
+-- toggle quickfix
+map('n', '<leader>q', function()
+  local qf_window_id = vim.fn.getqflist({ winid = 0 }).winid
+  -- window id > 0 means that the window is open
+  if qf_window_id > 0 then
+    vim.cmd 'cclose'
+  else
+    vim.cmd 'copen'
+  end
+end)
+
 -- neo-tree.nvim
 map('n', '<c-n>', function()
   local toggle_if_open = true
