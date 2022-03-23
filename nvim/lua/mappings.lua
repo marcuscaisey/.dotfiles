@@ -52,11 +52,10 @@ map('n', '<leader>q', function()
 end)
 
 -- open changed buffers in quickfix
-map('n', '<leader>m', function()
+map('n', '<leader>cb', function()
   -- filter buffers for changed property since bufmodified = 1 doesn't seem to filter out all unchanged buffers
   local changed_buffers = vim.tbl_filter(
     function(b)
-      print 'got here'
       return b.changed == 1
     end,
     vim.fn.getbufinfo {
