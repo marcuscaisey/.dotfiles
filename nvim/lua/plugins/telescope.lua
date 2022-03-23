@@ -143,7 +143,7 @@ local function create_lsp_definitions_entry(entry)
 end
 
 local function open_in_qflist(prompt_bufnr)
-  actions.smart_add_to_qflist(prompt_bufnr)
+  actions.smart_send_to_qflist(prompt_bufnr)
   actions.open_qflist(prompt_bufnr)
   vim.cmd 'cfirst'
 end
