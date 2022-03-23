@@ -72,6 +72,19 @@ map('n', '<leader>m', function()
   vim.cmd 'cfirst'
 end)
 
+-- open git changes in quickfix
+map('n', '<leader>gm', function()
+  local changed_files =
+    vim.fn.systemlist 'git diff --name-only | sed -e "s@^@$(git rev-parse --show-toplevel)/@" -e "s@$(pwd)/@@" -e "s@$HOME@~@"'
+  vim.fn.setqflist(vim.tbl_map(function(filename)
+    return {
+      filename = filename,
+    }
+  end, changed_files))
+  vim.cmd 'copen'
+  vim.cmd 'cfirst'
+end)
+
 map('n', '<c-n>', function()
   vim.cmd 'Explore'
 end)
