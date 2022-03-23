@@ -3,6 +3,7 @@ local layout = require 'telescope.actions.layout'
 local entry_display = require 'telescope.pickers.entry_display'
 local utils = require 'telescope.utils'
 local actions = require 'telescope.actions'
+local transform_mod = require('telescope.actions.mt').transform_mod
 
 --- Splits a filepath into head / tail where tail is the last path component and
 --- head is everything before it.
@@ -142,11 +143,12 @@ local function create_lsp_definitions_entry(entry)
   }
 end
 
-local function open_in_qflist(prompt_bufnr)
-  actions.smart_send_to_qflist(prompt_bufnr)
-  actions.open_qflist(prompt_bufnr)
-  vim.cmd 'cfirst'
-end
+local custom_actions = transform_mod {
+  open_first_qf_item = function(_)
+    print 'got here'
+    vim.cmd 'cfirst'
+  end,
+}
 
 telescope.setup {
   defaults = {
@@ -161,14 +163,14 @@ telescope.setup {
     mappings = {
       i = {
         ['<c-h>'] = layout.toggle_preview,
-        ['<c-q>'] = open_in_qflist,
+        ['<c-q>'] = actions.smart_send_to_qflist + actions.open_qflist + custom_actions.open_first_qf_item,
       },
       n = {
         ['<c-h>'] = layout.toggle_preview,
         ['<c-c>'] = actions.close,
         ['<c-n>'] = actions.move_selection_next,
         ['<c-p>'] = actions.move_selection_previous,
-        ['<c-q>'] = open_in_qflist,
+        ['<c-q>'] = actions.smart_send_to_qflist + actions.open_qflist + custom_actions.open_first_qf_item,
       },
     },
     sorting_strategy = 'ascending',
