@@ -91,6 +91,11 @@ map('n', '<leader>gc', function()
     table.insert(qf_items, { filename = filename, text = 'added' })
   end
 
+  if #qf_items == 0 then
+    print 'no changed / added files'
+    return
+  end
+
   vim.fn.setqflist(qf_items)
   vim.cmd 'copen'
   vim.cmd 'cfirst'
