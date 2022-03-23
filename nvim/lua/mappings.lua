@@ -73,14 +73,26 @@ map('n', '<leader>m', function()
 end)
 
 -- open git changes in quickfix
-map('n', '<leader>gm', function()
-  local changed_files =
-    vim.fn.systemlist 'git diff --name-only | sed -e "s@^@$(git rev-parse --show-toplevel)/@" -e "s@$(pwd)/@@" -e "s@$HOME@~@"'
-  vim.fn.setqflist(vim.tbl_map(function(filename)
-    return {
-      filename = filename,
-    }
-  end, changed_files))
+map('n', '<leader>gc', function()
+  local path_to_git_root = vim.trim(vim.fn.system 'git rev-parse --show-cdup')
+
+  local changed_files = vim.fn.systemlist 'git diff --numstat'
+  local added_files = vim.fn.systemlist(string.format('git ls-files --others --exclude-standard %s', path_to_git_root))
+
+  local qf_items = {}
+  for _, line in pairs(changed_files) do
+    -- lines are in the format $ADDED\t$DELETED\t$FILENAME
+    local parts = vim.fn.split(line, '\t')
+    table.insert(qf_items, {
+      filename = path_to_git_root .. parts[3],
+      text = string.format('+%s -%s', parts[1], parts[2]),
+    })
+  end
+  for _, filename in pairs(added_files) do
+    table.insert(qf_items, { filename = filename, text = 'added' })
+  end
+
+  vim.fn.setqflist(qf_items)
   vim.cmd 'copen'
   vim.cmd 'cfirst'
 end)
