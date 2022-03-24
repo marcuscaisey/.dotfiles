@@ -111,7 +111,7 @@ map('n', '<leader>gc', function()
   vim.cmd 'cfirst'
 end)
 
-map('n', '<c-n>', function()
+map('n', '-', function()
   vim.cmd 'Explore'
 end)
 
