@@ -73,35 +73,37 @@ end)
 
 -- open git changes in quickfix
 map('n', '<leader>gc', function()
-  local git_root = vim.trim(vim.fn.system 'git rev-parse --show-toplevel')
   local cwd = vim.fn.getcwd()
+  local git_root = vim.trim(vim.fn.system 'git rev-parse --show-toplevel')
 
-  local changed_files = vim.fn.systemlist 'git diff --numstat'
+  local diff_lines = vim.fn.systemlist 'git diff -U0 --no-prefix'
   local added_files = vim.fn.systemlist(string.format('git ls-files --others --exclude-standard %s', git_root))
 
   local qf_items = {}
-  for _, line in pairs(changed_files) do
-    -- lines are in the format $ADDED\t$DELETED\t$FILENAME
-    local parts = vim.fn.split(line, '\t')
-    local added = parts[1]
-    local removed = parts[2]
-    local absolute_filepath = git_root .. '/' .. parts[3]
-    local relative_filepath = vim.trim(
-      vim.fn.system(string.format('realpath --relative-to %s %s', cwd, absolute_filepath))
-    )
 
-    table.insert(qf_items, {
-      filename = relative_filepath,
-      text = string.format('+%s -%s', added, removed),
-    })
+  local current_filename
+  for _, line in pairs(diff_lines) do
+    -- diff --git lua/please.lua lua/please.lua
+    local filename = line:match '^diff %-%-git .+ (.+)'
+    if filename then
+      local absolute_filepath = git_root .. '/' .. filename
+      local relative_filepath = vim.trim(
+        vim.fn.system(string.format('realpath --relative-to %s %s', cwd, absolute_filepath))
+      )
+      current_filename = relative_filepath
+    end
+    -- @@ -4 +4,3 @@ M.test = function()
+    local line_number = line:match '^@@ %-.+ %+(%d+)'
+    if line_number then
+      table.insert(qf_items, {
+        filename = current_filename,
+        text = 'changed',
+        lnum = tonumber(line_number),
+      })
+    end
   end
   for _, filename in pairs(added_files) do
-    table.insert(qf_items, { filename = filename, text = 'added' })
-  end
-
-  if #qf_items == 0 then
-    print 'no changed / added files'
-    return
+    table.insert(qf_items, { filename = filename, lnum = 1, text = 'added' })
   end
 
   vim.fn.setqflist(qf_items)
