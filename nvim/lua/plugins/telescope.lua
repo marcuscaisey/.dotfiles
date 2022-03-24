@@ -145,7 +145,6 @@ end
 
 local custom_actions = transform_mod {
   open_first_qf_item = function(_)
-    print 'got here'
     vim.cmd 'cfirst'
   end,
 }
