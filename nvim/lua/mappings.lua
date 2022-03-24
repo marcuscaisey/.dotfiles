@@ -73,7 +73,9 @@ end)
 
 -- open git changes in quickfix
 map('n', '<leader>gc', function()
+  local git_root = vim.trim(vim.fn.system 'git rev-parse --show-toplevel') .. '/'
   local path_to_git_root = vim.trim(vim.fn.system 'git rev-parse --show-cdup')
+  local cwd = vim.fn.getcwd() .. '/'
 
   local changed_files = vim.fn.systemlist 'git diff --numstat'
   local added_files = vim.fn.systemlist(string.format('git ls-files --others --exclude-standard %s', path_to_git_root))
@@ -82,9 +84,22 @@ map('n', '<leader>gc', function()
   for _, line in pairs(changed_files) do
     -- lines are in the format $ADDED\t$DELETED\t$FILENAME
     local parts = vim.fn.split(line, '\t')
+    local added = parts[1]
+    local removed = parts[2]
+    local absolute_filepath = git_root .. parts[3]
+
+    local filename
+    if absolute_filepath:sub(1, #cwd) == cwd then
+      -- make paths in the cwd relative
+      filename = absolute_filepath:gsub(cwd, '')
+    else
+      -- shorten paths elsewhere by replacing the git root with the path to the git root
+      filename = absolute_filepath:gsub(git_root, path_to_git_root)
+    end
+
     table.insert(qf_items, {
-      filename = path_to_git_root .. parts[3],
-      text = string.format('+%s -%s', parts[1], parts[2]),
+      filename = filename,
+      text = string.format('+%s -%s', added, removed),
     })
   end
   for _, filename in pairs(added_files) do
