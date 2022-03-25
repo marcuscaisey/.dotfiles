@@ -184,3 +184,6 @@ vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('netrw_mappings', { clear = true }),
   desc = 'Map <c-c> to bdelete in netrw buffer',
 })
+
+-- plenary
+map('n', '<leader>pt', '<Plug>PlenaryTestFile')
