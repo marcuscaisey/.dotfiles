@@ -39,7 +39,7 @@ local function create_lsp_document_symbols_entry(entry)
   local displayer = entry_display.create {
     separator = ' ',
     items = {
-      { remaining = true }, -- symbol type
+      { width = 13 }, -- symbol type
       { remaining = true }, -- symbol name
     },
   }
@@ -48,6 +48,44 @@ local function create_lsp_document_symbols_entry(entry)
     return displayer {
       { entry.symbol_type, 'LSPSymbol' .. entry.symbol_type },
       entry.symbol_name,
+    }
+  end
+
+  local symbol_msg = entry.text:gsub('.* | ', '')
+  local symbol_type, symbol_name = symbol_msg:match '%[(.+)%]%s+(.*)'
+  local ordinal = symbol_name .. ' ' .. (symbol_type or 'unknown')
+
+  return {
+    valid = true,
+    value = entry,
+    ordinal = ordinal,
+    display = make_display,
+    filename = entry.filename or vim.api.nvim_buf_get_name(entry.bufnr),
+    lnum = entry.lnum,
+    col = entry.col,
+    symbol_name = symbol_name,
+    symbol_type = symbol_type,
+    start = entry.start,
+    finish = entry.finish,
+  }
+end
+
+-- displays workspace symbols as: type name filepath
+local function create_lsp_dynamic_workspace_symbols_entry(entry)
+  local displayer = entry_display.create {
+    separator = ' ',
+    items = {
+      { width = 13 }, -- symbol type
+      { remaining = true }, -- symbol name
+      { remaining = true }, -- filepath
+    },
+  }
+
+  local make_display = function(entry)
+    return displayer {
+      { entry.symbol_type, 'LSPSymbol' .. entry.symbol_type },
+      entry.symbol_name,
+      { shorten_path(entry.filename), 'TelescopeResultsLineNr' },
     }
   end
 
@@ -219,6 +257,9 @@ telescope.setup {
     },
     lsp_document_symbols = {
       entry_maker = create_lsp_document_symbols_entry,
+    },
+    lsp_dynamic_workspace_symbols = {
+      entry_maker = create_lsp_dynamic_workspace_symbols_entry,
     },
     lsp_references = {
       entry_maker = create_lsp_references_entry,
