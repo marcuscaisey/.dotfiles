@@ -133,6 +133,9 @@ require('packer').startup {
     use 'tpope/vim-unimpaired'
     use {
       'ThePrimeagen/harpoon',
+      config = function()
+        require 'plugins.harpoon'
+      end,
       requires = 'nvim-lua/plenary.nvim',
     }
 
