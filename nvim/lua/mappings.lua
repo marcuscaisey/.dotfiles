@@ -1,9 +1,9 @@
 local telescope = require 'telescope.builtin'
 local neoformat = require 'plugins.neoformat'
 local gitsigns = require 'gitsigns.actions'
--- local neo_tree = require 'neo-tree'
 local harpoon_ui = require 'harpoon.ui'
 local map = require('utils.mappings').map
+local buf_map = require('utils.mappings').buf_map
 
 map('i', 'jj', '<esc>')
 
@@ -111,10 +111,6 @@ map('n', '<leader>gc', function()
   vim.cmd 'cfirst'
 end)
 
-map('n', '-', function()
-  vim.cmd 'Explore'
-end)
-
 -- telescope.nvim
 map('n', '<c-p>', telescope.find_files)
 map('n', '<c-b>', telescope.buffers)
@@ -168,3 +164,17 @@ for n = 1, 4 do
     harpoon_ui.nav_file(n)
   end)
 end
+
+-- netrw
+map('n', '-', function()
+  vim.cmd 'Explore'
+end)
+
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function()
+    buf_map('n', '<c-c>', '<cmd>bdelete<cr>')
+  end,
+  pattern = 'netrw',
+  group = vim.api.nvim_create_augroup('netrw_mappings', { clear = true }),
+  desc = 'Map <c-c> to bdelete in netrw buffer',
+})
