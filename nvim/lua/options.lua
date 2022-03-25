@@ -25,6 +25,7 @@ vim.g.do_filetype_lua = 1
 vim.g.mapleader = ' '
 vim.g.netrw_banner = 0
 vim.g.netrw_list_hide = '\\(^\\|\\s\\s\\)\\zs\\.\\S\\+'
+vim.g.netrw_altfile = 1
 
 vim.filetype.add {
   extension = {
