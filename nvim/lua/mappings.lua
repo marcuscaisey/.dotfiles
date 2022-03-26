@@ -172,10 +172,6 @@ for n = 1, 4 do
 end
 
 -- netrw
-map('n', '-', function()
-  vim.cmd 'Explore'
-end)
-
 vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     buf_map('n', '<c-c>', '<cmd>bdelete<cr>')

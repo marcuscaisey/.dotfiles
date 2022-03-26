@@ -138,6 +138,7 @@ require('packer').startup {
       end,
       requires = 'nvim-lua/plenary.nvim',
     }
+    use 'tpope/vim-vinegar'
 
     -- Text objects
     use {
