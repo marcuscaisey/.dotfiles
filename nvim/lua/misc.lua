@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 vim.api.nvim_create_autocmd('BufWritePost', {
-  command = [[ silent execute '!wollemi --log fatal gofmt' fnamemodify(expand('%:h'), ':.') ]],
+  command = [[ execute '!wollemi --log fatal gofmt' fnamemodify(expand('%:h'), ':.') ]],
   pattern = { '*.go' },
   group = group,
   desc = 'Run wollemi on parent directory of go files on save',
