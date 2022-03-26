@@ -1,3 +1,5 @@
+local Job = require 'plenary.job'
+
 local group = vim.api.nvim_create_augroup('misc', { clear = true })
 
 vim.api.nvim_create_autocmd('BufReadPost', {
@@ -33,7 +35,20 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 vim.api.nvim_create_autocmd('BufWritePost', {
-  command = [[ silent execute '!wollemi --log fatal gofmt' fnamemodify(expand('%:h'), ':.') ]],
+  callback = function()
+    local job = Job:new {
+      command = 'wollemi',
+      args = { 'gofmt' },
+      -- run in the directory of the saved file since wollemi won't run outside of a plz repo
+      cwd = vim.fn.expand '%:p:h',
+      env = {
+        -- wollemi needs GOROOT to be set
+        GOROOT = vim.trim(vim.fn.system 'go env GOROOT'),
+        PATH = vim.fn.getenv 'PATH',
+      },
+    }
+    job:start()
+  end,
   pattern = { '*.go' },
   group = group,
   desc = 'Run wollemi on parent directory of go files on save',
