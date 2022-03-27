@@ -175,6 +175,8 @@ end
 map('n', '-', function()
   neo_tree.execute {
     reveal_force_cwd = true,
+    -- TODO: fix upstream dir option which should just be able to take in '%:p:h' and expand it for us
+    dir = vim.fn.expand '%:p:h',
   }
 end)
 
