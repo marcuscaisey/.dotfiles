@@ -150,6 +150,7 @@ require('packer').startup {
         'MunifTanjim/nui.nvim',
       },
     }
+    use 'nvim-treesitter/playground'
 
     -- Text objects
     use {

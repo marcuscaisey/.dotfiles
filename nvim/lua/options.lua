@@ -65,4 +65,7 @@ require('file_types').setup {
     text_width = 100,
     format_on_save = true,
   },
+  query = {
+    tab_size = 2,
+  },
 }
