@@ -1,9 +1,9 @@
 local telescope = require 'telescope.builtin'
-local neoformat = require 'plugins.neoformat'
 local gitsigns = require 'gitsigns.actions'
 local harpoon_ui = require 'harpoon.ui'
+local neo_tree = require 'neo-tree.command'
 local map = require('utils.mappings').map
-local buf_map = require('utils.mappings').buf_map
+local neoformat = require 'plugins.neoformat'
 
 map('i', 'jj', '<esc>')
 
@@ -171,15 +171,12 @@ for n = 1, 4 do
   end)
 end
 
--- netrw
-vim.api.nvim_create_autocmd('FileType', {
-  callback = function()
-    buf_map('n', '<c-c>', '<cmd>bdelete<cr>')
-  end,
-  pattern = 'netrw',
-  group = vim.api.nvim_create_augroup('netrw_mappings', { clear = true }),
-  desc = 'Map <c-c> to bdelete in netrw buffer',
-})
+-- neo-tree
+map('n', '-', function()
+  neo_tree.execute {
+    reveal_force_cwd = true,
+  }
+end)
 
 -- plenary
 map('n', '<leader>pt', '<Plug>PlenaryTestFile')

@@ -138,7 +138,18 @@ require('packer').startup {
       end,
       requires = 'nvim-lua/plenary.nvim',
     }
-    use 'tpope/vim-vinegar'
+    use {
+      'nvim-neo-tree/neo-tree.nvim',
+      branch = 'v2.x',
+      config = function()
+        require 'plugins.neo_tree'
+      end,
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'kyazdani42/nvim-web-devicons',
+        'MunifTanjim/nui.nvim',
+      },
+    }
 
     -- Text objects
     use {
