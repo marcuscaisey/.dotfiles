@@ -53,15 +53,3 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   group = group,
   desc = 'Run wollemi on parent directory of go files on save',
 })
-
-vim.api.nvim_create_autocmd('BufEnter', {
-  callback = function()
-    -- winbufnr == -1 when the buffer doesn't exist, i.e. there's no second buffer and we're in the last buffer of the
-    -- window
-    if vim.bo.buftype == 'quickfix' and vim.fn.winbufnr(2) == -1 then
-      vim.cmd 'quit'
-    end
-  end,
-  group = group,
-  desc = 'Quit vim if quickfix is last open buffer',
-})
