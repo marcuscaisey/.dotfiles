@@ -64,7 +64,7 @@ alias vim=nvim
 
 # git
 alias oops="gau && gcn!"
-alias conflicts='vim -q <(git diff --name-only --diff-filter=U | sed -e "s@^@$(git rev-parse --show-cdup)/@" -e "s/$/:1:conflicts/") +copen'
+alias conflicts='vim -q <(git diff --name-only --diff-filter=U | sed -e "s@^@$(git rev-parse --show-toplevel)/@" -e "s/$/:1:conflicts/" | xargs realpath --relative-to $(pwd)) +copen'
 alias gcfd="git clean -fd"
 
 alias d="cd ~/.dotfiles"
