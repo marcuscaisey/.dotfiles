@@ -151,6 +151,10 @@ require('packer').startup {
       },
     }
     use 'nvim-treesitter/playground'
+    use {
+      'marcuscaisey/please.nvim',
+      branch = 'jump-to-target',
+    }
 
     -- Text objects
     use {

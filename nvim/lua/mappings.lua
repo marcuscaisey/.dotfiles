@@ -2,6 +2,7 @@ local telescope = require 'telescope.builtin'
 local gitsigns = require 'gitsigns.actions'
 local harpoon_ui = require 'harpoon.ui'
 local neo_tree = require 'neo-tree.command'
+local please = require 'please'
 local map = require('utils.mappings').map
 local neoformat = require 'plugins.neoformat'
 
@@ -182,3 +183,8 @@ end)
 
 -- plenary
 map('n', '<leader>pt', '<Plug>PlenaryTestFile')
+
+-- please.nvim
+map('n', '<leader>pj', function()
+  please.run_command 'jump_to_target'
+end)
