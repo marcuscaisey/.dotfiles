@@ -152,7 +152,7 @@ require('packer').startup {
     }
     use 'nvim-treesitter/playground'
     use {
-      'marcuscaisey/please.nvim',
+      '~/scratch/please.nvim',
       branch = 'jump-to-target',
     }
 
