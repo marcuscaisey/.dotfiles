@@ -185,6 +185,4 @@ end)
 map('n', '<leader>pt', '<Plug>PlenaryTestFile')
 
 -- please.nvim
-map('n', '<leader>pj', function()
-  please.run_command 'jump_to_target'
-end)
+map('n', '<leader>pj', please.jump_to_target)
