@@ -217,8 +217,12 @@ telescope.setup {
   },
   pickers = {
     find_files = {
+      previewer = false,
       layout_config = {
-        preview_width = 0.4,
+        horizontal = {
+          width = 0.5,
+          height = 0.7,
+        },
       },
       find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix', '--follow', '--hidden', '--exclude', '.git' },
     },
