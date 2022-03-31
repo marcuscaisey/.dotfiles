@@ -22,6 +22,10 @@ if linux; then
   plugins=(kubectl kube-ps1 $plugins)
 fi
 
+if osx; then
+  plugins=(docker $plugins)
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 
