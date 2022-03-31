@@ -68,4 +68,7 @@ require('file_types').setup {
   query = {
     tab_size = 2,
   },
+  zsh = {
+    tab_size = 2,
+  },
 }
