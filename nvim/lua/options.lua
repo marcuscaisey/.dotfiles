@@ -71,4 +71,7 @@ require('file_types').setup {
   zsh = {
     tab_size = 2,
   },
+  markdown = {
+    text_width = 100,
+  },
 }
