@@ -39,7 +39,6 @@ require('packer').startup {
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-nvim-lua',
         'hrsh7th/cmp-buffer',
-        'onsails/lspkind-nvim',
       },
     }
     use {
