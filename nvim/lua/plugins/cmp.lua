@@ -73,3 +73,5 @@ cmp.setup {
     comparators = { cmp.config.compare.sort_text },
   },
 }
+
+cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())

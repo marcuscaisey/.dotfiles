@@ -89,6 +89,12 @@ require('packer').startup {
     }
     use 'tpope/vim-eunuch'
     use 'tpope/vim-repeat'
+    use {
+      'windwp/nvim-autopairs',
+      config = function()
+        require('nvim-autopairs').setup()
+      end,
+    }
     use 'vim-scripts/ReplaceWithRegister'
     use {
       'tpope/vim-commentary',
