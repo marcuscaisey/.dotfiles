@@ -41,8 +41,6 @@ map('n', '<leader>cd', '<cmd>cd %:h<cr>:pwd<cr>')
 
 map('t', '<esc>', '<c-\\><c-n>')
 
-map('n', 'q:', '<nop>')
-
 -- toggle quickfix
 map('n', '<leader>q', function()
   local qf_window_id = vim.fn.getqflist({ winid = 0 }).winid
