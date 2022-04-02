@@ -27,6 +27,11 @@ require('neo-tree').setup {
         ['l'] = 'open',
         ['h'] = 'close_node',
         ['-'] = 'navigate_up',
+        ['<c-]>'] = 'set_root',
+        ['.'] = function(state)
+          vim.api.nvim_set_current_dir(state.path)
+          print(string.format('cwd set to %s', state.path))
+        end,
       },
     },
     renderers = {
