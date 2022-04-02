@@ -32,6 +32,7 @@ require('neo-tree').setup {
           vim.api.nvim_set_current_dir(state.path)
           print(string.format('cwd set to %s', state.path))
         end,
+        ['D'] = 'delete',
       },
     },
     renderers = {
