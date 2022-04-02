@@ -45,6 +45,10 @@ require('neo-tree').setup {
           vim.api.nvim_set_current_dir(state.path)
           print(string.format('cwd set to %s', state.path))
         end,
+        ['a'] = function(state)
+          -- workaround for default add handler resetting the tree root to cwd when adding a file / directory
+          require('neo-tree.sources.common.commands').add(state)
+        end,
       },
     },
     renderers = {
