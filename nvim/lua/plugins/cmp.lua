@@ -37,6 +37,7 @@ local function should_tab_out()
   end
   return brackets[next_char] == true
 end
+
 cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
@@ -73,5 +74,3 @@ cmp.setup {
     comparators = { cmp.config.compare.sort_text },
   },
 }
-
-cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
