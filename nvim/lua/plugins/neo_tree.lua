@@ -21,6 +21,19 @@ require('neo-tree').setup {
   window = {
     position = 'current',
   },
+  event_handlers = {
+    -- Workaround for default mapping to delete node (d) clashing with mappings which start with d, like ds and dK. When
+    -- d is pressed, nvim waits for a second keypress for a bit incase a second letter is coming, meaning that there's a
+    -- delay before the "are you sure?" prompt appears. Mapping with nowait stops this.
+    {
+      event = 'after_render',
+      handler = function(state)
+        vim.keymap.set('n', 'd', function()
+          require('neo-tree.sources.filesystem.commands').delete(state)
+        end, { buffer = state.bufnr, silent = true, nowait = true })
+      end,
+    },
+  },
   filesystem = {
     window = {
       mappings = {
@@ -32,7 +45,6 @@ require('neo-tree').setup {
           vim.api.nvim_set_current_dir(state.path)
           print(string.format('cwd set to %s', state.path))
         end,
-        ['D'] = 'delete',
       },
     },
     renderers = {
