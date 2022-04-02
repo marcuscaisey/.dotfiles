@@ -157,7 +157,6 @@ require('packer').startup {
         require('tabout').setup()
       end,
       requires = { 'nvim-treesitter' },
-      after = { 'nvim-cmp' },
     }
 
     -- Text objects
