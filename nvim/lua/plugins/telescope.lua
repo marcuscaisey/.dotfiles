@@ -26,6 +26,8 @@ local function shorten_path(path)
   if path == cwd then
     return ''
   end
+  -- need to escape - since its a special character in lua patterns
+  cwd = cwd:gsub('%-', '%%-')
   local relative_path, replacements = path:gsub('^' .. cwd .. '/', '')
   if replacements == 1 then
     return relative_path
