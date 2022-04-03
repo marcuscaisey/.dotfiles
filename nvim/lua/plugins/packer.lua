@@ -151,13 +151,6 @@ require('packer').startup {
     }
     use 'nvim-treesitter/playground'
     use '~/scratch/please.nvim'
-    use {
-      'abecodes/tabout.nvim',
-      config = function()
-        require('tabout').setup()
-      end,
-      requires = { 'nvim-treesitter' },
-    }
 
     -- Text objects
     use {
