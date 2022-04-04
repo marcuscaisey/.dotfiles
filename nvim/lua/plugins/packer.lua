@@ -93,9 +93,9 @@ require('packer').startup {
     }
     use 'tpope/vim-surround'
     use {
-      'ggandor/lightspeed.nvim',
+      'ggandor/leap.nvim',
       config = function()
-        require 'plugins.lightspeed'
+        require 'plugins.leap'
       end,
     }
     use {

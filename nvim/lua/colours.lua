@@ -20,24 +20,10 @@ vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticWar
 vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticHint' })
 vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticInfo' })
 
--- lightspeed
-highlight.create('LightspeedLabel', { fg = gruvbox.bright_purple, bold = true, undercurl = true })
-highlight.link('LightspeedGreyWash', 'Comment')
-highlight.create(
-  'LightspeedShortcut',
-  { fg = gruvbox.dark0, bg = gruvbox.bright_purple, bold = true, undercurl = true }
-)
-highlight.create('LightspeedMaskedChar', { fg = gruvbox.neutral_red })
-highlight.create('LightspeedUnlabeledMatch', { fg = gruvbox.light1, bold = true })
-highlight.create('LightspeedLabelDistant', { fg = gruvbox.bright_blue, bold = true, undercurl = true })
-highlight.create('LightspeedOneCharMatch', { fg = gruvbox.dark0, bg = gruvbox.bright_purple, bold = true })
-highlight.create('LightspeedPendingOpArea', { fg = gruvbox.dark0, bg = gruvbox.bright_purple })
-highlight.create('LightspeedLabelOverlapped', { fg = gruvbox.faded_purple, undercurl = true })
-highlight.create(
-  'LightspeedShortcutOverlapped',
-  { fg = gruvbox.dark0, bg = gruvbox.bright_purple, bold = true, undercurl = true }
-)
-highlight.create('LightspeedLabelDistantOverlapped', { fg = gruvbox.faded_blue, undercurl = true })
+-- leap
+highlight.create('LeapMatch', { fg = gruvbox.bright_aqua, underline = true })
+highlight.create('LeapLabelPrimary', { fg = gruvbox.dark0, bg = gruvbox.bright_aqua })
+highlight.create('LeapLabelSecondary', { fg = gruvbox.dark0, bg = gruvbox.bright_blue })
 
 -- galaxyline
 local mode_to_colour = {
