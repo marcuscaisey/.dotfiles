@@ -194,6 +194,7 @@ telescope.setup {
     layout_config = {
       horizontal = {
         width = 0.9,
+        height = 0.9,
         prompt_position = 'top',
         preview_width = 0.5,
       },
@@ -220,26 +221,30 @@ telescope.setup {
   pickers = {
     find_files = {
       layout_config = {
-        preview_width = 0.4,
+        width = 0.6,
+        height = 0.6,
       },
+      previewer = false,
       find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix', '--follow', '--hidden', '--exclude', '.git' },
     },
     oldfiles = {
       layout_config = {
-        preview_width = 0.4,
+        width = 0.6,
+        height = 0.6,
       },
+      previewer = false,
       path_display = function(opts, path)
         return shorten_path(path)
       end,
     },
     buffers = {
       layout_config = {
-        width = 0.5,
-        height = 0.5,
+        width = 0.6,
+        height = 0.6,
       },
+      previewer = false,
       sort_mru = true,
       ignore_current_buffer = true,
-      previewer = false,
       mappings = {
         i = {
           ['<c-d>'] = 'delete_buffer',
