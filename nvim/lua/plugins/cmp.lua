@@ -2,20 +2,22 @@ local cmp = require 'cmp'
 
 local source_name_to_menu = {
   nvim_lsp = '[LSP]',
-  buffer = '[BUF]',
+  buffer = '[BUFFER]',
   nvim_lua = '[LUA]',
+  luasnip = '[SNIP]',
 }
 
 cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'luasnip' },
     { name = 'buffer' },
     { name = 'nvim_lua' },
     { name = 'nvim_lsp_signature_help' },
   },
   snippet = {
     expand = function(args)
-      vim.fn['vsnip#anonymous'](args.body)
+      require('luasnip').lsp_expand(args.body)
     end,
   },
   completion = {

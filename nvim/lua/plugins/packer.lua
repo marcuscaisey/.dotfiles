@@ -29,12 +29,17 @@ require('packer').startup {
         require 'plugins.cmp'
       end,
     }
-    use 'hrsh7th/vim-vsnip'
-    use 'hrsh7th/cmp-vsnip'
+    use 'saadparwaiz1/cmp_luasnip'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-nvim-lua'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-nvim-lsp-signature-help'
+    use {
+      'L3MON4D3/LuaSnip',
+      config = function()
+        require 'plugins.luasnip'
+      end,
+    }
     use {
       'NTBBloodbath/galaxyline.nvim',
       config = function()

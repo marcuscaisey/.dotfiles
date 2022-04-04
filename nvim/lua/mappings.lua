@@ -1,3 +1,5 @@
+local ls = require 'luasnip'
+local cmp = require 'cmp'
 local tsutils = require 'nvim-treesitter.ts_utils'
 local telescope = require 'telescope.builtin'
 local gitsigns = require 'gitsigns.actions'
@@ -200,3 +202,22 @@ map('n', '<leader>pt', '<Plug>PlenaryTestFile')
 
 -- please.nvim
 map('n', '<leader>pj', please.jump_to_target)
+
+-- luasnip
+map({ 'i', 's' }, '<c-j>', function()
+  if ls.expand_or_jumpable() then
+    ls.expand_or_jump()
+    return
+  end
+  if cmp.visible() then
+    local selected_entry = cmp.get_selected_entry()
+    if selected_entry and selected_entry.completion_item.kind == vim.lsp.protocol.CompletionItemKind.Snippet then
+      cmp.confirm()
+    end
+  end
+end)
+map({ 'i', 's' }, '<c-k>', function()
+  if ls.jumpable(-1) then
+    ls.jump(-1)
+  end
+end)
