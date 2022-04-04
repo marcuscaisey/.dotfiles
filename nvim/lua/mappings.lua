@@ -144,8 +144,8 @@ map('n', 'gd', telescope.lsp_definitions)
 map('n', 'ge', telescope.lsp_references)
 map('n', '<leader>ht', telescope.help_tags)
 map('n', '<leader>of', telescope.oldfiles)
-map('n', '<leader>t', telescope.builtin)
-map('n', '<leader>r', telescope.resume)
+map('n', '<leader>tt', telescope.builtin)
+map('n', '<leader>tr', telescope.resume)
 
 -- lsp
 map('n', 'K', vim.lsp.buf.hover)
@@ -176,7 +176,6 @@ map('n', '<leader>hu', gitsigns.undo_stage_hunk)
 map({ 'n', 'v' }, '<leader>hr', '<cmd>Gitsigns reset_hunk<cr>')
 map('n', '<leader>hR', gitsigns.reset_buffer)
 map('n', '<leader>hp', gitsigns.preview_hunk)
-map('n', '<leader>td', gitsigns.toggle_deleted)
 map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
 
 -- harpoon
