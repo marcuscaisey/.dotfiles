@@ -220,3 +220,4 @@ map({ 'i', 's' }, '<c-k>', function()
     ls.jump(-1)
   end
 end)
+map('n', '<leader><leader>s', '<cmd>source ~/.dotfiles/nvim/lua/plugins/luasnip.lua<cr>')
