@@ -42,20 +42,16 @@ map('n', '<leader>cd', '<cmd>cd %:h<cr>:pwd<cr>')
 
 map('t', '<esc>', '<c-\\><c-n>')
 
--- jump past closing pair characters with <tab>
-local close_chars = { "'", '"', '`', '}', ')', ']' }
-map('i', '<tab>', function()
+-- jump past closing pair character with <c-l>
+local closing_chars = { "'", '"', '`', '}', ')', ']' }
+map('i', '<c-l>', function()
   local node = tsutils.get_node_at_cursor()
   local text = tsutils.get_node_text(node)[1]
   local last_char = text:sub(#text)
 
-  local end_line, end_col = node:end_()
-  local cursor_line, cursor_col = vim.fn.line '.' - 1, vim.fn.col '.'
-
-  if cursor_line == end_line and cursor_col == end_col and vim.tbl_contains(close_chars, last_char) then
-    vim.api.nvim_win_set_cursor(0, { end_line + 1, end_col })
-  else
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<c-v><tab>', false, false, true), 'i', false)
+  if vim.tbl_contains(closing_chars, last_char) then
+    local line, col = node:end_()
+    vim.api.nvim_win_set_cursor(0, { line + 1, col })
   end
 end)
 
