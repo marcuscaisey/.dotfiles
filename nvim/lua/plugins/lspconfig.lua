@@ -2,9 +2,9 @@ local lspconfig = require 'lspconfig'
 local util = require 'lspconfig.util'
 
 -- sumneko setup
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, 'lua/?.lua')
-table.insert(runtime_path, 'lua/?/init.lua')
+local lua_runtime_path = vim.split(package.path, ';')
+table.insert(lua_runtime_path, 'lua/?.lua')
+table.insert(lua_runtime_path, 'lua/?/init.lua')
 -- Don't add ~/.config/nvim to the LSP libraries because that's just a symlink
 -- to ~/.dotfiles/nvim/lua, so when we're in ~/.dotfiles/nvim/lua we end up
 -- with duplicate symbols
@@ -16,23 +16,6 @@ for _, file in ipairs(runtime_files) do
     table.insert(lua_library, file)
   end
 end
-lspconfig.sumneko_lua.setup {
-  cmd = { 'lua-language-server' },
-  settings = {
-    Lua = {
-      runtime = {
-        version = 'LuaJIT',
-        path = runtime_path,
-      },
-      diagnostics = {
-        globals = { 'vim' },
-      },
-      workspace = {
-        library = lua_library,
-      },
-    },
-  },
-}
 
 require('lspconfig.configs').please = {
   default_config = {
@@ -79,6 +62,23 @@ local servers = {
             '/home/mcaisey/core3/src',
             '/home/mcaisey/core3/src/plz-out/gen',
           },
+        },
+      },
+    },
+  },
+  sumneko_lua = {
+    cmd = { 'lua-language-server' },
+    settings = {
+      Lua = {
+        runtime = {
+          version = 'LuaJIT',
+          path = lua_runtime_path,
+        },
+        diagnostics = {
+          globals = { 'vim' },
+        },
+        workspace = {
+          library = lua_library,
         },
       },
     },
