@@ -39,13 +39,8 @@ require('packer').startup {
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-nvim-lua',
         'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-nvim-lsp-signature-help',
       },
-    }
-    use {
-      'ray-x/lsp_signature.nvim',
-      config = function()
-        require 'plugins.lsp_signature'
-      end,
     }
 
     -- UI

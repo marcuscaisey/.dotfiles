@@ -5,6 +5,7 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'nvim_lua' },
+    { name = 'nvim_lsp_signature_help' },
   },
   snippet = {
     expand = function(args)
