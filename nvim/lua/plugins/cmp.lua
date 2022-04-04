@@ -1,5 +1,11 @@
 local cmp = require 'cmp'
 
+local source_name_to_menu = {
+  nvim_lsp = '[LSP]',
+  buffer = '[BUF]',
+  nvim_lua = '[LUA]',
+}
+
 cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
@@ -33,5 +39,11 @@ cmp.setup {
   },
   sorting = {
     comparators = { cmp.config.compare.sort_text },
+  },
+  formatting = {
+    format = function(entry, vim_item)
+      vim_item.menu = source_name_to_menu[entry.source.name]
+      return vim_item
+    end,
   },
 }
