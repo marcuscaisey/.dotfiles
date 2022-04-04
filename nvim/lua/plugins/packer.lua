@@ -13,11 +13,10 @@ require('packer').startup {
       config = function()
         require 'plugins.treesitter'
       end,
-      requires = {
-        'nvim-treesitter/nvim-treesitter-textobjects',
-        'romgrk/nvim-treesitter-context',
-      },
     }
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use 'romgrk/nvim-treesitter-context'
+    use 'nvim-treesitter/playground'
     use {
       'neovim/nvim-lspconfig',
       config = function()
@@ -29,15 +28,13 @@ require('packer').startup {
       config = function()
         require 'plugins.cmp'
       end,
-      requires = {
-        'hrsh7th/vim-vsnip',
-        'hrsh7th/cmp-vsnip',
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-nvim-lua',
-        'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-nvim-lsp-signature-help',
-      },
     }
+    use 'hrsh7th/vim-vsnip'
+    use 'hrsh7th/cmp-vsnip'
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-nvim-lua'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-nvim-lsp-signature-help'
     use {
       'NTBBloodbath/galaxyline.nvim',
       config = function()
@@ -68,11 +65,11 @@ require('packer').startup {
       requires = {
         'nvim-lua/popup.nvim',
         'nvim-lua/plenary.nvim',
-        {
-          'nvim-telescope/telescope-fzf-native.nvim',
-          run = 'make',
-        },
       },
+    }
+    use {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      run = 'make',
     }
     use 'tpope/vim-eunuch'
     use 'tpope/vim-repeat'
@@ -136,7 +133,6 @@ require('packer').startup {
         'MunifTanjim/nui.nvim',
       },
     }
-    use 'nvim-treesitter/playground'
     use '~/scratch/please.nvim'
     use {
       'kana/vim-textobj-entire',
