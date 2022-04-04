@@ -5,6 +5,7 @@ local source_name_to_menu = {
   buffer = '[BUFFER]',
   nvim_lua = '[LUA]',
   luasnip = '[SNIP]',
+  path = '[PATH]',
 }
 
 cmp.setup {
@@ -14,6 +15,7 @@ cmp.setup {
     { name = 'buffer' },
     { name = 'nvim_lua' },
     { name = 'nvim_lsp_signature_help' },
+    { name = 'path' },
   },
   snippet = {
     expand = function(args)
