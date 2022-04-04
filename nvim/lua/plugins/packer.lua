@@ -7,8 +7,6 @@ end
 require('packer').startup {
   function(use)
     use 'wbthomason/packer.nvim'
-
-    -- Syntax
     use {
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
@@ -20,8 +18,6 @@ require('packer').startup {
         'romgrk/nvim-treesitter-context',
       },
     }
-
-    -- Completion
     use {
       'neovim/nvim-lspconfig',
       config = function()
@@ -42,8 +38,6 @@ require('packer').startup {
         'hrsh7th/cmp-nvim-lsp-signature-help',
       },
     }
-
-    -- UI
     use {
       'NTBBloodbath/galaxyline.nvim',
       config = function()
@@ -66,8 +60,6 @@ require('packer').startup {
         require('colorizer').setup()
       end,
     }
-
-    -- Command
     use {
       'nvim-telescope/telescope.nvim',
       config = function()
@@ -146,8 +138,6 @@ require('packer').startup {
     }
     use 'nvim-treesitter/playground'
     use '~/scratch/please.nvim'
-
-    -- Text objects
     use {
       'kana/vim-textobj-entire',
       requires = 'kana/vim-textobj-user',
