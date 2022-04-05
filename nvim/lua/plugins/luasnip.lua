@@ -1,11 +1,15 @@
 local ls = require 'luasnip'
+local s = ls.snippet
+local i = ls.insert_node
+local fmt = require('luasnip.extras.fmt').fmt
+local nonempty = require('luasnip.extras').nonempty
 
 ls.config.setup {
   updateevents = 'TextChanged,TextChangedI',
 }
 
 ls.add_snippets('lua', {
-  ls.parser.parse_snippet('func', 'function ${1:name}($2)\n  $0\nend'),
+  s('func', fmt('function{}{}({})\n  {}\nend', { nonempty(1, ' ', ''), i(1), i(2), i(0) })),
   ls.parser.parse_snippet('lfunc', 'local ${1:name} = function($2)\n  $0\nend'),
   ls.parser.parse_snippet('mfunc', '${1:M}.${2:name} = function($3)\n  $0\nend'),
   ls.parser.parse_snippet('for', 'for ${1:k}, ${2:v} in pairs(${3:t}) do\n  $0\nend'),
@@ -13,4 +17,5 @@ ls.add_snippets('lua', {
   ls.parser.parse_snippet('p', 'print($1)$0'),
   ls.parser.parse_snippet('i', 'vim.inspect($1)$0'),
   ls.parser.parse_snippet('pi', 'print(vim.inspect($1))$0'),
+  ls.parser.parse_snippet('req', "local $1 = require '$2'$0"),
 }, { key = 'lua' })
