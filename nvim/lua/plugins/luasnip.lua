@@ -5,6 +5,7 @@ local fmt = require('luasnip.extras.fmt').fmt
 local nonempty = require('luasnip.extras').nonempty
 
 ls.config.setup {
+  history = true,
   updateevents = 'TextChanged,TextChangedI',
 }
 
