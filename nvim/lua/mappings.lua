@@ -206,13 +206,6 @@ map('n', '<leader>pj', please.jump_to_target)
 map({ 'i', 's' }, '<c-j>', function()
   if ls.expand_or_jumpable() then
     ls.expand_or_jump()
-    return
-  end
-  if cmp.visible() then
-    local selected_entry = cmp.get_selected_entry()
-    if selected_entry and selected_entry.completion_item.kind == vim.lsp.protocol.CompletionItemKind.Snippet then
-      cmp.confirm()
-    end
   end
 end)
 map({ 'i', 's' }, '<c-k>', function()
