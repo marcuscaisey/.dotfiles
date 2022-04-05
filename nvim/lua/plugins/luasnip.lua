@@ -18,6 +18,6 @@ ls.add_snippets('lua', {
   ls.parser.parse_snippet('then', 'then\n  $0\nend'),
   ls.parser.parse_snippet('pr', 'print($1)$0'),
   ls.parser.parse_snippet('in', 'vim.inspect($1)$0'),
-  ls.parser.parse_snippet('pin', 'print(vim.inspect($1))$0'),
+  ls.parser.parse_snippet('prin', 'print(vim.inspect($1))$0'),
   ls.parser.parse_snippet('req', "local $1 = require '$2'$0"),
 }, { key = 'lua' })
