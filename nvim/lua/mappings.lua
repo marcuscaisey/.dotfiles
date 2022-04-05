@@ -48,8 +48,8 @@ map('t', '<esc>', '<c-\\><c-n>')
 local closing_chars = { "'", '"', '`', '}', ')', ']' }
 map('i', '<c-l>', function()
   local node = tsutils.get_node_at_cursor()
-  local text = tsutils.get_node_text(node)[1]
-  local last_char = text:sub(#text)
+  local node_text = table.concat(tsutils.get_node_text(node))
+  local last_char = node_text:sub(#node_text)
 
   if vim.tbl_contains(closing_chars, last_char) then
     local line, col = node:end_()
