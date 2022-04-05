@@ -80,6 +80,9 @@ local servers = {
         workspace = {
           library = lua_library,
         },
+        completion = {
+          keywordSnippet = 'Disable',
+        },
       },
     },
   },
