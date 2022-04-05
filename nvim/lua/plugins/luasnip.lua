@@ -15,8 +15,8 @@ ls.add_snippets('lua', {
   ls.parser.parse_snippet('for', 'for ${1:k}, ${2:v} in pairs(${3:t}) do\n  $0\nend'),
   ls.parser.parse_snippet('fori', 'for ${1:_}, ${2:v} in ipairs(${3:t}) do\n  $0\nend'),
   ls.parser.parse_snippet('if', 'if $1 then\n  $0\nend'),
-  ls.parser.parse_snippet('p', 'print($1)$0'),
-  ls.parser.parse_snippet('i', 'vim.inspect($1)$0'),
-  ls.parser.parse_snippet('pi', 'print(vim.inspect($1))$0'),
+  ls.parser.parse_snippet('pr', 'print($1)$0'),
+  ls.parser.parse_snippet('in', 'vim.inspect($1)$0'),
+  ls.parser.parse_snippet('pin', 'print(vim.inspect($1))$0'),
   ls.parser.parse_snippet('req', "local $1 = require '$2'$0"),
 }, { key = 'lua' })
