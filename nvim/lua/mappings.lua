@@ -52,8 +52,12 @@ map('i', '<c-l>', function()
   local last_char = node_text:sub(#node_text)
 
   if vim.tbl_contains(closing_chars, last_char) then
-    local line, col = node:end_()
-    vim.api.nvim_win_set_cursor(0, { line + 1, col })
+    local node_end_line, node_end_col = tsutils.get_vim_range { node:end_() }
+    local last_buf_line, last_buf_col = vim.fn.line '$', vim.fn.col '$'
+    if node_end_line <= last_buf_line and node_end_col <= last_buf_col then
+      local jump_pos = { node_end_line, node_end_col - 1 } -- cursor col is 0-indexed
+      vim.api.nvim_win_set_cursor(0, jump_pos)
+    end
   end
 end)
 
