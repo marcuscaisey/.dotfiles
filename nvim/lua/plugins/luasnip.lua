@@ -10,7 +10,7 @@ ls.config.setup {
 }
 
 ls.add_snippets('lua', {
-  s('func', fmt('function{}{}({})\n  {}\nend', { nonempty(1, ' ', ''), i(1), i(2), i(0) })),
+  s('func', fmt('function{}{}({})\n  {}\nend{}', { nonempty(1, ' ', ''), i(1), i(2), i(3), i(0) })),
   ls.parser.parse_snippet('lfunc', 'local ${1:name} = function($2)\n  $0\nend'),
   ls.parser.parse_snippet('mfunc', '${1:M}.${2:name} = function($3)\n  $0\nend'),
   ls.parser.parse_snippet('for', 'for ${1:k}, ${2:v} in pairs(${3:t}) do\n  $0\nend'),
