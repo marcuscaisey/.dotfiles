@@ -201,7 +201,7 @@ map('n', '-', function()
 end)
 
 -- plenary
-map('n', '<leader>pt', '<Plug>PlenaryTestFile')
+map('n', '<leader>lt', '<Plug>PlenaryTestFile')
 
 -- please.nvim
 map('n', '<leader>pj', please.jump_to_target)
