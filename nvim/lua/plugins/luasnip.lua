@@ -21,4 +21,12 @@ ls.add_snippets('lua', {
   ls.parser.parse_snippet('in', 'vim.inspect($1)$0'),
   ls.parser.parse_snippet('prin', 'print(vim.inspect($1))$0'),
   ls.parser.parse_snippet('req', "local $1 = require '$2'$0"),
-}, { key = 'lua' })
+}, {
+  key = 'lua',
+})
+
+ls.add_snippets('go', {
+  s('func', fmt('func {}({}) {}{}{{\n\t{}\n}}', { i(1, 'name'), i(2), i(3), nonempty(3, ' ', ''), i(0) })),
+}, {
+  key = 'go',
+})
