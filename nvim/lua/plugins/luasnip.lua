@@ -1,6 +1,7 @@
 local ls = require 'luasnip'
 local s = ls.snippet
 local i = ls.insert_node
+local f = ls.function_node
 local fmt = require('luasnip.extras.fmt').fmt
 local nonempty = require('luasnip.extras').nonempty
 
@@ -20,7 +21,20 @@ ls.add_snippets('lua', {
   ls.parser.parse_snippet('pr', 'print($1)$0'),
   ls.parser.parse_snippet('in', 'vim.inspect($1)$0'),
   ls.parser.parse_snippet('prin', 'print(vim.inspect($1))$0'),
-  ls.parser.parse_snippet('req', "local $1 = require '$2'$0"),
+  -- ls.parser.parse_snippet('req', "local $1 = require '$2'$0"),
+  s(
+    'req',
+    fmt("local {} = require '{}'{}", {
+      f(function(args)
+        local parts = vim.split(args[1][1], '.', true)
+        return parts[#parts] or ''
+      end, {
+        1,
+      }),
+      i(1),
+      i(0),
+    })
+  ),
 }, {
   key = 'lua',
 })
