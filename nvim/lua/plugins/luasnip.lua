@@ -12,10 +12,10 @@ ls.config.setup {
 
 ls.add_snippets('lua', {
   s('func', fmt('function{}{}({})\n  {}\nend{}', { nonempty(1, ' ', ''), i(1), i(2), i(3), i(0) })),
-  ls.parser.parse_snippet('lfunc', 'local $1 = function($2)\n  $0\nend'),
-  ls.parser.parse_snippet('mfunc', '$1.$2 = function($3)\n  $0\nend'),
-  ls.parser.parse_snippet('for', 'for $1, $2 in pairs($3) do\n  $0\nend'),
-  ls.parser.parse_snippet('fori', 'for $1, $2 in ipairs($3) do\n  $0\nend'),
+  ls.parser.parse_snippet('lfunc', 'local ${1:name} = function($2)\n  $0\nend'),
+  ls.parser.parse_snippet('mfunc', '${1:M}.${2:name} = function($3)\n  $0\nend'),
+  ls.parser.parse_snippet('for', 'for ${1:k}, ${2:v} in pairs(${3:t}) do\n  $0\nend'),
+  ls.parser.parse_snippet('fori', 'for ${1:_}, ${2:v} in ipairs(${3:t}) do\n  $0\nend'),
   ls.parser.parse_snippet('if', 'if $1 then\n  $0\nend'),
   ls.parser.parse_snippet('then', 'then\n  $0\nend'),
   ls.parser.parse_snippet('pr', 'print($1)$0'),
@@ -27,9 +27,7 @@ ls.add_snippets('lua', {
       f(function(args)
         local parts = vim.split(args[1][1], '.', true)
         return parts[#parts] or ''
-      end, {
-        1,
-      }),
+      end, { 1 }),
       i(1),
       i(0),
     })
