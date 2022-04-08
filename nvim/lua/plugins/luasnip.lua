@@ -27,7 +27,9 @@ ls.add_snippets('lua', {
       f(function(args)
         local parts = vim.split(args[1][1], '.', true)
         return parts[#parts] or ''
-      end, { 1 }),
+      end, {
+        1,
+      }),
       i(1),
       i(0),
     })
@@ -38,6 +40,7 @@ ls.add_snippets('lua', {
 
 ls.add_snippets('go', {
   s('func', fmt('func {}({}) {}{}{{\n\t{}\n}}', { i(1, 'name'), i(2), i(3), nonempty(3, ' ', ''), i(0) })),
+  ls.parser.parse_snippet('if', 'if $1 {\n\t$0\n}'),
 }, {
   key = 'go',
 })
