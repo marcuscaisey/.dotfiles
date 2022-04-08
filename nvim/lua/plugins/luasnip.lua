@@ -42,7 +42,10 @@ ls.add_snippets('lua', {
 })
 
 ls.add_snippets('go', {
-  s('func', fmt('func {}({}) {}{}{{\n\t{}\n}}', { i(1, 'name'), i(2), i(3), nonempty(3, ' ', ''), i(0) })),
+  s(
+    'func',
+    fmt('func{}{}({}) {}{}{{\n\t{}\n}}', { nonempty(1, ' ', ''), i(1), i(2), i(3), nonempty(3, ' ', ''), i(0) })
+  ),
   ls.parser.parse_snippet('if', 'if $1 {\n\t$0\n}'),
   ls.parser.parse_snippet('pr', 'fmt.Println($1)$0'),
   ls.parser.parse_snippet('prf', 'fmt.Printf("$1\\n", $2)$0'),
