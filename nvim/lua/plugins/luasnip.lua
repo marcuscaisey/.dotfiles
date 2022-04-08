@@ -16,6 +16,7 @@ ls.add_snippets('lua', {
   ls.parser.parse_snippet('mfunc', '${1:M}.${2:name} = function($3)\n  $0\nend'),
   ls.parser.parse_snippet('for', 'for ${1:k}, ${2:v} in pairs(${3:t}) do\n  $0\nend'),
   ls.parser.parse_snippet('fori', 'for ${1:_}, ${2:v} in ipairs(${3:t}) do\n  $0\nend'),
+  ls.parser.parse_snippet('while', 'while $1 do\n  $0\nend'),
   ls.parser.parse_snippet('if', 'if $1 then\n  $0\nend'),
   ls.parser.parse_snippet('then', 'then\n  $0\nend'),
   ls.parser.parse_snippet('pr', 'print($1)$0'),
