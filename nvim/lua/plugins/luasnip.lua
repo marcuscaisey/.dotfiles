@@ -22,6 +22,8 @@ ls.add_snippets('lua', {
   ls.parser.parse_snippet('pr', 'print($1)$0'),
   ls.parser.parse_snippet('in', 'vim.inspect($1)$0'),
   ls.parser.parse_snippet('prin', 'print(vim.inspect($1))$0'),
+  ls.parser.parse_snippet('desc', "describe('$1', function()\n  $0\nend)"),
+  ls.parser.parse_snippet('it', "it('$1', function()\n  $0\nend)"),
   s(
     'req',
     fmt("local {} = require '{}'{}", {
