@@ -60,7 +60,6 @@ local servers = {
           typeCheckingMode = 'off',
           extraPaths = {
             '/home/mcaisey/core3/src',
-            '/home/mcaisey/core3/src/plz-out/gen',
           },
         },
       },
