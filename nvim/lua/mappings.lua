@@ -47,17 +47,26 @@ map('t', '<esc>', '<c-\\><c-n>')
 -- jump past closing pair character with <c-l>
 local closing_chars = { "'", '"', '`', '}', ')', ']' }
 map('i', '<c-l>', function()
+  -- first look for closing pair character at the end of treesitter node under cursor
   local node = tsutils.get_node_at_cursor()
   local node_text = table.concat(tsutils.get_node_text(node))
   local last_char = node_text:sub(#node_text)
-
   if vim.tbl_contains(closing_chars, last_char) then
     local node_end_line, node_end_col = tsutils.get_vim_range { node:end_() }
     local last_buf_line, last_buf_col = vim.fn.line '$', vim.fn.col '$'
     if node_end_line <= last_buf_line and node_end_col <= last_buf_col then
       local jump_pos = { node_end_line, node_end_col - 1 } -- cursor col is 0-indexed
       vim.api.nvim_win_set_cursor(0, jump_pos)
+      return
     end
+  end
+
+  -- fallback to checking if the next character is a closing pair character
+  local next_col = vim.fn.col '.'
+  local next_char = vim.fn.getline('.'):sub(next_col, next_col)
+  if vim.tbl_contains(closing_chars, next_char) then
+    local jump_pos = { vim.fn.line '.', next_col }
+    vim.api.nvim_win_set_cursor(0, jump_pos)
   end
 end)
 
