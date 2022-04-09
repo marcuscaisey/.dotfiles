@@ -206,7 +206,8 @@ map('n', '<leader>lt', '<Plug>PlenaryTestFile')
 -- please.nvim
 map('n', '<leader>pj', please.jump_to_target)
 map('n', '<leader>pb', please.build_target)
-map('n', '<leader>pt', please.test_file)
+map('n', '<leader>ptt', please.test_file)
+map('n', '<leader>ptf', please.test_function)
 
 -- luasnip
 map({ 'i', 's' }, '<c-j>', function()
