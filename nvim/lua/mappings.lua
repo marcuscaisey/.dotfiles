@@ -216,7 +216,7 @@ map('n', '<leader>lt', '<Plug>PlenaryTestFile')
 map('n', '<leader>pj', please.jump_to_target)
 map('n', '<leader>pb', please.build_target)
 map('n', '<leader>ptf', please.test_file)
-map('n', '<leader>ptc', please.test_at_cursor)
+map('n', '<leader>ptc', please.test_under_cursor)
 
 -- luasnip
 map({ 'i', 's' }, '<c-j>', function()
