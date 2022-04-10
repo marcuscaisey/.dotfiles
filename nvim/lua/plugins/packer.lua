@@ -92,7 +92,12 @@ require('packer').startup {
         require 'plugins.commentary'
       end,
     }
-    use 'tpope/vim-surround'
+    use {
+      'tpope/vim-surround',
+      config = function()
+        require 'plugins.surround'
+      end,
+    }
     use {
       'ggandor/leap.nvim',
       config = function()
