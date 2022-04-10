@@ -49,6 +49,10 @@ ls.add_snippets('go', {
   ls.parser.parse_snippet('if', 'if $1 {\n\t$0\n}'),
   ls.parser.parse_snippet('pr', 'fmt.Println($1)$0'),
   ls.parser.parse_snippet('prf', 'fmt.Printf("$1\\n", $2)$0'),
+  ls.parser.parse_snippet('sl', '[]$1{$2}$0'),
+  ls.parser.parse_snippet('map', 'map[$1]$2{$3}$0'),
+  ls.parser.parse_snippet('msl', 'make([]$1, $2)$0'),
+  ls.parser.parse_snippet('mmap', 'make(map[$1]$2, $3)$0'),
 }, {
   key = 'go',
 })
