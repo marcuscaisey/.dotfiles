@@ -30,9 +30,7 @@ ls.add_snippets('lua', {
       f(function(args)
         local parts = vim.split(args[1][1], '.', true)
         return parts[#parts] or ''
-      end, {
-        1,
-      }),
+      end, { 1 }),
       i(1),
       i(0),
     })
