@@ -1,7 +1,7 @@
 require('nvim-treesitter.parsers').filetype_to_parsername.please = 'python'
 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = 'maintained',
+  ensure_installed = 'all',
   highlight = {
     enable = true,
     disable = { 'yaml' },
