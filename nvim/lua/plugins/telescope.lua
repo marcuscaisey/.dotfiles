@@ -244,7 +244,7 @@ telescope.setup {
     find_files = {
       layout_config = {
         width = 0.6,
-        height = 0.6,
+        height = 0.9,
       },
       previewer = false,
       find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix', '--follow', '--hidden', '--exclude', '.git' },
@@ -260,7 +260,7 @@ telescope.setup {
     oldfiles = {
       layout_config = {
         width = 0.6,
-        height = 0.6,
+        height = 0.9,
       },
       previewer = false,
       path_display = function(opts, path)
