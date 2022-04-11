@@ -2,6 +2,8 @@ local ls = require 'luasnip'
 local s = ls.snippet
 local i = ls.insert_node
 local f = ls.function_node
+local c = ls.choice_node
+local t = ls.text_node
 local fmt = require('luasnip.extras.fmt').fmt
 local nonempty = require('luasnip.extras').nonempty
 
@@ -45,6 +47,14 @@ ls.add_snippets('go', {
     fmt('func{}{}({}) {}{}{{\n\t{}\n}}', { nonempty(1, ' ', ''), i(1), i(2), i(3), nonempty(3, ' ', ''), i(0) })
   ),
   ls.parser.parse_snippet('if', 'if $1 {\n\t$0\n}'),
+  s(
+    'for',
+    fmt(
+      'for {} := range {} {{\n\t{}\n}}',
+      { c(1, { { t '_, ', i(1, 'v') }, { i(1, 'i'), t ', ', i(2, 'v') }, i(nil, 'i') }), i(2), i(0) }
+    )
+  ),
+  ls.parser.parse_snippet('fori', 'for ${1:i} := ${2:0}; $1 < $3; $1++ {\n\t$0\n}'),
   ls.parser.parse_snippet('pr', 'fmt.Println($1)$0'),
   ls.parser.parse_snippet('prf', 'fmt.Printf("$1\\n", $2)$0'),
   ls.parser.parse_snippet('sl', '[]$1{$2}$0'),
