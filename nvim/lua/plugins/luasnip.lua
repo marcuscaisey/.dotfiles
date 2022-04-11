@@ -46,6 +46,7 @@ ls.add_snippets('go', {
     'func',
     fmt('func{}{}({}) {}{}{{\n\t{}\n}}', { nonempty(1, ' ', ''), i(1), i(2), i(3), nonempty(3, ' ', ''), i(0) })
   ),
+  s('mfunc', fmt('func ({}) {}({}) {}{}{{\n\t{}\n}}', { i(1), i(2), i(3), i(4), nonempty(4, ' ', ''), i(0) })),
   ls.parser.parse_snippet('if', 'if $1 {\n\t$0\n}'),
   s(
     'for',
