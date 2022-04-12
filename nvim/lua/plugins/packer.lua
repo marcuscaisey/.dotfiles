@@ -33,12 +33,17 @@ require('packer').startup {
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-nvim-lua'
     use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-nvim-lsp-signature-help'
     use 'hrsh7th/cmp-path'
     use {
       'L3MON4D3/LuaSnip',
       config = function()
         require 'plugins.luasnip'
+      end,
+    }
+    use {
+      'ray-x/lsp_signature.nvim',
+      config = function()
+        require 'plugins.lsp_signature'
       end,
     }
     use {
