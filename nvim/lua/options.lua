@@ -30,6 +30,7 @@ vim.g.netrw_altfile = 1
 vim.filetype.add {
   extension = {
     build_defs = 'please',
+    build = 'please',
     plz = 'please',
   },
   filename = {
