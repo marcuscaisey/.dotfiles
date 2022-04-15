@@ -10,7 +10,6 @@ local nonempty = require('luasnip.extras').nonempty
 local strings = require 'plenary.strings'
 
 ls.config.setup {
-  history = true,
   updateevents = 'TextChanged,TextChangedI',
 }
 
