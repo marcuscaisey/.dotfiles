@@ -1,7 +1,7 @@
 require('nvim-treesitter.parsers').filetype_to_parsername.please = 'python'
 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { 'lua', 'python', 'go', 'json', 'yaml' },
+  ensure_installed = { 'lua', 'python', 'go', 'json', 'yaml', 'query' },
   highlight = {
     enable = true,
     disable = { 'yaml' },
