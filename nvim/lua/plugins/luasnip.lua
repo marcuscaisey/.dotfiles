@@ -11,6 +11,7 @@ local types = require 'luasnip.util.types'
 
 ls.config.setup {
   updateevents = 'TextChanged,TextChangedI',
+  delete_check_events = 'TextChanged',
   history = true,
   ext_opts = {
     [types.choiceNode] = {
