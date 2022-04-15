@@ -1,17 +1,24 @@
 local ls = require 'luasnip'
 local s = ls.snippet
 local i = ls.insert_node
-local f = ls.function_node
 local c = ls.choice_node
 local t = ls.text_node
 local fmt = require('luasnip.extras.fmt').fmt
 local rep = require('luasnip.extras').rep
 local nonempty = require('luasnip.extras').nonempty
 local strings = require 'plenary.strings'
+local types = require 'luasnip.util.types'
 
 ls.config.setup {
   updateevents = 'TextChanged,TextChangedI',
   history = true,
+  ext_opts = {
+    [types.choiceNode] = {
+      active = {
+        virt_text = { { '← choices', 'LuasnipChoiceVirtualText' } },
+      },
+    },
+  },
 }
 
 ls.add_snippets('lua', {

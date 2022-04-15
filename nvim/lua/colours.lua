@@ -63,3 +63,6 @@ highlight.link('TelescopeSelection', 'CursorLine')
 
 -- neo-tree.nvim
 highlight.link('NeoTreeSymbolicLinkTarget', 'Comment')
+
+-- luasnip
+highlight.create('LuasnipChoiceVirtualText', { fg = gruvbox.bright_aqua, bg = gruvbox.dark1 })
