@@ -5,7 +5,9 @@ local f = ls.function_node
 local c = ls.choice_node
 local t = ls.text_node
 local fmt = require('luasnip.extras.fmt').fmt
+local rep = require('luasnip.extras').rep
 local nonempty = require('luasnip.extras').nonempty
+local strings = require 'plenary.strings'
 
 ls.config.setup {
   history = true,
@@ -48,6 +50,22 @@ ls.add_snippets('go', {
   ),
   s('mfunc', fmt('func ({}) {}({}) {}{}{{\n\t{}\n}}', { i(1), i(2), i(3), i(4), nonempty(4, ' ', ''), i(0) })),
   ls.parser.parse_snippet('if', 'if $1 {\n\t$0\n}'),
+  s(
+    {
+      trig = 'iferr',
+      docstring = strings.dedent [[
+        if (err != nil || err := f(); err != nil) {
+
+        }]],
+    },
+    fmt('if {} {{\n\t{}\n}}', {
+      c(1, {
+        fmt('{} != nil', { i(1, 'err') }),
+        fmt('{} := {}; {} != nil', { i(1, 'err'), i(2), rep(1) }),
+      }),
+      i(0),
+    })
+  ),
   s(
     'for',
     fmt(
