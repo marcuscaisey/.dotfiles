@@ -11,6 +11,7 @@ local strings = require 'plenary.strings'
 
 ls.config.setup {
   updateevents = 'TextChanged,TextChangedI',
+  history = true,
 }
 
 ls.add_snippets('lua', {
