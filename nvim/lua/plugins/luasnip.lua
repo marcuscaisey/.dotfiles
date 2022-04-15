@@ -29,13 +29,12 @@ ls.add_snippets('lua', {
   ls.parser.parse_snippet('it', "it('$1', function()\n  $0\nend)"),
   s(
     'req',
-    fmt("local {} = require '{}'{}", {
-      f(function(args)
-        local parts = vim.split(args[1][1], '.', true)
-        return parts[#parts] or ''
-      end, { 1 }),
+    fmt('local {} = {}', {
       i(1),
-      i(0),
+      c(2, {
+        fmt("require '{}'", { i(1) }),
+        fmt("require('{}').{}", { i(1), i(2) }),
+      }),
     })
   ),
 }, {
