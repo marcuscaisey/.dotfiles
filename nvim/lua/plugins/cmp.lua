@@ -39,6 +39,8 @@ cmp.setup {
       end
     end,
     ['<cr>'] = cmp.mapping.confirm { select = true },
+    ['<c-n>'] = cmp.mapping.select_next_item(),
+    ['<c-p>'] = cmp.mapping.select_prev_item(),
   },
   sorting = {
     comparators = { cmp.config.compare.sort_text },
