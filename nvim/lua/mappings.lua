@@ -234,4 +234,7 @@ vim.keymap.set({ 'i', 's' }, '<c-h>', function()
     ls.change_choice(1)
   end
 end)
-map('n', '<leader><leader>s', '<cmd>source ~/.dotfiles/nvim/lua/plugins/luasnip.lua<cr>')
+map('n', '<leader><leader>s', function()
+  vim.cmd 'source ~/.dotfiles/nvim/lua/plugins/luasnip.lua'
+  print 'reloaded snippets'
+end)
