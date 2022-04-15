@@ -103,6 +103,7 @@ ls.add_snippets('go', {
       ls.parser.parse_snippet(nil, 'make(map[$1]$2, $3)'),
     })
   ),
+  ls.parser.parse_snippet('append', '$1 = append($1, $2)'),
 }, {
   key = 'go',
 })
