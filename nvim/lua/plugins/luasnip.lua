@@ -83,10 +83,26 @@ ls.add_snippets('go', {
   ls.parser.parse_snippet('fori', 'for ${1:i} := ${2:0}; $1 < $3; $1++ {\n\t$0\n}'),
   ls.parser.parse_snippet('pr', 'fmt.Println($1)$0'),
   ls.parser.parse_snippet('prf', 'fmt.Printf("$1\\n", $2)$0'),
-  ls.parser.parse_snippet('sl', '[]$1{$2}$0'),
-  ls.parser.parse_snippet('map', 'map[$1]$2{$3}$0'),
-  ls.parser.parse_snippet('msl', 'make([]$1, $2)$0'),
-  ls.parser.parse_snippet('mmap', 'make(map[$1]$2, $3)$0'),
+  s(
+    {
+      trig = 'slice',
+      docstring = '[]$1{$2} || make([]$1, $2)',
+    },
+    c(1, {
+      ls.parser.parse_snippet(nil, '[]$1{$2}'),
+      ls.parser.parse_snippet(nil, 'make([]$1, $2)'),
+    })
+  ),
+  s(
+    {
+      trig = 'map',
+      docstring = 'map[$1]$2{$3} || make(map[$1]$2, $3)',
+    },
+    c(1, {
+      ls.parser.parse_snippet(nil, 'map[$1]$2{$3}'),
+      ls.parser.parse_snippet(nil, 'make(map[$1]$2, $3)'),
+    })
+  ),
 }, {
   key = 'go',
 })
