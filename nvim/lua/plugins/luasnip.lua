@@ -27,16 +27,16 @@ ls.add_snippets('lua', {
   ps('func', 'function($1)\n  $0\nend'),
   ps('lfunc', 'local $1 = function($2)\n  $0\nend'),
   ps('mfunc', '${1:M}.$2 = function($3)\n  $0\nend'),
-  ls.parser.parse_snippet('for', 'for ${1:k}, ${2:v} in pairs(${3:t}) do\n  $0\nend'),
-  ls.parser.parse_snippet('fori', 'for ${1:_}, ${2:v} in ipairs(${3:t}) do\n  $0\nend'),
-  ls.parser.parse_snippet('while', 'while $1 do\n  $0\nend'),
-  ls.parser.parse_snippet('if', 'if $1 then\n  $0\nend'),
-  ls.parser.parse_snippet('then', 'then\n  $0\nend'),
-  ls.parser.parse_snippet('pr', 'print($1)$0'),
-  ls.parser.parse_snippet('in', 'vim.inspect($1)$0'),
-  ls.parser.parse_snippet('prin', 'print(vim.inspect($1))$0'),
-  ls.parser.parse_snippet('desc', "describe('$1', function()\n  $0\nend)"),
-  ls.parser.parse_snippet('it', "it('$1', function()\n  $0\nend)"),
+  ps('for', 'for $1, $2 in pairs($3) do\n  $0\nend'),
+  ps('fori', 'for ${1:_}, $2 in ipairs($3) do\n  $0\nend'),
+  ps('while', 'while $1 do\n  $0\nend'),
+  ps('if', 'if $1 then\n  $0\nend'),
+  ps('then', 'then\n  $0\nend'),
+  ps('pr', 'print($1)$0'),
+  ps('in', 'vim.inspect($1)$0'),
+  ps('prin', 'print(vim.inspect($1))$0'),
+  ps('desc', "describe('$1', function()\n  $0\nend)"),
+  ps('it', "it('$1', function()\n  $0\nend)"),
   s(
     'req',
     fmt('local {} = {}', {
@@ -57,7 +57,7 @@ ls.add_snippets('go', {
     fmt('func{}{}({}) {}{}{{\n\t{}\n}}', { nonempty(1, ' ', ''), i(1), i(2), i(3), nonempty(3, ' ', ''), i(0) })
   ),
   s('mfunc', fmt('func ({}) {}({}) {}{}{{\n\t{}\n}}', { i(1), i(2), i(3), i(4), nonempty(4, ' ', ''), i(0) })),
-  ls.parser.parse_snippet('if', 'if $1 {\n\t$0\n}'),
+  ps('if', 'if $1 {\n\t$0\n}'),
   s(
     {
       trig = 'iferr',
@@ -81,17 +81,17 @@ ls.add_snippets('go', {
       { c(1, { { t '_, ', i(1, 'v') }, { i(1, 'i'), t ', ', i(2, 'v') }, i(nil, 'i') }), i(2), i(0) }
     )
   ),
-  ls.parser.parse_snippet('fori', 'for ${1:i} := ${2:0}; $1 < $3; $1++ {\n\t$0\n}'),
-  ls.parser.parse_snippet('pr', 'fmt.Println($1)$0'),
-  ls.parser.parse_snippet('prf', 'fmt.Printf("$1\\n", $2)$0'),
+  ps('fori', 'for ${1:i} := ${2:0}; $1 < $3; $1++ {\n\t$0\n}'),
+  ps('pr', 'fmt.Println($1)$0'),
+  ps('prf', 'fmt.Printf("$1\\n", $2)$0'),
   s(
     {
       trig = 'slice',
       docstring = '[]$1{$2} || make([]$1, $2)',
     },
     c(1, {
-      ls.parser.parse_snippet(nil, '[]$1{$2}'),
-      ls.parser.parse_snippet(nil, 'make([]$1, $2)'),
+      ps(nil, '[]$1{$2}'),
+      ps(nil, 'make([]$1, $2)'),
     })
   ),
   s(
@@ -100,11 +100,11 @@ ls.add_snippets('go', {
       docstring = 'map[$1]$2{$3} || make(map[$1]$2, $3)',
     },
     c(1, {
-      ls.parser.parse_snippet(nil, 'map[$1]$2{$3}'),
-      ls.parser.parse_snippet(nil, 'make(map[$1]$2, $3)'),
+      ps(nil, 'map[$1]$2{$3}'),
+      ps(nil, 'make(map[$1]$2, $3)'),
     })
   ),
-  ls.parser.parse_snippet('append', '$1 = append($1, $2)'),
+  ps('append', '$1 = append($1, $2)'),
 }, {
   key = 'go',
 })
