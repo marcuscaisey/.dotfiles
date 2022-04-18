@@ -3,6 +3,7 @@ local s = ls.snippet
 local i = ls.insert_node
 local c = ls.choice_node
 local t = ls.text_node
+local ps = ls.parser.parse_snippet
 local fmt = require('luasnip.extras.fmt').fmt
 local rep = require('luasnip.extras').rep
 local nonempty = require('luasnip.extras').nonempty
@@ -41,8 +42,8 @@ ls.add_snippets('lua', {
     fmt('local {} = {}', {
       i(1),
       c(2, {
-        fmt("require '{}'", { i(1) }),
-        fmt("require('{}').{}", { i(1), i(2) }),
+        ps(nil, "require '$1'"),
+        ps(nil, "require('$1').$2"),
       }),
     })
   ),
