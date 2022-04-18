@@ -15,7 +15,7 @@ require('packer').startup {
       end,
     }
     use 'nvim-treesitter/nvim-treesitter-textobjects'
-    use 'romgrk/nvim-treesitter-context'
+    use 'lewis6991/nvim-treesitter-context'
     use 'nvim-treesitter/playground'
     use {
       'neovim/nvim-lspconfig',
