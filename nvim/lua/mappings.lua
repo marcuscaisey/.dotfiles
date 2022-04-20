@@ -150,7 +150,9 @@ end)
 -- telescope.nvim
 map('n', '<c-p>', telescope.find_files)
 map('n', '<c-b>', telescope.buffers)
-map('n', '<c-f>', telescope.current_buffer_fuzzy_find)
+map('n', '<c-f>', function()
+  telescope.live_grep { search_dirs = { vim.api.nvim_buf_get_name(0) } }
+end)
 map('n', '<c-g>', telescope.live_grep)
 map('n', '<c-s>', telescope.lsp_document_symbols)
 map('n', '<leader>s', telescope.lsp_dynamic_workspace_symbols)
