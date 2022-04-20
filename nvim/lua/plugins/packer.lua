@@ -157,6 +157,7 @@ require('packer').startup {
       'kana/vim-textobj-entire',
       requires = 'kana/vim-textobj-user',
     }
+    use 'nelstrom/vim-visual-star-search'
   end,
   config = {
     display = {
