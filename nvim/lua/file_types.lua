@@ -14,11 +14,14 @@ local function add_tab_size_autocmd(file_type, tab_size)
   })
 end
 
-local function add_text_width_autocmd(file_type, text_width)
+local function add_text_width_autocmd(file_type, text_width, auto_wrap)
   vim.api.nvim_create_autocmd('FileType', {
     callback = function()
       vim.bo.textwidth = text_width
-      vim.cmd 'setlocal formatoptions-=o'
+      vim.opt_local.formatoptions = vim.opt_local.formatoptions - { 'o' }
+      if not auto_wrap then
+        vim.opt_local.formatoptions = vim.opt_local.formatoptions - { 't' }
+      end
     end,
     pattern = file_type,
     group = augroup,
@@ -48,7 +51,7 @@ M.setup = function(opts)
     end
 
     if settings.text_width then
-      add_text_width_autocmd(file_type, settings.text_width)
+      add_text_width_autocmd(file_type, settings.text_width, settings.auto_wrap)
     end
 
     if settings.indent_with_tabs then

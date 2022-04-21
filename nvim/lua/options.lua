@@ -71,5 +71,6 @@ require('file_types').setup {
   },
   markdown = {
     text_width = 100,
+    auto_wrap = true,
   },
 }
