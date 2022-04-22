@@ -1,6 +1,6 @@
 local telescope = require 'telescope'
 local state = require 'telescope.actions.state'
-local layout = require 'telescope.actions.state'
+local layout = require 'telescope.actions.layout'
 local builtin = require 'telescope.builtin'
 local entry_display = require 'telescope.pickers.entry_display'
 local utils = require 'telescope.utils'
