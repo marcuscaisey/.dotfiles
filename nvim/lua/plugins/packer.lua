@@ -158,6 +158,7 @@ require('packer').startup {
       requires = 'kana/vim-textobj-user',
     }
     use 'nelstrom/vim-visual-star-search'
+    use 'michaeljsmith/vim-indent-object'
   end,
   config = {
     display = {
