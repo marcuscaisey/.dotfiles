@@ -35,3 +35,15 @@ ls.add_snippets('lua', {
 ls.add_snippets('go', {}, {
   key = 'go',
 })
+
+vim.api.nvim_create_autocmd('ModeChanged', {
+  pattern = '*:s',
+  callback = function()
+    if ls.in_snippet() then
+      local keys = vim.api.nvim_replace_termcodes('<c-r>_', true, false, true)
+      vim.api.nvim_feedkeys(keys, 'n', false)
+    end
+  end,
+  group = vim.api.nvim_create_augroup('luasnip-custom', { clear = true }),
+  desc = 'Send replaced node text to the black hole register',
+})
