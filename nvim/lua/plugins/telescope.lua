@@ -203,11 +203,7 @@ local custom_actions = transform_mod {
       end
     end
     actions.close(prompt_bufnr)
-    -- There's some race condition occurring when you instantly open another telescope finder, causing the initial mode
-    -- to be normal and not insert. Adding this tiny delay seems to fix it.
-    vim.defer_fn(function()
-      builtin.live_grep { search_dirs = filenames, initial_mode = 'insert' }
-    end, 10)
+    builtin.live_grep { search_dirs = filenames }
   end,
 }
 
