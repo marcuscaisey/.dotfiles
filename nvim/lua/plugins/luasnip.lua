@@ -28,6 +28,8 @@ ls.add_snippets('lua', {
   ls.parser.parse_snippet('lf', 'local ${1:name} = function($2)\n  $0\nend'),
   ls.parser.parse_snippet('mf', '${1:M}.${2:name} = function($3)\n  $0\nend'),
   ls.parser.parse_snippet('if', 'if $1 then\n  $0\nend'),
+  ls.parser.parse_snippet('pr', 'print($0)'),
+  ls.parser.parse_snippet('in', 'vim.inspect($0)'),
 }, {
   key = 'lua',
 })
