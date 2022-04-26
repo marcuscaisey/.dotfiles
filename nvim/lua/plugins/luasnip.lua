@@ -32,7 +32,15 @@ ls.add_snippets('lua', {
   key = 'lua',
 })
 
-ls.add_snippets('go', {}, {
+ls.add_snippets('go', {
+  ls.parser.parse_snippet('prf', 'fmt.Printf("$1\\n", $0)'),
+  ls.parser.parse_snippet('pr', 'fmt.Println($0)'),
+  ls.parser.parse_snippet('map', 'map[$1]$2{$0}'),
+  ls.parser.parse_snippet('slice', '[]$1{$0}'),
+  ls.parser.parse_snippet('iferr', 'if ${1:err} != nil {\n\t$0\n}'),
+  ls.parser.parse_snippet('if', 'if $1 {\n\t$0\n}'),
+  ls.parser.parse_snippet('for', 'for ${1:_}, ${2:v} := range $3 {\n\t$0\n}'),
+}, {
   key = 'go',
 })
 
