@@ -33,6 +33,7 @@ ls.add_snippets('lua', {
   ls.parser.parse_snippet('for', 'for ${1:k}, ${2:v} in ${3|pairs,ipairs|}(${4:t}) do \n  $0\nend'),
   ls.parser.parse_snippet('desc', 'describe($1, function()\n  $0\nend)'),
   ls.parser.parse_snippet('it', 'it($1, function()\n  $0\nend)'),
+  ls.parser.parse_snippet('req', "local $1 = require '$2'"),
 }, {
   key = 'lua',
 })
