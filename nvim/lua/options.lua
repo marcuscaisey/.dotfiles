@@ -24,17 +24,6 @@ vim.g.did_load_filetypes = 0
 vim.g.do_filetype_lua = 1
 vim.g.mapleader = ' '
 
-vim.filetype.add {
-  extension = {
-    build_defs = 'please',
-    build = 'please',
-    plz = 'please',
-  },
-  filename = {
-    ['BUILD'] = 'please',
-  },
-}
-
 require('file_types').setup {
   lua = {
     tab_size = 2,
