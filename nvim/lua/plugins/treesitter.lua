@@ -6,13 +6,7 @@ require('nvim-treesitter.configs').setup {
     enable = true,
     disable = { 'yaml' },
   },
-  indent = {
-    enable = true,
-    disable = {
-      'python',
-      'please',
-    },
-  },
+  indent = { enable = false },
   incremental_selection = {
     enable = true,
     keymaps = {
