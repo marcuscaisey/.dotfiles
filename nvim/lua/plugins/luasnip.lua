@@ -47,6 +47,7 @@ ls.add_snippets('go', {
   ls.parser.parse_snippet('if', 'if $1 {\n\t$0\n}'),
   ls.parser.parse_snippet('for', 'for ${1:_}, ${2:v} := range $3 {\n\t$0\n}'),
   ls.parser.parse_snippet('f', 'func ${1:name}($2) $3 {\n\t$0\n}'),
+  ls.parser.parse_snippet('mf', 'func ($1) $2($3) $4 {\n\t$0\n}'),
 }, {
   key = 'go',
 })
