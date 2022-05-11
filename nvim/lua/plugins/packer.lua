@@ -157,6 +157,7 @@ require('packer').startup {
     }
     use 'nelstrom/vim-visual-star-search'
     use 'michaeljsmith/vim-indent-object'
+    use 'tpope/vim-abolish'
   end,
   config = {
     display = {
