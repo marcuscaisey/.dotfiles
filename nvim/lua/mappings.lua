@@ -219,6 +219,9 @@ map('n', '<leader>lt', '<Plug>PlenaryTestFile')
 map('n', '<leader>pj', please.jump_to_target)
 map('n', '<leader>pb', please.build)
 map('n', '<leader>pt', please.test)
+map('n', '<leader>pct', function()
+  please.test { under_cursor = true }
+end)
 map('n', '<leader>pr', please.run)
 
 -- luasnip
