@@ -216,13 +216,31 @@ end)
 map('n', '<leader>lt', '<Plug>PlenaryTestFile')
 
 -- please.nvim
-map('n', '<leader>pj', please.jump_to_target)
-map('n', '<leader>pb', please.build)
-map('n', '<leader>pt', please.test)
-map('n', '<leader>pct', function()
-  please.test { under_cursor = true }
+-- require all of these in a callback so that we can hot reload them
+map('n', '<leader>pj', function()
+  require('please').jump_to_target()
 end)
-map('n', '<leader>pr', please.run)
+map('n', '<leader>pb', function()
+  require('please').build()
+end)
+map('n', '<leader>pt', function()
+  require('please').test()
+end)
+map('n', '<leader>pct', function()
+  require('please').test { under_cursor = true }
+end)
+map('n', '<leader>pr', function()
+  require('please').run()
+end)
+map('n', '<leader>py', function()
+  require('please').yank()
+end)
+map('n', '<leader>pl', function()
+  require('please').reload()
+end)
+map('n', '<leader>pd', function()
+  require('please').toggle_debug_logs()
+end)
 
 -- luasnip
 map({ 'i', 's' }, '<c-j>', function()
