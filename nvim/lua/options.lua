@@ -64,5 +64,6 @@ require('file_types').setup {
   },
   html = {
     tab_size = 2,
+    format_on_save = true,
   },
 }
