@@ -1,5 +1,5 @@
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { 'lua', 'python', 'go', 'json', 'yaml', 'query', 'comment', 'markdown', 'vim' },
+  ensure_installed = { 'lua', 'python', 'go', 'json', 'yaml', 'query', 'comment', 'markdown', 'vim', 'html' },
   highlight = {
     enable = true,
     disable = { 'yaml' },
@@ -58,6 +58,8 @@ require('nvim-treesitter.configs').setup {
   },
   autotag = {
     enable = true,
+    enable_close = true,
+    enable_rename = true,
   },
 }
 

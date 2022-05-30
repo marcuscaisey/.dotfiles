@@ -62,4 +62,7 @@ require('file_types').setup {
     text_width = 100,
     auto_wrap = true,
   },
+  html = {
+    tab_size = 2,
+  },
 }
