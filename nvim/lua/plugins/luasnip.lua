@@ -60,12 +60,11 @@ ls.add_snippets('go', {
     })
   ),
   ls.parser.parse_snippet('if', 'if $1 {\n\t$0\n}'),
-  ls.parser.parse_snippet('for', 'for ${1:_}, ${2:v} := range $3 {\n\t$0\n}'),
   s(
     'for',
     fmt('for {} := range {} {{\n\t{}\n}}', {
       c(1, {
-        { i(1, '_'), t ', ', i(2, 'v') },
+        { i(1, '_'), t ', ', i(2, nil) },
         i(nil, nil),
       }),
       i(2),
