@@ -43,11 +43,37 @@ ls.add_snippets('go', {
   ls.parser.parse_snippet('pr', 'fmt.Println($0)'),
   ls.parser.parse_snippet('map', 'map[$1]$2{$0}'),
   ls.parser.parse_snippet('sl', '[]$1{$0}'),
-  ls.parser.parse_snippet('iferr', 'if ${1:err} != nil {\n\t$0\n}'),
+  s(
+    {
+      trig = 'iferr',
+      docstring = strings.dedent [[
+      if (err != nil || err := f(); err != nil) {
+
+      }]],
+    },
+    fmt('if {} {{\n\t{}\n}}', {
+      c(1, {
+        fmt('{} != nil', { i(1, 'err') }),
+        fmt('{} := {}; {} != nil', { i(1, 'err'), i(2), rep(1) }),
+      }),
+      i(0),
+    })
+  ),
   ls.parser.parse_snippet('if', 'if $1 {\n\t$0\n}'),
   ls.parser.parse_snippet('for', 'for ${1:_}, ${2:v} := range $3 {\n\t$0\n}'),
+  s(
+    'for',
+    fmt('for {} := range {} {{\n\t{}\n}}', {
+      c(1, {
+        { i(1, '_'), t ', ', i(2, 'v') },
+        i(nil, nil),
+      }),
+      i(2),
+      i(0),
+    })
+  ),
   ls.parser.parse_snippet('fori', 'for ${1:i} := 0; $1 < $3; $1++ {\n\t$0\n}'),
-  ls.parser.parse_snippet('f', 'func ${1:name}($2) $3 {\n\t$0\n}'),
+  ls.parser.parse_snippet('f', 'func ${1}($2) $3 {\n\t$0\n}'),
   ls.parser.parse_snippet('mf', 'func ($1) $2($3) $4 {\n\t$0\n}'),
 }, {
   key = 'go',
