@@ -44,7 +44,7 @@ ls.add_snippets('go', {
   ls.parser.parse_snippet('map', 'map[$1]$2{$0}'),
   ls.parser.parse_snippet('sl', '[]$1{$0}'),
   s(
-    'ife',
+    'iferr',
     fmt('if {} {{\n\t{}\n}}', {
       c(1, {
         fmt('{} != nil', { i(1, 'err') }),
