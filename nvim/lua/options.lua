@@ -5,6 +5,7 @@ vim.o.expandtab = true
 vim.o.hidden = true
 vim.o.hlsearch = false
 vim.o.ignorecase = true
+vim.o.lazyredraw = true
 vim.o.mouse = 'a'
 vim.o.number = true
 vim.o.pumheight = 10
