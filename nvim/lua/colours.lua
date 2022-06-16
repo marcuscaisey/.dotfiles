@@ -66,3 +66,7 @@ highlight.link('NeoTreeSymbolicLinkTarget', 'Comment')
 
 -- luasnip
 highlight.create('LuasnipChoiceVirtualText', { fg = gruvbox.bright_aqua, bg = gruvbox.dark1 })
+
+-- git-conflict.nvim
+highlight.create('GitConflictCurrent', { fg = gruvbox.dark0, bg = gruvbox.faded_blue })
+highlight.create('GitConflictIncoming', { fg = gruvbox.dark0, bg = gruvbox.faded_aqua })

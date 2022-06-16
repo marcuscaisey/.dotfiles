@@ -8,6 +8,7 @@ local neo_tree = require 'neo-tree.command'
 local please = require 'please'
 local map = require('utils.mappings').map
 local neoformat = require 'plugins.neoformat'
+local conflict = require 'git-conflict'
 
 map('i', 'jj', '<esc>')
 
@@ -43,6 +44,9 @@ map('i', 'AA', '<esc>A')
 map('n', '<leader>cd', '<cmd>cd %:h<cr>:pwd<cr>')
 
 map('t', '<esc>', '<c-\\><c-n>')
+
+map('n', ']q', '<cmd>cnext<cr>')
+map('n', '[q', '<cmd>cprev<cr>')
 
 -- When i use map to create this, nothing appears in the command line when i trigger the mapping until i press another
 -- key. Not sure why...
@@ -265,4 +269,12 @@ end)
 map('n', '<leader><leader>s', function()
   vim.cmd 'source ~/.dotfiles/nvim/lua/plugins/luasnip.lua'
   print 'reloaded snippets'
+end)
+
+-- git-conflict.nvim
+map('n', ']x', function()
+  conflict.find_next 'ours'
+end)
+map('n', '[x', function()
+  conflict.find_prev 'ours'
 end)

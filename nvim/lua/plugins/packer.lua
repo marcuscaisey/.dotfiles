@@ -130,7 +130,6 @@ require('packer').startup {
     }
     use 'svban/YankAssassin.vim'
     use 'tpope/vim-fugitive'
-    use 'tpope/vim-unimpaired'
     use {
       'ThePrimeagen/harpoon',
       config = function()
@@ -158,6 +157,12 @@ require('packer').startup {
     use 'nelstrom/vim-visual-star-search'
     use 'michaeljsmith/vim-indent-object'
     use 'tpope/vim-abolish'
+    use {
+      'akinsho/git-conflict.nvim',
+      config = function()
+        require 'plugins.git_conflict'
+      end,
+    }
   end,
   config = {
     display = {
