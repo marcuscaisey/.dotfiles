@@ -44,6 +44,10 @@ map('n', '<leader>cd', '<cmd>cd %:h<cr>:pwd<cr>')
 
 map('t', '<esc>', '<c-\\><c-n>')
 
+-- When i use map to create this, nothing appears in the command line when i trigger the mapping until i press another
+-- key. Not sure why...
+vim.cmd 'vnoremap @ :norm @'
+
 -- jump past closing pair character with <c-l>
 local closing_chars = { "'", '"', '`', '}', ')', ']' }
 map('i', '<c-l>', function()
