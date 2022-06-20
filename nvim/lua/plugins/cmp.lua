@@ -9,14 +9,13 @@ local source_name_to_menu = {
 }
 
 cmp.setup {
-  sources = cmp.config.sources({
+  sources = {
     { name = 'nvim_lsp' },
-    { name = 'luasnip' },
     { name = 'nvim_lua' },
     { name = 'path' },
-  }, {
     { name = 'buffer' },
-  }),
+    { name = 'luasnip' },
+  },
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
@@ -52,7 +51,10 @@ cmp.setup {
     end,
   },
   sorting = {
-    comparators = { cmp.config.compare.sort_text },
+    comparators = {
+      cmp.config.compare.sort_text,
+      cmp.config.compare.score,
+    },
   },
   formatting = {
     format = function(entry, vim_item)
