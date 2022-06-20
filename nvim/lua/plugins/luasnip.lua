@@ -41,8 +41,6 @@ ls.add_snippets('lua', {
 ls.add_snippets('go', {
   ls.parser.parse_snippet('prf', 'fmt.Printf("$1\\n", $0)'),
   ls.parser.parse_snippet('pr', 'fmt.Println($0)'),
-  ls.parser.parse_snippet('map', 'map[$1]$2{$0}'),
-  ls.parser.parse_snippet('sl', '[]$1{$0}'),
   s(
     'iferr',
     fmt('if {} {{\n\t{}\n}}', {
