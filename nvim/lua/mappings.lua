@@ -200,6 +200,7 @@ map('n', '<leader>hu', gitsigns.undo_stage_hunk)
 map({ 'n', 'v' }, '<leader>hr', '<cmd>Gitsigns reset_hunk<cr>')
 map('n', '<leader>hR', gitsigns.reset_buffer)
 map('n', '<leader>hp', gitsigns.preview_hunk)
+map('n', '<leader>hd', gitsigns.toggle_deleted)
 map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
 
 -- harpoon
