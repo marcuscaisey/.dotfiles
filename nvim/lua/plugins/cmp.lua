@@ -9,13 +9,14 @@ local source_name_to_menu = {
 }
 
 cmp.setup {
-  sources = {
+  sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = 'buffer' },
     { name = 'nvim_lua' },
     { name = 'path' },
-  },
+  }, {
+    { name = 'buffer' },
+  }),
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
