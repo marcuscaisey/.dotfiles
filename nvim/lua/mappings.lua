@@ -1,7 +1,7 @@
 local ls = require 'luasnip'
 local cmp = require 'cmp'
 local tsutils = require 'nvim-treesitter.ts_utils'
-local telescope = require 'telescope.builtin'
+local telescope_builtin = require 'telescope.builtin'
 local telescope_state = require 'telescope.actions.state'
 local telescope_actions = require 'telescope.actions'
 local gitsigns = require 'gitsigns.actions'
@@ -188,17 +188,17 @@ end)
 map('n', '<c-p>', telescope_builtin.find_files)
 map('n', '<c-b>', telescope_builtin.buffers)
 map('n', '<c-f>', function()
-  telescope.live_grep { search_dirs = { vim.api.nvim_buf_get_name(0) } }
+  telescope_builtin.live_grep { search_dirs = { vim.api.nvim_buf_get_name(0) } }
 end)
-map('n', '<c-g>', telescope.live_grep)
-map('n', '<c-s>', telescope.lsp_document_symbols)
-map('n', '<leader>s', telescope.lsp_dynamic_workspace_symbols)
-map('n', 'gd', telescope.lsp_definitions)
-map('n', 'ge', telescope.lsp_references)
-map('n', '<leader>ht', telescope.help_tags)
-map('n', '<leader>of', telescope.oldfiles)
-map('n', '<leader>tt', telescope.builtin)
-map('n', '<leader>tr', telescope.resume)
+map('n', '<c-g>', telescope_builtin.live_grep)
+map('n', '<c-s>', telescope_builtin.lsp_document_symbols)
+map('n', '<leader>s', telescope_builtin.lsp_dynamic_workspace_symbols)
+map('n', 'gd', telescope_builtin.lsp_definitions)
+map('n', 'ge', telescope_builtin.lsp_references)
+map('n', '<leader>ht', telescope_builtin.help_tags)
+map('n', '<leader>of', telescope_builtin.oldfiles)
+map('n', '<leader>tt', telescope_builtin.builtin)
+map('n', '<leader>tr', telescope_builtin.resume)
 
 -- lsp
 map('n', 'K', vim.lsp.buf.hover)
