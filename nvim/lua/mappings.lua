@@ -50,6 +50,15 @@ map('t', '<esc>', '<c-\\><c-n>')
 map('n', ']q', '<cmd>cnext<cr>')
 map('n', '[q', '<cmd>cprev<cr>')
 
+-- Yank the current path to the clipboard
+map('n', '<leader>y', function()
+  local current_path = vim.api.nvim_buf_get_name(0)
+  vim.fn.setreg('"', current_path)
+  vim.fn.setreg('*', current_path)
+  vim.cmd 'OSCYankReg "'
+  print(string.format('Yanked %s', current_path))
+end)
+
 -- When i use map to create this, nothing appears in the command line when i trigger the mapping until i press another
 -- key. Not sure why...
 vim.cmd 'vnoremap @ :norm @'
