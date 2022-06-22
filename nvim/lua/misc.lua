@@ -1,4 +1,5 @@
 local Job = require 'plenary.job'
+local neoformat = require 'plugins.neoformat'
 
 local group = vim.api.nvim_create_augroup('misc', { clear = true })
 
@@ -36,6 +37,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.api.nvim_create_autocmd('BufWritePost', {
   callback = function()
+    if not neoformat.auto_neoformatting_enabled() then
+      return
+    end
     local job = Job:new {
       command = 'wollemi',
       args = { 'gofmt' },

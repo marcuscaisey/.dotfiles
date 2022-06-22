@@ -30,7 +30,11 @@ require('neo-tree').setup {
       handler = function(state)
         vim.keymap.set('n', 'd', function()
           require('neo-tree.sources.filesystem.commands').delete(state)
-        end, { buffer = state.bufnr, silent = true, nowait = true })
+        end, {
+          buffer = state.bufnr,
+          silent = true,
+          nowait = true,
+        })
       end,
     },
   },
