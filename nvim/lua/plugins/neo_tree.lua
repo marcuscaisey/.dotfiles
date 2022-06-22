@@ -72,7 +72,7 @@ require('neo-tree').setup {
         { 'clipboard' },
       },
     },
-    bind_to_cwd = false,
+    bind_to_cwd = true,
     use_libuv_file_watcher = true,
   },
 }
