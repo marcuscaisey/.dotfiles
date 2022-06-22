@@ -2,6 +2,8 @@ local ls = require 'luasnip'
 local cmp = require 'cmp'
 local tsutils = require 'nvim-treesitter.ts_utils'
 local telescope = require 'telescope.builtin'
+local telescope_state = require 'telescope.actions.state'
+local telescope_actions = require 'telescope.actions'
 local gitsigns = require 'gitsigns.actions'
 local harpoon_ui = require 'harpoon.ui'
 local neo_tree = require 'neo-tree.command'
@@ -156,8 +158,35 @@ map('n', '<leader>gc', function()
 end)
 
 -- telescope.nvim
-map('n', '<c-p>', telescope.find_files)
-map('n', '<c-b>', telescope.buffers)
+-- Pick new working directory from Git repo
+map('n', '<c-c>', function()
+  local git_root = vim.trim(vim.fn.system 'git rev-parse --show-toplevel')
+  if vim.v.shell_error > 0 then
+    print 'not in a git repository'
+    return
+  end
+
+  local change_cwd = function(prompt_bufnr)
+    local entry = telescope_state.get_selected_entry()
+    vim.api.nvim_set_current_dir(entry.path)
+    print(string.format('cwd set to %s', entry[1]))
+    telescope_actions.close(prompt_bufnr)
+  end
+
+  telescope_builtin.find_files {
+    prompt_title = 'Change working directory',
+    find_command = { 'fd', '--type', 'd', '--strip-cwd-prefix' },
+    cwd = git_root,
+    previewer = false,
+    attach_mappings = function(_, telescope_map)
+      telescope_map('i', '<cr>', change_cwd)
+      telescope_map('n', '<cr>', change_cwd)
+      return true
+    end,
+  }
+end)
+map('n', '<c-p>', telescope_builtin.find_files)
+map('n', '<c-b>', telescope_builtin.buffers)
 map('n', '<c-f>', function()
   telescope.live_grep { search_dirs = { vim.api.nvim_buf_get_name(0) } }
 end)
