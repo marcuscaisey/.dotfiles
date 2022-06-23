@@ -90,7 +90,8 @@ end)
 map('n', '<leader>q', function()
   local qf_window_id = vim.fn.getqflist({ winid = 0 }).winid
   -- window id > 0 means that the window is open
-  if qf_window_id > 0 then
+  local qf_open = qf_window_id > 0
+  if qf_open then
     vim.cmd 'cclose'
   else
     vim.cmd 'copen'
