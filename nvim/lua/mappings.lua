@@ -86,6 +86,55 @@ map('i', '<c-l>', function()
   end
 end)
 
+local qf_delete_undo_stack = {}
+
+-- delete a quickfix item
+map('n', 'dd', function()
+  if vim.o.filetype ~= 'qf' then
+    vim.api.nvim_feedkeys('dd', 'n', true)
+    return
+  end
+
+  local qf_items = vim.fn.getqflist()
+  if #qf_items == 0 then
+    return
+  end
+
+  local cursor_line, cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
+  local removed_item = table.remove(qf_items, cursor_line)
+  table.insert(qf_delete_undo_stack, { cursor_line, cursor_col, removed_item })
+
+  vim.fn.setqflist(qf_items)
+
+  if #qf_items > 0 then
+    if cursor_line <= #qf_items then
+      vim.api.nvim_win_set_cursor(0, { cursor_line, cursor_col })
+    else
+      vim.api.nvim_win_set_cursor(0, { cursor_line - 1, cursor_col })
+    end
+  end
+end)
+
+-- undo deleting a quickfix item
+map('n', 'u', function()
+  if vim.o.filetype ~= 'qf' then
+    vim.api.nvim_feedkeys('u', 'n', true)
+    return
+  end
+
+  if #qf_delete_undo_stack == 0 then
+    return
+  end
+
+  local qf_items = vim.fn.getqflist()
+  local cursor_line, cursor_col, removed_item = unpack(table.remove(qf_delete_undo_stack))
+  table.insert(qf_items, cursor_line, removed_item)
+
+  vim.fn.setqflist(qf_items)
+
+  vim.api.nvim_win_set_cursor(0, { cursor_line, cursor_col })
+end)
+
 -- toggle quickfix
 map('n', '<leader>q', function()
   local qf_window_id = vim.fn.getqflist({ winid = 0 }).winid
