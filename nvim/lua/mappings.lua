@@ -42,8 +42,6 @@ map('n', 'N', 'Nzz')
 map('i', 'II', '<esc>I')
 map('i', 'AA', '<esc>A')
 
-map('n', '<leader>cd', '<cmd>cd %:h<cr>:pwd<cr>')
-
 map('t', '<esc>', '<c-\\><c-n>')
 
 -- Yank the current path to the clipboard
@@ -169,7 +167,7 @@ end)
 
 -- telescope.nvim
 -- Pick new working directory from Git repo
-map('n', '<c-c>', function()
+map('n', '<leader>cd', function()
   local git_root = vim.trim(vim.fn.system 'git rev-parse --show-toplevel')
   if vim.v.shell_error > 0 then
     print 'not in a git repository'
