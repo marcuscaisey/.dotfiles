@@ -9,6 +9,8 @@ end)
 
 -- gruvbox.nvim
 highlight.link('diffChanged', 'GruvboxOrange')
+highlight.create('DiffChanged', { fg = gruvbox.orange, bg = gruvbox.bg0 })
+highlight.create('GitGutterChange', { fg = gruvbox.orange, bg = gruvbox.bg1 })
 
 -- gitsigns.nvim
 highlight.link('GitSignsAdd', 'diffAdded')
