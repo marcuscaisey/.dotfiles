@@ -220,6 +220,17 @@ end)
 map('n', '[e', function()
   vim.diagnostic.goto_prev { severity = { min = vim.diagnostic.severity.WARN } }
 end)
+map('n', '<leader>dq', function()
+  local diagnostics = vim.diagnostic.get(0)
+  if #diagnostics == 0 then
+    print 'no diagnostics'
+    return
+  end
+  local qf_items = vim.diagnostic.toqflist(diagnostics)
+  vim.fn.setqflist(qf_items)
+  vim.cmd 'copen'
+  vim.cmd 'cfirst'
+end)
 
 -- neoformat
 map('n', '<leader>fm', '<cmd>Neoformat<cr>')

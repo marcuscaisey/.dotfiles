@@ -69,3 +69,12 @@ vim.api.nvim_create_autocmd('BufEnter', {
   group = group,
   desc = 'Quit vim if quickfix is last open buffer',
 })
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'qf',
+  callback = function()
+    vim.wo.wrap = false
+  end,
+  group = group,
+  desc = 'Turn off wrapping in quickfix',
+})
