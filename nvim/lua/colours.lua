@@ -7,6 +7,9 @@ lsp_utils.for_each_symbol_kind(function(kind)
   highlight.link('LSPSymbol' .. kind, 'CmpItemKind' .. kind)
 end)
 
+-- gruvbox.nvim
+highlight.link('diffChanged', 'GruvboxOrange')
+
 -- gitsigns.nvim
 highlight.link('GitSignsAdd', 'diffAdded')
 highlight.link('GitSignsChange', 'diffChanged')
