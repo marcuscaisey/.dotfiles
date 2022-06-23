@@ -118,51 +118,6 @@ map('n', '<leader>cb', function()
   vim.cmd 'cfirst'
 end)
 
--- open git changes in quickfix
-map('n', '<leader>gc', function()
-  local cwd = vim.fn.getcwd()
-  local git_root = vim.trim(vim.fn.system 'git rev-parse --show-toplevel')
-
-  local diff_lines = vim.fn.systemlist 'git diff -U0 --no-prefix'
-  local added_files = vim.fn.systemlist(string.format('git ls-files --others --exclude-standard %s', git_root))
-
-  local qf_items = {}
-
-  local current_filename
-  for _, line in pairs(diff_lines) do
-    -- diff --git lua/please.lua lua/please.lua
-    local filename = line:match '^diff %-%-git .+ (.+)'
-    if filename then
-      local absolute_filepath = git_root .. '/' .. filename
-      local relative_filepath = vim.trim(
-        vim.fn.system(string.format('realpath --relative-to %s %s', cwd, absolute_filepath))
-      )
-      current_filename = relative_filepath
-    end
-    -- @@ -4 +4,3 @@ M.test = function()
-    local line_number = line:match '^@@ %-.+ %+(%d+)'
-    if line_number then
-      table.insert(qf_items, {
-        filename = current_filename,
-        text = 'changed',
-        lnum = tonumber(line_number),
-      })
-    end
-  end
-  for _, filename in pairs(added_files) do
-    table.insert(qf_items, { filename = filename, lnum = 1, text = 'added' })
-  end
-
-  vim.fn.setqflist(qf_items)
-  if #qf_items == 0 then
-    print 'no changed / added files'
-    vim.cmd 'cclose'
-    return
-  end
-  vim.cmd 'copen'
-  vim.cmd 'cfirst'
-end)
-
 -- telescope.nvim
 -- Pick new working directory from Git repo
 map('n', '<c-c>', function()
@@ -237,6 +192,9 @@ map('n', '<leader>hR', gitsigns.reset_buffer)
 map('n', '<leader>hp', gitsigns.preview_hunk)
 map('n', '<leader>hd', gitsigns.toggle_deleted)
 map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
+map('n', '<leader>gc', function()
+  gitsigns.setqflist 'all'
+end)
 
 -- harpoon
 map('n', '<leader>ha', require('harpoon.mark').add_file)
