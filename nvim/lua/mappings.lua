@@ -10,7 +10,6 @@ local neo_tree = require 'neo-tree.command'
 local please = require 'please'
 local map = require('utils.mappings').map
 local neoformat = require 'plugins.neoformat'
-local conflict = require 'git-conflict'
 
 map('i', 'jj', '<esc>')
 
@@ -46,9 +45,6 @@ map('i', 'AA', '<esc>A')
 map('n', '<leader>cd', '<cmd>cd %:h<cr>:pwd<cr>')
 
 map('t', '<esc>', '<c-\\><c-n>')
-
-map('n', ']q', '<cmd>cnext<cr>')
-map('n', '[q', '<cmd>cprev<cr>')
 
 -- Yank the current path to the clipboard
 map('n', '<leader>y', function()
@@ -308,12 +304,4 @@ end)
 map('n', '<leader><leader>s', function()
   vim.cmd 'source ~/.dotfiles/nvim/lua/plugins/luasnip.lua'
   print 'reloaded snippets'
-end)
-
--- git-conflict.nvim
-map('n', ']x', function()
-  conflict.find_next 'ours'
-end)
-map('n', '[x', function()
-  conflict.find_prev 'ours'
 end)

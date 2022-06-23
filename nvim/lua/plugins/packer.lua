@@ -130,6 +130,7 @@ require('packer').startup {
     }
     use 'svban/YankAssassin.vim'
     use 'tpope/vim-fugitive'
+    use 'tpope/vim-unimpaired'
     use {
       'ThePrimeagen/harpoon',
       config = function()
