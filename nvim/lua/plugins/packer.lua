@@ -164,6 +164,12 @@ require('packer').startup {
         require 'plugins.git_conflict'
       end,
     }
+    use {
+      'https://gitlab.com/yorickpeterse/nvim-pqf',
+      config = function()
+        require('pqf').setup()
+      end,
+    }
   end,
   config = {
     display = {
