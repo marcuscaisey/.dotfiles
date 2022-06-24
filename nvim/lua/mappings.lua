@@ -102,7 +102,16 @@ map('n', 'dd', function()
   local removed_item = table.remove(qf_items, cursor_line)
   table.insert(qf_delete_undo_stack, { cursor_line, cursor_col, removed_item })
 
-  vim.fn.setqflist(qf_items)
+  local next_item = qf_items[cursor_line]
+  if next_item then
+    local next_item_winnr = vim.fn.bufwinnr(next_item.bufnr)
+    local next_item_winid = vim.fn.win_getid(next_item_winnr)
+    vim.api.nvim_win_call(next_item_winid, function()
+      vim.api.nvim_win_set_cursor(0, { next_item.lnum, next_item.col - 1 })
+    end)
+  end
+
+  vim.fn.setqflist({}, 'r', { idx = cursor_line, items = qf_items })
 
   if #qf_items > 0 then
     if cursor_line <= #qf_items then
