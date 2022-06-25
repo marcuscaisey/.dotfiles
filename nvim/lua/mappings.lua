@@ -261,8 +261,13 @@ map('n', '<leader>hd', gitsigns.toggle_deleted)
 map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
 map('n', '<leader>gc', function()
   gitsigns.setqflist('all', { open = false })
-  vim.cmd 'copen'
-  vim.cmd 'cfirst'
+  local qf_items = vim.fn.getqflist()
+  if #qf_items > 0 then
+    vim.cmd 'copen'
+    vim.cmd 'cfirst'
+  else
+    print 'No Git changes'
+  end
 end)
 
 -- harpoon
