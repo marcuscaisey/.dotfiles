@@ -232,7 +232,8 @@ end)
 map('n', '<leader>dq', function()
   local diagnostics = vim.diagnostic.get(0)
   if #diagnostics == 0 then
-    print 'no diagnostics'
+    print 'No diagnostics'
+    vim.cmd 'cclose'
     return
   end
   local qf_items = vim.diagnostic.toqflist(diagnostics)
