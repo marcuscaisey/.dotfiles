@@ -262,7 +262,11 @@ map('n', '<leader>hd', gitsigns.toggle_deleted)
 map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
 map('n', '<leader>gc', function()
   gitsigns.setqflist('all', { open = false })
-  local qf_items = vim.fn.getqflist()
+  local qf_items
+  vim.wait(500, function()
+    qf_items = vim.fn.getqflist()
+    return #qf_items > 0
+  end)
   if #qf_items > 0 then
     vim.cmd 'copen'
     vim.cmd 'cfirst'
