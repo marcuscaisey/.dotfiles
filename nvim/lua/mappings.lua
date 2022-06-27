@@ -1,5 +1,4 @@
 local ls = require 'luasnip'
-local cmp = require 'cmp'
 local tsutils = require 'nvim-treesitter.ts_utils'
 local telescope_builtin = require 'telescope.builtin'
 local telescope_state = require 'telescope.actions.state'
@@ -7,7 +6,6 @@ local telescope_actions = require 'telescope.actions'
 local gitsigns = require 'gitsigns.actions'
 local harpoon_ui = require 'harpoon.ui'
 local neo_tree = require 'neo-tree.command'
-local please = require 'please'
 local map = require('utils.mappings').map
 local neoformat = require 'plugins.neoformat'
 
