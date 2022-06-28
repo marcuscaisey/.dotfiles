@@ -259,18 +259,21 @@ map('n', '<leader>hp', gitsigns.preview_hunk)
 map('n', '<leader>hd', gitsigns.toggle_deleted)
 map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
 map('n', '<leader>gc', function()
+  vim.fn.system 'git diff --quiet'
+  if vim.v.shell_error == 0 then
+    print 'No Git changes'
+    return
+  end
+
+  vim.fn.setqflist {}
   gitsigns.setqflist('all', { open = false })
-  local qf_items
-  vim.wait(500, function()
-    qf_items = vim.fn.getqflist()
+  -- wait for quickfix list to have items in before opening
+  vim.wait(5000, function()
+    local qf_items = vim.fn.getqflist()
     return #qf_items > 0
   end)
-  if #qf_items > 0 then
-    vim.cmd 'copen'
-    vim.cmd 'cfirst'
-  else
-    print 'No Git changes'
-  end
+  vim.cmd 'copen'
+  vim.cmd 'cfirst'
 end)
 
 -- harpoon
