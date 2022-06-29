@@ -62,7 +62,10 @@ require('packer').startup {
       end,
     }
     use 'stevearc/dressing.nvim'
-    use 'ellisonleao/gruvbox.nvim'
+    use {
+      'ellisonleao/gruvbox.nvim',
+      commit = '3352c12c083d0ab6285a9738b7679e24e7602411',
+    }
     use {
       'norcalli/nvim-colorizer.lua',
       config = function()

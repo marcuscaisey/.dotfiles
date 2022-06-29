@@ -1,6 +1,6 @@
 local lsp_utils = require 'utils.lsp'
 local highlight = require 'utils.highlight'
-local gruvbox = require 'gruvbox.palette'
+local gruvbox = require 'gruvbox.colors'
 
 -- lsp symbol highlights
 lsp_utils.for_each_symbol_kind(function(kind)
@@ -9,8 +9,8 @@ end)
 
 -- gruvbox.nvim
 highlight.link('diffChanged', 'GruvboxOrange')
-highlight.create('DiffChanged', { fg = gruvbox.bright_orange, bg = gruvbox.bg0 })
-highlight.create('GitGutterChange', { fg = gruvbox.bright_orange, bg = gruvbox.bg1 })
+highlight.create('DiffChanged', { fg = gruvbox.orange, bg = gruvbox.bg0 })
+highlight.create('GitGutterChange', { fg = gruvbox.orange, bg = gruvbox.bg1 })
 
 -- gitsigns.nvim
 highlight.link('GitSignsAdd', 'diffAdded')
@@ -32,12 +32,12 @@ highlight.create('LeapLabelSecondary', { fg = gruvbox.dark0, bg = gruvbox.bright
 
 -- galaxyline
 local mode_to_colour = {
-  Normal = gruvbox.bright_blue,
+  Normal = gruvbox.blue,
   Insert = gruvbox.bright_green,
   Command = gruvbox.light3,
-  Visual = gruvbox.bright_orange,
-  VisualLine = gruvbox.bright_orange,
-  VisualBlock = gruvbox.bright_orange,
+  Visual = gruvbox.orange,
+  VisualLine = gruvbox.orange,
+  VisualBlock = gruvbox.orange,
   Replace = gruvbox.bright_purple,
   Terminal = gruvbox.bright_aqua,
   Select = gruvbox.bright_yellow,
