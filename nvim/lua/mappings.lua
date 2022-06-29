@@ -8,6 +8,7 @@ local harpoon_ui = require 'harpoon.ui'
 local neo_tree = require 'neo-tree.command'
 local map = require('utils.mappings').map
 local neoformat = require 'plugins.neoformat'
+local conflict = require 'git-conflict'
 
 map('i', 'jj', '<esc>')
 
@@ -346,4 +347,12 @@ end)
 map('n', '<leader><leader>s', function()
   vim.cmd 'source ~/.dotfiles/nvim/lua/plugins/luasnip.lua'
   print 'reloaded snippets'
+end)
+
+-- git-conflict.nvim
+map('n', '<leader>cc', function() -- current changes
+  conflict.choose 'ours'
+end)
+map('n', '<leader>ic', function() -- incoming changes
+  conflict.choose 'theirs'
 end)
