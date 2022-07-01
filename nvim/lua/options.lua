@@ -68,4 +68,7 @@ require('file_types').setup {
     tab_size = 2,
     format_on_save = true,
   },
+  sql = {
+    tab_size = 2,
+  },
 }
