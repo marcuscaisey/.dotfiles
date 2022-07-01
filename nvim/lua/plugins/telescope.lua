@@ -286,7 +286,9 @@ telescope.setup {
       },
     },
     current_buffer_fuzzy_find = {
-      previewer = false,
+      layout_config = {
+        preview_width = 0.4,
+      },
     },
     lsp_document_symbols = {
       entry_maker = create_lsp_document_symbols_entry,
