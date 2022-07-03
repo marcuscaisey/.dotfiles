@@ -35,6 +35,9 @@ require('file_types').setup {
   javascript = {
     tab_size = 2,
   },
+  typescript = {
+    tab_size = 2,
+  },
   json = {
     tab_size = 2,
   },
