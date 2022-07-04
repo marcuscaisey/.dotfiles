@@ -174,25 +174,25 @@ map('n', '<leader>cb', function()
 end)
 
 -- telescope.nvim
--- Pick new working directory from Git repo
+-- Pick new working directory for the current window. Picks from directory inside the current git repo if available,
+-- otherwise the current directory.
 map('n', '<leader>cd', function()
-  local git_root = vim.trim(vim.fn.system 'git rev-parse --show-toplevel')
+  local cwd = vim.trim(vim.fn.system 'git rev-parse --show-toplevel')
   if vim.v.shell_error > 0 then
-    print 'not in a git repository'
-    return
+    cwd = vim.fn.getcwd()
   end
 
   local change_cwd = function(prompt_bufnr)
     local entry = telescope_state.get_selected_entry()
-    vim.api.nvim_set_current_dir(entry.path)
-    print(string.format('cwd set to %s', entry[1]))
-    telescope_actions.close(prompt_bufnr)
+    telescope_actions.close(prompt_bufnr) -- need to close prompt first otherwise cwd of prompt gets set
+    vim.api.nvim_cmd({ cmd = 'lcd', args = { entry.path } }, {})
+    print(string.format('window cwd set to %s', entry[1]))
   end
 
   telescope_builtin.find_files {
-    prompt_title = 'Change working directory',
+    prompt_title = 'Change window working directory',
     find_command = { 'fd', '--type', 'd', '--strip-cwd-prefix' },
-    cwd = git_root,
+    cwd = cwd,
     previewer = false,
     attach_mappings = function(_, telescope_map)
       telescope_map('i', '<cr>', change_cwd)
