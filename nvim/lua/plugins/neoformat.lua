@@ -1,6 +1,7 @@
 vim.g.neoformat_enabled_python = { 'black' }
 vim.g.neoformat_enabled_lua = { 'stylua' }
 vim.g.neoformat_enabled_go = { 'goimports' }
+vim.g.neoformat_enabled_sql = { 'pg_format' }
 
 local M = {}
 
