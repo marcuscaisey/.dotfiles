@@ -122,10 +122,30 @@ galaxyline.section.left = {
 
 galaxyline.section.right = {
   {
+    SearchResults = {
+      provider = function()
+        local search_term = vim.fn.getreg '/'
+        local search_count = vim.fn.searchcount {
+          recompute = 1,
+          maxcount = -1,
+        }
+
+        return string.format('/%s [%d/%d]', search_term, search_count.current, search_count.total)
+      end,
+      condition = function()
+        local search_count = vim.fn.searchcount {
+          recompute = 1,
+          maxcount = -1,
+        }
+        return search_count.total > 0
+      end,
+    },
+  },
+  {
     GetLspClient = {
       provider = 'GetLspClient',
       condition = condition.hide_in_width,
-      separator = '| ',
+      separator = ' | ',
     },
   },
   {
