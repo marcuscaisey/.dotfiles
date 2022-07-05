@@ -1,7 +1,13 @@
 vim.g.neoformat_enabled_python = { 'black' }
 vim.g.neoformat_enabled_lua = { 'stylua' }
 vim.g.neoformat_enabled_go = { 'goimports' }
-vim.g.neoformat_enabled_sql = { 'pg_format' }
+vim.g.neoformat_enabled_sql = { 'sqlformat' }
+
+vim.g.neoformat_sql_sqlformat = {
+  exe = 'sqlformat',
+  args = { '--reindent', '--keywords', 'upper', '--identifiers', 'lower', '-' },
+  stdin = 1,
+}
 
 local M = {}
 

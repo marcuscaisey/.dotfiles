@@ -78,3 +78,23 @@ vim.api.nvim_create_autocmd('FileType', {
   group = group,
   desc = 'Turn off wrapping in quickfix',
 })
+
+vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained', 'InsertLeave', 'WinEnter' }, {
+  pattern = '*',
+  callback = function()
+    if vim.fn.mode() ~= 'i' and vim.wo.number then
+      vim.wo.relativenumber = true
+    end
+  end,
+  group = group,
+  desc = 'Set relativenumber in focused window when not in insert mode',
+})
+
+vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave' }, {
+  pattern = '*',
+  callback = function()
+    vim.wo.relativenumber = false
+  end,
+  group = group,
+  desc = 'Unset relativenumber in unfocused windows or when in insert mode',
+})
