@@ -118,6 +118,22 @@ galaxyline.section.left = {
       separator = '|',
     },
   },
+  {
+    Space = {
+      provider = function()
+        return ' '
+      end,
+    },
+  },
+  {
+    Cwd = {
+      provider = function()
+        return vim.fn.getcwd()
+      end,
+      condition = condition.buffer_not_empty,
+      separator = ' |',
+    },
+  },
 }
 
 galaxyline.section.right = {
