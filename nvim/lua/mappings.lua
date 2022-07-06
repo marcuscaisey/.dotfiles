@@ -261,6 +261,7 @@ map('n', '<leader>gc', function()
   vim.fn.system 'git diff --quiet'
   if vim.v.shell_error == 0 then
     print 'No Git changes'
+    vim.cmd 'cclose'
     return
   end
 
