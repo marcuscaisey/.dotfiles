@@ -31,6 +31,10 @@ local servers = {
       gopls = {
         directoryFilters = { '-plz-out' },
         linksInHover = false,
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
       },
     },
     root_dir = function(fname)
