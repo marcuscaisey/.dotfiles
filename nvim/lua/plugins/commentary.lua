@@ -3,6 +3,7 @@ local comment_characters = {
   sql = '--',
   toml = '#',
   please = '#',
+  proto = '//',
 }
 
 -- Add comment character autocmds
