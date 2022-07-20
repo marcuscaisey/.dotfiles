@@ -74,5 +74,6 @@ require('file_types').setup {
   },
   sql = {
     tab_size = 2,
+    text_width = 100,
   },
 }
