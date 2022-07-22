@@ -9,6 +9,13 @@ vim.g.neoformat_sql_sqlformat = {
   stdin = 1,
 }
 
+vim.g.neoformat_javascript_prettier = {
+  exe = 'prettier',
+  args = { '--stdin-filepath', '"%:p"', '--print-width', '100' },
+  stdin = 1,
+  try_node_exe = 1,
+}
+
 local M = {}
 
 local auto_neoformatting_enabled = true
