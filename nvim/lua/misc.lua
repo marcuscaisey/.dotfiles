@@ -40,6 +40,13 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     if not neoformat.auto_neoformatting_enabled() then
       return
     end
+    local output_lines = {}
+    local on_output = function(_, line)
+      table.insert(output_lines, line)
+    end
+    local on_exit = function()
+      print(table.concat(output_lines, '\n'))
+    end
     local job = Job:new {
       command = 'wollemi',
       args = { 'gofmt' },
@@ -50,6 +57,9 @@ vim.api.nvim_create_autocmd('BufWritePost', {
         GOROOT = vim.trim(vim.fn.system 'go env GOROOT'),
         PATH = vim.fn.getenv 'PATH',
       },
+      on_stdout = on_output,
+      on_stderr = on_output,
+      on_exit = on_exit,
     }
     job:start()
   end,
