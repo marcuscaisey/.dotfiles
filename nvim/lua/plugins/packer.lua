@@ -48,9 +48,9 @@ require('packer').startup {
       end,
     }
     use {
-      'NTBBloodbath/galaxyline.nvim',
+      'nvim-lualine/lualine.nvim',
       config = function()
-        require 'plugins.galaxyline'
+        require 'plugins.lualine'
       end,
       requires = 'kyazdani42/nvim-web-devicons',
     }

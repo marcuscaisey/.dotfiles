@@ -2,6 +2,8 @@ local lsp_utils = require 'utils.lsp'
 local highlight = require 'utils.highlight'
 local gruvbox = require 'gruvbox.colors'
 
+local M = {}
+
 -- lsp symbol highlights
 lsp_utils.for_each_symbol_kind(function(kind)
   highlight.link('LSPSymbol' .. kind, 'CmpItemKind' .. kind)
@@ -17,39 +19,33 @@ highlight.link('GitSignsAdd', 'diffAdded')
 highlight.link('GitSignsChange', 'diffChanged')
 highlight.link('GitSignsDelete', 'diffRemoved')
 
--- Diagnostics
-highlight.link('DiagnosticInfo', 'DiagnosticHint')
-
 vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticError' })
 vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticWarn' })
-vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticHint' })
 vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticInfo' })
+vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticHint' })
 
 -- leap
 highlight.create('LeapMatch', { fg = gruvbox.bright_aqua, underline = true })
 highlight.create('LeapLabelPrimary', { fg = gruvbox.dark0, bg = gruvbox.bright_aqua })
 highlight.create('LeapLabelSecondary', { fg = gruvbox.dark0, bg = gruvbox.bright_blue })
 
--- galaxyline
+-- lualine
 local mode_to_colour = {
-  Normal = gruvbox.blue,
-  Insert = gruvbox.bright_green,
-  Command = gruvbox.light3,
-  Visual = gruvbox.orange,
-  VisualLine = gruvbox.orange,
-  VisualBlock = gruvbox.orange,
-  Replace = gruvbox.bright_purple,
-  Terminal = gruvbox.bright_aqua,
-  Select = gruvbox.bright_yellow,
+  normal = gruvbox.blue,
+  insert = gruvbox.bright_green,
+  visual = gruvbox.orange,
+  replace = gruvbox.bright_purple,
+  command = gruvbox.light3,
 }
+
+M.lualine = {}
 for mode, colour in pairs(mode_to_colour) do
-  highlight.create('Galaxyline' .. mode .. 'Mode', { fg = gruvbox.dark0, bg = colour })
-  highlight.create('Galaxyline' .. mode .. 'ModeSeparator', { fg = colour, bg = gruvbox.dark0 })
+  M.lualine[mode] = {
+    a = { bg = colour, fg = gruvbox.dark0 },
+    b = { bg = gruvbox.dark2, fg = gruvbox.white },
+    c = { bg = gruvbox.dark1, fg = gruvbox.white },
+  }
 end
-highlight.link('GalaxylineGitIcon', 'GruvboxOrange')
-highlight.link('GalaxylineDiffAdd', 'diffAdded')
-highlight.link('GalaxylineDiffModified', 'diffChanged')
-highlight.link('GalaxylineDiffRemove', 'diffRemoved')
 
 -- nvim
 highlight.link('SignColumn', 'Normal')
@@ -75,3 +71,5 @@ highlight.create('LuasnipChoiceVirtualText', { fg = gruvbox.bright_aqua, bg = gr
 -- git-conflict.nvim
 highlight.create('GitConflictCurrent', { fg = gruvbox.dark0, bg = gruvbox.faded_blue })
 highlight.create('GitConflictIncoming', { fg = gruvbox.dark0, bg = gruvbox.faded_aqua })
+
+return M
