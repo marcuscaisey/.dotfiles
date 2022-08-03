@@ -28,6 +28,12 @@ require('nvim-treesitter.configs').setup {
         ['iC'] = '@class.inner',
         ['aC'] = '@class.outer',
       },
+      selection_modes = {
+        ['@function.outer'] = 'V',
+        ['@function.inner'] = 'V',
+        ['@class.outer'] = 'V',
+        ['@class.inner'] = 'V',
+      },
     },
     move = {
       enable = true,
