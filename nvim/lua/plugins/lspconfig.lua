@@ -5,7 +5,7 @@ local util = require 'lspconfig.util'
 local lua_runtime_path = vim.split(package.path, ';')
 table.insert(lua_runtime_path, 'lua/?.lua')
 table.insert(lua_runtime_path, 'lua/?/init.lua')
-local runtime_files = vim.api.nvim_get_runtime_file('lua', true)
+local runtime_files = vim.api.nvim_get_runtime_file('', true)
 -- Don't add ~/.config/nvim to the LSP libraries because that's just a symlink
 -- to ~/.dotfiles/nvim/lua, so when we're in ~/.dotfiles/nvim/lua we end up
 -- with duplicate symbols
