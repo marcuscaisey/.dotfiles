@@ -72,4 +72,8 @@ highlight.create('LuasnipChoiceVirtualText', { fg = gruvbox.bright_aqua, bg = gr
 highlight.create('GitConflictCurrent', { fg = gruvbox.dark0, bg = gruvbox.faded_blue })
 highlight.create('GitConflictIncoming', { fg = gruvbox.dark0, bg = gruvbox.faded_aqua })
 
+-- nvim-dap
+highlight.link('DapBreakpoint', 'GruvboxPurple')
+highlight.link('DapBreakpointRejected', 'GruvboxRed')
+
 return M

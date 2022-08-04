@@ -9,6 +9,7 @@ local neo_tree = require 'neo-tree.command'
 local map = require('utils.mappings').map
 local neoformat = require 'plugins.neoformat'
 local conflict = require 'git-conflict'
+local dap = require 'dap'
 
 map('i', 'jj', '<esc>')
 
@@ -324,7 +325,7 @@ map('n', '<leader>pl', function()
   require('please.plugin').reload()
 end)
 map('n', '<leader>pd', function()
-  require('please.logging').toggle_debug()
+  require('please').debug()
 end)
 
 -- luasnip
@@ -355,3 +356,16 @@ end)
 map('n', '<leader>ic', function() -- incoming changes
   conflict.choose 'theirs'
 end)
+
+-- nvim-dap
+map('n', '<leader>bp', dap.toggle_breakpoint)
+map('n', '<leader>bcp', function()
+  dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
+end)
+map('n', '<f5>', dap.continue)
+map('n', '<f17>', dap.terminate)
+map('n', '<f6>', dap.restart)
+map('n', '<f8>', dap.run_to_cursor)
+map('n', '<f10>', dap.step_over)
+map('n', '<f11>', dap.step_into)
+map('n', '<f23>', dap.step_out)

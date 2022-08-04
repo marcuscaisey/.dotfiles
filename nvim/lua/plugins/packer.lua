@@ -36,6 +36,24 @@ require('packer').startup {
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use {
+      'mfussenegger/nvim-dap',
+      config = function()
+        require 'plugins.dap'
+      end,
+    }
+    use {
+      'theHamsta/nvim-dap-virtual-text',
+      config = function()
+        require('nvim-dap-virtual-text').setup()
+      end,
+    }
+    use {
+      'rcarriga/nvim-dap-ui',
+      config = function()
+        require 'plugins.dapui'
+      end,
+    }
+    use {
       'L3MON4D3/LuaSnip',
       config = function()
         require 'plugins.luasnip'
