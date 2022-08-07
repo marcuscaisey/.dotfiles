@@ -367,5 +367,7 @@ map('n', '<f17>', dap.terminate)
 map('n', '<f6>', dap.restart)
 map('n', '<f8>', dap.run_to_cursor)
 map('n', '<f10>', dap.step_over)
-map('n', '<f11>', dap.step_into)
+map('n', '<f11>', function()
+  dap.step_into { askForTargets = true }
+end)
 map('n', '<f23>', dap.step_out)
