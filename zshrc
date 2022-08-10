@@ -180,10 +180,6 @@ export PATH="$HOME/.yarn/bin:$PATH"
 ################################################################################
 #                                     plz
 ################################################################################
-if linux; then
-  alias sef="plz sef"
-fi
-
 _plz_complete_zsh() {
     local args=("${words[@]:1:$CURRENT}")
     local IFS=$'\n'
