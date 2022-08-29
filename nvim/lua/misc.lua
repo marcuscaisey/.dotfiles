@@ -1,4 +1,5 @@
 local Job = require 'plenary.job'
+local util = require 'lspconfig.util'
 local neoformat = require 'plugins.neoformat'
 
 local group = vim.api.nvim_create_augroup('misc', { clear = true })
@@ -37,7 +38,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.api.nvim_create_autocmd('BufWritePost', {
   callback = function()
-    if not neoformat.auto_neoformatting_enabled() then
+    local plz_root = util.root_pattern '.plzconfig'(vim.api.nvim_buf_get_name(0))
+    if not neoformat.auto_neoformatting_enabled() or not plz_root then
       return
     end
     local output_lines = {}
