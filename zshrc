@@ -74,15 +74,6 @@ alias gcfd="git clean -fd"
 alias d="cd ~/.dotfiles"
 alias s="cd ~/scratch"
 
-if linux; then
-  alias c="cd ~/core3/src"
-  alias t="cd ~/toolchain"
-
-  alias black="PYTHONNOUSERSITE=1 black"
-
-  alias bob='kubectl exec bob -c bob -it -- psql'
-fi
-
 # tmux
 # start a new session with the same name as the current git branch
 tgb() {
