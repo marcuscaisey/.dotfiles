@@ -204,16 +204,8 @@ fi
 ################################################################################
 #                                    stern
 ################################################################################
-ifelse () {
-    while read -r line; do
-        if ! printf $line | bash -c "tr -d '\n' | $1" 2>/dev/null; then
-            printf $line | bash -c "tr -d '\n' | $2"
-        fi
-    done
-}
-
-function sternc {
-    stern -o json "$@" | ifelse "jq '.message | fromjson'" "jq"
+function stern-jq {
+    stern -o raw "$@" | jq -rR '. as $raw | try (fromjson) catch ("\u001b[31m" + $raw + "\u001b[0m")'
 }
 
 
