@@ -20,6 +20,7 @@ plugins=(
 
 if linux; then
   plugins=(kubectl kube-ps1 $plugins)
+  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
 
 if osx; then
