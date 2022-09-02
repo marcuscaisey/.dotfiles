@@ -186,6 +186,7 @@ require('packer').startup {
     use 'tpope/vim-abolish'
     use {
       'akinsho/git-conflict.nvim',
+      tag = '*',
       config = function()
         require 'plugins.git_conflict'
       end,
