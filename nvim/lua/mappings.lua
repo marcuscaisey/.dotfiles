@@ -315,6 +315,9 @@ end)
 map('n', '<leader>plt', function()
   require('please').test { list = true }
 end)
+map('n', '<leader>pft', function()
+  require('please').test { failed = true }
+end)
 map('n', '<leader>pr', function()
   require('please').run()
 end)
