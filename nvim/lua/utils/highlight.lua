@@ -2,8 +2,7 @@ local M = {}
 
 -- A wrapper around vim.highlight.link which always replaces existing links
 M.link = function(from, to)
-  local force = true
-  vim.highlight.link(from, to, force)
+  vim.api.nvim_set_hl(0, from, { link = to })
 end
 
 -- A wrapper around vim.api.nvim_set_hl which always creates in the global namespace
