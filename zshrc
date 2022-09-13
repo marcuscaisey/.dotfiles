@@ -14,6 +14,7 @@ plugins=(
   git
   per-directory-history
   # please
+  zsh-vi-mode
   tmux
   zsh-autosuggestions
 )
@@ -222,16 +223,21 @@ fi
 ################################################################################
 #                                  key binds
 ################################################################################
-bindkey '^P' up-line-or-beginning-search
-bindkey '^N' down-line-or-beginning-search
-bindkey '^ ' autosuggest-accept
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
-# Enable Ctrl-x-e to edit command line
-autoload -U edit-command-line
-# Emacs style
-zle -N edit-command-line
-bindkey '^xe' edit-command-line
-bindkey '^x^e' edit-command-line
+function zvm_after_lazy_keybindings() {
+  bindkey '^ ' autosuggest-accept
+  bindkey -M menuselect 'h' vi-backward-char
+  bindkey -M menuselect 'k' vi-up-line-or-history
+  bindkey -M menuselect 'l' vi-forward-char
+  bindkey -M menuselect 'j' vi-down-line-or-history
+  zvm_bindkey vicmd 'gh' vi-first-non-blank
+  zvm_bindkey vicmd 'gl' vi-end-of-line
+}
+
+
+################################################################################
+#                                 zsh-vi-mode
+################################################################################
+export ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
+function zvm_after_init() {
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+}
