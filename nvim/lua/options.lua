@@ -23,8 +23,6 @@ vim.o.tabstop = 4
 vim.o.termguicolors = true
 vim.o.updatetime = 100
 
-vim.g.did_load_filetypes = 0
-vim.g.do_filetype_lua = 1
 vim.g.mapleader = ' '
 
 require('file_types').setup {
