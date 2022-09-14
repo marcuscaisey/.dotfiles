@@ -1,5 +1,26 @@
 source ~/.dotfiles/utils.sh
 
+
+################################################################################
+#                                 zsh-vi-mode
+################################################################################
+function zvm_config() {
+  ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
+}
+function zvm_after_init() {
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  bindkey -M viins '^ ' autosuggest-accept
+}
+function zvm_after_lazy_keybindings() {
+  bindkey -M vicmd 'gh' vi-first-non-blank
+  bindkey -M vicmd 'gl' vi-end-of-line
+  bindkey -M menuselect 'h' vi-backward-char
+  bindkey -M menuselect 'k' vi-up-line-or-history
+  bindkey -M menuselect 'l' vi-forward-char
+  bindkey -M menuselect 'j' vi-down-line-or-history
+}
+
+
 ################################################################################
 #                                  oh my zsh
 ################################################################################
@@ -218,26 +239,3 @@ if osx; then
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 fi
-
-
-################################################################################
-#                                  key binds
-################################################################################
-function zvm_after_lazy_keybindings() {
-  bindkey '^ ' autosuggest-accept
-  bindkey -M menuselect 'h' vi-backward-char
-  bindkey -M menuselect 'k' vi-up-line-or-history
-  bindkey -M menuselect 'l' vi-forward-char
-  bindkey -M menuselect 'j' vi-down-line-or-history
-  zvm_bindkey vicmd 'gh' vi-first-non-blank
-  zvm_bindkey vicmd 'gl' vi-end-of-line
-}
-
-
-################################################################################
-#                                 zsh-vi-mode
-################################################################################
-export ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
-function zvm_after_init() {
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-}
