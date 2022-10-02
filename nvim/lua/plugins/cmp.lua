@@ -1,4 +1,4 @@
-local cmp = require 'cmp'
+local cmp = require('cmp')
 
 local source_name_to_menu = {
   nvim_lsp = '[LSP]',
@@ -8,7 +8,7 @@ local source_name_to_menu = {
   path = '[PATH]',
 }
 
-cmp.setup {
+cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
@@ -38,7 +38,7 @@ cmp.setup {
         fallback()
       end
     end,
-    ['<cr>'] = cmp.mapping.confirm { select = true },
+    ['<cr>'] = cmp.mapping.confirm({ select = true }),
     ['<c-n>'] = function()
       if cmp.visible() then
         cmp.select_next_item()
@@ -62,4 +62,4 @@ cmp.setup {
       return vim_item
     end,
   },
-}
+})

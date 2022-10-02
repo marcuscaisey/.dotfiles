@@ -1,15 +1,15 @@
-local ls = require 'luasnip'
-local tsutils = require 'nvim-treesitter.ts_utils'
-local telescope_builtin = require 'telescope.builtin'
-local telescope_state = require 'telescope.actions.state'
-local telescope_actions = require 'telescope.actions'
-local gitsigns = require 'gitsigns.actions'
-local harpoon_ui = require 'harpoon.ui'
-local neo_tree = require 'neo-tree.command'
+local ls = require('luasnip')
+local tsutils = require('nvim-treesitter.ts_utils')
+local telescope_builtin = require('telescope.builtin')
+local telescope_state = require('telescope.actions.state')
+local telescope_actions = require('telescope.actions')
+local gitsigns = require('gitsigns.actions')
+local harpoon_ui = require('harpoon.ui')
+local neo_tree = require('neo-tree.command')
 local map = require('utils.mappings').map
-local neoformat = require 'plugins.neoformat'
-local conflict = require 'git-conflict'
-local dap = require 'dap'
+local neoformat = require('plugins.neoformat')
+local conflict = require('git-conflict')
+local dap = require('dap')
 
 map('i', 'jj', '<esc>')
 
@@ -49,22 +49,22 @@ map('n', '<leader>y', function()
   local current_path = vim.api.nvim_buf_get_name(0)
   vim.fn.setreg('"', current_path)
   vim.fn.setreg('*', current_path)
-  vim.cmd 'OSCYankReg "'
+  vim.cmd('OSCYankReg "')
   print(string.format('Yanked %s', current_path))
 end)
 
 -- When i use map to create this, nothing appears in the command line when i trigger the mapping until i press another
 -- key. Not sure why...
-vim.cmd 'vnoremap @ :norm @'
+vim.cmd('vnoremap @ :norm @')
 
 -- jump past closing pair character with <c-l>
 local closing_chars = { "'", '"', '`', '}', ')', ']' }
 map('i', '<c-l>', function()
   -- first check if the next character is a closing pair character
-  local next_col = vim.fn.col '.'
+  local next_col = vim.fn.col('.')
   local next_char = vim.fn.getline('.'):sub(next_col, next_col)
   if vim.tbl_contains(closing_chars, next_char) then
-    local jump_pos = { vim.fn.line '.', next_col }
+    local jump_pos = { vim.fn.line('.'), next_col }
     vim.api.nvim_win_set_cursor(0, jump_pos)
     return
   end
@@ -74,8 +74,8 @@ map('i', '<c-l>', function()
   local node_text = table.concat(tsutils.get_node_text(node))
   local last_char = node_text:sub(#node_text)
   if vim.tbl_contains(closing_chars, last_char) then
-    local node_end_line, node_end_col = tsutils.get_vim_range { node:end_() }
-    local last_buf_line, last_buf_col = vim.fn.line '$', vim.fn.col '$'
+    local node_end_line, node_end_col = tsutils.get_vim_range({ node:end_() })
+    local last_buf_line, last_buf_col = vim.fn.line('$'), vim.fn.col('$')
     if node_end_line <= last_buf_line and node_end_col <= last_buf_col then
       local jump_pos = { node_end_line, node_end_col - 1 } -- cursor col is 0-indexed
       vim.api.nvim_win_set_cursor(0, jump_pos)
@@ -148,9 +148,9 @@ map('n', '<leader>q', function()
   -- window id > 0 means that the window is open
   local qf_open = qf_window_id > 0
   if qf_open then
-    vim.cmd 'cclose'
+    vim.cmd('cclose')
   else
-    vim.cmd 'copen'
+    vim.cmd('copen')
   end
 end)
 
@@ -161,24 +161,24 @@ map('n', '<leader>cb', function()
     function(b)
       return b.changed == 1
     end,
-    vim.fn.getbufinfo {
+    vim.fn.getbufinfo({
       bufmodified = 1,
-    }
+    })
   )
   if #changed_buffers == 0 then
-    print 'no changed buffers'
+    print('no changed buffers')
     return
   end
   vim.fn.setqflist(changed_buffers)
-  vim.cmd 'copen'
-  vim.cmd 'cfirst'
+  vim.cmd('copen')
+  vim.cmd('cfirst')
 end)
 
 -- telescope.nvim
 -- Pick new working directory for the current window. Picks from directory inside the current git repo if available,
 -- otherwise the current directory.
 map('n', '<leader>cd', function()
-  local cwd = vim.trim(vim.fn.system 'git rev-parse --show-toplevel')
+  local cwd = vim.trim(vim.fn.system('git rev-parse --show-toplevel'))
   if vim.v.shell_error > 0 then
     cwd = vim.fn.getcwd()
   end
@@ -190,7 +190,7 @@ map('n', '<leader>cd', function()
     print(string.format('window cwd set to %s', entry[1]))
   end
 
-  telescope_builtin.find_files {
+  telescope_builtin.find_files({
     prompt_title = 'Change window working directory',
     find_command = { 'fd', '--type', 'd', '--strip-cwd-prefix' },
     cwd = cwd,
@@ -200,7 +200,7 @@ map('n', '<leader>cd', function()
       telescope_map('n', '<cr>', change_cwd)
       return true
     end,
-  }
+  })
 end)
 map('n', '<c-p>', telescope_builtin.find_files)
 map('n', '<c-b>', telescope_builtin.buffers)
@@ -222,22 +222,22 @@ map('n', '<leader>rn', vim.lsp.buf.rename)
 map('n', ']d', vim.diagnostic.goto_next)
 map('n', '[d', vim.diagnostic.goto_prev)
 map('n', ']e', function()
-  vim.diagnostic.goto_next { severity = { min = vim.diagnostic.severity.WARN } }
+  vim.diagnostic.goto_next({ severity = { min = vim.diagnostic.severity.WARN } })
 end)
 map('n', '[e', function()
-  vim.diagnostic.goto_prev { severity = { min = vim.diagnostic.severity.WARN } }
+  vim.diagnostic.goto_prev({ severity = { min = vim.diagnostic.severity.WARN } })
 end)
 map('n', '<leader>dq', function()
   local diagnostics = vim.diagnostic.get(0)
   if #diagnostics == 0 then
-    print 'No diagnostics'
-    vim.cmd 'cclose'
+    print('No diagnostics')
+    vim.cmd('cclose')
     return
   end
   local qf_items = vim.diagnostic.toqflist(diagnostics)
   vim.fn.setqflist(qf_items)
-  vim.cmd 'copen'
-  vim.cmd 'cfirst'
+  vim.cmd('copen')
+  vim.cmd('cfirst')
 end)
 
 -- neoformat
@@ -259,22 +259,22 @@ map('n', '<leader>hp', gitsigns.preview_hunk)
 map('n', '<leader>hd', gitsigns.toggle_deleted)
 map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
 map('n', '<leader>gc', function()
-  vim.fn.system 'git diff --quiet'
+  vim.fn.system('git diff --quiet')
   if vim.v.shell_error == 0 then
-    print 'No Git changes'
-    vim.cmd 'cclose'
+    print('No Git changes')
+    vim.cmd('cclose')
     return
   end
 
-  vim.fn.setqflist {}
+  vim.fn.setqflist({})
   gitsigns.setqflist('all', { open = false })
   -- wait for quickfix list to have items in before opening
   vim.wait(5000, function()
     local qf_items = vim.fn.getqflist()
     return #qf_items > 0
   end)
-  vim.cmd 'copen'
-  vim.cmd 'cfirst'
+  vim.cmd('copen')
+  vim.cmd('cfirst')
 end)
 
 -- harpoon
@@ -288,11 +288,11 @@ end
 
 -- neo-tree
 map('n', '-', function()
-  neo_tree.execute {
+  neo_tree.execute({
     reveal_force_cwd = true,
     -- TODO: fix upstream dir option which should just be able to take in '%:p:h' and expand it for us
-    dir = vim.fn.expand '%:p:h',
-  }
+    dir = vim.fn.expand('%:p:h'),
+  })
 end)
 
 -- plenary
@@ -310,13 +310,13 @@ map('n', '<leader>pt', function()
   require('please').test()
 end)
 map('n', '<leader>pct', function()
-  require('please').test { under_cursor = true }
+  require('please').test({ under_cursor = true })
 end)
 map('n', '<leader>plt', function()
-  require('please').test { list = true }
+  require('please').test({ list = true })
 end)
 map('n', '<leader>pft', function()
-  require('please').test { failed = true }
+  require('please').test({ failed = true })
 end)
 map('n', '<leader>pr', function()
   require('please').run()
@@ -332,6 +332,9 @@ map('n', '<leader>pll', function()
 end)
 map('n', '<leader>pd', function()
   require('please').debug()
+end)
+map('n', '<leader>pa', function()
+  require('please').action_history()
 end)
 
 -- luasnip
@@ -351,22 +354,22 @@ vim.keymap.set({ 'i', 's' }, '<c-h>', function()
   end
 end)
 map('n', '<leader><leader>s', function()
-  vim.cmd 'source ~/.dotfiles/nvim/lua/plugins/luasnip.lua'
-  print 'reloaded snippets'
+  vim.cmd('source ~/.dotfiles/nvim/lua/plugins/luasnip.lua')
+  print('reloaded snippets')
 end)
 
 -- git-conflict.nvim
 map('n', '<leader>cc', function() -- current changes
-  conflict.choose 'ours'
+  conflict.choose('ours')
 end)
 map('n', '<leader>ic', function() -- incoming changes
-  conflict.choose 'theirs'
+  conflict.choose('theirs')
 end)
 
 -- nvim-dap
 map('n', '<leader>bp', dap.toggle_breakpoint)
 map('n', '<leader>bcp', function()
-  dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
+  dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
 end)
 map('n', '<f5>', dap.continue)
 map('n', '<f17>', dap.terminate)
@@ -374,6 +377,6 @@ map('n', '<f6>', dap.restart)
 map('n', '<f8>', dap.run_to_cursor)
 map('n', '<f10>', dap.step_over)
 map('n', '<f11>', function()
-  dap.step_into { askForTargets = true }
+  dap.step_into({ askForTargets = true })
 end)
 map('n', '<f23>', dap.step_out)

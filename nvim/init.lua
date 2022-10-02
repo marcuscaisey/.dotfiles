@@ -1,5 +1,5 @@
-require 'plugins.packer'
-require 'options'
-require 'mappings'
-require 'colours'
-require 'misc'
+require('plugins.packer')
+require('options')
+require('mappings')
+require('colours')
+require('misc')

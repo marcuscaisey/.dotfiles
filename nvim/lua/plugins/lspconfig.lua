@@ -1,11 +1,11 @@
-local lspconfig = require 'lspconfig'
-local util = require 'lspconfig.util'
+local lspconfig = require('lspconfig')
+local util = require('lspconfig.util')
 
 require('lspconfig.configs').please = {
   default_config = {
     cmd = { 'plz', 'tool', 'lps' },
     filetypes = { 'please' },
-    root_dir = util.root_pattern '.plzconfig',
+    root_dir = util.root_pattern('.plzconfig'),
   },
 }
 
@@ -22,12 +22,12 @@ local servers = {
       },
     },
     root_dir = function(fname)
-      local go_mod_root = util.root_pattern 'go.mod'(fname)
+      local go_mod_root = util.root_pattern('go.mod')(fname)
       if go_mod_root then
         return go_mod_root
       end
-      local plz_root = util.root_pattern '.plzconfig'(fname)
-      local gopath_root = util.root_pattern 'src'(fname)
+      local plz_root = util.root_pattern('.plzconfig')(fname)
+      local gopath_root = util.root_pattern('src')(fname)
       if plz_root and gopath_root then
         vim.env.GOPATH = string.format('%s:%s/plz-out/go', gopath_root, plz_root)
         vim.env.GO111MODULE = 'off'
@@ -98,7 +98,7 @@ local servers = {
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 for server, config in pairs(servers) do
-  lspconfig[server].setup {
+  lspconfig[server].setup({
     capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
@@ -106,10 +106,10 @@ for server, config in pairs(servers) do
     settings = config.settings,
     root_dir = config.root_dir,
     cmd = config.cmd,
-  }
+  })
 end
 
-vim.diagnostic.config {
+vim.diagnostic.config({
   virtual_text = false,
   float = {
     source = 'always',
@@ -118,4 +118,4 @@ vim.diagnostic.config {
   underline = true,
   update_in_insert = false,
   severity_sort = true,
-}
+})

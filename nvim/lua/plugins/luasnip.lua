@@ -1,4 +1,4 @@
-local ls = require 'luasnip'
+local ls = require('luasnip')
 local s = ls.snippet
 local i = ls.insert_node
 local c = ls.choice_node
@@ -7,10 +7,10 @@ local ps = ls.parser.parse_snippet
 local fmt = require('luasnip.extras.fmt').fmt
 local rep = require('luasnip.extras').rep
 local nonempty = require('luasnip.extras').nonempty
-local strings = require 'plenary.strings'
-local types = require 'luasnip.util.types'
+local strings = require('plenary.strings')
+local types = require('luasnip.util.types')
 
-ls.config.setup {
+ls.config.setup({
   updateevents = 'TextChanged,TextChangedI',
   delete_check_events = 'TextChanged',
   history = true,
@@ -21,7 +21,7 @@ ls.config.setup {
       },
     },
   },
-}
+})
 
 ls.add_snippets('lua', {
   ls.parser.parse_snippet('f', 'function($1)\n  $0\nend'),
@@ -57,7 +57,7 @@ ls.add_snippets('go', {
     'for',
     fmt('for {} := range {} {{\n\t{}\n}}', {
       c(1, {
-        { i(1, '_'), t ', ', i(2, nil) },
+        { i(1, '_'), t(', '), i(2, nil) },
         i(nil, nil),
       }),
       i(2),

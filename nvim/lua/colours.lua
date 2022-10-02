@@ -1,6 +1,6 @@
-local lsp_utils = require 'utils.lsp'
-local highlight = require 'utils.highlight'
-local gruvbox = require 'gruvbox.colors'
+local lsp_utils = require('utils.lsp')
+local highlight = require('utils.highlight')
+local gruvbox = require('gruvbox.colors')
 
 local M = {}
 

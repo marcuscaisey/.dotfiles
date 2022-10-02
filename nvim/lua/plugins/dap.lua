@@ -1,6 +1,6 @@
-local dap = require 'dap'
-local repl = require 'dap.repl'
-local ui = require 'dap.ui'
+local dap = require('dap')
+local repl = require('dap.repl')
+local ui = require('dap.ui')
 
 -- evaluates an expression in the same way that nvim-dap does except it replaces literal \n and \t with actual newlines
 -- and tabs

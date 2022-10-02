@@ -1,10 +1,10 @@
-local telescope = require 'telescope'
-local state = require 'telescope.actions.state'
-local layout = require 'telescope.actions.layout'
-local builtin = require 'telescope.builtin'
-local entry_display = require 'telescope.pickers.entry_display'
-local utils = require 'telescope.utils'
-local actions = require 'telescope.actions'
+local telescope = require('telescope')
+local state = require('telescope.actions.state')
+local layout = require('telescope.actions.layout')
+local builtin = require('telescope.builtin')
+local entry_display = require('telescope.pickers.entry_display')
+local utils = require('telescope.utils')
+local actions = require('telescope.actions')
 local transform_mod = require('telescope.actions.mt').transform_mod
 
 --- Splits a filepath into head / tail where tail is the last path component and
@@ -34,29 +34,29 @@ local function shorten_path(path)
   if replacements == 1 then
     return relative_path
   end
-  local path_without_home = path:gsub('^' .. os.getenv 'HOME', '~')
+  local path_without_home = path:gsub('^' .. os.getenv('HOME'), '~')
   return path_without_home
 end
 
 -- displays document symbols as: type name
 local function create_lsp_document_symbols_entry(entry)
-  local displayer = entry_display.create {
+  local displayer = entry_display.create({
     separator = ' ',
     items = {
       { width = 13 }, -- symbol type
       { remaining = true }, -- symbol name
     },
-  }
+  })
 
   local make_display = function(entry)
-    return displayer {
+    return displayer({
       { entry.symbol_type, 'LSPSymbol' .. entry.symbol_type },
       entry.symbol_name,
-    }
+    })
   end
 
   local symbol_msg = entry.text:gsub('.* | ', '')
-  local symbol_type, symbol_name = symbol_msg:match '%[(.+)%]%s+(.*)'
+  local symbol_type, symbol_name = symbol_msg:match('%[(.+)%]%s+(.*)')
   local ordinal = symbol_name .. ' ' .. (symbol_type or 'unknown')
 
   return {
@@ -76,25 +76,25 @@ end
 
 -- displays workspace symbols as: type name filepath
 local function create_lsp_dynamic_workspace_symbols_entry(entry)
-  local displayer = entry_display.create {
+  local displayer = entry_display.create({
     separator = ' ',
     items = {
       { width = 13 }, -- symbol type
       { remaining = true }, -- symbol name
       { remaining = true }, -- filepath
     },
-  }
+  })
 
   local make_display = function(entry)
-    return displayer {
+    return displayer({
       { entry.symbol_type, 'LSPSymbol' .. entry.symbol_type },
       entry.symbol_name,
       { shorten_path(entry.filename), 'TelescopeResultsLineNr' },
-    }
+    })
   end
 
   local symbol_msg = entry.text:gsub('.* | ', '')
-  local symbol_type, symbol_name = symbol_msg:match '%[(.+)%]%s+(.*)'
+  local symbol_type, symbol_name = symbol_msg:match('%[(.+)%]%s+(.*)')
   local ordinal = symbol_name .. ' ' .. (symbol_type or 'unknown')
 
   return {
@@ -114,14 +114,14 @@ end
 
 -- displays lsp references as: filename line:col directory
 local function create_lsp_references_entry(entry)
-  local displayer = entry_display.create {
+  local displayer = entry_display.create({
     separator = ' ',
     items = {
       { remaining = true }, -- filename
       { remaining = true }, -- line:col
       { remaining = true }, -- directory
     },
-  }
+  })
 
   local make_display = function(entry)
     local head, tail = split_path(entry.filename)
@@ -129,11 +129,11 @@ local function create_lsp_references_entry(entry)
 
     local position = table.concat({ entry.lnum, entry.col }, ':')
 
-    return displayer {
+    return displayer({
       tail,
       { position, 'TelescopeResultsLineNr' },
       { head, 'TelescopeResultsLineNr' },
-    }
+    })
   end
 
   return {
@@ -153,21 +153,21 @@ end
 
 -- display lsp definitions as: filename directory
 local function create_lsp_definitions_entry(entry)
-  local displayer = entry_display.create {
+  local displayer = entry_display.create({
     separator = ' ',
     items = {
       { remaining = true }, -- filename
       { remaining = true }, -- directory
     },
-  }
+  })
 
   local make_display = function(entry)
     local head, tail = split_path(entry.filename)
     head = shorten_path(head)
-    return displayer {
+    return displayer({
       tail,
       { head, 'TelescopeResultsLineNr' },
-    }
+    })
   end
 
   return {
@@ -185,9 +185,9 @@ local function create_lsp_definitions_entry(entry)
   }
 end
 
-local custom_actions = transform_mod {
+local custom_actions = transform_mod({
   open_first_qf_item = function(_)
-    vim.cmd 'cfirst'
+    vim.cmd('cfirst')
   end,
   grep_in_files = function(prompt_bufnr)
     local picker = state.get_current_picker(prompt_bufnr)
@@ -203,11 +203,11 @@ local custom_actions = transform_mod {
       end
     end
     actions.close(prompt_bufnr)
-    builtin.live_grep { search_dirs = filenames }
+    builtin.live_grep({ search_dirs = filenames })
   end,
-}
+})
 
-telescope.setup {
+telescope.setup({
   defaults = {
     layout_config = {
       horizontal = {
@@ -303,5 +303,5 @@ telescope.setup {
       entry_maker = create_lsp_definitions_entry,
     },
   },
-}
-telescope.load_extension 'fzf'
+})
+telescope.load_extension('fzf')

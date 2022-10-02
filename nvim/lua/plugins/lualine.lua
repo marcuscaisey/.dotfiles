@@ -1,19 +1,19 @@
-local colours = require 'colours'
+local colours = require('colours')
 
 local search_results = {
   function()
-    local search_term = vim.fn.getreg '/'
-    local search_count = vim.fn.searchcount {
+    local search_term = vim.fn.getreg('/')
+    local search_count = vim.fn.searchcount({
       recompute = 1,
       maxcount = -1,
-    }
+    })
     return string.format('/%s [%d/%d]', search_term, search_count.current, search_count.total)
   end,
   cond = function()
-    local search_count = vim.fn.searchcount {
+    local search_count = vim.fn.searchcount({
       recompute = 1,
       maxcount = -1,
-    }
+    })
     return search_count.total > 0
   end,
 }
@@ -21,11 +21,11 @@ local search_results = {
 local lsp_clients = function()
   local client_names = vim.tbl_map(function(client)
     return client.name
-  end, vim.lsp.get_active_clients { bufnr = 0 })
+  end, vim.lsp.get_active_clients({ bufnr = 0 }))
   return #client_names > 0 and table.concat(client_names, ', ') or 'No Active LSP Clients'
 end
 
-require('lualine').setup {
+require('lualine').setup({
   options = {
     theme = colours.lualine,
     component_separators = { left = '', right = '' },
@@ -67,4 +67,4 @@ require('lualine').setup {
       { 'progress', padding = { left = 0, right = 1 } },
     },
   },
-}
+})

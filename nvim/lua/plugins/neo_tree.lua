@@ -1,6 +1,6 @@
 vim.g.neo_tree_remove_legacy_commands = 1
 
-require('neo-tree').setup {
+require('neo-tree').setup({
   use_popups_for_input = false,
   enable_git_status = true,
   git_status_async = true,
@@ -75,4 +75,4 @@ require('neo-tree').setup {
     bind_to_cwd = false,
     use_libuv_file_watcher = true,
   },
-}
+})

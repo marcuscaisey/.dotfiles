@@ -1,4 +1,4 @@
-vim.cmd 'colorscheme gruvbox'
+vim.cmd('colorscheme gruvbox')
 vim.o.clipboard = 'unnamed'
 vim.o.cursorline = true
 vim.o.expandtab = true
@@ -25,7 +25,7 @@ vim.o.updatetime = 100
 
 vim.g.mapleader = ' '
 
-require('file_types').setup {
+require('file_types').setup({
   lua = {
     tab_size = 2,
     text_width = 120,
@@ -74,4 +74,4 @@ require('file_types').setup {
     tab_size = 2,
     text_width = 100,
   },
-}
+})
