@@ -25,6 +25,13 @@ require('packer').startup({
       end,
     })
     use({
+      'kosayoda/nvim-lightbulb',
+      requires = 'antoinemadec/FixCursorHold.nvim',
+      config = function()
+        require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
+      end,
+    })
+    use({
       'hrsh7th/nvim-cmp',
       config = function()
         require('plugins.cmp')

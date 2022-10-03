@@ -239,6 +239,8 @@ map('n', '<leader>dq', function()
   vim.cmd('copen')
   vim.cmd('cfirst')
 end)
+map('n', '<leader>ca', vim.lsp.buf.code_action)
+map('v', '<leader>ca', vim.lsp.buf.code_action)
 
 -- neoformat
 map('n', '<leader>fm', '<cmd>Neoformat<cr>')
