@@ -171,7 +171,7 @@ require('packer').startup({
         'MunifTanjim/nui.nvim',
       },
     })
-    use('~/scratch/please.nvim')
+    use('marcuscaisey/please.nvim')
     use({
       'kana/vim-textobj-entire',
       requires = 'kana/vim-textobj-user',
