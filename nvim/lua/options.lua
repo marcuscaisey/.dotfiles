@@ -69,4 +69,7 @@ require('file_types').setup({
     tab_size = 2,
     text_width = 100,
   },
+  please = {
+    text_width = 120,
+  },
 })
