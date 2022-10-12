@@ -382,3 +382,24 @@ map('n', '<f11>', function()
   dap.step_into({ askForTargets = true })
 end)
 map('n', '<f23>', dap.step_out)
+
+-- Go
+map('n', '<leader>gt', function()
+  if vim.bo.filetype ~= 'go' then
+    print('not in a Go file')
+    return
+  end
+
+  local filepath = vim.api.nvim_buf_get_name(0)
+  local dirname = vim.fs.dirname(filepath)
+  local basename = vim.fs.basename(filepath)
+
+  local new_basename
+  if basename:match('_test') then
+    new_basename = basename:match('^(.+)_test%.go$') .. '.go'
+  else
+    new_basename = basename:match('^(.+)%.go$') .. '_test.go'
+  end
+
+  vim.cmd({ cmd = 'edit', args = { dirname .. '/' .. new_basename } })
+end)
