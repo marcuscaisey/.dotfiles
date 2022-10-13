@@ -5,8 +5,8 @@ local telescope_state = require('telescope.actions.state')
 local telescope_actions = require('telescope.actions')
 local gitsigns = require('gitsigns.actions')
 local harpoon_ui = require('harpoon.ui')
-local neo_tree = require('neo-tree.command')
 local map = require('utils.mappings').map
+local buf_map = require('utils.mappings').buf_map
 local neoformat = require('plugins.neoformat')
 local conflict = require('git-conflict')
 local dap = require('dap')
@@ -288,15 +288,6 @@ for n = 1, 4 do
   end)
 end
 
--- neo-tree
-map('n', '-', function()
-  neo_tree.execute({
-    reveal_force_cwd = true,
-    -- TODO: fix upstream dir option which should just be able to take in '%:p:h' and expand it for us
-    dir = vim.fn.expand('%:p:h'),
-  })
-end)
-
 -- plenary
 map('n', '<leader>lt', '<Plug>PlenaryTestFile')
 
@@ -403,3 +394,14 @@ map('n', '<leader>gt', function()
 
   vim.cmd({ cmd = 'edit', args = { dirname .. '/' .. new_basename } })
 end)
+
+-- netrw
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  pattern = 'netrw',
+  callback = function()
+    -- there are other mappings in netrw starting with q which we don't care about, so don't wait for any more keys
+    buf_map('n', 'q', '<c-^>', { nowait = true })
+  end,
+  group = vim.api.nvim_create_augroup('mappings', { clear = true }),
+  desc = 'Map q to ctrl-^ in netrw',
+})
