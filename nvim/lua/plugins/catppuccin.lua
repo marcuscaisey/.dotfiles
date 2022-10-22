@@ -1,3 +1,5 @@
+local highlight = require 'utils.highlight'
+
 require('catppuccin').setup({
   flavour = 'mocha',
   integrations = {
@@ -29,3 +31,5 @@ require('catppuccin').setup({
   },
 })
 vim.cmd.colorscheme({ args = { 'catppuccin' } })
+
+highlight.link('NormalFloat', 'Pmenu')
