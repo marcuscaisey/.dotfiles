@@ -25,11 +25,9 @@ end
 
 require('lualine').setup({
   options = {
-    options = {
-      theme = 'catppuccin',
-      component_separators = { left = '', right = '' },
-      section_separators = { left = '', right = '' },
-    },
+    theme = 'catppuccin',
+    component_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
     disabled_filetypes = {
       statusline = {},
       winbar = {},
