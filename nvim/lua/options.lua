@@ -1,4 +1,3 @@
-vim.cmd('colorscheme gruvbox')
 vim.o.clipboard = 'unnamed'
 vim.o.cursorline = true
 vim.o.expandtab = true

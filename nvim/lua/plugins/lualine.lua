@@ -1,5 +1,3 @@
-local colours = require('colours')
-
 local search_results = {
   function()
     local search_term = vim.fn.getreg('/')
@@ -27,9 +25,9 @@ end
 
 require('lualine').setup({
   options = {
-    theme = colours.lualine,
-    component_separators = { left = '', right = '' },
-    section_separators = { right = '', left = '' },
+    options = {
+      theme = 'catppuccin',
+    },
     disabled_filetypes = {
       statusline = {},
       winbar = {},

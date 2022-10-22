@@ -88,8 +88,10 @@ require('packer').startup({
     })
     use('stevearc/dressing.nvim')
     use({
-      'ellisonleao/gruvbox.nvim',
-      commit = '3352c12c083d0ab6285a9738b7679e24e7602411',
+      'catppuccin/nvim',
+      config = function()
+        require('plugins.catppuccin')
+      end,
     })
     use({
       'norcalli/nvim-colorizer.lua',
