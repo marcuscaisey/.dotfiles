@@ -1,7 +1,12 @@
-local highlight = require 'utils.highlight'
+local highlight = require('utils.highlight')
 
 require('catppuccin').setup({
   flavour = 'mocha',
+  color_overrides = {
+    mocha = {
+      base = '#000000',
+    },
+  },
   integrations = {
     cmp = true,
     dap = {
