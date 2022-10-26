@@ -61,7 +61,7 @@ fi
 cecho "Symlinking to new dotfiles..."
 ln -isv ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -isv ~/.dotfiles/zshrc ~/.zshrc
-mkdir -pv ~/.config/nvim && ln -isv ~/.dotfiles/nvim/* ~/.config/nvim
+ln -isv ~/.dotfiles/nvim ~/.config
 if linux; then
     mkdir -pv ~/.config/k9s && ln -isv ~/.dotfiles/k9s-skin.yml ~/.config/k9s/skin.yml
 fi

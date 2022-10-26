@@ -2,3 +2,4 @@
 *.swo
 .ccls-cache
 nvim/lua/packer_compiled.lua
+nvim/plugin
