@@ -191,6 +191,12 @@ require('packer').startup({
       end,
     })
     use('AndrewRadev/splitjoin.vim')
+    use({
+      'smjonas/live-command.nvim',
+      config = function()
+        require('plugins.live_command')
+      end,
+    })
   end,
   config = {
     display = {
