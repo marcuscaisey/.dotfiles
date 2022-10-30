@@ -190,6 +190,7 @@ require('packer').startup({
         require('pqf').setup()
       end,
     })
+    use('AndrewRadev/splitjoin.vim')
   end,
   config = {
     display = {
