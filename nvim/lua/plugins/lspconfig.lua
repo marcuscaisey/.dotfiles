@@ -18,9 +18,20 @@ local servers = {
         analyses = {
           unusedparams = true,
         },
+        codelenses = {
+          gc_details = true,
+        },
         staticcheck = true,
       },
     },
+    on_attach = function(_, bufnr)
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'BufWritePost', 'CursorHold' }, {
+        callback = vim.lsp.codelens.refresh,
+        group = vim.api.nvim_create_augroup('gopls', { clear = true }),
+        buffer = bufnr,
+        desc = 'Refresh codelenses when gopls is running',
+      })
+    end,
     root_dir = function(fname)
       local go_mod_root = util.root_pattern('go.mod')(fname)
       if go_mod_root then
@@ -105,6 +116,7 @@ for server, config in pairs(servers) do
     settings = config.settings,
     root_dir = config.root_dir,
     cmd = config.cmd,
+    on_attach = config.on_attach,
   })
 end
 
