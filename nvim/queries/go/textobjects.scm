@@ -13,3 +13,5 @@
   . (literal_element) @literal_value.inner
   . ","? @_end
   (#make-range! "literal_value.outer" @literal_value.inner @_end))
+
+right: (expression_list) @rvalue

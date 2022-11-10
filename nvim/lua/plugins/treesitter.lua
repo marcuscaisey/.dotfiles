@@ -29,6 +29,7 @@ require('nvim-treesitter.configs').setup({
         ['aC'] = '@class.outer',
         ['iv'] = '@literal_value.inner',
         ['av'] = '@literal_value.outer',
+        ['ir'] = '@rvalue',
       },
       selection_modes = {
         ['@function.outer'] = 'V',
