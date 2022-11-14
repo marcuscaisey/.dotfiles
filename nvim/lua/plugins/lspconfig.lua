@@ -121,7 +121,7 @@ for server, config in pairs(servers) do
 end
 
 vim.diagnostic.config({
-  virtual_text = false,
+  virtual_text = true,
   float = {
     source = 'always',
   },
