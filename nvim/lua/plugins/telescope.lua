@@ -299,6 +299,9 @@ telescope.setup({
     lsp_references = {
       entry_maker = create_lsp_references_entry,
     },
+    lsp_implementations = {
+      entry_maker = create_lsp_references_entry,
+    },
     lsp_definitions = {
       entry_maker = create_lsp_definitions_entry,
     },
