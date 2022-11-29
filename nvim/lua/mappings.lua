@@ -210,6 +210,7 @@ map('n', '<leader>tr', telescope_builtin.resume)
 -- lsp
 map('n', 'K', vim.lsp.buf.hover)
 map('n', 'dK', vim.diagnostic.open_float)
+map('n', 'dr', vim.diagnostic.reset)
 map('n', '<leader>rn', vim.lsp.buf.rename)
 map('n', ']d', vim.diagnostic.goto_next)
 map('n', '[d', vim.diagnostic.goto_prev)
