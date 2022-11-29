@@ -388,17 +388,6 @@ map('n', '<leader>gt', function()
   vim.cmd({ cmd = 'edit', args = { dirname .. '/' .. new_basename } })
 end)
 
--- netrw
-vim.api.nvim_create_autocmd({ 'FileType' }, {
-  pattern = 'netrw',
-  callback = function()
-    -- there are other mappings in netrw starting with q which we don't care about, so don't wait for any more keys
-    buf_map('n', 'q', '<c-^>', { nowait = true })
-  end,
-  group = vim.api.nvim_create_augroup('mappings', { clear = true }),
-  desc = 'Map q to ctrl-^ in netrw',
-})
-
 local shell_cmd_or_die = function(cmd, ...)
   local output_or_err = vim.trim(vim.fn.system(string.format(cmd, ...)))
   if vim.v.shell_error > 0 then
