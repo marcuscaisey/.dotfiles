@@ -197,6 +197,12 @@ require('packer').startup({
         require('plugins.live_command')
       end,
     })
+    use({
+      'prichrd/netrw.nvim',
+      config = function()
+        require('plugins.netrw')
+      end,
+    })
   end,
   config = {
     display = {
