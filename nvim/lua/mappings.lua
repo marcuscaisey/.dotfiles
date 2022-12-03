@@ -38,6 +38,8 @@ map('n', '<c-w>e', '<c-w>=')
 
 map('n', 'n', 'nzz')
 map('n', 'N', 'Nzz')
+map('n', '<c-d>', '<c-d>zz')
+map('n', '<c-u>', '<c-u>zz')
 
 map('i', 'II', '<esc>I')
 map('i', 'AA', '<esc>A')
