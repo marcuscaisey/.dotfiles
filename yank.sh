@@ -22,4 +22,10 @@ set -euo pipefail
 # Values in [brackets] are variable parameters, not literals.
 # OSC means ESC ]
 
-printf "\x1b]52;;$(cat - | base64)\x07"
+if [[ -n ${TMUX:-} ]]; then
+    # If we're in tmux, then we need to write the escape sequence to the tty of the active pane.
+    active_pane_tty=$(tmux list-panes -F "#{pane_active} #{pane_tty}" | awk '$1=="1" { print $2 }')
+    printf $'\x1b]52;;%s\x07' "$(cat - | base64)" > $active_pane_tty
+else
+    printf $'\x1b]52;;%s\x07' "$(cat - | base64)"
+fi
