@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Copies stdin to clipboard using the OSC 52 escape sequence.
-
+#
 # From iTerm docs:
 #
 # OSC 52
