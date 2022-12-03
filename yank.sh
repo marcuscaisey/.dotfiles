@@ -22,4 +22,4 @@ set -euo pipefail
 # Values in [brackets] are variable parameters, not literals.
 # OSC means ESC ]
 
-printf "\x1b]52;;$(cat - | tr -d '\n' | base64)\x07"
+printf "\x1b]52;;$(cat - | base64)\x07"
