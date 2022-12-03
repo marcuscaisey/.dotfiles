@@ -1,20 +1,25 @@
 #!/bin/bash
-# yk (yank) script - copy stdin to clipboard using osc52 escape sequence
 set -euo pipefail
 
-function print_OSC52() {
-  esc="\033]52;c;$( printf %s "$1" | head -c $maxlen | base64 | tr -d '\r\n')\a"
-  printf $esc
-}
+# Copies stdin to clipboard using the OSC 52 escape sequence.
 
-buf=$(cat "$@")
-buf_len=${#buf}
+# From iTerm docs:
+#
+# OSC 52
+# This is not a proprietary control sequence. It's probably your best choice
+# since it'll work with other terminal emulators.
+# To write to the pasteboard:
+#
+# OSC 52 ; Pc ; [base64 encoded string] ST
+#
+# The Pc parameter is ignored. xterm uses it to choose among various
+# clipboards, most of which do not exist in macOS.
+#
+#
+# ESC means "Escape" (hex code 0x1b)
+# ST means either BEL (hex code 0x07) or ESC \\.
+# Spaces in control sequences are to be ignored.
+# Values in [brackets] are variable parameters, not literals.
+# OSC means ESC ]
 
-maxlen=74994
-if [[ $buf_len -gt $maxlen ]]; then
-    >&2 echo "Input length ($buf_len) longer than max length ($maxlen), \
-        output will be truncated"
-fi
-
-print_OSC52 "$buf"
->&2 echo "Copied $buf_len characters to clipboard"
+printf "\x1b]52;;$(cat - | tr -d '\n' | base64)\x07"
