@@ -66,9 +66,6 @@ ln -isv ~/.dotfiles/nvim ~/.config
 if linux; then
     mkdir -pv ~/.config/k9s && ln -isv ~/.dotfiles/k9s-skin.yml ~/.config/k9s/skin.yml
 fi
-if osx; then
-  mkdir -pv ~/Library/Application\ Support/ptpython && ln -isv ~/.dotfiles/ptpython-config.py ~/Library/Application\ Support/ptpython/config.py
-fi
 
 cecho "Changing login shell..."
 chsh -s $(which zsh)
