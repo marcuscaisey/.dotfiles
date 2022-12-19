@@ -6,7 +6,7 @@ if osx; then
   cecho "Installing homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  pkgs="zsh git tmux exa fzf fd bat ripgrep nvim ranger"
+  pkgs="zsh git tmux exa fzf fd bat ripgrep nvim ranger ncurses"
   for pkg in $pkgs; do
       cecho "Installing $pkg..."
       brew install $pkg
@@ -47,11 +47,12 @@ git clone https://github.com/jeffreytse/zsh-vi-mode ${ZSH_CUSTOM:-~/.oh-my-zsh/c
 cecho "Installing tmux plugin manager..."
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-cecho "Installing tmux-256color terminfo"
-curl -LO http://invisible-island.net/datafiles/current/terminfo.src.gz
-gunzip terminfo.src.gz
-tic -xe tmux-256color terminfo.src
-rm terminfo.src
+if osx; then
+  cecho "Installing tmux-256color terminfo"
+  $(brew --prefix ncurses)/bin/infocmp tmux-256color > /tmp/tmux-256color.info
+  tic -xe tmux-256color /tmp/tmux-256color.info
+  rm /tmp/tmux-256color.info
+fi
 
 if osx; then
   cecho "Installing pyenv..."
