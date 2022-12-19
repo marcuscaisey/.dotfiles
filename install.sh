@@ -6,7 +6,7 @@ if osx; then
   cecho "Installing homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  pkgs="zsh git tmux exa fzf fd bat ripgrep nvim ranger ncurses"
+  pkgs="zsh git tmux exa fzf fd bat ripgrep nvim ranger ncurses stow"
   for pkg in $pkgs; do
       cecho "Installing $pkg..."
       brew install $pkg
@@ -59,13 +59,8 @@ if osx; then
   curl https://pyenv.run | bash
 fi
 
-cecho "Symlinking to new dotfiles..."
-ln -isv ~/.dotfiles/tmux.conf ~/.tmux.conf
-ln -isv ~/.dotfiles/zshrc ~/.zshrc
-ln -isv ~/.dotfiles/nvim ~/.config
-if linux; then
-    mkdir -pv ~/.config/k9s && ln -isv ~/.dotfiles/k9s-skin.yml ~/.config/k9s/skin.yml
-fi
+cecho "Stowing config files..."
+stow -vv --target ~ --dir ~/.dotfiles --restow stow
 
 cecho "Changing login shell..."
 chsh -s $(which zsh)

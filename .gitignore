@@ -1,5 +1,5 @@
 *.swp
 *.swo
 .ccls-cache
-nvim/lua/packer_compiled.lua
-nvim/plugin
+stow/.config/nvim/lua/packer_compiled.lua
+stow/.config/nvim/plugin
