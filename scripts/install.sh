@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ~/.dotfiles/utils.sh
+source ~/.dotfiles/scripts/utils.sh
 
 if osx; then
   cecho "Installing homebrew..."

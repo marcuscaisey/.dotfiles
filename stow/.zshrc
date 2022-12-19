@@ -1,4 +1,4 @@
-source ~/.dotfiles/utils.sh
+source ~/.dotfiles/scripts/utils.sh
 
 
 ################################################################################
