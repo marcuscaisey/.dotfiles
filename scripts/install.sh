@@ -59,8 +59,8 @@ if osx; then
   curl https://pyenv.run | bash
 fi
 
-cecho "Stowing config files..."
-stow -vv --target ~ --dir ~/.dotfiles --restow stow
+cecho "Restowing config files..."
+source ~/.dotfiles/scripts/restow.sh
 
 cecho "Changing login shell..."
 chsh -s $(which zsh)
