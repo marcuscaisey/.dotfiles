@@ -50,7 +50,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 if osx; then
   cecho "Installing tmux-256color terminfo"
   $(brew --prefix ncurses)/bin/infocmp tmux-256color > /tmp/tmux-256color.info
-  tic -xe tmux-256color /tmp/tmux-256color.info
+  tic -xve tmux-256color /tmp/tmux-256color.info
   rm /tmp/tmux-256color.info
 fi
 
