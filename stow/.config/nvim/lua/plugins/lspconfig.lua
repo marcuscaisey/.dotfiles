@@ -121,13 +121,9 @@ for server, config in pairs(servers) do
 end
 
 vim.diagnostic.config({
-  virtual_text = true,
   float = {
     source = 'always',
   },
-  signs = true,
-  underline = true,
-  update_in_insert = false,
   severity_sort = true,
 })
 
