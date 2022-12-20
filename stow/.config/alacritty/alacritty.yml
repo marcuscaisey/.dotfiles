@@ -3,7 +3,7 @@ window:
 font:
   normal:
     family: Monego Nerd Font Fix
-  size: 14
+  size: 14.5
   builtin_box_drawing: true
 colors:
   primary:
