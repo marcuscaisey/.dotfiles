@@ -75,3 +75,12 @@ require('file_types').setup({
     text_width = 120,
   },
 })
+
+vim.filetype.add({
+  extension = {
+    vifm = 'vim',
+  },
+  filename = {
+    vifmrc = 'vim',
+  },
+})
