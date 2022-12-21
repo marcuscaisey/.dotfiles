@@ -3,3 +3,5 @@
 .ccls-cache
 stow/.config/nvim/lua/packer_compiled.lua
 stow/.config/nvim/plugin
+stow/.config/vifm/vifm-help.txt
+stow/.config/vifm/vifminfo.json
