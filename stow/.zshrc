@@ -89,7 +89,7 @@ alias rmr="rm -r"
 alias py=python
 
 alias vim=nvim
-alias vimo='nvim -c "e #<1"'
+alias vo='nvim -c "e #<1"'
 
 # git
 alias oops="gau && gcn!"
