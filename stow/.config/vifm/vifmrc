@@ -118,6 +118,11 @@ command! make !!make %a
 command! mkcd :mkdir %a | cd %a
 command! vgrep vim "+grep %a"
 command! reload :write | restart full
+command! FZFFd :set noquickview
+              \| let $FZF_PICK = term('fd | fzf --layout reverse 2>/dev/tty')
+              \| if $FZF_PICK != ''
+              \|     execute 'goto' fnameescape($FZF_PICK)
+              \| endif
 
 " ------------------------------------------------------------------------------
 " File types association
@@ -484,6 +489,7 @@ nnoremap <a-o> :sync %c<cr>
 " Swap panes
 nnoremap <c-u> <c-w>x
 
+nnoremap <c-p> :FZFFd<cr>
 " ------------------------------------------------------------------------------
 " Various customization examples
 " ------------------------------------------------------------------------------
