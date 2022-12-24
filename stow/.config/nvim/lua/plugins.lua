@@ -100,7 +100,12 @@ require('packer').startup({
       'akinsho/git-conflict.nvim',
       tag = '*',
     })
-    use('https://gitlab.com/yorickpeterse/nvim-pqf')
+    use({
+      'https://gitlab.com/yorickpeterse/nvim-pqf',
+      config = function()
+        require('pqf').setup()
+      end,
+    })
     use('AndrewRadev/splitjoin.vim')
     use('smjonas/live-command.nvim')
     use('prichrd/netrw.nvim')
