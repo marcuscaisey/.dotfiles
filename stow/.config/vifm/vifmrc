@@ -489,7 +489,15 @@ nnoremap <a-o> :sync %c<cr>
 " Swap panes
 nnoremap <c-u> <c-w>x
 
+nnoremap gk gg
+vnoremap gk gg
+nnoremap gj G
+vnoremap gj G
+
 nnoremap <c-p> :FZFFd<cr>
+" Sync current pane directory to the directory of the other pane
+nnoremap <c-s> <c-i>:sync<cr><c-i>
+
 " ------------------------------------------------------------------------------
 " Various customization examples
 " ------------------------------------------------------------------------------
