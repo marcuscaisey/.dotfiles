@@ -5,46 +5,44 @@ local telescope_state = require('telescope.actions.state')
 local telescope_actions = require('telescope.actions')
 local gitsigns = require('gitsigns.actions')
 local harpoon_ui = require('harpoon.ui')
-local map = require('utils.mappings').map
-local buf_map = require('utils.mappings').buf_map
 local conflict = require('git-conflict')
 local dap = require('dap')
 local Job = require('plenary.job')
 
-map('i', 'jj', '<esc>')
+vim.keymap.set('i', 'jj', '<esc>')
 
-map('n', 'gk', 'gg')
-map('v', 'gk', 'gg')
-map('n', 'gj', 'G')
-map('v', 'gj', 'G')
-map('n', 'gh', '^')
-map('v', 'gh', '^')
-map('n', 'gl', '$')
-map('v', 'gl', 'g_')
+vim.keymap.set('n', 'gk', 'gg')
+vim.keymap.set('v', 'gk', 'gg')
+vim.keymap.set('n', 'gj', 'G')
+vim.keymap.set('v', 'gj', 'G')
+vim.keymap.set('n', 'gh', '^')
+vim.keymap.set('v', 'gh', '^')
+vim.keymap.set('n', 'gl', '$')
+vim.keymap.set('v', 'gl', 'g_')
 
-map('n', '<c-j>', '<c-w>j')
-map('n', '<c-k>', '<c-w>k')
-map('n', '<c-l>', '<c-w>l')
-map('n', '<c-h>', '<c-w>h')
-map('n', '<c-w>j', '<c-w>J')
-map('n', '<c-w>k', '<c-w>K')
-map('n', '<c-w>l', '<c-w>L')
-map('n', '<c-w>h', '<c-w>H')
-map('n', '<c-w><', '<c-w>5<')
-map('n', '<c-w>>', '<c-w>5>')
-map('n', '<c-w>-', '<c-w>5-')
-map('n', '<c-w>=', '<c-w>5+')
-map('n', '<c-w>e', '<c-w>=')
+vim.keymap.set('n', '<c-j>', '<c-w>j')
+vim.keymap.set('n', '<c-k>', '<c-w>k')
+vim.keymap.set('n', '<c-l>', '<c-w>l')
+vim.keymap.set('n', '<c-h>', '<c-w>h')
+vim.keymap.set('n', '<c-w>j', '<c-w>J')
+vim.keymap.set('n', '<c-w>k', '<c-w>K')
+vim.keymap.set('n', '<c-w>l', '<c-w>L')
+vim.keymap.set('n', '<c-w>h', '<c-w>H')
+vim.keymap.set('n', '<c-w><', '<c-w>5<')
+vim.keymap.set('n', '<c-w>>', '<c-w>5>')
+vim.keymap.set('n', '<c-w>-', '<c-w>5-')
+vim.keymap.set('n', '<c-w>=', '<c-w>5+')
+vim.keymap.set('n', '<c-w>e', '<c-w>=')
 
-map('n', 'n', 'nzz')
-map('n', 'N', 'Nzz')
-map('n', '<c-d>', '<c-d>zz')
-map('n', '<c-u>', '<c-u>zz')
+vim.keymap.set('n', 'n', 'nzz')
+vim.keymap.set('n', 'N', 'Nzz')
+vim.keymap.set('n', '<c-d>', '<c-d>zz')
+vim.keymap.set('n', '<c-u>', '<c-u>zz')
 
-map('i', 'II', '<esc>I')
-map('i', 'AA', '<esc>A')
+vim.keymap.set('i', 'II', '<esc>I')
+vim.keymap.set('i', 'AA', '<esc>A')
 
-map('t', '<esc>', '<c-\\><c-n>')
+vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
 
 -- When i use map to create this, nothing appears in the command line when i trigger the mapping until i press another
 -- key. Not sure why...
@@ -52,7 +50,7 @@ vim.cmd('vnoremap @ :norm @')
 
 -- jump past closing pair character with <c-l>
 local closing_chars = { "'", '"', '`', '}', ')', ']' }
-map('i', '<c-l>', function()
+vim.keymap.set('i', '<c-l>', function()
   -- first check if the next character is a closing pair character
   local next_col = vim.fn.col('.')
   local next_char = vim.fn.getline('.'):sub(next_col, next_col)
@@ -80,7 +78,7 @@ end)
 local qf_delete_undo_stack = {}
 
 -- delete a quickfix item
-map('n', 'dd', function()
+vim.keymap.set('n', 'dd', function()
   if vim.o.filetype ~= 'qf' then
     vim.api.nvim_feedkeys('dd', 'n', true)
     return
@@ -116,7 +114,7 @@ map('n', 'dd', function()
 end)
 
 -- undo deleting a quickfix item
-map('n', 'u', function()
+vim.keymap.set('n', 'u', function()
   if vim.o.filetype ~= 'qf' then
     vim.api.nvim_feedkeys('u', 'n', true)
     return
@@ -136,7 +134,7 @@ map('n', 'u', function()
 end)
 
 -- toggle quickfix
-map('n', '<leader>q', function()
+vim.keymap.set('n', '<leader>q', function()
   local qf_window_id = vim.fn.getqflist({ winid = 0 }).winid
   -- window id > 0 means that the window is open
   local qf_open = qf_window_id > 0
@@ -148,7 +146,7 @@ map('n', '<leader>q', function()
 end)
 
 -- open changed buffers in quickfix
-map('n', '<leader>cb', function()
+vim.keymap.set('n', '<leader>cb', function()
   -- filter buffers for changed property since bufmodified = 1 doesn't seem to filter out all unchanged buffers
   local changed_buffers = vim.tbl_filter(
     function(b)
@@ -170,7 +168,7 @@ end)
 -- telescope.nvim
 -- Pick new working directory for the current window. Picks from directory inside the current git repo if available,
 -- otherwise the current directory.
-map('n', '<leader>cd', function()
+vim.keymap.set('n', '<leader>cd', function()
   local cwd = vim.trim(vim.fn.system('git rev-parse --show-toplevel'))
   if vim.v.shell_error > 0 then
     cwd = vim.fn.getcwd()
@@ -195,35 +193,35 @@ map('n', '<leader>cd', function()
     end,
   })
 end)
-map('n', '<c-p>', telescope_builtin.find_files)
-map('n', '<c-b>', telescope_builtin.buffers)
-map('n', '<c-f>', telescope_builtin.current_buffer_fuzzy_find)
-map('n', '<c-g>', telescope_builtin.live_grep)
-map('n', '<c-s>', telescope_builtin.lsp_document_symbols)
-map('n', '<leader>s', telescope_builtin.lsp_dynamic_workspace_symbols)
-map('n', 'gd', telescope_builtin.lsp_definitions)
-map('n', 'gi', telescope_builtin.lsp_implementations)
-map('n', 'ge', telescope_builtin.lsp_references)
-map('n', '<leader>ht', telescope_builtin.help_tags)
-map('n', '<leader>of', telescope_builtin.oldfiles)
-map('n', '<leader>tt', telescope_builtin.builtin)
-map('n', '<leader>tr', telescope_builtin.resume)
+vim.keymap.set('n', '<c-p>', telescope_builtin.find_files)
+vim.keymap.set('n', '<c-b>', telescope_builtin.buffers)
+vim.keymap.set('n', '<c-f>', telescope_builtin.current_buffer_fuzzy_find)
+vim.keymap.set('n', '<c-g>', telescope_builtin.live_grep)
+vim.keymap.set('n', '<c-s>', telescope_builtin.lsp_document_symbols)
+vim.keymap.set('n', '<leader>s', telescope_builtin.lsp_dynamic_workspace_symbols)
+vim.keymap.set('n', 'gd', telescope_builtin.lsp_definitions)
+vim.keymap.set('n', 'gi', telescope_builtin.lsp_implementations)
+vim.keymap.set('n', 'ge', telescope_builtin.lsp_references)
+vim.keymap.set('n', '<leader>ht', telescope_builtin.help_tags)
+vim.keymap.set('n', '<leader>of', telescope_builtin.oldfiles)
+vim.keymap.set('n', '<leader>tt', telescope_builtin.builtin)
+vim.keymap.set('n', '<leader>tr', telescope_builtin.resume)
 
 -- lsp
-map('n', 'K', vim.lsp.buf.hover)
-map('n', 'dK', vim.diagnostic.open_float)
-map('n', 'dr', vim.diagnostic.reset)
-map('n', '<leader>rn', vim.lsp.buf.rename)
-map('n', ']d', vim.diagnostic.goto_next)
-map('n', '[d', vim.diagnostic.goto_prev)
-map('n', '<leader>rc', vim.lsp.codelens.run)
-map('n', ']e', function()
+vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+vim.keymap.set('n', 'dK', vim.diagnostic.open_float)
+vim.keymap.set('n', 'dr', vim.diagnostic.reset)
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', '<leader>rc', vim.lsp.codelens.run)
+vim.keymap.set('n', ']e', function()
   vim.diagnostic.goto_next({ severity = { min = vim.diagnostic.severity.WARN } })
 end)
-map('n', '[e', function()
+vim.keymap.set('n', '[e', function()
   vim.diagnostic.goto_prev({ severity = { min = vim.diagnostic.severity.WARN } })
 end)
-map('n', '<leader>dq', function()
+vim.keymap.set('n', '<leader>dq', function()
   local diagnostics = vim.diagnostic.get(0)
   if #diagnostics == 0 then
     print('No diagnostics')
@@ -235,8 +233,8 @@ map('n', '<leader>dq', function()
   vim.cmd('copen')
   vim.cmd('cfirst')
 end)
-map('n', '<leader>ca', vim.lsp.buf.code_action)
-map('v', '<leader>ca', vim.lsp.buf.code_action)
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
+vim.keymap.set('v', '<leader>ca', vim.lsp.buf.code_action)
 
 -- neoformat
 local wollemi = function()
@@ -268,26 +266,26 @@ local wollemi = function()
   job:start()
 end
 
-map('n', '<leader>fm', function()
+vim.keymap.set('n', '<leader>fm', function()
   vim.cmd.Neoformat()
   wollemi()
 end)
 
 -- vim-fugitive
-map('n', '<leader>gb', '<cmd>:Git blame<cr>')
+vim.keymap.set('n', '<leader>gb', '<cmd>:Git blame<cr>')
 
 -- gitsigns.nvim
-map('n', ']c', gitsigns.next_hunk)
-map('n', '[c', gitsigns.prev_hunk)
-map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-map('n', '<leader>hS', gitsigns.stage_buffer)
-map('n', '<leader>hu', gitsigns.undo_stage_hunk)
-map({ 'n', 'v' }, '<leader>hr', '<cmd>Gitsigns reset_hunk<cr>')
-map('n', '<leader>hR', gitsigns.reset_buffer)
-map('n', '<leader>hp', gitsigns.preview_hunk_inline)
-map('n', '<leader>hd', gitsigns.toggle_deleted)
-map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
-map('n', '<leader>gc', function()
+vim.keymap.set('n', ']c', gitsigns.next_hunk)
+vim.keymap.set('n', '[c', gitsigns.prev_hunk)
+vim.keymap.set({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+vim.keymap.set('n', '<leader>hS', gitsigns.stage_buffer)
+vim.keymap.set('n', '<leader>hu', gitsigns.undo_stage_hunk)
+vim.keymap.set({ 'n', 'v' }, '<leader>hr', '<cmd>Gitsigns reset_hunk<cr>')
+vim.keymap.set('n', '<leader>hR', gitsigns.reset_buffer)
+vim.keymap.set('n', '<leader>hp', gitsigns.preview_hunk_inline)
+vim.keymap.set('n', '<leader>hd', gitsigns.toggle_deleted)
+vim.keymap.set({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
+vim.keymap.set('n', '<leader>gc', function()
   vim.fn.system('git diff --quiet')
   if vim.v.shell_error == 0 then
     print('No Git changes')
@@ -307,63 +305,63 @@ map('n', '<leader>gc', function()
 end)
 
 -- harpoon
-map('n', '<leader>ha', require('harpoon.mark').add_file)
-map('n', '<leader>hh', harpoon_ui.toggle_quick_menu)
+vim.keymap.set('n', '<leader>ha', require('harpoon.mark').add_file)
+vim.keymap.set('n', '<leader>hh', harpoon_ui.toggle_quick_menu)
 for n = 1, 4 do
-  map('n', string.format('<leader>%d', n), function()
+  vim.keymap.set('n', string.format('<leader>%d', n), function()
     harpoon_ui.nav_file(n)
   end)
 end
 
 -- plenary
-map('n', '<leader>lt', '<Plug>PlenaryTestFile')
+vim.keymap.set('n', '<leader>lt', '<Plug>PlenaryTestFile')
 
 -- please.nvim
 -- require all of these in a callback so that we can hot reload them
-map('n', '<leader>pj', function()
+vim.keymap.set('n', '<leader>pj', function()
   require('please').jump_to_target()
 end)
-map('n', '<leader>pb', function()
+vim.keymap.set('n', '<leader>pb', function()
   require('please').build()
 end)
-map('n', '<leader>pt', function()
+vim.keymap.set('n', '<leader>pt', function()
   require('please').test()
 end)
-map('n', '<leader>pct', function()
+vim.keymap.set('n', '<leader>pct', function()
   require('please').test({ under_cursor = true })
 end)
-map('n', '<leader>plt', function()
+vim.keymap.set('n', '<leader>plt', function()
   require('please').test({ list = true })
 end)
-map('n', '<leader>pft', function()
+vim.keymap.set('n', '<leader>pft', function()
   require('please').test({ failed = true })
 end)
-map('n', '<leader>pr', function()
+vim.keymap.set('n', '<leader>pr', function()
   require('please').run()
 end)
-map('n', '<leader>py', function()
+vim.keymap.set('n', '<leader>py', function()
   require('please').yank()
 end)
-map('n', '<leader>pp', function()
+vim.keymap.set('n', '<leader>pp', function()
   require('please.runners.popup').restore()
 end)
-map('n', '<leader>pll', function()
+vim.keymap.set('n', '<leader>pll', function()
   require('please.plugin').reload()
 end)
-map('n', '<leader>pd', function()
+vim.keymap.set('n', '<leader>pd', function()
   require('please').debug()
 end)
-map('n', '<leader>pa', function()
+vim.keymap.set('n', '<leader>pa', function()
   require('please').action_history()
 end)
 
 -- luasnip
-map({ 'i', 's' }, '<c-j>', function()
+vim.keymap.set({ 'i', 's' }, '<c-j>', function()
   if ls.expand_or_jumpable() then
     ls.expand_or_jump()
   end
 end)
-map({ 'i', 's' }, '<c-k>', function()
+vim.keymap.set({ 'i', 's' }, '<c-k>', function()
   if ls.jumpable(-1) then
     ls.jump(-1)
   end
@@ -373,36 +371,36 @@ vim.keymap.set({ 'i', 's' }, '<c-h>', function()
     ls.change_choice(1)
   end
 end)
-map('n', '<leader><leader>s', function()
+vim.keymap.set('n', '<leader><leader>s', function()
   vim.cmd('source ~/.dotfiles/nvim/lua/plugins/luasnip.lua')
   print('reloaded snippets')
 end)
 
 -- git-conflict.nvim
-map('n', '<leader>cc', function() -- current changes
+vim.keymap.set('n', '<leader>cc', function() -- current changes
   conflict.choose('ours')
 end)
-map('n', '<leader>ic', function() -- incoming changes
+vim.keymap.set('n', '<leader>ic', function() -- incoming changes
   conflict.choose('theirs')
 end)
 
 -- nvim-dap
-map('n', '<leader>bp', dap.toggle_breakpoint)
-map('n', '<leader>bcp', function()
+vim.keymap.set('n', '<leader>bp', dap.toggle_breakpoint)
+vim.keymap.set('n', '<leader>bcp', function()
   dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
 end)
-map('n', '<f5>', dap.continue)
-map('n', '<f17>', dap.terminate)
-map('n', '<f6>', dap.restart)
-map('n', '<f8>', dap.run_to_cursor)
-map('n', '<f10>', dap.step_over)
-map('n', '<f11>', function()
+vim.keymap.set('n', '<f5>', dap.continue)
+vim.keymap.set('n', '<f17>', dap.terminate)
+vim.keymap.set('n', '<f6>', dap.restart)
+vim.keymap.set('n', '<f8>', dap.run_to_cursor)
+vim.keymap.set('n', '<f10>', dap.step_over)
+vim.keymap.set('n', '<f11>', function()
   dap.step_into({ askForTargets = true })
 end)
-map('n', '<f23>', dap.step_out)
+vim.keymap.set('n', '<f23>', dap.step_out)
 
 -- Go
-map('n', '<leader>gt', function()
+vim.keymap.set('n', '<leader>gt', function()
   if vim.bo.filetype ~= 'go' then
     print('not in a Go file')
     return
@@ -427,7 +425,7 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
   pattern = 'netrw',
   callback = function()
     -- there are other mappings in netrw starting with q which we don't care about, so don't wait for any more keys
-    buf_map('n', 'q', '<c-^>', { nowait = true })
+    vim.keymap.set('n', 'q', '<c-^>', { nowait = true, buffer = true })
   end,
   group = vim.api.nvim_create_augroup('mappings', { clear = true }),
   desc = 'Map q to ctrl-^ in netrw',
@@ -442,7 +440,7 @@ local shell_cmd_or_die = function(cmd, ...)
 end
 
 -- sourcegraph
-map('n', '<leader>ys', function()
+vim.keymap.set('n', '<leader>ys', function()
   local url_template = 'https://sourcegraph.iap.tmachine.io/git.gaia.tmachine.io/diffusion/CORE@%s/-/blob/%s?L%d'
   local commit = shell_cmd_or_die('git rev-parse HEAD')
   local root = shell_cmd_or_die('git rev-parse --show-toplevel')
