@@ -10,20 +10,12 @@ require('packer').startup({
     use({
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
-      config = function()
-        require('plugins.treesitter')
-      end,
     })
     use('nvim-treesitter/nvim-treesitter-textobjects')
     use('lewis6991/nvim-treesitter-context')
     use('nvim-treesitter/playground')
     use('windwp/nvim-ts-autotag')
-    use({
-      'neovim/nvim-lspconfig',
-      config = function()
-        require('plugins.lspconfig')
-      end,
-    })
+    use('neovim/nvim-lspconfig')
     use({
       'kosayoda/nvim-lightbulb',
       requires = 'antoinemadec/FixCursorHold.nvim',
@@ -31,68 +23,32 @@ require('packer').startup({
         require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
       end,
     })
-    use({
-      'hrsh7th/nvim-cmp',
-      config = function()
-        require('plugins.cmp')
-      end,
-    })
+    use('hrsh7th/nvim-cmp')
     use('saadparwaiz1/cmp_luasnip')
     use('hrsh7th/cmp-nvim-lsp')
     use('hrsh7th/cmp-nvim-lua')
     use('hrsh7th/cmp-buffer')
     use('hrsh7th/cmp-path')
-    use({
-      'mfussenegger/nvim-dap',
-      config = function()
-        require('plugins.dap')
-      end,
-    })
+    use('mfussenegger/nvim-dap')
     use({
       'theHamsta/nvim-dap-virtual-text',
       config = function()
-        require('nvim-dap-virtual-text').setup()
+        require('nvim-dap-virtual-text').setup({})
       end,
     })
-    use({
-      'rcarriga/nvim-dap-ui',
-      config = function()
-        require('plugins.dapui')
-      end,
-    })
-    use({
-      'L3MON4D3/LuaSnip',
-      config = function()
-        require('plugins.luasnip')
-      end,
-    })
-    use({
-      'ray-x/lsp_signature.nvim',
-      config = function()
-        require('plugins.lsp_signature')
-      end,
-    })
+    use('rcarriga/nvim-dap-ui')
+    use('L3MON4D3/LuaSnip')
+    use('ray-x/lsp_signature.nvim')
     use({
       'nvim-lualine/lualine.nvim',
-      config = function()
-        require('plugins.lualine')
-      end,
       requires = 'kyazdani42/nvim-web-devicons',
     })
     use({
       'lewis6991/gitsigns.nvim',
       requires = 'nvim-lua/plenary.nvim',
-      config = function()
-        require('plugins.gitsigns')
-      end,
     })
     use('stevearc/dressing.nvim')
-    use({
-      'catppuccin/nvim',
-      config = function()
-        require('plugins.catppuccin')
-      end,
-    })
+    use('catppuccin/nvim')
     use({
       'norcalli/nvim-colorizer.lua',
       config = function()
@@ -101,11 +57,7 @@ require('packer').startup({
     })
     use({
       'nvim-telescope/telescope.nvim',
-      config = function()
-        require('plugins.telescope')
-      end,
       requires = {
-        'nvim-lua/popup.nvim',
         'nvim-lua/plenary.nvim',
       },
     })
@@ -122,50 +74,17 @@ require('packer').startup({
       end,
     })
     use('vim-scripts/ReplaceWithRegister')
-    use({
-      'tpope/vim-commentary',
-      config = function()
-        require('plugins.commentary')
-      end,
-    })
-    use({
-      'tpope/vim-surround',
-      config = function()
-        require('plugins.surround')
-      end,
-    })
-    use({
-      'ggandor/leap.nvim',
-      config = function()
-        require('plugins.leap')
-      end,
-    })
-    use({
-      'bkad/camelcasemotion',
-      config = function()
-        require('plugins.camelcasemotion')
-      end,
-    })
-    use({
-      'ojroques/vim-oscyank',
-      config = function()
-        require('plugins.oscyank')
-      end,
-    })
-    use({
-      'sbdchd/neoformat',
-      config = function()
-        require('plugins.neoformat')
-      end,
-    })
+    use('tpope/vim-commentary')
+    use('tpope/vim-surround')
+    use('ggandor/leap.nvim')
+    use('bkad/camelcasemotion')
+    use('ojroques/vim-oscyank')
+    use('sbdchd/neoformat')
     use('svban/YankAssassin.vim')
     use('tpope/vim-fugitive')
     use('tpope/vim-unimpaired')
     use({
       'ThePrimeagen/harpoon',
-      config = function()
-        require('plugins.harpoon')
-      end,
       requires = 'nvim-lua/plenary.nvim',
     })
     use('tpope/vim-vinegar')
@@ -180,29 +99,11 @@ require('packer').startup({
     use({
       'akinsho/git-conflict.nvim',
       tag = '*',
-      config = function()
-        require('plugins.git_conflict')
-      end,
     })
-    use({
-      'https://gitlab.com/yorickpeterse/nvim-pqf',
-      config = function()
-        require('pqf').setup()
-      end,
-    })
+    use('https://gitlab.com/yorickpeterse/nvim-pqf')
     use('AndrewRadev/splitjoin.vim')
-    use({
-      'smjonas/live-command.nvim',
-      config = function()
-        require('plugins.live_command')
-      end,
-    })
-    use({
-      'prichrd/netrw.nvim',
-      config = function()
-        require('plugins.netrw')
-      end,
-    })
+    use('smjonas/live-command.nvim')
+    use('prichrd/netrw.nvim')
   end,
   config = {
     display = {
