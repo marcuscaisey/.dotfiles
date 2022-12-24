@@ -7,7 +7,6 @@ local gitsigns = require('gitsigns.actions')
 local harpoon_ui = require('harpoon.ui')
 local map = require('utils.mappings').map
 local buf_map = require('utils.mappings').buf_map
--- local neoformat = require('plugins.neoformat')
 local conflict = require('git-conflict')
 local dap = require('dap')
 
@@ -240,7 +239,6 @@ map('v', '<leader>ca', vim.lsp.buf.code_action)
 
 -- neoformat
 map('n', '<leader>fm', '<cmd>Neoformat<cr>')
--- map('n', '<leader>ft', neoformat.toggle_auto_neoformatting)
 
 -- vim-fugitive
 map('n', '<leader>gb', '<cmd>:Git blame<cr>')

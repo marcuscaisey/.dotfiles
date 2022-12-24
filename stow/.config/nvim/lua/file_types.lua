@@ -40,11 +40,7 @@ local function add_indent_with_tabs_autocmd(file_type)
   })
 end
 
-M.auto_format_file_types = {}
-
 M.setup = function(opts)
-  M.auto_format_file_types = {}
-
   for file_type, settings in pairs(opts) do
     if settings.tab_size then
       add_tab_size_autocmd(file_type, settings.tab_size)
@@ -56,10 +52,6 @@ M.setup = function(opts)
 
     if settings.indent_with_tabs then
       add_indent_with_tabs_autocmd(file_type)
-    end
-
-    if settings.format_on_save then
-      M.auto_format_file_types[file_type] = true
     end
   end
 end
