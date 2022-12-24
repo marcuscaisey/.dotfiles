@@ -1,6 +1,3 @@
-local Job = require('plenary.job')
-local util = require('lspconfig.util')
-
 local group = vim.api.nvim_create_augroup('misc', { clear = true })
 
 vim.api.nvim_create_autocmd('BufReadPost', {
@@ -33,40 +30,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
   group = group,
   desc = 'Highlight yanked text',
-})
-
-vim.api.nvim_create_autocmd('BufWritePost', {
-  callback = function()
-    local plz_root = util.root_pattern('.plzconfig')(vim.api.nvim_buf_get_name(0))
-    if not plz_root then
-      return
-    end
-    local output_lines = {}
-    local on_output = function(_, line)
-      table.insert(output_lines, line)
-    end
-    local on_exit = function()
-      print(table.concat(output_lines, '\n'))
-    end
-    local job = Job:new({
-      command = 'wollemi',
-      args = { 'gofmt' },
-      -- run in the directory of the saved file since wollemi won't run outside of a plz repo
-      cwd = vim.fn.expand('%:p:h'),
-      env = {
-        -- wollemi needs GOROOT to be set
-        GOROOT = vim.trim(vim.fn.system('go env GOROOT')),
-        PATH = vim.fn.getenv('PATH'),
-      },
-      on_stdout = on_output,
-      on_stderr = on_output,
-      on_exit = on_exit,
-    })
-    job:start()
-  end,
-  pattern = { '*.go' },
-  group = group,
-  desc = 'Run wollemi on parent directory of go files on save',
 })
 
 vim.api.nvim_create_autocmd('BufEnter', {

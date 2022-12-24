@@ -9,6 +9,7 @@ local map = require('utils.mappings').map
 local buf_map = require('utils.mappings').buf_map
 local conflict = require('git-conflict')
 local dap = require('dap')
+local Job = require('plenary.job')
 
 map('i', 'jj', '<esc>')
 
@@ -238,7 +239,39 @@ map('n', '<leader>ca', vim.lsp.buf.code_action)
 map('v', '<leader>ca', vim.lsp.buf.code_action)
 
 -- neoformat
-map('n', '<leader>fm', '<cmd>Neoformat<cr>')
+local wollemi = function()
+  local plz_root = vim.fs.find('.plzconfig', { upwards = true })[1]
+  if vim.bo.filetype ~= 'go' or not plz_root then
+    return
+  end
+  local output_lines = {}
+  local on_output = function(_, line)
+    table.insert(output_lines, line)
+  end
+  local on_exit = function()
+    print(table.concat(output_lines, '\n'))
+  end
+  local job = Job:new({
+    command = 'wollemi',
+    args = { 'gofmt' },
+    -- run in the directory of the saved file since wollemi won't run outside of a plz repo
+    cwd = vim.fn.expand('%:p:h'),
+    env = {
+      -- wollemi needs GOROOT to be set
+      GOROOT = vim.trim(vim.fn.system('go env GOROOT')),
+      PATH = vim.fn.getenv('PATH'),
+    },
+    on_stdout = on_output,
+    on_stderr = on_output,
+    on_exit = on_exit,
+  })
+  job:start()
+end
+
+map('n', '<leader>fm', function()
+  vim.cmd.Neoformat()
+  wollemi()
+end)
 
 -- vim-fugitive
 map('n', '<leader>gb', '<cmd>:Git blame<cr>')
