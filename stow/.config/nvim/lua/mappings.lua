@@ -158,29 +158,3 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
   group = vim.api.nvim_create_augroup('mappings', { clear = true }),
   desc = 'Map q to ctrl-^ in netrw',
 })
-
-local shell_cmd_or_die = function(cmd, ...)
-  local output_or_err = vim.trim(vim.fn.system(string.format(cmd, ...)))
-  if vim.v.shell_error > 0 then
-    error(output_or_err)
-  end
-  return output_or_err
-end
-
--- sourcegraph
-vim.keymap.set('n', '<leader>ys', function()
-  local url_template = 'https://sourcegraph.iap.tmachine.io/git.gaia.tmachine.io/diffusion/CORE@%s/-/blob/%s?L%d'
-  local commit = shell_cmd_or_die('git rev-parse HEAD')
-  local root = shell_cmd_or_die('git rev-parse --show-toplevel')
-  local absolute_filepath = vim.api.nvim_buf_get_name(0)
-  local relative_filepath = shell_cmd_or_die('realpath --relative-to %s %s', root, absolute_filepath)
-  local line_num = unpack(vim.api.nvim_win_get_cursor(0))
-  local url = url_template:format(commit, relative_filepath, line_num)
-  for _, register in ipairs({ '"', '*' }) do
-    vim.fn.setreg(register, url)
-  end
-  if vim.fn.exists(':OSCYankReg') == 2 then
-    vim.cmd.OSCYankReg({ args = { '"' } })
-  end
-  print(string.format('Yanked %s', url))
-end)
