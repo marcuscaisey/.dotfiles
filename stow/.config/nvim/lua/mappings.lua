@@ -35,9 +35,9 @@ vim.keymap.set('i', 'AA', '<esc>A')
 
 vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
 
--- When i use map to create this, nothing appears in the command line when i trigger the mapping until i press another
+-- When i use vim.keymap.set to create this, nothing appears in the command line when i trigger the mapping until i press another
 -- key. Not sure why...
-vim.cmd('vnoremap @ :norm @')
+vim.cmd.vnoremap('@ :norm @')
 
 -- jump past closing pair character with <c-l>
 local closing_chars = { "'", '"', '`', '}', ')', ']' }
@@ -72,9 +72,9 @@ vim.keymap.set('n', '<leader>q', function()
   -- window id > 0 means that the window is open
   local qf_open = qf_window_id > 0
   if qf_open then
-    vim.cmd('cclose')
+    vim.cmd.cclose()
   else
-    vim.cmd('copen')
+    vim.cmd.copen()
   end
 end)
 
@@ -94,8 +94,8 @@ vim.keymap.set('n', '<leader>cb', function()
     return
   end
   vim.fn.setqflist(changed_buffers)
-  vim.cmd('copen')
-  vim.cmd('cfirst')
+  vim.cmd.copen()
+  vim.cmd.cfirst()
 end)
 
 -- lsp
@@ -116,13 +116,13 @@ vim.keymap.set('n', '<leader>dq', function()
   local diagnostics = vim.diagnostic.get(0)
   if #diagnostics == 0 then
     print('No diagnostics')
-    vim.cmd('cclose')
+    vim.cmd.cclose()
     return
   end
   local qf_items = vim.diagnostic.toqflist(diagnostics)
   vim.fn.setqflist(qf_items)
-  vim.cmd('copen')
-  vim.cmd('cfirst')
+  vim.cmd.copen()
+  vim.cmd.cfirst()
 end)
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
 vim.keymap.set('v', '<leader>ca', vim.lsp.buf.code_action)
@@ -145,7 +145,7 @@ vim.keymap.set('n', '<leader>gt', function()
     new_basename = basename:match('^(.+)%.go$') .. '_test.go'
   end
 
-  vim.cmd({ cmd = 'edit', args = { dirname .. '/' .. new_basename } })
+  vim.cmd.edit(dirname .. '/' .. new_basename)
 end)
 
 -- netrw

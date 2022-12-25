@@ -22,7 +22,7 @@ vim.keymap.set('n', '<leader>gc', function()
   vim.fn.system('git diff --quiet')
   if vim.v.shell_error == 0 then
     print('No Git changes')
-    vim.cmd('cclose')
+    vim.cmd.cclose()
     return
   end
 
@@ -33,6 +33,6 @@ vim.keymap.set('n', '<leader>gc', function()
     local qf_items = vim.fn.getqflist()
     return #qf_items > 0
   end)
-  vim.cmd('copen')
-  vim.cmd('cfirst')
+  vim.cmd.copen()
+  vim.cmd.cfirst()
 end)

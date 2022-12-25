@@ -47,4 +47,4 @@ require('catppuccin').setup({
     treesitter_context = true,
   },
 })
-vim.cmd.colorscheme({ args = { 'catppuccin' } })
+vim.cmd.colorscheme('catppuccin')

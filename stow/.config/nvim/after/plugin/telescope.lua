@@ -187,7 +187,7 @@ end
 
 local custom_actions = transform_mod({
   open_first_qf_item = function(_)
-    vim.cmd('cfirst')
+    vim.cmd.cfirst()
   end,
   grep_in_files = function(prompt_bufnr)
     local picker = state.get_current_picker(prompt_bufnr)
@@ -334,7 +334,7 @@ vim.keymap.set('n', '<leader>cd', function()
   local change_cwd = function(prompt_bufnr)
     local entry = state.get_selected_entry()
     actions.close(prompt_bufnr) -- need to close prompt first otherwise cwd of prompt gets set
-    vim.api.nvim_cmd({ cmd = 'lcd', args = { entry.path } }, {})
+    vim.cmd.lcd(entry.path)
     print(string.format('window cwd set to %s', entry[1]))
   end
 

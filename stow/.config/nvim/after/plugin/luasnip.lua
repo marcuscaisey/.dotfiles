@@ -100,6 +100,6 @@ vim.keymap.set({ 'i', 's' }, '<c-h>', function()
   end
 end)
 vim.keymap.set('n', '<leader><leader>s', function()
-  vim.cmd('source ~/.dotfiles/nvim/lua/plugins/luasnip.lua')
+  vim.cmd.source('~/.dotfiles/nvim/lua/plugins/luasnip.lua')
   print('reloaded snippets')
 end)

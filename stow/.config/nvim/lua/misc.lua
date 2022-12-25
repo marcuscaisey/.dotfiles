@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
     -- winbufnr == -1 when the buffer doesn't exist, i.e. there's no second buffer and we're in the last buffer of the
     -- window
     if vim.bo.buftype == 'quickfix' and vim.fn.winbufnr(2) == -1 then
-      vim.cmd('quit')
+      vim.cmd.quit()
     end
   end,
   group = group,
