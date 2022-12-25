@@ -308,3 +308,45 @@ telescope.setup({
   },
 })
 telescope.load_extension('fzf')
+
+vim.keymap.set('n', '<c-p>', builtin.find_files)
+vim.keymap.set('n', '<c-b>', builtin.buffers)
+vim.keymap.set('n', '<c-f>', builtin.current_buffer_fuzzy_find)
+vim.keymap.set('n', '<c-g>', builtin.live_grep)
+vim.keymap.set('n', '<c-s>', builtin.lsp_document_symbols)
+vim.keymap.set('n', '<leader>s', builtin.lsp_dynamic_workspace_symbols)
+vim.keymap.set('n', 'gd', builtin.lsp_definitions)
+vim.keymap.set('n', 'gi', builtin.lsp_implementations)
+vim.keymap.set('n', 'ge', builtin.lsp_references)
+vim.keymap.set('n', '<leader>ht', builtin.help_tags)
+vim.keymap.set('n', '<leader>of', builtin.oldfiles)
+vim.keymap.set('n', '<leader>tt', builtin.builtin)
+vim.keymap.set('n', '<leader>tr', builtin.resume)
+
+-- Pick new working directory for the current window. Picks from directory inside the current git repo if available,
+-- otherwise the current directory.
+vim.keymap.set('n', '<leader>cd', function()
+  local cwd = vim.trim(vim.fn.system('git rev-parse --show-toplevel'))
+  if vim.v.shell_error > 0 then
+    cwd = vim.fn.getcwd()
+  end
+
+  local change_cwd = function(prompt_bufnr)
+    local entry = state.get_selected_entry()
+    actions.close(prompt_bufnr) -- need to close prompt first otherwise cwd of prompt gets set
+    vim.api.nvim_cmd({ cmd = 'lcd', args = { entry.path } }, {})
+    print(string.format('window cwd set to %s', entry[1]))
+  end
+
+  builtin.find_files({
+    prompt_title = 'Change window working directory',
+    find_command = { 'fd', '--type', 'd', '--strip-cwd-prefix' },
+    cwd = cwd,
+    previewer = false,
+    attach_mappings = function(_, map)
+      map('i', '<cr>', change_cwd)
+      map('n', '<cr>', change_cwd)
+      return true
+    end,
+  })
+end)

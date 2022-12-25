@@ -83,3 +83,23 @@ vim.api.nvim_create_autocmd('ModeChanged', {
   group = vim.api.nvim_create_augroup('luasnip-custom', { clear = true }),
   desc = 'Send replaced node text to the black hole register',
 })
+
+vim.keymap.set({ 'i', 's' }, '<c-j>', function()
+  if ls.expand_or_jumpable() then
+    ls.expand_or_jump()
+  end
+end)
+vim.keymap.set({ 'i', 's' }, '<c-k>', function()
+  if ls.jumpable(-1) then
+    ls.jump(-1)
+  end
+end)
+vim.keymap.set({ 'i', 's' }, '<c-h>', function()
+  if ls.choice_active() then
+    ls.change_choice(1)
+  end
+end)
+vim.keymap.set('n', '<leader><leader>s', function()
+  vim.cmd('source ~/.dotfiles/nvim/lua/plugins/luasnip.lua')
+  print('reloaded snippets')
+end)
