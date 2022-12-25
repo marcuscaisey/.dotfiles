@@ -3,20 +3,8 @@ local state = require('telescope.actions.state')
 local layout = require('telescope.actions.layout')
 local builtin = require('telescope.builtin')
 local entry_display = require('telescope.pickers.entry_display')
-local utils = require('telescope.utils')
 local actions = require('telescope.actions')
 local transform_mod = require('telescope.actions.mt').transform_mod
-
---- Splits a filepath into head / tail where tail is the last path component and
---- head is everything before it.
----@param path string
----@return string head
----@return string tail
-local function split_path(path)
-  local tail = utils.path_tail(path)
-  local head = path:gsub('/' .. tail .. '$', '')
-  return head, tail
-end
 
 --- Shortens the given path by either:
 --- - making it relative if it's part of the cwd
@@ -124,7 +112,8 @@ local function create_lsp_references_entry(entry)
   })
 
   local make_display = function(entry)
-    local head, tail = split_path(entry.filename)
+    local head = vim.fs.dirname(entry.filename)
+    local tail = vim.fs.basename(entry.filename)
     head = shorten_path(head)
 
     local position = table.concat({ entry.lnum, entry.col }, ':')
@@ -162,7 +151,8 @@ local function create_lsp_definitions_entry(entry)
   })
 
   local make_display = function(entry)
-    local head, tail = split_path(entry.filename)
+    local head = vim.fs.dirname(entry.filename)
+    local tail = vim.fs.basename(entry.filename)
     head = shorten_path(head)
     return displayer({
       tail,
@@ -322,7 +312,6 @@ vim.keymap.set('n', '<leader>ht', builtin.help_tags)
 vim.keymap.set('n', '<leader>of', builtin.oldfiles)
 vim.keymap.set('n', '<leader>tt', builtin.builtin)
 vim.keymap.set('n', '<leader>tr', builtin.resume)
-
 -- Pick new working directory for the current window. Picks from directory inside the current git repo if available,
 -- otherwise the current directory.
 vim.keymap.set('n', '<leader>cd', function()
