@@ -87,7 +87,6 @@ require('packer').startup({
       'ThePrimeagen/harpoon',
       requires = 'nvim-lua/plenary.nvim',
     })
-    use('tpope/vim-vinegar')
     use('marcuscaisey/please.nvim')
     use({
       'kana/vim-textobj-entire',
@@ -108,7 +107,7 @@ require('packer').startup({
     })
     use('AndrewRadev/splitjoin.vim')
     use('smjonas/live-command.nvim')
-    use('prichrd/netrw.nvim')
+    use('is0n/fm-nvim')
   end,
   config = {
     display = {

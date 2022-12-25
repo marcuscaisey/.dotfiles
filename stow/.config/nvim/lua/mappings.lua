@@ -147,14 +147,3 @@ vim.keymap.set('n', '<leader>gt', function()
 
   vim.cmd.edit(dirname .. '/' .. new_basename)
 end)
-
--- netrw
-vim.api.nvim_create_autocmd({ 'FileType' }, {
-  pattern = 'netrw',
-  callback = function()
-    -- there are other mappings in netrw starting with q which we don't care about, so don't wait for any more keys
-    vim.keymap.set('n', 'q', '<c-^>', { nowait = true, buffer = true })
-  end,
-  group = vim.api.nvim_create_augroup('mappings', { clear = true }),
-  desc = 'Map q to ctrl-^ in netrw',
-})
