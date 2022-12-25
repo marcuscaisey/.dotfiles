@@ -1,4 +1,4 @@
-local conflict = pcall(require, 'git-conflict')
+local conflict = require('git-conflict')
 
 conflict.setup({
   default_mappings = true,

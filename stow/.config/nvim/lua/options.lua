@@ -1,3 +1,5 @@
+local filetypes = require('filetypes')
+
 vim.o.clipboard = 'unnamed'
 vim.o.cursorline = true
 vim.o.expandtab = true
@@ -24,56 +26,22 @@ vim.o.updatetime = 100
 
 vim.g.mapleader = ' '
 
-require('file_types').setup({
-  lua = {
-    tab_size = 2,
-    text_width = 120,
-  },
-  javascript = {
-    tab_size = 2,
-  },
-  typescript = {
-    tab_size = 2,
-  },
-  json = {
-    tab_size = 2,
-  },
-  jsonc = {
-    tab_size = 2,
-  },
-  python = {
-    text_width = 100,
-  },
-  go = {
-    text_width = 120,
-    indent_with_tabs = true,
-  },
-  proto = {
-    text_width = 100,
-  },
-  query = {
-    tab_size = 2,
-  },
-  zsh = {
-    tab_size = 2,
-  },
-  sh = {
-    tab_size = 2,
-  },
-  markdown = {
-    text_width = 100,
-    auto_wrap = true,
-  },
-  html = {
-    tab_size = 2,
-  },
-  sql = {
-    tab_size = 2,
-    text_width = 100,
-  },
-  please = {
-    text_width = 120,
-  },
+filetypes.setup({
+  lua = { tab_size = 2, text_width = 120 },
+  javascript = { tab_size = 2 },
+  typescript = { tab_size = 2 },
+  json = { tab_size = 2 },
+  jsonc = { tab_size = 2 },
+  python = { text_width = 100 },
+  go = { text_width = 120, indent_with_tabs = true },
+  proto = { text_width = 100 },
+  query = { tab_size = 2 },
+  zsh = { tab_size = 2 },
+  sh = { tab_size = 2 },
+  markdown = { text_width = 100, auto_wrap = true },
+  html = { tab_size = 2 },
+  sql = { tab_size = 2, text_width = 100 },
+  please = { text_width = 120 },
 })
 
 vim.filetype.add({
