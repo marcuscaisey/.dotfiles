@@ -498,6 +498,8 @@ nnoremap <c-p> :FZFFd<cr>
 " Sync current pane directory to the directory of the other pane
 nnoremap <c-s> <c-i>:sync<cr><c-i>
 
+nnoremap q :q<cr>
+
 " ------------------------------------------------------------------------------
 " Various customization examples
 " ------------------------------------------------------------------------------
