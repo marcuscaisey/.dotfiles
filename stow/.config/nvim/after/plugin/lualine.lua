@@ -16,6 +16,13 @@ local search_results = {
   end,
 }
 
+local cwd = {
+  function()
+    return vim.fn.getcwd():gsub('^' .. os.getenv('HOME'), '~')
+  end,
+  color = 'LualineCwd',
+}
+
 local lsp_clients = function()
   local client_names = vim.tbl_map(function(client)
     return client.name
@@ -34,7 +41,6 @@ require('lualine').setup({
       quickfix = {},
     },
     globalstatus = true,
-    refresh = { statusline = 100, tabline = 100 },
   },
   sections = {
     lualine_a = { 'mode' },
@@ -50,6 +56,7 @@ require('lualine').setup({
         padding = { left = 1, right = 0 },
       },
       'filename',
+      cwd,
     },
     lualine_x = { search_results },
     lualine_y = {
