@@ -14,6 +14,7 @@ require('catppuccin').setup({
         GitConflictIncoming = { bg = '#243A5E' },
         GitConflictAncestorLabel = { bg = '#45475a' },
         GitConflictAncestor = { bg = '#585b70' },
+        LualineCwd = { fg = palette.surface2, bg = palette.mantle },
         IncSearch = { bg = palette.peach },
         NormalFloat = { fg = palette.overlay2, bg = palette.surface0 },
       }
