@@ -208,6 +208,7 @@ telescope.setup({
       },
       vertical = { width = 0.9 },
     },
+    borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
     mappings = {
       i = {
         ['<c-h>'] = layout.toggle_preview,
