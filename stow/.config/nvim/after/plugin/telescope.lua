@@ -302,7 +302,6 @@ telescope.load_extension('fzf')
 
 vim.keymap.set('n', '<c-p>', builtin.find_files)
 vim.keymap.set('n', '<c-b>', builtin.buffers)
-vim.keymap.set('n', '<c-f>', builtin.current_buffer_fuzzy_find)
 vim.keymap.set('n', '<c-g>', builtin.live_grep)
 vim.keymap.set('n', '<c-s>', builtin.lsp_document_symbols)
 vim.keymap.set('n', '<leader>s', builtin.lsp_dynamic_workspace_symbols)
