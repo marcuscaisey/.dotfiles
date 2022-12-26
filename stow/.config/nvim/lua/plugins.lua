@@ -107,7 +107,7 @@ require('packer').startup({
     })
     use('AndrewRadev/splitjoin.vim')
     use('smjonas/live-command.nvim')
-    use('is0n/fm-nvim')
+    use('is0n/tui-nvim')
   end,
   config = {
     display = {
