@@ -250,7 +250,7 @@ telescope.setup({
         height = 0.9,
       },
       previewer = false,
-      path_display = function(opts, path)
+      path_display = function(_, path)
         return shorten_path(path)
       end,
     },
