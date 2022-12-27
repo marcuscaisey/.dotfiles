@@ -26,155 +26,6 @@ local function shorten_path(path)
   return path_without_home
 end
 
--- displays document symbols as: type name
-local function create_lsp_document_symbols_entry(entry)
-  local displayer = entry_display.create({
-    separator = ' ',
-    items = {
-      { width = 13 }, -- symbol type
-      { remaining = true }, -- symbol name
-    },
-  })
-
-  local make_display = function(entry)
-    return displayer({
-      { entry.symbol_type, 'CmpItemKind' .. entry.symbol_type },
-      entry.symbol_name,
-    })
-  end
-
-  local symbol_msg = entry.text:gsub('.* | ', '')
-  local symbol_type, symbol_name = symbol_msg:match('%[(.+)%]%s+(.*)')
-  local ordinal = symbol_name .. ' ' .. (symbol_type or 'unknown')
-
-  return {
-    valid = true,
-    value = entry,
-    ordinal = ordinal,
-    display = make_display,
-    filename = entry.filename or vim.api.nvim_buf_get_name(entry.bufnr),
-    lnum = entry.lnum,
-    col = entry.col,
-    symbol_name = symbol_name,
-    symbol_type = symbol_type,
-    start = entry.start,
-    finish = entry.finish,
-  }
-end
-
--- displays workspace symbols as: type name filepath
-local function create_lsp_dynamic_workspace_symbols_entry(entry)
-  local displayer = entry_display.create({
-    separator = ' ',
-    items = {
-      { width = 13 }, -- symbol type
-      { remaining = true }, -- symbol name
-      { remaining = true }, -- filepath
-    },
-  })
-
-  local make_display = function(entry)
-    return displayer({
-      { entry.symbol_type, 'CmpItemKind' .. entry.symbol_type },
-      entry.symbol_name,
-      { shorten_path(entry.filename), 'TelescopeResultsLineNr' },
-    })
-  end
-
-  local symbol_msg = entry.text:gsub('.* | ', '')
-  local symbol_type, symbol_name = symbol_msg:match('%[(.+)%]%s+(.*)')
-  local ordinal = symbol_name .. ' ' .. (symbol_type or 'unknown')
-
-  return {
-    valid = true,
-    value = entry,
-    ordinal = ordinal,
-    display = make_display,
-    filename = entry.filename or vim.api.nvim_buf_get_name(entry.bufnr),
-    lnum = entry.lnum,
-    col = entry.col,
-    symbol_name = symbol_name,
-    symbol_type = symbol_type,
-    start = entry.start,
-    finish = entry.finish,
-  }
-end
-
--- displays lsp references as: filename line:col directory
-local function create_lsp_references_entry(entry)
-  local displayer = entry_display.create({
-    separator = ' ',
-    items = {
-      { remaining = true }, -- filename
-      { remaining = true }, -- line:col
-      { remaining = true }, -- directory
-    },
-  })
-
-  local make_display = function(entry)
-    local head = vim.fs.dirname(entry.filename)
-    local tail = vim.fs.basename(entry.filename)
-    head = shorten_path(head)
-
-    local position = table.concat({ entry.lnum, entry.col }, ':')
-
-    return displayer({
-      tail,
-      { position, 'TelescopeResultsLineNr' },
-      { head, 'TelescopeResultsLineNr' },
-    })
-  end
-
-  return {
-    valid = true,
-    value = entry,
-    ordinal = entry.filename .. ' ' .. entry.text,
-    display = make_display,
-    bufnr = entry.bufnr,
-    filename = entry.filename,
-    lnum = entry.lnum,
-    col = entry.col,
-    text = entry.text,
-    start = entry.start,
-    finish = entry.finish,
-  }
-end
-
--- display lsp definitions as: filename directory
-local function create_lsp_definitions_entry(entry)
-  local displayer = entry_display.create({
-    separator = ' ',
-    items = {
-      { remaining = true }, -- filename
-      { remaining = true }, -- directory
-    },
-  })
-
-  local make_display = function(entry)
-    local head = vim.fs.dirname(entry.filename)
-    local tail = vim.fs.basename(entry.filename)
-    head = shorten_path(head)
-    return displayer({
-      tail,
-      { head, 'TelescopeResultsLineNr' },
-    })
-  end
-
-  return {
-    valid = true,
-    value = entry,
-    ordinal = entry.filename .. ' ' .. entry.text,
-    display = make_display,
-    bufnr = entry.bufnr,
-    filename = entry.filename,
-    lnum = entry.lnum,
-    col = entry.col,
-    text = entry.text,
-    start = entry.start,
-    finish = entry.finish,
-  }
-end
-
 local custom_actions = transform_mod({
   open_first_qf_item = function(_)
     vim.cmd.cfirst()
@@ -282,19 +133,173 @@ telescope.setup({
       },
     },
     lsp_document_symbols = {
-      entry_maker = create_lsp_document_symbols_entry,
+      entry_maker = function(entry)
+        local displayer = entry_display.create({
+          separator = ' ',
+          items = {
+            { width = 13 }, -- symbol type
+            { remaining = true }, -- symbol name
+          },
+        })
+
+        local make_display = function(entry)
+          return displayer({
+            { entry.symbol_type, 'CmpItemKind' .. entry.symbol_type },
+            entry.symbol_name,
+          })
+        end
+
+        return {
+          valid = true,
+          value = entry,
+          ordinal = entry.text,
+          display = make_display,
+          filename = entry.filename or vim.api.nvim_buf_get_name(entry.bufnr),
+          lnum = entry.lnum,
+          col = entry.col,
+          symbol_name = entry.text:match('%[.+%]%s+(.*)'),
+          symbol_type = entry.kind,
+          start = entry.start,
+          finish = entry.finish,
+        }
+      end,
     },
     lsp_dynamic_workspace_symbols = {
-      entry_maker = create_lsp_dynamic_workspace_symbols_entry,
+      entry_maker = function(entry)
+        local displayer = entry_display.create({
+          separator = ' ',
+          items = {
+            { width = 13 }, -- symbol type
+            { remaining = true }, -- symbol name
+            { remaining = true }, -- filepath
+          },
+        })
+
+        local make_display = function(entry)
+          return displayer({
+            { entry.symbol_type, 'CmpItemKind' .. entry.symbol_type },
+            entry.symbol_name,
+            { shorten_path(entry.filename), 'TelescopeResultsLineNr' },
+          })
+        end
+
+        return {
+          valid = true,
+          value = entry,
+          ordinal = entry.filename .. entry.text,
+          display = make_display,
+          filename = entry.filename or vim.api.nvim_buf_get_name(entry.bufnr),
+          lnum = entry.lnum,
+          col = entry.col,
+          symbol_name = entry.text:match('%[.+%]%s+(.*)'),
+          symbol_type = entry.kind,
+          start = entry.start,
+          finish = entry.finish,
+        }
+      end,
     },
     lsp_references = {
-      entry_maker = create_lsp_references_entry,
+      entry_maker = function(entry)
+        local displayer = entry_display.create({
+          separator = ' ',
+          items = {
+            { remaining = true }, -- filename
+            { remaining = true }, -- line:col
+            { remaining = true }, -- directory
+          },
+        })
+
+        local make_display = function(entry)
+          return displayer({
+            vim.fs.basename(entry.filename),
+            { entry.lnum .. ':' .. entry.col, 'TelescopeResultsLineNr' },
+            { shorten_path(vim.fs.dirname(entry.filename)), 'TelescopeResultsLineNr' },
+          })
+        end
+
+        return {
+          valid = true,
+          value = entry,
+          ordinal = entry.filename .. entry.text,
+          display = make_display,
+          bufnr = entry.bufnr,
+          filename = entry.filename,
+          lnum = entry.lnum,
+          col = entry.col,
+          text = entry.text,
+          start = entry.start,
+          finish = entry.finish,
+        }
+      end,
     },
     lsp_implementations = {
-      entry_maker = create_lsp_references_entry,
+      entry_maker = function(entry)
+        local displayer = entry_display.create({
+          separator = ' ',
+          items = {
+            { remaining = true }, -- filename
+            { remaining = true }, -- line:col
+            { remaining = true }, -- directory
+          },
+        })
+
+        local make_display = function(entry)
+          return displayer({
+            vim.fs.basename(entry.filename),
+            { entry.lnum .. ':' .. entry.col, 'TelescopeResultsLineNr' },
+            { shorten_path(vim.fs.dirname(entry.filename)), 'TelescopeResultsLineNr' },
+          })
+        end
+
+        return {
+          valid = true,
+          value = entry,
+          ordinal = entry.filename .. entry.text,
+          display = make_display,
+          bufnr = entry.bufnr,
+          filename = entry.filename,
+          lnum = entry.lnum,
+          col = entry.col,
+          text = entry.text,
+          start = entry.start,
+          finish = entry.finish,
+        }
+      end,
     },
     lsp_definitions = {
-      entry_maker = create_lsp_definitions_entry,
+      entry_maker = function(entry)
+        local displayer = entry_display.create({
+          separator = ' ',
+          items = {
+            { remaining = true }, -- filename
+            { remaining = true }, -- directory
+          },
+        })
+
+        local make_display = function(entry)
+          local head = vim.fs.dirname(entry.filename)
+          local tail = vim.fs.basename(entry.filename)
+          head = shorten_path(head)
+          return displayer({
+            tail,
+            { head, 'TelescopeResultsLineNr' },
+          })
+        end
+
+        return {
+          valid = true,
+          value = entry,
+          ordinal = entry.filename .. entry.text,
+          display = make_display,
+          bufnr = entry.bufnr,
+          filename = entry.filename,
+          lnum = entry.lnum,
+          col = entry.col,
+          text = entry.text,
+          start = entry.start,
+          finish = entry.finish,
+        }
+      end,
     },
   },
   extensions = {
@@ -305,7 +310,7 @@ telescope.setup({
       },
       previewer = false,
       path_display = function(_, path)
-        return path:gsub('^' .. os.getenv('HOME'), '~')
+        return shorten_path(path)
       end,
     },
   },
