@@ -3,7 +3,7 @@ local M = {}
 local history_file = vim.fn.stdpath('data') .. '/cwd-history'
 local history_limit = 100
 
-M.set = function(path)
+M.setcwd = function(path)
   path = vim.fs.normalize(path)
   vim.cmd.lcd(vim.fn.fnameescape(path))
 
@@ -24,7 +24,7 @@ M.set = function(path)
   f:close()
 end
 
-M.history = function()
+M.get = function()
   local f = io.open(history_file, 'r')
   if not f then
     return {}

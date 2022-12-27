@@ -9,7 +9,7 @@ local pickers = require('telescope.pickers')
 local finders = require('telescope.finders')
 local make_entry = require('telescope.make_entry')
 local conf = require('telescope.config').values
-local cwd = require('cwd')
+local olddirs = require('olddirs')
 
 --- Shortens the given path by either:
 --- - making it relative if it's part of the cwd
@@ -321,7 +321,7 @@ vim.keymap.set('n', '<leader>od', function()
   local current_cwd = vim.fn.getcwd()
   local history = vim.tbl_filter(function(dir)
     return dir ~= current_cwd
-  end, cwd.history())
+  end, olddirs.get())
   local opts = {
     layout_config = {
       width = 0.6,
@@ -335,7 +335,7 @@ vim.keymap.set('n', '<leader>od', function()
   local set_cwd = function(prompt_bufnr)
     local entry = state.get_selected_entry()
     actions.close(prompt_bufnr) -- need to close prompt first otherwise cwd of prompt gets set
-    cwd.set(entry.path)
+    olddirs.setcwd(entry.path)
   end
   pickers
     .new(opts, {
