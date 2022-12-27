@@ -111,6 +111,7 @@ require('packer').startup({
       'is0n/tui-nvim',
       branch = 'winhl-fix',
     })
+    use('marcuscaisey/olddirs.nvim')
   end,
   config = {
     display = {

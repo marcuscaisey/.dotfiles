@@ -5,11 +5,6 @@ local builtin = require('telescope.builtin')
 local entry_display = require('telescope.pickers.entry_display')
 local actions = require('telescope.actions')
 local transform_mod = require('telescope.actions.mt').transform_mod
-local pickers = require('telescope.pickers')
-local finders = require('telescope.finders')
-local make_entry = require('telescope.make_entry')
-local conf = require('telescope.config').values
-local olddirs = require('olddirs')
 
 --- Shortens the given path by either:
 --- - making it relative if it's part of the cwd
@@ -302,8 +297,21 @@ telescope.setup({
       entry_maker = create_lsp_definitions_entry,
     },
   },
+  extensions = {
+    olddirs = {
+      layout_config = {
+        width = 0.6,
+        height = 0.9,
+      },
+      previewer = false,
+      path_display = function(_, path)
+        return path:gsub('^' .. os.getenv('HOME'), '~')
+      end,
+    },
+  },
 })
 telescope.load_extension('fzf')
+telescope.load_extension('olddirs')
 
 vim.keymap.set('n', '<c-p>', builtin.find_files)
 vim.keymap.set('n', '<c-b>', builtin.buffers)
@@ -317,40 +325,4 @@ vim.keymap.set('n', '<leader>ht', builtin.help_tags)
 vim.keymap.set('n', '<leader>of', builtin.oldfiles)
 vim.keymap.set('n', '<leader>tt', builtin.builtin)
 vim.keymap.set('n', '<leader>tr', builtin.resume)
-vim.keymap.set('n', '<leader>od', function()
-  local current_cwd = vim.fn.getcwd()
-  local history = vim.tbl_filter(function(dir)
-    return dir ~= current_cwd
-  end, olddirs.get())
-  local opts = {
-    layout_config = {
-      width = 0.6,
-      height = 0.9,
-    },
-    previewer = false,
-    path_display = function(_, path)
-      return shorten_path(path)
-    end,
-  }
-  local set_cwd = function(prompt_bufnr)
-    local entry = state.get_selected_entry()
-    actions.close(prompt_bufnr) -- need to close prompt first otherwise cwd of prompt gets set
-    olddirs.lcd(entry.path)
-  end
-  pickers
-    .new(opts, {
-      prompt_title = 'Olddirs',
-      finder = finders.new_table({
-        results = history,
-        entry_maker = opts.entry_maker or make_entry.gen_from_file(opts),
-      }),
-      sorter = conf.file_sorter(opts),
-      previewer = conf.file_previewer(opts),
-      attach_mappings = function(_, map)
-        map('i', '<cr>', set_cwd)
-        map('n', '<cr>', set_cwd)
-        return true
-      end,
-    })
-    :find()
-end)
+vim.keymap.set('n', '<leader>od', telescope.extensions.olddirs.picker)
