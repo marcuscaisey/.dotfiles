@@ -1,31 +1,51 @@
 local M = {}
 
-local history_file = vim.fn.stdpath('data') .. '/cwd-history'
-local history_limit = 100
+local olddirs_file = vim.fn.stdpath('data') .. '/olddirs'
+local limit = 100
 
-M.setcwd = function(path)
+local cd_and_save_path = function(cd_func, path)
   path = vim.fs.normalize(path)
-  vim.cmd.lcd(vim.fn.fnameescape(path))
+  cd_func(vim.fn.fnameescape(path))
 
-  local history = { path }
-  local f = io.open(history_file, 'r')
+  local olddirs = { path }
+  local f = io.open(olddirs_file, 'r')
   if f then
     for line in f:lines() do
       if line ~= path then
-        table.insert(history, line)
+        table.insert(olddirs, line)
       end
     end
     f:close()
   end
 
-  f = assert(io.open(history_file, 'w+'))
-  local content = table.concat(history, '\n', 1, math.min(history_limit, #history))
-  assert(f:write(content))
+  f = assert(io.open(olddirs_file, 'w+'))
+  local file_content = table.concat(olddirs, '\n', 1, math.min(limit, #olddirs))
+  assert(f:write(file_content))
   f:close()
 end
 
+---Wrapper around |:cd| which saves {path} to the olddirs file.
+---@param path string The target directory.
+M.cd = function(path)
+  cd_and_save_path(vim.cmd.cd, path)
+end
+
+---Wrapper around |:lcd| which saves {path} to the olddirs file.
+---@param path string The target directory.
+M.lcd = function(path)
+  cd_and_save_path(vim.cmd.lcd, path)
+end
+
+---Wrapper around |:tcd| which saves {path} to the olddirs file.
+---@param path string The target directory.
+M.tcd = function(path)
+  cd_and_save_path(vim.cmd.tcd, path)
+end
+
+---Returns the paths from the olddirs file if it exists, otherwise an empty table.
+---@return table
 M.get = function()
-  local f = io.open(history_file, 'r')
+  local f = io.open(olddirs_file, 'r')
   if not f then
     return {}
   end

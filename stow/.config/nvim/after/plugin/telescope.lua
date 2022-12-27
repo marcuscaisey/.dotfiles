@@ -335,7 +335,7 @@ vim.keymap.set('n', '<leader>od', function()
   local set_cwd = function(prompt_bufnr)
     local entry = state.get_selected_entry()
     actions.close(prompt_bufnr) -- need to close prompt first otherwise cwd of prompt gets set
-    olddirs.setcwd(entry.path)
+    olddirs.lcd(entry.path)
   end
   pickers
     .new(opts, {

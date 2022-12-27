@@ -36,7 +36,7 @@ vim.keymap.set('n', '<c-f>', function()
         vim.cmd.vsplit(vim.fn.fnameescape(path))
       end),
       path_action('/tmp/vifm-cd', function(path)
-        olddirs.setcwd(path)
+        olddirs.lcd(path)
       end),
       path_action('/tmp/vifm-grep', function(path)
         telescope_builtin.live_grep({
