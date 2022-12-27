@@ -107,7 +107,10 @@ require('packer').startup({
     })
     use('AndrewRadev/splitjoin.vim')
     use('smjonas/live-command.nvim')
-    use('is0n/tui-nvim')
+    use({
+      'is0n/tui-nvim',
+      branch = 'winhl-fix',
+    })
   end,
   config = {
     display = {
