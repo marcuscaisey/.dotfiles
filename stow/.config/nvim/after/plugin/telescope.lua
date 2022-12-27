@@ -5,6 +5,11 @@ local builtin = require('telescope.builtin')
 local entry_display = require('telescope.pickers.entry_display')
 local actions = require('telescope.actions')
 local transform_mod = require('telescope.actions.mt').transform_mod
+local pickers = require('telescope.pickers')
+local finders = require('telescope.finders')
+local make_entry = require('telescope.make_entry')
+local conf = require('telescope.config').values
+local cwd = require('cwd')
 
 --- Shortens the given path by either:
 --- - making it relative if it's part of the cwd
@@ -312,30 +317,40 @@ vim.keymap.set('n', '<leader>ht', builtin.help_tags)
 vim.keymap.set('n', '<leader>of', builtin.oldfiles)
 vim.keymap.set('n', '<leader>tt', builtin.builtin)
 vim.keymap.set('n', '<leader>tr', builtin.resume)
--- Pick new working directory for the current window. Picks from directory inside the current git repo if available,
--- otherwise the current directory.
-vim.keymap.set('n', '<leader>cd', function()
-  local cwd = vim.trim(vim.fn.system('git rev-parse --show-toplevel'))
-  if vim.v.shell_error > 0 then
-    cwd = vim.fn.getcwd()
-  end
-
-  local change_cwd = function(prompt_bufnr)
+vim.keymap.set('n', '<leader>od', function()
+  local current_cwd = vim.fn.getcwd()
+  local history = vim.tbl_filter(function(dir)
+    return dir ~= current_cwd
+  end, cwd.history())
+  local opts = {
+    layout_config = {
+      width = 0.6,
+      height = 0.9,
+    },
+    previewer = false,
+    path_display = function(_, path)
+      return shorten_path(path)
+    end,
+  }
+  local set_cwd = function(prompt_bufnr)
     local entry = state.get_selected_entry()
     actions.close(prompt_bufnr) -- need to close prompt first otherwise cwd of prompt gets set
-    vim.cmd.lcd(entry.path)
-    print(string.format('window cwd set to %s', entry[1]))
+    cwd.set(entry.path)
   end
-
-  builtin.find_files({
-    prompt_title = 'Change window working directory',
-    find_command = { 'fd', '--type', 'd', '--strip-cwd-prefix' },
-    cwd = cwd,
-    previewer = false,
-    attach_mappings = function(_, map)
-      map('i', '<cr>', change_cwd)
-      map('n', '<cr>', change_cwd)
-      return true
-    end,
-  })
+  pickers
+    .new(opts, {
+      prompt_title = 'Olddirs',
+      finder = finders.new_table({
+        results = history,
+        entry_maker = opts.entry_maker or make_entry.gen_from_file(opts),
+      }),
+      sorter = conf.file_sorter(opts),
+      previewer = conf.file_previewer(opts),
+      attach_mappings = function(_, map)
+        map('i', '<cr>', set_cwd)
+        map('n', '<cr>', set_cwd)
+        return true
+      end,
+    })
+    :find()
 end)

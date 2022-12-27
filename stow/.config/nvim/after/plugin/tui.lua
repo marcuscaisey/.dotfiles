@@ -1,14 +1,17 @@
 local tui = require('tui-nvim')
 local telescope_builtin = require('telescope.builtin')
+local cwd = require('cwd')
 
 local path_action = function(path_file, callback)
-  local file = io.open(path_file, 'r')
-  if not file then
-    return
+  return function()
+    local file = io.open(path_file, 'r')
+    if not file then
+      return
+    end
+    local path = file:read()
+    callback(path)
+    os.remove(path_file)
   end
-  local path = file:read()
-  callback(path)
-  os.remove(path_file)
 end
 
 vim.keymap.set('n', '<c-f>', function()
@@ -33,7 +36,7 @@ vim.keymap.set('n', '<c-f>', function()
         vim.cmd.vsplit(vim.fn.fnameescape(path))
       end),
       path_action('/tmp/vifm-cd', function(path)
-        vim.cmd.lcd(vim.fn.fnameescape(path))
+        cwd.set(path)
       end),
       path_action('/tmp/vifm-grep', function(path)
         telescope_builtin.live_grep({
