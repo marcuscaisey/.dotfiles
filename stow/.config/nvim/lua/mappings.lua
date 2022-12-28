@@ -28,9 +28,6 @@ vim.keymap.set('n', 'N', 'Nzz')
 vim.keymap.set('n', '<c-d>', '<c-d>zz')
 vim.keymap.set('n', '<c-u>', '<c-u>zz')
 
-vim.keymap.set('i', 'II', '<esc>I')
-vim.keymap.set('i', 'AA', '<esc>A')
-
 vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
 
 -- When i use vim.keymap.set to create this, nothing appears in the command line when i trigger the mapping until i press another
