@@ -22,10 +22,6 @@ packer.startup({
     use({
       'kosayoda/nvim-lightbulb',
       requires = 'antoinemadec/FixCursorHold.nvim',
-      config = function()
-        local lightbulb = require('nvim-lightbulb')
-        lightbulb.setup({ autocmd = { enabled = true } })
-      end,
     })
     use('hrsh7th/nvim-cmp')
     use('saadparwaiz1/cmp_luasnip')
@@ -34,13 +30,7 @@ packer.startup({
     use('hrsh7th/cmp-buffer')
     use('hrsh7th/cmp-path')
     use('mfussenegger/nvim-dap')
-    use({
-      'theHamsta/nvim-dap-virtual-text',
-      config = function()
-        local virtual_text = require('nvim-dap-virtual-text')
-        virtual_text.setup({})
-      end,
-    })
+    use('theHamsta/nvim-dap-virtual-text')
     use('rcarriga/nvim-dap-ui')
     use('L3MON4D3/LuaSnip')
     use('ray-x/lsp_signature.nvim')
@@ -54,13 +44,7 @@ packer.startup({
     })
     use('stevearc/dressing.nvim')
     use('catppuccin/nvim')
-    use({
-      'norcalli/nvim-colorizer.lua',
-      config = function()
-        local colorizer = require('colorizer')
-        colorizer.setup()
-      end,
-    })
+    use('norcalli/nvim-colorizer.lua')
     use({
       'nvim-telescope/telescope.nvim',
       requires = {
@@ -73,13 +57,7 @@ packer.startup({
     })
     use('tpope/vim-eunuch')
     use('tpope/vim-repeat')
-    use({
-      'windwp/nvim-autopairs',
-      config = function()
-        local autopairs = require('nvim-autopairs')
-        autopairs.setup()
-      end,
-    })
+    use('windwp/nvim-autopairs')
     use('vim-scripts/ReplaceWithRegister')
     use('tpope/vim-commentary')
     use('tpope/vim-surround')
@@ -106,13 +84,7 @@ packer.startup({
       'akinsho/git-conflict.nvim',
       tag = '*',
     })
-    use({
-      'https://gitlab.com/yorickpeterse/nvim-pqf',
-      config = function()
-        local pqf = require('pqf')
-        pqf.setup()
-      end,
-    })
+    use('https://gitlab.com/yorickpeterse/nvim-pqf')
     use('AndrewRadev/splitjoin.vim')
     use('smjonas/live-command.nvim')
     use({
