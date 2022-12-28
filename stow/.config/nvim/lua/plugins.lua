@@ -4,7 +4,10 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd.packadd('packer.nvim')
 end
 
-require('packer').startup({
+local packer = require('packer')
+local util = require('packer.util')
+
+packer.startup({
   function(use)
     use('wbthomason/packer.nvim')
     use({
@@ -20,7 +23,8 @@ require('packer').startup({
       'kosayoda/nvim-lightbulb',
       requires = 'antoinemadec/FixCursorHold.nvim',
       config = function()
-        require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
+        local lightbulb = require('nvim-lightbulb')
+        lightbulb.setup({ autocmd = { enabled = true } })
       end,
     })
     use('hrsh7th/nvim-cmp')
@@ -33,7 +37,8 @@ require('packer').startup({
     use({
       'theHamsta/nvim-dap-virtual-text',
       config = function()
-        require('nvim-dap-virtual-text').setup({})
+        local virtual_text = require('nvim-dap-virtual-text')
+        virtual_text.setup({})
       end,
     })
     use('rcarriga/nvim-dap-ui')
@@ -52,7 +57,8 @@ require('packer').startup({
     use({
       'norcalli/nvim-colorizer.lua',
       config = function()
-        require('colorizer').setup()
+        local colorizer = require('colorizer')
+        colorizer.setup()
       end,
     })
     use({
@@ -70,7 +76,8 @@ require('packer').startup({
     use({
       'windwp/nvim-autopairs',
       config = function()
-        require('nvim-autopairs').setup()
+        local autopairs = require('nvim-autopairs')
+        autopairs.setup()
       end,
     })
     use('vim-scripts/ReplaceWithRegister')
@@ -102,7 +109,8 @@ require('packer').startup({
     use({
       'https://gitlab.com/yorickpeterse/nvim-pqf',
       config = function()
-        require('pqf').setup()
+        local pqf = require('pqf')
+        pqf.setup()
       end,
     })
     use('AndrewRadev/splitjoin.vim')
@@ -115,7 +123,7 @@ require('packer').startup({
   end,
   config = {
     display = {
-      open_fn = require('packer.util').float,
+      open_fn = util.float,
     },
   },
 })

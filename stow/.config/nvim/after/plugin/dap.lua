@@ -1,4 +1,5 @@
 local dap = require('dap')
+local entity = require('dap.entity')
 local repl = require('dap.repl')
 local ui = require('dap.ui')
 
@@ -13,7 +14,7 @@ local print_literal = function(text)
     local layer = ui.layer(vim.api.nvim_get_current_buf())
     local attributes = (resp.presentationHint or {}).attributes or {}
     if resp.variablesReference > 0 or vim.tbl_contains(attributes, 'rawString') then
-      local tree = ui.new_tree(require('dap.entity').variable.tree_spec)
+      local tree = ui.new_tree(entity.variable.tree_spec)
       tree.render(layer, resp)
     else
       local formatted_result = resp.result:gsub('\\n', '\n')

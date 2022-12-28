@@ -1,7 +1,9 @@
 local lspconfig = require('lspconfig')
+local configs = require('lspconfig.configs')
 local util = require('lspconfig.util')
+local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
-require('lspconfig.configs').please = {
+configs.please = {
   default_config = {
     cmd = { 'plz', 'tool', 'lps' },
     filetypes = { 'please' },
@@ -110,7 +112,7 @@ local servers = {
 
 for server, config in pairs(servers) do
   lspconfig[server].setup({
-    capabilities = require('cmp_nvim_lsp').default_capabilities(),
+    capabilities = cmp_nvim_lsp.default_capabilities(),
     flags = {
       debounce_text_changes = 150,
     },

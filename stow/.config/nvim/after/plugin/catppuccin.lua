@@ -1,4 +1,6 @@
-require('catppuccin').setup({
+local catppuccin = require('catppuccin')
+
+catppuccin.setup({
   flavour = 'mocha',
   color_overrides = {
     mocha = {

@@ -1,3 +1,5 @@
+local lualine = require('lualine')
+
 local search_results = {
   function()
     local search_term = vim.fn.getreg('/')
@@ -30,7 +32,7 @@ local lsp_clients = function()
   return #client_names > 0 and table.concat(client_names, ', ') or 'No Active LSP Clients'
 end
 
-require('lualine').setup({
+lualine.setup({
   options = {
     theme = 'catppuccin',
     component_separators = { left = '', right = '' },

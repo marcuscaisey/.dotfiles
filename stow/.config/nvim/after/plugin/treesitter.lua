@@ -1,4 +1,7 @@
-require('nvim-treesitter.configs').setup({
+local configs = require('nvim-treesitter.configs')
+local context = require('treesitter-context')
+
+configs.setup({
   ensure_installed = {
     'comment',
     'git_rebase',
@@ -87,4 +90,4 @@ require('nvim-treesitter.configs').setup({
   },
 })
 
-require('treesitter-context').setup()
+context.setup()
