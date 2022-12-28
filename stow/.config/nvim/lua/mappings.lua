@@ -3,12 +3,9 @@ vim.g.camelcasemotion_key = '<leader>'
 
 vim.keymap.set('i', 'jj', '<esc>')
 
-vim.keymap.set('n', 'gk', 'gg')
-vim.keymap.set('v', 'gk', 'gg')
-vim.keymap.set('n', 'gj', 'G')
-vim.keymap.set('v', 'gj', 'G')
-vim.keymap.set('n', 'gh', '^')
-vim.keymap.set('v', 'gh', '^')
+vim.keymap.set({ 'n', 'v' }, 'gk', 'gg')
+vim.keymap.set({ 'n', 'v' }, 'gj', 'G')
+vim.keymap.set({ 'n', 'v' }, 'gh', '^')
 vim.keymap.set('n', 'gl', '$')
 vim.keymap.set('v', 'gl', 'g_')
 
