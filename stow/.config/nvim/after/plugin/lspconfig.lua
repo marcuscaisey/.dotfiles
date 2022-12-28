@@ -113,9 +113,6 @@ local servers = {
 for server, config in pairs(servers) do
   lspconfig[server].setup({
     capabilities = cmp_nvim_lsp.default_capabilities(),
-    flags = {
-      debounce_text_changes = 150,
-    },
     settings = config.settings,
     root_dir = config.root_dir,
     cmd = config.cmd,
