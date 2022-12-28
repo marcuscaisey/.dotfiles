@@ -10,7 +10,6 @@ configs.setup({
     'gitcommit',
     'go',
     'html',
-    'help',
     'json',
     'lua',
     'markdown',
