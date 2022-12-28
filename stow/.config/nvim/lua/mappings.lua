@@ -27,6 +27,9 @@ vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
 vim.keymap.set('n', '<c-d>', '<c-d>zz')
 vim.keymap.set('n', '<c-u>', '<c-u>zz')
+vim.keymap.set('v', 'J', ":m '>+1<cr>gv", { silent = true })
+vim.keymap.set('v', 'K', ":m '<-2<cr>gv", { silent = true })
+vim.keymap.set('n', 'J', 'mzJ`z')
 
 vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
 
