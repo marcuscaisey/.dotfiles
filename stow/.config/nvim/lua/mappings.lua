@@ -98,35 +98,6 @@ vim.keymap.set('n', '<leader>cb', function()
   vim.cmd.cfirst()
 end)
 
--- lsp
-vim.keymap.set('n', 'K', vim.lsp.buf.hover)
-vim.keymap.set('n', 'dK', vim.diagnostic.open_float)
-vim.keymap.set('n', 'dr', vim.diagnostic.reset)
-vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', '<leader>rc', vim.lsp.codelens.run)
-vim.keymap.set('n', ']e', function()
-  vim.diagnostic.goto_next({ severity = { min = vim.diagnostic.severity.WARN } })
-end)
-vim.keymap.set('n', '[e', function()
-  vim.diagnostic.goto_prev({ severity = { min = vim.diagnostic.severity.WARN } })
-end)
-vim.keymap.set('n', '<leader>dq', function()
-  local diagnostics = vim.diagnostic.get(0)
-  if #diagnostics == 0 then
-    print('No diagnostics')
-    vim.cmd.cclose()
-    return
-  end
-  local qf_items = vim.diagnostic.toqflist(diagnostics)
-  vim.fn.setqflist(qf_items)
-  vim.cmd.copen()
-  vim.cmd.cfirst()
-end)
-vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
-vim.keymap.set('v', '<leader>ca', vim.lsp.buf.code_action)
-
 -- Go
 vim.keymap.set('n', '<leader>gt', function()
   if vim.bo.filetype ~= 'go' then
