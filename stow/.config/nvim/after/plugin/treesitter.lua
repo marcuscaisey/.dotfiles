@@ -16,7 +16,6 @@ configs.setup({
     'proto',
     'python',
     'query',
-    'vim',
     'yaml',
   },
   highlight = {
