@@ -1,3 +1,6 @@
+vim.g.mapleader = ' '
+vim.g.camelcasemotion_key = '<leader>'
+
 vim.keymap.set('i', 'jj', '<esc>')
 
 vim.keymap.set('n', 'gk', 'gg')

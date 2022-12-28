@@ -24,9 +24,6 @@ vim.o.tabstop = 4
 vim.o.termguicolors = true
 vim.o.updatetime = 100
 
-vim.g.mapleader = ' '
-vim.g.camelcasemotion_key = '<leader>'
-
 filetypes.setup({
   lua = { tab_size = 2, text_width = 120 },
   javascript = { tab_size = 2 },
