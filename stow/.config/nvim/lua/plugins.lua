@@ -91,7 +91,7 @@ packer.startup({
     use('AndrewRadev/splitjoin.vim')
     use('smjonas/live-command.nvim')
     use({
-      'is0n/tui-nvim',
+      'marcuscaisey/tui-nvim',
       branch = 'winhl-fix',
     })
     use('marcuscaisey/olddirs.nvim')
