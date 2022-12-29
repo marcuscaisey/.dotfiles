@@ -120,6 +120,11 @@ lspconfig.jsonls.setup({
   on_attach = on_attach,
 })
 
+lspconfig.marksman.setup({
+  capabilities = cmp_nvim_lsp.default_capabilities(),
+  on_attach = on_attach,
+})
+
 lspconfig.please.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
   on_attach = on_attach,
