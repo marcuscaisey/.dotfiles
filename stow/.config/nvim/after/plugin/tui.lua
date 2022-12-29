@@ -39,7 +39,7 @@ vim.keymap.set('n', '<c-f>', function()
       end),
       path_action('/tmp/vifm-grep', function(path)
         telescope_builtin.live_grep({
-          prompt_title = 'Live Grep in ' .. path,
+          prompt_title = 'Live Grep in ' .. path:gsub('^' .. os.getenv('HOME'), '~'),
           search_dirs = { path },
         })
       end),
