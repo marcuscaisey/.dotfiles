@@ -1,6 +1,5 @@
 local tui = require('tui-nvim')
 local telescope_builtin = require('telescope.builtin')
-local olddirs = require('olddirs')
 
 local path_action = function(path_file, callback)
   return function()
@@ -36,7 +35,7 @@ vim.keymap.set('n', '<c-f>', function()
         vim.cmd.vsplit(vim.fn.fnameescape(path))
       end),
       path_action('/tmp/vifm-cd', function(path)
-        olddirs.lcd(path)
+        vim.cmd.lcd(path)
       end),
       path_action('/tmp/vifm-grep', function(path)
         telescope_builtin.live_grep({
