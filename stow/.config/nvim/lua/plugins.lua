@@ -19,6 +19,8 @@ packer.startup({
     use('nvim-treesitter/playground')
     use('windwp/nvim-ts-autotag')
     use('neovim/nvim-lspconfig')
+    use('williamboman/mason.nvim')
+    use('williamboman/mason-lspconfig.nvim')
     use({
       'kosayoda/nvim-lightbulb',
       requires = 'antoinemadec/FixCursorHold.nvim',

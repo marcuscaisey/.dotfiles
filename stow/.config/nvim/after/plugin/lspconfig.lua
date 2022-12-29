@@ -3,6 +3,11 @@ local configs = require('lspconfig.configs')
 local util = require('lspconfig.util')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 local telescope_builtin = require('telescope.builtin')
+local mason_lspconfig = require('mason-lspconfig')
+
+mason_lspconfig.setup({
+  automatic_installation = true,
+})
 
 local on_attach = function(_, bufnr)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr })
