@@ -243,3 +243,15 @@ if osx; then
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 fi
+
+
+################################################################################
+#                                     vifm
+################################################################################
+vifm() {
+    local dst="$(command vifm --choose-dir - "$@")"
+    if [ -z "$dst" ]; then
+        return 1
+    fi
+    cd "$dst"
+}
