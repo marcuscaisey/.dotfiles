@@ -325,4 +325,24 @@ vim.keymap.set('n', '<leader>ht', builtin.help_tags)
 vim.keymap.set('n', '<leader>of', builtin.oldfiles)
 vim.keymap.set('n', '<leader>tt', builtin.builtin)
 vim.keymap.set('n', '<leader>tr', builtin.resume)
-vim.keymap.set('n', '<leader>od', telescope.extensions.olddirs.picker)
+vim.keymap.set('n', '<leader>od', function()
+  telescope.extensions.olddirs.picker({
+    attach_mappings = function(_, map)
+      map({ 'i', 'n' }, '<c-p>', function()
+        local dir = state.get_selected_entry().value
+        builtin.find_files({
+          prompt_title = 'Find Files in ' .. dir,
+          cwd = dir,
+        })
+      end)
+      map({ 'i', 'n' }, '<c-g>', function()
+        local dir = state.get_selected_entry().value
+        builtin.live_grep({
+          prompt_title = 'Live Grep in ' .. dir,
+          search_dirs = { dir },
+        })
+      end)
+      return true
+    end,
+  })
+end)
