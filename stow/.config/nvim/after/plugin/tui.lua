@@ -28,7 +28,7 @@ vim.keymap.set('n', '<c-f>', function()
     mappings = {
       { '<c-v>', ':!echo %c:p > /tmp/vifm-split<cr>:q<cr>' },
       { '<c-g>', ':!echo %d > /tmp/vifm-grep<cr>:q<cr>' },
-      { '<c-c>', ':!echo %d > /tmp/vifm-cd<cr>:q<cr>' },
+      { '<leader>cd', ':!echo %d > /tmp/vifm-cd<cr>:q<cr>' },
     },
     on_exit = {
       path_action('/tmp/vifm-split', function(path)
