@@ -4,7 +4,7 @@ hi Win          cterm=none                    ctermfg=white    ctermbg=default
 hi OtherWin     cterm=none                    ctermfg=default  ctermbg=default
 hi AuxWin       cterm=none                    ctermfg=default  ctermbg=233
 hi OddLine      cterm=none                    ctermfg=default  ctermbg=default
-hi TopLineSel   cterm=bold                    ctermfg=16       ctermbg=default
+hi TopLineSel   cterm=bold                    ctermfg=216      ctermbg=default
 hi TopLine      cterm=none                    ctermfg=black    ctermbg=default
 hi TabLine      cterm=none                    ctermfg=white    ctermbg=black
 hi TabLineSel   cterm=bold,reverse            ctermfg=default  ctermbg=default
