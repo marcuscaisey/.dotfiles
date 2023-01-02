@@ -6,7 +6,7 @@ if osx; then
   cecho "Installing homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  pkgs="zsh git tmux exa fzf fd bat ripgrep nvim ranger ncurses stow"
+  pkgs="zsh git tmux exa fzf fd bat ripgrep nvim vifm ncurses stow"
   for pkg in $pkgs; do
       cecho "Installing $pkg..."
       brew install $pkg
@@ -14,7 +14,7 @@ if osx; then
 fi
 
 if linux; then
-  pkgs="zsh git tmux cargo ranger"
+  pkgs="zsh git tmux cargo vifm"
   for pkg in $pkgs; do
       cecho "Installing $pkg..."
       sudo apt install $pkg
