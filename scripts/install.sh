@@ -14,7 +14,7 @@ if osx; then
 fi
 
 if linux; then
-  pkgs="zsh git tmux cargo vifm"
+  pkgs="zsh git tmux cargo vifm stow"
   for pkg in $pkgs; do
       cecho "Installing $pkg..."
       sudo apt install $pkg
