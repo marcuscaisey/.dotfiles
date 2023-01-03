@@ -6,3 +6,4 @@ stow/.config/nvim/plugin
 stow/.config/vifm/vifm-help.txt
 stow/.config/vifm/vifminfo.json
 stow/.config/vifm/scripts
+stow/.config/k9s/config.yml
