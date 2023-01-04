@@ -19,7 +19,7 @@ vim.g.neoformat_javascript_prettier = {
 }
 
 local wollemi = function()
-  local plz_root = vim.fs.find('.plzconfig', { upwards = true })[1]
+  local plz_root = vim.fs.find('.plzconfig', { upward = true })[1]
   if vim.bo.filetype ~= 'go' or not plz_root then
     return
   end
