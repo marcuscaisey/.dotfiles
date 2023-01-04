@@ -101,6 +101,7 @@ telescope.setup({
         height = 0.9,
       },
       previewer = false,
+      cwd_only = true,
       path_display = function(_, path)
         return shorten_path(path)
       end,
