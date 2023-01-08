@@ -39,6 +39,7 @@ filetypes.setup({
   markdown = { text_width = 100, auto_wrap = true },
   html = { tab_size = 2 },
   sql = { tab_size = 2, text_width = 100 },
+  scheme = { tab_size = 2 },
   please = { text_width = 120 },
 })
 
