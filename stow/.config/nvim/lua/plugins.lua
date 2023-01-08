@@ -95,6 +95,7 @@ packer.startup({
       branch = 'winhl-fix',
     })
     use('marcuscaisey/olddirs.nvim')
+    use('p00f/nvim-ts-rainbow')
   end,
   config = {
     display = {

@@ -88,6 +88,11 @@ configs.setup({
     enable_close = true,
     enable_rename = true,
   },
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = nil,
+  },
 })
 
 context.setup()
@@ -120,4 +125,3 @@ vim.keymap.set('i', '<c-l>', function()
     end
   end
 end)
-
