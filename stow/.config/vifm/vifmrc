@@ -119,10 +119,15 @@ command! mkcd :mkdir %a | cd %a
 command! vgrep vim "+grep %a"
 command! reload :write | restart full
 command! FZFFd :set noquickview
-              \| let $FZF_PICK = term('fd | fzf --layout reverse 2>/dev/tty')
-              \| if $FZF_PICK != ''
-              \|     execute 'goto' fnameescape($FZF_PICK)
-              \| endif
+             \| let $FZF_PICK = term('fd | fzf --layout reverse 2>/dev/tty')
+             \| if $FZF_PICK != ''
+             \|     let $FILETYPE = system('test -d $FZF_PICK && echo dir')
+             \|     if $FILETYPE == 'dir'
+             \|         execute 'cd' fnameescape($FZF_PICK)
+             \|     else
+             \|         execute 'goto' fnameescape($FZF_PICK)
+             \|     endif
+             \| endif
 
 " ------------------------------------------------------------------------------
 " File types association
