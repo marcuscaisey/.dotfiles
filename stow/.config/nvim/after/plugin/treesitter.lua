@@ -9,6 +9,7 @@ configs.setup({
     'gitcommit',
     'go',
     'html',
+    'java',
     'json',
     'lua',
     'markdown',
