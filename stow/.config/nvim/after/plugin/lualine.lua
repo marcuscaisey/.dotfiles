@@ -57,7 +57,10 @@ lualine.setup({
         component_separators = { left = '' },
         padding = { left = 1, right = 0 },
       },
-      'filename',
+      {
+        'filename',
+        path = 1,
+      },
       cwd,
     },
     lualine_x = { search_results },
