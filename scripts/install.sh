@@ -6,7 +6,7 @@ if osx; then
   cecho "Installing homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  pkgs="zsh git tmux exa fzf fd bat ripgrep nvim vifm ncurses stow git-delta"
+  pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta"
   for pkg in $pkgs; do
       cecho "Installing $pkg..."
       brew install $pkg
