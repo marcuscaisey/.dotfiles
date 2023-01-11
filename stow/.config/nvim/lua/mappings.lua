@@ -34,6 +34,9 @@ vim.keymap.set('n', 'J', 'mzJ`z')
 
 vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
 
+vim.keymap.set('n', '<leader>dt', '<cmd>diffthis<cr>')
+vim.keymap.set('n', '<leader>do', '<cmd>diffoff!<cr>')
+
 -- When i use vim.keymap.set to create this, nothing appears in the command line when i trigger the mapping until i press another
 -- key. Not sure why...
 vim.cmd.vnoremap('@ :norm @')
