@@ -10,6 +10,7 @@ configs.setup({
     'go',
     'html',
     'java',
+    'javascript',
     'json',
     'lua',
     'markdown',
