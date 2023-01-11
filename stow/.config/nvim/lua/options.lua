@@ -14,6 +14,7 @@ vim.o.relativenumber = true
 vim.o.scrolloff = 10
 vim.o.shiftwidth = 4
 vim.o.shortmess = vim.o.shortmess .. 'S'
+vim.o.diffopt = vim.o.diffopt .. ',linematch:60'
 vim.o.showmode = false
 vim.o.signcolumn = 'yes:2'
 vim.o.smartcase = true
