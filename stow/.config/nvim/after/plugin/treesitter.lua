@@ -4,6 +4,7 @@ local tsutils = require('nvim-treesitter.ts_utils')
 
 configs.setup({
   ensure_installed = {
+    'bash',
     'comment',
     'git_rebase',
     'gitcommit',
