@@ -10,7 +10,6 @@ function zvm_config() {
 function zvm_after_init() {
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
   bindkey -M viins '^ ' autosuggest-accept
-  bindkey -M viins '^g' per-directory-history-toggle-history
 }
 function zvm_after_lazy_keybindings() {
   bindkey -M vicmd 'gh' vi-first-non-blank
@@ -34,7 +33,6 @@ plugins=(
   colored-man-pages
   fast-syntax-highlighting
   git
-  per-directory-history
   # please
   zsh-vi-mode
   tmux
