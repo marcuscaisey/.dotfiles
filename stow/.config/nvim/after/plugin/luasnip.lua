@@ -42,6 +42,7 @@ ls.add_snippets('lua', {
 ls.add_snippets('go', {
   ls.parser.parse_snippet('prf', 'fmt.Printf("$1\\n", $0)'),
   ls.parser.parse_snippet('pr', 'fmt.Println($0)'),
+  ls.parser.parse_snippet('dp', 'fmt.Printf("$1: %+v\\n", $1)'),
   s(
     'iferr',
     fmt('if {} {{\n\t{}\n}}', {
@@ -100,6 +101,6 @@ vim.keymap.set({ 'i', 's' }, '<c-h>', function()
   end
 end)
 vim.keymap.set('n', '<leader><leader>s', function()
-  vim.cmd.source('~/.dotfiles/nvim/lua/plugins/luasnip.lua')
+  vim.cmd.source('~/.dotfiles/stow/.config/nvim/after/plugin/luasnip.lua')
   print('reloaded snippets')
 end)
