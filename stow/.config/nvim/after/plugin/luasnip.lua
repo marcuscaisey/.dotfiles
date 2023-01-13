@@ -42,7 +42,7 @@ ls.add_snippets('lua', {
 ls.add_snippets('go', {
   ls.parser.parse_snippet('prf', 'fmt.Printf("$1\\n", $0)'),
   ls.parser.parse_snippet('pr', 'fmt.Println($0)'),
-  ls.parser.parse_snippet('dp', 'fmt.Printf("$1: %+v\\n", $1)'),
+  s('dp', fmt('fmt.Printf("{}: %+v\\n", {})', { rep(1), i(1) })),
   s(
     'iferr',
     fmt('if {} {{\n\t{}\n}}', {
