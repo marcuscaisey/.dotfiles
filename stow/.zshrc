@@ -255,3 +255,15 @@ vifm() {
     fi
     cd "$dst"
 }
+
+
+################################################################################
+#                                   arcanist
+################################################################################
+_arc_diff_completion() {
+    local branches
+    branches=($(git branch --format='%(refname:short)'))
+    compadd -a branches
+}
+
+compdef _arc_diff_completion arc diff
