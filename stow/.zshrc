@@ -4,6 +4,11 @@ source ~/.dotfiles/scripts/utils.sh
 ################################################################################
 #                                 zsh-vi-mode
 ################################################################################
+function zvm_yank_to_clipboard() {
+  zvm_yank
+	printf "%s" "$CUTBUFFER" | yank
+  zvm_exit_visual_mode
+}
 function zvm_config() {
   ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
 }
@@ -12,6 +17,8 @@ function zvm_after_init() {
   bindkey -M viins '^ ' autosuggest-accept
 }
 function zvm_after_lazy_keybindings() {
+  zvm_define_widget zvm_yank_to_clipboard
+  bindkey -M visual 'y' zvm_yank_to_clipboard
   bindkey -M vicmd 'gh' vi-first-non-blank
   bindkey -M vicmd 'gl' vi-end-of-line
   bindkey -M menuselect 'h' vi-backward-char
