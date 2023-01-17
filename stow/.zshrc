@@ -102,7 +102,7 @@ alias fm="vifm"
 alias oops="gau && gcn!"
 alias conflicts='vim -q <(git diff --name-only --diff-filter=U | sed -e "s@^@$(git rev-parse --show-toplevel)/@" -e "s/$/:1:conflicts/" | xargs realpath --relative-to $(pwd)) +copen'
 alias gcfd="git clean -fd"
-alias grbm='git fetch origin master:master && git rebase -i --onto master $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) && git branch --set-upstream-to=master'
+alias grbm='git fetch origin master:master && git rebase -i --onto master $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) && git branch --set-upstream-to=master || echo "\033[31;1mRebase was not successful. Remember to git branch --set-upstream-to=master once fixed.\033[0m"'
 
 alias d="cd ~/.dotfiles"
 alias s="cd ~/scratch"
