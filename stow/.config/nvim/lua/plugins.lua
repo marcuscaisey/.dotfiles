@@ -40,7 +40,7 @@ packer.startup({
       'nvim-lualine/lualine.nvim',
       requires = 'kyazdani42/nvim-web-devicons',
     })
-    use('arkav/lualine-lsp-progress')
+    use('j-hui/fidget.nvim')
     use({
       'lewis6991/gitsigns.nvim',
       requires = 'nvim-lua/plenary.nvim',

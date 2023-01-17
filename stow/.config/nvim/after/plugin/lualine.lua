@@ -66,7 +66,6 @@ lualine.setup({
     lualine_x = { search_results },
     lualine_y = {
       { lsp_clients, component_separators = { right = '' } },
-      { 'lsp_progress', display_components = { 'lsp_client_name', { 'title', 'percentage', 'message' } } },
       {
         'diagnostics',
         symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
