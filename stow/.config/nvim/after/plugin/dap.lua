@@ -36,8 +36,8 @@ vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = 'DapBreakp
 vim.fn.sign_define('DapStopped', { text = '' })
 vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'DapBreakpointRejected' })
 
-vim.keymap.set('n', '<leader>dbp', dap.toggle_breakpoint)
-vim.keymap.set('n', '<leader>dbcp', function()
+vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint)
+vim.keymap.set('n', '<leader>dcb', function()
   dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
 end)
 vim.keymap.set('n', '<f5>', dap.continue)
