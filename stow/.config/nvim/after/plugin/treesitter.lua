@@ -26,15 +26,6 @@ configs.setup({
     disable = { 'yaml' },
   },
   indent = { enable = false },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      -- init_selection = 'grn',
-      -- node_incremental = 'grn',
-      -- scope_incremental = 'grc',
-      -- node_decremental = 'grm',
-    },
-  },
   textobjects = {
     select = {
       enable = true,
