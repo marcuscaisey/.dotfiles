@@ -29,10 +29,10 @@ configs.setup({
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = 'grn',
-      node_incremental = 'grn',
-      scope_incremental = 'grc',
-      node_decremental = 'grm',
+      -- init_selection = 'grn',
+      -- node_incremental = 'grn',
+      -- scope_incremental = 'grc',
+      -- node_decremental = 'grm',
     },
   },
   textobjects = {
