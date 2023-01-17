@@ -9,13 +9,13 @@ mason_lspconfig.setup({
   automatic_installation = true,
 })
 
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr })
   vim.keymap.set('n', '<c-s>', telescope_builtin.lsp_document_symbols, { buffer = bufnr })
   vim.keymap.set('n', '<leader>s', telescope_builtin.lsp_dynamic_workspace_symbols, { buffer = bufnr })
   vim.keymap.set('n', 'gd', telescope_builtin.lsp_definitions, { buffer = bufnr })
   vim.keymap.set('n', 'gi', telescope_builtin.lsp_implementations, { buffer = bufnr })
-  vim.keymap.set('n', 'ge', telescope_builtin.lsp_references, { buffer = bufnr })
+  vim.keymap.set('n', 'gr', telescope_builtin.lsp_references, { buffer = bufnr })
   vim.keymap.set('n', 'dK', vim.diagnostic.open_float, { buffer = bufnr })
   vim.keymap.set('n', 'dr', vim.diagnostic.reset, { buffer = bufnr })
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr })
