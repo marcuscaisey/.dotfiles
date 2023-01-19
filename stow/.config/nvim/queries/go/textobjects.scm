@@ -2,7 +2,7 @@
 
 (keyed_element
   (literal_element)
-  (literal_element) @value.inner)
+  (literal_element) @value.inner) @value.outer
 
 (literal_value
   "," @_start .
