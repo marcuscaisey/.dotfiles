@@ -2,16 +2,16 @@
 
 (keyed_element
   (literal_element)
-  (literal_element) @literal_value.inner)
+  (literal_element) @value.inner)
 
 (literal_value
   "," @_start .
-  (literal_element) @literal_value.inner
-  (#make-range! "literal_value.outer" @_start @literal_value.inner))
+  (literal_element) @value.inner
+  (#make-range! "value.outer" @_start @value.inner))
 
 (literal_value
-  . (literal_element) @literal_value.inner
+  . (literal_element) @value.inner
   . ","? @_end
-  (#make-range! "literal_value.outer" @literal_value.inner @_end))
+  (#make-range! "value.outer" @value.inner @_end))
 
-right: (expression_list) @rvalue
+right: (expression_list) @value.inner @value.outer

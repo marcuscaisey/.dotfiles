@@ -39,9 +39,8 @@ configs.setup({
         ['ac'] = '@call.outer',
         ['iC'] = '@class.inner',
         ['aC'] = '@class.outer',
-        ['iv'] = '@literal_value.inner',
-        ['av'] = '@literal_value.outer',
-        ['ir'] = '@rvalue',
+        ['iv'] = '@value.inner',
+        ['av'] = '@value.outer',
       },
       selection_modes = {
         ['@function.outer'] = 'V',
