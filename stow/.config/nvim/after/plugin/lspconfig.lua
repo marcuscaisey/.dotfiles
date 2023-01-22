@@ -9,7 +9,10 @@ mason_lspconfig.setup({
   automatic_installation = true,
 })
 
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
+  -- disable lsp semantic highlighting, it's annoying and slower than treesitter
+  client.server_capabilities.semanticTokensProvider = nil
+
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr })
   vim.keymap.set('n', '<c-s>', telescope_builtin.lsp_document_symbols, { buffer = bufnr })
   vim.keymap.set('n', '<leader>s', telescope_builtin.lsp_dynamic_workspace_symbols, { buffer = bufnr })
