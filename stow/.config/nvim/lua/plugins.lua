@@ -88,8 +88,6 @@ packer.startup({
       tag = '*',
     })
     use('https://gitlab.com/yorickpeterse/nvim-pqf')
-    use('AndrewRadev/splitjoin.vim')
-    use('smjonas/live-command.nvim')
     use({
       'marcuscaisey/tui-nvim',
       branch = 'winhl-fix',
