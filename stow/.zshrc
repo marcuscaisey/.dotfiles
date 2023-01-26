@@ -137,7 +137,7 @@ _fzf_compgen_dir() {
 
 # Use ctrl + t to fuzzy search all files/directories (excluding .git) with preview in current directory
 export FZF_CTRL_T_COMMAND='fd --follow --strip-cwd-prefix'
-export FZF_CTRL_T_OPTS="--preview 'if [ ! -d {} ]; then bat --color=always {}; else echo Directory: {}; fi'"
+export FZF_CTRL_T_OPTS="--preview 'if [ ! -d {} ]; then bat --color always --wrap never --pager never {}; else exa --classify --all --tree --level=2 --color always {}; fi'"
 
 # Catppuccin theme
 # Allow selecting / deselecting of all options
