@@ -235,21 +235,11 @@ fi
 
 
 ################################################################################
-#                                    stern
-################################################################################
-function stern-jq {
-    stern -o raw "$@" | jq -rR '. as $raw | try (fromjson) catch ("\u001b[31m" + $raw + "\u001b[0m")'
-}
-
-
-################################################################################
 #                                     nvm
 ################################################################################
-if osx; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 
 ################################################################################

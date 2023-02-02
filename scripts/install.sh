@@ -59,6 +59,9 @@ if osx; then
   curl https://pyenv.run | bash
 fi
 
+cecho "Installing nvm..."
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+
 cecho "Restowing config files..."
 source ~/.dotfiles/scripts/restow.sh
 
