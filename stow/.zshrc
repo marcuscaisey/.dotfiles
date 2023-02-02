@@ -38,6 +38,7 @@ ZSH_THEME=""
 plugins=(
   alias-finder
   colored-man-pages
+  docker
   fast-syntax-highlighting
   git
   # please
@@ -49,10 +50,6 @@ plugins=(
 if linux; then
   plugins=(kubectl kube-ps1 $plugins)
   export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-fi
-
-if osx; then
-  plugins=(docker $plugins)
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -81,7 +78,6 @@ fi
 ################################################################################
 #                                   aliases
 ################################################################################
-# exa
 alias ls="exa"
 alias lsl="ls -l"
 alias lsa="ls -a"
@@ -106,12 +102,6 @@ alias gbm='git branch --set-upstream-to=master'
 
 alias d="cd ~/.dotfiles"
 alias s="cd ~/scratch"
-
-# tmux
-# start a new session with the same name as the current git branch
-tgb() {
-    tmux new-session -s $(git rev-parse --abbrev-ref HEAD)
-}
 
 
 ################################################################################
@@ -146,15 +136,6 @@ export FZF_DEFAULT_OPTS=" \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
 --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
 -m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all"
-
-
-################################################################################
-#                                    python
-################################################################################
-if linux; then
-  # don't want pip installed stuff to get in the way of toolchain stuff
-  export PATH="$PATH:$HOME/.local/bin"
-fi
 
 
 ################################################################################
