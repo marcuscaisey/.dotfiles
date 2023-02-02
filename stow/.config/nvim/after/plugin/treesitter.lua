@@ -15,6 +15,7 @@ configs.setup({
     'json',
     'lua',
     'markdown',
+    'php',
     'proto',
     'python',
     'query',
