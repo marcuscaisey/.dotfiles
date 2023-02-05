@@ -44,6 +44,19 @@ ls.add_snippets('go', {
   ls.parser.parse_snippet('pr', 'fmt.Println($0)'),
   s('dp', fmt('fmt.Printf("{}: %+v\\n", {})', { rep(1), i(1) })),
   s(
+    'jp',
+    fmt(
+      [[
+        {}Bytes, err := json.MarshalIndent({}, "", "  ")
+        if err != nil {{
+            panic(err)
+        }}
+        fmt.Printf("{}: %+v\n", string({}Bytes))
+      ]],
+      { rep(1), i(1), rep(1), rep(1) }
+    )
+  ),
+  s(
     'iferr',
     fmt('if {} {{\n\t{}\n}}', {
       c(1, {
