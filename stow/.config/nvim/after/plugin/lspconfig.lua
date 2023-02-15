@@ -121,7 +121,7 @@ lspconfig.pyright.setup({
   },
 })
 
-lspconfig.sumneko_lua.setup({
+lspconfig.lua_ls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
   on_attach = on_attach,
   settings = {
