@@ -76,6 +76,24 @@ vim.keymap.set('n', '<leader>cb', function()
   vim.cmd.cfirst()
 end)
 
+-- open modified or untracked files in quickfix
+vim.keymap.set('n', '<leader>gf', function()
+  local files = vim.fn.systemlist('git ls-files --modified --others --exclude-standard --full-name')
+  local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+
+  local qflist = {}
+  for _, file in ipairs(files) do
+    table.insert(qflist, {
+      filename = git_root .. '/' .. file,
+      lnum = 1,
+      col = 1,
+    })
+  end
+  vim.fn.setqflist(qflist)
+  vim.cmd.copen()
+  vim.cmd.cfirst()
+end)
+
 -- Go
 vim.keymap.set('n', '<leader>gt', function()
   if vim.bo.filetype ~= 'go' then
