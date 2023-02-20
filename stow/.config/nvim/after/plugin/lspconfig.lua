@@ -1,6 +1,5 @@
 local lspconfig = require('lspconfig')
 local configs = require('lspconfig.configs')
-local util = require('lspconfig.util')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 local telescope_builtin = require('telescope.builtin')
 local mason_lspconfig = require('mason-lspconfig')
@@ -17,7 +16,9 @@ configs.please = {
   default_config = {
     cmd = { 'plz', 'tool', 'lps' },
     filetypes = { 'please' },
-    root_dir = util.root_pattern('.plzconfig'),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find('.plzconfig', {upward = true, path = vim.fs.dirname(fname)}))[1]
+    end,
   },
 }
 
@@ -59,14 +60,14 @@ lspconfig.gopls.setup({
     on_attach(client)
   end,
   root_dir = function(fname)
-    local go_mod_root = util.root_pattern('go.mod')(fname)
-    if go_mod_root then
-      return go_mod_root
+    local go_mod = vim.fs.find('go.mod', { upward = true, path = vim.fs.dirname(fname) })[1]
+    if go_mod then
+      return vim.fs.dirname(go_mod)
     end
-    local plz_root = util.root_pattern('.plzconfig')(fname)
-    local gopath_root = util.root_pattern('src')(fname)
-    if plz_root and gopath_root then
-      vim.env.GOPATH = string.format('%s:%s/plz-out/go', gopath_root, plz_root)
+    local plzconfig = vim.fs.find('.plzconfig', { upward = true, path = vim.fs.dirname(fname) })[1]
+    local src = vim.fs.find('src', { upward = true, path = vim.fs.dirname(fname) })[1]
+    if plzconfig and src then
+      vim.env.GOPATH = string.format('%s:%s/plz-out/go', vim.fs.dirname(src), vim.fs.dirname(plzconfig))
       vim.env.GO111MODULE = 'off'
     end
     return vim.fn.getcwd()
