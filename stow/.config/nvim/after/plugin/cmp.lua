@@ -22,9 +22,6 @@ cmp.setup({
       luasnip.lsp_expand(args.body)
     end,
   },
-  completion = {
-    completeopt = 'menu,menuone,preview,noinsert',
-  },
   confirmation = {
     default_behavior = cmp.ConfirmBehavior.Replace,
   },
