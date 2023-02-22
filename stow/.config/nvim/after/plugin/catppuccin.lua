@@ -11,12 +11,9 @@ catppuccin.setup({
   highlight_overrides = {
     mocha = function(palette)
       return {
-        GitConflictCurrentLabel = { bg = '#158472' },
-        GitConflictCurrent = { bg = '#27403B' },
-        GitConflictIncomingLabel = { bg = '#395F8F' },
-        GitConflictIncoming = { bg = '#243A5E' },
-        GitConflictAncestorLabel = { bg = '#45475a' },
-        GitConflictAncestor = { bg = '#585b70' },
+        GitConflictCurrent = { bg = colors.darken(palette.green, 0.2, palette.base) },
+        GitConflictIncoming = { bg = colors.darken(palette.blue, 0.2, palette.base) },
+        GitConflictAncestor = { bg = palette.surface1 },
         LualineCwd = { fg = palette.surface2, bg = palette.mantle },
         IncSearch = { bg = palette.peach },
         NormalFloat = { fg = palette.overlay2, bg = palette.surface0 },
