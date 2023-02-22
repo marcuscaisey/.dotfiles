@@ -17,7 +17,7 @@ configs.please = {
     cmd = { 'plz', 'tool', 'lps' },
     filetypes = { 'please' },
     root_dir = function(fname)
-      return vim.fs.dirname(vim.fs.find('.plzconfig', {upward = true, path = vim.fs.dirname(fname)}))[1]
+      return vim.fs.dirname(vim.fs.find('.plzconfig', {upward = true, path = vim.fs.dirname(fname)})[1])
     end,
   },
 }
