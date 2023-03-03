@@ -40,6 +40,16 @@ vim.keymap.set('n', '<leader>do', '<cmd>diffoff!<cr>')
 vim.keymap.set('v', 'p', 'P')
 vim.keymap.set({ 'n', 'v' }, '<leader>P', '"0p')
 
+vim.keymap.set('n', '<leader>y', function()
+  local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+  local filepath = vim.api.nvim_buf_get_name(0)
+  local relative_filepath = filepath:gsub('^' .. git_root .. '/', '')
+  local location = string.format('%s:%d:%d', relative_filepath, vim.fn.line('.'), vim.fn.col('.'))
+  vim.fn.setreg('"', location)
+  vim.fn.setreg('*', location)
+  print(string.format("Yanked %s", location))
+end)
+
 -- When i use vim.keymap.set to create this, nothing appears in the command line when i trigger the mapping until i press another
 -- key. Not sure why...
 vim.cmd.vnoremap('@ :norm @')
