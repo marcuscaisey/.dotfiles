@@ -19,6 +19,8 @@ configs.setup({
     'proto',
     'python',
     'query',
+    'regex',
+    'ruby',
     'scheme',
     'yaml',
   },
