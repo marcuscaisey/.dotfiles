@@ -18,6 +18,7 @@ configs.setup({
     'php',
     'proto',
     'python',
+    'sql',
     'query',
     'regex',
     'ruby',

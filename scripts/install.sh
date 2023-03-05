@@ -6,7 +6,7 @@ if osx; then
   cecho "Installing homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta"
+  pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta tree-sitter"
   for pkg in $pkgs; do
       cecho "Installing $pkg..."
       brew install $pkg
@@ -20,7 +20,7 @@ if linux; then
       sudo apt install $pkg
   done
 
-  cargo_pkgs="exa fd-find bat ripgrep git-delta"
+  cargo_pkgs="exa fd-find bat ripgrep git-delta tree-sitter-cli"
   for pkg in $cargo_pkgs; do
       cecho "Installing $pkg..."
       cargo install $pkg
