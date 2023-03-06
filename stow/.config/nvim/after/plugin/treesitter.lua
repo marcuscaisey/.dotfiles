@@ -59,16 +59,20 @@ configs.setup({
       goto_next_start = {
         [']f'] = '@function.outer',
         [']a'] = '@parameter.inner',
+        [']m'] = '@method.outer',
       },
       goto_next_end = {
         [']F'] = '@function.outer',
+        [']M'] = '@method.outer',
       },
       goto_previous_start = {
         ['[f'] = '@function.outer',
         ['[a'] = '@parameter.inner',
+        ['[m'] = '@method.outer',
       },
       goto_previous_end = {
         ['[F'] = '@function.outer',
+        ['[M'] = '@method.outer',
       },
     },
   },
