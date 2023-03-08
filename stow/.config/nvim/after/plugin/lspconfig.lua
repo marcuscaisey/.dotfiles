@@ -8,10 +8,6 @@ mason_lspconfig.setup({
   automatic_installation = true,
 })
 
-local on_attach = function(client)
-  client.server_capabilities.semanticTokensProvider = nil
-end
-
 configs.please = {
   default_config = {
     cmd = { 'plz', 'tool', 'lps' },
@@ -24,12 +20,10 @@ configs.please = {
 
 lspconfig.bashls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  on_attach = on_attach,
 })
 
 lspconfig.ccls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  on_attach = on_attach,
   root_dir = function()
     return vim.fn.getcwd()
   end,
@@ -57,7 +51,6 @@ lspconfig.gopls.setup({
       buffer = bufnr,
       desc = 'Refresh codelenses when gopls is running',
     })
-    on_attach(client)
   end,
   root_dir = function(fname)
     local go_mod = vim.fs.find('go.mod', { upward = true, path = vim.fs.dirname(fname) })[1]
@@ -76,33 +69,27 @@ lspconfig.gopls.setup({
 
 lspconfig.intelephense.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  on_attach = on_attach,
 })
 
 lspconfig.java_language_server.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  on_attach = on_attach,
   cmd = { 'java_language_server.sh' },
 })
 
 lspconfig.jsonls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  on_attach = on_attach,
 })
 
 lspconfig.marksman.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  on_attach = on_attach,
 })
 
 lspconfig.please.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  on_attach = on_attach,
 })
 
 lspconfig.pyright.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  on_attach = on_attach,
   root_dir = function()
     return vim.fn.getcwd()
   end,
@@ -124,7 +111,6 @@ lspconfig.pyright.setup({
 
 lspconfig.lua_ls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  on_attach = on_attach,
   settings = {
     Lua = {
       runtime = {
@@ -149,7 +135,6 @@ lspconfig.lua_ls.setup({
 
 lspconfig.tsserver.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  on_attach = on_attach,
   root_dir = function()
     return vim.fn.getcwd()
   end,
@@ -157,12 +142,10 @@ lspconfig.tsserver.setup({
 
 lspconfig.vimls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  on_attach = on_attach,
 })
 
 lspconfig.yamlls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  on_attach = on_attach,
 })
 
 vim.diagnostic.config({
