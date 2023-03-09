@@ -38,7 +38,6 @@ lspconfig.gopls.setup({
       analyses = {
         unusedparams = true,
       },
-      semanticTokens = true,
       codelenses = {
         gc_details = true,
       },
@@ -46,49 +45,6 @@ lspconfig.gopls.setup({
     },
   },
   on_attach = function(client, bufnr)
-    client.server_capabilities.semanticTokensProvider = {
-      full = true,
-      legend = {
-        tokenModifiers = {
-          'declaration',
-          'definition',
-          'readonly',
-          'static',
-          'deprecated',
-          'abstract',
-          'async',
-          'modification',
-          'documentation',
-          'defaultLibrary',
-        },
-        tokenTypes = {
-          'namespace',
-          'type',
-          'class',
-          'enum',
-          'interface',
-          'struct',
-          'typeParameter',
-          'parameter',
-          'variable',
-          'property',
-          'enumMember',
-          'event',
-          'function',
-          'method',
-          'macro',
-          'keyword',
-          'modifier',
-          'comment',
-          'string',
-          'number',
-          'regexp',
-          'operator',
-          'decorator',
-        },
-      },
-      range = true,
-    }
     vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'BufWritePost', 'CursorHold' }, {
       callback = vim.lsp.codelens.refresh,
       group = vim.api.nvim_create_augroup('gopls', { clear = true }),
