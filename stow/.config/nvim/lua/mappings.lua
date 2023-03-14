@@ -89,7 +89,14 @@ end)
 -- open modified or untracked files in quickfix
 vim.keymap.set('n', '<leader>gf', function()
   local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
-  local files = vim.fn.systemlist(string.format('git -C %s ls-files --modified --others --exclude-standard --full-name --deduplicate', git_root))
+  local files = vim.fn.systemlist(
+    string.format('git -C %s ls-files --modified --others --exclude-standard --full-name --deduplicate', git_root)
+  )
+
+  if #files == 0 then
+    print('No Git changes')
+    return
+  end
 
   local qflist = {}
   for _, file in ipairs(files) do
