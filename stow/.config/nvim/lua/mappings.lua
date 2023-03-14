@@ -47,7 +47,7 @@ vim.keymap.set('n', '<leader>y', function()
   local location = string.format('%s:%d:%d', relative_filepath, vim.fn.line('.'), vim.fn.col('.'))
   vim.fn.setreg('"', location)
   vim.fn.setreg('*', location)
-  print(string.format("Yanked %s", location))
+  print(string.format('Yanked %s', location))
 end)
 
 -- When i use vim.keymap.set to create this, nothing appears in the command line when i trigger the mapping until i press another
