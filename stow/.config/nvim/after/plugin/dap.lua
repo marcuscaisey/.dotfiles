@@ -33,7 +33,7 @@ repl.commands = vim.tbl_extend('force', repl.commands, {
 
 vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DapBreakpoint' })
 vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = 'DapBreakpoint' })
-vim.fn.sign_define('DapStopped', { text = '' })
+vim.fn.sign_define('DapStopped', { text = '', texthl = 'DapStopped' })
 vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'DapBreakpointRejected' })
 
 vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint)
