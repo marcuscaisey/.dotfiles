@@ -8,8 +8,18 @@ gitsigns.setup({
   },
 })
 
-vim.keymap.set('n', ']c', gitsigns.next_hunk)
-vim.keymap.set('n', '[c', gitsigns.prev_hunk)
+vim.keymap.set('n', ']c', function()
+  gitsigns.next_hunk({
+    navigation_message = true,
+    greedy = true,
+  })
+end)
+vim.keymap.set('n', '[c', function()
+  gitsigns.prev_hunk({
+    navigation_message = true,
+    greedy = true,
+  })
+end)
 vim.keymap.set({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
 vim.keymap.set('n', '<leader>hS', gitsigns.stage_buffer)
 vim.keymap.set('n', '<leader>hu', gitsigns.undo_stage_hunk)
