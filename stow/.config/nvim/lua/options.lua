@@ -23,7 +23,6 @@ vim.o.splitright = true
 vim.o.swapfile = false
 vim.o.tabstop = 4
 vim.o.termguicolors = true
-vim.o.wrapscan = false
 vim.o.updatetime = 100
 
 filetypes.setup({

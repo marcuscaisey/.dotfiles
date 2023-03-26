@@ -11,12 +11,14 @@ gitsigns.setup({
 vim.keymap.set('n', ']c', function()
   gitsigns.next_hunk({
     navigation_message = true,
+    wrap = false,
     greedy = true,
   })
 end)
 vim.keymap.set('n', '[c', function()
   gitsigns.prev_hunk({
     navigation_message = true,
+    wrap = false,
     greedy = true,
   })
 end)
