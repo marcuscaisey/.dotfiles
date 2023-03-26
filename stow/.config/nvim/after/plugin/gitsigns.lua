@@ -42,7 +42,7 @@ vim.keymap.set('n', '<leader>gc', function()
   vim.wait(5000, function()
     local qf_items = vim.fn.getqflist()
     return #qf_items > 0
-  end)
+  end, 10)
   vim.cmd.copen()
   vim.cmd.cfirst()
 end)
