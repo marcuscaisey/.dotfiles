@@ -211,7 +211,11 @@ vim.keymap.set('n', '<c-s>', telescope_builtin.lsp_document_symbols)
 vim.keymap.set('n', '<leader>s', telescope_builtin.lsp_dynamic_workspace_symbols)
 vim.keymap.set('n', 'gd', telescope_builtin.lsp_definitions)
 vim.keymap.set('n', 'gi', telescope_builtin.lsp_implementations)
-vim.keymap.set('n', 'gr', telescope_builtin.lsp_references)
+vim.keymap.set('n', 'gr', function()
+  telescope_builtin.lsp_references({
+    jump_type = 'never',
+  })
+end)
 vim.keymap.set('n', 'dK', vim.diagnostic.open_float)
 vim.keymap.set('n', 'dr', vim.diagnostic.reset)
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
