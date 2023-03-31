@@ -62,7 +62,7 @@ packer.startup({
     use('tpope/vim-repeat')
     use('windwp/nvim-autopairs')
     use('vim-scripts/ReplaceWithRegister')
-    use('tpope/vim-commentary')
+    use('numToStr/Comment.nvim')
     use('tpope/vim-surround')
     use('ggandor/leap.nvim')
     use('bkad/camelcasemotion')
