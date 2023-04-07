@@ -192,9 +192,9 @@ lspconfig.yamlls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
   settings = {
     yaml = {
-      validate = false
-    }
-  }
+      validate = false,
+    },
+  },
 })
 
 vim.diagnostic.config({
