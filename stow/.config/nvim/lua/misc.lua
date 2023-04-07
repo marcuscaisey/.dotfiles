@@ -73,26 +73,14 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave'
   desc = 'Unset relativenumber in unfocused windows or when in insert mode',
 })
 
-local original_tmux_window_name
-
-vim.api.nvim_create_autocmd({ 'VimEnter' }, {
-  callback = function()
-    if os.getenv('TMUX') then
-      original_tmux_window_name = vim.trim(vim.fn.system('tmux display-message -p "#{window_name}"'))
-    end
-  end,
-  group = group,
-  desc = 'Store the current tmux window name',
-})
-
 vim.api.nvim_create_autocmd({ 'VimLeave' }, {
   callback = function()
     if os.getenv('TMUX') then
-      vim.fn.system(string.format('tmux rename-window "%s"', original_tmux_window_name))
+      vim.fn.system('tmux set-window-option automatic-rename on')
     end
   end,
   group = group,
-  desc = 'Rename the tmux window to cwd:nvim if inside a tmux session',
+  desc = 'Turn tmux automatic window renaming on',
 })
 
 vim.api.nvim_create_autocmd({ 'DirChanged' }, {
