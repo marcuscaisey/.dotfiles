@@ -233,17 +233,6 @@ end)
 vim.keymap.set('n', '[e', function()
   vim.diagnostic.goto_prev({ severity = { min = vim.diagnostic.severity.WARN } })
 end)
-vim.keymap.set('n', '<leader>dq', function()
-  local diagnostics = vim.diagnostic.get(0)
-  if #diagnostics == 0 then
-    print('No diagnostics')
-    vim.cmd.cclose()
-    return
-  end
-  local qf_items = vim.diagnostic.toqflist(diagnostics)
-  vim.fn.setqflist(qf_items)
-  vim.cmd.copen()
-  vim.cmd.cfirst()
-end)
+vim.keymap.set('n', '<leader>dq', vim.diagnostic.setqflist)
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
 vim.keymap.set('v', '<leader>ca', vim.lsp.buf.code_action)
