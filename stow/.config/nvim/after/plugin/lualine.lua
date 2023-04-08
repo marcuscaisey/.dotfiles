@@ -10,11 +10,12 @@ local search_results = {
     return string.format('/%s [%d/%d]', search_term, search_count.current, search_count.total)
   end,
   cond = function()
-    local search_count = vim.fn.searchcount({
+    -- searchcount returns raises an error if there's something wrong with the search term like an unmatched \(
+    local ok, search_count = pcall(vim.fn.searchcount, {
       recompute = 1,
       maxcount = -1,
     })
-    return search_count.total > 0
+    return ok and search_count.total > 0
   end,
 }
 
