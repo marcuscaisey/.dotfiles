@@ -160,9 +160,10 @@ packer.startup({
     })
     use('bkad/camelcasemotion')
     use({
-      'sbdchd/neoformat',
+      'jose-elias-alvarez/null-ls.nvim',
+      requires = 'nvim-lua/plenary.nvim',
       config = function()
-        require('plugins.neoformat')
+        require('plugins.null_ls')
       end,
     })
     use('svban/YankAssassin.vim')

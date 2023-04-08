@@ -1,3 +1,5 @@
+local Job = require('plenary.job')
+
 local group = vim.api.nvim_create_augroup('misc', { clear = true })
 
 vim.api.nvim_create_autocmd('BufReadPost', {
@@ -91,4 +93,39 @@ vim.api.nvim_create_autocmd({ 'DirChanged' }, {
   end,
   group = group,
   desc = 'Rename the tmux window to $cwd:nvim',
+})
+
+vim.api.nvim_create_autocmd('BufWritePost', {
+  callback = function()
+    local filepath = vim.api.nvim_buf_get_name(0)
+    local plz_root = vim.fs.find('.plzconfig', { upward = true, path = filepath })[1]
+    if not plz_root then
+      return
+    end
+    local output_lines = {}
+    local on_output = function(_, line)
+      table.insert(output_lines, line)
+    end
+    local on_exit = function()
+      vim.print(table.concat(output_lines, '\n'))
+    end
+    local job = Job:new({
+      command = 'wollemi',
+      args = { 'gofmt' },
+      -- Run in the directory of the saved file since wollemi won't run outside of a plz repo
+      cwd = vim.fs.dirname(filepath),
+      env = {
+        -- wollemi needs GOROOT to be set
+        GOROOT = vim.trim(vim.fn.system('go env GOROOT')),
+        PATH = vim.fn.getenv('PATH'),
+      },
+      on_stdout = on_output,
+      on_stderr = on_output,
+      on_exit = on_exit,
+    })
+    job:start()
+  end,
+  pattern = { '*.go' },
+  group = group,
+  desc = 'Run wollemi on parent directory of go file',
 })
