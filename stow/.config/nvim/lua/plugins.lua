@@ -58,11 +58,10 @@ packer.startup({
       run = 'make',
     })
     use('tpope/vim-eunuch')
-    use('tpope/vim-repeat')
     use('windwp/nvim-autopairs')
     use('vim-scripts/ReplaceWithRegister')
     use('numToStr/Comment.nvim')
-    use('tpope/vim-surround')
+    use('kylechui/nvim-surround')
     use('ggandor/leap.nvim')
     use('bkad/camelcasemotion')
     use('sbdchd/neoformat')
