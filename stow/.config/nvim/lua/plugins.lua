@@ -30,7 +30,6 @@ packer.startup({
     use('hrsh7th/cmp-nvim-lsp')
     use('hrsh7th/cmp-nvim-lua')
     use('hrsh7th/cmp-buffer')
-    use('hrsh7th/cmp-path')
     use('mfussenegger/nvim-dap')
     use('theHamsta/nvim-dap-virtual-text')
     use('rcarriga/nvim-dap-ui')
