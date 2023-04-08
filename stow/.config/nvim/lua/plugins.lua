@@ -67,7 +67,6 @@ packer.startup({
     use('sbdchd/neoformat')
     use('svban/YankAssassin.vim')
     use('tpope/vim-fugitive')
-    use('tpope/vim-unimpaired')
     use({
       'ThePrimeagen/harpoon',
       requires = 'nvim-lua/plenary.nvim',

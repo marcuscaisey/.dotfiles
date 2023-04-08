@@ -40,6 +40,14 @@ vim.keymap.set('n', '<leader>do', '<cmd>diffoff!<cr>')
 vim.keymap.set('v', 'p', 'P')
 vim.keymap.set({ 'n', 'v' }, '<leader>P', '"0p')
 
+-- Jump between git conflict markers <<<<<<<, =======, >>>>>>> with ]n and [n
+vim.keymap.set('n', ']n', function()
+  vim.fn.search([[^\(<\{7}\|=\{7}\|>\{7}\)]], 'W')
+end)
+vim.keymap.set('n', '[n', function()
+  vim.fn.search([[\(<\{7}\|=\{7}\|>\{7}\)]], 'bW')
+end)
+
 vim.keymap.set('n', '<leader>y', function()
   local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
   local filepath = vim.api.nvim_buf_get_name(0)
@@ -65,6 +73,9 @@ vim.keymap.set('n', '<leader>q', function()
     vim.cmd.copen()
   end
 end)
+
+vim.keymap.set('n', ']q', vim.cmd.cnext)
+vim.keymap.set('n', '[q', vim.cmd.cprev)
 
 -- open changed buffers in quickfix
 vim.keymap.set('n', '<leader>cb', function()
