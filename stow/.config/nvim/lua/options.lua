@@ -52,3 +52,15 @@ vim.filetype.add({
     vifmrc = 'vim',
   },
 })
+
+vim.g.clipboard = {
+  name = 'tmux',
+  copy = {
+    ['+'] = 'tmux load-buffer -w -',
+    ['*'] = 'tmux load-buffer -w -',
+  },
+  paste = {
+    ['+'] = 'tmux save-buffer -',
+    ['*'] = 'tmux save-buffer -',
+  },
+}

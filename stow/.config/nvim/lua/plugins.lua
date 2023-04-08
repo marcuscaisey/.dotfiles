@@ -66,7 +66,6 @@ packer.startup({
     use('tpope/vim-surround')
     use('ggandor/leap.nvim')
     use('bkad/camelcasemotion')
-    use('ojroques/vim-oscyank')
     use('sbdchd/neoformat')
     use('svban/YankAssassin.vim')
     use('tpope/vim-fugitive')
