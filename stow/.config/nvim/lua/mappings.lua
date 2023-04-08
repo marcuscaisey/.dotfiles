@@ -4,41 +4,39 @@ vim.g.surround_no_insert_mappings = true
 
 vim.keymap.set('i', 'jj', '<esc>')
 
-vim.keymap.set({ 'n', 'v' }, 'gk', 'gg')
-vim.keymap.set({ 'n', 'v' }, 'gj', 'G')
+-- Jump to start / end of line / buffer with g(h|j|k|l)
 vim.keymap.set({ 'n', 'v' }, 'gh', '^')
+vim.keymap.set({ 'n', 'v' }, 'gj', 'G')
+vim.keymap.set({ 'n', 'v' }, 'gk', 'gg')
 vim.keymap.set('n', 'gl', '$')
 vim.keymap.set('v', 'gl', 'g_')
 
-vim.keymap.set('n', '<c-j>', '<c-w>j')
-vim.keymap.set('n', '<c-k>', '<c-w>k')
-vim.keymap.set('n', '<c-l>', '<c-w>l')
-vim.keymap.set('n', '<c-h>', '<c-w>h')
-vim.keymap.set('n', '<c-w>j', '<c-w>J')
-vim.keymap.set('n', '<c-w>k', '<c-w>K')
-vim.keymap.set('n', '<c-w>l', '<c-w>L')
-vim.keymap.set('n', '<c-w>h', '<c-w>H')
+-- Resize splits in increments of 5
 vim.keymap.set('n', '<c-w><', '<c-w>5<')
 vim.keymap.set('n', '<c-w>>', '<c-w>5>')
 vim.keymap.set('n', '<c-w>-', '<c-w>5-')
 vim.keymap.set('n', '<c-w>=', '<c-w>5+')
-vim.keymap.set('n', '<c-w>e', '<c-w>=')
 
+-- Keep current cursor line in center of buffer when jumping between search results
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
+
+-- Keep current cursor line in center of buffer when scrolling window
 vim.keymap.set('n', '<c-d>', '<c-d>zz')
 vim.keymap.set('n', '<c-u>', '<c-u>zz')
+
+-- Swap lines above / below with J or K in visual mode
 vim.keymap.set('v', 'J', ":m '>+1<cr>gv", { silent = true })
 vim.keymap.set('v', 'K', ":m '<-2<cr>gv", { silent = true })
+
+-- Keep cursor in same position when joining lines
 vim.keymap.set('n', 'J', 'mzJ`z')
 
+-- <esc> to leave terminal mode
 vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
 
 vim.keymap.set('n', '<leader>dt', '<cmd>diffthis<cr>')
 vim.keymap.set('n', '<leader>do', '<cmd>diffoff!<cr>')
-
-vim.keymap.set('v', 'p', 'P')
-vim.keymap.set({ 'n', 'v' }, '<leader>P', '"0p')
 
 -- Jump between git conflict markers <<<<<<<, =======, >>>>>>> with ]n and [n
 vim.keymap.set('n', ']n', function()
@@ -48,21 +46,21 @@ vim.keymap.set('n', '[n', function()
   vim.fn.search([[\(<\{7}\|=\{7}\|>\{7}\)]], 'bW')
 end)
 
+-- Yank current path relative to the git root
 vim.keymap.set('n', '<leader>y', function()
   local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
   local filepath = vim.api.nvim_buf_get_name(0)
   local relative_filepath = filepath:gsub('^' .. git_root .. '/', '')
-  local location = string.format('%s:%d:%d', relative_filepath, vim.fn.line('.'), vim.fn.col('.'))
-  vim.fn.setreg('"', location)
-  vim.fn.setreg('*', location)
-  print(string.format('Yanked %s', location))
+  vim.fn.setreg('"', relative_filepath)
+  vim.fn.setreg('*', relative_filepath)
+  print(string.format('Yanked %s', relative_filepath))
 end)
 
 -- When i use vim.keymap.set to create this, nothing appears in the command line when i trigger the mapping until i press another
 -- key. Not sure why...
 vim.cmd.vnoremap('@ :norm @')
 
--- toggle quickfix
+-- Toggle quickfix window
 vim.keymap.set('n', '<leader>q', function()
   local qf_window_id = vim.fn.getqflist({ winid = 0 }).winid
   -- window id > 0 means that the window is open
@@ -77,7 +75,7 @@ end)
 vim.keymap.set('n', ']q', vim.cmd.cnext)
 vim.keymap.set('n', '[q', vim.cmd.cprev)
 
--- open changed buffers in quickfix
+-- Open unsaved buffers in quickfix window
 vim.keymap.set('n', '<leader>cb', function()
   -- filter buffers for changed property since bufmodified = 1 doesn't seem to filter out all unchanged buffers
   local changed_buffers = vim.tbl_filter(
@@ -89,7 +87,7 @@ vim.keymap.set('n', '<leader>cb', function()
     })
   )
   if #changed_buffers == 0 then
-    print('no changed buffers')
+    print('No unsaved buffers')
     return
   end
   vim.fn.setqflist(changed_buffers)
@@ -97,7 +95,7 @@ vim.keymap.set('n', '<leader>cb', function()
   vim.cmd.cfirst()
 end)
 
--- open modified or untracked files in quickfix
+-- Open modified or untracked files in quickfix
 vim.keymap.set('n', '<leader>gf', function()
   local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
   local files = vim.fn.systemlist(
@@ -122,10 +120,20 @@ vim.keymap.set('n', '<leader>gf', function()
   vim.cmd.cfirst()
 end)
 
--- Go
+-- Toggle between source and test file
 vim.keymap.set('n', '<leader>gt', function()
-  if vim.bo.filetype ~= 'go' then
-    print('not in a Go file')
+  local extension_by_filetype = {
+    go = 'go',
+    python = 'py',
+  }
+  local extension = extension_by_filetype[vim.bo.filetype]
+  if not extension then
+    print(
+      string.format(
+        'Jumping between source and test file only supported for filetypes: %s',
+        table.concat(vim.tbl_keys(extension_by_filetype), ', ')
+      )
+    )
     return
   end
 
@@ -135,10 +143,19 @@ vim.keymap.set('n', '<leader>gt', function()
 
   local new_basename
   if basename:match('_test') then
-    new_basename = basename:match('^(.+)_test%.go$') .. '.go'
+    new_basename = basename:match(string.format('^(.+)_test%%.%s$', extension)) .. '.' .. extension
   else
-    new_basename = basename:match('^(.+)%.go$') .. '_test.go'
+    new_basename = basename:match(string.format('^(.+)%%.%s$', extension)) .. '_test.' .. extension
   end
 
-  vim.cmd.edit(dirname .. '/' .. new_basename)
+  local new_filepath = dirname .. '/' .. new_basename
+
+  local f = io.open(new_filepath, 'r') -- attempt reading the new filepath to see if it exists
+  if not f then
+    print(string.format('%s does not exist', new_filepath))
+    return
+  end
+
+  io.close(f)
+  vim.cmd.edit(new_filepath)
 end)
