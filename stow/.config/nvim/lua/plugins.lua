@@ -214,6 +214,9 @@ packer.startup({
       end,
     })
     use('marcuscaisey/olddirs.nvim')
+    use({ 'tpope/vim-projectionist', config = function()
+      require('plugins.projectionist')
+    end })
   end,
   config = {
     display = {
