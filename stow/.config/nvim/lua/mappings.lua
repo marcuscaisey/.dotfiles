@@ -72,10 +72,10 @@ vim.keymap.set('n', '<leader>q', function()
 end)
 
 vim.keymap.set('n', ']q', function()
-  pcall(vim.cmd.cprev)
+  pcall(vim.cmd.cnext)
 end)
 vim.keymap.set('n', '[q', function()
-  pcall(vim.cmd.cnext)
+  pcall(vim.cmd.cprev)
 end)
 
 -- Open unsaved buffers in quickfix window
