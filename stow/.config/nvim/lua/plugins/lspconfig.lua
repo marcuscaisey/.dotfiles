@@ -95,6 +95,14 @@ lspconfig.gopls.setup({
       buffer = bufnr,
       desc = 'Refresh codelenses when gopls is running',
     })
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      callback = function()
+        vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+      end,
+      group = vim.api.nvim_create_augroup('gopls', { clear = true }),
+      buffer = bufnr,
+      desc = 'Organize imports before saving',
+    })
   end,
   root_dir = function(fname)
     local go_mod = vim.fs.find('go.mod', { upward = true, path = vim.fs.dirname(fname) })[1]
