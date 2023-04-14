@@ -37,6 +37,9 @@ vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
 vim.keymap.set('n', '<leader>dt', '<cmd>diffthis<cr>')
 vim.keymap.set('n', '<leader>do', '<cmd>diffoff!<cr>')
 
+-- Don't overwrite unnamed register when pasting in visual mode
+vim.keymap.set('v', 'p', 'P')
+
 -- Jump between git conflict markers <<<<<<<, =======, >>>>>>> with ]n and [n
 vim.keymap.set('n', ']n', function()
   vim.fn.search([[^\(<\{7}\|=\{7}\|>\{7}\)]], 'W')
