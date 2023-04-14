@@ -245,6 +245,17 @@ vim.keymap.set('n', '<leader>dq', vim.diagnostic.setqflist)
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
 vim.keymap.set('v', '<leader>ca', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>fm', function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  -- Run format in autocmd to avoid racing against the :w call
+  vim.api.nvim_create_autocmd('BufWritePost', {
+    callback = function()
+      vim.lsp.buf.format({
+        bufnr = bufnr,
+        timeout_ms = 5000,
+      })
+    end,
+    buffer = bufnr,
+    once = true,
+  })
   vim.cmd.w()
-  vim.lsp.buf.format({ timeout_ms = 5000 })
 end)
