@@ -40,6 +40,22 @@ vim.keymap.set('n', '<leader>do', '<cmd>diffoff!<cr>')
 -- Don't overwrite unnamed register when pasting in visual mode
 vim.keymap.set('v', 'p', 'P')
 
+-- Add to jumplist after relative line jumps
+vim.keymap.set('n', 'j', function()
+  if vim.v.count > 0 then
+    vim.cmd.normal({ string.format("m'%sj", vim.v.count), bang = true })
+    return
+  end
+  vim.cmd.normal({ 'j', bang = true })
+end)
+vim.keymap.set('n', 'k', function()
+  if vim.v.count > 0 then
+    vim.cmd.normal({ string.format("m'%sk", vim.v.count), bang = true })
+    return
+  end
+  vim.cmd.normal({ 'k', bang = true })
+end)
+
 -- Jump between git conflict markers <<<<<<<, =======, >>>>>>> with ]n and [n
 vim.keymap.set('n', ']n', function()
   vim.fn.search([[^\(<\{7}\|=\{7}\|>\{7}\)]], 'W')
