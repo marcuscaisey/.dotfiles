@@ -7,7 +7,6 @@ local ps = ls.parser.parse_snippet
 local fmt = require('luasnip.extras.fmt').fmt
 local rep = require('luasnip.extras').rep
 local nonempty = require('luasnip.extras').nonempty
-local strings = require('plenary.strings')
 local types = require('luasnip.util.types')
 
 ls.config.setup({
@@ -15,7 +14,7 @@ ls.config.setup({
   delete_check_events = 'TextChanged',
   history = true,
   ext_opts = {
-    [types.choiceNode] = {
+        [types.choiceNode] = {
       active = {
         virt_text = { { '← choices', 'LuasnipChoiceVirtualText' } },
       },
