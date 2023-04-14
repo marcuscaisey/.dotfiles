@@ -79,8 +79,27 @@ ls.add_snippets('go', {
     })
   ),
   ls.parser.parse_snippet('fori', 'for ${1:i} := 0; $1 < $3; $1++ {\n\t$0\n}'),
-  ls.parser.parse_snippet('f', 'func ${1}($2) $3 {\n\t$0\n}'),
-  ls.parser.parse_snippet('mf', 'func ($1) $2($3) $4 {\n\t$0\n}'),
+  s(
+    'f',
+    fmt('func {}({}) {}{}{{\n\t{}\n}}', {
+      i(1),
+      i(2),
+      i(3),
+      nonempty(3, ' ', ''),
+      i(0),
+    })
+  ),
+  s(
+    'mf',
+    fmt('func ({}) {}({}) {}{}{{\n\t{}\n}}', {
+      i(1),
+      i(2),
+      i(3),
+      i(4),
+      nonempty(4, ' ', ''),
+      i(0),
+    })
+  ),
   ls.parser.parse_snippet('gf', 'go func($1) {\n\t$2\n}($3)$0'),
 }, {
   key = 'go',
