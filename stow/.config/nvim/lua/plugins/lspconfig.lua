@@ -221,7 +221,7 @@ vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticHin
 
 vim.keymap.set('n', 'K', vim.lsp.buf.hover)
 vim.keymap.set('n', '<c-s>', telescope_builtin.lsp_document_symbols)
-vim.keymap.set('n', '<leader>s', telescope_builtin.lsp_dynamic_workspace_symbols)
+vim.keymap.set('n', '<leader>ss', telescope_builtin.lsp_dynamic_workspace_symbols)
 vim.keymap.set('n', 'gd', telescope_builtin.lsp_definitions)
 vim.keymap.set('n', 'gi', telescope_builtin.lsp_implementations)
 vim.keymap.set('n', 'gr', function()
