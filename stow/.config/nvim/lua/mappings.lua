@@ -34,8 +34,10 @@ vim.keymap.set('n', 'J', 'mzJ`z')
 -- <esc> to leave terminal mode
 vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
 
-vim.keymap.set('n', '<leader>dt', '<cmd>diffthis<cr>')
-vim.keymap.set('n', '<leader>do', '<cmd>diffoff!<cr>')
+vim.keymap.set('n', '<leader>dt', vim.cmd.diffthis)
+vim.keymap.set('n', '<leader>do', function()
+  vim.cmd.diffoff({bang = true})
+end)
 
 -- Don't overwrite unnamed register when pasting in visual mode
 vim.keymap.set('v', 'p', 'P')
