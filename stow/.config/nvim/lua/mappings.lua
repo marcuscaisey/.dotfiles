@@ -42,8 +42,6 @@ end)
 -- Don't overwrite unnamed register when pasting in visual mode
 vim.keymap.set('v', 'p', 'P')
 
-vim.keymap.set('n', '<leader>so', vim.cmd.source)
-
 -- Add to jumplist after relative line jumps
 vim.keymap.set('n', 'j', function()
   if vim.v.count > 0 then
