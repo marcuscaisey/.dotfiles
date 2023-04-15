@@ -99,6 +99,7 @@ lspconfig.gopls.setup({
     vim.api.nvim_create_autocmd('BufWritePre', {
       callback = function()
         vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+        vim.cmd.w()
       end,
       group = gopls_group,
       buffer = bufnr,
