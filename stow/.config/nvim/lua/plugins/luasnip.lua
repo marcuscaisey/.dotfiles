@@ -136,6 +136,6 @@ vim.keymap.set({ 'i', 's' }, '<c-h>', function()
   end
 end)
 vim.keymap.set('n', '<leader><leader>s', function()
-  vim.cmd.source('~/.dotfiles/stow/.config/nvim/after/plugin/luasnip.lua')
-  print('reloaded snippets')
+  vim.cmd.source('~/.dotfiles/stow/.config/nvim/lua/plugins/luasnip.lua')
+  print('Reloaded snippets')
 end)
