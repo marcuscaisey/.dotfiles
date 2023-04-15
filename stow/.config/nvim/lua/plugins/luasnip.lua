@@ -65,6 +65,7 @@ ls.add_snippets('go', {
       i(0),
     })
   ),
+  ls.parser.parse_snippet('fe', 'fmt.Errorf("$1: ${2:%w}"$3, err)$0'),
   ls.parser.parse_snippet('if', 'if $1 {\n\t$0\n}'),
   s(
     'for',
