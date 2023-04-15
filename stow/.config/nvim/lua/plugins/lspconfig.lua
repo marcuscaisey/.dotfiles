@@ -29,6 +29,7 @@ lspconfig.ccls.setup({
   end,
 })
 
+local gopls_group = vim.api.nvim_create_augroup('gopls', { clear = true })
 lspconfig.gopls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
   settings = {
@@ -91,7 +92,7 @@ lspconfig.gopls.setup({
     }
     vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'BufWritePost', 'CursorHold' }, {
       callback = vim.lsp.codelens.refresh,
-      group = vim.api.nvim_create_augroup('gopls', { clear = true }),
+      group = gopls_group,
       buffer = bufnr,
       desc = 'Refresh codelenses when gopls is running',
     })
@@ -99,7 +100,7 @@ lspconfig.gopls.setup({
       callback = function()
         vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
       end,
-      group = vim.api.nvim_create_augroup('gopls', { clear = true }),
+      group = gopls_group,
       buffer = bufnr,
       desc = 'Organize imports before saving',
     })
