@@ -24,10 +24,6 @@ vim.keymap.set('n', 'N', 'Nzz')
 vim.keymap.set('n', '<c-d>', '<c-d>zz')
 vim.keymap.set('n', '<c-u>', '<c-u>zz')
 
--- Swap lines above / below with J or K in visual mode
-vim.keymap.set('v', 'J', ":m '>+1<cr>gv", { silent = true })
-vim.keymap.set('v', 'K', ":m '<-2<cr>gv", { silent = true })
-
 -- Keep cursor in same position when joining lines
 vim.keymap.set('n', 'J', 'mzJ`z')
 
