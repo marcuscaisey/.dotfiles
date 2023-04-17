@@ -111,11 +111,11 @@ vim.keymap.set('i', '<c-l>', function()
   end
 
   -- fallback to looking for closing pair character at the end of treesitter node under cursor
-  local node = tsutils.get_node_at_cursor()
+  local node = vim.treesitter.get_node()
   if not node then
     return
   end
-  local node_text = vim.treesitter.query.get_node_text(node, 0)
+  local node_text = vim.treesitter.get_node_text(node, 0)
   local last_char = node_text:sub(#node_text)
   if vim.tbl_contains(closing_chars, last_char) then
     local node_end_line, node_end_col = tsutils.get_vim_range({ node:end_() })
