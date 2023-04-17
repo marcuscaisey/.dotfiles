@@ -2,6 +2,7 @@ local filetypes = require('filetypes')
 
 vim.o.clipboard = 'unnamed'
 vim.o.cursorline = true
+vim.o.diffopt = vim.o.diffopt .. ',linematch:60'
 vim.o.expandtab = true
 vim.o.hidden = true
 vim.o.hlsearch = false
@@ -14,8 +15,6 @@ vim.o.relativenumber = true
 vim.o.scrolloff = 10
 vim.o.shiftwidth = 4
 vim.o.shortmess = vim.o.shortmess .. 'S'
-vim.o.diffopt = vim.o.diffopt .. ',linematch:60'
-vim.opt.formatoptions:append('n')
 vim.o.showmode = false
 vim.o.signcolumn = 'yes:2'
 vim.o.smartcase = true
@@ -25,6 +24,7 @@ vim.o.swapfile = false
 vim.o.tabstop = 4
 vim.o.termguicolors = true
 vim.o.updatetime = 100
+vim.opt.formatoptions:append('n')
 
 filetypes.setup({
   lua = { tab_size = 2, text_width = 120 },
