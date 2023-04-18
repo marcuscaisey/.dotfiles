@@ -32,7 +32,7 @@ vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
 
 vim.keymap.set('n', '<leader>dt', vim.cmd.diffthis)
 vim.keymap.set('n', '<leader>do', function()
-  vim.cmd.diffoff({bang = true})
+  vim.cmd.diffoff({ bang = true })
 end)
 
 -- Don't overwrite unnamed register when pasting in visual mode
