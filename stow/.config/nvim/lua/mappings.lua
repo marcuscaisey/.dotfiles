@@ -40,8 +40,8 @@ vim.keymap.set('v', 'p', 'P')
 
 vim.keymap.set('n', '<leader>so', function()
   local file = vim.api.nvim_buf_get_name(0)
-  vim.cmd.source(file)
   print('Sourced ' .. file)
+  vim.cmd.source(file)
 end)
 
 -- Add to jumplist after relative line jumps
