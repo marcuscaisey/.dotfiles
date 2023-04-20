@@ -60,12 +60,12 @@ vim.keymap.set('n', 'k', function()
   vim.cmd.normal({ 'k', bang = true })
 end)
 
--- Jump between git conflict markers <<<<<<<, =======, >>>>>>> with ]n and [n
+-- Jump between git conflict markers <<<<<<<, |||||||, =======, >>>>>>> with ]n and [n
 vim.keymap.set('n', ']n', function()
-  vim.fn.search([[^\(<\{7}\|=\{7}\|>\{7}\)]], 'W')
+  vim.fn.search([[^\(<\{7}\||\{7}\|=\{7}\|>\{7}\)]], 'W')
 end)
 vim.keymap.set('n', '[n', function()
-  vim.fn.search([[\(<\{7}\|=\{7}\|>\{7}\)]], 'bW')
+  vim.fn.search([[^\(<\{7}\||\{7}\|=\{7}\|>\{7}\)]], 'bW')
 end)
 
 -- Yank current path relative to the git root
