@@ -78,6 +78,18 @@ vim.keymap.set('n', '<leader>y', function()
   print(string.format('Yanked %s', relative_filepath))
 end)
 
+-- Yank current path relative to the git root with line number in sourcegraph search format
+vim.keymap.set('n', '<leader>sy', function()
+  local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+  local filepath = vim.api.nvim_buf_get_name(0)
+  local relative_filepath = filepath:gsub('^' .. git_root .. '/', '')
+  local line = unpack(vim.api.nvim_win_get_cursor(0))
+  local relative_filepath_with_line = string.format('%s?L%d', relative_filepath, line)
+  vim.fn.setreg('"', relative_filepath_with_line)
+  vim.fn.setreg('*', relative_filepath_with_line)
+  print(string.format('Yanked %s', relative_filepath_with_line))
+end)
+
 -- When i use vim.keymap.set to create this, nothing appears in the command line when i trigger the mapping until i press another
 -- key. Not sure why...
 vim.cmd.vnoremap('@ :norm @')
