@@ -51,6 +51,7 @@ vim.filetype.add({
   },
   filename = {
     vifmrc = 'vim',
+    ['new-commit'] = 'gitcommit',
   },
 })
 
