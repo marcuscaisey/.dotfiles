@@ -3,6 +3,8 @@ local s = ls.snippet
 local i = ls.insert_node
 local c = ls.choice_node
 local t = ls.text_node
+local d = ls.dynamic_node
+local sn = ls.snippet_node
 local ps = ls.parser.parse_snippet
 local fmt = require('luasnip.extras.fmt').fmt
 local rep = require('luasnip.extras').rep
@@ -14,7 +16,7 @@ ls.config.setup({
   delete_check_events = 'TextChanged',
   history = true,
   ext_opts = {
-        [types.choiceNode] = {
+    [types.choiceNode] = {
       active = {
         virt_text = { { '← choices', 'LuasnipChoiceVirtualText' } },
       },
@@ -90,17 +92,7 @@ ls.add_snippets('go', {
       end
     end),
   }),
-  s(
-    'mf',
-    fmt('func ({}) {}({}) {}{}{{\n\t{}\n}}', {
-      i(1),
-      i(2),
-      i(3),
-      i(4),
-      nonempty(4, ' ', ''),
-      i(0),
-    })
-  ),
+  s('mf', fmt('func ({}) {}({}) {}{}{{\n\t{}\n}}', { i(1), i(2), i(3), i(4), nonempty(4, ' ', ''), i(0) })),
   ls.parser.parse_snippet('gf', 'go func($1) {\n\t$2\n}($3)$0'),
 }, {
   key = 'go',
