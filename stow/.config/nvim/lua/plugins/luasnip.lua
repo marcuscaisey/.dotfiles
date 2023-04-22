@@ -81,17 +81,24 @@ ls.add_snippets('go', {
     })
   ),
   ls.parser.parse_snippet('fori', 'for ${1:i} := ${2:0}; $1 ${3:<} $4; $1${5:++} {\n\t$0\n}'),
-  s('f', {
-    d(1, function()
-      if not vim.treesitter.get_node():parent() then
-        -- Named function if we're at the top level of the file
-        return sn(nil, fmt('func {}({}) {}{}{{\n\t{}\n}}', { i(1), i(2), i(3), nonempty(4, ' ', ''), i(0) }))
-      else
-        -- Anonymous function if we're not at the top level of the file
-        return sn(nil, fmt('func({}) {}{}{{\n\t{}\n}}', { i(1), i(2), nonempty(3, ' ', ''), i(0) }))
-      end
-    end),
-  }),
+  s(
+    'f',
+    fmt('func{}({}) {}{}{{\n\t{}\n}}', {
+      d(1, function()
+        if not vim.treesitter.get_node():parent() then
+          -- Function has a name if we're at the top level of the file
+          return sn(nil, { t(' '), i(1) })
+        else
+          -- Function has no name if we're not at the top level of the file
+          return sn(nil, {})
+        end
+      end),
+      i(2),
+      i(3),
+      nonempty(3, ' ', ''),
+      i(0),
+    })
+  ),
   s('mf', fmt('func ({}) {}({}) {}{}{{\n\t{}\n}}', { i(1), i(2), i(3), i(4), nonempty(4, ' ', ''), i(0) })),
   ls.parser.parse_snippet('gf', 'go func($1) {\n\t$2\n}($3)$0'),
 }, {
