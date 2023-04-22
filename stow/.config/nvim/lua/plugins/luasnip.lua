@@ -80,7 +80,7 @@ ls.add_snippets('go', {
       i(0),
     })
   ),
-  ls.parser.parse_snippet('fori', 'for ${1:i} := 0; $1 < $3; $1++ {\n\t$0\n}'),
+  ls.parser.parse_snippet('fori', 'for ${1:i} := ${2:0}; $1 ${3:<} $4; $1${5:++} {\n\t$0\n}'),
   s('f', {
     d(1, function()
       if not vim.treesitter.get_node():parent() then
