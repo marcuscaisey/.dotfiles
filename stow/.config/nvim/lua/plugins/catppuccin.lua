@@ -18,7 +18,6 @@ catppuccin.setup({
         IncSearch = { bg = palette.peach },
         NormalFloat = { fg = palette.overlay2, bg = palette.surface0 },
         DiffChange = { bg = colors.darken(palette.blue, 0.15, palette.base) },
-        DiffText = { bg = colors.darken(palette.blue, 0.3, palette.base) },
       }
     end,
   },
