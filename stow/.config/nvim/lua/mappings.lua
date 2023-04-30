@@ -1,23 +1,23 @@
 vim.g.mapleader = ' '
 
-vim.keymap.set('i', 'jj', '<esc>')
+vim.keymap.set('i', 'jj', '<esc>', { desc = 'End Insert or Replace mode, go back to Normal mode' })
 
--- Jump to start / end of line / buffer with g(h|j|k|l)
-vim.keymap.set({ 'n', 'v' }, 'gh', '^')
-vim.keymap.set({ 'n', 'v' }, 'gj', 'G')
-vim.keymap.set({ 'n', 'v' }, 'gk', 'gg')
-vim.keymap.set('n', 'gl', '$')
-vim.keymap.set('v', 'gl', 'g_')
+vim.keymap.set({ 'n', 'v' }, 'gh', '^', { desc = 'Jump to the first non-blank character of the line' })
+vim.keymap.set({ 'n', 'v' }, 'gj', 'G', { desc = 'Jump to the last line' })
+vim.keymap.set({ 'n', 'v' }, 'gk', 'gg', { desc = 'Jump to the first line' })
+vim.keymap.set({ 'n', 'v' }, 'gl', 'g_', { desc = 'Jump to the last non-blank character of the line' })
 
--- Resize splits in increments of 5
-vim.keymap.set('n', '<c-w><', '<c-w>5<')
-vim.keymap.set('n', '<c-w>>', '<c-w>5>')
-vim.keymap.set('n', '<c-w>-', '<c-w>5-')
-vim.keymap.set('n', '<c-w>=', '<c-w>5+')
+vim.keymap.set('n', '<c-w><', '<c-w>5<', { desc = 'Decrease current window width by 5' })
+vim.keymap.set('n', '<c-w>>', '<c-w>5>', { desc = 'Increase current window width by 5' })
+vim.keymap.set('n', '<c-w>-', '<c-w>5-', { desc = 'Decrease current window height by 5' })
+vim.keymap.set('n', '<c-w>=', '<c-w>5+', { desc = 'Increase current window height by 5' })
 
--- Keep current cursor line in center of buffer when jumping between search results
-vim.keymap.set('n', 'n', 'nzz')
-vim.keymap.set('n', 'N', 'Nzz')
+-- stylua: ignore start
+vim.keymap.set('n', 'n', 'nzz',
+  { desc = 'Repeat the latest "/" or "?", then redraw the current line at center of the window' })
+vim.keymap.set('n', 'N', 'Nzz',
+  { desc = 'Repeat the latest "/" or "?" in opposite direction, then redraw the current line at center of the window' })
+-- stylua: ignore end
 
 local last_scroll_time = 0
 local scrolling = false
@@ -48,44 +48,45 @@ vim.api.nvim_create_autocmd('CursorMoved', {
   desc = "Unset the scrolling variable if this event wasn't triggered by a scroll",
 })
 
+vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines, keeping the cursor in its current position' })
+
+vim.keymap.set('t', '<esc>', '<c-\\><c-n>', { desc = 'Go back to Normal mode' })
+
+vim.keymap.set('n', '<leader>dt', vim.cmd.diffthis, { desc = 'Make the current window part of the diff windows' })
 vim.keymap.set('n', '<leader>do', function()
   vim.cmd.diffoff({ bang = true })
-end)
+end, { desc = 'Switch off diff mode for all windows in the current tab page' })
 
--- Don't overwrite unnamed register when pasting in visual mode
-vim.keymap.set('v', 'p', 'P')
+vim.keymap.set('v', 'p', 'P', { desc = 'Replace the selected text without changing the unnamed register' })
 
 vim.keymap.set('n', '<leader>so', function()
   local file = vim.api.nvim_buf_get_name(0)
   print('Sourced ' .. file)
   vim.cmd.source(file)
-end)
+end, { desc = 'Source the current file' })
 
--- Add to jumplist after relative line jumps
 vim.keymap.set('n', 'j', function()
   if vim.v.count > 0 then
     vim.cmd.normal({ string.format("m'%sj", vim.v.count), bang = true })
     return
   end
   vim.cmd.normal({ 'j', bang = true })
-end)
+end, { desc = 'Move cursor down, setting the previous context mark if a count greater than 1 is provided' })
 vim.keymap.set('n', 'k', function()
   if vim.v.count > 0 then
     vim.cmd.normal({ string.format("m'%sk", vim.v.count), bang = true })
     return
   end
   vim.cmd.normal({ 'k', bang = true })
-end)
+end, { desc = 'Move cursor up, setting the previous context mark if a count greater than 1 is provided' })
 
--- Jump between git conflict markers <<<<<<<, |||||||, =======, >>>>>>> with ]n and [n
 vim.keymap.set('n', ']n', function()
   vim.fn.search([[^\(<\{7}\||\{7}\|=\{7}\|>\{7}\)]], 'W')
-end)
+end, { desc = 'Jump to next git conflict marker (<<<<<<<, |||||||, =======, >>>>>>>)' })
 vim.keymap.set('n', '[n', function()
   vim.fn.search([[^\(<\{7}\||\{7}\|=\{7}\|>\{7}\)]], 'bW')
-end)
+end, { desc = 'Jump to previous git conflict marker (<<<<<<<, |||||||, =======, >>>>>>>)' })
 
--- Yank current path relative to the git root
 vim.keymap.set('n', '<leader>y', function()
   local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
   local filepath = vim.api.nvim_buf_get_name(0)
@@ -93,9 +94,8 @@ vim.keymap.set('n', '<leader>y', function()
   vim.fn.setreg('"', relative_filepath)
   vim.fn.setreg('*', relative_filepath)
   print(string.format('Yanked %s', relative_filepath))
-end)
+end, { desc = 'Yank the path of the current buffer relative to the git root' })
 
--- Yank current path relative to the git root with line number in sourcegraph search format
 vim.keymap.set('n', '<leader>sy', function()
   local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
   local filepath = vim.api.nvim_buf_get_name(0)
@@ -105,13 +105,8 @@ vim.keymap.set('n', '<leader>sy', function()
   vim.fn.setreg('"', relative_filepath_with_line)
   vim.fn.setreg('*', relative_filepath_with_line)
   print(string.format('Yanked %s', relative_filepath_with_line))
-end)
+end, { desc = 'Yank the path of the current buffer relative to the git root in sourcegraph search format' })
 
--- When i use vim.keymap.set to create this, nothing appears in the command line when i trigger the mapping until i press another
--- key. Not sure why...
-vim.cmd.vnoremap('@ :norm @')
-
--- Toggle quickfix window
 vim.keymap.set('n', '<leader>q', function()
   local qf_window_id = vim.fn.getqflist({ winid = 0 }).winid
   -- window id > 0 means that the window is open
@@ -121,16 +116,15 @@ vim.keymap.set('n', '<leader>q', function()
   else
     vim.cmd.copen()
   end
-end)
+end, { desc = 'Toggle quickfix window' })
 
 vim.keymap.set('n', ']q', function()
   pcall(vim.cmd.cnext)
-end)
+end, { desc = 'Jump to the next item in the quickfix list' })
 vim.keymap.set('n', '[q', function()
   pcall(vim.cmd.cprev)
-end)
+end, { desc = 'Jump to the previous item in the quickfix list' })
 
--- Open unsaved buffers in quickfix window
 vim.keymap.set('n', '<leader>cb', function()
   -- filter buffers for changed property since bufmodified = 1 doesn't seem to filter out all unchanged buffers
   local changed_buffers = vim.tbl_filter(
@@ -148,9 +142,8 @@ vim.keymap.set('n', '<leader>cb', function()
   vim.fn.setqflist(changed_buffers)
   vim.cmd.copen()
   vim.cmd.cfirst()
-end)
+end, { desc = 'Populate the quickfix list with any unsaved buffers' })
 
--- Open modified or untracked files in quickfix
 vim.keymap.set('n', '<leader>gf', function()
   local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
   local files = vim.fn.systemlist(
@@ -173,4 +166,4 @@ vim.keymap.set('n', '<leader>gf', function()
   vim.fn.setqflist(qflist)
   vim.cmd.copen()
   vim.cmd.cfirst()
-end)
+end, {desc = 'Populate the quickfix list with all modified or untracked git files'})
