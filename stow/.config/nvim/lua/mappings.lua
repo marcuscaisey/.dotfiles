@@ -19,17 +19,35 @@ vim.keymap.set('n', '<c-w>=', '<c-w>5+')
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
 
--- Keep current cursor line in center of buffer when scrolling window
-vim.keymap.set('n', '<c-d>', '<c-d>zz')
-vim.keymap.set('n', '<c-u>', '<c-u>zz')
+local last_scroll_time = 0
+local scrolling = false
+vim.keymap.set('n', '<c-d>', function()
+  last_scroll_time = os.clock()
+  if not scrolling then
+    scrolling = true
+    vim.cmd.normal("m'")
+  end
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<c-d>zz', true, false, true), 'n', false)
+end, { desc = 'Scroll window downwards and set the previous context mark if not currently scrolling' })
+vim.keymap.set('n', '<c-u>', function()
+  last_scroll_time = os.clock()
+  if not scrolling then
+    scrolling = true
+    vim.cmd.normal("m'")
+  end
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<c-u>zz', true, false, true), 'n', false)
+end, { desc = 'Scroll window upwards and set the previous context mark if not currently scrolling' })
+vim.api.nvim_create_autocmd('CursorMoved', {
+  callback = function()
+    -- If the last scroll was more than a millisecond ago, then we assume that this event wasn't triggered by a scroll.
+    if (os.clock() - last_scroll_time) > 0.001 then
+      scrolling = false
+    end
+  end,
+  group = vim.api.nvim_create_augroup('scrolling', { clear = true }),
+  desc = "Unset the scrolling variable if this event wasn't triggered by a scroll",
+})
 
--- Keep cursor in same position when joining lines
-vim.keymap.set('n', 'J', 'mzJ`z')
-
--- <esc> to leave terminal mode
-vim.keymap.set('t', '<esc>', '<c-\\><c-n>')
-
-vim.keymap.set('n', '<leader>dt', vim.cmd.diffthis)
 vim.keymap.set('n', '<leader>do', function()
   vim.cmd.diffoff({ bang = true })
 end)
