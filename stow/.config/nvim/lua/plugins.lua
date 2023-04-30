@@ -26,6 +26,10 @@ packer.startup({
       config = function()
         require('plugins.lspconfig')
       end,
+      requires = {
+        'williamboman/mason.nvim',
+        'williamboman/mason-lspconfig.nvim',
+      },
     })
     use({
       'williamboman/mason.nvim',
