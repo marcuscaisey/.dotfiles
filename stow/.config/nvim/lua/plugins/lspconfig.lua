@@ -5,7 +5,9 @@ local telescope_builtin = require('telescope.builtin')
 local mason_lspconfig = require('mason-lspconfig')
 
 mason_lspconfig.setup({
-  automatic_installation = true,
+  automatic_installation = {
+    exclude = { 'java_language_server' },
+  },
 })
 
 configs.please = {
