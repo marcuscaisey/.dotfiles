@@ -141,22 +141,16 @@ lspconfig.please.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
 })
 
-lspconfig.pyright.setup({
+lspconfig.pylsp.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  root_dir = function()
-    return vim.fn.getcwd()
-  end,
   settings = {
-    python = {
-      analysis = {
-        autoSearchPaths = true,
-        diagnosticMode = 'workspace',
-        useLibraryCodeForTypes = true,
-        typeCheckingMode = 'off',
-        extraPaths = {
-          '/home/mcaisey/core3/src',
-          '/home/mcaisey/core3/src/plz-out/gen',
-        },
+    pylsp = {
+      plugins = {
+        pyflakes = { enabled = false },
+        mccabe = { enabled = false },
+        pycodestyle = { enabled = false },
+        autopep8 = { enabled = false },
+        flake8 = { enabled = true },
       },
     },
   },
