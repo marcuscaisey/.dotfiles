@@ -162,7 +162,12 @@ packer.startup({
         require('plugins.leap')
       end,
     })
-    use('bkad/camelcasemotion')
+    use({
+      'bkad/camelcasemotion',
+      config = function()
+        require('plugins.camel_case_motion')
+      end
+    })
     use({
       'jose-elias-alvarez/null-ls.nvim',
       requires = 'nvim-lua/plenary.nvim',
