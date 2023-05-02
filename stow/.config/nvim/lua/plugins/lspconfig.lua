@@ -3,7 +3,9 @@ local configs = require('lspconfig.configs')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 local telescope_builtin = require('telescope.builtin')
 local mason_lspconfig = require('mason-lspconfig')
+local mason = require('mason')
 
+mason.setup()
 mason_lspconfig.setup({
   automatic_installation = {
     exclude = { 'java_language_server' },

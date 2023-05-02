@@ -31,12 +31,7 @@ packer.startup({
         'williamboman/mason-lspconfig.nvim',
       },
     })
-    use({
-      'williamboman/mason.nvim',
-      config = function()
-        require('mason').setup()
-      end,
-    })
+    use('williamboman/mason.nvim')
     use('williamboman/mason-lspconfig.nvim')
     use({
       'kosayoda/nvim-lightbulb',
@@ -166,7 +161,7 @@ packer.startup({
       'bkad/camelcasemotion',
       config = function()
         require('plugins.camel_case_motion')
-      end
+      end,
     })
     use({
       'jose-elias-alvarez/null-ls.nvim',
