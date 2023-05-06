@@ -53,7 +53,6 @@ packer.startup({
       end,
     })
     use('hrsh7th/cmp-nvim-lsp')
-    use('hrsh7th/cmp-nvim-lua')
     use('hrsh7th/cmp-buffer')
     use({
       'mfussenegger/nvim-dap',
@@ -225,6 +224,7 @@ packer.startup({
         require('plugins.projectionist')
       end,
     })
+    use('folke/neodev.nvim')
   end,
   config = {
     display = {

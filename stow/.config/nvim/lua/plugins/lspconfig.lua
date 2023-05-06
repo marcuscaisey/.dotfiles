@@ -160,6 +160,8 @@ lspconfig.pylsp.setup({
   },
 })
 
+require('neodev').setup()
+
 lspconfig.lua_ls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
   settings = {
@@ -167,11 +169,7 @@ lspconfig.lua_ls.setup({
       runtime = {
         version = 'LuaJIT',
       },
-      diagnostics = {
-        globals = { 'vim' },
-      },
       workspace = {
-        library = vim.api.nvim_get_runtime_file('', true),
         checkThirdParty = false,
       },
       telemetry = {

@@ -4,14 +4,12 @@ local luasnip = require('luasnip')
 local source_name_to_menu = {
   nvim_lsp = '[LSP]',
   buffer = '[BUFFER]',
-  nvim_lua = '[LUA]',
   luasnip = '[SNIP]',
 }
 
 cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'nvim_lua' },
     { name = 'buffer' },
     { name = 'luasnip' },
   },
