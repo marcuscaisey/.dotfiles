@@ -160,13 +160,13 @@ keyring = True
 
 # Custom colors for the completion menu, toolbar, etc.
 [colors]
-completion-menu.completion.current = 'bg:#ffffff #000000'
-completion-menu.completion = 'bg:#008888 #ffffff'
-completion-menu.meta.completion.current = 'bg:#44aaaa #000000'
-completion-menu.meta.completion = 'bg:#448888 #ffffff'
+completion-menu.completion.current = 'bg:#45475a #cdd6f4 bold'
+completion-menu.completion = 'bg:#2b2b3c #cdd6f4'
+completion-menu.meta.completion.current = 'bg:#45475a #cba6f7'
+completion-menu.meta.completion = 'bg:#2b2b3c #cba6f7'
 completion-menu.multi-column-meta = 'bg:#aaffff #000000'
 scrollbar.arrow = 'bg:#003333'
-scrollbar = 'bg:#00aaaa'
+scrollbar = 'bg:#45475a'
 selected = '#ffffff bg:#6666aa'
 search = '#ffffff bg:#4444aa'
 search.current = '#ffffff bg:#44aa44'
@@ -183,12 +183,12 @@ bottom-toolbar.transaction.failed = 'bg:#222222 #ff005f bold'
 # These three values can be used to further refine the syntax highlighting.
 # They are commented out by default, since they have priority over the theme set
 # with the `syntax_style` setting and overriding its behavior can be confusing.
-# literal.string = '#ba2121'
-# literal.number = '#666666'
-# keyword = 'bold #008000'
+literal.string = '#a6e3a1'
+literal.number = '#fab387'
+keyword = 'bold #cba6f7'
 
 # style classes for colored table output
-output.header = "#00ff5f bold"
+output.header = "#a6e3a1 bold"
 output.odd-row = ""
 output.even-row = ""
 output.null = "#808080"
