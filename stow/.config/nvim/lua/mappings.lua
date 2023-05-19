@@ -9,8 +9,6 @@ vim.keymap.set({ 'n', 'v' }, 'gl', 'g_', { desc = 'Jump to the last non-blank ch
 
 vim.keymap.set('n', '<c-w><', '<c-w>5<', { desc = 'Decrease current window width by 5' })
 vim.keymap.set('n', '<c-w>>', '<c-w>5>', { desc = 'Increase current window width by 5' })
-vim.keymap.set('n', '<c-w>-', '<c-w>5-', { desc = 'Decrease current window height by 5' })
-vim.keymap.set('n', '<c-w>=', '<c-w>5+', { desc = 'Increase current window height by 5' })
 
 -- stylua: ignore start
 vim.keymap.set('n', 'n', 'nzz',
