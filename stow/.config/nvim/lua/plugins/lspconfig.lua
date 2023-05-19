@@ -7,9 +7,7 @@ local mason = require('mason')
 
 mason.setup()
 mason_lspconfig.setup({
-  automatic_installation = {
-    exclude = { 'java_language_server' },
-  },
+  automatic_installation = true,
 })
 
 configs.please = {
@@ -87,7 +85,6 @@ lspconfig.intelephense.setup({
 
 lspconfig.java_language_server.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  cmd = { 'java_language_server.sh' },
 })
 
 lspconfig.jsonls.setup({
