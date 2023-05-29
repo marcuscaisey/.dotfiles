@@ -114,7 +114,11 @@ lspconfig.pylsp.setup({
   },
 })
 
-require('neodev').setup()
+require('neodev').setup({
+  override = function(_, library)
+    library.plugins = true
+  end
+})
 
 lspconfig.lua_ls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
