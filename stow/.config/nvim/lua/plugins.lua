@@ -18,7 +18,7 @@ packer.startup({
       end,
     })
     use('nvim-treesitter/nvim-treesitter-textobjects')
-    use('lewis6991/nvim-treesitter-context')
+    use('nvim-treesitter/nvim-treesitter-context')
     use('nvim-treesitter/playground')
     use('windwp/nvim-ts-autotag')
     use({
