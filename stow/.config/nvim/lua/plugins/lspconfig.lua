@@ -117,7 +117,7 @@ lspconfig.pylsp.setup({
 require('neodev').setup({
   override = function(_, library)
     library.plugins = true
-  end
+  end,
 })
 
 lspconfig.lua_ls.setup({
