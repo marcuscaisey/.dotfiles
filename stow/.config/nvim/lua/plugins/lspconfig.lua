@@ -31,6 +31,8 @@ lspconfig.ccls.setup({
   end,
 })
 
+lspconfig.cmake.setup({})
+
 local gopls_group = vim.api.nvim_create_augroup('gopls', { clear = true })
 lspconfig.gopls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
