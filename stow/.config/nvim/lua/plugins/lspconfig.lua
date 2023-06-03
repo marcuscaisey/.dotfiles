@@ -138,6 +138,9 @@ lspconfig.lua_ls.setup({
       completion = {
         keywordSnippet = 'Disable',
       },
+      format = {
+        enable = false,
+      },
     },
   },
 })
