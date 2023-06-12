@@ -86,7 +86,7 @@ vim.keymap.set('n', '[n', function()
 end, { desc = 'Jump to previous git conflict marker (<<<<<<<, |||||||, =======, >>>>>>>)' })
 
 vim.keymap.set('n', '<leader>y', function()
-  local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+  local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
   local filepath = vim.api.nvim_buf_get_name(0)
   local relative_filepath = filepath:gsub('^' .. git_root .. '/', '')
   vim.fn.setreg('"', relative_filepath)
@@ -95,7 +95,7 @@ vim.keymap.set('n', '<leader>y', function()
 end, { desc = 'Yank the path of the current buffer relative to the git root' })
 
 vim.keymap.set('n', '<leader>sy', function()
-  local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+  local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
   local filepath = vim.api.nvim_buf_get_name(0)
   local relative_filepath = filepath:gsub('^' .. git_root .. '/', '')
   local line = unpack(vim.api.nvim_win_get_cursor(0))
@@ -143,9 +143,23 @@ vim.keymap.set('n', '<leader>cb', function()
 end, { desc = 'Populate the quickfix list with any unsaved buffers' })
 
 vim.keymap.set('n', '<leader>gf', function()
-  local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
-  local files = vim.fn.systemlist(
-    string.format('git -C %s ls-files --modified --others --exclude-standard --full-name --deduplicate', git_root)
+  local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
+  local files = vim.split(
+    vim
+      .system({
+        'git',
+        '-C',
+        git_root,
+        'ls-files',
+        '--modified',
+        '--others',
+        '--exclude-standard',
+        '--full-name',
+        '--deduplicate',
+      })
+      :wait().stdout,
+    '\n',
+    { trimempty = true }
   )
 
   if #files == 0 then
@@ -164,4 +178,4 @@ vim.keymap.set('n', '<leader>gf', function()
   vim.fn.setqflist(qflist)
   vim.cmd.copen()
   vim.cmd.cfirst()
-end, {desc = 'Populate the quickfix list with all modified or untracked git files'})
+end, { desc = 'Populate the quickfix list with all modified or untracked git files' })

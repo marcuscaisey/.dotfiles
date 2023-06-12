@@ -1,5 +1,3 @@
-local Job = require('plenary.job')
-
 local group = vim.api.nvim_create_augroup('misc', { clear = true })
 
 vim.api.nvim_create_autocmd('BufReadPost', {
@@ -78,7 +76,7 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave'
 vim.api.nvim_create_autocmd({ 'VimLeave' }, {
   callback = function()
     if os.getenv('TMUX') then
-      vim.fn.system('tmux set-window-option automatic-rename on')
+      vim.system({ 'tmux', 'set-window-option', 'automatic-rename', 'on' })
     end
   end,
   group = group,
@@ -88,7 +86,7 @@ vim.api.nvim_create_autocmd({ 'VimLeave' }, {
 vim.api.nvim_create_autocmd({ 'DirChanged' }, {
   callback = function()
     if os.getenv('TMUX') then
-      vim.fn.system(string.format('tmux rename-window "%s:nvim"', vim.fs.basename(vim.v.event.cwd)))
+      vim.system({ 'tmux', 'rename-window', vim.fs.basename(vim.v.event.cwd) .. ':nvim' })
     end
   end,
   group = group,
@@ -109,21 +107,17 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     local on_exit = function()
       vim.print(table.concat(output_lines, '\n'))
     end
-    local job = Job:new({
-      command = 'wollemi',
-      args = { 'gofmt' },
+    vim.system({ 'wollemi', 'gofmt' }, {
       -- Run in the directory of the saved file since wollemi won't run outside of a plz repo
       cwd = vim.fs.dirname(filepath),
       env = {
         -- wollemi needs GOROOT to be set
-        GOROOT = vim.trim(vim.fn.system('go env GOROOT')),
+        GOROOT = vim.trim(vim.system({ 'go', 'env', 'GOROOT' }):wait().stdout),
         PATH = vim.fn.getenv('PATH'),
       },
-      on_stdout = on_output,
-      on_stderr = on_output,
-      on_exit = on_exit,
-    })
-    job:start()
+      stdout = on_output,
+      stderr = on_output,
+    }, on_exit)
   end,
   pattern = { '*.go' },
   group = group,

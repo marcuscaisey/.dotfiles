@@ -31,8 +31,8 @@ vim.keymap.set('n', '<leader>hp', gitsigns.preview_hunk_inline)
 vim.keymap.set('n', '<leader>hd', gitsigns.toggle_deleted)
 vim.keymap.set({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
 vim.keymap.set('n', '<leader>gc', function()
-  vim.fn.system('git diff --quiet')
-  if vim.v.shell_error == 0 then
+  local result = vim.system({ 'git', 'diff', '--quiet' }):wait()
+  if result.code == 0 then
     print('No Git changes')
     vim.cmd.cclose()
     return
