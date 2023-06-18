@@ -92,6 +92,7 @@ packer.startup({
       config = function()
         require('fidget').setup()
       end,
+      tag = 'legacy',
     })
     use({
       'lewis6991/gitsigns.nvim',
