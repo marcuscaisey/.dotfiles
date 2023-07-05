@@ -46,12 +46,7 @@ packer.startup({
         require('plugins.cmp')
       end,
     })
-    use({
-      'saadparwaiz1/cmp_luasnip',
-      config = function()
-        require('plugins.luasnip')
-      end,
-    })
+    use('saadparwaiz1/cmp_luasnip')
     use('hrsh7th/cmp-nvim-lsp')
     use('hrsh7th/cmp-buffer')
     use({
@@ -72,7 +67,12 @@ packer.startup({
         require('plugins.dap_ui')
       end,
     })
-    use('L3MON4D3/LuaSnip')
+    use({
+      'L3MON4D3/LuaSnip',
+      config = function()
+        require('plugins.luasnip')
+      end,
+    })
     use({
       'ray-x/lsp_signature.nvim',
       config = function()
