@@ -45,7 +45,6 @@ packer.startup({
       config = function()
         require('plugins.cmp')
       end,
-      commit = '5dcbc91d9a0eed00f66b6cdc406f843c4253020f',
     })
     use({
       'saadparwaiz1/cmp_luasnip',
