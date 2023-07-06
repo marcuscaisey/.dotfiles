@@ -4,7 +4,6 @@ local tsutils = require('nvim-treesitter.ts_utils')
 
 configs.setup({
   ensure_installed = {
-    'bash',
     'comment',
     'git_rebase',
     'gitcommit',
@@ -13,13 +12,9 @@ configs.setup({
     'java',
     'javascript',
     'json',
-    'lua',
-    'markdown',
     'php',
     'proto',
-    'python',
     'sql',
-    'query',
     'regex',
     'ruby',
     'scheme',
