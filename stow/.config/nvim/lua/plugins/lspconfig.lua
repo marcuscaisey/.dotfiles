@@ -189,7 +189,6 @@ vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticWar
 vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticInfo' })
 vim.fn.sign_define('DiagnosticSignHint', { text = '󰌵', texthl = 'DiagnosticHint' })
 
-vim.keymap.set('n', 'K', vim.lsp.buf.hover)
 vim.keymap.set('n', '<c-s>', telescope_builtin.lsp_document_symbols)
 vim.keymap.set('n', '<leader>ss', telescope_builtin.lsp_dynamic_workspace_symbols)
 vim.keymap.set('n', 'gd', telescope_builtin.lsp_definitions)
