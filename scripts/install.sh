@@ -73,6 +73,12 @@ curl https://pyenv.run | bash
 cecho "Installing nvm..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
+cecho "Installing nvim..."
+mkdir -p ~/scratch/neovim\
+  && git clone https://github.com/neovim/neovim\
+  && make -C ~/scratch/neovim CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=/opt/neovim\
+  && sudo make -C ~/scratch/neovim install
+
 cecho "Restowing config files..."
 ~/.dotfiles/scripts/restow.sh
 
