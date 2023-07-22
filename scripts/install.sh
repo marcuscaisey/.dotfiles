@@ -43,9 +43,6 @@ if linux; then
   done
 fi
 
-cecho "Restowing config files..."
-~/.dotfiles/scripts/restow.sh
-
 if osx; then
   cecho "Setting up fzf..."
   "$(brew --prefix)"/opt/fzf/install
@@ -84,6 +81,9 @@ mkdir -p ~/scratch/neovim\
   && git clone https://github.com/neovim/neovim\
   && make -C ~/scratch/neovim CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=/opt/neovim\
   && sudo make -C ~/scratch/neovim install
+
+cecho "Restowing config files..."
+~/.dotfiles/scripts/restow.sh
 
 cecho "Changing login shell..."
 chsh -s "$(which zsh)"
