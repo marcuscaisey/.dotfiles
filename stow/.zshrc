@@ -184,10 +184,10 @@ export EDITOR=nvim
 ################################################################################
 #                                   kubectl
 ################################################################################
-if linux; then
-  export KUBECONFIG=$HOME/.kube/config
-  for file in $HOME/.kube/configs/*.yaml; do
-    export KUBECONFIG=$KUBECONFIG:$file
+export KUBECONFIG="$HOME"/.kube/config
+if [ -d "$HOME/.kube/configs" ]; then
+  for file in "$HOME"/.kube/configs/*.yaml; do
+    export KUBECONFIG="$KUBECONFIG:$file"
   done
 fi
 
