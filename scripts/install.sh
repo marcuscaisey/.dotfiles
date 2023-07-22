@@ -67,10 +67,8 @@ if osx; then
   rm /tmp/tmux-256color.info
 fi
 
-if osx; then
-  cecho "Installing pyenv..."
-  curl https://pyenv.run | bash
-fi
+cecho "Installing pyenv..."
+curl https://pyenv.run | bash
 
 cecho "Installing nvm..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
