@@ -8,43 +8,43 @@ cecho() {
 }
 
 if osx; then
-  cecho "Installing homebrew..."
+  cecho "Installing homebrew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta tree-sitter curl make cmake"
   for pkg in $pkgs; do
-      cecho "Installing $pkg..."
+      cecho "Installing $pkg"
       brew install "$pkg"
   done
 fi
 
 if linux; then
-  cecho "Updating list of available packages..."
+  cecho "Updating list of available packages"
   sudo apt update
 
   pkgs="zsh git tmux cargo vifm stow curl make cmake"
   for pkg in $pkgs; do
-      cecho "Installing $pkg..."
+      cecho "Installing $pkg"
       sudo apt install "$pkg"
   done
 
   cargo_pkgs="exa fd-find bat ripgrep git-delta tree-sitter-cli"
   for pkg in $cargo_pkgs; do
-      cecho "Installing $pkg..."
+      cecho "Installing $pkg"
       cargo install "$pkg"
   done
 fi
 
 if osx; then
-  cecho "Setting up fzf..."
+  cecho "Setting up fzf"
   "$(brew --prefix)"/opt/fzf/install
 fi
 if linux; then
-  cecho "Installing fzf..."
+  cecho "Installing fzf"
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 fi
 
-cecho "Installing Oh My Zsh..."
+cecho "Installing Oh My Zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 
 cecho "Installing Oh My Zsh plugins: fast-syntax-highlighting, zsh-autosuggestions, zsh-vi-mode"
@@ -52,7 +52,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/p
 git clone https://github.com/zdharma-continuum/fast-syntax-highlighting ~/.oh-my-zsh/custom/plugins/fast-syntax-highlighting
 git clone https://github.com/jeffreytse/zsh-vi-mode ~/.oh-my-zsh/custom/plugins/zsh-vi-mode
 
-cecho "Installing tmux plugin manager..."
+cecho "Installing tmux plugin manager"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 if osx; then
@@ -62,26 +62,26 @@ if osx; then
   rm /tmp/tmux-256color.info
 fi
 
-cecho "Installing pyenv..."
+cecho "Installing pyenv"
 curl https://pyenv.run | bash
 
-cecho "Installing nvm..."
+cecho "Installing nvm"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
-cecho "Installing nvim..."
+cecho "Installing nvim"
 mkdir -p ~/scratch\
   && git clone https://github.com/neovim/neovim ~/scratch/neovim\
   && make -C ~/scratch/neovim CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=/opt/neovim\
   && sudo make -C ~/scratch/neovim install
 
-cecho "Removing .zshrc..."
+cecho "Removing .zshrc"
 rm ~/.zshrc
 
-cecho "Restowing config files..."
+cecho "Restowing config files"
 ~/.dotfiles/scripts/restow.sh
 
-cecho "Changing login shell..."
+cecho "Changing login shell"
 chsh -s "$(which zsh)"
 
-cecho "$(tput bold)Installation complete. Starting zsh..."
+cecho "$(tput bold)Installation complete. Starting zsh"
 exec zsh
