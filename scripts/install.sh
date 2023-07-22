@@ -28,7 +28,7 @@ if linux; then
       sudo apt install "$pkg"
   done
 
-  cargo_pkgs="exa fd-find bat ripgrep git-delta tree-sitter-cli"
+  cargo_pkgs="exa fd-find bat ripgrep git-delta"
   for pkg in $cargo_pkgs; do
       cecho "Installing $pkg"
       cargo install "$pkg"
