@@ -22,7 +22,7 @@ if osx; then
   pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta tree-sitter"
   for pkg in $pkgs; do
       cecho "Installing $pkg..."
-      brew install $pkg
+      brew install "$pkg"
   done
 fi
 
@@ -30,19 +30,19 @@ if linux; then
   pkgs="zsh git tmux cargo vifm stow"
   for pkg in $pkgs; do
       cecho "Installing $pkg..."
-      sudo apt install $pkg
+      sudo apt install "$pkg"
   done
 
   cargo_pkgs="exa fd-find bat ripgrep git-delta tree-sitter-cli"
   for pkg in $cargo_pkgs; do
       cecho "Installing $pkg..."
-      cargo install $pkg
+      cargo install "$pkg"
   done
 fi
 
 if osx; then
   cecho "Setting up fzf..."
-  $(brew --prefix)/opt/fzf/install
+  "$(brew --prefix)"/opt/fzf/install
 fi
 if linux; then
   cecho "Installing fzf..."
@@ -53,16 +53,16 @@ cecho "Installing Oh My Zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 
 cecho "Installing Oh My Zsh plugins: fast-syntax-highlighting, zsh-autosuggestions, zsh-vi-mode"
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zdharma-continuum/fast-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
-git clone https://github.com/jeffreytse/zsh-vi-mode ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-vi-mode
+git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
+git clone https://github.com/zdharma-continuum/fast-syntax-highlighting "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/fast-syntax-highlighting
+git clone https://github.com/jeffreytse/zsh-vi-mode "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-vi-mode
 
 cecho "Installing tmux plugin manager..."
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 if osx; then
   cecho "Installing tmux-256color terminfo"
-  $(brew --prefix ncurses)/bin/infocmp tmux-256color > /tmp/tmux-256color.info
+  "$(brew --prefix ncurses)"/bin/infocmp tmux-256color > /tmp/tmux-256color.info
   tic -xve tmux-256color /tmp/tmux-256color.info
   rm /tmp/tmux-256color.info
 fi
@@ -76,10 +76,10 @@ cecho "Installing nvm..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
 cecho "Restowing config files..."
-source ~/.dotfiles/scripts/restow.sh
+~/.dotfiles/scripts/restow.sh
 
 cecho "Changing login shell..."
-chsh -s $(which zsh)
+chsh -s "$(which zsh)"
 
 cecho "$(tput bold)Installation complete. Starting zsh..."
 exec zsh
