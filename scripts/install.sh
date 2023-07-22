@@ -19,7 +19,7 @@ if osx; then
   cecho "Installing homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta tree-sitter"
+  pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta tree-sitter curl"
   for pkg in $pkgs; do
       cecho "Installing $pkg..."
       brew install "$pkg"
@@ -27,7 +27,7 @@ if osx; then
 fi
 
 if linux; then
-  pkgs="zsh git tmux cargo vifm stow"
+  pkgs="zsh git tmux cargo vifm stow curl"
   for pkg in $pkgs; do
       cecho "Installing $pkg..."
       sudo apt install "$pkg"
