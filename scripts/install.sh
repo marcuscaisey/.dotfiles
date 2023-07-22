@@ -22,13 +22,13 @@ if linux; then
   cecho "Updating list of available packages"
   sudo apt update
 
-  pkgs="zsh git tmux cargo vifm stow curl make cmake"
+  pkgs="zsh git tmux exa fd-find bat ripgrep cargo vifm stow curl make cmake"
   for pkg in $pkgs; do
       cecho "Installing $pkg"
       sudo apt install "$pkg"
   done
 
-  cargo_pkgs="exa fd-find bat ripgrep git-delta"
+  cargo_pkgs="git-delta"
   for pkg in $cargo_pkgs; do
       cecho "Installing $pkg"
       cargo install "$pkg"
