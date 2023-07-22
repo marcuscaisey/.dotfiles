@@ -2,6 +2,11 @@
 
 source ~/.dotfiles/scripts/utils.sh
 
+# echo wrapper which cycles between output colours on subsequent calls
+cecho() {
+  echo "$(tput setaf "${ci:-1}")$1$(tput sgr0)" && ci=$(( (${ci:-1} % 6) + 1 ))
+}
+
 if osx; then
   cecho "Installing homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
