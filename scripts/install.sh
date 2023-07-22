@@ -27,6 +27,9 @@ if osx; then
 fi
 
 if linux; then
+  cecho "Updating list of available packages..."
+  sudo apt update
+
   pkgs="zsh git tmux cargo vifm stow curl"
   for pkg in $pkgs; do
       cecho "Installing $pkg..."
