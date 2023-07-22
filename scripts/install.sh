@@ -25,7 +25,7 @@ if linux; then
   pkgs="zsh git tmux exa fd-find bat ripgrep cargo vifm stow curl make cmake"
   for pkg in $pkgs; do
       cecho "Installing $pkg"
-      sudo apt install "$pkg"
+      sudo apt install -y "$pkg"
   done
 
   cargo_pkgs="git-delta"
