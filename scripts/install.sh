@@ -82,6 +82,9 @@ mkdir -p ~/scratch/neovim\
   && make -C ~/scratch/neovim CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=/opt/neovim\
   && sudo make -C ~/scratch/neovim install
 
+cecho "Removing .zshrc..."
+rm ~/.zshrc
+
 cecho "Restowing config files..."
 ~/.dotfiles/scripts/restow.sh
 
