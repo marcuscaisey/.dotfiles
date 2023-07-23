@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -exuo pipefail
+
 source ~/.dotfiles/scripts/utils.sh
 
 # echo wrapper which cycles between output colours on subsequent calls
