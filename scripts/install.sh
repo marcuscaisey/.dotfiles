@@ -54,15 +54,16 @@ if linux; then
   done
 fi
 
-if osx; then
-  cecho "Setting up fzf"
-  "$(brew --prefix)"/opt/fzf/install
-fi
 if linux; then
   cecho "Installing fzf"
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  ~/.fzf/install --key-bindings --no-completion --no-update-rc
+  fzf_install=~/.fzf/install
+else
+  fzf_install="$(brew --prefix)/opt/fzf/install"
 fi
+
+cecho "Setting up fzf"
+$fzf_install --key-bindings --no-completion --no-update-rc
 
 cecho "Installing Oh My Zsh"
 if [ ! -d ~/.oh-my-zsh ]; then
