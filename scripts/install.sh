@@ -49,7 +49,8 @@ if osx; then
 fi
 if linux; then
   cecho "Installing fzf"
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install --key-bindings --no-completion --no-update-rc
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install --key-bindings --no-completion --no-update-rc
 fi
 
 cecho "Installing Oh My Zsh"
@@ -77,10 +78,10 @@ cecho "Installing nvm"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
 cecho "Installing nvim"
-mkdir -p ~/scratch\
-  && git clone https://github.com/neovim/neovim ~/scratch/neovim\
-  && make -C ~/scratch/neovim CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=/opt/neovim\
-  && sudo make -C ~/scratch/neovim install
+mkdir -p ~/scratch
+git clone https://github.com/neovim/neovim ~/scratch/neovim\
+make -C ~/scratch/neovim CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=/opt/neovim\
+sudo make -C ~/scratch/neovim install
 
 cecho "Removing .zshrc"
 rm -v ~/.zshrc
