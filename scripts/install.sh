@@ -62,6 +62,9 @@ fi
 if linux; then
   cecho "Linking fd to fdfind"
   sudo ln -sfv "$(which fdfind)" /usr/local/bin/fd
+
+  checo "Linking bat to batcat"
+  sudo ln -sfv "$(which batcat)" /usr/local/bin/bat
 fi
 
 if linux; then
