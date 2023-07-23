@@ -101,6 +101,7 @@ mkdir -p ~/scratch
 clone_or_pull https://github.com/neovim/neovim ~/scratch/neovim
 make -C ~/scratch/neovim CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=/opt/neovim
 sudo make -C ~/scratch/neovim install
+sudo ln -sfv /opt/neovim/bin/nvim /usr/local/bin/nvim
 
 cecho "Removing .zshrc"
 rm -v ~/.zshrc
