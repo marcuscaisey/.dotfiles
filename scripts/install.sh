@@ -28,10 +28,8 @@ if osx; then
   brew update
 
   pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta tree-sitter curl make cmake gettext"
-  for pkg in $pkgs; do
-      cecho "Installing $pkg"
-      brew install "$pkg"
-  done
+  cecho "Installing $pkgs"
+  sudo apt install -y "$pkgs"
 fi
 
 if linux; then
@@ -39,10 +37,8 @@ if linux; then
   sudo apt update
 
   pkgs="zsh git tmux exa fd-find bat ripgrep vifm stow curl make cmake gettext"
-  for pkg in $pkgs; do
-      cecho "Installing $pkg"
-      sudo apt install -y "$pkg"
-  done
+  cecho "Installing $pkgs"
+  sudo apt install -y "$pkgs"
 
   cecho "Installing rust"
   curl https://sh.rustup.rs -sSf | sh -s -- -y
