@@ -15,7 +15,7 @@ local search_results = {
       recompute = 1,
       maxcount = -1,
     })
-    return ok and search_count.total > 0
+    return ok and search_count.total and search_count.total > 0
   end,
 }
 
