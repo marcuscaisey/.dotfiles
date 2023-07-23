@@ -1,6 +1,3 @@
-source ~/.dotfiles/scripts/utils.sh
-
-
 ################################################################################
 #                                 zsh-vi-mode
 ################################################################################
@@ -42,15 +39,12 @@ plugins=(
   fast-syntax-highlighting
   git
   # please
+  kubectl
+  kube-ps1
   zsh-vi-mode
   tmux
   zsh-autosuggestions
 )
-
-if linux; then
-  plugins=(kubectl kube-ps1 $plugins)
-  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -69,10 +63,10 @@ export PROMPT='%{$fg_bold[blue]%}%c%{$reset_color%} $(git_prompt_info)'
 ################################################################################
 #                                   kube-ps1
 ################################################################################
-if linux; then
-  export KUBE_PS1_SYMBOL_ENABLE=false
-  export PROMPT='%B$(kube_ps1)'" $PROMPT"
-fi
+export KUBE_PS1_SYMBOL_ENABLE=true
+export KUBE_PS1_SYMBOL_PADDING=true
+export KUBE_PS1_SEPARATOR=""
+export PROMPT='%B$(kube_ps1)%b'" $PROMPT"
 
 
 ################################################################################
@@ -190,6 +184,7 @@ if [ -d "$HOME/.kube/configs" ]; then
     export KUBECONFIG="$KUBECONFIG:$file"
   done
 fi
+export PATH="$HOME/.krew/bin:$PATH"
 
 
 ################################################################################
