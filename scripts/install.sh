@@ -7,10 +7,10 @@ source ~/.dotfiles/scripts/utils.sh
 # clone_or_pull <repository> <directory>
 # Clones a repository into a directory if it doesn't exist, otherwise pulls in the latest changes.
 clone_or_pull() {
-  if [ -d "$2" ]; then
-    git -C "$2" pull
-  else
+  if [ ! -d "$2" ]; then
     git clone --depth 1 "$1" "$2"
+  else
+    git -C "$2" pull
   fi
 }
 
@@ -65,6 +65,8 @@ $fzf_install --key-bindings --no-completion --no-update-rc
 cecho "Installing Oh My Zsh"
 if [ ! -d ~/.oh-my-zsh ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
+else
+  ~/.oh-my-zsh/tools/upgrade.sh
 fi
 
 cecho "Installing Oh My Zsh plugins: fast-syntax-highlighting, zsh-autosuggestions, zsh-vi-mode"
@@ -83,7 +85,11 @@ if osx; then
 fi
 
 cecho "Installing pyenv"
-curl https://pyenv.run | bash
+if [ ! -d ~/.pyenv ]; then
+  curl https://pyenv.run | bash
+else
+  ~/.pyenv/bin/pyenv update
+fi
 
 cecho "Installing nvm"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
