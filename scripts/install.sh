@@ -75,7 +75,7 @@ mkdir -p ~/scratch\
   && sudo make -C ~/scratch/neovim install
 
 cecho "Removing .zshrc"
-rm ~/.zshrc
+rm -v ~/.zshrc
 
 cecho "Restowing config files"
 ~/.dotfiles/scripts/restow.sh
