@@ -66,7 +66,7 @@ cecho "Installing Oh My Zsh"
 if [ ! -d ~/.oh-my-zsh ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 else
-  ~/.oh-my-zsh/tools/upgrade.sh
+  ZSH=~/.oh-my-zsh ~/.oh-my-zsh/tools/upgrade.sh
 fi
 
 cecho "Installing Oh My Zsh plugins: fast-syntax-highlighting, zsh-autosuggestions, zsh-vi-mode"
