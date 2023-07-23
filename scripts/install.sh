@@ -60,6 +60,11 @@ if linux; then
 fi
 
 if linux; then
+  cecho "Linking fd to fdfind"
+  sudo ln -sfv "$(which fdfind)" /usr/local/bin/fd
+fi
+
+if linux; then
   cecho "Installing fzf"
   clone_or_pull https://github.com/junegunn/fzf.git ~/.fzf
   fzf_install=~/.fzf/install
