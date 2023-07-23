@@ -24,11 +24,14 @@ if linux; then
   cecho "Updating list of available packages"
   sudo apt update
 
-  pkgs="zsh git tmux exa fd-find bat ripgrep cargo vifm stow curl make cmake"
+  pkgs="zsh git tmux exa fd-find bat ripgrep vifm stow curl make cmake"
   for pkg in $pkgs; do
       cecho "Installing $pkg"
       sudo apt install -y "$pkg"
   done
+
+  cecho "Installing rust"
+  curl https://sh.rustup.rs -sSf | sh -s -- -y
 
   cargo_pkgs="git-delta"
   for pkg in $cargo_pkgs; do
