@@ -33,6 +33,9 @@ if linux; then
   cecho "Installing rust"
   curl https://sh.rustup.rs -sSf | sh -s -- -y
 
+  cecho "Sourcing ~/.cargo/env"
+  source ~/.cargo/env
+
   cargo_pkgs="git-delta"
   for pkg in $cargo_pkgs; do
       cecho "Installing $pkg"
