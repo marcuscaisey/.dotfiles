@@ -24,7 +24,7 @@ if osx; then
   cecho "Installing homebrew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta tree-sitter curl make cmake"
+  pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta tree-sitter curl make cmake gettext"
   for pkg in $pkgs; do
       cecho "Installing $pkg"
       brew install "$pkg"
@@ -35,7 +35,7 @@ if linux; then
   cecho "Updating list of available packages"
   sudo apt update
 
-  pkgs="zsh git tmux exa fd-find bat ripgrep vifm stow curl make cmake"
+  pkgs="zsh git tmux exa fd-find bat ripgrep vifm stow curl make cmake gettext"
   for pkg in $pkgs; do
       cecho "Installing $pkg"
       sudo apt install -y "$pkg"
