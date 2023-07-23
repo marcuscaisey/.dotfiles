@@ -49,7 +49,7 @@ if osx; then
 fi
 if linux; then
   cecho "Installing fzf"
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install --key-bindings --no-completion --no-update-rc
 fi
 
 cecho "Installing Oh My Zsh"
