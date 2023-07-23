@@ -24,6 +24,9 @@ if osx; then
   cecho "Installing homebrew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+  cecho "Updating list of available packages"
+  brew update
+
   pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta tree-sitter curl make cmake gettext"
   for pkg in $pkgs; do
       cecho "Installing $pkg"
