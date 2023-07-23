@@ -56,7 +56,7 @@ fi
 
 if linux; then
   cecho "Installing fzf"
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  clone_or_pull https://github.com/junegunn/fzf.git ~/.fzf
   fzf_install=~/.fzf/install
 else
   fzf_install="$(brew --prefix)/opt/fzf/install"
