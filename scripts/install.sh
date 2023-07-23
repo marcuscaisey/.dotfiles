@@ -106,8 +106,5 @@ rm -v ~/.zshrc
 cecho "Restowing config files"
 ~/.dotfiles/scripts/restow.sh
 
-cecho "Changing login shell"
-chsh -s "$(which zsh)"
-
-cecho "$(tput bold)Installation complete. Starting zsh"
+cecho "Installation complete. Starting zsh"
 exec zsh
