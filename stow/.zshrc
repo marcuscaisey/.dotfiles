@@ -50,14 +50,18 @@ source $ZSH/oh-my-zsh.sh
 
 
 ################################################################################
+#                                    prompt
+################################################################################
+export PROMPT="%B%F{blue}%c%b%f"
+
+
+################################################################################
 #                                  git prompt
 ################################################################################
-git_branch_format="%{$fg_bold[yellow]%}"
-export ZSH_THEME_GIT_PROMPT_PREFIX="$git_branch_format("
-export ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-export ZSH_THEME_GIT_PROMPT_CLEAN="$git_branch_format) "
+export ZSH_THEME_GIT_PROMPT_PREFIX="%B(%F{216}"
+export ZSH_THEME_GIT_PROMPT_SUFFIX="%f)%b "
 
-export PROMPT='%{$fg_bold[blue]%}%c%{$reset_color%} $(git_prompt_info)'
+export PROMPT="$PROMPT"' $(git_prompt_info)'
 
 
 ################################################################################
