@@ -35,7 +35,7 @@ if linux; then
   cecho "Updating list of available packages"
   sudo apt update
 
-  pkgs="zsh git tmux exa fzf fd-find bat ripgrep vifm stow curl make cmake"
+  pkgs="zsh git tmux exa fd-find bat ripgrep vifm stow curl make cmake"
   for pkg in $pkgs; do
       cecho "Installing $pkg"
       sudo apt install -y "$pkg"
@@ -54,13 +54,15 @@ if linux; then
   done
 fi
 
-cecho "Setting up fzf"
 if osx; then
-  fzf_install="$(brew --prefix)"/opt/fzf/install
-else
-  fzf_install=~/.fzf/install
+  cecho "Setting up fzf"
+  "$(brew --prefix)"/opt/fzf/install
 fi
-$fzf_install --key-bindings --no-completion --no-update-rc
+if linux; then
+  cecho "Installing fzf"
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install --key-bindings --no-completion --no-update-rc
+fi
 
 cecho "Installing Oh My Zsh"
 if [ ! -d ~/.oh-my-zsh ]; then
