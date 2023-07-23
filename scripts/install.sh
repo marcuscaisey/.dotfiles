@@ -123,5 +123,8 @@ rm -v ~/.zshrc
 cecho "Restowing config files"
 ~/.dotfiles/scripts/restow.sh
 
+cecho "Updating bat theme cache"
+bat cache --build
+
 cecho "Installation complete. Starting zsh"
 exec zsh
