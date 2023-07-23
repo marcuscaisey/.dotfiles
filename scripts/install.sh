@@ -29,7 +29,7 @@ if osx; then
 
   pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta tree-sitter curl make cmake gettext"
   cecho "Installing $pkgs"
-  sudo apt install -y "$pkgs"
+  sudo apt install -y $pkgs
 fi
 
 if linux; then
@@ -38,7 +38,7 @@ if linux; then
 
   pkgs="zsh git tmux exa fd-find bat ripgrep vifm stow curl make cmake gettext"
   cecho "Installing $pkgs"
-  sudo apt install -y "$pkgs"
+  sudo apt install -y $pkgs
 
   cecho "Installing rust"
   curl https://sh.rustup.rs -sSf | sh -s -- -y
