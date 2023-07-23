@@ -27,7 +27,7 @@ if osx; then
   cecho "Updating list of available packages"
   brew update
 
-  pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta tree-sitter curl make cmake gettext"
+  pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta tree-sitter curl make cmake gettext g++"
   cecho "Installing $pkgs"
   sudo apt install -y $pkgs
 fi
@@ -36,7 +36,7 @@ if linux; then
   cecho "Updating list of available packages"
   sudo apt update
 
-  pkgs="zsh git tmux exa fd-find bat ripgrep vifm stow curl make cmake gettext"
+  pkgs="zsh git tmux exa fd-find bat ripgrep vifm stow curl make cmake gettext g++"
   cecho "Installing $pkgs"
   sudo apt install -y $pkgs
 
