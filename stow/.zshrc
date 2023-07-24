@@ -58,7 +58,7 @@ export PROMPT="%B%F{blue}%c%b%f"
 ################################################################################
 #                                  git prompt
 ################################################################################
-export ZSH_THEME_GIT_PROMPT_PREFIX="%B(%F{216}"
+export ZSH_THEME_GIT_PROMPT_PREFIX="%B(%F{216}"
 export ZSH_THEME_GIT_PROMPT_SUFFIX="%f)%b "
 
 export PROMPT="$PROMPT"' $(git_prompt_info)'
@@ -67,7 +67,7 @@ export PROMPT="$PROMPT"' $(git_prompt_info)'
 ################################################################################
 #                                   kube-ps1
 ################################################################################
-export KUBE_PS1_SYMBOL_ENABLE=true
+export KUBE_PS1_SYMBOL_ENABLE=false
 export KUBE_PS1_SYMBOL_PADDING=true
 export KUBE_PS1_SEPARATOR=""
 export PROMPT='%B$(kube_ps1)%b'" $PROMPT"
