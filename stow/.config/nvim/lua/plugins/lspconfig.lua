@@ -53,6 +53,7 @@ lspconfig.gopls.setup({
       analyses = {
         unusedparams = true,
       },
+      usePlaceholders = false,
       semanticTokens = true,
       codelenses = {
         gc_details = true,
