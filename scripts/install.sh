@@ -50,12 +50,6 @@ if linux; then
   cecho "Installing $pkgs"
   sudo apt install -y $pkgs
 
-  cecho "Installing kubectl"
-  curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg --yes
-  echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-  sudo apt update
-  sudo apt install -y kubectl
-
   cecho "Installing rust"
   curl https://sh.rustup.rs -sSf | sh -s -- -y
 
