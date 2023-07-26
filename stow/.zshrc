@@ -68,8 +68,6 @@ export PROMPT="$PROMPT"' $(git_prompt_info)'
 #                                   kube-ps1
 ################################################################################
 export KUBE_PS1_SYMBOL_ENABLE=false
-export KUBE_PS1_SYMBOL_PADDING=true
-export KUBE_PS1_SEPARATOR=""
 export PROMPT='%B$(kube_ps1)%b'" $PROMPT"
 
 
