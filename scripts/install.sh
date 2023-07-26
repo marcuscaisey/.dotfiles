@@ -2,7 +2,17 @@
 
 set -euo pipefail
 
-source ~/.dotfiles/scripts/utils.sh
+# osx
+# Returns if we're running on osx
+osx() {
+  [ "$(uname)" = "Darwin" ]
+}
+
+# linux
+# Returns if we're running on osx
+linux() {
+  [ "$(uname)" = "Linux" ]
+}
 
 # clone_or_pull <repository> <directory>
 # Clones a repository into a directory if it doesn't exist, otherwise pulls in the latest changes.
