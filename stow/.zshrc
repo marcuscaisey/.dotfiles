@@ -3,7 +3,7 @@
 ################################################################################
 function zvm_yank_to_clipboard() {
   zvm_yank
-	printf "%s" "$CUTBUFFER" | yank
+	printf "%s" "$CUTBUFFER" | tmux load-buffer -w -
   zvm_exit_visual_mode
 }
 function zvm_config() {
