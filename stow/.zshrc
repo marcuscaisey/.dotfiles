@@ -32,6 +32,8 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME=""
 
+zstyle ':omz:plugins:nvm' lazy yes
+
 plugins=(
   alias-finder
   colored-man-pages
@@ -41,6 +43,7 @@ plugins=(
   # please
   kubectl
   kube-ps1
+  nvm
   zsh-vi-mode
   tmux
   zsh-autosuggestions
@@ -189,14 +192,6 @@ if [ -d "$HOME/.kube/configs" ]; then
   done
 fi
 export PATH="$HOME/.krew/bin:$PATH"
-
-
-################################################################################
-#                                     nvm
-################################################################################
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 
 ################################################################################
