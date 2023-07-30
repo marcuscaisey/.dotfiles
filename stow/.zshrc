@@ -67,8 +67,10 @@ export PROMPT="$PROMPT"' $(git_prompt_info)'
 ################################################################################
 #                                   kube-ps1
 ################################################################################
-export KUBE_PS1_SYMBOL_ENABLE=false
-export PROMPT='%B$(kube_ps1)%b'" $PROMPT"
+if kubectl config current-context >/dev/null 2>&1; then
+  export KUBE_PS1_SYMBOL_ENABLE=false
+  export PROMPT='%B$(kube_ps1)%b'" $PROMPT"
+fi
 
 
 ################################################################################
