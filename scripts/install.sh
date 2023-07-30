@@ -121,8 +121,8 @@ make -C ~/scratch/neovim CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=/o
 sudo make -C ~/scratch/neovim install
 sudo ln -sfv /opt/neovim/bin/nvim /usr/local/bin/nvim
 
-cecho "Removing .zshrc"
-rm -v ~/.zshrc
+cecho "Moving .zshrc -> .zshrc.old"
+mv -v ~/.zshrc ~/.zshrc.old
 
 cecho "Restowing config files"
 ~/.dotfiles/scripts/restow.sh
