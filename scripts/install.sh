@@ -39,7 +39,7 @@ if osx; then
 
   pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta tree-sitter curl make cmake gettext g++ kubectl"
   cecho "Installing $pkgs"
-  sudo apt install -y $pkgs
+  brew install $pkgs
 fi
 
 if linux; then
