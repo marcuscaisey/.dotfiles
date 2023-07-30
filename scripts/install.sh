@@ -37,7 +37,7 @@ if osx; then
   cecho "Updating list of available packages"
   brew update
 
-  pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta curl make cmake gettext g++ kubectl"
+  pkgs="zsh git tmux exa fzf fd bat ripgrep vifm ncurses stow git-delta curl make cmake gettext gcc kubectl"
   cecho "Installing $pkgs"
   brew install $pkgs
 fi
