@@ -122,7 +122,7 @@ sudo make -C ~/scratch/neovim install
 sudo ln -sfv /opt/neovim/bin/nvim /usr/local/bin/nvim
 
 cecho "Moving .zshrc -> .zshrc.old"
-mv -v ~/.zshrc ~/.zshrc.old
+mv -iv ~/.zshrc ~/.zshrc.old
 
 cecho "Restowing config files"
 ~/.dotfiles/scripts/restow.sh
