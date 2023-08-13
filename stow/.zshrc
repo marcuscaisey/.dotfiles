@@ -40,7 +40,6 @@ plugins=(
   docker
   fast-syntax-highlighting
   git
-  # please
   kubectl
   kube-ps1
   nvm
