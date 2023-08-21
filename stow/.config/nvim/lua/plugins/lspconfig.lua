@@ -82,12 +82,16 @@ lspconfig.gopls.setup({
     if go_mod then
       return vim.fs.dirname(go_mod)
     end
-    local plzconfig = vim.fs.find('.plzconfig', { upward = true, path = vim.fs.dirname(fname) })[1]
-    local src = vim.fs.find('src', { upward = true, path = vim.fs.dirname(fname) })[1]
-    if plzconfig and src then
-      vim.env.GOPATH = string.format('%s:%s/plz-out/go', vim.fs.dirname(src), vim.fs.dirname(plzconfig))
-      vim.env.GO111MODULE = 'off'
+
+    -- Set GOPATH if we're in a directory called 'src' containing a .plzconfig
+    local plzconfig_path = vim.fs.find('.plzconfig', { upward = true, path = vim.fs.dirname(fname) })[1]
+    if plzconfig_path then
+      local plzconfig_dir = vim.fs.dirname(plzconfig_path)
+      if plzconfig_dir and vim.fs.basename(plzconfig_dir) == 'src' then
+        vim.env.GOPATH = string.format('%s:%s/plz-out/go', vim.fs.dirname(plzconfig_dir), plzconfig_dir)
+      end
     end
+
     return vim.fn.getcwd()
   end,
 })
