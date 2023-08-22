@@ -2,12 +2,12 @@ local lualine = require('lualine')
 
 local search_results = {
   function()
-    local search_term = vim.fn.getreg('/')
+    local search_term = vim.fn.getreg('/') ---@cast search_term string
     local search_count = vim.fn.searchcount({
       recompute = 1,
       maxcount = -1,
     })
-    return string.format('/%s [%d/%d]', search_term, search_count.current, search_count.total)
+    return string.format('/%s [%d/%d]', search_term:gsub('%%', '%%%%'), search_count.current, search_count.total)
   end,
   cond = function()
     -- searchcount returns raises an error if there's something wrong with the search term like an unmatched \(
