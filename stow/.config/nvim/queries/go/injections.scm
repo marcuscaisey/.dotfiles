@@ -1,15 +1,38 @@
 ; extends
 
-((raw_string_literal) @sql (#lua-match? @sql "^`%s*SELECT") (#offset! @sql 0 1 0 -1))
-((raw_string_literal) @sql (#lua-match? @sql "^`%s*INSERT") (#offset! @sql 0 1 0 -1))
-((raw_string_literal) @sql (#lua-match? @sql "^`%s*UPDATE") (#offset! @sql 0 1 0 -1))
+; Inject SQL into strings which start with SELECT, INSERT, or UPDATE
+((raw_string_literal) @injection.content
+  (#lua-match? @injection.content "^`%s*SELECT")
+  (#offset! @injection.content 0 1 0 -1)
+  (#set! injection.language "sql"))
 
-((interpreted_string_literal) @sql (#lua-match? @sql "^\"%s*SELECT") (#offset! @sql 0 1 0 -1))
-((interpreted_string_literal) @sql (#lua-match? @sql "^\"%s*INSERT") (#offset! @sql 0 1 0 -1))
-((interpreted_string_literal) @sql (#lua-match? @sql "^\"%s*UPDATE") (#offset! @sql 0 1 0 -1))
+((raw_string_literal) @injection.content
+  (#lua-match? @injection.content "^`%s*INSERT")
+  (#offset! @injection.content 0 1 0 -1)
+  (#set! injection.language "sql"))
 
-(
-  (raw_string_literal) @python
-  (#match? @python "api\\s*\\=\\s*(\"\\d\\.\\d\\.\\d\"|'\\d\\.\\d\\.\\d')\n")
-  (#offset! @python 0 1 0 -1)
-)
+((raw_string_literal) @injection.content
+  (#lua-match? @injection.content "^`%s*UPDATE")
+  (#offset! @injection.content 0 1 0 -1)
+  (#set! injection.language "sql"))
+
+((interpreted_string_literal) @injection.content
+  (#lua-match? @injection.content "^\"%s*SELECT")
+  (#offset! @injection.content 0 1 0 -1)
+  (#set! injection.language "sql"))
+
+((interpreted_string_literal) @injection.content
+  (#lua-match? @injection.content "^\"%s*INSERT")
+  (#offset! @injection.content 0 1 0 -1)
+  (#set! injection.language "sql"))
+
+((interpreted_string_literal) @injection.content
+  (#lua-match? @injection.content "^\"%s*UPDATE")
+  (#offset! @injection.content 0 1 0 -1)
+  (#set! injection.language "sql"))
+
+; Inject Python into strings which contain a line like "api = 4.0.0"
+((raw_string_literal) @injection.content
+  (#match? @injection.content "api\\s*\\=\\s*(\"\\d\\.\\d\\.\\d\"|'\\d\\.\\d\\.\\d')\n")
+  (#offset! @injection.content 0 1 0 -1)
+  (#set! injection.language "python"))
