@@ -2,6 +2,7 @@ local filetypes = require('filetypes')
 
 vim.o.clipboard = 'unnamed'
 vim.o.cursorline = true
+vim.o.colorcolumn = '+1'
 vim.o.diffopt = vim.o.diffopt .. ',linematch:60'
 vim.o.expandtab = true
 vim.o.hidden = true
