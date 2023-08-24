@@ -15,7 +15,7 @@ configs.setup({
     'php',
     'proto',
     'sql',
-    'regex',
+    -- 'regex',
     'ruby',
     'scheme',
     'yaml',
