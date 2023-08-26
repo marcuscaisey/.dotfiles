@@ -92,14 +92,7 @@ alias lsal="ls -al"
 alias lsla=lsal
 alias l="ls -algh"
 
-alias rmr="rm -r"
-
-alias py=python
-
-alias vi=nvim
-alias vim=nvim
 alias vo='nvim -c "e #<1"'
-alias fm="vifm"
 
 # git
 alias oops="gau && gcn!"
