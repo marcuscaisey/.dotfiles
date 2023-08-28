@@ -156,6 +156,11 @@ lspconfig.lua_ls.setup({
       completion = {
         keywordSnippet = 'Disable',
       },
+      diagnostics = {
+        disable = {
+          'redefined-local',
+        },
+      },
       format = {
         enable = false,
       },
