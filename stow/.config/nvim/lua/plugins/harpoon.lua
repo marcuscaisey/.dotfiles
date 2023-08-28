@@ -11,10 +11,10 @@ harpoon.setup({
   },
 })
 
-vim.keymap.set('n', '<leader>ha', mark.add_file)
-vim.keymap.set('n', '<leader>hh', ui.toggle_quick_menu)
-for n = 1, 4 do
-  vim.keymap.set('n', string.format('<leader>%d', n), function()
-    ui.nav_file(n)
-  end)
+vim.keymap.set('n', '<leader>ha', mark.add_file, { desc = 'Mark file to be revisited later on with Harpoon' })
+vim.keymap.set('n', '<leader>hh', ui.toggle_quick_menu, { desc = 'View all Harpoon marks' })
+for i = 1, 4 do
+  vim.keymap.set('n', string.format('<leader>%d', i), function()
+    ui.nav_file(i)
+  end, { desc = string.format('Navigate to Harpoon mark %d', i) })
 end
