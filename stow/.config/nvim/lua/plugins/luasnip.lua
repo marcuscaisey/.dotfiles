@@ -25,9 +25,23 @@ ls.config.setup({
 })
 
 ls.add_snippets('lua', {
-  ls.parser.parse_snippet('f', 'function($1)\n  $0\nend'),
-  ls.parser.parse_snippet('lf', 'local ${1:name} = function($2)\n  $0\nend'),
-  ls.parser.parse_snippet('mf', '${1:M}.${2:name} = function($3)\n  $0\nend'),
+  s(
+    'f',
+    fmt('function{}({})\n  {}\nend', {
+      d(1, function()
+        if not vim.treesitter.get_node():parent() then
+          -- Function has a name if we're at the top level of the file
+          return sn(nil, { t(' '), i(1) })
+        else
+          -- Function has no name if we're not at the top level of the file
+          return sn(nil, {})
+        end
+      end),
+      i(2),
+      i(0),
+    })
+  ),
+  ls.parser.parse_snippet('lf', 'local function ${1:name}($2)\n  $0\nend'),
   ls.parser.parse_snippet('if', 'if $1 then\n  $0\nend'),
   ls.parser.parse_snippet('pr', 'print($0)'),
   ls.parser.parse_snippet('ppr', 'vim.print($0)'),
