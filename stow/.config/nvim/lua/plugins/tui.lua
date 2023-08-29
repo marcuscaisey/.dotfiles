@@ -23,8 +23,7 @@ vim.keymap.set('n', '<c-f>', function()
     cmd = cmd,
     temp = '/tmp/tui-nvim',
     method = 'edit',
-    border = 'single',
-    borderhl = 'FloatBorder',
+    border = 'none',
     mappings = {
       { '<c-v>', ':!echo %c:p > /tmp/vifm-split<cr>:q<cr>' },
       { '<c-g>', ':!echo %d > /tmp/vifm-grep<cr>:q<cr>' },
@@ -44,8 +43,9 @@ vim.keymap.set('n', '<c-f>', function()
         })
       end),
     },
-    winhl = 'Normal',
-    height = 0.95,
-    width = 0.95,
+    height = 1,
+    width = 1,
+    x = 0,
+    y = 0,
   })
 end)

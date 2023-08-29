@@ -212,7 +212,6 @@ packer.startup({
     })
     use({
       'marcuscaisey/tui-nvim',
-      branch = 'winhl-fix',
       config = function()
         require('plugins.tui')
       end,
