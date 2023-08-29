@@ -184,7 +184,7 @@ packer.startup({
       end,
     })
     use({
-      '~/scratch/please.nvim/src',
+      'marcuscaisey/please.nvim',
       config = function()
         require('plugins.please')
       end,
