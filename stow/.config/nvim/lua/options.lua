@@ -28,22 +28,22 @@ vim.o.updatetime = 100
 vim.opt.formatoptions:append('n')
 
 filetypes.setup({
-  lua = { tab_size = 2, text_width = 120 },
+  go = { text_width = 120, indent_with_tabs = true },
+  html = { tab_size = 2 },
   javascript = { tab_size = 2 },
-  typescript = { tab_size = 2 },
   json = { tab_size = 2 },
   jsonc = { tab_size = 2 },
-  python = { text_width = 100 },
-  go = { text_width = 120, indent_with_tabs = true },
-  proto = { text_width = 100 },
-  query = { tab_size = 2 },
-  zsh = { tab_size = 2 },
-  sh = { tab_size = 2 },
+  lua = { tab_size = 2, text_width = 120 },
   markdown = { text_width = 100, auto_wrap = true },
-  html = { tab_size = 2 },
-  sql = { tab_size = 2, text_width = 100 },
-  scheme = { tab_size = 2 },
   please = { text_width = 120 },
+  proto = { text_width = 100 },
+  python = { text_width = 100 },
+  query = { tab_size = 2 },
+  scheme = { tab_size = 2 },
+  sh = { tab_size = 2 },
+  sql = { tab_size = 2, text_width = 100 },
+  typescript = { tab_size = 2 },
+  zsh = { tab_size = 2 },
 })
 
 vim.filetype.add({
