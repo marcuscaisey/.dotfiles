@@ -40,7 +40,7 @@ filetypes.setup({
   python = { text_width = 100 },
   query = { tab_size = 2 },
   scheme = { tab_size = 2 },
-  sh = { tab_size = 2 },
+  sh = { text_width = 120, tab_size = 2 },
   sql = { tab_size = 2, text_width = 100 },
   typescript = { tab_size = 2 },
   zsh = { tab_size = 2 },
