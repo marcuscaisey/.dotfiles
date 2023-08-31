@@ -9,6 +9,22 @@ mason_lspconfig.setup({
   automatic_installation = true,
 })
 
+local augroup = vim.api.nvim_create_augroup('lspconfig_config', { clear = true })
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.server_capabilities.codeLensProvider then
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'BufWritePost', 'CursorHold' }, {
+        callback = vim.lsp.codelens.refresh,
+        group = augroup,
+        buffer = args.buf,
+        desc = 'Refresh codelenses automatically in this buffer',
+      })
+    end
+  end,
+  group = augroup,
+})
+
 configs.please = {
   default_config = {
     cmd = { 'plz', 'tool', 'lps' },
@@ -42,7 +58,6 @@ vim.notify = function(msg, level, opts)
   notify(msg, level, opts)
 end
 
-local gopls_group = vim.api.nvim_create_augroup('gopls', { clear = true })
 lspconfig.gopls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
   settings = {
@@ -61,17 +76,11 @@ lspconfig.gopls.setup({
     },
   },
   on_attach = function(_, bufnr)
-    vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'BufWritePost', 'CursorHold' }, {
-      callback = vim.lsp.codelens.refresh,
-      group = gopls_group,
-      buffer = bufnr,
-      desc = 'Refresh codelenses when gopls is running',
-    })
     vim.api.nvim_create_autocmd('BufWritePre', {
       callback = function()
         vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
       end,
-      group = gopls_group,
+      group = augroup,
       buffer = bufnr,
       desc = 'Organize imports before saving',
     })
