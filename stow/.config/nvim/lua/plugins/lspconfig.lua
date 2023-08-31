@@ -48,16 +48,6 @@ lspconfig.ccls.setup({
 
 lspconfig.cmake.setup({})
 
--- Bodge to silence the 'No code actions available' message which gets logged when I run the source.organizeImports code
--- action on save in a Go file and the imports are already organised.
-local notify = vim.notify
-vim.notify = function(msg, level, opts)
-  if msg == 'No code actions available' then
-    return
-  end
-  notify(msg, level, opts)
-end
-
 lspconfig.gopls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
   settings = {
@@ -75,16 +65,6 @@ lspconfig.gopls.setup({
       staticcheck = true,
     },
   },
-  on_attach = function(_, bufnr)
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      callback = function()
-        vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
-      end,
-      group = augroup,
-      buffer = bufnr,
-      desc = 'Organize imports before saving',
-    })
-  end,
   root_dir = function(fname)
     local go_mod = vim.fs.find('go.mod', { upward = true, path = vim.fs.dirname(fname) })[1]
     if go_mod then
