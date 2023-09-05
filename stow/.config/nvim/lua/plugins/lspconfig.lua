@@ -128,7 +128,6 @@ require('neodev').setup({
 lspconfig.lua_ls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
   on_attach = function(_, bufnr)
-    -- This gets set automatically by nvim which breaks formatting with gq.
     vim.bo[bufnr].formatexpr = ''
   end,
   settings = {
