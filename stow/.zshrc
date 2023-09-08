@@ -86,11 +86,6 @@ fi
 #                                   aliases
 ################################################################################
 alias ls="exa"
-alias lsl="ls -l"
-alias lsa="ls -a"
-alias lsal="ls -al"
-alias lsla=lsal
-alias l="ls -algh"
 
 alias vo='nvim -c "e #<1"'
 
