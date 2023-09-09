@@ -19,6 +19,8 @@ vim.keymap.set('n', 'N', 'Nzz',
   { desc = 'Repeat the latest "/" or "?" in opposite direction, then redraw the current line at center of the window' })
 -- stylua: ignore end
 
+vim.keymap.set('n', '<leader>m', '<cmd>messages<cr>')
+
 local last_scroll_time = 0
 local scrolling = false
 vim.keymap.set('n', '<c-d>', function()
