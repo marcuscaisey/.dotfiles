@@ -82,8 +82,18 @@ vim.keymap.set('n', 'k', function()
   vim.cmd.normal({ 'k', bang = true })
 end, { desc = 'Move cursor up, setting the previous context mark if a count greater than 1 is provided' })
 
-vim.keymap.set({ 'n', 'v' }, 'dro', ':diffget REMOTE<cr>')
-vim.keymap.set({ 'n', 'v' }, 'dlo', ':diffget LOCAL<cr>')
+vim.keymap.set(
+  'n',
+  'dlo',
+  '<cmd>diffget LOCAL<cr>',
+  { desc = 'Modify the current buffer to undo difference with the LOCAL vimdiff buffer', silent = true }
+)
+vim.keymap.set(
+  'n',
+  'dro',
+  '<cmd>diffget REMOTE<cr>',
+  { desc = 'Modify the current buffer to undo difference with the REMOTE vimdiff buffer', silent = true }
+)
 
 vim.keymap.set('n', ']g', function()
   vim.fn.search([[GIVEN\|WHEN\|THEN]], 'W')
