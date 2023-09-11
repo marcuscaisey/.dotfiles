@@ -1,4 +1,5 @@
 local gitsigns = require('gitsigns')
+local actions = require('gitsigns.actions')
 
 gitsigns.setup({
   numhl = true,
@@ -6,30 +7,41 @@ gitsigns.setup({
     border = 'none',
     relative = 'cursor',
   },
+  on_attach = function(bufnr)
+    vim.keymap.set('n', ']c', function()
+      if vim.wo.diff then
+        return ']c'
+      end
+      actions.next_hunk({
+        wrap = false,
+        navigation_message = true,
+      })
+      return '<Ignore>'
+    end, { buffer = bufnr, expr = true })
+    vim.keymap.set('n', '[c', function()
+      if vim.wo.diff then
+        return '[c'
+      end
+      actions.prev_hunk({
+        wrap = false,
+        navigation_message = true,
+      })
+      return '<Ignore>'
+    end, { buffer = bufnr, expr = true })
+    vim.keymap.set('n', '<leader>hs', actions.stage_hunk, { buffer = bufnr })
+    vim.keymap.set('v', '<leader>hs', function()
+      actions.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+    end, { buffer = bufnr })
+    vim.keymap.set('n', '<leader>hS', actions.stage_buffer, { buffer = bufnr })
+    vim.keymap.set('n', '<leader>hu', actions.undo_stage_hunk, { buffer = bufnr })
+    vim.keymap.set('n', '<leader>hr', actions.reset_hunk, { buffer = bufnr })
+    vim.keymap.set('v', '<leader>hr', function()
+      actions.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+    end, { buffer = bufnr })
+    vim.keymap.set('n', '<leader>hR', actions.reset_buffer, { buffer = bufnr })
+    vim.keymap.set('n', '<leader>hp', actions.preview_hunk_inline, { buffer = bufnr })
+    vim.keymap.set('n', '<leader>gc', function()
+      actions.setqflist('all', { open = true })
+    end, { buffer = bufnr })
+  end,
 })
-
-vim.keymap.set('n', ']c', function()
-  gitsigns.next_hunk({
-    navigation_message = true,
-    wrap = false,
-    greedy = true,
-  })
-end)
-vim.keymap.set('n', '[c', function()
-  gitsigns.prev_hunk({
-    navigation_message = true,
-    wrap = false,
-    greedy = true,
-  })
-end)
-vim.keymap.set({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>', { silent = true })
-vim.keymap.set('n', '<leader>hS', gitsigns.stage_buffer)
-vim.keymap.set('n', '<leader>hu', gitsigns.undo_stage_hunk)
-vim.keymap.set({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<cr>', { silent = true })
-vim.keymap.set('n', '<leader>hR', gitsigns.reset_buffer)
-vim.keymap.set('n', '<leader>hp', gitsigns.preview_hunk_inline)
-vim.keymap.set('n', '<leader>hd', gitsigns.toggle_deleted)
-vim.keymap.set({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
-vim.keymap.set('n', '<leader>gc', function()
-  gitsigns.setqflist('all', { open = true })
-end)
