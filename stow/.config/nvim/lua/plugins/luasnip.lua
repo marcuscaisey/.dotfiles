@@ -29,7 +29,18 @@ ls.add_snippets('lua', {
     'f',
     fmt('function{}({})\n  {}\nend', {
       d(1, function()
-        if not vim.treesitter.get_node():parent() then
+        local cursor = vim.api.nvim_win_get_cursor(0)
+        local node = vim.treesitter.get_node({
+          pos = {
+            -- Subtract 1 from row to translate from 1-based cursor position to 0-based treesitter position.
+            cursor[1] - 1,
+            -- If the node that the cursor was in before the snippet was invoked was the last child of its parent, the
+            -- cursor position that we read seems to be the last position of its parent. Subtracting 1 moves the cursor
+            -- back into the last child node.
+            math.max(cursor[2] - 1, 0),
+          },
+        })
+        if node and not node:parent() then
           -- Function has a name if we're at the top level of the file
           return sn(nil, { t(' '), i(1) })
         else
@@ -99,7 +110,18 @@ ls.add_snippets('go', {
     'f',
     fmt('func{}({}) {}{}{{\n\t{}\n}}', {
       d(1, function()
-        if not vim.treesitter.get_node():parent() then
+        local cursor = vim.api.nvim_win_get_cursor(0)
+        local node = vim.treesitter.get_node({
+          pos = {
+            -- Subtract 1 from row to translate from 1-based cursor position to 0-based treesitter position.
+            cursor[1] - 1,
+            -- If the node that the cursor was in before the snippet was invoked was the last child of its parent, the
+            -- cursor position that we read seems to be the last position of its parent. Subtracting 1 moves the cursor
+            -- back into the last child node.
+            math.max(cursor[2] - 1, 0),
+          },
+        })
+        if node and not node:parent() then
           -- Function has a name if we're at the top level of the file
           return sn(nil, { t(' '), i(1) })
         else
