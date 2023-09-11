@@ -118,10 +118,6 @@ ls.add_snippets('go', {
   key = 'go',
 })
 
-ls.add_snippets('gitrebase', {
-  ps('up', 'update-ref refs/heads/$0'),
-})
-
 vim.api.nvim_create_autocmd('ModeChanged', {
   pattern = '*:s',
   callback = function()
