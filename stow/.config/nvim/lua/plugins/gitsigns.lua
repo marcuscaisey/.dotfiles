@@ -31,20 +31,5 @@ vim.keymap.set('n', '<leader>hp', gitsigns.preview_hunk_inline)
 vim.keymap.set('n', '<leader>hd', gitsigns.toggle_deleted)
 vim.keymap.set({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
 vim.keymap.set('n', '<leader>gc', function()
-  local result = vim.system({ 'git', 'diff', '--quiet' }):wait()
-  if result.code == 0 then
-    print('No Git changes')
-    vim.cmd.cclose()
-    return
-  end
-
-  vim.fn.setqflist({})
-  gitsigns.setqflist('all', { open = false })
-  -- wait for quickfix list to have items in before opening
-  vim.wait(5000, function()
-    local qf_items = vim.fn.getqflist()
-    return #qf_items > 0
-  end, 10)
-  vim.cmd.copen()
-  vim.cmd.cfirst()
+  gitsigns.setqflist('all', { open = true })
 end)
