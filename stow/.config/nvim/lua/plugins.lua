@@ -107,12 +107,6 @@ packer.startup({
       end,
     })
     use({
-      'norcalli/nvim-colorizer.lua',
-      config = function()
-        require('colorizer').setup()
-      end,
-    })
-    use({
       'nvim-telescope/telescope.nvim',
       requires = {
         'nvim-lua/plenary.nvim',
