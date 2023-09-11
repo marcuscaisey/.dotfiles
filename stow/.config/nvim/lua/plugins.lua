@@ -151,12 +151,6 @@ packer.startup({
       end,
     })
     use({
-      'ggandor/leap.nvim',
-      config = function()
-        require('plugins.leap')
-      end,
-    })
-    use({
       'bkad/camelcasemotion',
       config = function()
         require('plugins.camel_case_motion')
