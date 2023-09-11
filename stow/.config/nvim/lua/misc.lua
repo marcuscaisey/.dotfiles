@@ -123,3 +123,28 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   group = group,
   desc = 'Run wollemi on parent directory of go file',
 })
+
+local diff_augroup = vim.api.nvim_create_augroup('diff', { clear = true })
+vim.api.nvim_create_autocmd('VimEnter', {
+  group = diff_augroup,
+  desc = 'Disable diagnostics in all windows with diff enabled',
+  callback = function()
+    for _, winid in ipairs(vim.api.nvim_list_wins()) do
+      if vim.wo[winid].diff then
+        vim.diagnostic.disable(vim.api.nvim_win_get_buf(winid))
+      end
+    end
+  end,
+})
+vim.api.nvim_create_autocmd('OptionSet', {
+  group = diff_augroup,
+  pattern = 'diff',
+  desc = 'Toggle diagnostics when diff enabled and disabled',
+  callback = function()
+    if vim.v.option_new == '1' then
+      vim.diagnostic.disable(0)
+    else
+      vim.diagnostic.enable(0)
+    end
+  end,
+})

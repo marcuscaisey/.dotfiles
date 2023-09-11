@@ -191,14 +191,6 @@ packer.startup({
     use('michaeljsmith/vim-indent-object')
     use('tpope/vim-abolish')
     use({
-      'akinsho/git-conflict.nvim',
-      tag = '*',
-      config = function()
-        require('plugins.git_conflict')
-      end,
-      after = 'nvim',
-    })
-    use({
       'https://gitlab.com/yorickpeterse/nvim-pqf',
       config = function()
         require('pqf').setup()

@@ -93,7 +93,6 @@ alias yank="tmux load-buffer -w -"
 
 # git
 alias oops="gau && gcn!"
-alias conflicts='nvim -q <(git diff --name-only --diff-filter=U | sed -e "s@^@$(git rev-parse --show-toplevel)/@" -e "s/$/:1:conflicts/" | xargs realpath --relative-to $(pwd)) +copen'
 alias gcfd="git clean -fd"
 alias gbm='git branch --set-upstream-to=master'
 

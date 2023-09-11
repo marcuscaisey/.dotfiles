@@ -11,9 +11,6 @@ catppuccin.setup({
   highlight_overrides = {
     mocha = function(palette)
       return {
-        GitConflictCurrent = { bg = colors.darken(palette.green, 0.2, palette.base) },
-        GitConflictIncoming = { bg = colors.darken(palette.blue, 0.2, palette.base) },
-        GitConflictAncestor = { bg = palette.surface1 },
         LualineCwd = { fg = palette.surface2, bg = palette.mantle },
         IncSearch = { bg = palette.peach },
         NormalFloat = { fg = palette.overlay2, bg = palette.surface0 },
