@@ -28,11 +28,6 @@ vim.keymap.set('n', 'J', 'm`J``', { desc = 'Join lines, keeping the cursor in it
 
 vim.keymap.set('t', '<esc>', '<c-\\><c-n>', { desc = 'Go back to Normal mode' })
 
-vim.keymap.set('n', '<leader>dt', vim.cmd.diffthis, { desc = 'Make the current window part of the diff windows' })
-vim.keymap.set('n', '<leader>do', function()
-  vim.cmd.diffoff({ bang = true })
-end, { desc = 'Switch off diff mode for all windows in the current tab page' })
-
 vim.keymap.set('v', 'p', 'P', { desc = 'Replace the selected text without changing the unnamed register' })
 
 vim.keymap.set('n', '<leader>so', function()
@@ -55,19 +50,6 @@ vim.keymap.set('n', 'k', function()
   end
   vim.cmd.normal({ 'k', bang = true })
 end, { desc = 'Move cursor up, setting the previous context mark if a count greater than 1 is provided' })
-
-vim.keymap.set(
-  'n',
-  'dlo',
-  '<cmd>diffget LOCAL<cr>',
-  { desc = 'Modify the current buffer to undo difference with the LOCAL vimdiff buffer', silent = true }
-)
-vim.keymap.set(
-  'n',
-  'dro',
-  '<cmd>diffget REMOTE<cr>',
-  { desc = 'Modify the current buffer to undo difference with the REMOTE vimdiff buffer', silent = true }
-)
 
 vim.keymap.set('n', ']g', function()
   vim.fn.search([[GIVEN\|WHEN\|THEN]], 'W')
