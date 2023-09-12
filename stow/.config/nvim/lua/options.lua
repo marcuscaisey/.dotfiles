@@ -1,7 +1,7 @@
 vim.o.clipboard = 'unnamed'
 vim.o.cursorline = true
 vim.o.colorcolumn = '+1'
-vim.o.diffopt = vim.o.diffopt .. ',linematch:60'
+vim.opt.diffopt:append('linematch:60')
 vim.o.expandtab = true
 vim.o.hidden = true
 vim.o.hlsearch = false
@@ -13,7 +13,7 @@ vim.o.pumheight = 10
 vim.o.relativenumber = true
 vim.o.scrolloff = 10
 vim.o.shiftwidth = 4
-vim.o.shortmess = vim.o.shortmess .. 'S'
+vim.opt.shortmess:append('S')
 vim.o.showmode = false
 vim.o.signcolumn = 'yes:2'
 vim.o.smartcase = true
