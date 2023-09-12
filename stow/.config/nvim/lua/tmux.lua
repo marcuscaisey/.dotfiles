@@ -1,4 +1,4 @@
-local augroup = vim.nvim_create_augroup('tmux', { clear = true })
+local augroup = vim.api.nvim_create_augroup('tmux', { clear = true })
 
 vim.api.nvim_create_autocmd({ 'VimLeave' }, {
   callback = function()
