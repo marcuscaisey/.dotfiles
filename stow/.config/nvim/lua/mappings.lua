@@ -125,24 +125,6 @@ vim.keymap.set('n', '<leader>sy', function()
   print(string.format('Yanked %s', relative_filepath_with_line))
 end, { desc = 'Yank the path of the current buffer relative to the git root in sourcegraph search format' })
 
-vim.keymap.set('n', '<leader>q', function()
-  local qf_window_id = vim.fn.getqflist({ winid = 0 }).winid
-  -- window id > 0 means that the window is open
-  local qf_open = qf_window_id > 0
-  if qf_open then
-    vim.cmd.cclose()
-  else
-    vim.cmd.copen()
-  end
-end, { desc = 'Toggle quickfix window' })
-
-vim.keymap.set('n', ']q', function()
-  pcall(vim.cmd.cnext)
-end, { desc = 'Jump to the next item in the quickfix list' })
-vim.keymap.set('n', '[q', function()
-  pcall(vim.cmd.cprev)
-end, { desc = 'Jump to the previous item in the quickfix list' })
-
 vim.keymap.set('n', '<leader>cb', function()
   -- filter buffers for changed property since bufmodified = 1 doesn't seem to filter out all unchanged buffers
   local changed_buffers = vim.tbl_filter(

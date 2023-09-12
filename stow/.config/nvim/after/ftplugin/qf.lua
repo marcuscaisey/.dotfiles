@@ -21,3 +21,22 @@ vim.api.nvim_create_autocmd('WinClosed', {
   group = vim.api.nvim_create_augroup('qf', { clear = true }),
   desc = 'Quit if last open window is the quickfix',
 })
+
+vim.keymap.set('n', '<leader>q', function()
+  local qf_window_id = vim.fn.getqflist({ winid = 0 }).winid
+  -- window id > 0 means that the window is open
+  local qf_open = qf_window_id > 0
+  if qf_open then
+    vim.cmd.cclose()
+  else
+    vim.cmd.copen()
+  end
+end, { desc = 'Toggle quickfix window' })
+
+vim.keymap.set('n', ']q', function()
+  pcall(vim.cmd.cnext)
+end, { desc = 'Jump to the next item in the quickfix list' })
+
+vim.keymap.set('n', '[q', function()
+  pcall(vim.cmd.cprev)
+end, { desc = 'Jump to the previous item in the quickfix list' })
