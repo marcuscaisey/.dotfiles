@@ -50,7 +50,7 @@ vim.api.nvim_create_autocmd('CursorMoved', {
   desc = "Unset the scrolling variable if this event wasn't triggered by a scroll",
 })
 
-vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines, keeping the cursor in its current position' })
+vim.keymap.set('n', 'J', 'm`J``', { desc = 'Join lines, keeping the cursor in its current position' })
 
 vim.keymap.set('t', '<esc>', '<c-\\><c-n>', { desc = 'Go back to Normal mode' })
 
