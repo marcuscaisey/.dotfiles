@@ -1,7 +1,6 @@
 vim.o.clipboard = 'unnamed'
-vim.o.cursorline = true
 vim.o.colorcolumn = '+1'
-vim.opt.diffopt:append('linematch:60')
+vim.o.cursorline = true
 vim.o.expandtab = true
 vim.o.hidden = true
 vim.o.hlsearch = false
@@ -13,7 +12,6 @@ vim.o.pumheight = 10
 vim.o.relativenumber = true
 vim.o.scrolloff = 10
 vim.o.shiftwidth = 4
-vim.opt.shortmess:append('S')
 vim.o.showmode = false
 vim.o.signcolumn = 'yes:2'
 vim.o.smartcase = true
@@ -23,7 +21,9 @@ vim.o.swapfile = false
 vim.o.tabstop = 4
 vim.o.termguicolors = true
 vim.o.updatetime = 100
+vim.opt.diffopt:append('linematch:60')
 vim.opt.formatoptions:append('n')
+vim.opt.shortmess:append('S')
 
 vim.filetype.add({
   extension = {
