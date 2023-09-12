@@ -19,6 +19,7 @@ vim.keymap.set('n', 'N', 'Nzz',
   { desc = 'Repeat the latest "/" or "?" in opposite direction, then redraw the current line at center of the window' })
 -- stylua: ignore end
 
+-- stylua: ignore
 vim.keymap.set({ 'o', 'v' }, 'ae', ':<c-u>execute "normal! gg" | keepjumps normal! VG<cr>',
   { desc = '"around everything" text object, selects everything in the buffer', silent = true })
 
