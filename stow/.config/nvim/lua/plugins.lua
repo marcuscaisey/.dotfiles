@@ -177,10 +177,6 @@ packer.startup({
         require('plugins.please')
       end,
     })
-    use({
-      'kana/vim-textobj-entire',
-      requires = 'kana/vim-textobj-user',
-    })
     use('nelstrom/vim-visual-star-search')
     use('michaeljsmith/vim-indent-object')
     use('tpope/vim-abolish')
