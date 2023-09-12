@@ -22,7 +22,7 @@ vim.keymap.set('n', 'N', 'Nzz',
 vim.keymap.set({ 'o', 'v' }, 'ae', ':<c-u>execute "normal! gg" | keepjumps normal! VG<cr>',
   { desc = '"around everything" text object, selects everything in the buffer', silent = true })
 
-vim.keymap.set('n', '<leader>m', '<cmd>messages<cr>')
+vim.keymap.set('n', '<leader>m', '<cmd>messages<cr>', { desc = 'Show all messages' })
 
 local last_scroll_time = 0
 local scrolling = false
