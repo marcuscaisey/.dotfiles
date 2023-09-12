@@ -4,13 +4,13 @@
     navigate = true
     line-numbers = true
     syntax-theme = Catppuccin-mocha
-[difftool]
-    prompt = true
 [diff]
     tool = nvimdiff
     colorMoved = default
+[difftool]
+    trustExitCode = true
 [difftool "nvimdiff"]
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+    cmd = nvim -d -c 'wincmd l' \"$LOCAL\" \"$REMOTE\"
 [interactive]
     diffFilter = delta --color-only
 [merge]
