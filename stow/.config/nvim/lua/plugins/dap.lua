@@ -49,3 +49,30 @@ vim.keymap.set('n', '<f11>', function()
   dap.step_into({ askForTargets = true })
 end)
 vim.keymap.set('n', '<f23>', dap.step_out)
+
+dap.adapters.delve = {
+  type = 'server',
+  port = '${port}',
+  executable = {
+    command = 'dlv',
+    args = { 'dap', '-l', '127.0.0.1:${port}' },
+  },
+}
+
+-- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
+dap.configurations.go = {
+  {
+    type = 'delve',
+    request = 'launch',
+    name = 'Debug',
+    mode = 'debug',
+    program = '${file}',
+  },
+  {
+    type = 'delve',
+    request = 'launch',
+    name = 'Debug test',
+    mode = 'test',
+    program = '${file}',
+  },
+}
