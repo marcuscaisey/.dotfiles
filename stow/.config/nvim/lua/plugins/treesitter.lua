@@ -8,6 +8,7 @@ configs.setup({
     'git_rebase',
     'gitcommit',
     'go',
+    'gomod',
     'html',
     'java',
     'javascript',
