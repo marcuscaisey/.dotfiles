@@ -46,6 +46,7 @@ plugins=(
   colored-man-pages
   docker
   fast-syntax-highlighting
+  golang
   git
   kubectl
   kube-ps1
