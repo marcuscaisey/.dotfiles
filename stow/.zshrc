@@ -46,6 +46,7 @@ plugins=(
   colored-man-pages
   docker
   fast-syntax-highlighting
+  git
   kubectl
   kube-ps1
   nvm
