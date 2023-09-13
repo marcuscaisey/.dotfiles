@@ -9,6 +9,8 @@ configs.setup({
     'gitcommit',
     'go',
     'gomod',
+    'gowork',
+    'gosum',
     'html',
     'java',
     'javascript',
