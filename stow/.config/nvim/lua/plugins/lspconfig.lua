@@ -62,6 +62,11 @@ lspconfig.gopls.setup({
     },
   },
   root_dir = function(fname)
+    local go_work_dir = util.root_pattern('go.work')(fname)
+    if go_work_dir then
+      return go_work_dir
+    end
+
     local go_mod_dir = util.root_pattern('go.mod')(fname)
     if go_mod_dir then
       return go_mod_dir
