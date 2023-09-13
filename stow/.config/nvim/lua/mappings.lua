@@ -68,6 +68,13 @@ vim.keymap.set('n', '<leader>y', function()
   print(string.format('Yanked %s', relative_filepath))
 end, { desc = 'Yank the path of the current buffer relative to the git root' })
 
+vim.keymap.set('n', '<leader>Y', function()
+  local filepath = vim.api.nvim_buf_get_name(0)
+  vim.fn.setreg('"', filepath)
+  vim.fn.setreg('*', filepath)
+  print(string.format('Yanked %s', filepath))
+end, { desc = 'Yank the absolute path of the current buffer' })
+
 vim.keymap.set('n', '<leader>sy', function()
   local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
   local filepath = vim.api.nvim_buf_get_name(0)
