@@ -82,6 +82,8 @@ lspconfig.gopls.setup({
   end,
 })
 
+lspconfig.golangci_lint_ls.setup({})
+
 lspconfig.intelephense.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
 })
