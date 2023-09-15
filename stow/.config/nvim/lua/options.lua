@@ -45,6 +45,7 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave'
 
 vim.filetype.add({
   extension = {
+    lox = 'lox',
     vifm = 'vim',
   },
   filename = {
