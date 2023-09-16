@@ -46,7 +46,7 @@ if linux; then
   cecho "Updating list of available packages"
   sudo apt update
 
-  pkgs="zsh git tmux exa fd-find bat ripgrep vifm stow curl make cmake gettext g++ ca-certificates gpg"
+  pkgs="zsh git tmux exa fd-find bat ripgrep vifm stow curl make cmake gettext g++"
   cecho "Installing $pkgs"
   sudo apt install -y $pkgs
 
