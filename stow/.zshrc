@@ -10,7 +10,7 @@ typeset -U PATH
 ################################################################################
 function zvm_yank_to_clipboard() {
   zvm_yank
-	printf "%s" "$CUTBUFFER" | tmux load-buffer -w -
+	printf "%s" "$CUTBUFFER" | yank
   zvm_exit_visual_mode
 }
 function zvm_config() {
@@ -90,8 +90,6 @@ alias ls="exa"
 
 alias vo='nvim -c "e #<1"'
 
-alias yank="tmux load-buffer -w -"
-
 # git
 alias oops="gau && gcn!"
 alias gcfd="git clean -fd"
@@ -99,6 +97,16 @@ alias gbm='git branch --set-upstream-to=master'
 
 alias d="cd ~/.dotfiles"
 alias s="cd ~/scratch"
+
+
+################################################################################
+#                                     yank
+################################################################################
+# yank copies stdin to the clipboard via tmux.
+# A single trailing newline is stripped if there is one.
+function yank() {
+  perl -pe 'chomp if eof' | tmux load-buffer -w -
+}
 
 
 ################################################################################
