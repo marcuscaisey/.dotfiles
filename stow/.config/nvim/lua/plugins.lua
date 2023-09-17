@@ -93,12 +93,11 @@ packer.startup({
       tag = 'legacy',
     })
     use({
-      'marcuscaisey/gitsigns.nvim',
+      'lewis6991/gitsigns.nvim',
       requires = 'nvim-lua/plenary.nvim',
       config = function()
         require('plugins.gitsigns')
       end,
-      branch = 'setqflist-newline',
     })
     use('stevearc/dressing.nvim')
     use({
