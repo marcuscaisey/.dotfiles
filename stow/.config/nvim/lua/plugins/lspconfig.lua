@@ -130,7 +130,7 @@ lspconfig.pylsp.setup({
 
 require('neodev').setup({
   override = function(_, library)
-    library.plugins = true
+    library.enabled = true
   end,
 })
 
