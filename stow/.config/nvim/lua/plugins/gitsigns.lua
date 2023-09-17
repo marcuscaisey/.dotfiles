@@ -54,10 +54,14 @@ vim.keymap.set('n', '<leader>gc', function()
   vim.fn.setqflist({})
   gitsigns.setqflist('all', { open = false })
   -- wait for quickfix list to have items in before opening
-  vim.wait(5000, function()
+  local qf_populated = vim.wait(5000, function()
     local qf_items = vim.fn.getqflist()
     return #qf_items > 0
   end, 10)
+  if not qf_populated then
+    vim.api.nvim_err_writeln('Timed out after waiting 5s for quickfix list to be populated with Git changes')
+    return
+  end
   vim.cmd.copen()
   vim.cmd.cfirst()
 end)
