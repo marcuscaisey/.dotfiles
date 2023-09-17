@@ -36,6 +36,16 @@ dap.configurations.go = {
     name = 'Debug',
     mode = 'debug',
     program = '${file}',
+    args = function()
+      return coroutine.create(function(dap_run_co)
+        vim.ui.input({ prompt = 'Enter program arguments' }, function(args)
+          if not args then
+            return
+          end
+          coroutine.resume(dap_run_co, vim.split(args, ' ', { trimempty = true }))
+        end)
+      end)
+    end,
   },
   {
     type = 'delve',
