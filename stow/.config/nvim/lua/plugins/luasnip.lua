@@ -54,20 +54,15 @@ ls.add_snippets('lua', {
   ),
   ls.parser.parse_snippet('lf', 'local function ${1:name}($2)\n  $0\nend'),
   ls.parser.parse_snippet('if', 'if $1 then\n  $0\nend'),
-  ls.parser.parse_snippet('pr', 'print($0)'),
-  ls.parser.parse_snippet('ppr', 'vim.print($0)'),
-  ls.parser.parse_snippet('in', 'vim.inspect($0)'),
   ls.parser.parse_snippet('for', 'for ${1:k}, ${2:v} in ${3|pairs,ipairs|}(${4:t}) do \n  $0\nend'),
   ls.parser.parse_snippet('desc', 'describe($1, function()\n  $0\nend)'),
   ls.parser.parse_snippet('it', 'it($1, function()\n  $0\nend)'),
-  ls.parser.parse_snippet('req', "local $1 = require '$2'"),
 }, {
   key = 'lua',
 })
 
 ls.add_snippets('go', {
   ls.parser.parse_snippet('prf', 'fmt.Printf("$1\\n", $0)'),
-  ls.parser.parse_snippet('pr', 'fmt.Println($0)'),
   s('dp', fmt('fmt.Printf("{}: %+v\\n", {})', { rep(1), i(1) })),
   s(
     'jp',
