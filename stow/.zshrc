@@ -46,7 +46,6 @@ ZSH_THEME=""
 zstyle ':omz:*' aliases no # Skip all aliases, in lib files and enabled plugins
 
 plugins=(
-  docker
   fast-syntax-highlighting
   golang
   git
