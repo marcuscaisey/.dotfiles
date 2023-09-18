@@ -51,7 +51,6 @@ plugins=(
   git
   kube-ps1
   zsh-vi-mode
-  tmux
   zsh-autosuggestions
 )
 
