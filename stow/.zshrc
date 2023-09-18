@@ -94,7 +94,7 @@ fi
 alias ls="exa"
 
 # git
-alias oops="gau && gcn!"
+alias oops="git add --update && git commit --no-edit --amend"
 
 alias d="cd ~/.dotfiles"
 alias s="cd ~/scratch"
