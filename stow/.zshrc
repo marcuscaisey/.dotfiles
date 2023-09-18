@@ -31,6 +31,10 @@ function zvm_after_lazy_keybindings() {
   bindkey -M menuselect 'j' vi-down-line-or-history
 }
 
+export ZVM_VI_HIGHLIGHT_FOREGROUND=#cdd6f4
+export ZVM_VI_HIGHLIGHT_BACKGROUND=#45475a
+export ZVM_VI_HIGHLIGHT_EXTRASTYLE=bold
+
 
 ################################################################################
 #                                  oh my zsh
