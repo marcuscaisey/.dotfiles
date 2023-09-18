@@ -43,7 +43,8 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME=""
 
-zstyle ':omz:plugins:nvm' lazy yes
+zstyle ':omz:plugins:nvm' lazy yes # Lazy load nvm plugin
+zstyle ':omz:*' aliases no # Skip all aliases, in lib files and enabled plugins
 
 plugins=(
   alias-finder
@@ -96,8 +97,6 @@ alias vo='nvim -c "e #<1"'
 
 # git
 alias oops="gau && gcn!"
-alias gcfd="git clean -fd"
-alias gbm='git branch --set-upstream-to=master'
 
 alias d="cd ~/.dotfiles"
 alias s="cd ~/scratch"
