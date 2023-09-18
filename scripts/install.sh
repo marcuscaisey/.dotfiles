@@ -111,9 +111,6 @@ else
   ~/.pyenv/bin/pyenv update
 fi
 
-cecho "Installing nvm"
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-
 cecho "Installing nvim"
 mkdir -p ~/scratch
 clone_or_pull https://github.com/neovim/neovim ~/scratch/neovim

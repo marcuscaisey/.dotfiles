@@ -43,7 +43,6 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME=""
 
-zstyle ':omz:plugins:nvm' lazy yes # Lazy load nvm plugin
 zstyle ':omz:*' aliases no # Skip all aliases, in lib files and enabled plugins
 
 plugins=(
@@ -53,7 +52,6 @@ plugins=(
   git
   kubectl
   kube-ps1
-  nvm
   zsh-vi-mode
   tmux
   zsh-autosuggestions
