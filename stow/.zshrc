@@ -47,7 +47,6 @@ zstyle ':omz:plugins:nvm' lazy yes # Lazy load nvm plugin
 zstyle ':omz:*' aliases no # Skip all aliases, in lib files and enabled plugins
 
 plugins=(
-  alias-finder
   colored-man-pages
   docker
   fast-syntax-highlighting
