@@ -111,6 +111,9 @@ function yank() {
 # Use fd for find instead of default find
 export FZF_DEFAULT_COMMAND="fd --follow --type f --exclude .git --strip-cwd-prefix"
 
+# Use ~~ for completion trigger instead of **
+export FZF_COMPLETION_TRIGGER='~~'
+
 # Use fd instead of the default find
 _fzf_compgen_path() {
     fd --hidden --follow --exclude .git . $1
