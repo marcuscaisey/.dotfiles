@@ -34,7 +34,6 @@ packer.startup({
     use('williamboman/mason-lspconfig.nvim')
     use({
       'kosayoda/nvim-lightbulb',
-      requires = 'antoinemadec/FixCursorHold.nvim',
       config = function()
         require('plugins.lightbulb')
       end,
