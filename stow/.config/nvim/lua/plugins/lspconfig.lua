@@ -118,11 +118,12 @@ lspconfig.pylsp.setup({
   settings = {
     pylsp = {
       plugins = {
-        pyflakes = { enabled = false },
-        mccabe = { enabled = false },
-        pycodestyle = { enabled = false },
         autopep8 = { enabled = false },
         flake8 = { enabled = true },
+        mccabe = { enabled = false },
+        pycodestyle = { enabled = false },
+        pyflakes = { enabled = false },
+        yapf = { enabled = false },
       },
     },
   },
