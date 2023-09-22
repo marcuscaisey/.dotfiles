@@ -17,6 +17,7 @@ configs.setup({
     'json',
     'php',
     'proto',
+    'promql',
     'sql',
     'regex',
     'ruby',
