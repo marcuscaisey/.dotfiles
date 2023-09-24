@@ -114,12 +114,6 @@ packer.startup({
     })
     use('tpope/vim-eunuch')
     use({
-      'windwp/nvim-autopairs',
-      config = function()
-        require('nvim-autopairs').setup()
-      end,
-    })
-    use({
       'vim-scripts/ReplaceWithRegister',
       config = function()
         require('plugins.replace_with_register')
