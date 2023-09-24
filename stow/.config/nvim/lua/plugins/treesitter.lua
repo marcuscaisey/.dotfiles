@@ -1,6 +1,5 @@
 local context = require('treesitter-context')
 local configs = require('nvim-treesitter.configs')
-local tsutils = require('nvim-treesitter.ts_utils')
 
 configs.setup({
   ensure_installed = {
