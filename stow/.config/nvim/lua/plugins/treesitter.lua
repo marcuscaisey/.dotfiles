@@ -15,6 +15,7 @@ configs.setup({
     'java',
     'javascript',
     'json',
+    'perl',
     'php',
     'promql',
     'proto',
