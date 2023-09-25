@@ -24,8 +24,6 @@ function zvm_after_init() {
 function zvm_after_lazy_keybindings() {
   zvm_define_widget zvm_yank_to_clipboard
   bindkey -M visual 'y' zvm_yank_to_clipboard
-  bindkey -M vicmd 'gh' vi-first-non-blank
-  bindkey -M vicmd 'gl' vi-end-of-line
   bindkey -M menuselect 'h' vi-backward-char
   bindkey -M menuselect 'k' vi-up-line-or-history
   bindkey -M menuselect 'l' vi-forward-char

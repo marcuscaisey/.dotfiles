@@ -2,11 +2,6 @@ vim.g.mapleader = ' '
 
 vim.keymap.set('i', 'jj', '<esc>', { desc = 'End Insert or Replace mode, go back to Normal mode' })
 
-vim.keymap.set({ 'n', 'v' }, 'gh', '^', { desc = 'Jump to the first non-blank character of the line' })
-vim.keymap.set({ 'n', 'v' }, 'gj', 'G', { desc = 'Jump to the last line' })
-vim.keymap.set({ 'n', 'v' }, 'gk', 'gg', { desc = 'Jump to the first line' })
-vim.keymap.set({ 'n', 'v' }, 'gl', 'g_', { desc = 'Jump to the last non-blank character of the line' })
-
 vim.keymap.set('n', '<c-w><', '<c-w>5<', { desc = 'Decrease current window width by 5' })
 vim.keymap.set('n', '<c-w>>', '<c-w>5>', { desc = 'Increase current window width by 5' })
 vim.keymap.set('n', '<c-w>-', '<c-w>5-', { desc = 'Decrease current window height by 5' })
