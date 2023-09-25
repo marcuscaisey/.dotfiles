@@ -19,6 +19,7 @@ function zvm_config() {
 function zvm_after_init() {
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
   bindkey -M viins '^ ' autosuggest-accept
+  bindkey -M viins '^x^e' zvm_vi_edit_command_line
 }
 function zvm_after_lazy_keybindings() {
   zvm_define_widget zvm_yank_to_clipboard
