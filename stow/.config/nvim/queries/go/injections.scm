@@ -33,6 +33,6 @@
 
 ; Inject Python into strings which contain a line like "api = 4.0.0"
 ((raw_string_literal) @injection.content
-  (#match? @injection.content "api\\s*\\=\\s*(\"\\d\\.\\d\\.\\d\"|'\\d\\.\\d\\.\\d')\n")
+  (#match? @injection.content "api\\s*\\=\\s*(\"\\d\\.\\d\\d?\\.\\d\"|'\\d\\.\\d\\d?\\.\\d')\n")
   (#offset! @injection.content 0 1 0 -1)
   (#set! injection.language "python"))
