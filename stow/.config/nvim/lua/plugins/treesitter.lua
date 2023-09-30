@@ -10,6 +10,7 @@ configs.setup({
     'gomod',
     'gosum',
     'gowork',
+    'ebnf',
     'html',
     'java',
     'javascript',
