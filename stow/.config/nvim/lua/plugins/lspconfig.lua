@@ -42,7 +42,9 @@ lspconfig.clangd.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
 })
 
-lspconfig.cmake.setup({})
+lspconfig.cmake.setup({
+  capabilities = cmp_nvim_lsp.default_capabilities(),
+})
 
 lspconfig.gopls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
