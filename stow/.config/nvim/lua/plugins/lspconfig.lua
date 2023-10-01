@@ -52,15 +52,11 @@ lspconfig.gopls.setup({
     gopls = {
       directoryFilters = { '-plz-out' },
       linksInHover = false,
-      analyses = {
-        unusedparams = true,
-      },
       usePlaceholders = false,
       semanticTokens = true,
       codelenses = {
         gc_details = true,
       },
-      staticcheck = true,
     },
   },
   root_dir = function(fname)
@@ -81,6 +77,14 @@ lspconfig.gopls.setup({
 
 lspconfig.golangci_lint_ls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
+  on_new_config = function(config)
+    -- https://golangci-lint.run/usage/linters/#enabled-by-default
+    local linters = { 'errcheck', 'gosimple', 'govet', 'ineffassign', 'staticcheck', 'unused' }
+    for _, linter in ipairs(linters) do
+      table.insert(config.init_options.command, '--enable')
+      table.insert(config.init_options.command, linter)
+    end
+  end,
 })
 
 lspconfig.intelephense.setup({
