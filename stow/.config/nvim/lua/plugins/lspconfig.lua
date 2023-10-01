@@ -176,10 +176,20 @@ lspconfig.yamlls.setup({
   },
 })
 
+local virtual_text_float_config = {
+  source = true,
+  ---@param diagnostic Diagnostic
+  ---@return string
+  format = function(diagnostic)
+    local source_prefix = string.format('%s: ', diagnostic.source)
+    local message = diagnostic.message:gsub('^' .. source_prefix, '')
+    return message
+  end,
+}
 vim.diagnostic.config({
-  float = {
-    source = 'always',
-  },
+  float = virtual_text_float_config,
+  virtual_text = virtual_text_float_config,
+  source = true,
   severity_sort = true,
 })
 
