@@ -19,7 +19,6 @@ packer.startup({
     })
     use('nvim-treesitter/nvim-treesitter-textobjects')
     use('nvim-treesitter/nvim-treesitter-context')
-    use('windwp/nvim-ts-autotag')
     use({
       'neovim/nvim-lspconfig',
       config = function()
