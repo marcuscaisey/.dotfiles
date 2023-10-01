@@ -83,6 +83,7 @@ lspconfig.gopls.setup({
 })
 
 lspconfig.golangci_lint_ls.setup({
+  capabilities = cmp_nvim_lsp.default_capabilities(),
   root_dir = util.root_pattern(
     '.golangci.yml',
     '.golangci.yaml',
