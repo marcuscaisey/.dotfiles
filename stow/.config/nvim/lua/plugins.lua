@@ -5,7 +5,6 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 local packer = require('packer')
-local util = require('packer.util')
 
 packer.startup({
   function(use)
@@ -187,9 +186,4 @@ packer.startup({
     })
     use('folke/neodev.nvim')
   end,
-  config = {
-    display = {
-      open_fn = util.float,
-    },
-  },
 })
