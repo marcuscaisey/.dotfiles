@@ -163,7 +163,6 @@ packer.startup({
         require('plugins.please')
       end,
     })
-    use('nelstrom/vim-visual-star-search')
     use('michaeljsmith/vim-indent-object')
     use('tpope/vim-abolish')
     use({
