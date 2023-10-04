@@ -1,12 +1,7 @@
-local ls = require('luasnip')
-local s = ls.snippet
-local i = ls.insert_node
-local extras = require('luasnip.extras')
-local rep = extras.rep
-local fmt = require('luasnip.extras.fmt').fmt
+local luasnip = require('luasnip')
 local types = require('luasnip.util.types')
 
-ls.config.setup({
+luasnip.config.setup({
   updateevents = 'TextChanged,TextChangedI',
   delete_check_events = 'TextChanged',
   history = true,
@@ -19,20 +14,17 @@ ls.config.setup({
   },
 })
 
-ls.add_snippets('go', {
-  s('dp', fmt('fmt.Printf("{}: %+v\\n", {})', { rep(1), i(1) })),
-  s(
+luasnip.add_snippets('go', {
+  luasnip.parser.parse_snippet('dp', 'fmt.Printf("$1: %+v\\n", $1)'),
+  luasnip.parser.parse_snippet(
     'jp',
-    fmt(
-      [[
-        {}Bytes, err := json.MarshalIndent({}, "", "  ")
-        if err != nil {{
-            panic(err)
-        }}
-        fmt.Printf("{}: %+v\n", string({}Bytes))
-      ]],
-      { rep(1), i(1), rep(1), rep(1) }
-    )
+    [[
+      $1Bytes, err := json.MarshalIndent($1, "", "  ")
+      if err != nil {{
+          panic(err)
+      }}
+      fmt.Printf("$1: %+v\n", string($1Bytes))
+  ]]
   ),
 }, {
   key = 'go',
@@ -41,7 +33,7 @@ ls.add_snippets('go', {
 vim.api.nvim_create_autocmd('ModeChanged', {
   pattern = '*:s',
   callback = function()
-    if ls.in_snippet() then
+    if luasnip.in_snippet() then
       local keys = vim.api.nvim_replace_termcodes('<c-r>_', true, false, true)
       vim.api.nvim_feedkeys(keys, 'n', false)
     end
@@ -51,18 +43,18 @@ vim.api.nvim_create_autocmd('ModeChanged', {
 })
 
 vim.keymap.set({ 'i', 's' }, '<c-j>', function()
-  if ls.expand_or_jumpable() then
-    ls.expand_or_jump()
+  if luasnip.expand_or_jumpable() then
+    luasnip.expand_or_jump()
   end
 end)
 vim.keymap.set({ 'i', 's' }, '<c-k>', function()
-  if ls.jumpable(-1) then
-    ls.jump(-1)
+  if luasnip.jumpable(-1) then
+    luasnip.jump(-1)
   end
 end)
 vim.keymap.set({ 'i', 's' }, '<c-h>', function()
-  if ls.choice_active() then
-    ls.change_choice(1)
+  if luasnip.choice_active() then
+    luasnip.change_choice(1)
   end
 end)
 vim.keymap.set('n', '<leader><leader>s', function()
