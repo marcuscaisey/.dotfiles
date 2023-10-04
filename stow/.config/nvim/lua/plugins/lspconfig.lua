@@ -212,6 +212,15 @@ end)
 vim.keymap.set('n', '[d', function()
   vim.diagnostic.goto_prev({ wrap = false })
 end)
+vim.keymap.set('n', '<leader>dd', function()
+  if vim.diagnostic.is_disabled() then
+    vim.diagnostic.enable()
+    print('Enabled diagnostics')
+  else
+    vim.diagnostic.disable()
+    print('Disabled diagnostics')
+  end
+end)
 vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run)
 vim.keymap.set('n', ']e', function()
   vim.diagnostic.goto_next({ severity = { min = vim.diagnostic.severity.WARN }, wrap = false })
