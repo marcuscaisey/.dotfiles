@@ -1,5 +1,4 @@
 local telescope = require('telescope')
-local state = require('telescope.actions.state')
 local layout = require('telescope.actions.layout')
 local builtin = require('telescope.builtin')
 local entry_display = require('telescope.pickers.entry_display')
@@ -29,22 +28,6 @@ end
 local custom_actions = transform_mod({
   open_first_qf_item = function(_)
     vim.cmd.cfirst()
-  end,
-  grep_in_files = function(prompt_bufnr)
-    local picker = state.get_current_picker(prompt_bufnr)
-    local selections = picker:get_multi_selection()
-    local filenames = {}
-    if #selections > 0 then
-      for _, entry in pairs(selections) do
-        table.insert(filenames, entry[1])
-      end
-    else
-      for entry in picker.manager:iter() do
-        table.insert(filenames, entry[1])
-      end
-    end
-    actions.close(prompt_bufnr)
-    builtin.live_grep({ search_dirs = filenames })
   end,
 })
 
@@ -86,14 +69,6 @@ telescope.setup({
       },
       previewer = false,
       find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix', '--follow', '--hidden', '--exclude', '.git' },
-      mappings = {
-        i = {
-          ['<c-g>'] = custom_actions.grep_in_files,
-        },
-        n = {
-          ['<c-g>'] = custom_actions.grep_in_files,
-        },
-      },
     },
     oldfiles = {
       layout_config = {
