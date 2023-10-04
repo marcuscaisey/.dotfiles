@@ -97,6 +97,7 @@ packer.startup({
       config = function()
         require('plugins.catppuccin')
       end,
+      as = 'catppuccin',
     })
     use({
       'nvim-telescope/telescope.nvim',
