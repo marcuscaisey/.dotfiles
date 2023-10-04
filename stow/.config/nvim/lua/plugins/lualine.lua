@@ -69,7 +69,7 @@ lualine.setup({
       { lsp_clients, component_separators = { right = '' } },
       {
         'diagnostics',
-        symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+        symbols = { error = ' ', warn = ' ', info = ' ', hint = '󰌵 ' },
         padding = { left = 0, right = 1 },
       },
     },
