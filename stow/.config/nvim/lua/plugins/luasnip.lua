@@ -1,13 +1,8 @@
 local ls = require('luasnip')
 local s = ls.snippet
-local sn = ls.snippet_node
-local t = ls.text_node
 local i = ls.insert_node
-local c = ls.choice_node
-local d = ls.dynamic_node
 local extras = require('luasnip.extras')
 local rep = extras.rep
-local nonempty = extras.nonempty
 local fmt = require('luasnip.extras.fmt').fmt
 local types = require('luasnip.util.types')
 
@@ -24,45 +19,7 @@ ls.config.setup({
   },
 })
 
-ls.add_snippets('lua', {
-  s(
-    'f',
-    fmt('function{}({})\n  {}\nend', {
-      d(1, function()
-        local cursor = vim.api.nvim_win_get_cursor(0)
-        local node = vim.treesitter.get_node({
-          pos = {
-            -- Subtract 1 from row to translate from 1-based cursor position to 0-based treesitter position.
-            cursor[1] - 1,
-            -- If the node that the cursor was in before the snippet was invoked was the last child of its parent, the
-            -- cursor position that we read seems to be the last position of its parent. Subtracting 1 moves the cursor
-            -- back into the last child node.
-            math.max(cursor[2] - 1, 0),
-          },
-        })
-        if node and not node:parent() then
-          -- Function has a name if we're at the top level of the file
-          return sn(nil, { t(' '), i(1) })
-        else
-          -- Function has no name if we're not at the top level of the file
-          return sn(nil, {})
-        end
-      end),
-      i(2),
-      i(0),
-    })
-  ),
-  ls.parser.parse_snippet('lf', 'local function ${1:name}($2)\n  $0\nend'),
-  ls.parser.parse_snippet('if', 'if $1 then\n  $0\nend'),
-  ls.parser.parse_snippet('for', 'for ${1:k}, ${2:v} in ${3|pairs,ipairs|}(${4:t}) do \n  $0\nend'),
-  ls.parser.parse_snippet('desc', 'describe($1, function()\n  $0\nend)'),
-  ls.parser.parse_snippet('it', 'it($1, function()\n  $0\nend)'),
-}, {
-  key = 'lua',
-})
-
 ls.add_snippets('go', {
-  ls.parser.parse_snippet('prf', 'fmt.Printf("$1\\n", $0)'),
   s('dp', fmt('fmt.Printf("{}: %+v\\n", {})', { rep(1), i(1) })),
   s(
     'jp',
@@ -77,61 +34,6 @@ ls.add_snippets('go', {
       { rep(1), i(1), rep(1), rep(1) }
     )
   ),
-  s(
-    'iferr',
-    fmt('if {} {{\n\t{}\n}}', {
-      c(1, {
-        fmt('{} != nil', { i(1, 'err') }),
-        fmt('{} := {}; {} != nil', { i(1, 'err'), i(2), rep(1) }),
-      }),
-      i(0),
-    })
-  ),
-  ls.parser.parse_snippet('fe', 'fmt.Errorf("$1: ${2:%w}"$3, err)$0'),
-  ls.parser.parse_snippet('if', 'if $1 {\n\t$0\n}'),
-  s(
-    'for',
-    fmt('for {} := range {} {{\n\t{}\n}}', {
-      c(1, {
-        { i(1, '_'), t(', '), i(2, nil) },
-        i(nil, nil),
-      }),
-      i(2),
-      i(0),
-    })
-  ),
-  ls.parser.parse_snippet('fori', 'for ${1:i} := ${2:0}; $1 ${3:<} $4; $1${5:++} {\n\t$0\n}'),
-  s(
-    'f',
-    fmt('func{}({}) {}{}{{\n\t{}\n}}', {
-      d(1, function()
-        local cursor = vim.api.nvim_win_get_cursor(0)
-        local node = vim.treesitter.get_node({
-          pos = {
-            -- Subtract 1 from row to translate from 1-based cursor position to 0-based treesitter position.
-            cursor[1] - 1,
-            -- If the node that the cursor was in before the snippet was invoked was the last child of its parent, the
-            -- cursor position that we read seems to be the last position of its parent. Subtracting 1 moves the cursor
-            -- back into the last child node.
-            math.max(cursor[2] - 1, 0),
-          },
-        })
-        if node and not node:parent() then
-          -- Function has a name if we're at the top level of the file
-          return sn(nil, { t(' '), i(1) })
-        else
-          -- Function has no name if we're not at the top level of the file
-          return sn(nil, {})
-        end
-      end),
-      i(2),
-      i(3),
-      nonempty(3, ' ', ''),
-      i(0),
-    })
-  ),
-  s('mf', fmt('func ({}) {}({}) {}{}{{\n\t{}\n}}', { i(1), i(2), i(3), i(4), nonempty(4, ' ', ''), i(0) })),
-  ls.parser.parse_snippet('gf', 'go func($1) {\n\t$2\n}($3)$0'),
 }, {
   key = 'go',
 })
