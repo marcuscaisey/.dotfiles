@@ -107,15 +107,18 @@ lspconfig.please.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
 })
 
-lspconfig.pyright.setup({
+lspconfig.pylsp.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
   settings = {
-    python = {
-      analysis = {
-        autoSearchPaths = true,
-        diagnosticMode = 'workspace',
-        useLibraryCodeForTypes = true,
-        typeCheckingMode = 'off',
+    pylsp = {
+      plugins = {
+        autopep8 = { enabled = false },
+        flake8 = { enabled = true },
+        mccabe = { enabled = false },
+        pycodestyle = { enabled = false },
+        pyflakes = { enabled = false },
+        yapf = { enabled = false },
+        jedi_completion = { enabled = true },
       },
     },
   },
@@ -124,9 +127,11 @@ lspconfig.pyright.setup({
     if not plzconfig_dir then
       return
     end
-    config.settings.python.analysis.extraPaths = {
-      plzconfig_dir,
-      vim.fs.joinpath(plzconfig_dir, 'plz-out/gen'),
+    config.settings.pylsp.plugins.jedi = {
+      extra_paths = {
+        plzconfig_dir,
+        vim.fs.joinpath(plzconfig_dir, 'plz-out/gen'),
+      },
     }
   end,
 })
