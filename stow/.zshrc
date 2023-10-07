@@ -180,15 +180,3 @@ if [ -d "$HOME/.kube/configs" ]; then
   done
 fi
 export PATH="$HOME/.krew/bin:$PATH"
-
-
-################################################################################
-#                                     vifm
-################################################################################
-vifm() {
-    local dst="$(command vifm --choose-dir - "$@")"
-    if [ -z "$dst" ]; then
-        return 1
-    fi
-    cd "$dst"
-}
