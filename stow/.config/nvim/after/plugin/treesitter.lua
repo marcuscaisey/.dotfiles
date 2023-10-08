@@ -1,4 +1,3 @@
-local context = require('treesitter-context')
 local ok, configs = pcall(require, 'nvim-treesitter.configs')
 if not ok then
   return
@@ -90,5 +89,3 @@ configs.setup({
     max_file_lines = nil,
   },
 })
-
-context.setup()
