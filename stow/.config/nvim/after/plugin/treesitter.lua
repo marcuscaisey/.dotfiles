@@ -6,13 +6,13 @@ end
 configs.setup({
   ensure_installed = {
     'comment',
+    'ebnf',
     'git_rebase',
     'gitcommit',
     'go',
     'gomod',
     'gosum',
     'gowork',
-    'ebnf',
     'html',
     'java',
     'javascript',
