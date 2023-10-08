@@ -156,9 +156,6 @@ require('neodev').setup({
 
 lspconfig.lua_ls.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  on_attach = function(_, bufnr)
-    vim.bo[bufnr].formatexpr = ''
-  end,
   settings = {
     Lua = {
       runtime = {
