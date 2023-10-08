@@ -16,6 +16,10 @@ local ok, mason_lspconfig = pcall(require, 'mason-lspconfig')
 if not ok then
   return
 end
+local ok, neodev = pcall(require, 'neodev')
+if not ok then
+  return
+end
 
 mason.setup()
 mason_lspconfig.setup({
@@ -155,7 +159,7 @@ lspconfig.pylsp.setup({
   end,
 })
 
-require('neodev').setup({
+neodev.setup({
   override = function(_, library)
     library.enabled = true
   end,
