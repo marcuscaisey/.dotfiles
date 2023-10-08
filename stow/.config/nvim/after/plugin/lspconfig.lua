@@ -26,6 +26,10 @@ mason_lspconfig.setup({
   automatic_installation = true,
 })
 
+util.default_config = vim.tbl_extend('force', util.default_config, {
+  capabilities = cmp_nvim_lsp.default_capabilities(),
+})
+
 local augroup = vim.api.nvim_create_augroup('lspconfig_config', { clear = true })
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
@@ -57,20 +61,13 @@ configs.please = {
   },
 }
 
-lspconfig.bashls.setup({
-  capabilities = cmp_nvim_lsp.default_capabilities(),
-})
+lspconfig.bashls.setup({})
 
-lspconfig.clangd.setup({
-  capabilities = cmp_nvim_lsp.default_capabilities(),
-})
+lspconfig.clangd.setup({})
 
-lspconfig.cmake.setup({
-  capabilities = cmp_nvim_lsp.default_capabilities(),
-})
+lspconfig.cmake.setup({})
 
 lspconfig.gopls.setup({
-  capabilities = cmp_nvim_lsp.default_capabilities(),
   settings = {
     gopls = {
       directoryFilters = { '-plz-out' },
@@ -99,7 +96,6 @@ lspconfig.gopls.setup({
 })
 
 lspconfig.golangci_lint_ls.setup({
-  capabilities = cmp_nvim_lsp.default_capabilities(),
   on_new_config = function(config)
     -- https://golangci-lint.run/usage/linters/#enabled-by-default
     local linters = { 'errcheck', 'gosimple', 'govet', 'ineffassign', 'staticcheck', 'unused' }
@@ -110,28 +106,17 @@ lspconfig.golangci_lint_ls.setup({
   end,
 })
 
-lspconfig.intelephense.setup({
-  capabilities = cmp_nvim_lsp.default_capabilities(),
-})
+lspconfig.intelephense.setup({})
 
-lspconfig.java_language_server.setup({
-  capabilities = cmp_nvim_lsp.default_capabilities(),
-})
+lspconfig.java_language_server.setup({})
 
-lspconfig.jsonls.setup({
-  capabilities = cmp_nvim_lsp.default_capabilities(),
-})
+lspconfig.jsonls.setup({})
 
-lspconfig.marksman.setup({
-  capabilities = cmp_nvim_lsp.default_capabilities(),
-})
+lspconfig.marksman.setup({})
 
-lspconfig.please.setup({
-  capabilities = cmp_nvim_lsp.default_capabilities(),
-})
+lspconfig.please.setup({})
 
 lspconfig.pylsp.setup({
-  capabilities = cmp_nvim_lsp.default_capabilities(),
   settings = {
     pylsp = {
       plugins = {
@@ -166,7 +151,6 @@ neodev.setup({
 })
 
 lspconfig.lua_ls.setup({
-  capabilities = cmp_nvim_lsp.default_capabilities(),
   settings = {
     Lua = {
       runtime = {
@@ -193,16 +177,11 @@ lspconfig.lua_ls.setup({
   },
 })
 
-lspconfig.tsserver.setup({
-  capabilities = cmp_nvim_lsp.default_capabilities(),
-})
+lspconfig.tsserver.setup({})
 
-lspconfig.vimls.setup({
-  capabilities = cmp_nvim_lsp.default_capabilities(),
-})
+lspconfig.vimls.setup({})
 
 lspconfig.yamlls.setup({
-  capabilities = cmp_nvim_lsp.default_capabilities(),
   settings = {
     yaml = {
       validate = false,
@@ -211,10 +190,3 @@ lspconfig.yamlls.setup({
 })
 
 vim.lsp.set_log_level(vim.log.levels.OFF)
-
-vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
-vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run)
-vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action)
-vim.keymap.set('n', '<leader>fm', function()
-  vim.lsp.buf.format({ timeout_ms = 5000 })
-end)
