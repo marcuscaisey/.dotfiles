@@ -5,6 +5,8 @@ end
 
 configs.setup({
   ensure_installed = {
+    'bash',
+    'c',
     'comment',
     'ebnf',
     'git_rebase',
@@ -17,14 +19,20 @@ configs.setup({
     'java',
     'javascript',
     'json',
+    'lua',
+    'markdown',
     'perl',
     'php',
     'promql',
     'proto',
+    'python',
+    'query',
     'regex',
     'ruby',
     'scheme',
     'sql',
+    'vim',
+    'vimdoc',
     'yaml',
   },
   highlight = {
