@@ -2,8 +2,8 @@ local ok, harpoon = pcall(require, 'harpoon')
 if not ok then
   return
 end
-local ui = require('harpoon.ui')
 local mark = require('harpoon.mark')
+local ui = require('harpoon.ui')
 
 harpoon.setup({
   menu = {

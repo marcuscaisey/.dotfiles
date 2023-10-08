@@ -35,4 +35,3 @@ end)
 vim.keymap.set('n', '<leader>pa', function()
   require('please').action_history()
 end)
-

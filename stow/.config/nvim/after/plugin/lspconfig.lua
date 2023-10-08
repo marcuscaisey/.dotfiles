@@ -2,8 +2,8 @@ local ok, lspconfig = pcall(require, 'lspconfig')
 if not ok then
   return
 end
-local util = require('lspconfig.util')
 local configs = require('lspconfig.configs')
+local util = require('lspconfig.util')
 local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 if not ok then
   return

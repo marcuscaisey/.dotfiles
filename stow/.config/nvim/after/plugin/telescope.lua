@@ -2,10 +2,10 @@ local ok, telescope = pcall(require, 'telescope')
 if not ok then
   return
 end
-local layout = require('telescope.actions.layout')
+local actions = require('telescope.actions')
 local builtin = require('telescope.builtin')
 local entry_display = require('telescope.pickers.entry_display')
-local actions = require('telescope.actions')
+local layout = require('telescope.actions.layout')
 local transform_mod = require('telescope.actions.mt').transform_mod
 
 --- Shortens the given path by either:
