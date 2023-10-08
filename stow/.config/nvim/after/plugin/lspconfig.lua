@@ -191,9 +191,6 @@ lspconfig.lua_ls.setup({
 
 lspconfig.tsserver.setup({
   capabilities = cmp_nvim_lsp.default_capabilities(),
-  root_dir = function()
-    return vim.fn.getcwd()
-  end,
 })
 
 lspconfig.vimls.setup({
