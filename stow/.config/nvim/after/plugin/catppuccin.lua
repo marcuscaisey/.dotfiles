@@ -1,4 +1,7 @@
-local catppuccin = require('catppuccin')
+local ok, catppuccin = pcall(require, 'catppuccin')
+if not ok then
+  return
+end
 local colors = require('catppuccin.utils.colors')
 
 catppuccin.setup({

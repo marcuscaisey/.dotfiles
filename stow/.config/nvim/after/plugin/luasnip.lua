@@ -1,4 +1,7 @@
-local luasnip = require('luasnip')
+local ok, luasnip = pcall(require, 'luasnip')
+if not ok then
+  return
+end
 local types = require('luasnip.util.types')
 
 luasnip.config.setup({

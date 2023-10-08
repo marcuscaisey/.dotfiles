@@ -1,5 +1,11 @@
-local tui = require('tui-nvim')
-local telescope_builtin = require('telescope.builtin')
+local ok, tui = pcall(require, 'tui-nvim')
+if not ok then
+  return
+end
+local ok, telescope_builtin = pcall(require, 'telescope.builtin')
+if not ok then
+  return
+end
 
 local path_action = function(path_file, callback)
   return function()

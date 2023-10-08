@@ -1,4 +1,7 @@
-local telescope = require('telescope')
+local ok, telescope = pcall(require, 'telescope')
+if not ok then
+  return
+end
 local layout = require('telescope.actions.layout')
 local builtin = require('telescope.builtin')
 local entry_display = require('telescope.pickers.entry_display')

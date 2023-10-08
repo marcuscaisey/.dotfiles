@@ -1,4 +1,7 @@
-local dap = require('dap')
+local ok, dap = pcall(require, 'dap')
+if not ok then
+  return
+end
 
 vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DapBreakpoint' })
 vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = 'DapBreakpoint' })

@@ -1,9 +1,21 @@
-local lspconfig = require('lspconfig')
+local ok, lspconfig = pcall(require, 'lspconfig')
+if not ok then
+  return
+end
 local util = require('lspconfig.util')
 local configs = require('lspconfig.configs')
-local cmp_nvim_lsp = require('cmp_nvim_lsp')
-local mason_lspconfig = require('mason-lspconfig')
-local mason = require('mason')
+local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+if not ok then
+  return
+end
+local ok, mason = pcall(require, 'mason')
+if not ok then
+  return
+end
+local ok, mason_lspconfig = pcall(require, 'mason-lspconfig')
+if not ok then
+  return
+end
 
 mason.setup()
 mason_lspconfig.setup({
