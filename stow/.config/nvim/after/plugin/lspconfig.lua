@@ -85,8 +85,6 @@ lspconfig.golangci_lint_ls.setup({
 
 lspconfig.intelephense.setup({})
 
-lspconfig.java_language_server.setup({})
-
 lspconfig.jsonls.setup({})
 
 lspconfig.marksman.setup({})
