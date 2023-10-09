@@ -30,29 +30,6 @@ util.default_config = vim.tbl_extend('force', util.default_config, {
   capabilities = cmp_nvim_lsp.default_capabilities(),
 })
 
-local augroup = vim.api.nvim_create_augroup('lspconfig_config', { clear = true })
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client and client.server_capabilities.codeLensProvider then
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'BufWritePost', 'CursorHold' }, {
-        callback = vim.lsp.codelens.refresh,
-        group = augroup,
-        buffer = args.buf,
-        desc = 'Refresh codelenses automatically in this buffer',
-      })
-    end
-
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
-    vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run)
-    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action)
-    vim.keymap.set('n', '<leader>fm', function()
-      vim.lsp.buf.format({ timeout_ms = 5000 })
-    end)
-  end,
-  group = augroup,
-})
-
 configs.please = {
   default_config = {
     cmd = { 'plz', 'tool', 'lps' },
@@ -188,5 +165,3 @@ lspconfig.yamlls.setup({
     },
   },
 })
-
-vim.lsp.set_log_level(vim.log.levels.OFF)
