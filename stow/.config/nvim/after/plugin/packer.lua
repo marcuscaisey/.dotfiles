@@ -51,7 +51,6 @@ packer.startup({
     use({ 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } })
     use({ 'tpope/vim-fugitive' })
     use({ 'marcuscaisey/please.nvim', requires = { 'nvim-treesitter/nvim-treesitter', 'mfussenegger/nvim-dap' } })
-    use({ 'michaeljsmith/vim-indent-object' })
     use({ 'tpope/vim-abolish' })
     use({ 'https://gitlab.com/yorickpeterse/nvim-pqf' })
     use({ 'marcuscaisey/tui-nvim' })
