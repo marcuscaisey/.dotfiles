@@ -24,8 +24,6 @@ vim.keymap.set('n', 'J', 'm`J``', { desc = 'Join lines, keeping the cursor in it
 
 vim.keymap.set('t', '<esc>', '<c-\\><c-n>', { desc = 'Go back to Normal mode' })
 
-vim.keymap.set('v', 'p', 'P', { desc = 'Replace the selected text without changing the unnamed register' })
-
 vim.keymap.set('n', '<leader>so', function()
   local file = vim.api.nvim_buf_get_name(0)
   print('Sourced ' .. file)
