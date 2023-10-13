@@ -45,13 +45,6 @@ vim.keymap.set('n', 'k', function()
   vim.cmd.normal({ 'k', bang = true })
 end, { desc = 'Move cursor up, setting the previous context mark if a count greater than 1 is provided' })
 
-vim.keymap.set('n', ']g', function()
-  vim.fn.search([[GIVEN\|WHEN\|THEN]], 'W')
-end, { desc = 'Jump to next GIVEN / WHEN / THEN' })
-vim.keymap.set('n', '[g', function()
-  vim.fn.search([[GIVEN\|WHEN\|THEN]], 'bW')
-end, { desc = 'Jump to previous GIVEN / WHEN / THEN' })
-
 vim.keymap.set('n', '<leader>y', function()
   local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
   local filepath = vim.api.nvim_buf_get_name(0)
