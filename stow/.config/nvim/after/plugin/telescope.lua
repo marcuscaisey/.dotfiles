@@ -32,6 +32,9 @@ local custom_actions = transform_mod({
   open_first_qf_item = function(_)
     vim.cmd.cfirst()
   end,
+  open_first_loc_item = function(_)
+    vim.cmd.lfirst()
+  end,
 })
 
 telescope.setup({
@@ -50,6 +53,7 @@ telescope.setup({
       i = {
         ['<c-h>'] = layout.toggle_preview,
         ['<c-q>'] = actions.smart_send_to_qflist + actions.open_qflist + custom_actions.open_first_qf_item,
+        ['<c-l>'] = actions.smart_send_to_loclist + actions.open_loclist + custom_actions.open_first_loc_item,
       },
       n = {
         ['<c-h>'] = layout.toggle_preview,
@@ -57,6 +61,7 @@ telescope.setup({
         ['<c-n>'] = actions.move_selection_next,
         ['<c-p>'] = actions.move_selection_previous,
         ['<c-q>'] = actions.smart_send_to_qflist + actions.open_qflist + custom_actions.open_first_qf_item,
+        ['<c-l>'] = actions.smart_send_to_loclist + actions.open_loclist + custom_actions.open_first_loc_item,
       },
     },
     sorting_strategy = 'ascending',
