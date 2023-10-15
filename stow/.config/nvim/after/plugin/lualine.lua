@@ -85,16 +85,8 @@ lualine.setup({
       { 'diff', padding = { left = 0, right = 1 } },
     },
     lualine_c = {
-      {
-        'filetype',
-        icon_only = true,
-        component_separators = { left = '' },
-        padding = { left = 1, right = 0 },
-      },
-      {
-        'filename',
-        path = 1,
-      },
+      { 'filetype', icon_only = true, component_separators = { left = '' }, padding = { left = 1, right = 0 } },
+      { 'filename', path = 1 },
       cwd,
     },
     lualine_x = { search_results },
