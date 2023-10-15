@@ -26,7 +26,7 @@ mason_lspconfig.setup({
   automatic_installation = true,
 })
 
-util.default_config = vim.tbl_extend('force', util.default_config, {
+util.default_config = vim.tbl_deep_extend('force', util.default_config, {
   capabilities = cmp_nvim_lsp.default_capabilities(),
 })
 
