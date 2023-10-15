@@ -38,7 +38,6 @@ packer.startup({
     use({ 'L3MON4D3/LuaSnip' })
     use({ 'ray-x/lsp_signature.nvim' })
     use({ 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } })
-    use({ 'j-hui/fidget.nvim', tag = 'legacy' })
     use({ 'lewis6991/gitsigns.nvim' })
     use({ 'stevearc/dressing.nvim' })
     use({ 'catppuccin/nvim', as = 'catppuccin' })
