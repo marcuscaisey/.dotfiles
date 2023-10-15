@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd('LspProgress', {
     local msg = { payload.title }
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if client then
-      table.insert(msg, 1, string.format('[%s]: ', client.name))
+      table.insert(msg, 1, string.format('%s: ', client.name))
     end
     if payload.message then
       table.insert(msg, string.format(': %s', payload.message))
