@@ -29,7 +29,6 @@ catppuccin.setup({
       enable_ui = true,
     },
     gitsigns = true,
-    leap = true,
     native_lsp = {
       enabled = true,
       virtual_text = {
