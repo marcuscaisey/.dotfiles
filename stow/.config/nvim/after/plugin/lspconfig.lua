@@ -137,9 +137,6 @@ lspconfig.lua_ls.setup({
       telemetry = {
         enable = false,
       },
-      completion = {
-        keywordSnippet = 'Disable',
-      },
       diagnostics = {
         disable = {
           'redefined-local',
