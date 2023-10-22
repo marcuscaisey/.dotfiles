@@ -72,14 +72,9 @@ end, { desc = 'Yank the path of the current buffer relative to the git root in s
 
 vim.keymap.set('n', '<leader>cb', function()
   -- filter buffers for changed property since bufmodified = 1 doesn't seem to filter out all unchanged buffers
-  local changed_buffers = vim.tbl_filter(
-    function(b)
-      return b.changed == 1
-    end,
-    vim.fn.getbufinfo({
-      bufmodified = 1,
-    })
-  )
+  local changed_buffers = vim.tbl_filter(function(b)
+    return b.changed == 1
+  end, vim.fn.getbufinfo({ bufmodified = 1 }) or {})
   if #changed_buffers == 0 then
     print('No unsaved buffers')
     return
