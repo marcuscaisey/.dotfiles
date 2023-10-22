@@ -13,6 +13,7 @@ local source_name_to_menu = {
   luasnip = '[SNIP]',
 }
 
+---@diagnostic disable-next-line: missing-fields
 cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
@@ -24,6 +25,7 @@ cmp.setup({
       luasnip.lsp_expand(args.body)
     end,
   },
+---@diagnostic disable-next-line: missing-fields
   confirmation = {
     default_behavior = cmp.ConfirmBehavior.Replace,
   },
@@ -50,12 +52,14 @@ cmp.setup({
       end
     end,
   },
+  ---@diagnostic disable-next-line: missing-fields
   sorting = {
     comparators = {
       cmp.config.compare.sort_text,
       cmp.config.compare.score,
     },
   },
+  ---@diagnostic disable-next-line: missing-fields
   formatting = {
     format = function(entry, vim_item)
       vim_item.menu = source_name_to_menu[entry.source.name]
