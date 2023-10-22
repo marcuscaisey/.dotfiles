@@ -29,7 +29,7 @@ cmp.setup({
     ['<c-f>'] = cmp.mapping.scroll_docs(4),
     ['<c-b>'] = cmp.mapping.scroll_docs(-4),
     ['<c-space>'] = cmp.mapping.complete(),
-    ['<tab>'] = cmp.mapping.abort(),
+    ['<c-e>'] = cmp.mapping.abort(),
     ['<cr>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
     ['<c-n>'] = cmp.mapping.select_next_item(),
     ['<c-p>'] = cmp.mapping.select_prev_item(),
