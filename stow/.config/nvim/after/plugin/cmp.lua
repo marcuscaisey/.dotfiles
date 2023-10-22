@@ -2,10 +2,6 @@ local ok, cmp = pcall(require, 'cmp')
 if not ok then
   return
 end
-local ok, luasnip = pcall(require, 'luasnip')
-if not ok then
-  return
-end
 
 local source_name_to_menu = {
   nvim_lsp = '[LSP]',
@@ -22,7 +18,7 @@ cmp.setup({
   },
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      vim.snippet.expand(args.body)
     end,
   },
   mapping = {
