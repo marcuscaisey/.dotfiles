@@ -25,32 +25,14 @@ cmp.setup({
       luasnip.lsp_expand(args.body)
     end,
   },
----@diagnostic disable-next-line: missing-fields
-  confirmation = {
-    default_behavior = cmp.ConfirmBehavior.Replace,
-  },
   mapping = {
-    ['<c-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<c-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<c-f>'] = cmp.mapping.scroll_docs(4),
+    ['<c-b>'] = cmp.mapping.scroll_docs(-4),
     ['<c-space>'] = cmp.mapping.complete(),
-    ['<tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.abort()
-      else
-        fallback()
-      end
-    end,
-    ['<cr>'] = cmp.mapping.confirm({ select = true }),
-    ['<c-n>'] = function()
-      if cmp.visible() then
-        cmp.select_next_item()
-      end
-    end,
-    ['<c-p>'] = function()
-      if cmp.visible() then
-        cmp.select_prev_item()
-      end
-    end,
+    ['<tab>'] = cmp.mapping.abort(),
+    ['<cr>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
+    ['<c-n>'] = cmp.mapping.select_next_item(),
+    ['<c-p>'] = cmp.mapping.select_prev_item(),
   },
   ---@diagnostic disable-next-line: missing-fields
   sorting = {
