@@ -3,6 +3,7 @@ vim.g.projectionist_heuristics = {
     ['*_test.py'] = { alternate = '{}.py' },
     ['*.py'] = { alternate = '{}_test.py' },
     ['*_test.go'] = { alternate = '{}.go' },
+    ['*_internal_test.go'] = { alternate = '{}.go' },
     ['*.go'] = { alternate = '{}_test.go' },
   },
   ['lua/'] = {
