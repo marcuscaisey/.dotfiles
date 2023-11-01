@@ -51,7 +51,7 @@ packer.startup({
     use({ 'tpope/vim-fugitive' })
     use({ 'marcuscaisey/please.nvim', requires = { 'nvim-treesitter/nvim-treesitter', 'mfussenegger/nvim-dap' } })
     use({ 'tpope/vim-abolish' })
-    use({ 'https://gitlab.com/yorickpeterse/nvim-pqf' })
+    use({ 'yorickpeterse/nvim-pqf' })
     use({ 'marcuscaisey/tui-nvim' })
     use({ 'marcuscaisey/olddirs.nvim', requires = { 'nvim-telescope/telescope.nvim' } })
     use({ 'tpope/vim-projectionist' })
