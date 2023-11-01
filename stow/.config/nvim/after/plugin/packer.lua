@@ -56,6 +56,7 @@ packer.startup({
     use({ 'marcuscaisey/olddirs.nvim', requires = { 'nvim-telescope/telescope.nvim' } })
     use({ 'tpope/vim-projectionist' })
     use({ 'folke/neodev.nvim' })
+    use({ 'tpope/vim-eunuch' })
 
     if bootstrap then
       vim.api.nvim_create_autocmd('User', {
