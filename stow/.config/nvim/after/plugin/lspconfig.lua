@@ -150,6 +150,8 @@ lspconfig.lua_ls.setup({
   },
 })
 
+lspconfig.taplo.setup({})
+
 lspconfig.tsserver.setup({})
 
 lspconfig.vimls.setup({})
