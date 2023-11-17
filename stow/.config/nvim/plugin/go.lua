@@ -3,7 +3,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   pattern = { '*.go' },
   desc = 'Run puku on parent directory',
   callback = function(args)
-    if #vim.fs.find('.plzconfig', { upward = true, path = args.file }) < 1 then
+    if #vim.fs.find('.plzconfig', { upward = true, path = vim.api.nvim_buf_get_name(args.buf) }) < 1 then
       return
     end
     local function output_handler(level)
