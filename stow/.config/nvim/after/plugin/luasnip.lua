@@ -9,9 +9,9 @@ luasnip.add_snippets('go', {
     'jp',
     [[
       $1Bytes, err := json.MarshalIndent($1, "", "  ")
-      if err != nil {{
+      if err != nil {
           panic(err)
-      }}
+      }
       fmt.Printf("$1: %+v\n", string($1Bytes))
   ]]
   ),
