@@ -6,19 +6,20 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     if #vim.fs.find('.plzconfig', { upward = true, path = vim.api.nvim_buf_get_name(args.buf) }) < 1 then
       return
     end
-    local function output_handler(level)
-      return vim.schedule_wrap(function(err, data)
-        if err then
-          vim.notify(err, vim.log.levels.ERROR)
-        elseif data then
-          vim.notify(data:gsub('\n$', ''), level)
-        end
-      end)
+    local function on_event(_, data)
+      local msg = table.concat(data, '\n')
+      msg = vim.trim(msg)
+      msg = msg:gsub('\t', string.rep(' ', 4))
+      if msg ~= '' then
+        vim.notify('puku: ' .. msg, vim.log.levels.INFO)
+      end
     end
-    vim.system({ 'puku', 'fmt', '...' }, {
+    vim.fn.jobstart({ 'puku', 'fmt', '...' }, {
       cwd = vim.fs.dirname(args.file),
-      stdout = output_handler(vim.log.levels.INFO),
-      stderr = output_handler(vim.log.levels.ERROR),
+      on_stdout = on_event,
+      on_stderr = on_event,
+      stdout_buffered = true,
+      stderr_buffered = true,
     })
   end,
 })
