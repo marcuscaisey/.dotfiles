@@ -1,7 +1,7 @@
 vim.api.nvim_create_autocmd('BufWritePost', {
   group = vim.api.nvim_create_augroup('go', { clear = true }),
   pattern = { '*.go' },
-  desc = 'Run puku on parent directory',
+  desc = 'Run puku on saved file',
   callback = function(args)
     if #vim.fs.find('.plzconfig', { upward = true, path = vim.api.nvim_buf_get_name(args.buf) }) < 1 then
       return
@@ -14,8 +14,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
         vim.notify('puku: ' .. msg, vim.log.levels.INFO)
       end
     end
-    vim.fn.jobstart({ 'puku', 'fmt', '...' }, {
-      cwd = vim.fs.dirname(args.file),
+    vim.fn.jobstart({ 'puku', 'fmt', args.file }, {
       on_stdout = on_event,
       on_stderr = on_event,
       stdout_buffered = true,
