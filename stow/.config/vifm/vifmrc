@@ -505,6 +505,11 @@ nnoremap <c-p> :FZFFd<cr>
 " Sync current pane directory to the directory of the other pane
 nnoremap <c-s> <c-i>:sync<cr><c-i>
 
+" Yank the name of the current file
+nnoremap <space>y :!echo -n %c | tmux load-buffer -w -<cr>:echo 'Yanked' expand('%c')<cr>
+" Yank the absolute path of the current file
+nnoremap <space>Y :!echo -n %c:p | tmux load-buffer -w -<cr>:echo 'Yanked' expand('%c:p')<cr>
+
 nnoremap q :q<cr>
 
 " ------------------------------------------------------------------------------
