@@ -31,6 +31,7 @@ configs.setup({
     'regex',
     'ruby',
     'scheme',
+    'typescript',
     'sql',
     'vim',
     'vimdoc',
