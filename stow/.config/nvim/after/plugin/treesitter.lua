@@ -52,16 +52,12 @@ configs.setup({
         ['aa'] = '@parameter.outer',
         ['ic'] = '@call.inner',
         ['ac'] = '@call.outer',
-        ['iC'] = '@class.inner',
-        ['aC'] = '@class.outer',
         ['iv'] = '@value.inner',
         ['av'] = '@value.outer',
       },
       selection_modes = {
         ['@function.outer'] = 'V',
         ['@function.inner'] = 'V',
-        ['@class.outer'] = 'V',
-        ['@class.inner'] = 'V',
       },
     },
     move = {
