@@ -87,14 +87,4 @@ configs.setup({
       },
     },
   },
-  autotag = {
-    enable = true,
-    enable_close = true,
-    enable_rename = true,
-  },
-  rainbow = {
-    enable = true,
-    extended_mode = true,
-    max_file_lines = nil,
-  },
 })
