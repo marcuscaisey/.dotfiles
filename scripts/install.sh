@@ -9,7 +9,7 @@ osx() {
 }
 
 # linux
-# Returns if we're running on osx
+# Returns if we're running on linux
 linux() {
   [ "$(uname)" = "Linux" ]
 }
