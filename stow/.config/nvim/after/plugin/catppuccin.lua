@@ -23,16 +23,8 @@ catppuccin.setup({
     end,
   },
   integrations = {
-    cmp = true,
-    gitsigns = true,
+    ---@diagnostic disable-next-line: missing-fields
     native_lsp = {
-      enabled = true,
-      virtual_text = {
-        errors = { 'italic' },
-        hints = { 'italic' },
-        warnings = { 'italic' },
-        information = { 'italic' },
-      },
       underlines = {
         errors = { 'undercurl' },
         hints = { 'undercurl' },
@@ -40,8 +32,6 @@ catppuccin.setup({
         information = { 'undercurl' },
       },
     },
-    telescope = true,
-    treesitter = true,
     treesitter_context = true,
   },
 })
