@@ -24,10 +24,6 @@ catppuccin.setup({
   },
   integrations = {
     cmp = true,
-    dap = {
-      enabled = true,
-      enable_ui = true,
-    },
     gitsigns = true,
     native_lsp = {
       enabled = true,
