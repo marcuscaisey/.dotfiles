@@ -57,6 +57,7 @@ packer.startup({
     use({ 'tpope/vim-projectionist' })
     use({ 'folke/neodev.nvim' })
     use({ 'tpope/vim-eunuch' })
+    use({ 'github/copilot.vim' })
 
     if bootstrap then
       vim.api.nvim_create_autocmd('User', {
