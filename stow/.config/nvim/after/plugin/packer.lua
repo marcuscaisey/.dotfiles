@@ -12,18 +12,8 @@ local packer = require('packer')
 packer.startup({
   function(use)
     use({ 'wbthomason/packer.nvim' })
-    use({
-      'nvim-treesitter/nvim-treesitter',
-      run = function()
-        local install = require('nvim-treesitter.install')
-        install.update({ with_sync = true })()
-      end,
-    })
-    use({
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      after = 'nvim-treesitter',
-      requires = 'nvim-treesitter/nvim-treesitter',
-    })
+    use({ 'nvim-treesitter/nvim-treesitter' })
+    use({ 'nvim-treesitter/nvim-treesitter-textobjects', requires = { 'nvim-treesitter/nvim-treesitter' } })
     use({ 'nvim-treesitter/nvim-treesitter-context' })
     use({ 'neovim/nvim-lspconfig' })
     use({ 'williamboman/mason.nvim' })
@@ -81,4 +71,7 @@ packer.startup({
       packer.install()
     end
   end,
+  config = {
+    compile_on_sync = false,
+  },
 })
