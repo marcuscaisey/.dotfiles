@@ -20,6 +20,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
         desc = 'Refresh codelenses automatically in this buffer',
       })
     end
+
+    -- Disable LSP formatting with gq, see :help lsp-defaults
+    vim.bo[args.buf].formatexpr = nil
   end,
 })
 
