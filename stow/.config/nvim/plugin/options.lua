@@ -4,6 +4,8 @@ vim.opt.cursorline = true
 vim.opt.diffopt:append('linematch:60')
 vim.opt.expandtab = true
 vim.opt.formatoptions:append('n')
+vim.opt.formatoptions:remove('o')
+vim.opt.formatoptions:remove('t')
 vim.opt.hidden = true
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true
