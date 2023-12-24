@@ -72,6 +72,8 @@ lspconfig.gopls.setup({
   end,
 })
 
+lspconfig.java_language_server.setup({})
+
 lspconfig.golangci_lint_ls.setup({
   on_new_config = function(config)
     -- https://golangci-lint.run/usage/linters/#enabled-by-default
