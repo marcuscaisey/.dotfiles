@@ -58,3 +58,19 @@ dap.configurations.go = {
     program = '${file}',
   },
 }
+
+dap.adapters.debugpy = {
+  type = 'executable',
+  command = 'python',
+  args = { '-m', 'debugpy.adapter' },
+}
+
+-- https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
+dap.configurations.python = {
+  {
+    type = 'debugpy',
+    request = 'launch',
+    name = 'Debug',
+    program = '${file}',
+  },
+}
