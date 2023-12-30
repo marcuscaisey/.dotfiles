@@ -21,15 +21,9 @@ cmp.setup({
       vim.snippet.expand(args.body)
     end,
   },
-  mapping = {
-    ['<c-f>'] = cmp.mapping.scroll_docs(4),
-    ['<c-b>'] = cmp.mapping.scroll_docs(-4),
+  mapping = cmp.mapping.preset.insert({
     ['<c-space>'] = cmp.mapping.complete(),
-    ['<c-e>'] = cmp.mapping.abort(),
-    ['<cr>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
-    ['<c-n>'] = cmp.mapping.select_next_item(),
-    ['<c-p>'] = cmp.mapping.select_prev_item(),
-  },
+  }),
   ---@diagnostic disable-next-line: missing-fields
   sorting = {
     comparators = {
