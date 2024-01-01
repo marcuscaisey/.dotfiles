@@ -72,7 +72,15 @@ lspconfig.gopls.setup({
   end,
 })
 
-lspconfig.jdtls.setup({})
+lspconfig.jdtls.setup({
+  settings = {
+    java = {
+      referencesCodeLens = {
+        enabled = false,
+      },
+    },
+  },
+})
 
 lspconfig.golangci_lint_ls.setup({
   on_new_config = function(config)
