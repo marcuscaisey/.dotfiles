@@ -1,8 +1,6 @@
 -- stylua: ignore start
 vim.keymap.set('n', '<leader>dt', '<cmd>diffthis<cr>', { desc = 'Make the current window part of the diff windows', silent = true })
 vim.keymap.set('n', '<leader>do', '<cmd>diffoff!<cr>', { desc = 'Switch off diff mode for all windows in the current tab page', silent = true })
-vim.keymap.set('n', 'dlo', '<cmd>diffget LOCAL<cr>', { desc = 'Modify the current buffer to undo difference with the LOCAL vimdiff buffer', silent = true })
-vim.keymap.set('n', 'dro', '<cmd>diffget REMOTE<cr>', { desc = 'Modify the current buffer to undo difference with the REMOTE vimdiff buffer', silent = true })
 vim.keymap.set('n', ']n', function()
   vim.fn.search([[^\(<\{7}\||\{7}\|=\{7}\|>\{7}\)]], 'W')
 end, { desc = 'Jump to next git conflict marker (<<<<<<<, |||||||, =======, >>>>>>>)' })
