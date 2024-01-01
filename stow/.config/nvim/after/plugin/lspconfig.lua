@@ -152,6 +152,8 @@ lspconfig.lua_ls.setup({
   },
 })
 
+lspconfig.rust_analyzer.setup({})
+
 lspconfig.taplo.setup({})
 
 lspconfig.tsserver.setup({})
