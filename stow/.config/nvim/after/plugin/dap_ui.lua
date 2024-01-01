@@ -13,7 +13,7 @@ dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
 ---@diagnostic disable-next-line: missing-fields
 dapui.setup({
----@diagnostic disable-next-line: missing-fields
+  ---@diagnostic disable-next-line: missing-fields
   icons = { expanded = '▾', collapsed = '▸' },
   mappings = {
     expand = { 'h', 'l' },
