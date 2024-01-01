@@ -9,7 +9,6 @@ local source_name_to_menu = {
   luasnip = '[SNIP]',
 }
 
----@diagnostic disable-next-line: missing-fields
 cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
