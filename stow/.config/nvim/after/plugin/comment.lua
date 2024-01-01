@@ -6,5 +6,6 @@ end
 local ft = require('Comment.ft')
 
 ft.lox = '//%s'
+ft.ebnf = '/*%s*/'
 
 comment.setup()
