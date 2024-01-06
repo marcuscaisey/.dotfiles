@@ -9,7 +9,6 @@ configs.setup({
     'bash',
     'c',
     'comment',
-    'ebnf',
     'git_rebase',
     'gitcommit',
     'go',
