@@ -44,6 +44,8 @@ lspconfig.clangd.setup({})
 
 lspconfig.cmake.setup({})
 
+lspconfig.dartls.setup({})
+
 lspconfig.gopls.setup({
   settings = {
     gopls = {
