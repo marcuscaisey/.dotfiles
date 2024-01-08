@@ -166,7 +166,11 @@ lspconfig.rust_analyzer.setup({})
 
 lspconfig.taplo.setup({})
 
-lspconfig.tsserver.setup({})
+lspconfig.tsserver.setup({
+  on_attach = function(client)
+    client.server_capabilities.documentFormattingProvider = false
+  end,
+})
 
 lspconfig.vimls.setup({})
 
