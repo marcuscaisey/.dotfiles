@@ -9,7 +9,7 @@ parser_configs.lox = {
   install_info = {
     url = 'https://github.com/marcuscaisey/golox',
     files = { 'src/parser.c' },
-    location = 'tree-sitter',
+    location = 'tree-sitter-lox',
   },
 }
 
