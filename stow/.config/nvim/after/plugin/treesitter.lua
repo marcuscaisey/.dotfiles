@@ -9,6 +9,7 @@ configs.setup({
     'bash',
     'c',
     'comment',
+    'dart',
     'git_rebase',
     'gitcommit',
     'go',
