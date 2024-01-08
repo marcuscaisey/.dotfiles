@@ -5,11 +5,11 @@ end
 
 local parsers = require('nvim-treesitter.parsers')
 local parser_configs = parsers.get_parser_configs()
+---@diagnostic disable-next-line: inject-field
 parser_configs.lox = {
   install_info = {
-    url = 'https://github.com/marcuscaisey/golox',
+    url = 'https://github.com/marcuscaisey/tree-sitter-lox',
     files = { 'src/parser.c' },
-    location = 'tree-sitter-lox',
   },
 }
 
