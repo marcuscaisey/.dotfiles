@@ -3,6 +3,16 @@ if not ok then
   return
 end
 
+local parsers = require('nvim-treesitter.parsers')
+local parser_configs = parsers.get_parser_configs()
+parser_configs.lox = {
+  install_info = {
+    url = 'https://github.com/marcuscaisey/golox',
+    files = { 'src/parser.c' },
+    location = 'tree-sitter',
+  },
+}
+
 ---@diagnostic disable-next-line: missing-fields
 configs.setup({
   ensure_installed = {
@@ -22,6 +32,7 @@ configs.setup({
     'json',
     'lua',
     'markdown',
+    'lox',
     'perl',
     'php',
     'promql',
