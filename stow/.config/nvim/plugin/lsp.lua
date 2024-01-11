@@ -1,3 +1,5 @@
+local protocol = require('vim.lsp.protocol')
+
 local augroup = vim.api.nvim_create_augroup('lsp', { clear = true })
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -12,7 +14,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, { buffer = true })
 
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client and client.server_capabilities.codeLensProvider then
+    if client and client.supports_method(protocol.Methods.textDocument_codeLens) then
       vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'BufWritePost', 'CursorHold' }, {
         callback = vim.lsp.codelens.refresh,
         group = augroup,
