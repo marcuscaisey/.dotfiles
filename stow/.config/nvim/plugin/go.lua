@@ -1,3 +1,5 @@
+local protocol = require('vim.lsp.protocol')
+
 vim.api.nvim_create_autocmd('BufWritePost', {
   group = vim.api.nvim_create_augroup('go', { clear = true }),
   pattern = { '*.go' },
