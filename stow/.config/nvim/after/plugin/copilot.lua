@@ -7,3 +7,16 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
   once = true,
 })
+
+local enabled = true
+vim.keymap.set('n', '<leader>cc', function ()
+  if enabled then
+    vim.cmd.Copilot('disable')
+    print('Disabled copilot')
+    enabled = false
+  else
+    vim.cmd.Copilot('enable')
+    print('Enabled copilot')
+    enabled = true
+  end
+end)
