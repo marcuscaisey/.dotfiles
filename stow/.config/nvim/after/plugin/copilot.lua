@@ -1,4 +1,4 @@
-if vim.fn.exists(':Copilot') ~= 2 then
+if vim.fn.exists(':Copilot') ~= 2 or os.getenv('NVIM_DISABLE_COPILOT') then
   return
 end
 vim.api.nvim_create_autocmd('BufReadPost', {
