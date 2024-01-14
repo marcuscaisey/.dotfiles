@@ -1,5 +1,9 @@
-if vim.fn.exists(':Copilot') ~= 2 or os.getenv('NVIM_DISABLE_COPILOT') then
+if vim.fn.exists(':Copilot') ~= 2 then
   return
+end
+
+if os.getenv('NVIM_DISABLE_COPILOT') then
+  vim.cmd.Copilot('disable')
 end
 
 local enabled = true
