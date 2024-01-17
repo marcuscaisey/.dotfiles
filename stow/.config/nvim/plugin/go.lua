@@ -1,7 +1,9 @@
 local protocol = require('vim.lsp.protocol')
 
+local group = vim.api.nvim_create_augroup('go', { clear = true })
+
 vim.api.nvim_create_autocmd('BufWritePost', {
-  group = vim.api.nvim_create_augroup('go', { clear = true }),
+  group = group,
   pattern = { '*.go' },
   desc = 'Run puku on saved file',
   callback = function(args)
@@ -26,7 +28,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 vim.api.nvim_create_autocmd('BufWritePre', {
-  group = vim.api.nvim_create_augroup('go', { clear = true }),
+  group = group,
   pattern = '*.go',
   desc = 'Organize imports on save',
   callback = function(args)
