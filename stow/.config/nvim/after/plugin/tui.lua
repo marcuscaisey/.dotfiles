@@ -49,7 +49,7 @@ vim.keymap.set('n', '<c-f>', function()
         })
       end),
     },
-    height = 1,
+    height = 1.03,
     width = 1,
     x = 0,
     y = 0,
