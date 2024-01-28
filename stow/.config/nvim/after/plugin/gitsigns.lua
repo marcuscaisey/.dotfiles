@@ -10,6 +10,7 @@ gitsigns.setup({
     border = 'none',
     relative = 'cursor',
   },
+  attach_to_untracked = true,
   on_attach = function(bufnr)
     vim.keymap.set('n', ']c', function()
       if vim.wo.diff then
