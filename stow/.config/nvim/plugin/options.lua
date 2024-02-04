@@ -3,9 +3,6 @@ vim.opt.colorcolumn = '+1'
 vim.opt.cursorline = true
 vim.opt.diffopt:append('linematch:60')
 vim.opt.expandtab = true
-vim.opt.formatoptions:append('n')
-vim.opt.formatoptions:remove('o')
-vim.opt.formatoptions:remove('t')
 vim.opt.hidden = true
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true
@@ -28,6 +25,7 @@ vim.opt.termguicolors = true
 vim.opt.updatetime = 100
 
 local augroup = vim.api.nvim_create_augroup('options', { clear = true })
+
 vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained', 'InsertLeave', 'WinEnter' }, {
   group = augroup,
   desc = 'Set relativenumber in focused window when not in insert mode',
@@ -42,6 +40,16 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave'
   desc = 'Unset relativenumber in unfocused windows or when in insert mode',
   callback = function()
     vim.wo.relativenumber = false
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = augroup,
+  desc = 'Override formatoptions',
+  callback = function()
+    vim.opt.formatoptions:append('n')
+    vim.opt.formatoptions:remove('o')
+    vim.opt.formatoptions:remove('t')
   end,
 })
 
