@@ -42,7 +42,9 @@ lspconfig.autotools_ls.setup({})
 
 lspconfig.bashls.setup({})
 
-lspconfig.clangd.setup({})
+lspconfig.clangd.setup({
+  cmd = { 'clangd', '--offset-encoding=utf-16' },
+})
 
 lspconfig.cmake.setup({})
 
