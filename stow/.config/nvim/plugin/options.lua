@@ -43,16 +43,6 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave'
   end,
 })
 
-vim.api.nvim_create_autocmd('FileType', {
-  group = augroup,
-  desc = 'Override formatoptions',
-  callback = function()
-    vim.opt.formatoptions:append('n')
-    vim.opt.formatoptions:remove('o')
-    vim.opt.formatoptions:remove('t')
-  end,
-})
-
 vim.filetype.add({
   extension = {
     lox = 'lox',
