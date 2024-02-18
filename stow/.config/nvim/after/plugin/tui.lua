@@ -51,7 +51,5 @@ vim.keymap.set('n', '<c-f>', function()
     },
     height = 1,
     width = 1,
-    x = 0,
-    y = 0,
   })
 end)
