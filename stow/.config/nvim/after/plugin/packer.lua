@@ -42,7 +42,7 @@ packer.startup({
     use({ 'marcuscaisey/please.nvim', requires = { 'nvim-treesitter/nvim-treesitter', 'mfussenegger/nvim-dap' } })
     use({ 'tpope/vim-abolish' })
     use({ 'yorickpeterse/nvim-pqf' })
-    use({ 'bluskript/tui-nvim' })
+    use({ 'marcuscaisey/tui-nvim' })
     use({ 'marcuscaisey/olddirs.nvim', requires = { 'nvim-telescope/telescope.nvim' } })
     use({ 'tpope/vim-projectionist' })
     use({ 'folke/neodev.nvim' })
