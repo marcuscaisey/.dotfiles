@@ -22,6 +22,16 @@ vim.keymap.set('n', 'J', 'm`J``', { desc = 'Join lines, keeping the cursor in it
 
 vim.keymap.set('t', '<esc>', '<c-\\><c-n>', { desc = 'Go back to Normal mode' })
 
+vim.keymap.set('n', '<leader>ww', function()
+  if vim.opt_local.wrap:get() then
+    vim.opt_local.wrap = false
+    print('Disabled line wrapping')
+  else
+    vim.opt_local.wrap = true
+    print('Enabled line wrapping')
+  end
+end, { desc = 'Toggle line wrapping in the current window' })
+
 vim.keymap.set('n', '<leader>so', function()
   local file = vim.api.nvim_buf_get_name(0)
   print('Sourced ' .. file)
