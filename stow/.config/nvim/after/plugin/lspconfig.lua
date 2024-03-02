@@ -123,6 +123,31 @@ lspconfig.pyright.setup({
       },
     },
   },
+  root_dir = function(fname)
+    if util.root_pattern('.plzconfig') then
+      return vim.fn.getcwd()
+    else
+      return util.root_pattern(
+        'pyproject.toml',
+        'setup.py',
+        'setup.cfg',
+        'requirements.txt',
+        'Pipfile',
+        'pyrightconfig.json',
+        '.git'
+      )(fname)
+    end
+  end,
+  on_new_config = function(config, root_dir)
+    local plzconfig_dir = util.root_pattern('.plzconfig')(root_dir)
+    if not plzconfig_dir then
+      return
+    end
+    config.settings.python.analysis.extraPaths = {
+      plzconfig_dir,
+      vim.fs.joinpath(plzconfig_dir, 'plz-out/gen'),
+    }
+  end,
 })
 
 neodev.setup({
