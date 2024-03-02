@@ -115,10 +115,10 @@ lspconfig.pyright.setup({
         diagnosticMode = 'openFilesOnly',
         useLibraryCodeForTypes = true,
         exclude = {
-          'plz-out'
+          'plz-out',
         },
         extraPaths = {
-          'plz-out/gen'
+          'plz-out/gen',
         },
       },
     },
