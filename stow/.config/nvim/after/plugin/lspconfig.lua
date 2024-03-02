@@ -107,32 +107,22 @@ lspconfig.marksman.setup({})
 
 lspconfig.please.setup({})
 
-lspconfig.pylsp.setup({
+lspconfig.pyright.setup({
   settings = {
-    pylsp = {
-      plugins = {
-        autopep8 = { enabled = false },
-        flake8 = { enabled = true },
-        mccabe = { enabled = false },
-        pycodestyle = { enabled = false },
-        pyflakes = { enabled = false },
-        yapf = { enabled = false },
-        jedi_completion = { enabled = true },
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        diagnosticMode = 'openFilesOnly',
+        useLibraryCodeForTypes = true,
+        exclude = {
+          'plz-out'
+        },
+        extraPaths = {
+          'plz-out/gen'
+        },
       },
     },
   },
-  on_new_config = function(config, root_dir)
-    local plzconfig_dir = util.root_pattern('.plzconfig')(root_dir)
-    if not plzconfig_dir then
-      return
-    end
-    config.settings.pylsp.plugins.jedi = {
-      extra_paths = {
-        plzconfig_dir,
-        vim.fs.joinpath(plzconfig_dir, 'plz-out/gen'),
-      },
-    }
-  end,
 })
 
 neodev.setup({
