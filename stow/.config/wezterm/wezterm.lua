@@ -19,4 +19,6 @@ config.line_height = 1.2
 
 config.hide_tab_bar_if_only_one_tab = true
 
+config.audible_bell = 'Disabled'
+
 return config
