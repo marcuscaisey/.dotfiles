@@ -493,8 +493,6 @@ nnoremap <f8> :delete<cr>
 nnoremap <a-i> :sync<cr>
 " Open directory under cursor in the other pane
 nnoremap <a-o> :sync %c<cr>
-" Swap panes
-nnoremap <c-u> <c-w>x
 
 nnoremap gk gg
 vnoremap gk gg
