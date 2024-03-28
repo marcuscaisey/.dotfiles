@@ -44,6 +44,7 @@ lspconfig.bashls.setup({})
 
 lspconfig.clangd.setup({
   cmd = { 'clangd', '--offset-encoding=utf-16' },
+  filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, -- Default excluding proto
 })
 
 lspconfig.cmake.setup({})
