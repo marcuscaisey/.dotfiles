@@ -1,6 +1,6 @@
 local augroup = vim.api.nvim_create_augroup('misc', { clear = true })
 
-vim.api.nvim_create_autocmd('BufReadPost', {
+vim.api.nvim_create_autocmd('BufWinEnter', {
   callback = function()
     local last_line = vim.fn.line([['"]])
     local lines = vim.fn.line('$')
