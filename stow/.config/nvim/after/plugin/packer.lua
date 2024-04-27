@@ -32,7 +32,6 @@ packer.startup({
     use({ 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } })
     use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', requires = { 'nvim-telescope/telescope.nvim' } })
     use({ 'vim-scripts/ReplaceWithRegister' })
-    use({ 'numToStr/Comment.nvim' })
     use({ 'kylechui/nvim-surround' })
     use({ 'bkad/camelcasemotion' })
     use({ 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } })
