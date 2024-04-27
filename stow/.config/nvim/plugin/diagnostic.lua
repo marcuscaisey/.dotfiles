@@ -20,7 +20,6 @@ vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticWar
 vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticInfo' })
 vim.fn.sign_define('DiagnosticSignHint', { text = '󰌵', texthl = 'DiagnosticHint' })
 
-vim.keymap.set('n', 'dK', vim.diagnostic.open_float)
 vim.keymap.set('n', ']d', function()
   vim.diagnostic.goto_next({ wrap = false })
 end)
