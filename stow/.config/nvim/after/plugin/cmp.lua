@@ -30,4 +30,10 @@ cmp.setup({
       return vim_item
     end,
   },
+  view = {
+    ---@diagnostic disable-next-line: missing-fields
+    entries = {
+      follow_cursor = true,
+    },
+  },
 })
