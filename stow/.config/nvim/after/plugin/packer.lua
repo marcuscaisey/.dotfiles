@@ -8,6 +8,7 @@ if not vim.loop.fs_stat(install_path) then
 end
 
 local packer = require('packer')
+local util = require('packer.util')
 
 packer.startup({
   function(use)
@@ -71,5 +72,10 @@ packer.startup({
   end,
   config = {
     compile_on_sync = false,
+    display = {
+      open_fn = function()
+        return util.float({ border = 'single' })
+      end,
+    },
   },
 })
