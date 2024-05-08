@@ -24,4 +24,4 @@ vim.keymap.set('n', '<leader>cc', function()
   end
 end)
 
-vim.keymap.set('i', '<c-y>', '<Plug>(copilot-dismiss)')
+vim.keymap.set('i', '<c-e>', '<Plug>(copilot-dismiss)')
