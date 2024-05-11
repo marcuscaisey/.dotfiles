@@ -34,7 +34,7 @@ vim.api.nvim_create_autocmd('LspProgress', {
   group = vim.api.nvim_create_augroup('lualine_lsp_progress', { clear = true }),
   callback = function(args)
     -- https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#workDoneProgress
-    local payload = args.data.result.value
+    local payload = args.data.params.value
     local msg = { payload.title }
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if client then
