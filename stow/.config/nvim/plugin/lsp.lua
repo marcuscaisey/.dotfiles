@@ -29,3 +29,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.lsp.set_log_level(vim.log.levels.OFF)
+
+vim.keymap.set('n', 'crn', function()
+  vim.lsp.buf.rename()
+end, { desc = 'vim.lsp.buf.rename()' })
+
+local function map_codeaction(mode, lhs)
+  vim.keymap.set(mode, lhs, function()
+    vim.lsp.buf.code_action()
+  end, { desc = 'vim.lsp.buf.code_action()' })
+end
+map_codeaction('n', 'crr')
+map_codeaction('x', '<C-R>r')
+map_codeaction('x', '<C-R><C-R>')
