@@ -90,17 +90,6 @@ lspconfig.jdtls.setup({
   },
 })
 
-lspconfig.golangci_lint_ls.setup({
-  on_new_config = function(config)
-    -- https://golangci-lint.run/usage/linters/#enabled-by-default
-    local linters = { 'errcheck', 'gosimple', 'govet', 'ineffassign', 'staticcheck', 'unused' }
-    for _, linter in ipairs(linters) do
-      table.insert(config.init_options.command, '--enable')
-      table.insert(config.init_options.command, linter)
-    end
-  end,
-})
-
 lspconfig.intelephense.setup({})
 
 lspconfig.jsonls.setup({})
