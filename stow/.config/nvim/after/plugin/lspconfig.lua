@@ -58,6 +58,7 @@ lspconfig.gopls.setup({
       linksInHover = false,
       usePlaceholders = false,
       semanticTokens = true,
+      noSemanticString = true,
       codelenses = {
         gc_details = true,
       },
