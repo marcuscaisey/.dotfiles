@@ -1,11 +1,11 @@
 vim.keymap.set({ 'i', 's' }, '<c-j>', function()
-  if vim.snippet.jumpable(1) then
+  if vim.snippet.active({ direction = 1 }) then
     vim.snippet.jump(1)
   end
 end, { desc = 'Jump to the next snippet placeholder' })
 
 vim.keymap.set({ 'i', 's' }, '<c-k>', function()
-  if vim.snippet.jumpable(-1) then
+  if vim.snippet.active({ direction = -1 }) then
     vim.snippet.jump(-1)
   end
 end, { desc = 'Jump to the previous snippet placeholder' })
@@ -18,6 +18,6 @@ vim.api.nvim_create_autocmd('ModeChanged', {
       vim.api.nvim_feedkeys(keys, 'n', false)
     end
   end,
-  group = vim.api.nvim_create_augroup('snippets', { clear = true }),
+  group = vim.api.nvim_create_augroup('snippet', { clear = true }),
   desc = 'Send replaced node text to the black hole register',
 })
