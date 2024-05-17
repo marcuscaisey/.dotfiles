@@ -94,7 +94,7 @@ lualine.setup({
       { lsp_info },
       {
         'diagnostics',
-        symbols = { error = '', warn = '', info = '', hint = '󰌵' },
+        symbols = { error = ' ', warn = ' ', info = ' ', hint = '󰌵 ' },
         padding = { left = 0, right = 1 },
       },
     },
