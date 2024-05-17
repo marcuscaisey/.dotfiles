@@ -23,12 +23,6 @@ vim.diagnostic.config({
   },
 })
 
-vim.keymap.set('n', ']d', function()
-  vim.diagnostic.goto_next({ wrap = false })
-end)
-vim.keymap.set('n', '[d', function()
-  vim.diagnostic.goto_prev({ wrap = false })
-end)
 vim.keymap.set('n', '<leader>dd', function()
   if not vim.diagnostic.is_enabled() then
     vim.diagnostic.enable()
