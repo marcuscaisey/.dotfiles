@@ -2,45 +2,22 @@ local protocol = require('vim.lsp.protocol')
 
 local group = vim.api.nvim_create_augroup('go', { clear = true })
 
-local puku_enabled = true
-
-vim.api.nvim_create_user_command('PukuToggle', function()
-  if puku_enabled then
-    puku_enabled = false
-    vim.notify('Disabled puku auto-formatting', vim.log.levels.INFO)
-  else
-    puku_enabled = true
-    vim.notify('Enabled puku auto-formatting', vim.log.levels.INFO)
-  end
-end, {
-  desc = 'Toggle puku auto-formatting',
-})
-
 vim.api.nvim_create_autocmd('BufWritePost', {
   group = group,
   pattern = { '*.go' },
-  desc = 'Run puku on saved file if enabled',
+  desc = 'Run puku on saved file',
   callback = function(args)
-    if
-      not puku_enabled
-      or #vim.fs.find('.plzconfig', { upward = true, path = vim.api.nvim_buf_get_name(args.buf) }) < 1
-    then
+    if not vim.fs.root(args.file, '.plzconfig') then
       return
     end
-    local function on_event(_, data)
-      local msg = table.concat(data, '\n')
-      msg = vim.trim(msg)
-      msg = msg:gsub('\t', string.rep(' ', 4))
-      if msg ~= '' then
-        vim.notify('puku: ' .. msg, vim.log.levels.INFO)
+    vim.system({ 'puku', 'fmt', args.file }, nil, function(system_completed)
+      local output = system_completed.stderr .. system_completed.stdout
+      if output ~= '' then
+        vim.schedule(function()
+          vim.notify('puku: ' .. output, vim.log.levels.INFO)
+        end)
       end
-    end
-    vim.fn.jobstart({ 'puku', 'fmt', args.file }, {
-      on_stdout = on_event,
-      on_stderr = on_event,
-      stdout_buffered = true,
-      stderr_buffered = true,
-    })
+    end)
   end,
 })
 
