@@ -16,20 +16,14 @@ gitsigns.setup({
       if vim.wo.diff then
         return ']c'
       end
-      actions.next_hunk({
-        wrap = false,
-        navigation_message = true,
-      })
+      actions.nav_hunk('next', { navigation_message = true })
       return '<Ignore>'
     end, { buffer = bufnr, expr = true })
     vim.keymap.set('n', '[c', function()
       if vim.wo.diff then
         return '[c'
       end
-      actions.prev_hunk({
-        wrap = false,
-        navigation_message = true,
-      })
+      actions.nav_hunk('prev', { navigation_message = true })
       return '<Ignore>'
     end, { buffer = bufnr, expr = true })
     vim.keymap.set('n', '<leader>hs', actions.stage_hunk, { buffer = bufnr })
