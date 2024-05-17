@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
   callback = function()
     for _, winid in ipairs(vim.api.nvim_list_wins()) do
       if vim.wo[winid].diff then
-        vim.diagnostic.disable(vim.api.nvim_win_get_buf(winid))
+        vim.diagnostic.enable(false, { bufnr = vim.api.nvim_win_get_buf(winid) })
       end
     end
   end,
@@ -27,9 +27,9 @@ vim.api.nvim_create_autocmd('OptionSet', {
   desc = 'Toggle diagnostics when diff enabled and disabled',
   callback = function()
     if vim.v.option_new == '1' then
-      vim.diagnostic.disable(0)
+      vim.diagnostic.enable(false, { bufnr = 0 })
     else
-      vim.diagnostic.enable(0)
+      vim.diagnostic.enable(true, { bufnr = 0 })
     end
   end,
 })
