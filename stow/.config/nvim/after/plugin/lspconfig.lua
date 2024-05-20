@@ -67,8 +67,7 @@ local function plz_goroot(plz_root)
     gotool = gotool:gsub('|go$', '')
     local gotool_output_res = vim.system({ 'plz', '--repo_root', plz_root, 'query', 'output', gotool }):wait()
     if gotool_output_res.code > 0 then
-      return nil,
-        string.format('querying output of plugin.go.gotool target %s: %s', gotool, gotool_output_res.stderr)
+      return nil, string.format('querying output of plugin.go.gotool target %s: %s', gotool, gotool_output_res.stderr)
     end
     return vim.fs.joinpath(plz_root, vim.trim(gotool_output_res.stdout))
   end
@@ -126,14 +125,12 @@ lspconfig.gopls.setup({
       vim.env.GOPATH = string.format('%s:%s/plz-out/go', vim.fs.dirname(plz_root), plz_root)
       vim.env.GO111MODULE = 'off'
       local goroot, err = plz_goroot(plz_root)
-      if goroot then
-        if not vim.uv.fs_stat(goroot) then
-          vim.notify(string.format('GOROOT for plz repo %s does not exist: %s', plz_root, goroot), vim.log.levels.WARN)
-        else
-          vim.env.GOROOT = goroot
-        end
-      else
+      if not goroot then
         vim.notify(string.format('Determining GOROOT for plz repo %s: %s', plz_root, err), vim.log.levels.WARN)
+      elseif not vim.uv.fs_stat(goroot) then
+        vim.notify(string.format('GOROOT for plz repo %s does not exist: %s', plz_root, goroot), vim.log.levels.WARN)
+      else
+        vim.env.GOROOT = goroot
       end
       return vim.fn.getcwd()
     end
