@@ -74,11 +74,16 @@ vim.keymap.set('n', '<leader>sy', function()
   local filepath = vim.api.nvim_buf_get_name(0)
   local relative_filepath = filepath:gsub('^' .. git_root .. '/', '')
   local line = unpack(vim.api.nvim_win_get_cursor(0))
-  local relative_filepath_with_line = string.format('%s?L%d', relative_filepath, line)
-  vim.fn.setreg('"', relative_filepath_with_line)
-  vim.fn.setreg('*', relative_filepath_with_line)
-  print(string.format('Yanked %s', relative_filepath_with_line))
-end, { desc = 'Yank the path of the current buffer relative to the git root in sourcegraph search format' })
+  local base_url = vim.env.SOURCEGRAPH_BASE_URL
+  if not base_url then
+    vim.notify('Unable to yank sourcegraph URL: SOURCEGRAPH_BASE_URL env var not set', vim.log.levels.ERROR)
+    return
+  end
+  local url = string.format('%s/-/blob/%s?L%d', base_url, relative_filepath, line)
+  vim.fn.setreg('"', url)
+  vim.fn.setreg('*', url)
+  print(string.format('Yanked %s', url))
+end, { desc = 'Yank the sourcegraph URL to the current position in the buffer' })
 
 vim.keymap.set('n', '<leader>cb', function()
   -- filter buffers for changed property since bufmodified = 1 doesn't seem to filter out all unchanged buffers
