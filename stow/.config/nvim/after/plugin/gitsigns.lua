@@ -42,24 +42,12 @@ gitsigns.setup({
 })
 
 vim.keymap.set('n', '<leader>gc', function()
-  local result = vim.system({ 'git', 'diff', '--quiet' }):wait()
-  if result.code == 0 then
-    print('No Git changes')
-    vim.cmd.cclose()
-    return
-  end
-
-  vim.fn.setqflist({})
-  gitsigns.setqflist('all', { open = false })
-  -- wait for quickfix list to have items in before opening
-  local qf_populated = vim.wait(5000, function()
-    local qf_items = vim.fn.getqflist()
-    return #qf_items > 0
-  end, 10)
-  if not qf_populated then
-    vim.api.nvim_err_writeln('Timed out after waiting 5s for quickfix list to be populated with Git changes')
-    return
-  end
-  vim.cmd.copen()
-  vim.cmd.cfirst()
+  gitsigns.setqflist('all', { open = false }, function()
+    if #vim.fn.getqflist() == 0 then
+      vim.notfy('No Git changes', vim.log.levels.INFO)
+      return
+    end
+    vim.cmd.copen()
+    vim.cmd.cfirst()
+  end)
 end)
