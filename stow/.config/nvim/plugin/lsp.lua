@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-vim.lsp.set_log_level(vim.log.levels.OFF)
+vim.lsp.log.set_format_func(vim.inspect)
 
 vim.keymap.set('n', 'crl', vim.lsp.codelens.run, { desc = 'vim.lsp.codelens.run()' })
 vim.keymap.set('n', 'crf', vim.lsp.buf.format, { desc = 'vim.lsp.buf.format()' })
