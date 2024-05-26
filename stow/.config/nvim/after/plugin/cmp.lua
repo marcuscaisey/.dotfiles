@@ -14,7 +14,7 @@ cmp.setup({
     { name = 'buffer' },
   },
   mapping = cmp.mapping.preset.insert({
-    ['<c-space>'] = cmp.mapping.complete(),
+    ['<c-y>'] = cmp.mapping.confirm({ select = true }),
   }),
   ---@diagnostic disable-next-line: missing-fields
   sorting = {
