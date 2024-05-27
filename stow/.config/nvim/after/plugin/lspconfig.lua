@@ -213,15 +213,6 @@ neodev.setup({
 lspconfig.lua_ls.setup({
   settings = {
     Lua = {
-      runtime = {
-        version = 'LuaJIT',
-      },
-      workspace = {
-        checkThirdParty = false,
-      },
-      telemetry = {
-        enable = false,
-      },
       diagnostics = {
         disable = {
           'redefined-local',
@@ -230,8 +221,21 @@ lspconfig.lua_ls.setup({
       format = {
         enable = false,
       },
+      workspace = {
+        checkThirdParty = false,
+      },
     },
   },
+  on_new_config = function(config)
+    if vim.fn.executable('luarocks') == 0 then
+      return
+    end
+    local out = vim.system({ 'luarocks', 'config', 'deploy_lua_dir' }):wait()
+    if out.code > 0 then
+      return
+    end
+    config.settings.Lua.workspace.library = { vim.trim(out.stdout) }
+  end,
 })
 
 lspconfig.rust_analyzer.setup({})
