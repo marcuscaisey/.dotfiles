@@ -204,8 +204,8 @@ lspconfig.pyright.setup({
 
 neodev.setup({
   override = function(root_dir, library)
-    if vim.uv.fs_stat(vim.fs.joinpath(root_dir, 'lua')) then
-      library.plugins = true
+    if vim.uv.fs_stat(vim.fs.joinpath(root_dir, '.luarc.json')) then
+      library.enabled = false
     end
   end,
 })
@@ -226,16 +226,6 @@ lspconfig.lua_ls.setup({
       },
     },
   },
-  on_new_config = function(config)
-    if vim.fn.executable('luarocks') == 0 then
-      return
-    end
-    local out = vim.system({ 'luarocks', 'config', 'deploy_lua_dir' }):wait()
-    if out.code > 0 then
-      return
-    end
-    config.settings.Lua.workspace.library = { vim.trim(out.stdout) }
-  end,
 })
 
 lspconfig.rust_analyzer.setup({})
