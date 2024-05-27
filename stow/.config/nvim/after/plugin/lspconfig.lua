@@ -203,9 +203,11 @@ lspconfig.pyright.setup({
 })
 
 neodev.setup({
-  library = {
-    types = false,
-  },
+  override = function(root_dir, library)
+    if vim.uv.fs_stat(vim.fs.joinpath(root_dir, 'lua')) then
+      library.plugins = true
+    end
+  end,
 })
 
 lspconfig.lua_ls.setup({
