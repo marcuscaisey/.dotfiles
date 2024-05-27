@@ -203,10 +203,9 @@ lspconfig.pyright.setup({
 })
 
 neodev.setup({
-  override = function(_, library)
-    library.enabled = true
-    library.plugins = true
-  end,
+  library = {
+    types = false,
+  },
 })
 
 lspconfig.lua_ls.setup({
