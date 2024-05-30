@@ -21,6 +21,9 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.HINT] = '󰌵',
     },
   },
+  jump = {
+    wrap = false,
+  },
 })
 
 vim.keymap.set('n', '<leader>dd', function()
