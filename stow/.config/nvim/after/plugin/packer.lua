@@ -37,7 +37,7 @@ packer.startup({
     use({ 'bkad/camelcasemotion' })
     use({ 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } })
     use({ 'tpope/vim-fugitive' })
-    use({ 'marcuscaisey/please.nvim', requires = { 'mfussenegger/nvim-dap' } })
+    use({ 'marcuscaisey/please.nvim' })
     use({ 'tpope/vim-abolish' })
     use({ 'yorickpeterse/nvim-pqf' })
     use({ 'marcuscaisey/tui-nvim' })
