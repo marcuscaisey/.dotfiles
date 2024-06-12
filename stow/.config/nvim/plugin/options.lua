@@ -23,7 +23,6 @@ vim.opt.swapfile = false
 vim.opt.tabstop = 4
 vim.opt.termguicolors = true
 vim.opt.updatetime = 100
-vim.opt.wrapscan = false
 
 local augroup = vim.api.nvim_create_augroup('options', { clear = true })
 
