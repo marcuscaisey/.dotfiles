@@ -38,7 +38,6 @@ configs.setup({
     'promql',
     'proto',
     'python',
-    'query',
     'regex',
     'ruby',
     'scheme',
@@ -46,7 +45,6 @@ configs.setup({
     'terraform',
     'typescript',
     'vim',
-    'vimdoc',
     'yaml',
   },
   highlight = {
