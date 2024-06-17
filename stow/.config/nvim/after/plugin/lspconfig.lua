@@ -188,6 +188,16 @@ lspconfig.pyright.setup({
   end,
 })
 
+lspconfig.ruff_lsp.setup({
+  init_options = {
+    settings = {
+      lint = {
+        enable = false,
+      },
+    },
+  },
+})
+
 neodev.setup({
   override = function(root_dir, library)
     if vim.uv.fs_stat(vim.fs.joinpath(root_dir, '.luarc.json')) then
