@@ -177,7 +177,6 @@ lspconfig.pyright.setup({
         python = {
           analysis = {
             extraPaths = {
-              vim.fs.joinpath(root_dir, 'plz-out/gen'),
               vim.fs.joinpath(root_dir, 'plz-out/python/venv'),
             },
             exclude = { 'plz-out' },
