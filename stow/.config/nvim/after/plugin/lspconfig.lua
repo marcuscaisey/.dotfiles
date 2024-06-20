@@ -38,18 +38,12 @@ configs.please = {
   },
 }
 
-lspconfig.autotools_ls.setup({})
-
 lspconfig.bashls.setup({})
 
 lspconfig.clangd.setup({
   cmd = { 'clangd', '--offset-encoding=utf-16' },
   filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, -- Default excluding proto
 })
-
-lspconfig.cmake.setup({})
-
-lspconfig.dartls.setup({})
 
 ---@param plz_root string
 ---@return string? goroot
@@ -143,18 +137,6 @@ lspconfig.gopls.setup({
   end,
 })
 
-lspconfig.jdtls.setup({
-  settings = {
-    java = {
-      referencesCodeLens = {
-        enabled = false,
-      },
-    },
-  },
-})
-
-lspconfig.intelephense.setup({})
-
 lspconfig.jsonls.setup({})
 
 lspconfig.marksman.setup({})
@@ -213,10 +195,6 @@ lspconfig.lua_ls.setup({
   },
 })
 
-lspconfig.rust_analyzer.setup({})
-
-lspconfig.taplo.setup({})
-
 lspconfig.tsserver.setup({
   on_attach = function(client)
     client.server_capabilities.documentFormattingProvider = false
@@ -224,11 +202,3 @@ lspconfig.tsserver.setup({
 })
 
 lspconfig.vimls.setup({})
-
-lspconfig.yamlls.setup({
-  settings = {
-    yaml = {
-      validate = false,
-    },
-  },
-})
