@@ -15,7 +15,6 @@ catppuccin.setup({
     mocha = function(palette)
       return {
         LualineCwd = { fg = palette.surface2, bg = palette.mantle },
-        IncSearch = { bg = palette.peach },
         NormalFloat = { fg = palette.overlay2, bg = palette.surface0 },
         DiffChange = { bg = colors.darken(palette.blue, 0.15, palette.base) },
         VertSplit = { link = 'FloatBorder' },

@@ -4,7 +4,6 @@ vim.opt.cursorline = true
 vim.opt.diffopt:append('linematch:60')
 vim.opt.expandtab = true
 vim.opt.hidden = true
-vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.lazyredraw = true
 vim.opt.mouse = 'a'
