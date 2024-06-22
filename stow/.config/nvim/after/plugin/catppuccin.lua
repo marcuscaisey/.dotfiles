@@ -22,17 +22,5 @@ catppuccin.setup({
       }
     end,
   },
-  integrations = {
-    ---@diagnostic disable-next-line: missing-fields
-    native_lsp = {
-      underlines = {
-        errors = { 'undercurl' },
-        hints = { 'undercurl' },
-        warnings = { 'undercurl' },
-        information = { 'undercurl' },
-      },
-    },
-    treesitter_context = true,
-  },
 })
 vim.cmd.colorscheme('catppuccin')
