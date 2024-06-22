@@ -49,7 +49,6 @@ configs.setup({
   },
   highlight = {
     enable = true,
-    disable = { 'yaml' },
   },
   indent = { enable = false },
   textobjects = {
