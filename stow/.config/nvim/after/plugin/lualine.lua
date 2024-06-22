@@ -3,25 +3,6 @@ if not ok then
   return
 end
 
-local search_results = {
-  function()
-    local search_term = vim.fn.getreg('/') ---@cast search_term string
-    local search_count = vim.fn.searchcount({
-      recompute = 1,
-      maxcount = -1,
-    })
-    return string.format('/%s [%d/%d]', search_term:gsub('%%', '%%%%'), search_count.current, search_count.total)
-  end,
-  cond = function()
-    -- searchcount returns raises an error if there's something wrong with the search term like an unmatched \(
-    local ok, search_count = pcall(vim.fn.searchcount, {
-      recompute = 1,
-      maxcount = -1,
-    })
-    return ok and search_count.total and search_count.total > 0
-  end,
-}
-
 local cwd = {
   function()
     return vim.fn.getcwd():gsub('^' .. os.getenv('HOME'), '~')
@@ -89,7 +70,15 @@ lualine.setup({
       { 'filename', path = 1 },
       cwd,
     },
-    lualine_x = { search_results },
+    lualine_x = {
+      {
+        'searchcount',
+        cond = function()
+          local ok, search_count = pcall(vim.fn.searchcount, { recompute = 1 })
+          return ok and search_count.total > 0
+        end,
+      },
+    },
     lualine_y = {
       { lsp_info },
       {
