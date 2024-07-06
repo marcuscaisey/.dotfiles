@@ -43,6 +43,7 @@ vim.keymap.set('n', '<leader>gc', function()
   gitsigns.setqflist('all', { open = false }, function()
     if #vim.fn.getqflist() == 0 then
       vim.notify('No Git changes', vim.log.levels.INFO)
+      vim.cmd.cclose()
       return
     end
     vim.cmd.copen()
