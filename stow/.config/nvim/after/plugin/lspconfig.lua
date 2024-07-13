@@ -137,6 +137,16 @@ lspconfig.gopls.setup({
   end,
 })
 
+lspconfig.jdtls.setup({
+  settings = {
+    java = {
+      referencesCodeLens = {
+        enabled = false,
+      },
+    },
+  },
+})
+
 lspconfig.jsonls.setup({})
 
 lspconfig.marksman.setup({})
