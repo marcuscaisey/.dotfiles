@@ -8,8 +8,8 @@ local parser_configs = parsers.get_parser_configs()
 ---@diagnostic disable-next-line: inject-field
 parser_configs.lox = {
   install_info = {
-    url = 'https://github.com/marcuscaisey/tree-sitter-lox',
-    files = { 'src/parser.c' },
+    url = 'https://github.com/marcuscaisey/lox',
+    files = { 'tree-sitter/src/parser.c' },
   },
 }
 
