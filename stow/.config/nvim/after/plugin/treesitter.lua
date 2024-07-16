@@ -9,7 +9,7 @@ local parser_configs = parsers.get_parser_configs()
 parser_configs.lox = {
   install_info = {
     url = 'https://github.com/marcuscaisey/lox',
-    files = { 'tree-sitter/src/parser.c' },
+    files = { 'tree-sitter-lox/src/parser.c' },
   },
 }
 
