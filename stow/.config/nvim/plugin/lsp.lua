@@ -24,6 +24,6 @@ vim.lsp.log.set_format_func(vim.inspect)
 vim.lsp.set_log_level(vim.log.levels.OFF)
 
 vim.keymap.set('n', 'grl', vim.lsp.codelens.run, { desc = 'vim.lsp.codelens.run()' })
-vim.keymap.set('n', 'grf', function ()
+vim.keymap.set('n', 'grf', function()
   vim.lsp.buf.format({ timeout_ms = 5000 })
 end, { desc = 'vim.lsp.buf.format()' })

@@ -8,19 +8,19 @@ vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = 'DapBreakp
 vim.fn.sign_define('DapStopped', { text = '', texthl = 'DapStopped' })
 vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'DapBreakpointRejected' })
 
-vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint)
+vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'dap.toggle_breakpoint()' })
 vim.keymap.set('n', '<leader>dcb', function()
   dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
-end)
-vim.keymap.set({ 'n', 'i' }, '<f5>', dap.continue)
-vim.keymap.set({ 'n', 'i' }, '<f17>', dap.terminate)
-vim.keymap.set({ 'n', 'i' }, '<f6>', dap.restart)
-vim.keymap.set('n', '<f8>', dap.run_to_cursor)
-vim.keymap.set({ 'n', 'i' }, '<f10>', dap.step_over)
+end, { desc = 'dap.set_breakpoint()' })
+vim.keymap.set({ 'n', 'i' }, '<f5>', dap.continue, { desc = 'dap.continue()' })
+vim.keymap.set({ 'n', 'i' }, '<f17>', dap.terminate, { desc = 'dap.terminate()' })
+vim.keymap.set({ 'n', 'i' }, '<f6>', dap.restart, { desc = 'dap.restart()' })
+vim.keymap.set('n', '<f8>', dap.run_to_cursor, { desc = 'dap.run_to_cursor()' })
+vim.keymap.set({ 'n', 'i' }, '<f10>', dap.step_over, { desc = 'dap.step_over()' })
 vim.keymap.set({ 'n', 'i' }, '<f11>', function()
   dap.step_into({ askForTargets = true })
-end)
-vim.keymap.set({ 'n', 'i' }, '<f23>', dap.step_out)
+end, { desc = 'dap.step_into({ askForTargets = true })' })
+vim.keymap.set({ 'n', 'i' }, '<f23>', dap.step_out, { desc = 'dap.step_out()' })
 
 dap.adapters.delve = {
   type = 'server',

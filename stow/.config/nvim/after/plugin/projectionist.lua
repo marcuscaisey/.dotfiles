@@ -12,4 +12,4 @@ vim.g.projectionist_heuristics = {
   },
 }
 
-vim.keymap.set('n', '<leader>a', vim.cmd.A)
+vim.keymap.set('n', '<leader>a', vim.cmd.A, { desc = ':A' })

@@ -52,4 +52,4 @@ vim.keymap.set('n', '<c-f>', function()
     height = 1,
     width = 1,
   })
-end)
+end, { desc = 'tui:new()' })

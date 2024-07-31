@@ -31,4 +31,4 @@ vim.keymap.set('n', '<leader>dd', function()
     vim.diagnostic.enable(false)
     print('Disabled diagnostics')
   end
-end)
+end, { desc = 'Toggle diagnostics' })

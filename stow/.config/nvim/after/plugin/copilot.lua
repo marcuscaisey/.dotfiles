@@ -16,6 +16,6 @@ vim.keymap.set('n', '<leader>cc', function()
     print('Enabled copilot')
     vim.g.copilot_enabled = true
   end
-end)
+end, { desc = 'Toggle copilot' })
 
 vim.keymap.set('i', '<c-e>', '<Plug>(copilot-dismiss)')

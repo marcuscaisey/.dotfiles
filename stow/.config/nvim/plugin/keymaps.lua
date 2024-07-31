@@ -1,28 +1,23 @@
-vim.keymap.set('i', 'jj', '<esc>', { desc = 'End Insert or Replace mode, go back to Normal mode' })
+vim.keymap.set('i', 'jj', '<esc>')
 
-vim.keymap.set('n', '<c-w><', '<c-w>5<', { desc = 'Decrease current window width by 5' })
-vim.keymap.set('n', '<c-w>>', '<c-w>5>', { desc = 'Increase current window width by 5' })
-vim.keymap.set('n', '<c-w>-', '<c-w>5-', { desc = 'Decrease current window height by 5' })
-vim.keymap.set('n', '<c-w>+', '<c-w>5+', { desc = 'Increase current window height by 5' })
+vim.keymap.set('n', '<c-w><', '<c-w>5<')
+vim.keymap.set('n', '<c-w>>', '<c-w>5>')
+vim.keymap.set('n', '<c-w>-', '<c-w>5-')
+vim.keymap.set('n', '<c-w>+', '<c-w>5+')
 
--- stylua: ignore start
-vim.keymap.set('n', 'n', 'nzz',
-  { desc = 'Repeat the latest "/" or "?", then redraw the current line at center of the window' })
-vim.keymap.set('n', 'N', 'Nzz',
-  { desc = 'Repeat the latest "/" or "?" in opposite direction, then redraw the current line at center of the window' })
--- stylua: ignore end
+vim.keymap.set('n', 'n', 'nzz', { desc = 'Repeat the latest "/" or "?", then redraw the current line at center of the window' })
+vim.keymap.set('n', 'N', 'Nzz', { desc = 'Repeat the latest "/" or "?" in opposite direction, then redraw the current line at center of the window' })
 
--- stylua: ignore
-vim.keymap.set({ 'o', 'v' }, 'ae', ':<c-u>execute "normal! gg" | keepjumps normal! VG<cr>',
-  { desc = '"around everything" text object, selects everything in the buffer', silent = true })
+vim.keymap.set({ 'o', 'v' }, 'ae', ':<c-u>execute "normal! gg" | keepjumps normal! VG<cr>', { desc = '"around everything" text object, selects everything in the buffer', silent = true })
 
-vim.keymap.set('n', '<leader>m', '<cmd>messages<cr>', { desc = 'Show all messages' })
+vim.keymap.set('n', '<leader>m', '<cmd>messages<cr>')
 
 vim.keymap.set('n', 'J', 'm`J``', { desc = 'Join lines, keeping the cursor in its current position' })
 
 vim.keymap.set('t', '<esc>', '<c-\\><c-n>', { desc = 'Go back to Normal mode' })
 
 vim.keymap.set('n', '<leader>tw', function()
+  ---@diagnostic disable-next-line: undefined-field
   if vim.opt_local.wrap:get() then
     vim.opt_local.wrap = false
     print('Disabled line wrapping')
