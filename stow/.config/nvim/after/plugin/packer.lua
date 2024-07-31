@@ -48,6 +48,7 @@ packer.startup({
     use({ 'github/copilot.vim' })
     use({ 'norcalli/nvim-colorizer.lua' })
     use({ 'marcuscaisey/lox', rtp = 'tree-sitter-lox' })
+    use({ 'Wansmer/treesj' })
 
     if bootstrap then
       vim.api.nvim_create_autocmd('User', {
