@@ -32,12 +32,6 @@ vim.keymap.set('n', '<leader>tw', function()
   end
 end, { desc = 'Toggle line wrapping in the current window' })
 
-vim.keymap.set('n', '<leader>so', function()
-  local file = vim.api.nvim_buf_get_name(0)
-  print('Sourced ' .. file)
-  vim.cmd.source(file)
-end, { desc = 'Source the current file' })
-
 vim.keymap.set('n', 'j', function()
   if vim.v.count > 0 then
     vim.cmd.normal({ string.format("m'%sj", vim.v.count), bang = true })
