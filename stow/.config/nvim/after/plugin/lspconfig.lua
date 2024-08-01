@@ -206,6 +206,16 @@ lspconfig.lua_ls.setup({
   },
 })
 
+lspconfig.rust_analyzer.setup{
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = false;
+      }
+    }
+  }
+}
+
 lspconfig.tsserver.setup({
   on_attach = function(client)
     client.server_capabilities.documentFormattingProvider = false
