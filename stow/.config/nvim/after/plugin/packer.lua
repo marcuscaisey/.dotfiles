@@ -40,7 +40,6 @@ packer.startup({
     use({ 'marcuscaisey/please.nvim' })
     use({ 'tpope/vim-abolish' })
     use({ 'yorickpeterse/nvim-pqf' })
-    use({ 'marcuscaisey/tui-nvim' })
     use({ 'marcuscaisey/olddirs.nvim', requires = { 'nvim-telescope/telescope.nvim' } })
     use({ 'tpope/vim-projectionist' })
     use({ 'folke/neodev.nvim' })
@@ -49,6 +48,7 @@ packer.startup({
     use({ 'norcalli/nvim-colorizer.lua' })
     use({ 'marcuscaisey/lox', rtp = 'tree-sitter-lox' })
     use({ 'Wansmer/treesj' })
+    use({ 'stevearc/oil.nvim' })
 
     if bootstrap then
       vim.api.nvim_create_autocmd('User', {
