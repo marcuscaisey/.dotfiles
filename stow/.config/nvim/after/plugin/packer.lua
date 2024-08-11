@@ -43,7 +43,6 @@ packer.startup({
     use({ 'marcuscaisey/olddirs.nvim', requires = { 'nvim-telescope/telescope.nvim' } })
     use({ 'tpope/vim-projectionist' })
     use({ 'folke/neodev.nvim' })
-    use({ 'tpope/vim-eunuch' })
     use({ 'github/copilot.vim' })
     use({ 'norcalli/nvim-colorizer.lua' })
     use({ 'marcuscaisey/lox', rtp = 'tree-sitter-lox' })
