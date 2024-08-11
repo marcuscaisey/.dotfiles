@@ -5,6 +5,7 @@ end
 
 treesj.setup({
   use_default_keymaps = false,
+  max_join_length = 200,
 })
 
 vim.keymap.set('n', '<leader>s', treesj.split, { desc = 'treesj.split()' })
