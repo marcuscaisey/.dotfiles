@@ -183,6 +183,7 @@ telescope.setup({
 telescope.load_extension('fzf')
 telescope.load_extension('olddirs')
 
+-- stylua: ignore start
 vim.keymap.set('n', '<c-p>', builtin.find_files, { desc = 'telescope.builtin.find_files()' })
 vim.keymap.set('n', '<c-b>', builtin.buffers, { desc = 'telescope.builtin.buffers()' })
 vim.keymap.set('n', '<c-g>', builtin.live_grep, { desc = 'telescope.builtin.live_grep()' })
@@ -201,3 +202,4 @@ vim.keymap.set('n', 'gri', builtin.lsp_implementations, { desc = 'telescope.buil
 vim.keymap.set('n', 'grr', function()
   builtin.lsp_references({ jump_type = 'never', include_current_line = true })
 end, { desc = 'telescope.builtin.lsp_references()' })
+-- stylua: ignore end
