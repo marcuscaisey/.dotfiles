@@ -185,7 +185,9 @@ telescope.load_extension('olddirs')
 
 -- stylua: ignore start
 vim.keymap.set('n', '<c-p>', builtin.find_files, { desc = 'telescope.builtin.find_files()' })
-vim.keymap.set('n', '<c-b>', builtin.buffers, { desc = 'telescope.builtin.buffers()' })
+vim.keymap.set('n', '<c-b>', function ()
+  builtin.buffers({ sort_mru = true })
+end, { desc = 'telescope.builtin.buffers()' })
 vim.keymap.set('n', '<c-g>', builtin.live_grep, { desc = 'telescope.builtin.live_grep()' })
 vim.keymap.set('n', '<leader>ht', builtin.help_tags, { desc = 'telescope.builtin.help_tags()' })
 vim.keymap.set('n', '<leader>of', builtin.oldfiles, { desc = 'telescope.builtin.oldfiles()' })
