@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.lsp.log.set_format_func(vim.inspect)
-if vim.env.NVIM_DISABLE_LSP_LOGGING then
+if vim.env.NVIM_DISABLE_LSP_LOGGING == 'true' then
   vim.lsp.set_log_level(vim.log.levels.OFF)
 end
 
