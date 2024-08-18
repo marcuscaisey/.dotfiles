@@ -101,6 +101,10 @@ local function plz_goroot(plz_root)
   return nil, string.format('plugin.go.gotool %s not found in build.path %s', gotool, build_paths:gsub('\n', ':'))
 end
 
+if vim.env.NVIM_DISABLE_GOLANGCI_LINT ~= 'true' then
+  lspconfig.golangci_lint_ls.setup({})
+end
+
 lspconfig.gopls.setup({
   settings = {
     gopls = {
