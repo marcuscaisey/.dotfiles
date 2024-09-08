@@ -13,9 +13,8 @@ config.color_schemes = {
 
 config.color_scheme = 'Catppuccin OLED'
 
-config.font = wezterm.font('CommitMono')
+config.font = wezterm.font('JetBrains Mono')
 config.font_size = 14
-config.line_height = 1.2
 
 config.hide_tab_bar_if_only_one_tab = true
 
