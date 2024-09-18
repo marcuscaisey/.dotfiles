@@ -29,3 +29,7 @@ vim.keymap.set('n', 'grl', vim.lsp.codelens.run, { desc = 'vim.lsp.codelens.run(
 vim.keymap.set('n', 'grf', function()
   vim.lsp.buf.format({ timeout_ms = 5000 })
 end, { desc = 'vim.lsp.buf.format()' })
+vim.keymap.set('n', 'grn', vim.lsp.buf.rename, { desc = 'vim.lsp.buf.rename()' })
+vim.keymap.set({ 'n', 'x' }, 'gra', vim.lsp.buf.code_action, { desc = 'vim.lsp.buf.code_action()' })
+vim.keymap.set('n', 'grr', vim.lsp.buf.references, { desc = 'vim.lsp.buf.references()' })
+vim.keymap.set('i', '<C-S>', vim.lsp.buf.signature_help, { desc = 'vim.lsp.buf.signature_help()' })
