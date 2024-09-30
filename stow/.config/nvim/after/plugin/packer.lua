@@ -48,6 +48,7 @@ packer.startup({
     use({ 'marcuscaisey/lox', rtp = 'tree-sitter-lox' })
     use({ 'Wansmer/treesj' })
     use({ 'stevearc/oil.nvim' })
+    use({ 'jake-stewart/multicursor.nvim' })
 
     if bootstrap then
       vim.api.nvim_create_autocmd('User', {
