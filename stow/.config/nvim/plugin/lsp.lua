@@ -20,7 +20,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-vim.lsp.log.set_format_func(vim.inspect)
+-- Format JSON-RPC messages as JSON
+vim.lsp.log.set_format_func(function(...)
+  return vim.inspect(..., {
+    newline = '',
+    process = function(item, _)
+      if type(item) == 'table' and item.jsonrpc then
+        return vim.json.encode(item)
+      else
+        return item
+      end
+    end,
+  })
+end)
 if vim.env.NVIM_DISABLE_LSP_LOGGING == 'true' then
   vim.lsp.set_log_level(vim.log.levels.OFF)
 end
