@@ -6,7 +6,7 @@ vim.g.copilot_filetypes = {
   markdown = true,
 }
 
-vim.g.copilot_enabled = vim.env.NVIM_DISABLE_COPILOT ~= 'true'
+vim.g.copilot_enabled = false
 
 vim.keymap.set('n', '<leader>cc', function()
   if vim.g.copilot_enabled then
