@@ -7,12 +7,6 @@ vim.keymap.set('n', '<leader>q', function()
     vim.cmd.copen()
   end
 end, { desc = 'Toggle quickfix window' })
-vim.keymap.set('n', ']q', function()
-  pcall(vim.cmd.cnext)
-end, { desc = ':cnext' })
-vim.keymap.set('n', '[q', function()
-  pcall(vim.cmd.cprev)
-end, { desc = ':cprev' })
 
 vim.keymap.set('n', '<leader>l', function()
   local loc_window_id = vim.fn.getloclist(0, { winid = 0 }).winid
@@ -23,9 +17,3 @@ vim.keymap.set('n', '<leader>l', function()
     vim.cmd.lopen()
   end
 end, { desc = 'Toggle location list window' })
-vim.keymap.set('n', ']l', function()
-  pcall(vim.cmd.lnext)
-end, { desc = ':lnext' })
-vim.keymap.set('n', '[l', function()
-  pcall(vim.cmd.lprev)
-end, { desc = ':lprev' })
