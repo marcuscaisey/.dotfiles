@@ -75,17 +75,3 @@ vim.keymap.set('n', '<leader>ys', function()
   vim.fn.setreg('*', url)
   print(string.format('Yanked %s', url))
 end, { desc = 'Yank the sourcegraph URL to the current position in the buffer' })
-
-vim.keymap.set('n', '<leader>cb', function()
-  -- filter buffers for changed property since bufmodified = 1 doesn't seem to filter out all unchanged buffers
-  local changed_buffers = vim.tbl_filter(function(b)
-    return b.changed == 1
-  end, vim.fn.getbufinfo({ bufmodified = 1 }) or {})
-  if #changed_buffers == 0 then
-    print('No unsaved buffers')
-    return
-  end
-  vim.fn.setqflist(changed_buffers)
-  vim.cmd.copen()
-  vim.cmd.cfirst()
-end, { desc = 'Populate the quickfix list with any unsaved buffers' })
