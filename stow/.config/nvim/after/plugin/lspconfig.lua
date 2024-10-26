@@ -39,6 +39,14 @@ configs.please = {
   },
 }
 
+configs.loxls = {
+  default_config = {
+    cmd = { 'loxls' },
+    filetypes = { 'lox' },
+    root_dir = util.root_pattern('.git'),
+  },
+}
+
 lspconfig.bashls.setup({})
 
 lspconfig.clangd.setup({
@@ -141,6 +149,8 @@ lspconfig.gopls.setup({
     return vim.fn.getcwd()
   end,
 })
+
+lspconfig.loxls.setup({})
 
 lspconfig.jdtls.setup({
   settings = {
