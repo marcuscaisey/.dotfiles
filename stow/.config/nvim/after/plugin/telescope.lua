@@ -199,7 +199,22 @@ vim.keymap.set('n', '<leader>tr', builtin.resume, { desc = 'telescope.builtin.re
 vim.keymap.set('n', '<leader>od', telescope.extensions.olddirs.picker, { desc = 'telescope.extensions.olddirs.picker()' })
 vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { desc = 'telescope.builtin.lsp_document_symbols()' })
 vim.keymap.set('n', 'grS', builtin.lsp_dynamic_workspace_symbols, { desc = 'telescope.builtin.lsp_dynamic_workspace_symbols()' })
-vim.keymap.set('n', 'gd', builtin.lsp_definitions, { desc = 'telescope.builtin.lsp_definitions()' })
+vim.keymap.set('n', 'g]', function()
+  if vim.opt_local.tagfunc:get() == 'v:lua.vim.lsp.tagfunc' then
+    builtin.lsp_definitions({ jump_type = 'never' })
+    return '<Ignore>'
+  else
+    return 'g]'
+  end
+end, { expr = true, desc = [[telescope.builtin.lsp_definitions({ jump_type = 'never' )]] })
+vim.keymap.set('n', 'g<C-]>', function()
+  if vim.opt_local.tagfunc:get() == 'v:lua.vim.lsp.tagfunc' then
+    builtin.lsp_definitions()
+    return '<Ignore>'
+  else
+    return 'g<C-]>'
+  end
+end, { expr = true, desc = 'telescope.builtin.lsp_definitions()' })
 vim.keymap.set('n', 'gri', builtin.lsp_implementations, { desc = 'telescope.builtin.lsp_implementations()' })
 vim.keymap.set('n', 'grr', function()
   builtin.lsp_references({ jump_type = 'never', include_current_line = true })
