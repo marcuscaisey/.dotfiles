@@ -5,7 +5,6 @@ vim.opt.diffopt:append('linematch:60')
 vim.opt.expandtab = true
 vim.opt.hidden = true
 vim.opt.ignorecase = true
-vim.opt.lazyredraw = true
 vim.opt.mouse = 'a'
 vim.opt.number = true
 vim.opt.pumheight = 10
