@@ -36,3 +36,9 @@
   (#match? @injection.content "api\\s*\\=\\s*(\"\\d\\.\\d\\d?\\.\\d\"|'\\d\\.\\d\\d?\\.\\d')\n")
   (#offset! @injection.content 0 1 0 -1)
   (#set! injection.language "python"))
+
+; Inject Python into strings which contain a line like 'edge_api_version = "1"'
+((raw_string_literal) @injection.content
+  (#match? @injection.content "edge_api_version\\s*\\=\\s*\"\\d\"")
+  (#offset! @injection.content 0 1 0 -1)
+  (#set! injection.language "python"))
