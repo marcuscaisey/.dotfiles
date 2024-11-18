@@ -127,11 +127,6 @@ lspconfig.gopls.setup({
     },
   },
   root_dir = function(fname)
-    local gowork_or_gomod_dir = util.root_pattern('go.work', 'go.mod')(fname)
-    if gowork_or_gomod_dir then
-      return gowork_or_gomod_dir
-    end
-
     local plz_root = util.root_pattern('.plzconfig')(fname)
     if plz_root and vim.fs.basename(plz_root) == 'src' then
       vim.env.GOPATH = string.format('%s:%s/plz-out/go', vim.fs.dirname(plz_root), plz_root)
@@ -144,6 +139,12 @@ lspconfig.gopls.setup({
       else
         vim.env.GOROOT = goroot
       end
+      return vim.fn.getcwd()
+    end
+
+    local gowork_or_gomod_dir = util.root_pattern('go.work', 'go.mod')(fname)
+    if gowork_or_gomod_dir then
+      return gowork_or_gomod_dir
     end
 
     return vim.fn.getcwd()
