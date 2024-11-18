@@ -18,6 +18,9 @@ vim.keymap.set('n', 'J', 'm`J``', { desc = 'Join lines, keeping the cursor in it
 
 vim.keymap.set('t', '<esc>', '<c-\\><c-n>', { desc = 'Go back to Normal mode' })
 
+vim.keymap.set('i', '<CR>', 'pumvisible() ? "<C-E><CR>" : "<CR>"', { expr = true })
+vim.keymap.set('i', '<Tab>', 'pumvisible() ? "<C-E><Tab>" : "<Tab>"', { expr = true })
+
 vim.keymap.set('n', '<leader>tw', function()
   ---@diagnostic disable-next-line: undefined-field
   if vim.opt_local.wrap:get() then
