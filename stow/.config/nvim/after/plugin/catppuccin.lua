@@ -3,6 +3,7 @@ if not ok then
   return
 end
 local colors = require('catppuccin.utils.colors')
+local protocol = require('vim.lsp.protocol')
 
 catppuccin.setup({
   flavour = 'mocha',
@@ -23,4 +24,9 @@ catppuccin.setup({
     end,
   },
 })
+
+for _, kind in ipairs(protocol.CompletionItemKind) do
+  vim.api.nvim_set_hl(0, string.format('LspItemKind%s', kind), { link = string.format('CmpItemKind%s', kind) })
+end
+
 vim.cmd.colorscheme('catppuccin')

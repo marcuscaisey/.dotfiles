@@ -4,10 +4,6 @@ if not ok then
 end
 local configs = require('lspconfig.configs')
 local util = require('lspconfig.util')
-local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-if not ok then
-  return
-end
 local ok, mason = pcall(require, 'mason')
 if not ok then
   return
@@ -25,10 +21,6 @@ local protocol = require('vim.lsp.protocol')
 mason.setup()
 mason_lspconfig.setup({
   automatic_installation = true,
-})
-
-util.default_config = vim.tbl_deep_extend('force', util.default_config, {
-  capabilities = cmp_nvim_lsp.default_capabilities(),
 })
 
 configs.please = {

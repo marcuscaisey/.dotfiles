@@ -58,7 +58,7 @@ local function lsp_symbols_entry_maker(opts)
 
     local function make_display(entry)
       local args = {
-        { entry.symbol_type, 'CmpItemKind' .. entry.symbol_type },
+        { entry.symbol_type, string.format('LspItemKind%s', entry.symbol_type) },
         entry.symbol_name,
       }
       if opts.show_filename then
