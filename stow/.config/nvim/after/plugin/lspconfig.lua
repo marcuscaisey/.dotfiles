@@ -118,7 +118,6 @@ lspconfig.gopls.setup({
     gopls = {
       directoryFilters = { '-plz-out' },
       linksInHover = false,
-      usePlaceholders = false,
       semanticTokens = true,
       noSemanticString = true,
       codelenses = {
