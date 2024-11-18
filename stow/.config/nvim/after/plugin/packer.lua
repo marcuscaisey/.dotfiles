@@ -25,7 +25,6 @@ packer.startup({
     use({ 'hrsh7th/cmp-buffer', requires = { 'hrsh7th/nvim-cmp' } })
     use({ 'mfussenegger/nvim-dap' })
     use({ 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' } })
-    use({ 'ray-x/lsp_signature.nvim' })
     use({ 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } })
     use({ 'lewis6991/gitsigns.nvim' })
     use({ 'stevearc/dressing.nvim' })
