@@ -2,7 +2,6 @@ local ok, lspconfig = pcall(require, 'lspconfig')
 if not ok then
   return
 end
-local configs = require('lspconfig.configs')
 local util = require('lspconfig.util')
 local ok, mason = pcall(require, 'mason')
 if not ok then
@@ -22,14 +21,6 @@ mason.setup()
 mason_lspconfig.setup({
   automatic_installation = true,
 })
-
-configs.loxls = {
-  default_config = {
-    cmd = { 'loxls' },
-    filetypes = { 'lox' },
-    root_dir = util.root_pattern('.git'),
-  },
-}
 
 lspconfig.bashls.setup({})
 
@@ -132,8 +123,6 @@ lspconfig.gopls.setup({
     return vim.fn.getcwd()
   end,
 })
-
-lspconfig.loxls.setup({})
 
 lspconfig.jdtls.setup({
   settings = {
