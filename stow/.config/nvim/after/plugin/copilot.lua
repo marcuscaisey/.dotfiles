@@ -18,4 +18,8 @@ vim.keymap.set('n', '<leader>cc', function()
   end
 end, { desc = 'Toggle copilot' })
 
-vim.keymap.set('i', '<c-e>', '<Plug>(copilot-dismiss)')
+vim.keymap.set('i', '<C-Y>', 'copilot#Accept("\\<C-Y>")', { expr = true, replace_keycodes = false })
+vim.keymap.set('i', '<C-E>', 'pumvisible() ? "<C-E>" : "<Plug>(copilot-dismiss)"', {
+  expr = true,
+  replace_keycodes = false,
+})
