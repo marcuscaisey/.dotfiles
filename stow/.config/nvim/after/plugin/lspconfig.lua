@@ -23,14 +23,6 @@ mason_lspconfig.setup({
   automatic_installation = true,
 })
 
-configs.please = {
-  default_config = {
-    cmd = { 'plz', 'tool', 'lps' },
-    filetypes = { 'please' },
-    root_dir = util.root_pattern('.plzconfig'),
-  },
-}
-
 configs.loxls = {
   default_config = {
     cmd = { 'loxls' },
@@ -156,8 +148,6 @@ lspconfig.jdtls.setup({
 lspconfig.jsonls.setup({})
 
 lspconfig.marksman.setup({})
-
-lspconfig.please.setup({})
 
 lspconfig.pyright.setup({
   settings = {
