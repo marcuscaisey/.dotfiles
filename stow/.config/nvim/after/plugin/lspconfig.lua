@@ -15,7 +15,6 @@ local ok, neodev = pcall(require, 'neodev')
 if not ok then
   return
 end
-local protocol = require('vim.lsp.protocol')
 
 mason.setup()
 mason_lspconfig.setup({
@@ -204,21 +203,6 @@ lspconfig.ts_ls.setup({
   on_attach = function(client)
     client.server_capabilities.documentFormattingProvider = false
   end,
-  handlers = {
-    [protocol.Methods.textDocument_publishDiagnostics] = function(_, result, ctx, config)
-      if result.diagnostics ~= nil then
-        local idx = 1
-        while idx <= #result.diagnostics do
-          if result.diagnostics[idx].code == 80001 then
-            table.remove(result.diagnostics, idx)
-          else
-            idx = idx + 1
-          end
-        end
-      end
-      vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
-    end,
-  },
 })
 
 lspconfig.vimls.setup({})
