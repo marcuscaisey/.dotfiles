@@ -132,6 +132,8 @@ lspconfig.jdtls.setup({
   },
 })
 
+lspconfig.jsonls.setup({})
+
 lspconfig.marksman.setup({})
 
 lspconfig.pyright.setup({
