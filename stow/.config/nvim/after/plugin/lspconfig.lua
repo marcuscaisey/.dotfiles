@@ -2,7 +2,6 @@ local ok, lspconfig = pcall(require, 'lspconfig')
 if not ok then
   return
 end
-local util = require('lspconfig.util')
 local ok, mason = pcall(require, 'mason')
 if not ok then
   return
@@ -99,7 +98,7 @@ lspconfig.gopls.setup({
     },
   },
   root_dir = function(fname)
-    local plz_root = util.root_pattern('.plzconfig')(fname)
+    local plz_root = vim.fs.root(fname, '.plzconfig')
     if plz_root and vim.fs.basename(plz_root) == 'src' then
       vim.env.GOPATH = string.format('%s:%s/plz-out/go', vim.fs.dirname(plz_root), plz_root)
       vim.env.GO111MODULE = 'off'
@@ -114,7 +113,7 @@ lspconfig.gopls.setup({
       return vim.fn.getcwd()
     end
 
-    local gowork_or_gomod_dir = util.root_pattern('go.work', 'go.mod')(fname)
+    local gowork_or_gomod_dir = vim.fs.root(fname, { 'go.work', 'go.mod' })
     if gowork_or_gomod_dir then
       return gowork_or_gomod_dir
     end
