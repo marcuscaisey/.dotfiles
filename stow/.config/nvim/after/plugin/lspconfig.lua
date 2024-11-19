@@ -196,3 +196,9 @@ lspconfig.rust_analyzer.setup({
     },
   },
 })
+
+lspconfig.ts_ls.setup({
+  on_attach = function(client)
+    client.server_capabilities.documentFormattingProvider = false
+  end,
+})
