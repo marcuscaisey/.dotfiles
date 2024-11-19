@@ -1,9 +1,10 @@
-local install_path = vim.fs.joinpath(vim.fn.stdpath('data') --[[@as string]], 'site/pack/packer/start/packer.nvim')
+local install_path = vim.fs.joinpath(vim.fn.stdpath('data') --[[@as string]], 'site/pack/packer/start')
+local packer_install_path = vim.fs.joinpath(install_path, 'packer.nvim')
 local bootstrap = false
-if not vim.loop.fs_stat(install_path) then
-  local res = vim.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path }):wait()
+if not vim.loop.fs_stat(packer_install_path) then
+  local res = vim.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', packer_install_path }):wait()
   assert(res.code == 0, string.format('Failed to clone packer.nvim. stderr:\n%s', res.stderr))
-  vim.opt.runtimepath:append(install_path)
+  vim.opt.runtimepath:append(packer_install_path)
   bootstrap = true
 end
 
@@ -41,7 +42,7 @@ packer.startup({
     use({ 'folke/neodev.nvim' })
     use({ 'github/copilot.vim' })
     use({ 'norcalli/nvim-colorizer.lua' })
-    use({ 'marcuscaisey/lox', rtp = 'tree-sitter-lox' })
+    use({ 'marcuscaisey/lox' })
     use({ 'Wansmer/treesj' })
     use({ 'stevearc/oil.nvim' })
     use({ 'jake-stewart/multicursor.nvim' })
@@ -68,6 +69,7 @@ packer.startup({
     end
   end,
   config = {
+    compile_on_sync = false,
     display = {
       open_fn = function()
         return util.float({ border = 'single' })
@@ -75,3 +77,5 @@ packer.startup({
     },
   },
 })
+
+vim.opt.runtimepath:append(vim.fs.joinpath(install_path, 'lox/tree-sitter-lox'))
