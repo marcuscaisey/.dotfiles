@@ -198,5 +198,3 @@ lspconfig.rust_analyzer.setup({
     },
   },
 })
-
-lspconfig.vimls.setup({})
