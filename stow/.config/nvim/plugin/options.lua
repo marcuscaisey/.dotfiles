@@ -1,5 +1,7 @@
 vim.opt.clipboard = 'unnamed'
 vim.opt.colorcolumn = '+1'
+vim.opt.complete = '.'
+vim.opt.completeopt = { 'menuone', 'popup', 'noinsert', 'fuzzy' }
 vim.opt.cursorline = true
 vim.opt.diffopt:append('linematch:60')
 vim.opt.expandtab = true
@@ -22,8 +24,6 @@ vim.opt.swapfile = false
 vim.opt.tabstop = 4
 vim.opt.termguicolors = true
 vim.opt.updatetime = 100
-vim.opt.completeopt = { 'menuone', 'popup', 'noinsert', 'fuzzy' }
-vim.opt.complete = '.'
 
 local augroup = vim.api.nvim_create_augroup('options', { clear = true })
 
