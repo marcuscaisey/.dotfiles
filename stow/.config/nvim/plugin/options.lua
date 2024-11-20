@@ -23,6 +23,7 @@ vim.opt.tabstop = 4
 vim.opt.termguicolors = true
 vim.opt.updatetime = 100
 vim.opt.completeopt = { 'menuone', 'popup', 'noinsert', 'fuzzy' }
+vim.opt.complete = '.'
 
 local augroup = vim.api.nvim_create_augroup('options', { clear = true })
 
