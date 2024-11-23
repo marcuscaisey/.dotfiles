@@ -203,3 +203,5 @@ lspconfig.ts_ls.setup({
     client.server_capabilities.documentFormattingProvider = false
   end,
 })
+
+lspconfig.vimls.setup({})
