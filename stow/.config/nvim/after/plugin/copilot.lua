@@ -1,6 +1,4 @@
-if vim.fn.exists(':Copilot') ~= 2 then
-  return
-end
+local fn = vim.fn
 
 vim.g.copilot_filetypes = {
   markdown = true,
@@ -13,7 +11,15 @@ vim.keymap.set('n', '<leader>cc', function()
     print('Disabled copilot')
     vim.g.copilot_enabled = false
   else
-    print('Enabled copilot')
+    if fn.exists(':Copilot') ~= 2 then
+      vim.cmd.packadd('copilot.vim')
+      -- Force copilot to attach to the current buffer
+      vim.cmd.write()
+      vim.cmd.edit()
+      print('Started copilot')
+    else
+      print('Enabled copilot')
+    end
     vim.g.copilot_enabled = true
   end
 end, { desc = 'Toggle copilot' })

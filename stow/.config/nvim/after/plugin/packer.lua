@@ -40,7 +40,7 @@ packer.startup({
     use({ 'marcuscaisey/olddirs.nvim', requires = { 'nvim-telescope/telescope.nvim' } })
     use({ 'tpope/vim-projectionist' })
     use({ 'folke/neodev.nvim' })
-    use({ 'github/copilot.vim' })
+    use({ 'github/copilot.vim', opt = true })
     use({ 'norcalli/nvim-colorizer.lua' })
     use({ 'marcuscaisey/lox' })
     use({ 'Wansmer/treesj' })
