@@ -40,7 +40,6 @@ packer.startup({
     use({ 'tpope/vim-projectionist' })
     use({ 'folke/neodev.nvim' })
     use({ 'github/copilot.vim', opt = true })
-    use({ 'norcalli/nvim-colorizer.lua' })
     use({ 'marcuscaisey/lox' })
     use({ 'Wansmer/treesj' })
     use({ 'stevearc/oil.nvim' })
