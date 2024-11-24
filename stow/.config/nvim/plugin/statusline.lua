@@ -2,7 +2,10 @@ local api = vim.api
 local diagnostic = vim.diagnostic
 local fn = vim.fn
 local lsp = vim.lsp
-local devicons = require('nvim-web-devicons')
+local ok, devicons = pcall(require, 'nvim-web-devicons')
+if not ok then
+  return
+end
 
 local augroup = api.nvim_create_augroup('statusline', { clear = true })
 
@@ -17,7 +20,6 @@ api.nvim_create_autocmd('User', {
   desc = 'Redraw statusline',
   command = 'redrawstatus',
 })
-local git_icon, git_icon_hl_group = devicons.get_icon(nil, 'git')
 ---@type {name:string, hl_group:string, symbol:string}[]
 local git_status_sections = {
   { name = 'added', hl_group = 'diffAdded', symbol = '+' },
@@ -30,7 +32,8 @@ function StatusLineGitSection()
   local result = {}
   local head = vim.b.gitsigns_head ---@type string?
   if head then
-    table.insert(result, hl(git_icon_hl_group) .. git_icon .. ' ' .. hl('StatusLine') .. head)
+    local icon, icon_gl_group = devicons.get_icon(nil, 'git')
+    table.insert(result, hl(icon_gl_group) .. icon .. ' ' .. hl('StatusLine') .. head)
     local status_counts = vim.b.gitsigns_status_dict ---@type {added:integer?, changed:integer?, removed:integer?}?
     if status_counts then
       local status = {}
