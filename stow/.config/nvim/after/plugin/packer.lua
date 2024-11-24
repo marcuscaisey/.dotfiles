@@ -35,7 +35,6 @@ packer.startup({
     use({ 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } })
     use({ 'tpope/vim-fugitive' })
     use({ 'marcuscaisey/please.nvim' })
-    use({ 'tpope/vim-abolish' })
     use({ 'yorickpeterse/nvim-pqf' })
     use({ 'marcuscaisey/olddirs.nvim', requires = { 'nvim-telescope/telescope.nvim' } })
     use({ 'tpope/vim-projectionist' })
