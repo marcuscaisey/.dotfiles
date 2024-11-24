@@ -173,6 +173,9 @@ neodev.setup({
 lspconfig.lua_ls.setup({
   settings = {
     Lua = {
+      completion = {
+        callSnippet = 'Replace',
+      },
       diagnostics = {
         disable = {
           'redefined-local',
