@@ -7,15 +7,14 @@ vim.opt.diffopt:append('linematch:60')
 vim.opt.expandtab = true
 vim.opt.hidden = true
 vim.opt.ignorecase = true
+vim.opt.laststatus = 3
 vim.opt.mouse = 'a'
 vim.opt.number = true
 vim.opt.pumheight = 10
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 10
 vim.opt.shiftwidth = 4
-vim.opt.shortmess:append('S')
 vim.opt.shortmess:append('c')
-vim.opt.showmode = false
 vim.opt.signcolumn = 'yes:2'
 vim.opt.smartcase = true
 vim.opt.splitbelow = true

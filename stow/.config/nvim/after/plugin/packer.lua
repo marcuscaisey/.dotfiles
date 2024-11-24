@@ -23,7 +23,7 @@ packer.startup({
     use({ 'kosayoda/nvim-lightbulb' })
     use({ 'mfussenegger/nvim-dap' })
     use({ 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' } })
-    use({ 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } })
+    use({ 'kyazdani42/nvim-web-devicons' })
     use({ 'lewis6991/gitsigns.nvim' })
     use({ 'stevearc/dressing.nvim' })
     use({ 'catppuccin/nvim', as = 'catppuccin' })
