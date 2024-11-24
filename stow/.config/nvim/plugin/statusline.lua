@@ -72,6 +72,11 @@ api.nvim_create_autocmd('LspProgress', {
     vim.cmd.redrawstatus()
   end,
 })
+api.nvim_create_autocmd({'LspAttach', 'LspDetach'}, {
+  group = augroup,
+  desc = 'Redraw statusline',
+  command = 'redrawstatus',
+})
 
 ---@return string
 function StatusLineLSPSection()
