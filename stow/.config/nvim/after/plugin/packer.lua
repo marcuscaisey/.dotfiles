@@ -41,7 +41,6 @@ packer.startup({
     use({ 'folke/neodev.nvim' })
     use({ 'github/copilot.vim', opt = true })
     use({ 'marcuscaisey/lox' })
-    use({ 'Wansmer/treesj' })
     use({ 'stevearc/oil.nvim' })
     use({ 'jake-stewart/multicursor.nvim' })
 
