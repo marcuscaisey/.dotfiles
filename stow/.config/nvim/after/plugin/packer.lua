@@ -32,7 +32,6 @@ packer.startup({
     use({ 'vim-scripts/ReplaceWithRegister' })
     use({ 'kylechui/nvim-surround' })
     use({ 'bkad/camelcasemotion' })
-    use({ 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } })
     use({ 'tpope/vim-fugitive' })
     use({ 'marcuscaisey/please.nvim' })
     use({ 'yorickpeterse/nvim-pqf' })
