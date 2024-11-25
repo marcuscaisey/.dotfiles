@@ -89,6 +89,3 @@ if vim.env.NVIM_LSP_LOG_LEVEL then
 end
 
 vim.keymap.set('n', 'grl', vim.lsp.codelens.run, { desc = 'vim.lsp.codelens.run()' })
-vim.keymap.set('n', 'grf', function()
-  vim.lsp.buf.format({ timeout_ms = 5000 })
-end, { desc = 'vim.lsp.buf.format()' })
