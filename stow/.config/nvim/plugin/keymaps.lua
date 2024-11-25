@@ -22,6 +22,22 @@ vim.keymap.set('t', '<esc>', '<c-\\><c-n>', { desc = 'Go back to Normal mode' })
 vim.keymap.set('i', '<CR>', 'pumvisible() ? "<C-E><CR>" : "<CR>"', { expr = true })
 vim.keymap.set('i', '<Tab>', 'pumvisible() ? "<C-E><Tab>" : "<Tab>"', { expr = true })
 
+vim.keymap.set(
+  'n',
+  '<leader>f',
+  table.concat({
+    'ma', -- Set mark 'a' at cursor position
+    'H', -- Move to top of window
+    'mb', -- Set mark 'b' at top of window
+    'gg', -- Move to first line
+    'gqG', -- Format to last line
+    '`b', -- Move to top of window mark 'b'
+    'zt', -- Redraw line at top of window
+    '`a', -- Move to cursor position mark 'a'
+  }),
+  { desc = 'Format the entire buffer', silent = true }
+)
+
 vim.keymap.set('n', '<leader>tw', function()
   ---@diagnostic disable-next-line: undefined-field
   if vim.opt_local.wrap:get() then

@@ -181,9 +181,6 @@ lspconfig.lua_ls.setup({
           'redefined-local',
         },
       },
-      format = {
-        enable = false,
-      },
       workspace = {
         checkThirdParty = false,
       },
