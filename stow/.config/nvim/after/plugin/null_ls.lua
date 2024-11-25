@@ -4,7 +4,5 @@ if not ok then
 end
 
 null_ls.setup({
-  sources = {
-    null_ls.builtins.formatting.black,
-  },
+  sources = {},
 })
