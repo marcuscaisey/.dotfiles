@@ -183,9 +183,8 @@ telescope.setup({
 telescope.load_extension('fzf')
 telescope.load_extension('olddirs')
 
--- stylua: ignore start
 vim.keymap.set('n', '<c-p>', builtin.find_files, { desc = 'telescope.builtin.find_files()' })
-vim.keymap.set('n', '<c-b>', function ()
+vim.keymap.set('n', '<c-b>', function()
   builtin.buffers({ sort_mru = true })
 end, { desc = 'telescope.builtin.buffers()' })
 vim.keymap.set('n', '<c-g>', builtin.live_grep, { desc = 'telescope.builtin.live_grep()' })
@@ -196,9 +195,13 @@ vim.keymap.set('n', '<leader>oaf', function()
 end, { desc = 'telescope.builtin.oldfiles()' })
 vim.keymap.set('n', '<leader>tt', builtin.builtin, { desc = 'telescope.builtin.builtin()' })
 vim.keymap.set('n', '<leader>tr', builtin.resume, { desc = 'telescope.builtin.resume()' })
-vim.keymap.set('n', '<leader>od', telescope.extensions.olddirs.picker, { desc = 'telescope.extensions.olddirs.picker()' })
+vim.keymap.set('n', '<leader>od', telescope.extensions.olddirs.picker, {
+  desc = 'telescope.extensions.olddirs.picker()',
+})
 vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { desc = 'telescope.builtin.lsp_document_symbols()' })
-vim.keymap.set('n', 'grS', builtin.lsp_dynamic_workspace_symbols, { desc = 'telescope.builtin.lsp_dynamic_workspace_symbols()' })
+vim.keymap.set('n', 'grS', builtin.lsp_dynamic_workspace_symbols, {
+  desc = 'telescope.builtin.lsp_dynamic_workspace_symbols()',
+})
 vim.keymap.set('n', 'g]', function()
   if vim.opt_local.tagfunc:get() == 'v:lua.vim.lsp.tagfunc' then
     builtin.lsp_definitions({ jump_type = 'never' })
@@ -219,4 +222,3 @@ vim.keymap.set('n', 'gri', builtin.lsp_implementations, { desc = 'telescope.buil
 vim.keymap.set('n', 'grr', function()
   builtin.lsp_references({ jump_type = 'never', include_current_line = true })
 end, { desc = 'telescope.builtin.lsp_references()' })
--- stylua: ignore end

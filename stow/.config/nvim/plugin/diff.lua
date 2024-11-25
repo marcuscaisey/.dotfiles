@@ -1,13 +1,11 @@
--- stylua: ignore start
 vim.keymap.set('n', '<leader>dt', '<cmd>diffthis<cr>', { desc = ':diffthis', silent = true })
 vim.keymap.set('n', '<leader>do', '<cmd>diffoff!<cr>', { desc = ':diffoff!', silent = true })
-vim.keymap.set({'n', 'x'}, ']n', function()
+vim.keymap.set({ 'n', 'x' }, ']n', function()
   vim.fn.search([[^\(<\{7}\||\{7}\|=\{7}\|>\{7}\)]], 'W')
 end, { desc = 'Jump to next git conflict marker (<<<<<<<, |||||||, =======, >>>>>>>)' })
-vim.keymap.set({'n', 'x'}, '[n', function()
+vim.keymap.set({ 'n', 'x' }, '[n', function()
   vim.fn.search([[^\(<\{7}\||\{7}\|=\{7}\|>\{7}\)]], 'bW')
 end, { desc = 'Jump to previous git conflict marker (<<<<<<<, |||||||, =======, >>>>>>>)' })
--- stylua: ignore end
 
 local augroup = vim.api.nvim_create_augroup('diff', { clear = true })
 vim.api.nvim_create_autocmd('VimEnter', {

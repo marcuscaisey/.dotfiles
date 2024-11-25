@@ -5,12 +5,13 @@ vim.keymap.set('n', '<c-w>>', '<c-w>5>')
 vim.keymap.set('n', '<c-w>-', '<c-w>5-')
 vim.keymap.set('n', '<c-w>+', '<c-w>5+')
 
--- stylua: ignore start
-vim.keymap.set('n', 'n', 'nzz', { desc = 'Repeat the latest "/" or "?", then redraw the current line at center of the window' })
-vim.keymap.set('n', 'N', 'Nzz', { desc = 'Repeat the latest "/" or "?" in opposite direction, then redraw the current line at center of the window' })
+vim.keymap.set('n', 'n', 'nzz')
+vim.keymap.set('n', 'N', 'Nzz')
 
-vim.keymap.set({ 'o', 'v' }, 'ae', ':<c-u>execute "normal! gg" | keepjumps normal! VG<cr>', { desc = '"around everything" text object, selects everything in the buffer', silent = true })
--- stylua: ignore end
+vim.keymap.set({ 'o', 'v' }, 'ae', ':<c-u>execute "normal! gg" | keepjumps normal! VG<cr>', {
+  desc = '"around everything" text object, selects everything in the buffer',
+  silent = true,
+})
 
 vim.keymap.set('n', '<leader>m', '<cmd>messages<cr>')
 
