@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
-    if client.supports_method(protocol.Methods.textDocument_codeLens) then
+    if client:supports_method(protocol.Methods.textDocument_codeLens) then
       vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'BufWritePost', 'CursorHold' }, {
         callback = function()
           vim.lsp.codelens.refresh({ bufnr = args.buf })
@@ -54,7 +54,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
-    if client.supports_method(protocol.Methods.textDocument_completion) then
+    if client:supports_method(protocol.Methods.textDocument_completion) then
       vim.lsp.completion.enable(true, client.id, args.buf, {
         autotrigger = true,
         convert = completion_item_to_vim_item,
