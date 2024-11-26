@@ -39,7 +39,7 @@ end
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = augroup,
-  desc = 'Create codelens autocmd and enable completion',
+  desc = 'Create codelens autocmd, enable completion, create format mapping',
   callback = function(args)
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
@@ -50,7 +50,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end,
         group = augroup,
         buffer = args.buf,
-        desc = 'Refresh codelenses automatically',
+        desc = 'Refresh codelenses',
       })
     end
 
@@ -59,6 +59,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
         autotrigger = true,
         convert = completion_item_to_vim_item,
       })
+    end
+
+    if client:supports_method(protocol.Methods.textDocument_formatting) and not vim.bo.formatprg ~= '' then
+      vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'vim.lsp.buf.format()', buffer = args.buf })
     end
   end,
 })
