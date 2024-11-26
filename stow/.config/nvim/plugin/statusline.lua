@@ -1,20 +1,16 @@
-local api = vim.api
-local diagnostic = vim.diagnostic
-local fn = vim.fn
-local lsp = vim.lsp
 local ok, devicons = pcall(require, 'nvim-web-devicons')
 if not ok then
   return
 end
 
-local augroup = api.nvim_create_augroup('statusline', { clear = true })
+local augroup = vim.api.nvim_create_augroup('statusline', { clear = true })
 
 ---@param group string
 local function hl(group)
   return '%#' .. group .. '#'
 end
 
-api.nvim_create_autocmd('User', {
+vim.api.nvim_create_autocmd('User', {
   group = augroup,
   pattern = 'GitSignsUpdate',
   desc = 'Redraw statusline',
@@ -53,13 +49,13 @@ end
 
 ---@return string
 function StatusLineFileSection()
-  local icon, hl_group = devicons.get_icon(api.nvim_buf_get_name(0), nil, { default = true })
-  local cwd = fn.getcwd():gsub('^' .. vim.env.HOME, '~')
+  local icon, hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(0), nil, { default = true })
+  local cwd = vim.fn.getcwd():gsub('^' .. vim.env.HOME, '~')
   return hl(hl_group) .. icon .. ' ' .. hl('StatusLine') .. '%f %(%h%w%m%r %)' .. hl('StatusLineNC') .. cwd
 end
 
 local lsp_progress = nil
-api.nvim_create_autocmd('LspProgress', {
+vim.api.nvim_create_autocmd('LspProgress', {
   group = augroup,
   desc = 'Update statusline with LSP progress or clear it if the work is done',
   ---@param args {data:{params:{value:lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd}}}
@@ -67,12 +63,12 @@ api.nvim_create_autocmd('LspProgress', {
     if args.data.params.value.kind == 'end' then
       lsp_progress = nil
     else
-      lsp_progress = lsp.status():gsub('%%', '%%%%')
+      lsp_progress = vim.lsp.status():gsub('%%', '%%%%')
     end
     vim.cmd.redrawstatus()
   end,
 })
-api.nvim_create_autocmd({ 'LspAttach', 'LspDetach' }, {
+vim.api.nvim_create_autocmd({ 'LspAttach', 'LspDetach' }, {
   group = augroup,
   desc = 'Redraw statusline',
   command = 'redrawstatus',
@@ -84,7 +80,7 @@ function StatusLineLSPSection()
   if lsp_progress then
     result = lsp_progress
   else
-    local clients = lsp.get_clients({ bufnr = 0 })
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
     local client_names = {}
     for _, client in ipairs(clients) do
       table.insert(client_names, client.name)
@@ -95,18 +91,18 @@ function StatusLineLSPSection()
 end
 
 local diagnostic_severity_hl_groups = {
-  [diagnostic.severity.ERROR] = 'DiagnosticSignError',
-  [diagnostic.severity.WARN] = 'DiagnosticSignWarn',
-  [diagnostic.severity.INFO] = 'DiagnosticSignInfo',
-  [diagnostic.severity.HINT] = 'DiagnosticSignHint',
+  [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
+  [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
+  [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
+  [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
 }
 
-local diagnostic_severity_signs = diagnostic.config().signs.text
+local diagnostic_severity_signs = vim.diagnostic.config().signs.text
 assert(diagnostic_severity_signs, 'Expected signs.text to be populated in vim.diagnostic.config()')
 
 ---@return string
 function StatusLineDiagnosticsSection()
-  local counts = diagnostic.count(0)
+  local counts = vim.diagnostic.count(0)
   local result = {} ---@type string[]
   for level, count in pairs(counts) do
     table.insert(result, hl(diagnostic_severity_hl_groups[level]) .. diagnostic_severity_signs[level] .. ' ' .. count)

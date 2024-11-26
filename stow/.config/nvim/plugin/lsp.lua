@@ -1,5 +1,3 @@
-local protocol = require('vim.lsp.protocol')
-
 local augroup = vim.api.nvim_create_augroup('lsp', { clear = true })
 
 ---@param item lsp.CompletionItem
@@ -33,7 +31,7 @@ local function completion_item_to_vim_item(item)
   return {
     menu = '',
     info = item_documentation(item),
-    kind_hlgroup = string.format('LspItemKind%s', protocol.CompletionItemKind[item.kind] or ''),
+    kind_hlgroup = string.format('LspItemKind%s', vim.lsp.protocol.CompletionItemKind[item.kind] or ''),
   }
 end
 
@@ -43,7 +41,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
-    if client:supports_method(protocol.Methods.textDocument_codeLens) then
+    if client:supports_method(vim.lsp.protocol.Methods.textDocument_codeLens) then
       vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'BufWritePost', 'CursorHold' }, {
         callback = function()
           vim.lsp.codelens.refresh({ bufnr = args.buf })
@@ -54,14 +52,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
-    if client:supports_method(protocol.Methods.textDocument_completion) then
+    if client:supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
       vim.lsp.completion.enable(true, client.id, args.buf, {
         autotrigger = true,
         convert = completion_item_to_vim_item,
       })
     end
 
-    if client:supports_method(protocol.Methods.textDocument_formatting) and not vim.bo.formatprg ~= '' then
+    if client:supports_method(vim.lsp.protocol.Methods.textDocument_formatting) and not vim.bo.formatprg ~= '' then
       vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'vim.lsp.buf.format()', buffer = args.buf })
     end
   end,

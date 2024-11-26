@@ -2,8 +2,8 @@ local ok, configs = pcall(require, 'nvim-treesitter.configs')
 if not ok then
   return
 end
-
 local parsers = require('nvim-treesitter.parsers')
+
 local parser_configs = parsers.get_parser_configs()
 ---@diagnostic disable-next-line: inject-field
 parser_configs.lox = {
