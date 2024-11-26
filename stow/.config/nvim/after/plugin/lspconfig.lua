@@ -15,6 +15,8 @@ if not ok then
   return
 end
 
+local augroup = vim.api.nvim_create_augroup('lspconfig', { clear = true })
+
 mason.setup()
 mason_lspconfig.setup({
   automatic_installation = true,
@@ -97,6 +99,29 @@ lspconfig.gopls.setup({
       },
     },
   },
+  ---@param client vim.lsp.Client
+  ---@param bufnr integer
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      group = augroup,
+      buffer = bufnr,
+      desc = 'Run gopls source.organizeImports code action',
+      callback = function()
+        local params = vim.lsp.util.make_range_params(0, client.offset_encoding) ---@type lsp.CodeActionParams
+        params.context = { only = { 'source.organizeImports' }, diagnostics = {} }
+        ---@type {err: lsp.ResponseError?, result:(lsp.CodeAction|lsp.Command)[]?}?
+        local resp = client:request_sync(vim.lsp.protocol.Methods.textDocument_codeAction, params, nil, bufnr)
+        if not resp or not resp.result then
+          return
+        end
+        for _, code_action in pairs(resp.result) do
+          if code_action.edit then
+            vim.lsp.util.apply_workspace_edit(code_action.edit, client.offset_encoding)
+          end
+        end
+      end,
+    })
+  end,
   root_dir = function(fname)
     local plz_root = vim.fs.root(fname, '.plzconfig')
     if plz_root and vim.fs.basename(plz_root) == 'src' then
