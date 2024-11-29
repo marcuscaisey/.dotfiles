@@ -47,6 +47,11 @@ function StatusLineGitSection()
   return table.concat(result, ' ')
 end
 
+vim.api.nvim_create_autocmd({ 'DirChanged' }, {
+  group = augroup,
+  desc = 'Redraw statusline',
+  command = 'redrawstatus',
+})
 ---@return string
 function StatusLineFileSection()
   local icon, hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(0), nil, { default = true })
