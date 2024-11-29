@@ -115,6 +115,11 @@ function StatusLineDiagnosticsSection()
   return table.concat(result, ' ')
 end
 
+---@return string
+function StatusLineLocationSection()
+  return hl('StatusLine') .. '%11(%l:%v %p%%%)'
+end
+
 local padding = '  '
 
 ---@return string
@@ -126,7 +131,7 @@ function StatusLine()
     '%=',
     '%(%{%v:lua.StatusLineLSPSection()%}' .. padding .. '%)',
     '%(%{%v:lua.StatusLineDiagnosticsSection()%}' .. padding .. '%)',
-    hl('StatusLine') .. '%11(%l:%v %p%%%)',
+    '%{%v:lua.StatusLineLocationSection()%}',
     ' ',
   })
 end
