@@ -1,5 +1,5 @@
-vim.keymap.set('n', '<leader>dt', '<cmd>diffthis<cr>', { desc = ':diffthis', silent = true })
-vim.keymap.set('n', '<leader>do', '<cmd>diffoff!<cr>', { desc = ':diffoff!', silent = true })
+vim.keymap.set('n', '<Leader>dt', '<Cmd>diffthis<CR>', { desc = ':diffthis', silent = true })
+vim.keymap.set('n', '<Leader>do', '<Cmd>diffoff!<CR>', { desc = ':diffoff!', silent = true })
 vim.keymap.set({ 'n', 'x' }, ']n', function()
   vim.fn.search([[^\(<\{7}\||\{7}\|=\{7}\|>\{7}\)]], 'W')
 end, { desc = 'Jump to next git conflict marker (<<<<<<<, |||||||, =======, >>>>>>>)' })

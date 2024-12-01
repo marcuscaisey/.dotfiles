@@ -23,7 +23,7 @@ vim.diagnostic.config({
   },
 })
 
-vim.keymap.set('n', '<leader>dd', function()
+vim.keymap.set('n', '<Leader>dd', function()
   if not vim.diagnostic.is_enabled() then
     vim.diagnostic.enable()
     print('Enabled diagnostics')

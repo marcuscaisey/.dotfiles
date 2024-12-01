@@ -129,17 +129,17 @@ telescope.setup({
     borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
     mappings = {
       i = {
-        ['<c-h>'] = layout.toggle_preview,
-        ['<c-q>'] = actions.smart_send_to_qflist + actions.open_qflist + custom_actions.open_first_qf_item,
-        ['<c-l>'] = actions.smart_send_to_loclist + actions.open_loclist + custom_actions.open_first_loc_item,
+        ['<C-H>'] = layout.toggle_preview,
+        ['<C-Q>'] = actions.smart_send_to_qflist + actions.open_qflist + custom_actions.open_first_qf_item,
+        ['<C-L>'] = actions.smart_send_to_loclist + actions.open_loclist + custom_actions.open_first_loc_item,
       },
       n = {
-        ['<c-h>'] = layout.toggle_preview,
-        ['<c-c>'] = actions.close,
-        ['<c-n>'] = actions.move_selection_next,
-        ['<c-p>'] = actions.move_selection_previous,
-        ['<c-q>'] = actions.smart_send_to_qflist + actions.open_qflist + custom_actions.open_first_qf_item,
-        ['<c-l>'] = actions.smart_send_to_loclist + actions.open_loclist + custom_actions.open_first_loc_item,
+        ['<C-H>'] = layout.toggle_preview,
+        ['<C-C>'] = actions.close,
+        ['<C-N>'] = actions.move_selection_next,
+        ['<C-P>'] = actions.move_selection_previous,
+        ['<C-Q>'] = actions.smart_send_to_qflist + actions.open_qflist + custom_actions.open_first_qf_item,
+        ['<C-L>'] = actions.smart_send_to_loclist + actions.open_loclist + custom_actions.open_first_loc_item,
       },
     },
     sorting_strategy = 'ascending',
@@ -183,19 +183,19 @@ telescope.setup({
 telescope.load_extension('fzf')
 telescope.load_extension('olddirs')
 
-vim.keymap.set('n', '<c-p>', builtin.find_files, { desc = 'telescope.builtin.find_files()' })
-vim.keymap.set('n', '<c-b>', function()
+vim.keymap.set('n', '<C-P>', builtin.find_files, { desc = 'telescope.builtin.find_files()' })
+vim.keymap.set('n', '<C-B>', function()
   builtin.buffers({ sort_mru = true })
 end, { desc = 'telescope.builtin.buffers()' })
-vim.keymap.set('n', '<c-g>', builtin.live_grep, { desc = 'telescope.builtin.live_grep()' })
-vim.keymap.set('n', '<leader>ht', builtin.help_tags, { desc = 'telescope.builtin.help_tags()' })
-vim.keymap.set('n', '<leader>of', builtin.oldfiles, { desc = 'telescope.builtin.oldfiles()' })
-vim.keymap.set('n', '<leader>oaf', function()
+vim.keymap.set('n', '<C-G>', builtin.live_grep, { desc = 'telescope.builtin.live_grep()' })
+vim.keymap.set('n', '<Leader>ht', builtin.help_tags, { desc = 'telescope.builtin.help_tags()' })
+vim.keymap.set('n', '<Leader>of', builtin.oldfiles, { desc = 'telescope.builtin.oldfiles()' })
+vim.keymap.set('n', '<Leader>oaf', function()
   builtin.oldfiles({ cwd_only = false })
 end, { desc = 'telescope.builtin.oldfiles()' })
-vim.keymap.set('n', '<leader>tt', builtin.builtin, { desc = 'telescope.builtin.builtin()' })
-vim.keymap.set('n', '<leader>tr', builtin.resume, { desc = 'telescope.builtin.resume()' })
-vim.keymap.set('n', '<leader>od', telescope.extensions.olddirs.picker, {
+vim.keymap.set('n', '<Leader>tt', builtin.builtin, { desc = 'telescope.builtin.builtin()' })
+vim.keymap.set('n', '<Leader>tr', builtin.resume, { desc = 'telescope.builtin.resume()' })
+vim.keymap.set('n', '<Leader>od', telescope.extensions.olddirs.picker, {
   desc = 'telescope.extensions.olddirs.picker()',
 })
 vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { desc = 'telescope.builtin.lsp_document_symbols()' })

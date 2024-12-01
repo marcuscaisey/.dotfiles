@@ -2,22 +2,22 @@ local multicursor = require('multicursor-nvim')
 
 multicursor.setup()
 
-vim.keymap.set({ 'n', 'v' }, '<up>', function()
+vim.keymap.set({ 'n', 'v' }, '<Up>', function()
   multicursor.addCursor('k')
 end, { desc = [[multicursor.addCursor('k')]] })
-vim.keymap.set({ 'n', 'v' }, '<down>', function()
+vim.keymap.set({ 'n', 'v' }, '<Down>', function()
   multicursor.addCursor('j')
 end, { desc = [[multicursor.addCursor('j')]] })
 
-vim.keymap.set({ 'n', 'v' }, '<c-n>', function()
+vim.keymap.set({ 'n', 'v' }, '<C-N>', function()
   multicursor.addCursor('*')
 end, { desc = [[multicursor.addCursor('*')]] })
 
-vim.keymap.set({ 'n', 'v' }, '<c-s>', function()
+vim.keymap.set({ 'n', 'v' }, '<C-S>', function()
   multicursor.skipCursor('*')
 end, { desc = [[multicursor.skipCursor('*')]] })
 
-vim.keymap.set('n', '<esc>', function()
+vim.keymap.set('n', '<Esc>', function()
   if multicursor.hasCursors() then
     multicursor.clearCursors()
   end

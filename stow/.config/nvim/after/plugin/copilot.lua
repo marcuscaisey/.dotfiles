@@ -18,7 +18,7 @@ local function start_copilot()
   vim.cmd.edit()
 end
 
-vim.keymap.set('n', '<leader>cc', function()
+vim.keymap.set('n', '<Leader>cc', function()
   if vim.g.copilot_enabled then
     print('Disabled copilot')
     vim.g.copilot_enabled = false

@@ -11,11 +11,11 @@ oil.setup({
   use_default_keymaps = false,
   keymaps = {
     ['g?'] = 'actions.show_help',
-    ['<cr>'] = 'actions.select',
-    ['<c-s>'] = { 'actions.select', opts = { vertical = true }, desc = 'Open the entry in a vertical split' },
-    ['<c-h>'] = { 'actions.select', opts = { horizontal = true }, desc = 'Open the entry in a horizontal split' },
+    ['<CR>'] = 'actions.select',
+    ['<C-S>'] = { 'actions.select', opts = { vertical = true }, desc = 'Open the entry in a vertical split' },
+    ['<C-H>'] = { 'actions.select', opts = { horizontal = true }, desc = 'Open the entry in a horizontal split' },
     ['gp'] = 'actions.preview',
-    ['<c-p>'] = {
+    ['<C-P>'] = {
       function()
         local dir = oil.get_current_dir()
         if not dir then
@@ -30,7 +30,7 @@ oil.setup({
       nowait = true,
       desc = 'Find files in the current directory',
     },
-    ['<c-g>'] = {
+    ['<C-G>'] = {
       function()
         local dir = oil.get_current_dir()
         if not dir then
@@ -43,7 +43,7 @@ oil.setup({
       end,
       desc = 'telescope.builtin.live_grep({ search_dirs = { oil.get_current_dir() } })',
     },
-    ['<c-l>'] = 'actions.refresh',
+    ['<C-L>'] = 'actions.refresh',
     ['-'] = 'actions.parent',
     ['_'] = 'actions.open_cwd',
     ['`'] = 'actions.cd',

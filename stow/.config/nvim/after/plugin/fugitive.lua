@@ -1,4 +1,4 @@
-vim.keymap.set('n', '<leader>gb', function()
+vim.keymap.set('n', '<Leader>gb', function()
   vim.cmd.Git('blame')
 end, { desc = ':Git blame' })
 vim.api.nvim_create_autocmd('BufEnter', {
@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
   pattern = { 'fugitive:///*' },
   desc = 'Add mapping to Fugitive commit patch buffers to yank hash with <leader>y',
   callback = function()
-    vim.keymap.set('n', '<leader>yy', function()
+    vim.keymap.set('n', '<Leader>yy', function()
       local filepath = vim.api.nvim_buf_get_name(0)
       local hash = filepath:match('.+/%.git//(.+)')
       vim.fn.setreg('"', hash)

@@ -60,7 +60,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     if client:supports_method(vim.lsp.protocol.Methods.textDocument_formatting) and vim.bo.formatprg == '' then
-      vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'vim.lsp.buf.format()', buffer = args.buf })
+      vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format, { desc = 'vim.lsp.buf.format()', buffer = args.buf })
     end
   end,
 })

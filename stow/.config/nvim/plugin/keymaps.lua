@@ -1,30 +1,30 @@
-vim.keymap.set('i', 'jj', '<esc>')
+vim.keymap.set('i', 'jj', '<Esc>')
 
-vim.keymap.set('n', '<c-w><', '<c-w>5<')
-vim.keymap.set('n', '<c-w>>', '<c-w>5>')
-vim.keymap.set('n', '<c-w>-', '<c-w>5-')
-vim.keymap.set('n', '<c-w>+', '<c-w>5+')
+vim.keymap.set('n', '<C-W><', '<C-W>5<')
+vim.keymap.set('n', '<C-W>>', '<C-W>5>')
+vim.keymap.set('n', '<C-W>-', '<C-W>5-')
+vim.keymap.set('n', '<C-W>+', '<C-W>5+')
 
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
 
-vim.keymap.set({ 'o', 'v' }, 'ae', ':<c-u>execute "normal! gg" | keepjumps normal! VG<cr>', {
+vim.keymap.set({ 'o', 'v' }, 'ae', ':<C-U>execute "normal! gg" | keepjumps normal! VG<CR>', {
   desc = '"around everything" text object, selects everything in the buffer',
   silent = true,
 })
 
-vim.keymap.set('n', '<leader>m', '<cmd>messages<cr>')
+vim.keymap.set('n', '<Leader>m', '<Cmd>messages<CR>')
 
 vim.keymap.set('n', 'J', 'm`J``', { desc = 'Join lines, keeping the cursor in its current position' })
 
-vim.keymap.set('t', '<esc>', '<c-\\><c-n>', { desc = 'Go back to Normal mode' })
+vim.keymap.set('t', '<Esc>', '<C-\\><C-N>', { desc = 'Go back to Normal mode' })
 
 vim.keymap.set('i', '<CR>', 'pumvisible() ? "<C-E><CR>" : "<CR>"', { expr = true })
 vim.keymap.set('i', '<Tab>', 'pumvisible() ? "<C-E><Tab>" : "<Tab>"', { expr = true })
 
 vim.keymap.set(
   'n',
-  '<leader>f',
+  '<Leader>f',
   table.concat({
     'ma', -- Set mark 'a' at cursor position
     'H', -- Move to top of window
@@ -38,7 +38,7 @@ vim.keymap.set(
   { desc = 'Format the entire buffer', silent = true }
 )
 
-vim.keymap.set('n', '<leader>tw', function()
+vim.keymap.set('n', '<Leader>tw', function()
   ---@diagnostic disable-next-line: undefined-field
   if vim.opt_local.wrap:get() then
     vim.opt_local.wrap = false
@@ -64,7 +64,7 @@ vim.keymap.set('n', 'k', function()
   vim.cmd.normal({ 'k', bang = true })
 end, { desc = 'Move cursor up, setting the previous context mark if a count greater than 1 is provided' })
 
-vim.keymap.set('n', '<leader>yy', function()
+vim.keymap.set('n', '<Leader>yy', function()
   local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
   local filepath = vim.api.nvim_buf_get_name(0)
   local relative_filepath = filepath:gsub('^' .. git_root .. '/', '')
@@ -73,14 +73,14 @@ vim.keymap.set('n', '<leader>yy', function()
   print(string.format('Yanked %s', relative_filepath))
 end, { desc = 'Yank the path of the current buffer relative to the git root' })
 
-vim.keymap.set('n', '<leader>YY', function()
+vim.keymap.set('n', '<Leader>YY', function()
   local filepath = vim.api.nvim_buf_get_name(0)
   vim.fn.setreg('"', filepath)
   vim.fn.setreg('*', filepath)
   print(string.format('Yanked %s', filepath))
 end, { desc = 'Yank the absolute path of the current buffer' })
 
-vim.keymap.set('n', '<leader>ys', function()
+vim.keymap.set('n', '<Leader>ys', function()
   local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
   local filepath = vim.api.nvim_buf_get_name(0)
   local relative_filepath = filepath:gsub('^' .. git_root .. '/', '')
