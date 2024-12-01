@@ -16,7 +16,6 @@ catppuccin.setup({
       return {
         NormalFloat = { fg = palette.overlay2, bg = palette.surface0 },
         DiffChange = { bg = colors.darken(palette.blue, 0.15, palette.base) },
-        VertSplit = { link = 'FloatBorder' },
       }
     end,
   },
