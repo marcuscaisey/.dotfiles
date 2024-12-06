@@ -185,7 +185,11 @@ lspconfig.jdtls.setup({
 
 lspconfig.jsonls.setup({})
 
+lspconfig.loxls.setup({})
+
 lspconfig.marksman.setup({})
+
+lspconfig.please.setup({})
 
 lspconfig.pyright.setup({
   settings = {
