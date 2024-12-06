@@ -1,7 +1,5 @@
 vim.opt.clipboard = 'unnamed'
 vim.opt.colorcolumn = '+1'
-vim.opt.complete = '.'
-vim.opt.completeopt = { 'menuone', 'popup', 'noinsert', 'fuzzy' }
 vim.opt.cursorline = true
 vim.opt.diffopt:append('linematch:60')
 vim.opt.expandtab = true
@@ -14,7 +12,6 @@ vim.opt.pumheight = 10
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 10
 vim.opt.shiftwidth = 4
-vim.opt.shortmess:append('c')
 vim.opt.signcolumn = 'yes:2'
 vim.opt.smartcase = true
 vim.opt.splitbelow = true

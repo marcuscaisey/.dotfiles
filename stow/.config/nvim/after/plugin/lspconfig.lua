@@ -2,6 +2,12 @@ local ok, lspconfig = pcall(require, 'lspconfig')
 if not ok then
   return
 end
+local configs = require('lspconfig.configs')
+local util = require('lspconfig.util')
+local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+if not ok then
+  return
+end
 local ok, mason = pcall(require, 'mason')
 if not ok then
   return
@@ -21,6 +27,26 @@ mason.setup()
 mason_lspconfig.setup({
   automatic_installation = true,
 })
+
+util.default_config = vim.tbl_deep_extend('force', util.default_config, {
+  capabilities = cmp_nvim_lsp.default_capabilities(),
+})
+
+configs.please = {
+  default_config = {
+    cmd = { 'plz', 'tool', 'lps' },
+    filetypes = { 'please' },
+    root_dir = util.root_pattern('.plzconfig'),
+  },
+}
+
+configs.loxls = {
+  default_config = {
+    cmd = { 'lsp-devtools', 'agent', '--', 'go', 'run', 'github.com/marcuscaisey/lox/loxls' },
+    filetypes = { 'lox' },
+    root_dir = util.root_pattern('.git'),
+  },
+}
 
 lspconfig.bashls.setup({})
 
