@@ -27,6 +27,7 @@ packer.startup({
     use({ 'mfussenegger/nvim-dap' })
     use({ 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' } })
     use({ 'kyazdani42/nvim-web-devicons' })
+    use({ 'ray-x/lsp_signature.nvim' })
     use({ 'lewis6991/gitsigns.nvim' })
     use({ 'stevearc/dressing.nvim' })
     use({ 'catppuccin/nvim', as = 'catppuccin' })
