@@ -51,6 +51,10 @@ oil.setup({
     ['gs'] = 'actions.change_sort',
     ['g.'] = 'actions.toggle_hidden',
   },
+  view_options = {
+    -- Show files and directories that start with "."
+    show_hidden = true,
+  },
 })
 
 vim.keymap.set('n', '-', oil.open, { desc = 'oil.open()' })
