@@ -8,7 +8,6 @@ vim.g.copilot_enabled = false
 
 local function start_copilot()
   vim.cmd.packadd('copilot.vim')
-  vim.keymap.set('i', '<C-Y>', 'copilot#Accept("\\<C-Y>")', { expr = true, replace_keycodes = false })
   vim.keymap.set('i', '<C-E>', 'pumvisible() ? "<C-E>" : "<Plug>(copilot-dismiss)"', {
     expr = true,
     replace_keycodes = false,
