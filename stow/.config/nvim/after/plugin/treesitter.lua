@@ -16,6 +16,7 @@ parser_configs.lox = {
 ---@diagnostic disable-next-line: missing-fields
 configs.setup({
   ensure_installed = {
+    'bash',
     'comment',
     'dart',
     'git_rebase',
@@ -33,6 +34,7 @@ configs.setup({
     'php',
     'promql',
     'proto',
+    'python',
     'regex',
     'ruby',
     'scheme',
