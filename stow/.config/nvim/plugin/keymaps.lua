@@ -22,10 +22,12 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-N>', { desc = 'Go back to Normal mode' })
 vim.keymap.set('i', '<CR>', 'pumvisible() ? "<C-E><CR>" : "<CR>"', { expr = true })
 vim.keymap.set('i', '<Tab>', 'pumvisible() ? "<C-E><Tab>" : "<Tab>"', { expr = true })
 
-vim.keymap.set(
-  'n',
-  '<Leader>f',
-  table.concat({
+vim.keymap.set('n', '<Leader>f', function()
+  if vim.bo.formatexpr == '' and vim.bo.formatprg == '' then
+    print('Skipping formatting because neither formatprg or formatexpr are set')
+    return '<Ignore>'
+  end
+  return table.concat({
     'ma', -- Set mark 'a' at cursor position
     'H', -- Move to top of window
     'mb', -- Set mark 'b' at top of window
@@ -34,9 +36,8 @@ vim.keymap.set(
     '`b', -- Move to top of window mark 'b'
     'zt', -- Redraw line at top of window
     '`a', -- Move to cursor position mark 'a'
-  }),
-  { desc = 'Format the entire buffer', silent = true }
-)
+  })
+end, { desc = 'Format the entire buffer', expr = true, silent = true })
 
 vim.keymap.set('n', '<Leader>tw', function()
   ---@diagnostic disable-next-line: undefined-field
