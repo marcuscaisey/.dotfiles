@@ -4,7 +4,7 @@ if not ok then
 end
 local configs = require('lspconfig.configs')
 local util = require('lspconfig.util')
-local ok, blink = pcall(require, 'blink.cmp')
+local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 if not ok then
   return
 end
@@ -29,7 +29,7 @@ mason_lspconfig.setup({
 })
 
 util.default_config = vim.tbl_deep_extend('force', util.default_config, {
-  capabilities = blink.get_lsp_capabilities(),
+  capabilities = cmp_nvim_lsp.default_capabilities(),
 })
 
 configs.please = {
