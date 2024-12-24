@@ -13,6 +13,8 @@ vim.keymap.set({ 'o', 'v' }, 'ae', ':<C-U>execute "normal! gg" | keepjumps norma
   silent = true,
 })
 
+vim.keymap.set('n', '<C-]>', '<Cmd>silent! normal! <C-]><CR>')
+
 vim.keymap.set('n', '<Leader>m', '<Cmd>messages<CR>')
 
 vim.keymap.set('n', 'J', 'm`J``', { desc = 'Join lines, keeping the cursor in its current position' })
