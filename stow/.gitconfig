@@ -26,3 +26,5 @@
 [user]
 	name = Marcus Caisey
 	email = marcus@teckna.com
+[rerere]
+	enabled = true
