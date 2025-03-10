@@ -84,16 +84,31 @@ vim.keymap.set('n', '<Leader>YY', function()
 end, { desc = 'Yank the absolute path of the current buffer' })
 
 vim.keymap.set('n', '<Leader>ys', function()
-  local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
-  local filepath = vim.api.nvim_buf_get_name(0)
-  local relative_filepath = filepath:gsub('^' .. git_root .. '/', '')
-  local line = unpack(vim.api.nvim_win_get_cursor(0))
   local base_url = vim.env.SOURCEGRAPH_BASE_URL
   if not base_url then
     vim.notify('Unable to yank sourcegraph URL: SOURCEGRAPH_BASE_URL env var not set', vim.log.levels.ERROR)
     return
   end
-  local url = string.format('%s/-/blob/%s?L%d', base_url, relative_filepath, line)
+
+  local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
+  local filepath = vim.api.nvim_buf_get_name(0)
+  local relative_filepath = filepath:gsub('^' .. git_root .. '/', '')
+
+  local git_ref
+  local upstream_branch = vim.trim(vim.system({ 'git', 'rev-parse', '--abbrev-ref', '@{upstream}' }):wait().stdout)
+  if upstream_branch ~= '' then
+    local remote_branch_ref = vim.trim(vim.system({ 'git', 'branch', '--list', '--remotes', upstream_branch }):wait().stdout)
+    if remote_branch_ref ~= '' then
+      local remote_branch_name = remote_branch_ref:gsub('^.+/', '')
+      git_ref = remote_branch_name
+    end
+  end
+
+  local line = unpack(vim.api.nvim_win_get_cursor(0))
+
+  local git_ref_segment = git_ref and '@' .. git_ref or ''
+  local url = string.format('%s%s/-/blob/%s?L%d', base_url, git_ref_segment, relative_filepath, line)
+
   vim.fn.setreg('"', url)
   vim.fn.setreg('*', url)
   print(string.format('Yanked %s', url))
