@@ -92,7 +92,7 @@ vim.keymap.set('n', '<Leader>ys', function()
 
   local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
   local filepath = vim.api.nvim_buf_get_name(0)
-  local relative_filepath = filepath:gsub('^' .. git_root .. '/', '')
+  local relative_filepath = filepath:gsub('^' .. vim.pesc(git_root) .. '/', '')
 
   local git_ref
   local upstream_branch = vim.trim(vim.system({ 'git', 'rev-parse', '--abbrev-ref', '@{upstream}' }):wait().stdout)
