@@ -97,16 +97,19 @@ vim.keymap.set('n', '<Leader>ys', function()
   local git_ref
   local upstream_branch = vim.trim(vim.system({ 'git', 'rev-parse', '--abbrev-ref', '@{upstream}' }):wait().stdout)
   if upstream_branch ~= '' then
-    local remote_branch_ref = vim.trim(vim.system({ 'git', 'branch', '--list', '--remotes', upstream_branch }):wait().stdout)
-    if remote_branch_ref ~= '' then
-      local remote_branch_name = remote_branch_ref:gsub('^.+/', '')
-      git_ref = remote_branch_name
+    local remote_branch = upstream_branch:match('^origin/(.+)')
+    if remote_branch then
+      git_ref = remote_branch
+    end
+  else
+    local tag = vim.trim(vim.system({ 'git', 'tag', '--points-at', 'HEAD' }):wait().stdout)
+    if tag then
+      git_ref = tag
     end
   end
 
-  local line = unpack(vim.api.nvim_win_get_cursor(0))
-
   local git_ref_segment = git_ref and '@' .. git_ref or ''
+  local line = unpack(vim.api.nvim_win_get_cursor(0))
   local url = string.format('%s%s/-/blob/%s?L%d', base_url, git_ref_segment, relative_filepath, line)
 
   vim.fn.setreg('"', url)
