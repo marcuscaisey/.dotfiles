@@ -23,6 +23,7 @@ oil.setup({
         end
         telescope_builtin.find_files({
           prompt_title = 'Find files in ' .. dir:gsub('^' .. os.getenv('HOME'), '~'),
+          find_command = { 'fd', '--strip-cwd-prefix', '--follow', '--hidden', '--exclude', '.git' },
           cwd = dir,
         })
       end,
