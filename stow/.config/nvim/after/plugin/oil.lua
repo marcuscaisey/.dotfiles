@@ -42,7 +42,7 @@ oil.setup({
           search_dirs = { dir },
         })
       end,
-      desc = 'telescope.builtin.live_grep({ search_dirs = { oil.get_current_dir() } })',
+      desc = 'Grep over files in the current directory',
     },
     ['<C-L>'] = 'actions.refresh',
     ['-'] = 'actions.parent',
