@@ -260,3 +260,5 @@ lspconfig.ts_ls.setup({
 })
 
 lspconfig.vimls.setup({})
+
+vim.keymap.set('n', '<Leader>rl', '<Cmd>LspRestart<CR>')
