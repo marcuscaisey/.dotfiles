@@ -6,36 +6,6 @@ typeset -U PATH
 
 
 ################################################################################
-#                                 zsh-vi-mode
-################################################################################
-function zvm_yank_to_clipboard() {
-  zvm_yank
-	printf "%s" "$CUTBUFFER" | perl -pe 'chomp if eof' | tmux load-buffer -w -
-  zvm_exit_visual_mode
-}
-function zvm_config() {
-  ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
-}
-function zvm_after_init() {
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-  bindkey -M viins '^y' autosuggest-accept
-  bindkey -M viins '^x^e' zvm_vi_edit_command_line
-}
-function zvm_after_lazy_keybindings() {
-  zvm_define_widget zvm_yank_to_clipboard
-  bindkey -M visual 'y' zvm_yank_to_clipboard
-  bindkey -M menuselect 'h' vi-backward-char
-  bindkey -M menuselect 'k' vi-up-line-or-history
-  bindkey -M menuselect 'l' vi-forward-char
-  bindkey -M menuselect 'j' vi-down-line-or-history
-}
-
-export ZVM_VI_HIGHLIGHT_FOREGROUND=#cdd6f4
-export ZVM_VI_HIGHLIGHT_BACKGROUND=#45475a
-export ZVM_VI_HIGHLIGHT_EXTRASTYLE=bold
-
-
-################################################################################
 #                                  oh my zsh
 ################################################################################
 export ZSH="$HOME/.oh-my-zsh"
@@ -50,11 +20,16 @@ plugins=(
   golang
   git
   kube-ps1
-  zsh-vi-mode
   zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
+
+
+################################################################################
+#                             zsh autosuggestions
+################################################################################
+bindkey '^y' autosuggest-accept
 
 
 ################################################################################

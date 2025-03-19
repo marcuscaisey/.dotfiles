@@ -92,7 +92,6 @@ fi
 cecho "Installing Oh My Zsh plugins: fast-syntax-highlighting, zsh-autosuggestions, zsh-vi-mode"
 clone_or_pull https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 clone_or_pull https://github.com/zdharma-continuum/fast-syntax-highlighting ~/.oh-my-zsh/custom/plugins/fast-syntax-highlighting
-clone_or_pull https://github.com/jeffreytse/zsh-vi-mode ~/.oh-my-zsh/custom/plugins/zsh-vi-mode
 
 cecho "Installing tmux plugin manager"
 clone_or_pull https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
