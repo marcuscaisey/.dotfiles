@@ -17,10 +17,10 @@ zstyle ':omz:*' aliases no # Skip all aliases, in lib files and enabled plugins
 plugins=(
   brew
   fast-syntax-highlighting
-  golang
   git
-  kubectl
+  golang
   kube-ps1
+  kubectl
   zsh-autosuggestions
 )
 
