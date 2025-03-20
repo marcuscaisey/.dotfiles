@@ -19,6 +19,7 @@ plugins=(
   fast-syntax-highlighting
   golang
   git
+  kubectl
   kube-ps1
   zsh-autosuggestions
 )
