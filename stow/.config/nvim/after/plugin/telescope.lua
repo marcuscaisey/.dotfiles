@@ -199,7 +199,7 @@ vim.keymap.set('n', '<Leader>od', telescope.extensions.olddirs.picker, {
   desc = 'telescope.extensions.olddirs.picker()',
 })
 vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { desc = 'telescope.builtin.lsp_document_symbols()' })
-vim.keymap.set('n', 'grS', builtin.lsp_dynamic_workspace_symbols, {
+vim.keymap.set('n', 'gwO', builtin.lsp_dynamic_workspace_symbols, {
   desc = 'telescope.builtin.lsp_dynamic_workspace_symbols()',
 })
 vim.keymap.set('n', 'g]', function()
