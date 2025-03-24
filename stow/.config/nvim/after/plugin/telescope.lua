@@ -130,7 +130,14 @@ telescope.setup({
     mappings = {
       i = {
         ['<C-H>'] = layout.toggle_preview,
-        ['<C-Q>'] = actions.smart_send_to_qflist + actions.open_qflist + custom_actions.open_first_qf_item,
+        -- If we're in the quickfix window and the only other window that is open is displaying a buffer with buftype
+        -- set (like an oil.nvim window which has buftype=acwrite), then :cfirst (I think more generally any quickfix
+        -- jump command like :cc, :cnext etc) will open a new split above the quickfix instead of using the open window.
+        -- Jumping to the first quickfix item first avoids this.
+        -- Relevant source:
+        -- https://github.com/neovim/neovim/blob/c4e9ff30a6b6807c42bcf39dc312262cd2a22f32/src/nvim/quickfix.c#L2976-L2985
+        -- https://github.com/neovim/neovim/blob/c4e9ff30a6b6807c42bcf39dc312262cd2a22f32/src/nvim/quickfix.c#L2760-L2763
+        ['<C-Q>'] = actions.smart_send_to_qflist + custom_actions.open_first_qf_item + actions.open_qflist,
         ['<C-L>'] = actions.smart_send_to_loclist + actions.open_loclist + custom_actions.open_first_loc_item,
       },
       n = {
