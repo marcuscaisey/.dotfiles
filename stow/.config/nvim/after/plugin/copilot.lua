@@ -4,7 +4,7 @@ vim.g.copilot_filetypes = {
   markdown = true,
 }
 
-vim.g.copilot_enabled = false
+vim.g.copilot_enabled = vim.env.NVIM_DISABLE_COPILOT ~= 'true'
 
 local function start_copilot()
   vim.cmd.packadd('copilot.vim')
