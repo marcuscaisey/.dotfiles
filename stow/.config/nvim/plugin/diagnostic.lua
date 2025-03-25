@@ -4,7 +4,7 @@ local virtual_text_float_config = {
   ---@return string
   format = function(diagnostic)
     local source_prefix = string.format('%s: ', diagnostic.source)
-    local message = diagnostic.message:gsub('^' .. source_prefix, '')
+    local message = diagnostic.message:gsub('^' .. vim.pesc(source_prefix), '')
     return message
   end,
 }

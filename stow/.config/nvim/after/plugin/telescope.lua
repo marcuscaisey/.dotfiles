@@ -18,12 +18,15 @@ local function shorten_path(path)
   if path == cwd then
     return ''
   end
-  local relative_path, replacements = path:gsub('^' .. vim.pesc(cwd .. '/'), '')
+  local relative_path, replacements = path:gsub('^' .. vim.pesc(cwd) .. '/', '')
   if replacements == 1 then
     return relative_path
   end
-  local path_without_home = path:gsub('^' .. vim.pesc(assert(os.getenv('HOME'), '$HOME not set')), '~')
-  return path_without_home
+  local home = os.getenv('HOME')
+  if home then
+    path = path:gsub('^' .. vim.pesc(home), '~')
+  end
+  return path
 end
 
 local custom_actions = transform_mod({

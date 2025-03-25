@@ -70,7 +70,7 @@ end, { desc = 'Move cursor up, setting the previous context mark if a count grea
 vim.keymap.set('n', '<Leader>yy', function()
   local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
   local filepath = vim.api.nvim_buf_get_name(0)
-  local relative_filepath = filepath:gsub('^' .. git_root .. '/', '')
+  local relative_filepath = filepath:gsub('^' .. vim.pesc(git_root) .. '/', '')
   vim.fn.setreg('"', relative_filepath)
   vim.fn.setreg('*', relative_filepath)
   print(string.format('Yanked %s', relative_filepath))

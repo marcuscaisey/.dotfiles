@@ -21,8 +21,12 @@ oil.setup({
         if not dir then
           return
         end
+        local home = os.getenv('HOME')
+        if home then
+          dir = dir:gsub('^' .. vim.pesc(home), '~')
+        end
         telescope_builtin.find_files({
-          prompt_title = 'Find files in ' .. dir:gsub('^' .. os.getenv('HOME'), '~'),
+          prompt_title = 'Find files in ' .. dir,
           find_command = { 'fd', '--strip-cwd-prefix', '--follow', '--hidden', '--exclude', '.git' },
           cwd = dir,
         })
@@ -37,8 +41,12 @@ oil.setup({
         if not dir then
           return
         end
+        local home = os.getenv('HOME')
+        if home then
+          dir = dir:gsub('^' .. vim.pesc(home), '~')
+        end
         telescope_builtin.live_grep({
-          prompt_title = 'Live Grep in ' .. dir:gsub('^' .. os.getenv('HOME'), '~'),
+          prompt_title = 'Live Grep in ' .. dir,
           search_dirs = { dir },
         })
       end,

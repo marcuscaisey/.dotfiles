@@ -55,7 +55,11 @@ vim.api.nvim_create_autocmd({ 'DirChanged' }, {
 ---@return string
 function StatusLineFileSection()
   local icon, hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(0), nil, { default = true })
-  local cwd = vim.fn.getcwd():gsub('^' .. vim.env.HOME, '~')
+  local cwd = vim.fn.getcwd()
+  local home = os.getenv('HOME')
+  if home then
+    cwd = cwd:gsub('^' .. vim.pesc(home), '~')
+  end
   return hl(hl_group) .. icon .. ' ' .. hl('StatusLine') .. '%f %(%h%w%m%r %)' .. hl('StatusLineNC') .. cwd
 end
 
