@@ -145,7 +145,7 @@ telescope.setup({
         ['<C-C>'] = actions.close,
         ['<C-N>'] = actions.move_selection_next,
         ['<C-P>'] = actions.move_selection_previous,
-        ['<C-Q>'] = actions.smart_send_to_qflist + actions.open_qflist + custom_actions.open_first_qf_item,
+        ['<C-Q>'] = actions.smart_send_to_qflist + custom_actions.open_first_qf_item + actions.open_qflist,
         ['<C-L>'] = actions.smart_send_to_loclist + actions.open_loclist + custom_actions.open_first_loc_item,
       },
     },
