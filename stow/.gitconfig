@@ -1,6 +1,9 @@
 [core]
     pager = delta
 
+[branch]
+    sort = -committerdate
+
 [column]
     ui = auto
 
