@@ -44,6 +44,7 @@
 
 [push]
     autoSetupRemote = true
+    followTags = true
 
 [user]
 	name = Marcus Caisey
