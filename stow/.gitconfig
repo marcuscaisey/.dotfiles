@@ -26,6 +26,7 @@
     cmd = nvim -d -c 'wincmd l' \"$LOCAL\" \"$REMOTE\"
 
 [fetch]
+    all = true
     prune = true
     pruneTags = true
 
