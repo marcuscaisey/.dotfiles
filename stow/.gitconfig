@@ -25,6 +25,9 @@
 [difftool "nvimdiff"]
     cmd = nvim -d -c 'wincmd l' \"$LOCAL\" \"$REMOTE\"
 
+[fetch]
+    prune = true
+
 [interactive]
     diffFilter = delta --color-only
 
