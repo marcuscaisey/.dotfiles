@@ -58,6 +58,9 @@
 	name = Marcus Caisey
 	email = marcus@teckna.com
 
+[rebase]
+    autoSquash = true
+
 [rerere]
 	enabled = true
     autoUpdate = true
