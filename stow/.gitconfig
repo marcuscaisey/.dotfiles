@@ -42,6 +42,9 @@
 	hide-status = 1
 	hide-dirty = 1
 
+[push]
+    autoSetupRemote = true
+
 [user]
 	name = Marcus Caisey
 	email = marcus@teckna.com
