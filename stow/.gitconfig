@@ -7,6 +7,9 @@
 [column]
     ui = auto
 
+[commit]
+    verbose = true
+
 [delta]
     navigate = true
     line-numbers = true
