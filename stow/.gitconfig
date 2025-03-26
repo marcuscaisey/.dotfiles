@@ -27,6 +27,7 @@
 
 [fetch]
     prune = true
+    pruneTags = true
 
 [interactive]
     diffFilter = delta --color-only
