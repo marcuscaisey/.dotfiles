@@ -60,6 +60,7 @@
 
 [rerere]
 	enabled = true
+    autoUpdate = true
 
 [tag]
     sort = version:refname
