@@ -1,30 +1,41 @@
 [core]
     pager = delta
+
 [delta]
     navigate = true
     line-numbers = true
     syntax-theme = Catppuccin-mocha
+
 [diff]
     tool = nvimdiff
     colorMoved = default
+
 [difftool]
     trustExitCode = true
+
 [difftool "nvimdiff"]
     cmd = nvim -d -c 'wincmd l' \"$LOCAL\" \"$REMOTE\"
+
 [interactive]
     diffFilter = delta --color-only
+
 [merge]
     conflictstyle = diff3
     tool = nvimdiff
+
 [mergetool]
     keepBackup = false
+
 [mergetool "nvimdiff"]
     cmd = nvim -d -c 'wincmd l' \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+
 [oh-my-zsh]
 	hide-status = 1
 	hide-dirty = 1
+
 [user]
 	name = Marcus Caisey
 	email = marcus@teckna.com
+
 [rerere]
 	enabled = true
