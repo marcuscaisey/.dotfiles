@@ -54,6 +54,9 @@
     autoSetupRemote = true
     followTags = true
 
+[pull]
+    rebase = true
+
 [user]
 	name = Marcus Caisey
 	email = marcus@teckna.com
