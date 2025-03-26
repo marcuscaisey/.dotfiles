@@ -1,4 +1,7 @@
-local multicursor = require('multicursor-nvim')
+local ok, multicursor = pcall(require, 'multicursor-nvim')
+if not ok then
+  return
+end
 
 multicursor.setup()
 
