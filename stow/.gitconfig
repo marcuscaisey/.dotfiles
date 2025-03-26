@@ -13,6 +13,7 @@
     syntax-theme = Catppuccin-mocha
 
 [diff]
+    algorithm = histogram
     tool = nvimdiff
     colorMoved = default
 
