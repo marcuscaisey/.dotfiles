@@ -37,7 +37,7 @@ if osx; then
   cecho "Updating list of available packages"
   brew update
 
-  pkgs="zsh git tmux eza fzf fd bat ripgrep vifm stow git-delta curl make cmake gettext"
+  pkgs="zsh git tmux eza fzf fd bat ripgrep vifm stow git-delta curl ninja cmake gettext"
   cecho "Installing $pkgs"
   brew install $pkgs
 fi
@@ -46,7 +46,7 @@ if linux; then
   cecho "Updating list of available packages"
   sudo apt update
 
-  pkgs="zsh git tmux eza fd-find bat ripgrep vifm stow curl make cmake gettext"
+  pkgs="zsh git tmux eza fd-find bat ripgrep vifm stow ninja-build gettext cmake curl build-essential"
   cecho "Installing $pkgs"
   sudo apt install -y $pkgs
 
