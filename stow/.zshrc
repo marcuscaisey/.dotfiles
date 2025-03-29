@@ -1,82 +1,112 @@
 ################################################################################
-#                                     PATH
+#                                     ZSH                                      #
 ################################################################################
-# Remove duplicates from $PATH
-typeset -U PATH
+# Use Emacs key bindings.
+bindkey -A emacs main
 
+# Remove duplicates from $PATH and $path.
+typeset -U PATH path
 
-################################################################################
-#                                  oh my zsh
-################################################################################
-export ZSH="$HOME/.oh-my-zsh"
+# Changing Directories
+setopt auto_cd # Change to directory without typing cd.
+setopt auto_pushd # Make cd push the old directory onto the directory stack.
+setopt pushd_ignore_dups # Don't push duplicates onto the directory stack.
+setopt pushd_minus # Exchange meaning of +n and -n.
 
-ZSH_THEME=""
+# Completion
+zstyle ':completion:*' completer _complete _approximate # Fall back to approximate completion.
+zstyle ':completion:*' menu select # Use menu selection.
+zstyle ':completion:*' use-cache yes # Cache completions.
+setopt always_to_end # Move cursor to the end of a completed word.
+setopt complete_in_word # Allow completion within a word.
+setopt list_packed # Try to make completion list occupy less lines.
 
-zstyle ':omz:*' aliases no # Skip all aliases, in lib files and enabled plugins
+# History
+HISTSIZE=10000 # Keep 1000 lines of history in memory.
+SAVEHIST=10000 # Save 1000 lines of history.
+setopt hist_ignore_all_dups # Don't enter duplicates into the history list.
+setopt hist_reduce_blanks # Remove superfluous blanks from history list.
+setopt hist_save_no_dups # Don't save duplicates in history file.
+setopt share_history # Share history between all sessions.
 
-plugins=(
-  brew
-  fast-syntax-highlighting
-  git
-  golang
-  kube-ps1
-  kubectl
-  zsh-autosuggestions
-)
+# Input/Output
+setopt no_flow_control # Disable output flow control (^s/^q).
+setopt interactive_comments # Allow comments in interactive shells.
 
-source $ZSH/oh-my-zsh.sh
-
-
-################################################################################
-#                             zsh autosuggestions
-################################################################################
-bindkey '^y' autosuggest-accept
-
-
-################################################################################
-#                                    prompt
-################################################################################
-export PROMPT="%B%F{blue}%c%b%f"
+# Prompting
+setopt prompt_subst # Allow command substitution in prompts.
 
 
 ################################################################################
-#                                  git prompt
+#                                    Prompt                                    #
 ################################################################################
-export ZSH_THEME_GIT_PROMPT_PREFIX="%B(%F{216}"
-export ZSH_THEME_GIT_PROMPT_SUFFIX="%f)%b "
+# Configure git section.
+autoload -Uz vcs_info add-zsh-hook
+vcs_info_format=' %B(%F{216}%b%f)%%b'
+zstyle ':vcs_info:*' formats $vcs_info_format
+zstyle ':vcs_info:*' actionformats $vcs_info_format
+zstyle ':vcs_info:*' enable git # Disable all backends apart from git.
+zstyle ':vcs_info:*' max-exports 1 # Only set one vcs_info_msg_*_ variable.
+add-zsh-hook precmd vcs_info
 
-export PROMPT="$PROMPT"' $(git_prompt_info)'
-
-
-################################################################################
-#                                   kube-ps1
-################################################################################
-if kubectl config current-context >/dev/null 2>&1; then
-  export KUBE_PS1_SYMBOL_ENABLE=false
-  export PROMPT='%B$(kube_ps1)%b'" $PROMPT"
-fi
+PROMPT='%B%F{blue}%1d%b%f${vcs_info_msg_0_} '
 
 
 ################################################################################
-#                                   aliases
+#                                   Aliases                                    #
 ################################################################################
-alias ls="eza"
-
-alias oops="git add --update && git commit --no-edit --amend"
-
-alias yank="perl -pe 'chomp if eof' | tmux load-buffer -w -"
-
-alias d="cd ~/.dotfiles"
-alias s="cd ~/scratch"
+alias ls=eza
+alias oops='git add --update && git commit --no-edit --amend'
+alias yank='perl -pe 'chomp if eof' | tmux load-buffer -w -'
+alias d='cd ~/.dotfiles'
+alias s='cd ~/scratch'
 
 
 ################################################################################
-#                                     fzf
+#                                   General                                    #
+################################################################################
+# Ignore case when searching man pages.
+export MANPAGER='less -i'
+
+# Use nvim as default editor.
+export EDITOR=nvim
+
+
+################################################################################
+#                                   Homebrew                                   #
+################################################################################
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+
+################################################################################
+#                               zsh-completions                                #
+################################################################################
+fpath=(~/.zsh-plugins/zsh-completions/src $fpath)
+
+
+################################################################################
+#                                   compsys                                    #
+################################################################################
+autoload -Uz compinit
+# Initialise completion system.
+# Anything that modifies fpath must be done before this.
+# Anything that requires compdef must be done after this.
+compinit
+
+
+################################################################################
+#                           fast-syntax-highlighting                           #
+################################################################################
+source ~/.zsh-plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+
+################################################################################
+#                                     fzf                                      #
 ################################################################################
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Use fd for find instead of default find
-export FZF_DEFAULT_COMMAND="fd --follow --type f --exclude .git --strip-cwd-prefix"
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
 
 # Use ~~ for completion trigger instead of **
 export FZF_COMPLETION_TRIGGER='~~'
@@ -92,74 +122,60 @@ _fzf_compgen_dir() {
 }
 
 # Use ctrl + t to fuzzy search all files/directories (excluding .git) with preview in current directory
-export FZF_CTRL_T_COMMAND='fd --follow --strip-cwd-prefix'
+export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 export FZF_CTRL_T_OPTS="--preview 'if [ ! -d {} ]; then bat --color always --wrap never --pager never {}; else exa --classify --all --tree --level=2 --color always {}; fi'"
 
 # Catppuccin theme
-# Allow selecting / deselecting of all options
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#000000,spinner:#f5e0dc,hl:#f38ba8 \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
--m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all"
+--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+--color=selected-bg:#45475a \
+--color=border:#313244,label:#cdd6f4"
 
 
 ################################################################################
-#                                    pyenv
+#                                      Go                                      #
 ################################################################################
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+export PATH=$HOME/go/bin:$PATH
 
 
 ################################################################################
-#                                     pipx
+#                                     pipx                                     #
 ################################################################################
-export PATH="$PATH:$HOME/.local/bin"
+export PATH=$PATH:$HOME/.local/bin
 
 
 ################################################################################
-#                                    golang
+#                                    Please                                    #
 ################################################################################
-export PATH="/usr/local/go/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
-
-
-################################################################################
-#                                    cargo
-################################################################################
-export PATH="$HOME/.cargo/bin:$PATH"
-
-
-################################################################################
-#                                     plz
-################################################################################
-_plz_complete_zsh() {
-    local args=("${words[@]:1:$CURRENT}")
-    local IFS=$'\n'
-    local completions=($(GO_FLAGS_COMPLETION=1 ${words[1]} -p -v 0 --noupdate "${args[@]}"))
-    for completion in $completions; do
-        compadd -S '' $completion
-    done
-}
-
-compdef _plz_complete_zsh plz
-
-
-################################################################################
-#                                     env
-################################################################################
-export EDITOR=nvim
-
-
-################################################################################
-#                                   kubectl
-################################################################################
-export KUBECONFIG="$HOME"/.kube/config
-if [ -d "$HOME/.kube/configs" ]; then
-  for file in "$HOME"/.kube/configs/*.yaml; do
-    export KUBECONFIG="$KUBECONFIG:$file"
-  done
+if whence plz >/dev/null; then
+  source <(plz --completion_script)
 fi
-export PATH="$HOME/.krew/bin:$PATH"
+
+
+################################################################################
+#                                    pyenv                                     #
+################################################################################
+PYENV_ROOT=$HOME/.pyenv
+if [[ -d $PYENV_ROOT ]]; then
+  export PYENV_ROOT
+  export PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
+  source $PYENV_ROOT/completions/pyenv.zsh
+  # Lazy load to avoid slowing down shell startup.
+  function pyenv() {
+    unfunction pyenv
+    eval "$(pyenv init - zsh)"
+    pyenv $@
+  }
+fi
+
+
+################################################################################
+#                             zsh-autosuggestions                              #
+################################################################################
+source ~/.zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Disable suggestions for large buffers.
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+# Disable automatic widget re-binding on each precmd.
+ZSH_AUTOSUGGEST_MANUAL_REBIND=true

@@ -82,16 +82,10 @@ fi
 cecho "Setting up fzf"
 $fzf_install --key-bindings --no-completion --no-update-rc
 
-cecho "Installing Oh My Zsh"
-if [ ! -d ~/.oh-my-zsh ]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
-else
-  ZSH=~/.oh-my-zsh ~/.oh-my-zsh/tools/upgrade.sh
-fi
-
-cecho "Installing Oh My Zsh plugins: fast-syntax-highlighting, zsh-autosuggestions, zsh-vi-mode"
-clone_or_pull https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-clone_or_pull https://github.com/zdharma-continuum/fast-syntax-highlighting ~/.oh-my-zsh/custom/plugins/fast-syntax-highlighting
+cecho "Installing ZSH plugins: fast-syntax-highlighting, zsh-autosuggestions, zsh-completions"
+clone_or_pull https://github.com/zsh-users/zsh-autosuggestions ~/.zsh-plugins/zsh-autosuggestions
+clone_or_pull https://github.com/zdharma-continuum/fast-syntax-highlighting ~/.zsh-plugins/fast-syntax-highlighting
+clone_or_pull https://github.com/zsh-users/zsh-completions.git ~/.zsh-plugins/zsh-completions
 
 cecho "Installing tmux plugin manager"
 clone_or_pull https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
