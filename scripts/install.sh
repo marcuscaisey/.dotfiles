@@ -30,6 +30,39 @@ cecho() {
   echo "$(tput setaf "${ci:-1}")$1$(tput sgr0)" && ci=$(( (${ci:-1} % 6) + 1 ))
 }
 
+shared_pkgs=(
+  bat
+  cmake # nvim build dep
+  curl
+  eza
+  gettext # nvim build dep
+  git
+  ripgrep
+  stow
+  tmux
+  vifm
+  zsh
+)
+
+brew_pkgs=(
+  fd
+  fzf
+  git-delta
+  ninja # nvim build dep
+  "${shared_pkgs[@]}"
+)
+
+apt_pkgs=(
+  build-essential
+  fd-find
+  ninja-build  # nvim build dep
+  "${shared_pkgs[@]}"
+)
+
+linux_cargo_pkgs=(
+  git-delta
+)
+
 if osx; then
   cecho "Installing homebrew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -37,30 +70,26 @@ if osx; then
   cecho "Updating list of available packages"
   brew update
 
-  pkgs="zsh git tmux eza fzf fd bat ripgrep vifm stow git-delta curl ninja cmake gettext"
-  cecho "Installing $pkgs"
-  brew install $pkgs
+  cecho "Installing ${brew_pkgs[*]}"
+  brew install "${brew_pkgs[@]}"
 fi
 
 if linux; then
   cecho "Updating list of available packages"
   sudo apt update
 
-  pkgs="zsh git tmux eza fd-find bat ripgrep vifm stow ninja-build gettext cmake curl build-essential"
-  cecho "Installing $pkgs"
-  sudo apt install -y $pkgs
+  cecho "Installing ${apt_pkgs[*]}"
+  sudo apt install -y "${apt_pkgs[@]}"
 
   cecho "Installing rust"
   curl https://sh.rustup.rs -sSf | sh -s -- -y
 
   cecho "Sourcing ~/.cargo/env"
+  # shellcheck disable=SC1090
   source ~/.cargo/env
 
-  cargo_pkgs="git-delta"
-  for pkg in $cargo_pkgs; do
-      cecho "Installing $pkg"
-      cargo install "$pkg"
-  done
+  cecho "Installing ${linux_cargo_pkgs[*]}"
+  cargo install "${linux_cargo_pkgs[@]}"
 fi
 
 if linux; then
