@@ -164,7 +164,7 @@ export PATH=$PATH:$HOME/.local/bin
 #                                    Please                                    #
 ################################################################################
 if whence plz >/dev/null; then
-  source <(plz --completion_script)
+  source <(plz --completion_script 2>/dev/null)
 fi
 
 
