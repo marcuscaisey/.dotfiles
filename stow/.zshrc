@@ -22,6 +22,7 @@ setopt complete_in_word # Allow completion within a word.
 setopt list_packed # Try to make completion list occupy less lines.
 
 # History
+HISTFILE=~/.zsh_history
 HISTSIZE=10000 # Keep 1000 lines of history in memory.
 SAVEHIST=10000 # Save 1000 lines of history.
 setopt hist_ignore_all_dups # Don't enter duplicates into the history list.
