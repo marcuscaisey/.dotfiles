@@ -1,12 +1,5 @@
 local virtual_text_float_config = {
   source = true,
-  ---@param diagnostic vim.Diagnostic
-  ---@return string
-  format = function(diagnostic)
-    local source_prefix = string.format('%s: ', diagnostic.source)
-    local message = diagnostic.message:gsub('^' .. vim.pesc(source_prefix), '')
-    return message
-  end,
 }
 vim.diagnostic.config({
   float = virtual_text_float_config,
