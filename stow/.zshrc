@@ -75,13 +75,17 @@ export EDITOR=nvim
 ################################################################################
 #                                   Homebrew                                   #
 ################################################################################
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if [[ -d /opt/homebrew/bin ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 
 ################################################################################
 #                               zsh-completions                                #
 ################################################################################
-fpath=(~/.zsh-plugins/zsh-completions/src $fpath)
+if [[ -d ~/.zsh-plugins/zsh-completions ]]; then
+  fpath=(~/.zsh-plugins/zsh-completions/src $fpath)
+fi
 
 
 ################################################################################
@@ -97,41 +101,45 @@ compinit
 ################################################################################
 #                           fast-syntax-highlighting                           #
 ################################################################################
-source ~/.zsh-plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+if [[ -d ~/.zsh-plugins/fast-syntax-highlighting ]]; then
+  source ~/.zsh-plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+fi
 
 
 ################################################################################
 #                                     fzf                                      #
 ################################################################################
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [[ -f ~/.fzf.zsh ]]; then
+  source ~/.fzf.zsh
 
-# Use fd for find instead of default find
-export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
+  # Use fd for find instead of default find
+  FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
 
-# Use ~~ for completion trigger instead of **
-export FZF_COMPLETION_TRIGGER='~~'
+  # Use ~~ for completion trigger instead of **
+  FZF_COMPLETION_TRIGGER='~~'
 
-# Use fd instead of the default find
-_fzf_compgen_path() {
-    fd --hidden --follow --exclude .git --strip-cwd-prefix .
-}
+  # Use fd instead of the default find
+  _fzf_compgen_path() {
+      fd --hidden --follow --exclude .git --strip-cwd-prefix .
+  }
 
-# Use fd to generate the list for directory completion
-_fzf_compgen_dir() {
-    fd --type d --hidden --follow --exclude .git --strip-cwd-prefix .
-}
+  # Use fd to generate the list for directory completion
+  _fzf_compgen_dir() {
+      fd --type d --hidden --follow --exclude .git --strip-cwd-prefix .
+  }
 
-# Use ctrl + t to fuzzy search all files/directories (excluding .git) with preview in current directory
-export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
-export FZF_CTRL_T_OPTS="--preview 'if [ ! -d {} ]; then bat --color always --wrap never --pager never {}; else exa --classify --all --tree --level=2 --color always {}; fi'"
+  # Use ctrl + t to fuzzy search all files/directories (excluding .git) with preview in current directory
+  FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+  FZF_CTRL_T_OPTS="--preview 'if [ ! -d {} ]; then bat --color always --wrap never --pager never {}; else exa --classify --all --tree --level=2 --color always {}; fi'"
 
-# Catppuccin theme
-export FZF_DEFAULT_OPTS=" \
---color=bg+:#313244,bg:#000000,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
---color=selected-bg:#45475a \
---color=border:#313244,label:#cdd6f4"
+  # Catppuccin theme
+  FZF_DEFAULT_OPTS=" \
+  --color=bg+:#313244,bg:#000000,spinner:#f5e0dc,hl:#f38ba8 \
+  --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+  --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+  --color=selected-bg:#45475a \
+  --color=border:#313244,label:#cdd6f4"
+fi
 
 
 ################################################################################
@@ -174,8 +182,10 @@ fi
 ################################################################################
 #                             zsh-autosuggestions                              #
 ################################################################################
-source ~/.zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-# Disable suggestions for large buffers.
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-# Disable automatic widget re-binding on each precmd.
-ZSH_AUTOSUGGEST_MANUAL_REBIND=true
+if [[ -d ~/.zsh-plugins/zsh-autosuggestions ]]; then
+  source ~/.zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+  # Disable suggestions for large buffers.
+  ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+  # Disable automatic widget re-binding on each precmd.
+  ZSH_AUTOSUGGEST_MANUAL_REBIND=true
+fi
