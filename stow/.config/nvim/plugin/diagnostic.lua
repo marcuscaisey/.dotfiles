@@ -1,11 +1,7 @@
-local virtual_text_float_config = {
-  source = true,
-}
 vim.diagnostic.config({
-  float = virtual_text_float_config,
-  virtual_text = virtual_text_float_config,
-  source = true,
-  severity_sort = true,
+  virtual_text = {
+    source = true,
+  },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = '',
@@ -14,6 +10,10 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.HINT] = '󰌵',
     },
   },
+  float = {
+    source = true,
+  },
+  severity_sort = true,
 })
 
 vim.keymap.set('n', '<Leader>dd', function()
