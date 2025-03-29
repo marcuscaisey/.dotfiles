@@ -63,6 +63,13 @@ linux_cargo_pkgs=(
   git-delta
 )
 
+cecho "Installing rust"
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
+
+cecho "Sourcing ~/.cargo/env"
+# shellcheck disable=SC1090
+source ~/.cargo/env
+
 if osx; then
   cecho "Installing homebrew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -80,13 +87,6 @@ if linux; then
 
   cecho "Installing ${apt_pkgs[*]}"
   sudo apt install -y "${apt_pkgs[@]}"
-
-  cecho "Installing rust"
-  curl https://sh.rustup.rs -sSf | sh -s -- -y
-
-  cecho "Sourcing ~/.cargo/env"
-  # shellcheck disable=SC1090
-  source ~/.cargo/env
 
   cecho "Installing ${linux_cargo_pkgs[*]}"
   cargo install "${linux_cargo_pkgs[@]}"
