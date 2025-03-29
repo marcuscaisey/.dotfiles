@@ -196,3 +196,11 @@ if [[ -d ~/.zsh-plugins/zsh-autosuggestions ]]; then
   # Disable automatic widget re-binding on each precmd.
   ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 fi
+
+
+################################################################################
+#                                 local zshrc                                  #
+################################################################################
+if [[ -f ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
+fi
