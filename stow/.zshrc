@@ -252,6 +252,18 @@ if [[ -d ~/.zsh-plugins/zsh-autosuggestions ]]; then
   ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
   # Disable automatic widget re-binding on each precmd.
   ZSH_AUTOSUGGEST_MANUAL_REBIND=true
+
+  # Speed up pasting by disabling autosuggestions.
+  # https://github.com/zsh-users/zsh-autosuggestions/issues/238
+  pasteinit() {
+    OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+    zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+  }
+  pastefinish() {
+    zle -N self-insert $OLD_SELF_INSERT
+  }
+  zstyle :bracketed-paste-magic paste-init pasteinit
+  zstyle :bracketed-paste-magic paste-finish pastefinish
 fi
 
 
