@@ -13,7 +13,6 @@ vim.opt.pumheight = 10
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 10
 vim.opt.shiftwidth = 4
-vim.opt.shortmess:append('c')
 vim.opt.signcolumn = 'yes:2'
 vim.opt.smartcase = true
 vim.opt.splitbelow = true
@@ -22,7 +21,6 @@ vim.opt.swapfile = false
 vim.opt.tabstop = 4
 vim.opt.termguicolors = true
 vim.opt.updatetime = 100
-vim.opt.completeopt = { 'menuone', 'popup', 'noinsert', 'fuzzy' }
 
 local augroup = vim.api.nvim_create_augroup('options', { clear = true })
 

@@ -21,6 +21,7 @@ packer.startup({
     use({ 'williamboman/mason.nvim' })
     use({ 'williamboman/mason-lspconfig.nvim', requires = { 'williamboman/mason.nvim', 'neovim/nvim-lspconfig' } })
     use({ 'kosayoda/nvim-lightbulb' })
+    use({ 'saghen/blink.cmp', run = 'cargo build --release' })
     use({ 'kyazdani42/nvim-web-devicons' })
     use({ 'lewis6991/gitsigns.nvim' })
     use({ 'stevearc/dressing.nvim' })
