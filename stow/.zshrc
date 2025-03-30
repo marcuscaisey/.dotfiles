@@ -1,9 +1,6 @@
 ################################################################################
 #                                     ZSH                                      #
 ################################################################################
-# Use Emacs key bindings.
-bindkey -A emacs main
-
 # Remove duplicates from $PATH and $path.
 typeset -U PATH path
 
