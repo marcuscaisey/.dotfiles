@@ -4,6 +4,7 @@
 # Use Emacs key bindings.
 bindkey -A emacs main
 
+# CTRL+x CTRL+e to edit the command line in $EDITOR.
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey -M emacs '^x^e' edit-command-line
