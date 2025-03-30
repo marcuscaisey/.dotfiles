@@ -89,7 +89,7 @@ function _set_cmd_duration() {
 add-zsh-hook preexec _record_cmd_start
 add-zsh-hook precmd _set_cmd_duration
 
-PROMPT='%B%F{blue}%1d%b%f${vcs_info_msg_0_} '
+PROMPT='%B%F{blue}%1~%b%f${vcs_info_msg_0_} '
 RPROMPT='${_cmd_duration}'
 
 
