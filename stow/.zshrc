@@ -102,6 +102,8 @@ function _set_cmd_duration() {
       printf -v formatted_duration '%.1fs' 'duration_millis / 1000.0'
     fi
     _cmd_duration="%F{8}${formatted_duration}%f"
+  else
+    _cmd_duration=''
   fi
 }
 add-zsh-hook preexec _record_cmd_start
