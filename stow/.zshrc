@@ -96,7 +96,9 @@ RPROMPT='${_cmd_duration}'
 ################################################################################
 #                                   Aliases                                    #
 ################################################################################
-alias ls=eza
+if whence eza >/dev/null; then
+  alias ls=eza
+fi
 alias oops='git add --update && git commit --no-edit --amend'
 alias yank='perl -pe 'chomp if eof' | tmux load-buffer -w -'
 alias d='cd ~/.dotfiles'
