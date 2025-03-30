@@ -4,6 +4,10 @@
 # Use Emacs key bindings.
 bindkey -A emacs main
 
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M emacs '^x^e' edit-command-line
+
 # Remove duplicates from $PATH and $path.
 typeset -U PATH path
 
