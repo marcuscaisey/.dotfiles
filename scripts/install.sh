@@ -45,6 +45,7 @@ shared_pkgs=(
 )
 
 brew_pkgs=(
+  coreutils # gdate used in zsh prompt
   fd
   fzf
   git-delta
