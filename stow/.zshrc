@@ -14,6 +14,9 @@ autoload -Uz url-quote-magic bracketed-paste-magic
 zle -N self-insert url-quote-magic
 zle -N bracketed-paste bracketed-paste-magic
 
+# Disable highlighting pasted text.
+zle_highlight+=(paste:none)
+
 # Remove duplicates from $PATH and $path.
 typeset -U PATH path
 
