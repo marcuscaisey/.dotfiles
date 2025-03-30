@@ -4,6 +4,17 @@
 # Remove duplicates from $PATH and $path.
 typeset -U PATH path
 
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M viins '^x^e' edit-command-line
+bindkey -M viins '^p' up-history
+bindkey -M viins '^n' down-history
+zmodload zsh/complist
+bindkey -M menuselect 'h' backward-char
+bindkey -M menuselect 'j' down-history
+bindkey -M menuselect 'k' up-history
+bindkey -M menuselect 'l' forward-char
+
 # Changing Directories
 setopt auto_cd # Change to directory without typing cd.
 setopt auto_pushd # Make cd push the old directory onto the directory stack.
@@ -236,6 +247,7 @@ if [[ -d ~/.zsh-plugins/zsh-autosuggestions ]]; then
   ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
   # Disable automatic widget re-binding on each precmd.
   ZSH_AUTOSUGGEST_MANUAL_REBIND=true
+  bindkey -M viins '^y' autosuggest-accept
 fi
 
 
