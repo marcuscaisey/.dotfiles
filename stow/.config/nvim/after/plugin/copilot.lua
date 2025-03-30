@@ -1,20 +1,14 @@
-local fn = vim.fn
-
 vim.g.copilot_filetypes = {
   markdown = true,
 }
 
 vim.g.copilot_enabled = vim.env.NVIM_DISABLE_COPILOT ~= 'true'
-
-local function start_copilot()
+if vim.g.copilot_enabled then
   vim.cmd.packadd('copilot.vim')
   vim.keymap.set('i', '<C-E>', 'pumvisible() ? "<C-E>" : "<Plug>(copilot-dismiss)"', {
     expr = true,
     replace_keycodes = false,
   })
-  -- Force copilot to attach to the current buffer
-  vim.cmd.write()
-  vim.cmd.edit()
 end
 
 vim.keymap.set('n', '<Leader>cc', function()
@@ -22,12 +16,7 @@ vim.keymap.set('n', '<Leader>cc', function()
     print('Disabled copilot')
     vim.g.copilot_enabled = false
   else
-    if fn.exists(':Copilot') ~= 2 then
-      start_copilot()
-      print('Started copilot')
-    else
-      print('Enabled copilot')
-    end
+    print('Enabled copilot')
     vim.g.copilot_enabled = true
   end
 end, { desc = 'Toggle copilot' })
