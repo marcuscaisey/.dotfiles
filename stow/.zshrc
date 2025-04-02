@@ -8,7 +8,6 @@ bindkey -A emacs main
 autoload -Uz select-word-style
 select-word-style bash
 
-
 # CTRL+x CTRL+e to edit the command line in $EDITOR.
 autoload -Uz edit-command-line
 zle -N edit-command-line
