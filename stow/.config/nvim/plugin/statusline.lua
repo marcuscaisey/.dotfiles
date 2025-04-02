@@ -26,10 +26,22 @@ local git_status_sections = {
 ---@return string
 function StatusLineGitSection()
   local result = {}
-  local head = vim.b.gitsigns_head ---@type string?
-  if head then
+  local gitsigns_head = vim.b.gitsigns_head ---@type string?
+  if gitsigns_head then
+    if gitsigns_head ~= vim.b.prev_gitsigns_head then
+      vim.b.prev_gitsigns_head = gitsigns_head
+      vim.b.git_head = gitsigns_head
+      local current_branch = vim.trim(vim.system({ 'git', 'branch', '--show-current' }):wait().stdout)
+      if current_branch == '' then
+        -- If the current branch is empty, it means we are in a detached HEAD state.
+        local tag = vim.trim(vim.system({ 'git', 'describe', '--tags', '--exact-match', gitsigns_head }):wait().stdout)
+        if tag ~= '' then
+          vim.b.git_head = tag
+        end
+      end
+    end
     local icon, icon_gl_group = devicons.get_icon(nil, 'git')
-    table.insert(result, hl(icon_gl_group) .. icon .. ' ' .. hl('StatusLine') .. head)
+    table.insert(result, hl(icon_gl_group) .. icon .. ' ' .. hl('StatusLine') .. vim.b.git_head)
     local status_counts = vim.b.gitsigns_status_dict ---@type {added:integer?, changed:integer?, removed:integer?}?
     if status_counts then
       local status = {}
