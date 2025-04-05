@@ -15,24 +15,26 @@ gitsigns.setup({
 
 vim.keymap.set('n', ']c', function()
   if vim.wo.diff then
-    return ']c'
+    vim.cmd.normal({ ']c', bang = true })
   end
-  actions.nav_hunk('next')
-  return '<Ignore>'
-end, { expr = true, desc = 'gitsigns.actions.nav_hunk("next")' })
+  actions.nav_hunk('next', { greedy = false })
+end, { desc = 'gitsigns.actions.nav_hunk("next")' })
 vim.keymap.set('n', '[c', function()
   if vim.wo.diff then
-    return '[c'
+    vim.cmd.normal({ ']c', bang = true })
   end
-  actions.nav_hunk('prev')
-  return '<Ignore>'
-end, { expr = true, desc = 'gitsigns.actions.nav_hunk("prev")' })
-vim.keymap.set('n', '<Leader>hs', actions.stage_hunk, { desc = 'gitsigns.actions.stage_hunk()' })
+  actions.nav_hunk('prev', { greedy = false })
+end, { desc = 'gitsigns.actions.nav_hunk("prev")' })
+vim.keymap.set('n', '<Leader>hs', function()
+  actions.stage_hunk(nil, { greedy = false })
+end, { desc = 'gitsigns.actions.stage_hunk()' })
 vim.keymap.set('v', '<Leader>hs', function()
   actions.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
 end, { desc = 'gitsigns.actions.stage_hunk()' })
 vim.keymap.set('n', '<Leader>hS', actions.stage_buffer, { desc = 'gitsigns.actions.stage_buffer()' })
-vim.keymap.set('n', '<Leader>hr', actions.reset_hunk, { desc = 'gitsigns.actions.reset_hunk()' })
+vim.keymap.set('n', '<Leader>hr', function()
+  actions.reset_hunk(nil, { greedy = false })
+end, { desc = 'gitsigns.actions.reset_hunk()' })
 vim.keymap.set('v', '<Leader>hr', function()
   actions.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
 end, { desc = 'gitsigns.actions.reset_hunk()' })
