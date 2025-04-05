@@ -39,6 +39,7 @@ end, { desc = 'gitsigns.actions.reset_hunk()' })
 vim.keymap.set('n', '<Leader>hR', actions.reset_buffer, { desc = 'gitsigns.actions.reset_buffer()' })
 vim.keymap.set('n', '<Leader>hp', actions.preview_hunk_inline, { desc = 'gitsigns.actions.preview_hunk_inline()' })
 vim.keymap.set('n', '<Leader>gc', function()
+  ---@diagnostic disable-next-line: redundant-parameter
   gitsigns.setqflist('all', { open = false }, function()
     if #vim.fn.getqflist() == 0 then
       vim.notify('No Git changes', vim.log.levels.INFO)
