@@ -43,23 +43,11 @@ vim.keymap.set('n', '<Leader>hp', actions.preview_hunk, { desc = 'gitsigns.actio
 vim.keymap.set('n', '<Leader>gc', function()
   ---@diagnostic disable-next-line: redundant-parameter
   gitsigns.setqflist('all', { open = false }, function()
-    local qflist = vim.fn.getqflist()
-    if #qflist == 0 then
+    if #vim.fn.getqflist() == 0 then
       vim.notify('No Git changes', vim.log.levels.INFO)
       vim.cmd.cclose()
       return
     end
-    -- Remove duplicate hunks
-    for i = #qflist, 2, -1 do
-      local bufnr = qflist[i].bufnr
-      local prev_bufnr = qflist[i - 1].bufnr
-      local hunk_range = qflist[i].text:match('Lines %d+-%d+')
-      local prev_hunk_range = qflist[i - 1].text:match('Lines %d+-%d+')
-      if bufnr == prev_bufnr and hunk_range == prev_hunk_range then
-        table.remove(qflist, i)
-      end
-    end
-    vim.fn.setqflist(qflist)
     vim.cmd.copen()
     vim.cmd.cfirst()
   end)
