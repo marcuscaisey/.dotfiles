@@ -17,14 +17,14 @@ vim.keymap.set('n', ']c', function()
   if vim.wo.diff then
     return ']c'
   end
-  actions.nav_hunk('next', { navigation_message = true })
+  actions.nav_hunk('next')
   return '<Ignore>'
 end, { expr = true, desc = 'gitsigns.actions.nav_hunk("next")' })
 vim.keymap.set('n', '[c', function()
   if vim.wo.diff then
     return '[c'
   end
-  actions.nav_hunk('prev', { navigation_message = true })
+  actions.nav_hunk('prev')
   return '<Ignore>'
 end, { expr = true, desc = 'gitsigns.actions.nav_hunk("prev")' })
 vim.keymap.set('n', '<Leader>hs', actions.stage_hunk, { desc = 'gitsigns.actions.stage_hunk()' })
