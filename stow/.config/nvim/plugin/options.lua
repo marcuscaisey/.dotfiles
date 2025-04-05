@@ -2,6 +2,7 @@ vim.opt.clipboard = 'unnamed'
 vim.opt.colorcolumn = '+1'
 vim.opt.cursorline = true
 vim.opt.diffopt:append('algorithm:histogram')
+vim.opt.diffopt:append('linematch:60')
 vim.opt.expandtab = true
 vim.opt.formatoptions:remove('o')
 vim.opt.hidden = true
