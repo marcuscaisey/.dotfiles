@@ -179,6 +179,7 @@ telescope.setup({
   },
   extensions = {
     olddirs = {
+      cwd_only = true,
       layout_config = {
         width = 0.6,
         height = 0.9,
@@ -207,6 +208,11 @@ vim.keymap.set('n', '<Leader>tt', builtin.builtin, { desc = 'telescope.builtin.b
 vim.keymap.set('n', '<Leader>tr', builtin.resume, { desc = 'telescope.builtin.resume()' })
 vim.keymap.set('n', '<Leader>od', telescope.extensions.olddirs.picker, {
   desc = 'telescope.extensions.olddirs.picker()',
+})
+vim.keymap.set('n', '<Leader>oad', function()
+  telescope.extensions.olddirs.picker({ cwd_only = false })
+end, {
+  desc = 'telescope.extensions.olddirs.picker({ cwd_only = false })',
 })
 vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { desc = 'telescope.builtin.lsp_document_symbols()' })
 vim.keymap.set('n', 'gwO', builtin.lsp_dynamic_workspace_symbols, {
