@@ -35,7 +35,7 @@ vim.keymap.set('v', '<Leader>hr', function()
   actions.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
 end, { desc = 'gitsigns.actions.reset_hunk()' })
 vim.keymap.set('n', '<Leader>hR', actions.reset_buffer, { desc = 'gitsigns.actions.reset_buffer()' })
-vim.keymap.set('n', '<Leader>hp', actions.preview_hunk, { desc = 'gitsigns.actions.preview_hunk()' })
+vim.keymap.set('n', '<Leader>hp', actions.preview_hunk_inline, { desc = 'gitsigns.actions.preview_hunk_inline()' })
 vim.keymap.set('n', '<Leader>gc', function()
   ---@diagnostic disable-next-line: redundant-parameter
   gitsigns.setqflist('all', { open = false }, function()
