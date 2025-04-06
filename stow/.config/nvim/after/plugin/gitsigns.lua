@@ -6,10 +6,6 @@ local actions = require('gitsigns.actions')
 
 gitsigns.setup({
   numhl = true,
-  preview_config = {
-    border = 'none',
-    relative = 'cursor',
-  },
   attach_to_untracked = true,
 })
 
