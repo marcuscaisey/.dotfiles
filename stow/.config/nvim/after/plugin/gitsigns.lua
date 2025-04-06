@@ -39,11 +39,36 @@ vim.keymap.set('n', '<Leader>hp', actions.preview_hunk, { desc = 'gitsigns.actio
 vim.keymap.set('n', '<Leader>gc', function()
   ---@diagnostic disable-next-line: redundant-parameter
   gitsigns.setqflist('all', { open = false }, function()
-    if #vim.fn.getqflist() == 0 then
+    local qflist = vim.fn.getqflist()
+    if #qflist == 0 then
       vim.notify('No Git changes', vim.log.levels.INFO)
       vim.cmd.cclose()
       return
     end
+    -- Merge overlapping and contiguous hunks
+    for i = #qflist, 2, -1 do
+      local cur_bufnr = qflist[i].bufnr
+      local prev_bufnr = qflist[i - 1].bufnr
+      if cur_bufnr ~= prev_bufnr then
+        goto continue
+      end
+      local prev_from, prev_to, prev_suffix = qflist[i - 1].text:match('^Lines (%d+)-(%d+)(.*)$')
+      local cur_from, cur_to = qflist[i].text:match('^Lines (%d+)-(%d+)')
+      if not prev_from or not cur_from then
+        goto continue
+      end
+      cur_from = tonumber(cur_from)
+      prev_to = tonumber(prev_to)
+      if
+        cur_from == prev_to -- overlapping
+        or cur_from == prev_to + 1 -- contiguous
+      then
+        qflist[i - 1].text = string.format('Lines %s-%s%s', prev_from, cur_to, prev_suffix)
+        table.remove(qflist, i)
+      end
+      ::continue::
+    end
+    vim.fn.setqflist(qflist)
     vim.cmd.copen()
     vim.cmd.cfirst()
   end)
