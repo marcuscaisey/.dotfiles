@@ -32,6 +32,12 @@ util.default_config = vim.tbl_deep_extend('force', util.default_config, {
   capabilities = blink.get_lsp_capabilities(),
 })
 
+if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
+  util.default_config.on_new_config = function(config)
+    config.cmd = { 'lsp-devtools', 'agent', '--', unpack(config.cmd) }
+  end
+end
+
 configs.please = {
   default_config = {
     cmd = { 'plz', 'tool', 'lps' },
@@ -42,7 +48,7 @@ configs.please = {
 
 configs.loxls = {
   default_config = {
-    cmd = { 'lsp-devtools', 'agent', '--', 'go', 'run', 'github.com/marcuscaisey/lox/loxls' },
+    cmd = { 'go', 'run', 'github.com/marcuscaisey/lox/loxls' },
     filetypes = { 'lox' },
     root_dir = util.root_pattern('.git'),
   },
