@@ -122,6 +122,7 @@ alias oops='git add --update && git commit --no-edit --amend'
 alias yank="perl -pe 'chomp if eof' | tmux load-buffer -w -"
 alias d='cd ~/.dotfiles'
 alias s='cd ~/scratch'
+alias g='cd $(git rev-parse --show-toplevel)'
 
 
 ################################################################################
