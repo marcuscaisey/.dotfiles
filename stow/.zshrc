@@ -4,10 +4,6 @@
 # Use Emacs key bindings.
 bindkey -A emacs main
 
-# Only consider alphanumeric characters as word characters.
-autoload -Uz select-word-style
-select-word-style bash
-
 # CTRL+x CTRL+e to edit the command line in $EDITOR.
 autoload -Uz edit-command-line
 zle -N edit-command-line
