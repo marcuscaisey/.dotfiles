@@ -140,7 +140,8 @@ telescope.setup({
         -- Relevant source:
         -- https://github.com/neovim/neovim/blob/c4e9ff30a6b6807c42bcf39dc312262cd2a22f32/src/nvim/quickfix.c#L2976-L2985
         -- https://github.com/neovim/neovim/blob/c4e9ff30a6b6807c42bcf39dc312262cd2a22f32/src/nvim/quickfix.c#L2760-L2763
-        ['<C-Q>'] = actions.smart_send_to_qflist + custom_actions.open_first_qf_item + actions.open_qflist,
+        -- Jump to the first quickfix item after opening the quickfix list to leave in the main window.
+        ['<C-Q>'] = actions.smart_send_to_qflist + custom_actions.open_first_qf_item + actions.open_qflist + custom_actions.open_first_qf_item,
         ['<C-L>'] = actions.smart_send_to_loclist + actions.open_loclist + custom_actions.open_first_loc_item,
       },
       n = {
@@ -148,7 +149,7 @@ telescope.setup({
         ['<C-C>'] = actions.close,
         ['<C-N>'] = actions.move_selection_next,
         ['<C-P>'] = actions.move_selection_previous,
-        ['<C-Q>'] = actions.smart_send_to_qflist + custom_actions.open_first_qf_item + actions.open_qflist,
+        ['<C-Q>'] = actions.smart_send_to_qflist + custom_actions.open_first_qf_item + actions.open_qflist + custom_actions.open_first_qf_item,
         ['<C-L>'] = actions.smart_send_to_loclist + actions.open_loclist + custom_actions.open_first_loc_item,
       },
     },
