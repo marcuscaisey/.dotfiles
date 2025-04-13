@@ -3,18 +3,12 @@ if not ok then
   return
 end
 local util = require('lspconfig.util')
-local ok, mason = pcall(require, 'mason')
-if not ok then
-  return
-end
 local ok, neodev = pcall(require, 'neodev')
 if not ok then
   return
 end
 
 local augroup = vim.api.nvim_create_augroup('lspconfig', { clear = true })
-
-mason.setup()
 
 if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
   util.default_config.on_new_config = function(config)
