@@ -180,15 +180,6 @@ lspconfig.jsonls.setup({})
 lspconfig.marksman.setup({})
 
 lspconfig.pyright.setup({
-  settings = {
-    python = {
-      analysis = {
-        autoSearchPaths = true,
-        diagnosticMode = 'openFilesOnly',
-        useLibraryCodeForTypes = true,
-      },
-    },
-  },
   on_new_config = function(config, root_dir)
     if vim.uv.fs_stat(vim.fs.joinpath(root_dir, '.plzconfig')) then
       config.settings = vim.tbl_deep_extend('force', config.settings, {
