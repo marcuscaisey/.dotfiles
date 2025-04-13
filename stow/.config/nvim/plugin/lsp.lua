@@ -34,10 +34,18 @@ end
 vim.keymap.set('n', 'grl', vim.lsp.codelens.run, { desc = 'vim.lsp.codelens.run()' })
 
 vim.lsp.enable({
+  'bashls',
+  'jsonls',
   'loxls',
+  'marksman',
   'please',
   'pyright',
+  'vimls',
 })
+
+if vim.env.NVIM_DISABLE_GOLANGCI_LINT ~= 'true' then
+  vim.lsp.enable('golangci_lint_ls')
+end
 
 vim.lsp.config('pyright', {
   ---@param params lsp.InitializeParams

@@ -2,7 +2,6 @@ local ok, lspconfig = pcall(require, 'lspconfig')
 if not ok then
   return
 end
-local configs = require('lspconfig.configs')
 local util = require('lspconfig.util')
 local ok, blink = pcall(require, 'blink.cmp')
 if not ok then
@@ -37,8 +36,6 @@ if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
     config.cmd = { 'lsp-devtools', 'agent', '--', unpack(config.cmd) }
   end
 end
-
-lspconfig.bashls.setup({})
 
 lspconfig.clangd.setup({
   cmd = { 'clangd', '--offset-encoding=utf-16' },
@@ -98,10 +95,6 @@ local function plz_goroot(plz_root)
   end
 
   return nil, string.format('plugin.go.gotool %s not found in build.path %s', gotool, build_paths:gsub('\n', ':'))
-end
-
-if vim.env.NVIM_DISABLE_GOLANGCI_LINT ~= 'true' then
-  lspconfig.golangci_lint_ls.setup({})
 end
 
 lspconfig.gopls.setup({
@@ -175,10 +168,6 @@ lspconfig.jdtls.setup({
   },
 })
 
-lspconfig.jsonls.setup({})
-
-lspconfig.marksman.setup({})
-
 neodev.setup({
   override = function(root_dir, library)
     if vim.uv.fs_stat(vim.fs.joinpath(root_dir, '.luarc.json')) then
@@ -220,7 +209,5 @@ lspconfig.ts_ls.setup({
     client.server_capabilities.documentFormattingProvider = false
   end,
 })
-
-lspconfig.vimls.setup({})
 
 vim.keymap.set('n', '<Leader>rl', '<Cmd>LspRestart<CR>')
