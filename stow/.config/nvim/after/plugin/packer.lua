@@ -19,7 +19,6 @@ packer.startup({
     use({ 'nvim-treesitter/nvim-treesitter-context' })
     use({ 'neovim/nvim-lspconfig' })
     use({ 'williamboman/mason.nvim' })
-    use({ 'williamboman/mason-lspconfig.nvim', requires = { 'williamboman/mason.nvim', 'neovim/nvim-lspconfig' } })
     use({ 'kosayoda/nvim-lightbulb' })
     use({ 'saghen/blink.cmp', run = 'cargo build --release' })
     use({ 'kyazdani42/nvim-web-devicons' })
