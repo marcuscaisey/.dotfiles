@@ -32,3 +32,7 @@ if vim.env.NVIM_LSP_LOG_LEVEL then
 end
 
 vim.keymap.set('n', 'grl', vim.lsp.codelens.run, { desc = 'vim.lsp.codelens.run()' })
+
+vim.lsp.enable({
+  'please',
+})

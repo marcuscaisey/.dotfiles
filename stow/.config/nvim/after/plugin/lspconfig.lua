@@ -38,14 +38,6 @@ if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
   end
 end
 
-configs.please = {
-  default_config = {
-    cmd = { 'plz', 'tool', 'lps' },
-    filetypes = { 'please' },
-    root_dir = util.root_pattern('.plzconfig'),
-  },
-}
-
 configs.loxls = {
   default_config = {
     cmd = { 'go', 'run', 'github.com/marcuscaisey/lox/loxls' },
@@ -196,8 +188,6 @@ lspconfig.jsonls.setup({})
 lspconfig.loxls.setup({})
 
 lspconfig.marksman.setup({})
-
-lspconfig.please.setup({})
 
 lspconfig.pyright.setup({
   settings = {
