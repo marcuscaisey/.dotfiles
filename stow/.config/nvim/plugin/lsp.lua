@@ -76,6 +76,7 @@ vim.lsp.config('pyright', {
 })
 
 vim.lsp.config('ts_ls', {
+  ---@param client vim.lsp.Client
   on_attach = function(client)
     client.server_capabilities.documentFormattingProvider = false
   end,
