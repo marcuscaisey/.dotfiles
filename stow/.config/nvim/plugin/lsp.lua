@@ -34,5 +34,6 @@ end
 vim.keymap.set('n', 'grl', vim.lsp.codelens.run, { desc = 'vim.lsp.codelens.run()' })
 
 vim.lsp.enable({
+  'loxls',
   'please',
 })
