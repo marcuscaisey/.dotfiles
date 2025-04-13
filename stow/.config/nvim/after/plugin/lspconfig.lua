@@ -179,23 +179,6 @@ lspconfig.jsonls.setup({})
 
 lspconfig.marksman.setup({})
 
-lspconfig.pyright.setup({
-  on_new_config = function(config, root_dir)
-    if vim.uv.fs_stat(vim.fs.joinpath(root_dir, '.plzconfig')) then
-      config.settings = vim.tbl_deep_extend('force', config.settings, {
-        python = {
-          analysis = {
-            extraPaths = {
-              vim.fs.joinpath(root_dir, 'plz-out/python/venv'),
-            },
-            exclude = { 'plz-out' },
-          },
-        },
-      })
-    end
-  end,
-})
-
 neodev.setup({
   override = function(root_dir, library)
     if vim.uv.fs_stat(vim.fs.joinpath(root_dir, '.luarc.json')) then
