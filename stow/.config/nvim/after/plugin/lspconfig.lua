@@ -153,16 +153,6 @@ lspconfig.gopls.setup({
   end,
 })
 
-lspconfig.jdtls.setup({
-  settings = {
-    java = {
-      referencesCodeLens = {
-        enabled = false,
-      },
-    },
-  },
-})
-
 neodev.setup({
   override = function(root_dir, library)
     if vim.uv.fs_stat(vim.fs.joinpath(root_dir, '.luarc.json')) then
