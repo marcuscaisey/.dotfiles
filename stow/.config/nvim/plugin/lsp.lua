@@ -35,6 +35,7 @@ vim.keymap.set('n', 'grl', vim.lsp.codelens.run, { desc = 'vim.lsp.codelens.run(
 
 vim.lsp.enable({
   'bashls',
+  'clangd',
   'jsonls',
   'loxls',
   'marksman',
@@ -47,6 +48,10 @@ vim.lsp.enable({
 if vim.env.NVIM_DISABLE_GOLANGCI_LINT ~= 'true' then
   vim.lsp.enable('golangci_lint_ls')
 end
+
+vim.lsp.config('clangd', {
+  filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, -- Default excluding proto
+})
 
 vim.lsp.config('pyright', {
   ---@param params lsp.InitializeParams

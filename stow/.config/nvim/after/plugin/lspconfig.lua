@@ -37,11 +37,6 @@ if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
   end
 end
 
-lspconfig.clangd.setup({
-  cmd = { 'clangd', '--offset-encoding=utf-16' },
-  filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, -- Default excluding proto
-})
-
 ---@param plz_root string
 ---@return string? goroot
 ---@return string? errmsg
