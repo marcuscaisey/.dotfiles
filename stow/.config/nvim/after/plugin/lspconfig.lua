@@ -10,12 +10,6 @@ end
 
 local augroup = vim.api.nvim_create_augroup('lspconfig', { clear = true })
 
-if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
-  util.default_config.on_new_config = function(config)
-    config.cmd = { 'lsp-devtools', 'agent', '--', unpack(config.cmd) }
-  end
-end
-
 ---@param plz_root string
 ---@return string? goroot
 ---@return string? errmsg

@@ -31,9 +31,7 @@ if vim.env.NVIM_LSP_LOG_LEVEL then
   vim.lsp.set_log_level(vim.env.NVIM_LSP_LOG_LEVEL)
 end
 
-vim.keymap.set('n', 'grl', vim.lsp.codelens.run, { desc = 'vim.lsp.codelens.run()' })
-
-vim.lsp.enable({
+local enabled_lsps = {
   'bashls',
   'clangd',
   'jsonls',
@@ -43,10 +41,19 @@ vim.lsp.enable({
   'pyright',
   'ts_ls',
   'vimls',
-})
-
+}
 if vim.env.NVIM_DISABLE_GOLANGCI_LINT ~= 'true' then
-  vim.lsp.enable('golangci_lint_ls')
+  table.insert(enabled_lsps, 'golangci_lint_ls')
+end
+vim.lsp.enable(enabled_lsps)
+
+if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
+  for _, name in ipairs(enabled_lsps) do
+    vim.lsp.config(name, {
+      cmd = { 'lsp-devtools', 'agent', '--', unpack(vim.lsp.config[name].cmd) },
+    })
+    vim.print(vim.lsp.config[name].cmd)
+  end
 end
 
 vim.lsp.config('clangd', {
@@ -81,3 +88,5 @@ vim.lsp.config('ts_ls', {
     client.server_capabilities.documentFormattingProvider = false
   end,
 })
+
+vim.keymap.set('n', 'grl', vim.lsp.codelens.run, { desc = 'vim.lsp.codelens.run()' })
