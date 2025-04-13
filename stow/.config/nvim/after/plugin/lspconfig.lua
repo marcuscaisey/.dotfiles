@@ -38,14 +38,6 @@ if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
   end
 end
 
-configs.loxls = {
-  default_config = {
-    cmd = { 'go', 'run', 'github.com/marcuscaisey/lox/loxls' },
-    filetypes = { 'lox' },
-    root_dir = util.root_pattern('.git'),
-  },
-}
-
 lspconfig.bashls.setup({})
 
 lspconfig.clangd.setup({
@@ -184,8 +176,6 @@ lspconfig.jdtls.setup({
 })
 
 lspconfig.jsonls.setup({})
-
-lspconfig.loxls.setup({})
 
 lspconfig.marksman.setup({})
 
