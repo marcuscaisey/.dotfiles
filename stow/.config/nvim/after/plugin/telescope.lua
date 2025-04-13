@@ -157,6 +157,17 @@ telescope.setup({
     prompt_prefix = ' 🔍 ',
     selection_caret = '  ',
     multi_icon = ' 🔘 ',
+    vimgrep_arguments = {
+      'rg',
+      '--hidden',
+      "--glob=!.git",
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
+    },
   },
   pickers = {
     find_files = {
