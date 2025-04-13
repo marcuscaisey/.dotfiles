@@ -30,8 +30,6 @@
 
 [fetch]
     all = true
-    prune = true
-    pruneTags = true
 
 [interactive]
     diffFilter = delta --color-only
@@ -61,6 +59,10 @@
     autoSquash = true
     autoStash = true
     updateRefs = true
+
+[remote "origin"]
+	prune = true
+    pruneTags = true
 
 [rerere]
 	enabled = true
