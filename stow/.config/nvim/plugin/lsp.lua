@@ -40,6 +40,7 @@ vim.lsp.enable({
   'marksman',
   'please',
   'pyright',
+  'ts_ls',
   'vimls',
 })
 
@@ -66,5 +67,11 @@ vim.lsp.config('pyright', {
         },
       })
     end
+  end,
+})
+
+vim.lsp.config('ts_ls', {
+  on_attach = function(client)
+    client.server_capabilities.documentFormattingProvider = false
   end,
 })

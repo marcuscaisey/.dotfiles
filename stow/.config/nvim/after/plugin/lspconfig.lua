@@ -194,10 +194,4 @@ lspconfig.lua_ls.setup({
   },
 })
 
-lspconfig.ts_ls.setup({
-  on_attach = function(client)
-    client.server_capabilities.documentFormattingProvider = false
-  end,
-})
-
 vim.keymap.set('n', '<Leader>rl', '<Cmd>LspRestart<CR>')
