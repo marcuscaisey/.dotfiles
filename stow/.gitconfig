@@ -46,10 +46,6 @@
 [mergetool "nvimdiff"]
     cmd = nvim -d -c 'wincmd l' \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
 
-[oh-my-zsh]
-	hide-status = 1
-	hide-dirty = 1
-
 [push]
     autoSetupRemote = true
     followTags = true
