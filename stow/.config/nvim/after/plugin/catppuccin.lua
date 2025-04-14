@@ -20,7 +20,6 @@ catppuccin.setup({
     end,
   },
   integrations = {
-    blink_cmp = true,
     copilot_vim = true,
     ---@diagnostic disable-next-line: missing-fields
     native_lsp = {
@@ -31,7 +30,6 @@ catppuccin.setup({
         information = { 'undercurl' },
       },
     },
-    treesitter_context = true,
   },
 })
 
