@@ -17,7 +17,7 @@ vim.keymap.set('n', ']c', function()
 end, { desc = 'gitsigns.actions.nav_hunk("next")' })
 vim.keymap.set('n', '[c', function()
   if vim.wo.diff then
-    vim.cmd.normal({ ']c', bang = true })
+    vim.cmd.normal({ '[c', bang = true })
   end
   actions.nav_hunk('prev')
 end, { desc = 'gitsigns.actions.nav_hunk("prev")' })
