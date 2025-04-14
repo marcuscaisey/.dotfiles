@@ -21,6 +21,7 @@ catppuccin.setup({
   },
   integrations = {
     copilot_vim = true,
+    mason = true,
     ---@diagnostic disable-next-line: missing-fields
     native_lsp = {
       underlines = {
@@ -30,6 +31,7 @@ catppuccin.setup({
         information = { 'undercurl' },
       },
     },
+    nvim_surround = true,
   },
 })
 
