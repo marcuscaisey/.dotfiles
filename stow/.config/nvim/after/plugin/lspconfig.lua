@@ -3,12 +3,20 @@ if not ok then
   return
 end
 local util = require('lspconfig.util')
+local ok, blink = pcall(require, 'blink.cmp')
+if not ok then
+  return
+end
 local ok, neodev = pcall(require, 'neodev')
 if not ok then
   return
 end
 
 local augroup = vim.api.nvim_create_augroup('lspconfig', { clear = true })
+
+util.default_config = vim.tbl_deep_extend('force', util.default_config, {
+  capabilities = blink.get_lsp_capabilities(),
+})
 
 ---@param plz_root string
 ---@return string? goroot
