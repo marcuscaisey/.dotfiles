@@ -1,5 +1,3 @@
-local augroup = vim.api.nvim_create_augroup('lsp', { clear = true })
-
 local enabled_lsps = {
   'bashls',
   'clangd',
@@ -16,39 +14,6 @@ if vim.env.NVIM_DISABLE_GOLANGCI_LINT ~= 'true' then
 end
 vim.lsp.enable(enabled_lsps)
 
-vim.lsp.config('clangd', {
-  filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, -- Default excluding proto
-})
-
-vim.lsp.config('pyright', {
-  ---@param params lsp.InitializeParams
-  ---@param config vim.lsp.ClientConfig
-  ---@diagnostic disable-next-line: unused-local
-  before_init = function(params, config)
-    if not config.root_dir then
-      return
-    end
-    if vim.uv.fs_stat(vim.fs.joinpath(config.root_dir, '.plzconfig')) then
-      ---@diagnostic disable-next-line: param-type-mismatch
-      config.settings.python = vim.tbl_deep_extend('force', config.settings.python, {
-        analysis = {
-          extraPaths = {
-            vim.fs.joinpath(config.root_dir, 'plz-out/python/venv'),
-          },
-          exclude = { 'plz-out' },
-        },
-      })
-    end
-  end,
-})
-
-vim.lsp.config('ts_ls', {
-  ---@param client vim.lsp.Client
-  on_attach = function(client)
-    client.server_capabilities.documentFormattingProvider = false
-  end,
-})
-
 if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
   for _, name in ipairs(enabled_lsps) do
     vim.lsp.config(name, {
@@ -56,6 +21,8 @@ if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
     })
   end
 end
+
+local augroup = vim.api.nvim_create_augroup('lsp', { clear = true })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = augroup,
