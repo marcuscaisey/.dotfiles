@@ -1,6 +1,7 @@
 local enabled_lsps = {
   'bashls',
   'clangd',
+  'gopls',
   'jsonls',
   'loxls',
   'marksman',
