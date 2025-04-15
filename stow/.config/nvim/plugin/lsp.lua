@@ -4,6 +4,7 @@ local enabled_lsps = {
   'gopls',
   'jsonls',
   'loxls',
+  'lua_ls',
   'marksman',
   'please',
   'pyright',
