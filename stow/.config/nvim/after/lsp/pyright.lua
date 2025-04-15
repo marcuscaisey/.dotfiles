@@ -7,6 +7,7 @@ return {
       return
     end
     if vim.uv.fs_stat(vim.fs.joinpath(config.root_dir, '.plzconfig')) then
+      ---@diagnostic disable-next-line: param-type-mismatch
       config.settings.python = vim.tbl_deep_extend('force', config.settings.python, {
         analysis = {
           extraPaths = {
