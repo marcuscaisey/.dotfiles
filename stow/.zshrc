@@ -180,7 +180,7 @@ if [[ -f ~/.fzf.zsh ]]; then
   source ~/.fzf.zsh
 
   # Use fd for find instead of default find
-  FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
+  FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --exclude .git'
 
   # Use ~~ for completion trigger instead of **
   FZF_COMPLETION_TRIGGER='~~'
