@@ -160,7 +160,7 @@ telescope.setup({
     vimgrep_arguments = {
       'rg',
       '--hidden',
-      "--glob=!.git",
+      '--glob=!.git',
       '--color=never',
       '--no-heading',
       '--with-filename',
