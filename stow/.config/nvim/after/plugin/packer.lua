@@ -45,15 +45,11 @@ packer.startup({
         pattern = 'PackerComplete',
         desc = 'Load plugins and configuration after installation',
         callback = function()
-          vim.ui.select(
-            { 'Yes', 'No' },
-            { prompt = "Installed plugins won't be configured until nvim is restarted. Exit?" },
-            function(choice)
-              if choice == 'Yes' then
-                vim.cmd.quitall()
-              end
+          vim.ui.select({ 'Yes', 'No' }, { prompt = "Installed plugins won't be configured until nvim is restarted. Exit?" }, function(choice)
+            if choice == 'Yes' then
+              vim.cmd.quitall()
             end
-          )
+          end)
         end,
         once = true,
       })

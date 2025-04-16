@@ -20,10 +20,7 @@ return {
     if not config.root_dir then
       return
     end
-    if
-      vim.uv.fs_stat(vim.fs.joinpath(config.root_dir, '.luarc.json'))
-      or vim.uv.fs_stat(vim.fs.joinpath(config.root_dir, '.luarc.jsonc'))
-    then
+    if vim.uv.fs_stat(vim.fs.joinpath(config.root_dir, '.luarc.json')) or vim.uv.fs_stat(vim.fs.joinpath(config.root_dir, '.luarc.jsonc')) then
       return
     end
 

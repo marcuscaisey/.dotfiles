@@ -21,12 +21,7 @@ local function plz_goroot(plz_root)
     local goroot = vim.fs.joinpath(plz_root, vim.trim(gotool_output_res.stdout))
     if not vim.uv.fs_stat(goroot) then
       vim.notify(
-        string.format(
-          'GOROOT for plz repo %s does not exist: %s. Building plugin.go.gotool target %s in background',
-          plz_root,
-          goroot,
-          gotool
-        ),
+        string.format('GOROOT for plz repo %s does not exist: %s. Building plugin.go.gotool target %s in background', plz_root, goroot, gotool),
         vim.log.levels.INFO
       )
       vim.system({ 'plz', '--repo_root', plz_root, 'build', gotool }, nil, function(out)
@@ -34,10 +29,7 @@ local function plz_goroot(plz_root)
           if out.code == 0 then
             vim.notify(string.format('built plugin.go.gotool target %s successfully', gotool), vim.log.levels.INFO)
           else
-            vim.notify(
-              string.format('building plugin.go.gotool target %s failed: %s', gotool, out.stderr),
-              vim.log.levels.ERROR
-            )
+            vim.notify(string.format('building plugin.go.gotool target %s failed: %s', gotool, out.stderr), vim.log.levels.ERROR)
           end
         end)
       end)
