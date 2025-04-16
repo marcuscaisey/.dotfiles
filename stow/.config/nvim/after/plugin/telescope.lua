@@ -7,7 +7,7 @@ local builtin = require('telescope.builtin')
 local entry_display = require('telescope.pickers.entry_display')
 local layout = require('telescope.actions.layout')
 local state = require('telescope.actions.state')
-local transform_mod = require('telescope.actions.mt').transform_mod
+local mt = require('telescope.actions.mt')
 
 --- Shortens the given path by either:
 --- - making it relative if it's part of the cwd
@@ -30,7 +30,7 @@ local function shorten_path(path)
   return path
 end
 
-local custom_actions = transform_mod({
+local custom_actions = mt.transform_mod({
   open_first_qf_item = function(_)
     vim.cmd.cfirst()
   end,
