@@ -6,6 +6,7 @@ local actions = require('telescope.actions')
 local builtin = require('telescope.builtin')
 local entry_display = require('telescope.pickers.entry_display')
 local layout = require('telescope.actions.layout')
+local state = require('telescope.actions.state')
 local transform_mod = require('telescope.actions.mt').transform_mod
 
 --- Shortens the given path by either:
@@ -178,6 +179,19 @@ telescope.setup({
       path_display = function(_, path)
         return shorten_path(path)
       end,
+      prompt_title = 'Oldfiles (cwd only)',
+      attach_mappings = function(_, map)
+        map({ 'i', 'n' }, '<C-T>', function(prompt_bufnr)
+          local picker = state.get_current_picker(prompt_bufnr)
+          local opts = { default_text = state.get_current_line() }
+          if picker.prompt_title == 'Oldfiles (cwd only)' then
+            opts.cwd_only = false
+            opts.prompt_title = 'Oldfiles'
+          end
+          builtin.oldfiles(opts)
+        end)
+        return true
+      end,
     },
     buffers = {
       sort_mru = true,
@@ -200,6 +214,19 @@ telescope.setup({
       path_display = function(_, path)
         return shorten_path(path)
       end,
+      prompt_title = 'Olddirs (git repo only)',
+      attach_mappings = function(_, map)
+        map({ 'i', 'n' }, '<C-T>', function(prompt_bufnr)
+          local picker = state.get_current_picker(prompt_bufnr)
+          local opts = { default_text = state.get_current_line() }
+          if picker.prompt_title == 'Olddirs (git repo only)' then
+            opts.git_repo_only = false
+            opts.prompt_title = 'Olddirs'
+          end
+          telescope.extensions.olddirs.picker(opts)
+        end)
+        return true
+      end,
     },
   },
 })
@@ -211,18 +238,10 @@ vim.keymap.set('n', '<C-B>', builtin.buffers, { desc = 'telescope.builtin.buffer
 vim.keymap.set('n', '<C-G>', builtin.live_grep, { desc = 'telescope.builtin.live_grep()' })
 vim.keymap.set('n', '<Leader>ht', builtin.help_tags, { desc = 'telescope.builtin.help_tags()' })
 vim.keymap.set('n', '<Leader>of', builtin.oldfiles, { desc = 'telescope.builtin.oldfiles()' })
-vim.keymap.set('n', '<Leader>oaf', function()
-  builtin.oldfiles({ cwd_only = false })
-end, { desc = 'telescope.builtin.oldfiles()' })
 vim.keymap.set('n', '<Leader>tt', builtin.builtin, { desc = 'telescope.builtin.builtin()' })
 vim.keymap.set('n', '<Leader>tr', builtin.resume, { desc = 'telescope.builtin.resume()' })
 vim.keymap.set('n', '<Leader>od', telescope.extensions.olddirs.picker, {
   desc = 'telescope.extensions.olddirs.picker()',
-})
-vim.keymap.set('n', '<Leader>oad', function()
-  telescope.extensions.olddirs.picker({ git_repo_only = false })
-end, {
-  desc = 'telescope.extensions.olddirs.picker({ git_repo_only = false })',
 })
 vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { desc = 'telescope.builtin.lsp_document_symbols()' })
 vim.keymap.set('n', 'gwO', builtin.lsp_dynamic_workspace_symbols, {
