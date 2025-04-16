@@ -182,14 +182,14 @@ telescope.setup({
       path_display = function(_, path)
         return shorten_path(path)
       end,
-      prompt_title = 'Oldfiles (cwd only)',
+      prompt_title = 'Oldfiles (cwd)',
       attach_mappings = function(_, map)
         map({ 'i', 'n' }, '<C-T>', function(prompt_bufnr)
           local picker = state.get_current_picker(prompt_bufnr)
           local opts = { default_text = state.get_current_line() }
-          if picker.prompt_title == 'Oldfiles (cwd only)' then
+          if picker.prompt_title == 'Oldfiles (cwd)' then
             opts.cwd_only = false
-            opts.prompt_title = 'Oldfiles'
+            opts.prompt_title = 'Oldfiles (all)'
           end
           builtin.oldfiles(opts)
         end)
@@ -221,14 +221,14 @@ telescope.setup({
       path_display = function(_, path)
         return shorten_path(path)
       end,
-      prompt_title = 'Olddirs (git repo only)',
+      prompt_title = 'Olddirs (git repo)',
       attach_mappings = function(_, map)
         map({ 'i', 'n' }, '<C-T>', function(prompt_bufnr)
           local picker = state.get_current_picker(prompt_bufnr)
           local opts = { default_text = state.get_current_line() }
-          if picker.prompt_title == 'Olddirs (git repo only)' then
+          if picker.prompt_title == 'Olddirs (git repo)' then
             opts.git_repo_only = false
-            opts.prompt_title = 'Olddirs'
+            opts.prompt_title = 'Olddirs (all)'
           end
           telescope.extensions.olddirs.picker(opts)
         end)
