@@ -144,7 +144,7 @@ telescope.setup({
         ['<C-Q>'] = actions.smart_send_to_qflist
           + custom_actions.open_first_qf_item
           + actions.open_qflist
-        -- Jump to the first quickfix item after opening the quickfix list to leave in the main window.
+          -- Jump to the first quickfix item after opening the quickfix list to leave in the main window.
           + custom_actions.open_first_qf_item,
         ['<C-L>'] = actions.smart_send_to_loclist + actions.open_loclist + custom_actions.open_first_loc_item,
       },
@@ -153,10 +153,7 @@ telescope.setup({
         ['<C-C>'] = actions.close,
         ['<C-N>'] = actions.move_selection_next,
         ['<C-P>'] = actions.move_selection_previous,
-        ['<C-Q>'] = actions.smart_send_to_qflist
-          + custom_actions.open_first_qf_item
-          + actions.open_qflist
-          + custom_actions.open_first_qf_item,
+        ['<C-Q>'] = actions.smart_send_to_qflist + custom_actions.open_first_qf_item + actions.open_qflist + custom_actions.open_first_qf_item,
         ['<C-L>'] = actions.smart_send_to_loclist + actions.open_loclist + custom_actions.open_first_loc_item,
       },
     },
@@ -250,13 +247,9 @@ vim.keymap.set('n', '<Leader>ht', builtin.help_tags, { desc = 'telescope.builtin
 vim.keymap.set('n', '<Leader>of', builtin.oldfiles, { desc = 'telescope.builtin.oldfiles()' })
 vim.keymap.set('n', '<Leader>tt', builtin.builtin, { desc = 'telescope.builtin.builtin()' })
 vim.keymap.set('n', '<Leader>tr', builtin.resume, { desc = 'telescope.builtin.resume()' })
-vim.keymap.set('n', '<Leader>od', telescope.extensions.olddirs.picker, {
-  desc = 'telescope.extensions.olddirs.picker()',
-})
+vim.keymap.set('n', '<Leader>od', telescope.extensions.olddirs.picker, { desc = 'telescope.extensions.olddirs.picker()' })
 vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { desc = 'telescope.builtin.lsp_document_symbols()' })
-vim.keymap.set('n', 'gwO', builtin.lsp_dynamic_workspace_symbols, {
-  desc = 'telescope.builtin.lsp_dynamic_workspace_symbols()',
-})
+vim.keymap.set('n', 'gwO', builtin.lsp_dynamic_workspace_symbols, { desc = 'telescope.builtin.lsp_dynamic_workspace_symbols()' })
 vim.keymap.set('n', 'g]', function()
   if vim.opt_local.tagfunc:get() == 'v:lua.vim.lsp.tagfunc' then
     builtin.lsp_definitions({ jump_type = 'never' })
