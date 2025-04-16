@@ -6,8 +6,8 @@ local actions = require('telescope.actions')
 local builtin = require('telescope.builtin')
 local entry_display = require('telescope.pickers.entry_display')
 local layout = require('telescope.actions.layout')
-local state = require('telescope.actions.state')
 local mt = require('telescope.actions.mt')
+local state = require('telescope.actions.state')
 
 --- Shortens the given path by either:
 --- - making it relative if it's part of the cwd
