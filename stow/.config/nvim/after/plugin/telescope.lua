@@ -199,7 +199,11 @@ telescope.setup({
     },
     lsp_document_symbols = { entry_maker = lsp_symbols_entry_maker({ show_filename = false }) },
     lsp_dynamic_workspace_symbols = { entry_maker = lsp_symbols_entry_maker({ show_filename = true }) },
-    lsp_references = { entry_maker = lsp_location_entry_maker },
+    lsp_references = {
+      entry_maker = lsp_location_entry_maker,
+      include_current_line = true,
+      jump_type = 'never',
+    },
     lsp_implementations = { entry_maker = lsp_location_entry_maker },
     lsp_definitions = { entry_maker = lsp_location_entry_maker },
   },
@@ -264,6 +268,4 @@ vim.keymap.set('n', 'g<C-]>', function()
   end
 end, { expr = true, desc = 'telescope.builtin.lsp_definitions()' })
 vim.keymap.set('n', 'gri', builtin.lsp_implementations, { desc = 'telescope.builtin.lsp_implementations()' })
-vim.keymap.set('n', 'grr', function()
-  builtin.lsp_references({ jump_type = 'never', include_current_line = true })
-end, { desc = 'telescope.builtin.lsp_references()' })
+vim.keymap.set('n', 'grr', builtin.lsp_references, { desc = 'telescope.builtin.lsp_references()' })
