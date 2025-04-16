@@ -79,6 +79,7 @@ local function plz_goroot(plz_root)
   return nil, string.format('plugin.go.gotool %s not found in build.path %s', gotool, build_paths:gsub('\n', ':'))
 end
 
+---@type vim.lsp.Config
 return {
   settings = {
     gopls = {
@@ -92,8 +93,6 @@ return {
       },
     },
   },
-  ---@param client vim.lsp.Client
-  ---@param bufnr integer
   on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd('BufWritePre', {
       group = augroup,
@@ -102,7 +101,6 @@ return {
       callback = function()
         local params = vim.lsp.util.make_range_params(0, client.offset_encoding) ---@type lsp.CodeActionParams
         params.context = { only = { 'source.organizeImports' }, diagnostics = {} }
-        ---@type {err: lsp.ResponseError?, result:(lsp.CodeAction|lsp.Command)[]?}?
         local resp = client:request_sync(vim.lsp.protocol.Methods.textDocument_codeAction, params, nil, bufnr)
         if not resp or not resp.result then
           return
@@ -115,8 +113,6 @@ return {
       end,
     })
   end,
-  ---@param bufnr integer
-  ---@param cb fun(root_dir?:string)
   root_dir = function(bufnr, cb)
     local plz_root = vim.fs.root(bufnr, '.plzconfig')
     if plz_root and vim.fs.basename(plz_root) == 'src' then
