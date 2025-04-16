@@ -31,3 +31,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = augroup,
   desc = 'Highlight yanked text',
 })
+
+vim.api.nvim_create_autocmd('InsertEnter', {
+  callback = function()
+    vim.api.nvim_input('<Cmd>nohlsearch<CR>')
+  end,
+  group = augroup,
+  desc = ':nohlsearch',
+})
