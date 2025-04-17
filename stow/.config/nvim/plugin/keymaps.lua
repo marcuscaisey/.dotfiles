@@ -46,21 +46,6 @@ vim.keymap.set('n', '<Leader>tw', function()
   end
 end, { desc = 'Toggle line wrapping in the current window' })
 
-vim.keymap.set('n', 'j', function()
-  if vim.v.count > 0 then
-    vim.cmd.normal({ string.format("m'%sj", vim.v.count), bang = true })
-    return
-  end
-  vim.cmd.normal({ 'j', bang = true })
-end, { desc = 'Move cursor down, setting the previous context mark if a count greater than 1 is provided' })
-vim.keymap.set('n', 'k', function()
-  if vim.v.count > 0 then
-    vim.cmd.normal({ string.format("m'%sk", vim.v.count), bang = true })
-    return
-  end
-  vim.cmd.normal({ 'k', bang = true })
-end, { desc = 'Move cursor up, setting the previous context mark if a count greater than 1 is provided' })
-
 vim.keymap.set('n', '<Leader>yy', function()
   local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
   local filepath = vim.api.nvim_buf_get_name(0)
