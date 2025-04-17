@@ -7,8 +7,7 @@ local function nohlsearch()
 end
 
 local timer = assert(vim.uv.new_timer())
----@param timeout_millis integer
-local function schedule_nohlsearch(timeout_millis)
+local function schedule_nohlsearch()
   timer:start(timeout_millis, 0, nohlsearch)
 end
 
@@ -22,15 +21,13 @@ vim.api.nvim_create_autocmd('InsertEnter', {
 
 vim.api.nvim_create_autocmd('CursorHold', {
   group = augroup,
-  desc = string.format(':nohlsearch after %dms', timeout_millis - vim.opt.updatetime:get()),
-  callback = function()
-    schedule_nohlsearch(timeout_millis - vim.opt.updatetime:get())
-  end,
+  desc = string.format('schedule :nohlsearch after %dms', timeout_millis),
+  callback = schedule_nohlsearch,
 })
 
 for _, key in ipairs({ 'n', 'N' }) do
   vim.keymap.set('n', key, function()
-    schedule_nohlsearch(timeout_millis)
+    schedule_nohlsearch()
     return key
   end, { expr = true, desc = string.format('schedule :nohlsearch after %dms, then %s', timeout_millis, key) })
 end
