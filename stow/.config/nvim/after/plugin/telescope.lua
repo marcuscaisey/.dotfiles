@@ -15,17 +15,12 @@ local state = require('telescope.actions.state')
 ---@param path string
 ---@return string
 local function shorten_path(path)
-  local cwd = assert(vim.uv.cwd())
-  if path == cwd then
-    return ''
+  local rel_path = vim.fs.relpath(vim.fn.getcwd(), path)
+  if rel_path then
+    return rel_path
   end
-  local relative_path, replacements = path:gsub('^' .. vim.pesc(cwd) .. '/', '')
-  if replacements == 1 then
-    return relative_path
-  end
-  local home = os.getenv('HOME')
-  if home then
-    path = path:gsub('^' .. vim.pesc(home), '~')
+  if vim.env.HOME then
+    path = path:gsub('^' .. vim.pesc(vim.env.HOME), '~')
   end
   return path
 end
