@@ -153,7 +153,7 @@ telescope.setup({
       '--smart-case',
     },
     path_display = function(_, path)
-      return shorten_path(path)
+     return shorten_path(path)
     end,
   },
   pickers = {
