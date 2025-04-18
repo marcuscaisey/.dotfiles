@@ -16,15 +16,7 @@ local entry_display = require('telescope.pickers.entry_display')
 ---@param path string
 ---@return string
 local function shorten_path(path)
-  local rel_to_cwd = vim.fs.relpath(vim.fn.getcwd(), path)
-  if rel_to_cwd then
-    return rel_to_cwd
-  end
-  local rel_to_home = vim.fs.relpath(vim.env.HOME, path)
-  if rel_to_home then
-    return vim.fs.joinpath('~', rel_to_home)
-  end
-  return path
+  return vim.fs.relpath(vim.fn.getcwd(), path) or path:gsub('^' .. vim.pesc(vim.env.HOME), '~')
 end
 
 local custom_actions = mt.transform_mod({
