@@ -70,6 +70,10 @@ local function lsp_symbols_entry_maker(opts)
   return function(entry)
     local default_entry = default_entry_maker(entry)
     default_entry.display = make_display
+    default_entry.ordinal = default_entry.symbol_type .. ' ' .. default_entry.symbol_name
+    if opts.show_filename then
+      default_entry.ordinal = default_entry.ordinal .. ' ' .. default_entry.filename
+    end
     return default_entry
   end
 end
@@ -180,7 +184,10 @@ telescope.setup({
       ignore_current_buffer = true,
     },
     lsp_document_symbols = { entry_maker = lsp_symbols_entry_maker({ show_filename = false }) },
-    lsp_dynamic_workspace_symbols = { entry_maker = lsp_symbols_entry_maker({ show_filename = true }) },
+    lsp_dynamic_workspace_symbols = {
+      entry_maker = lsp_symbols_entry_maker({ show_filename = true }),
+      sorter = telescope.extensions.fzf.native_fzf_sorter(),
+    },
     lsp_references = {
       entry_maker = lsp_location_entry_maker(),
       include_current_line = true,
