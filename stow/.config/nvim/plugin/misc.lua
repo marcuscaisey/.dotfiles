@@ -23,11 +23,3 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   group = augroup,
   desc = 'Trim trailing whitespace',
 })
-
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank({ timeout = 500 })
-  end,
-  group = augroup,
-  desc = 'Highlight yanked text',
-})
