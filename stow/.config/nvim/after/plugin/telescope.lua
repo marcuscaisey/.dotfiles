@@ -6,6 +6,7 @@ local actions = require('telescope.actions')
 local builtin = require('telescope.builtin')
 local entry_display = require('telescope.pickers.entry_display')
 local layout = require('telescope.actions.layout')
+local make_entry = require('telescope.make_entry')
 local mt = require('telescope.actions.mt')
 local state = require('telescope.actions.state')
 
@@ -45,45 +46,36 @@ local function lsp_symbols_entry_maker(opts)
   for _, kind in ipairs(vim.lsp.protocol.SymbolKind) do
     max_symbol_kind_length = math.max(max_symbol_kind_length, #kind)
   end
+  local items = {
+    { width = max_symbol_kind_length }, -- symbol type
+    { remaining = true }, -- symbol name
+  }
+  if opts.show_filename then
+    table.insert(items, { remaining = true }) -- filepath
+  end
 
-  return function(entry)
-    local items = {
-      { width = max_symbol_kind_length }, -- symbol type
-      { remaining = true }, -- symbol name
+  local displayer = entry_display.create({ separator = ' ', items = items })
+  local function make_display(entry)
+    local args = {
+      { entry.symbol_type, string.format('LspItemKind%s', entry.symbol_type) },
+      entry.symbol_name,
     }
     if opts.show_filename then
-      table.insert(items, { remaining = true }) -- filepath
+      table.insert(args, { shorten_path(entry.filename), 'TelescopeResultsLineNr' })
     end
-    local displayer = entry_display.create({ separator = ' ', items = items })
+    return displayer(args)
+  end
 
-    local function make_display(entry)
-      local args = {
-        { entry.symbol_type, string.format('LspItemKind%s', entry.symbol_type) },
-        entry.symbol_name,
-      }
-      if opts.show_filename then
-        table.insert(args, { shorten_path(entry.filename), 'TelescopeResultsLineNr' })
-      end
-      return displayer(args)
-    end
-
-    return {
-      valid = true,
-      value = entry,
-      ordinal = entry.filename .. entry.text,
-      display = make_display,
-      filename = entry.filename or vim.api.nvim_buf_get_name(entry.bufnr),
-      lnum = entry.lnum,
-      col = entry.col,
-      symbol_name = entry.text:match('%[.+%]%s+(.*)'),
-      symbol_type = entry.kind,
-      start = entry.start,
-      finish = entry.finish,
-    }
+  local default_entry_maker = make_entry.gen_from_lsp_symbols()
+  return function(entry)
+    local default_entry = default_entry_maker(entry)
+    default_entry.display = make_display
+    return default_entry
   end
 end
 
-local function lsp_location_entry_maker(entry)
+---@return fun(entry):table
+local function lsp_location_entry_maker()
   local displayer = entry_display.create({
     separator = ' ',
     items = {
@@ -92,7 +84,6 @@ local function lsp_location_entry_maker(entry)
       { remaining = true }, -- directory
     },
   })
-
   local function make_display(entry)
     return displayer({
       vim.fs.basename(entry.filename),
@@ -101,19 +92,12 @@ local function lsp_location_entry_maker(entry)
     })
   end
 
-  return {
-    valid = true,
-    value = entry,
-    ordinal = entry.filename .. entry.text,
-    display = make_display,
-    bufnr = entry.bufnr,
-    filename = entry.filename,
-    lnum = entry.lnum,
-    col = entry.col,
-    text = entry.text,
-    start = entry.start,
-    finish = entry.finish,
-  }
+  local default_entry_maker = make_entry.gen_from_quickfix()
+  return function(entry)
+    local default_entry = default_entry_maker(entry)
+    default_entry.display = make_display
+    return default_entry
+  end
 end
 
 telescope.setup({
@@ -199,12 +183,12 @@ telescope.setup({
     lsp_document_symbols = { entry_maker = lsp_symbols_entry_maker({ show_filename = false }) },
     lsp_dynamic_workspace_symbols = { entry_maker = lsp_symbols_entry_maker({ show_filename = true }) },
     lsp_references = {
-      entry_maker = lsp_location_entry_maker,
+      entry_maker = lsp_location_entry_maker(),
       include_current_line = true,
       jump_type = 'never',
     },
-    lsp_implementations = { entry_maker = lsp_location_entry_maker },
-    lsp_definitions = { entry_maker = lsp_location_entry_maker },
+    lsp_implementations = { entry_maker = lsp_location_entry_maker() },
+    lsp_definitions = { entry_maker = lsp_location_entry_maker() },
   },
   extensions = {
     olddirs = {
