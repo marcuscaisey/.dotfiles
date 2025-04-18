@@ -27,7 +27,7 @@ packer.startup({
     use({ 'catppuccin/nvim', as = 'catppuccin' })
     use({ 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } })
     use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', requires = { 'nvim-telescope/telescope.nvim' } })
-    use({ 'vim-scripts/ReplaceWithRegister' })
+    use({ 'vim-scripts/ReplaceWithRegister', opt = true })
     use({ 'kylechui/nvim-surround' })
     use({ 'bkad/camelcasemotion' })
     use({ 'tpope/vim-fugitive' })
