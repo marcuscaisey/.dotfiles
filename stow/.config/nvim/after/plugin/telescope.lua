@@ -110,7 +110,6 @@ telescope.setup({
         preview_width = 0.5,
       },
     },
-    borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
     mappings = {
       i = {
         ['<C-H>'] = layout.toggle_preview,
