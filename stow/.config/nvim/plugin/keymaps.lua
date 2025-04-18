@@ -14,8 +14,6 @@ vim.keymap.set('n', '<C-]>', '<Cmd>silent! normal! <C-]><CR>')
 
 vim.keymap.set('n', '<Leader>m', '<Cmd>messages<CR>')
 
-vim.keymap.set('n', 'J', 'm`J``', { desc = 'Join lines, keeping the cursor in its current position' })
-
 vim.keymap.set('t', '<Esc>', '<C-\\><C-N>', { desc = 'Go back to Normal mode' })
 
 vim.keymap.set('n', '<Leader>f', function()
