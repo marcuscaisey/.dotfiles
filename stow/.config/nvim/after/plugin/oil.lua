@@ -21,9 +21,8 @@ oil.setup({
         if not dir then
           return
         end
-        local home = os.getenv('HOME')
-        if home then
-          dir = dir:gsub('^' .. vim.pesc(home), '~')
+        if vim.env.HOME then
+          dir = dir:gsub('^' .. vim.pesc(vim.env.HOME), '~')
         end
         telescope_builtin.find_files({
           prompt_title = 'Find files in ' .. dir,
@@ -41,9 +40,8 @@ oil.setup({
         if not dir then
           return
         end
-        local home = os.getenv('HOME')
-        if home then
-          dir = dir:gsub('^' .. vim.pesc(home), '~')
+        if vim.env.HOME then
+          dir = dir:gsub('^' .. vim.pesc(vim.env.HOME), '~')
         end
         telescope_builtin.live_grep({
           prompt_title = 'Live Grep in ' .. dir,
