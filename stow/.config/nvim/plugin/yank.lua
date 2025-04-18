@@ -9,11 +9,11 @@ end
 ---@return string?
 ---@return string? errmsg
 local function git_root(path)
-  local git_path = vim.fs.find('.git', { upward = true, path = path })[1]
-  if not git_path then
+  local root = vim.fs.root(path, '.git')
+  if not root then
     return nil, 'locating git root: not in a git repo'
   end
-  return vim.fs.dirname(git_path)
+  return root
 end
 
 ---@param root string
