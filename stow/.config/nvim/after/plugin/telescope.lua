@@ -152,6 +152,9 @@ telescope.setup({
       '--column',
       '--smart-case',
     },
+    path_display = function(_, path)
+      return shorten_path(path)
+    end,
   },
   pickers = {
     find_files = {
@@ -159,9 +162,6 @@ telescope.setup({
     },
     oldfiles = {
       cwd_only = true,
-      path_display = function(_, path)
-        return shorten_path(path)
-      end,
       prompt_title = 'Oldfiles (cwd)',
       attach_mappings = function(_, map)
         map({ 'i', 'n' }, '<C-T>', function(prompt_bufnr)
@@ -198,9 +198,6 @@ telescope.setup({
         height = 0.9,
       },
       previewer = false,
-      path_display = function(_, path)
-        return shorten_path(path)
-      end,
       prompt_title = 'Olddirs (git repo)',
       attach_mappings = function(_, map)
         map({ 'i', 'n' }, '<C-T>', function(prompt_bufnr)
