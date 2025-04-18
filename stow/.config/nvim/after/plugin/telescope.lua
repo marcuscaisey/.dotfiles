@@ -3,12 +3,12 @@ if not ok then
   return
 end
 local actions = require('telescope.actions')
-local builtin = require('telescope.builtin')
-local entry_display = require('telescope.pickers.entry_display')
 local layout = require('telescope.actions.layout')
-local make_entry = require('telescope.make_entry')
 local mt = require('telescope.actions.mt')
 local state = require('telescope.actions.state')
+local builtin = require('telescope.builtin')
+local make_entry = require('telescope.make_entry')
+local entry_display = require('telescope.pickers.entry_display')
 
 --- Shortens the given path by either:
 --- - making it relative if it's part of the cwd
