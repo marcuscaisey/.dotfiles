@@ -1,23 +1,68 @@
+---@param s string
+local function yank(s)
+  vim.fn.setreg('"', s)
+  vim.fn.setreg('*', s)
+  print(string.format('Yanked %s', s))
+end
+
+---@param path string
+---@return string?
+---@return string? errmsg
+local function git_root(path)
+  local git_path = vim.fs.find('.git', { upward = true, path = path })[1]
+  if not git_path then
+    return nil, 'locating git root: not in a git repo'
+  end
+  return vim.fs.dirname(git_path)
+end
+
+---@param root string
+---@return string?
+---@return string? errmsg
+local function git_ref(root)
+  local upstream_branch_res = vim.system({ 'git', '-C', root, 'rev-parse', '--abbrev-ref', '@{upstream}' }):wait()
+  local upstream_branch = vim.trim(upstream_branch_res.stdout)
+  if upstream_branch_res.code ~= 0 then
+    return nil, string.format('determining upstream branch: %s', upstream_branch_res.stderr)
+  end
+
+  local remote_branch = upstream_branch:match('^origin/(.+)')
+  if remote_branch then
+    return remote_branch
+  end
+
+  local tag_res = vim.system({ 'git', '-C', root, 'tag', '--points-at', 'HEAD' }):wait()
+  if tag_res.code ~= 0 then
+    return nil, string.format('determining tag: %s', tag_res.stderr)
+  end
+  local tag = vim.trim(tag_res.stdout)
+  if tag ~= '' then
+    return tag
+  end
+
+  return nil, 'determining git ref: no upstream branch or tag found'
+end
+
 vim.keymap.set('n', '<Leader>yy', function()
-  local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
-  local filepath = vim.api.nvim_buf_get_name(0)
-  local relative_filepath = vim.fs.relpath(git_root, filepath)
-  vim.fn.setreg('"', relative_filepath)
-  vim.fn.setreg('*', relative_filepath)
-  print(string.format('Yanked %s', relative_filepath))
+  local path = vim.api.nvim_buf_get_name(0)
+  local git_root, errmsg = git_root(vim.api.nvim_buf_get_name(0))
+  if not git_root then
+    vim.notify(string.format('Yanking path: %s', errmsg), vim.log.levels.ERROR)
+    return
+  end
+  local rel_path = vim.fs.relpath(git_root, path)
+  ---@cast rel_path -nil
+  yank(rel_path)
 end, { desc = 'Yank the path of the current buffer relative to the git root' })
 
 vim.keymap.set('n', '<Leader>YY', function()
-  local filepath = vim.api.nvim_buf_get_name(0)
-  vim.fn.setreg('"', filepath)
-  vim.fn.setreg('*', filepath)
-  print(string.format('Yanked %s', filepath))
+  yank(vim.api.nvim_buf_get_name(0))
 end, { desc = 'Yank the absolute path of the current buffer' })
 
 vim.keymap.set('n', '<Leader>ys', function()
   local base_url = vim.env.SOURCEGRAPH_BASE_URL
   if not base_url then
-    vim.notify('Unable to yank sourcegraph URL: SOURCEGRAPH_BASE_URL env var not set', vim.log.levels.ERROR)
+    vim.notify('Yanking sourcegraph URL: SOURCEGRAPH_BASE_URL env var not set', vim.log.levels.ERROR)
     return
   end
 
@@ -25,64 +70,44 @@ vim.keymap.set('n', '<Leader>ys', function()
   local filepath = vim.api.nvim_buf_get_name(0)
   local relative_filepath = vim.fs.relpath(git_root, filepath)
 
-  local git_ref
-  local upstream_branch = vim.trim(vim.system({ 'git', 'rev-parse', '--abbrev-ref', '@{upstream}' }):wait().stdout)
-  if upstream_branch ~= '' then
-    local remote_branch = upstream_branch:match('^origin/(.+)')
-    if remote_branch then
-      git_ref = remote_branch
-    end
-  else
-    local tag = vim.trim(vim.system({ 'git', 'tag', '--points-at', 'HEAD' }):wait().stdout)
-    if tag then
-      git_ref = tag
-    end
+  local git_ref, errmsg = git_ref(git_root)
+  if not git_ref then
+    vim.notify(string.format('Yanking sourcegraph URL: %s', errmsg), vim.log.levels.WARN)
   end
 
   local git_ref_segment = git_ref and '@' .. git_ref or ''
   local line = unpack(vim.api.nvim_win_get_cursor(0))
   local url = string.format('%s%s/-/blob/%s?L%d', base_url, git_ref_segment, relative_filepath, line)
 
-  vim.fn.setreg('"', url)
-  vim.fn.setreg('*', url)
-  print(string.format('Yanked %s', url))
+  yank(url)
 end, { desc = 'Yank the sourcegraph URL to the current position in the buffer' })
 
 vim.keymap.set('n', '<Leader>yg', function()
-  local git_remote_result = vim.system({ 'git', 'remote', 'get-url', 'origin' }):wait()
-  local base_url = vim.trim(git_remote_result.stdout)
-  if base_url == '' then
-    vim.notify(string.format('Unable to yank github URL: getting url of origin remote: %s', git_remote_result.stderr), vim.log.levels.ERROR)
+  local path = vim.api.nvim_buf_get_name(0)
+  local git_root, errmsg = git_root(vim.api.nvim_buf_get_name(0))
+  if not git_root then
+    vim.notify(string.format('Yanking github URL: %s', errmsg), vim.log.levels.ERROR)
     return
   end
 
-  local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
-  local filepath = vim.api.nvim_buf_get_name(0)
-  local relative_filepath = vim.fs.relpath(git_root, filepath)
-
-  local git_ref
-  local upstream_branch = vim.trim(vim.system({ 'git', 'rev-parse', '--abbrev-ref', '@{upstream}' }):wait().stdout)
-  if upstream_branch ~= '' then
-    local remote_branch = upstream_branch:match('^origin/(.+)')
-    if remote_branch then
-      git_ref = remote_branch
-    end
-  else
-    local tag = vim.trim(vim.system({ 'git', 'tag', '--points-at', 'HEAD' }):wait().stdout)
-    if tag then
-      git_ref = tag
-    end
+  local git_remote_result = vim.system({ 'git', '-C', git_root, 'remote', 'get-url', 'origin' }):wait()
+  local base_url = vim.trim(git_remote_result.stdout)
+  if base_url == '' then
+    vim.notify(string.format('Yanking github URL: getting url of origin remote: %s', git_remote_result.stderr), vim.log.levels.ERROR)
+    return
   end
+
+  local git_ref, errmsg = git_ref(git_root)
   if not git_ref then
-    vim.notify('Unable to yank github URL: unable to determine git reference', vim.log.levels.ERROR)
+    vim.notify(string.format('Yanking github URL: %s', errmsg), vim.log.levels.ERROR)
+    return
   end
 
   local line = unpack(vim.api.nvim_win_get_cursor(0))
-  local url = string.format('%s/blob/%s/%s#L%d', base_url, git_ref, relative_filepath, line)
+  local rel_path = vim.fs.relpath(git_root, path)
+  local url = string.format('%s/blob/%s/%s#L%d', base_url, git_ref, rel_path, line)
 
-  vim.fn.setreg('"', url)
-  vim.fn.setreg('*', url)
-  print(string.format('Yanked %s', url))
+  yank(url)
 end, { desc = 'Yank the github URL to the current position in the buffer' })
 
 local augroup = vim.api.nvim_create_augroup('yank', { clear = true })
