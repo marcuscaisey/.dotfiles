@@ -5,11 +5,6 @@ vim.keymap.set('n', '<C-W>>', '<C-W>5>')
 vim.keymap.set('n', '<C-W>-', '<C-W>5-')
 vim.keymap.set('n', '<C-W>+', '<C-W>5+')
 
-vim.keymap.set({ 'o', 'v' }, 'ae', ':<C-U>execute "normal! gg" | keepjumps normal! VG<CR>', {
-  desc = '"around everything" text object, selects everything in the buffer',
-  silent = true,
-})
-
 vim.keymap.set('n', '<C-]>', '<Cmd>silent! normal! <C-]><CR>')
 
 vim.keymap.set('n', '<Leader>m', '<Cmd>messages<CR>')
