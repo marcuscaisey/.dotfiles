@@ -21,14 +21,14 @@ end
 ---@return string? errmsg
 local function git_ref(root)
   local upstream_branch_res = vim.system({ 'git', '-C', root, 'rev-parse', '--abbrev-ref', '@{upstream}' }):wait()
-  local upstream_branch = vim.trim(upstream_branch_res.stdout)
-  if upstream_branch_res.code ~= 0 then
+  if upstream_branch_res.code == 0 then
+    local upstream_branch = vim.trim(upstream_branch_res.stdout)
+    local remote_branch = upstream_branch:match('^origin/(.+)')
+    if remote_branch then
+      return remote_branch
+    end
+  elseif not upstream_branch_res.stderr:match('HEAD does not point to a branch') then
     return nil, string.format('determining upstream branch: %s', upstream_branch_res.stderr)
-  end
-
-  local remote_branch = upstream_branch:match('^origin/(.+)')
-  if remote_branch then
-    return remote_branch
   end
 
   local tag_res = vim.system({ 'git', '-C', root, 'tag', '--points-at', 'HEAD' }):wait()
