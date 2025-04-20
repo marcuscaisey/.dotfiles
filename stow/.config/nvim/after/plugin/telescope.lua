@@ -3,12 +3,12 @@ if not ok then
   return
 end
 local actions = require('telescope.actions')
+local builtin = require('telescope.builtin')
+local entry_display = require('telescope.pickers.entry_display')
 local layout = require('telescope.actions.layout')
+local make_entry = require('telescope.make_entry')
 local mt = require('telescope.actions.mt')
 local state = require('telescope.actions.state')
-local builtin = require('telescope.builtin')
-local make_entry = require('telescope.make_entry')
-local entry_display = require('telescope.pickers.entry_display')
 
 --- Shortens the given path by either:
 --- - making it relative if it's part of the cwd
@@ -148,7 +148,7 @@ telescope.setup({
       '--smart-case',
     },
     path_display = function(_, path)
-     return shorten_path(path)
+      return shorten_path(path)
     end,
   },
   pickers = {
@@ -167,6 +167,21 @@ telescope.setup({
             opts.prompt_title = 'Oldfiles (all)'
           end
           builtin.oldfiles(opts)
+        end)
+        return true
+      end,
+    },
+    current_buffer_fuzzy_find = {
+      prompt_title = 'Current Buffer Fuzzy',
+      attach_mappings = function(_, map)
+        map({ 'i', 'n' }, '<C-T>', function(prompt_bufnr)
+          actions.close(prompt_bufnr)
+          builtin.live_grep({
+            search_dirs = { vim.api.nvim_buf_get_name(0) },
+            prompt_title = 'Current Buffer Live Grep',
+            default_text = state.get_current_line(),
+            path_display = { 'tail' },
+          })
         end)
         return true
       end,
@@ -218,6 +233,7 @@ telescope.load_extension('olddirs')
 vim.keymap.set('n', '<C-P>', builtin.find_files, { desc = 'telescope.builtin.find_files()' })
 vim.keymap.set('n', '<C-B>', builtin.buffers, { desc = 'telescope.builtin.buffers()' })
 vim.keymap.set('n', '<C-G>', builtin.live_grep, { desc = 'telescope.builtin.live_grep()' })
+vim.keymap.set('n', '<Leader>/', builtin.current_buffer_fuzzy_find, { desc = 'telescope.builtin.current_buffer_fuzzy_find()' })
 vim.keymap.set('n', '<Leader>ht', builtin.help_tags, { desc = 'telescope.builtin.help_tags()' })
 vim.keymap.set('n', '<Leader>of', builtin.oldfiles, { desc = 'telescope.builtin.oldfiles()' })
 vim.keymap.set('n', '<Leader>tt', builtin.builtin, { desc = 'telescope.builtin.builtin()' })
