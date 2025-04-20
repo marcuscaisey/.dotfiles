@@ -16,8 +16,12 @@ catppuccin.setup({
       return {
         NormalFloat = { fg = palette.overlay2, bg = palette.surface0 },
         DiffChange = { bg = colors.darken(palette.blue, 0.15, palette.base) },
+        IncSearch = { bg = palette.peach },
       }
     end,
+  },
+  custom_highlights = {
+    CurSearch = { link = 'IncSearch' },
   },
   integrations = {
     copilot_vim = true,
