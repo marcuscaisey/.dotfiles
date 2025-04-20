@@ -14,6 +14,7 @@ vim.opt.relativenumber = true
 vim.opt.scrolloff = 10
 vim.opt.shada = "!,'500,<50,s10,h"
 vim.opt.shiftwidth = 4
+vim.opt.showmode = false
 vim.opt.signcolumn = 'yes:2'
 vim.opt.smartcase = true
 vim.opt.splitbelow = true
