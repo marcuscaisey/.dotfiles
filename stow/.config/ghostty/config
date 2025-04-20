@@ -1,4 +1,4 @@
 font-size = 14
 theme = catppuccin-mocha
 background = #000000
-cursor-opacity = 0.5
+cursor-text = #000000
