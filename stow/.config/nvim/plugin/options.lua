@@ -1,5 +1,6 @@
 vim.opt.clipboard = 'unnamed'
 vim.opt.colorcolumn = '+1'
+vim.opt.completeopt = { 'menuone', 'popup', 'noinsert', 'fuzzy' }
 vim.opt.cursorline = true
 vim.opt.diffopt:append('linematch:60')
 vim.opt.expandtab = true
