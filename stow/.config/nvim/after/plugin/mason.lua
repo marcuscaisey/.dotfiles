@@ -9,6 +9,7 @@ local tools = {
   'bash-language-server',
   'black',
   'clangd',
+  'golangci-lint-langserver',
   'gopls',
   'json-lsp',
   'lua-language-server',
