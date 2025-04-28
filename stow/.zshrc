@@ -124,10 +124,10 @@ alias g='cd $(git rev-parse --show-toplevel)'
 ################################################################################
 #                                   General                                    #
 ################################################################################
-# Ignore case when searching man pages.
-export MANPAGER='less -i'
+# Use Neovim as man pager.
+export MANPAGER='nvim +Man!'
 
-# Use nvim as default editor.
+# Use Neovim as default editor.
 export EDITOR=nvim
 
 
