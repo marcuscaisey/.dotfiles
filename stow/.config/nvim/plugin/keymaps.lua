@@ -14,19 +14,30 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-N>', { desc = 'Go back to Normal mode' })
 vim.keymap.set('n', '<Leader>f', function()
   if vim.bo.formatexpr == '' and vim.bo.formatprg == '' then
     print('Skipping formatting because neither formatprg or formatexpr are set')
-    return '<Ignore>'
+    return
   end
-  return table.concat({
+  vim.cmd('silent normal! ' .. table.concat({
     'ma', -- Set mark 'a' at cursor position
     'H', -- Move to top of window
     'mb', -- Set mark 'b' at top of window
     'gg', -- Move to first line
     'gqG', -- Format to last line
+  }))
+  local errmsg
+  if vim.v.shell_error > 0 then
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    errmsg = table.concat(lines, '\n')
+    vim.cmd('silent undo')
+  end
+  vim.cmd('silent normal! ' .. table.concat({
     '`b', -- Move to top of window mark 'b'
     'zt', -- Redraw line at top of window
     '`a', -- Move to cursor position mark 'a'
-  })
-end, { desc = 'Format the entire buffer', expr = true, silent = true })
+  }))
+  if errmsg then
+    vim.notify(errmsg, vim.log.levels.ERROR)
+  end
+end, { desc = 'Format the entire buffer', silent = true })
 
 vim.keymap.set('n', '<Leader>tw', function()
   ---@diagnostic disable-next-line: undefined-field
