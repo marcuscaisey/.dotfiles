@@ -9,5 +9,3 @@
 )
 
 right: (expression_list) @value.inner @value.outer
-
-(method_declaration) @method.outer
