@@ -9,6 +9,9 @@ blink.setup({
     ['<C-p>'] = { 'show', 'select_prev', 'fallback_to_mappings' },
   },
   completion = {
+    accept = {
+      auto_brackets = { enabled = false },
+    },
     menu = {
       draw = {
         columns = { { 'label' }, { 'kind', 'source_name', gap = 1 } },
