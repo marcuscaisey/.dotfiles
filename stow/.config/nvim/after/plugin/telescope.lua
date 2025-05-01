@@ -122,6 +122,7 @@ telescope.setup({
           -- Jump to the first quickfix item after opening the quickfix list to leave in the main window.
           + custom_actions.open_first_qf_item,
         ['<C-L>'] = actions.smart_send_to_loclist + actions.open_loclist + custom_actions.open_first_loc_item,
+        ['<C-Space>'] = actions.to_fuzzy_refine,
       },
       n = {
         ['<C-H>'] = layout.toggle_preview,
