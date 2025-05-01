@@ -4,7 +4,7 @@ if not ok then
 end
 
 hardtime.setup({
-  disabled_filetypes = { 'qf', 'mason', 'oil', 'packer' },
+  disabled_filetypes = { 'qf', 'mason', 'oil', 'packer', 'help' },
   disabled_keys = {
     ['<Up>'] = {},
     ['<Down>'] = {},
