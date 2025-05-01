@@ -3,9 +3,7 @@
 (
  (keyed_element
    (literal_element)
-   (literal_element) @value.inner) @_start
+   (literal_element) @assignment.inner) @_start
  . ","? @_end
- (#make-range! "value.outer" @_start @_end)
+ (#make-range! "assignment.outer" @_start @_end)
 )
-
-right: (expression_list) @value.inner @value.outer

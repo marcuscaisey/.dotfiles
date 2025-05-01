@@ -58,8 +58,8 @@ configs.setup({
         ['aa'] = '@parameter.outer',
         ['ic'] = '@call.inner',
         ['ac'] = '@call.outer',
-        ['iv'] = '@value.inner',
-        ['av'] = '@value.outer',
+        ['iv'] = '@assignment.inner',
+        ['av'] = '@assignment.outer',
       },
       selection_modes = {
         ['@function.outer'] = 'V',
