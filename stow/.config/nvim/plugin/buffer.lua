@@ -1,16 +1,14 @@
 local augroup = vim.api.nvim_create_augroup('buffer', { clear = true })
 
 vim.api.nvim_create_autocmd('BufWinEnter', {
-  callback = function()
-    local last_line = vim.fn.line([['"]])
-    local lines = vim.fn.line('$')
-    if last_line ~= 0 and last_line <= lines then
-      local last_col = vim.fn.col([['"]])
-      vim.api.nvim_win_set_cursor(0, { last_line, last_col })
-    end
-  end,
   group = augroup,
   desc = 'Jump to last file position',
+  callback = function(args)
+    local pos = vim.api.nvim_buf_get_mark(args.buf, '"')
+    if pos[1] >= 1 and pos[1] <= vim.fn.line('$') and not vim.tbl_contains({ 'gitcommit', 'gitrebase' }, vim.o.filetype) then
+      vim.api.nvim_win_set_cursor(0, pos)
+    end
+  end,
 })
 
 vim.api.nvim_create_autocmd('BufWritePre', {
