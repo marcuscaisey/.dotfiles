@@ -16,24 +16,15 @@ vim.keymap.set('n', '<Leader>f', function()
     print('Skipping formatting because neither formatprg or formatexpr are set')
     return
   end
-  vim.cmd('silent normal! ' .. table.concat({
-    'ma', -- Set mark 'a' at cursor position
-    'H', -- Move to top of window
-    'mb', -- Set mark 'b' at top of window
-    'gg', -- Move to first line
-    'gqG', -- Format to last line
-  }))
+  local view = vim.fn.winsaveview()
+  vim.cmd('silent keepjumps normal! gggqG')
   local errmsg
   if vim.v.shell_error > 0 then
     local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
     errmsg = table.concat(lines, '\n')
     vim.cmd('silent undo')
   end
-  vim.cmd('silent normal! ' .. table.concat({
-    '`b', -- Move to top of window mark 'b'
-    'zt', -- Redraw line at top of window
-    '`a', -- Move to cursor position mark 'a'
-  }))
+  vim.fn.winrestview(view)
   if errmsg then
     vim.notify(errmsg, vim.log.levels.ERROR)
   end
