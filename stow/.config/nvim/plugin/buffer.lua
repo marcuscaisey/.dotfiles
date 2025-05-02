@@ -1,4 +1,4 @@
-local augroup = vim.api.nvim_create_augroup('misc', { clear = true })
+local augroup = vim.api.nvim_create_augroup('buffer', { clear = true })
 
 vim.api.nvim_create_autocmd('BufWinEnter', {
   callback = function()
