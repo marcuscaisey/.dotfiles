@@ -3,19 +3,22 @@ if not ok then
   return
 end
 
-local augroup = vim.api.nvim_create_augroup('statusline', { clear = true })
+vim.opt.statusline = table.concat({
+  ' ',
+  '%(%{%g:statusline_git%}  %)',
+  '%{%g:statusline_file%}',
+  '%=',
+  '%(%{%g:statusline_lsp%}  %)',
+  '%(%{%g:statusline_diagnostics%}  %)',
+  '%{%g:statusline_location%}',
+  ' ',
+})
 
 ---@param group string
 local function hl(group)
   return '%#' .. group .. '#'
 end
 
-vim.api.nvim_create_autocmd('User', {
-  group = augroup,
-  pattern = 'GitSignsUpdate',
-  desc = 'Redraw statusline',
-  command = 'redrawstatus',
-})
 ---@type {name:string, hl_group:string, symbol:string}[]
 local git_status_sections = {
   { name = 'added', hl_group = 'diffAdded', symbol = '+' },
@@ -23,8 +26,7 @@ local git_status_sections = {
   { name = 'removed', hl_group = 'diffRemoved', symbol = '-' },
 }
 
----@return string
-function StatusLineGitSection()
+local function update_statusline_git()
   local result = {}
   local gitsigns_head = vim.b.gitsigns_head ---@type string?
   if gitsigns_head then
@@ -56,58 +58,43 @@ function StatusLineGitSection()
       end
     end
   end
-  return table.concat(result, ' ')
+  vim.g.statusline_git = table.concat(result, ' ')
 end
 
-vim.api.nvim_create_autocmd({ 'DirChanged' }, {
-  group = augroup,
-  desc = 'Redraw statusline',
-  command = 'redrawstatus',
-})
----@return string
-function StatusLineFileSection()
-  local icon, hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(0), nil, { default = true })
+---@param bufnr integer
+local function update_statusline_file(bufnr)
+  local icon, hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(bufnr), nil, { default = true })
   local cwd = vim.fn.getcwd()
   if vim.env.HOME then
     cwd = cwd:gsub('^' .. vim.pesc(vim.env.HOME), '~')
   end
-  return hl(hl_group) .. icon .. ' ' .. hl('StatusLine') .. '%f %(%h%w%m%r %)' .. hl('StatusLineNC') .. cwd
+  vim.g.statusline_file = hl(hl_group) .. icon .. ' ' .. hl('StatusLine') .. '%f %(%h%w%m%r %)' .. hl('StatusLineNC') .. cwd
 end
 
-local lsp_progress = nil
-vim.api.nvim_create_autocmd('LspProgress', {
-  group = augroup,
-  desc = 'Update statusline with LSP progress or clear it if the work is done',
-  ---@param args {data:{params:{value:lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd}}}
-  callback = function(args)
-    if args.data.params.value.kind == 'end' then
-      lsp_progress = nil
-    else
-      lsp_progress = vim.lsp.status():gsub('%%', '%%%%')
-    end
-    vim.cmd.redrawstatus()
-  end,
-})
-vim.api.nvim_create_autocmd({ 'LspAttach', 'LspDetach' }, {
-  group = augroup,
-  desc = 'Redraw statusline',
-  command = 'redrawstatus',
-})
+local lsp_progress = nil ---@type string?
+---@param progress lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd
+local function update_lsp_progress(progress)
+  if progress.kind == 'end' then
+    lsp_progress = nil
+  else
+    lsp_progress = vim.lsp.status():gsub('%%', '%%%%')
+  end
+end
 
----@return string
-function StatusLineLSPSection()
+---@param bufnr? integer
+local function update_statusline_lsp(bufnr)
   local result
   if lsp_progress then
     result = lsp_progress
   else
-    local clients = vim.lsp.get_clients({ bufnr = 0 })
+    local clients = vim.lsp.get_clients({ bufnr = bufnr })
     local client_names = {}
     for _, client in ipairs(clients) do
       table.insert(client_names, client.name)
     end
     result = table.concat(client_names, ', ')
   end
-  return hl('StatusLine') .. result
+  vim.g.statusline_lsp = hl('StatusLine') .. result
 end
 
 local diagnostic_severity_hl_groups = {
@@ -120,35 +107,74 @@ local diagnostic_severity_hl_groups = {
 local diagnostic_severity_signs = vim.diagnostic.config().signs.text
 assert(diagnostic_severity_signs, 'Expected signs.text to be populated in vim.diagnostic.config()')
 
----@return string
-function StatusLineDiagnosticsSection()
-  local counts = vim.diagnostic.count(0)
+---@param bufnr integer
+local function update_statusline_diagnostics(bufnr)
+  local counts = vim.diagnostic.count(bufnr)
   local result = {} ---@type string[]
   for level, count in pairs(counts) do
     table.insert(result, hl(diagnostic_severity_hl_groups[level]) .. diagnostic_severity_signs[level] .. ' ' .. count)
   end
-  return table.concat(result, ' ')
+  vim.g.statusline_diagnostics = table.concat(result, ' ')
 end
 
----@return string
-function StatusLineLocationSection()
-  return hl('StatusLine') .. '%11(%l:%v %p%%%)'
-end
+vim.g.statusline_location = hl('StatusLine') .. '%11(%l:%v %p%%%)'
 
-local padding = '  '
+local augroup = vim.api.nvim_create_augroup('statusline', { clear = true })
 
----@return string
-function StatusLine()
-  return table.concat({
-    ' ',
-    '%(%{%v:lua.StatusLineGitSection()%}' .. padding .. '%)',
-    '%{%v:lua.StatusLineFileSection()%}',
-    '%=',
-    '%(%{%v:lua.StatusLineLSPSection()%}' .. padding .. '%)',
-    '%(%{%v:lua.StatusLineDiagnosticsSection()%}' .. padding .. '%)',
-    '%{%v:lua.StatusLineLocationSection()%}',
-    ' ',
-  })
-end
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = augroup,
+  desc = 'Update g:statusline_git, g:statusline_file, g:statusline_lsp, g:statusline_diagnostics',
+  callback = function(args)
+    update_statusline_git()
+    update_statusline_file(args.buf)
+    update_statusline_lsp(args.buf)
+    update_statusline_diagnostics(args.buf)
+  end,
+})
 
-vim.opt.statusline = '%!v:lua.StatusLine()'
+vim.api.nvim_create_autocmd('User', {
+  group = augroup,
+  pattern = 'GitSignsUpdate',
+  desc = 'Update g:statusline_git and redraw status line',
+  callback = function()
+    update_statusline_git()
+    vim.cmd.redrawstatus()
+  end,
+})
+
+vim.api.nvim_create_autocmd('DirChanged', {
+  group = augroup,
+  desc = 'Update g:statusline_file',
+  callback = function(args)
+    update_statusline_file(args.buf)
+  end,
+})
+
+vim.api.nvim_create_autocmd({ 'LspAttach', 'LspDetach' }, {
+  group = augroup,
+  desc = 'Update g:statusline_lsp and redraw status line',
+  callback = function(args)
+    update_statusline_lsp(args.buf)
+    vim.cmd.redrawstatus()
+  end,
+})
+vim.api.nvim_create_autocmd('LspProgress', {
+  group = augroup,
+  desc = 'Update g:statusline_lsp and redraw status line',
+  ---@param args {data:{params:{value:lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd}}}
+  callback = function(args)
+    update_lsp_progress(args.data.params.value)
+    update_statusline_lsp()
+    vim.cmd.redrawstatus()
+  end,
+})
+
+vim.api.nvim_create_autocmd('DiagnosticChanged', {
+  group = augroup,
+  desc = 'Update g:statusline_diagnostics if diagnostics changed in current buffer',
+  callback = function(args)
+    if args.buf == vim.api.nvim_get_current_buf() then
+      update_statusline_diagnostics(args.buf)
+    end
+  end,
+})
