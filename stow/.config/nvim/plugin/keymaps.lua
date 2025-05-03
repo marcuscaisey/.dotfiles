@@ -5,8 +5,6 @@ vim.keymap.set('n', '<C-W>>', '<C-W>5>')
 vim.keymap.set('n', '<C-W>-', '<C-W>5-')
 vim.keymap.set('n', '<C-W>+', '<C-W>5+')
 
-vim.keymap.set('n', '<Leader>m', '<Cmd>messages<CR>')
-
 vim.keymap.set('t', '<Esc>', '<C-\\><C-N>', { desc = 'Go back to Normal mode' })
 
 vim.keymap.set('n', '<Leader>f', function()
