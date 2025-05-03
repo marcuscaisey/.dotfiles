@@ -34,7 +34,7 @@ packer.startup({
     use({ 'marcuscaisey/please.nvim' })
     use({ 'yorickpeterse/nvim-pqf' })
     use({ 'marcuscaisey/olddirs.nvim', requires = { 'nvim-telescope/telescope.nvim' } })
-    use({ 'github/copilot.vim', opt = true })
+    use({ 'zbirenbaum/copilot.lua' })
     use({ 'marcuscaisey/lox' })
     use({ 'stevearc/oil.nvim' })
     use({ 'jake-stewart/multicursor.nvim' })

@@ -7,6 +7,8 @@ blink.setup({
   keymap = {
     ['<C-N>'] = { 'show', 'select_next', 'fallback_to_mappings' },
     ['<C-P>'] = { 'show', 'select_prev', 'fallback_to_mappings' },
+    ['<C-Y>'] = { 'select_and_accept', 'fallback_to_mappings' },
+    ['<C-K>'] = {},
     ['<C-Space>'] = {},
   },
   completion = {
