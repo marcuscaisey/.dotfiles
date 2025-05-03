@@ -54,3 +54,5 @@ vim.filetype.add({
     ['new-commit'] = 'gitcommit',
   },
 })
+
+require('vim._extui').enable({})
