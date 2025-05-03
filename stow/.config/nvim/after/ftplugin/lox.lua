@@ -1,2 +1,2 @@
-vim.opt_local.commentstring = '// %s'
-vim.opt_local.textwidth = 120
+vim.bo.commentstring = '// %s'
+vim.bo.textwidth = 120

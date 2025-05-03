@@ -243,7 +243,7 @@ vim.keymap.set('n', '<Leader>od', telescope.extensions.olddirs.picker, { desc = 
 vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { desc = 'telescope.builtin.lsp_document_symbols()' })
 vim.keymap.set('n', 'gwO', builtin.lsp_dynamic_workspace_symbols, { desc = 'telescope.builtin.lsp_dynamic_workspace_symbols()' })
 vim.keymap.set('n', 'g]', function()
-  if vim.opt_local.tagfunc:get() == 'v:lua.vim.lsp.tagfunc' then
+  if vim.bo.tagfunc == 'v:lua.vim.lsp.tagfunc' then
     builtin.lsp_definitions({ jump_type = 'never' })
     return '<Ignore>'
   else
@@ -251,7 +251,7 @@ vim.keymap.set('n', 'g]', function()
   end
 end, { expr = true, desc = [[telescope.builtin.lsp_definitions({ jump_type = 'never' )]] })
 vim.keymap.set('n', 'g<C-]>', function()
-  if vim.opt_local.tagfunc:get() == 'v:lua.vim.lsp.tagfunc' then
+  if vim.bo.tagfunc == 'v:lua.vim.lsp.tagfunc' then
     builtin.lsp_definitions()
     return '<Ignore>'
   else

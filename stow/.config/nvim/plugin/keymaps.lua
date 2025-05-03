@@ -31,12 +31,10 @@ vim.keymap.set('n', '<Leader>f', function()
 end, { desc = 'Format the entire buffer', silent = true })
 
 vim.keymap.set('n', '<Leader>tw', function()
-  ---@diagnostic disable-next-line: undefined-field
-  if vim.opt_local.wrap:get() then
-    vim.opt_local.wrap = false
-    print('Disabled line wrapping')
-  else
-    vim.opt_local.wrap = true
+  vim.wo.wrap = not vim.wo.wrap
+  if vim.wo.wrap then
     print('Enabled line wrapping')
+  else
+    print('Disabled line wrapping')
   end
 end, { desc = 'Toggle line wrapping in the current window' })

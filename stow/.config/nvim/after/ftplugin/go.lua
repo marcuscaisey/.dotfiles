@@ -1,3 +1,3 @@
-vim.opt_local.textwidth = 120
-vim.opt_local.expandtab = false
-vim.opt_local.formatprg = ''
+vim.bo.expandtab = false
+vim.bo.formatprg = ''
+vim.bo.textwidth = 120

@@ -1,4 +1,4 @@
-vim.opt_local.tabstop = 2
-vim.opt_local.shiftwidth = 2
-vim.opt_local.textwidth = 100
-vim.opt_local.commentstring = '-- %s'
+vim.bo.commentstring = '-- %s'
+vim.bo.shiftwidth = 2
+vim.bo.tabstop = 2
+vim.bo.textwidth = 100

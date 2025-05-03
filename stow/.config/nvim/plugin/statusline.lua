@@ -3,7 +3,7 @@ if not ok then
   return
 end
 
-vim.opt.statusline = table.concat({
+vim.o.statusline = table.concat({
   ' ',
   '%(%{%g:statusline_git%}  %)',
   '%{%g:statusline_file%}',

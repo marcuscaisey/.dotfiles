@@ -1,2 +1,2 @@
-vim.opt_local.formatprg = 'prettierd %'
-vim.opt_local.textwidth = 100
+vim.bo.formatprg = 'prettierd %'
+vim.bo.textwidth = 100

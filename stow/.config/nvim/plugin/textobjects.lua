@@ -12,8 +12,7 @@ end
 ---@param line string
 ---@return integer
 local function get_indent(line)
-  ---@diagnostic disable-next-line: undefined-field
-  local _, indent = vim.text.indent(0, line, { expandtab = vim.opt_local.tabstop:get() })
+  local _, indent = vim.text.indent(0, line, { expandtab = vim.bo.tabstop })
   return indent
 end
 
