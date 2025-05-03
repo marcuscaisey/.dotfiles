@@ -9,4 +9,8 @@ hardtime.setup({
     ['<Up>'] = {},
     ['<Down>'] = {},
   },
+  restricted_keys = {
+    ['<C-P>'] = {},
+    ['<C-N>'] = {},
+  },
 })
