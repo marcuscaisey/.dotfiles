@@ -41,30 +41,34 @@ vim.keymap.set('n', '<Leader>gc', function()
       vim.cmd.cclose()
       return
     end
-    -- Merge overlapping and contiguous hunks
-    for i = #qflist, 2, -1 do
-      local cur_bufnr = qflist[i].bufnr
-      local prev_bufnr = qflist[i - 1].bufnr
-      if cur_bufnr ~= prev_bufnr then
-        goto continue
+
+    -- Merge contiguous hunks
+    local contig_hunk_groups = {} ---@type {item:table, from:integer, to:integer}[][]
+    for _, item in ipairs(qflist) do
+      local from, to = item.text:match('^Lines (%d+)-(%d+).*$')
+      from, to = tonumber(from), tonumber(to)
+      local hunk = { item = item, from = from, to = to }
+      local cur_group = contig_hunk_groups[#contig_hunk_groups]
+      local cur_hunk = cur_group and cur_group[#cur_group]
+      if cur_hunk and item.bufnr == cur_hunk.item.bufnr and from - cur_hunk.to <= 1 then
+        table.insert(cur_group, hunk)
+      else
+        table.insert(contig_hunk_groups, { hunk })
       end
-      local prev_from, prev_to, prev_suffix = qflist[i - 1].text:match('^Lines (%d+)-(%d+)(.*)$')
-      local cur_from, cur_to = qflist[i].text:match('^Lines (%d+)-(%d+)')
-      if not prev_from or not cur_from then
-        goto continue
-      end
-      cur_from = tonumber(cur_from)
-      prev_to = tonumber(prev_to)
-      if
-        cur_from == prev_to -- overlapping
-        or cur_from == prev_to + 1 -- contiguous
-      then
-        qflist[i - 1].text = string.format('Lines %s-%s%s', prev_from, cur_to, prev_suffix)
-        table.remove(qflist, i)
-      end
-      ::continue::
     end
-    vim.fn.setqflist(qflist)
+    local new_qflist = {}
+    for _, group in ipairs(contig_hunk_groups) do
+      local item = group[1].item
+      -- Attempting to stage a group of hunks from the first hunk where the first hunk only spans a single line fails
+      -- with "No hunk to stage". Therefore use the second hunk from the group as the quickfix item.
+      if #group > 1 and group[1].from == group[1].to then
+        item = group[2].item
+      end
+      item.text = string.format('Lines %s-%s', group[1].from, group[#group].to)
+      table.insert(new_qflist, item)
+    end
+
+    vim.fn.setqflist(new_qflist)
     vim.cmd.copen()
     vim.cmd.cfirst()
   end)
