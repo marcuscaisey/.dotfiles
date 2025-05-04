@@ -4,11 +4,8 @@ vim.o.completeopt = 'menuone,popup,noinsert,fuzzy'
 vim.o.cursorline = true
 vim.opt.diffopt:append('linematch:60')
 vim.o.expandtab = true
-vim.opt.formatoptions:remove('o')
-vim.o.hidden = true
 vim.o.ignorecase = true
 vim.o.laststatus = 3
-vim.o.mouse = 'a'
 vim.o.number = true
 vim.o.pumheight = 10
 vim.o.relativenumber = true
@@ -22,7 +19,6 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.swapfile = false
 vim.o.tabstop = 4
-vim.o.termguicolors = true
 vim.o.updatetime = 100
 
 local augroup = vim.api.nvim_create_augroup('options', { clear = true })
