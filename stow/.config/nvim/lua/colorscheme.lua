@@ -27,7 +27,6 @@ function M.setup()
       CurSearch = { link = 'IncSearch' },
     },
     integrations = {
-      copilot_vim = true,
       mason = true,
       ---@diagnostic disable-next-line: missing-fields
       native_lsp = {
