@@ -17,3 +17,26 @@ vim.keymap.set('n', '<Leader>l', function()
     vim.cmd.lopen()
   end
 end, { desc = 'Toggle location list window' })
+
+local augroup = vim.api.nvim_create_augroup('quickfix', { clear = true })
+
+vim.api.nvim_create_autocmd('QuickFixCmdPost', {
+  group = augroup,
+  pattern = '*',
+  desc = 'Sort quickfix list items',
+  callback = function()
+    local qflist = vim.fn.getqflist()
+    table.sort(qflist, function(a, b)
+      local a_name = vim.api.nvim_buf_get_name(a.bufnr)
+      local b_name = vim.api.nvim_buf_get_name(b.bufnr)
+      if a_name ~= b_name then
+        return a_name < b_name
+      end
+      if a.lnum ~= b.lnum then
+        return a.lnum < b.lnum
+      end
+      return a.col < b.col
+    end)
+    vim.fn.setqflist(qflist, 'r')
+  end,
+})
