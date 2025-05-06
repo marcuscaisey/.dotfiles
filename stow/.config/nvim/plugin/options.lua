@@ -33,6 +33,15 @@ vim.filetype.add({
   },
 })
 
+vim.keymap.set('n', '<Leader>tw', function()
+  vim.wo.wrap = not vim.wo.wrap
+  if vim.wo.wrap then
+    print('Enabled line wrapping')
+  else
+    print('Disabled line wrapping')
+  end
+end, { desc = 'Toggle line wrapping in the current window' })
+
 local augroup = vim.api.nvim_create_augroup('options', { clear = true })
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained', 'InsertLeave', 'WinEnter' }, {
