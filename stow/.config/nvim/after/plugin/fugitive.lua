@@ -1,6 +1,3 @@
-vim.keymap.set('n', '<Leader>gb', function()
-  vim.cmd.Git('blame')
-end, { desc = ':Git blame' })
 vim.api.nvim_create_autocmd('BufEnter', {
   group = vim.api.nvim_create_augroup('fugitive_custom', { clear = true }),
   pattern = { 'fugitive:///*' },
@@ -15,3 +12,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
     end, { desc = 'Yank the hash of the commit patch', buffer = true })
   end,
 })
+
+vim.keymap.set('n', '<Leader>gb', function()
+  vim.cmd.Git('blame')
+end, { desc = ':Git blame' })

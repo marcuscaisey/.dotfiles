@@ -1,3 +1,13 @@
+local augroup = vim.api.nvim_create_augroup('yank', { clear = true })
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.hl.on_yank({ timeout = 500 })
+  end,
+  group = augroup,
+  desc = 'Highlight yanked text',
+})
+
 ---@param s string
 local function yank(s)
   vim.fn.setreg('"', s)
@@ -109,13 +119,3 @@ vim.keymap.set('n', '<Leader>yg', function()
 
   yank(url)
 end, { desc = 'Yank the github URL to the current position in the buffer' })
-
-local augroup = vim.api.nvim_create_augroup('yank', { clear = true })
-
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.hl.on_yank({ timeout = 500 })
-  end,
-  group = augroup,
-  desc = 'Highlight yanked text',
-})
