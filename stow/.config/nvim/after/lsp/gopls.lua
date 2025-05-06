@@ -109,7 +109,6 @@ return {
     local plz_root = vim.fs.root(bufnr, '.plzconfig')
     if plz_root and vim.fs.basename(plz_root) == 'src' then
       vim.env.GOPATH = string.format('%s:%s/plz-out/go', vim.fs.dirname(plz_root), plz_root)
-      vim.env.GO111MODULE = 'off'
       local goroot, err = plz_goroot(plz_root)
       if goroot then
         vim.env.GOROOT = goroot
