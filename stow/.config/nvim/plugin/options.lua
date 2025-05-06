@@ -20,6 +20,19 @@ vim.o.swapfile = false
 vim.o.tabstop = 4
 vim.o.updatetime = 100
 
+require('vim._extui').enable({})
+
+vim.filetype.add({
+  extension = {
+    lox = 'lox',
+    vifm = 'vim',
+  },
+  filename = {
+    vifmrc = 'vim',
+    ['new-commit'] = 'gitcommit',
+  },
+})
+
 local augroup = vim.api.nvim_create_augroup('options', { clear = true })
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained', 'InsertLeave', 'WinEnter' }, {
@@ -38,16 +51,3 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave'
     vim.wo.relativenumber = false
   end,
 })
-
-vim.filetype.add({
-  extension = {
-    lox = 'lox',
-    vifm = 'vim',
-  },
-  filename = {
-    vifmrc = 'vim',
-    ['new-commit'] = 'gitcommit',
-  },
-})
-
-require('vim._extui').enable({})
