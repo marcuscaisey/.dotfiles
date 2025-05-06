@@ -16,12 +16,7 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
-vim.keymap.set('n', '<Leader>dd', function()
-  if not vim.diagnostic.is_enabled() then
-    vim.diagnostic.enable()
-    print('Enabled diagnostics')
-  else
-    vim.diagnostic.enable(false)
-    print('Disabled diagnostics')
-  end
+vim.keymap.set('n', 'yod', function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+  print((vim.diagnostic.is_enabled() and 'Enabled' or 'Disabled') .. ' diagnostics')
 end, { desc = 'Toggle diagnostics' })

@@ -33,13 +33,9 @@ vim.filetype.add({
   },
 })
 
-vim.keymap.set('n', '<Leader>tw', function()
+vim.keymap.set('n', 'yow', function()
   vim.wo.wrap = not vim.wo.wrap
-  if vim.wo.wrap then
-    print('Enabled line wrapping')
-  else
-    print('Disabled line wrapping')
-  end
+  print((vim.wo.wrap and 'Enabled' or 'Disabled') .. ' line wrapping')
 end, { desc = 'Toggle line wrapping in the current window' })
 
 local augroup = vim.api.nvim_create_augroup('options', { clear = true })
