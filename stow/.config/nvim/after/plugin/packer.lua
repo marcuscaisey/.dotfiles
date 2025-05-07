@@ -38,7 +38,6 @@ packer.startup({
     use({ 'marcuscaisey/lox' })
     use({ 'stevearc/oil.nvim' })
     use({ 'jake-stewart/multicursor.nvim' })
-    use({ 'm4xshen/hardtime.nvim', requires = { 'MunifTanjim/nui.nvim' } })
 
     if bootstrap then
       vim.api.nvim_create_autocmd('User', {
