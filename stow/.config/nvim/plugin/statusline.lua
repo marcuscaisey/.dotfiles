@@ -81,16 +81,19 @@ local function update_lsp_progress(progress)
   end
 end
 
----@param bufnr? integer
-local function update_statusline_lsp(bufnr)
+---@param opts {bufnr:integer?, exclude_client_id:integer?}?
+local function update_statusline_lsp(opts)
+  opts = opts or {}
   local result
   if lsp_progress then
     result = lsp_progress
   else
-    local clients = vim.lsp.get_clients({ bufnr = bufnr })
+    local clients = vim.lsp.get_clients({ bufnr = opts.bufnr })
     local client_names = {}
     for _, client in ipairs(clients) do
-      table.insert(client_names, client.name)
+      if client.id ~= opts.exclude_client_id then
+        table.insert(client_names, client.name)
+      end
     end
     result = table.concat(client_names, ', ')
   end
@@ -127,7 +130,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
   callback = function(args)
     update_statusline_git()
     update_statusline_file(args.buf)
-    update_statusline_lsp(args.buf)
+    update_statusline_lsp({ bufnr = args.buf })
     update_statusline_diagnostics(args.buf)
   end,
 })
@@ -150,11 +153,19 @@ vim.api.nvim_create_autocmd('DirChanged', {
   end,
 })
 
-vim.api.nvim_create_autocmd({ 'LspAttach', 'LspDetach' }, {
+vim.api.nvim_create_autocmd('LspAttach', {
   group = augroup,
   desc = 'Update g:statusline_lsp and redraw status line',
   callback = function(args)
-    update_statusline_lsp(args.buf)
+    update_statusline_lsp({ bufnr = args.buf })
+    vim.cmd.redrawstatus()
+  end,
+})
+vim.api.nvim_create_autocmd('LspDetach', {
+  group = augroup,
+  desc = 'Update g:statusline_lsp and redraw status line',
+  callback = function(args)
+    update_statusline_lsp({ bufnr = args.buf, exclude_client_id = args.data.client_id })
     vim.cmd.redrawstatus()
   end,
 })
