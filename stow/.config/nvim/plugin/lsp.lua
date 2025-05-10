@@ -2,6 +2,7 @@ local enabled_lsps = {
   'bashls',
   'clangd',
   'gopls',
+  'intelephense',
   'jsonls',
   'loxls',
   'lua_ls',

@@ -11,6 +11,7 @@ local tools = {
   'clangd',
   'golangci-lint-langserver',
   'gopls',
+  'intelephense',
   'json-lsp',
   'lua-language-server',
   'marksman',
