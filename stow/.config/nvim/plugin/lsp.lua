@@ -1,6 +1,7 @@
 local enabled_lsps = {
   'bashls',
   'clangd',
+  'efm',
   'gopls',
   'intelephense',
   'jsonls',
@@ -43,10 +44,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         desc = 'Refresh codelenses',
       })
     end
-
-    if client:supports_method(vim.lsp.protocol.Methods.textDocument_formatting) and vim.bo.formatprg == '' then
-      vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format, { desc = 'vim.lsp.buf.format()', buffer = args.buf })
-    end
   end,
 })
 
@@ -59,3 +56,4 @@ if vim.env.NVIM_LSP_LOG_LEVEL then
 end
 
 vim.keymap.set('n', 'grl', vim.lsp.codelens.run, { desc = 'vim.lsp.codelens.run()' })
+vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format, { desc = 'vim.lsp.buf.format()' })

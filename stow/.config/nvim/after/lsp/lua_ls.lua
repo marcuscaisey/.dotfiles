@@ -10,6 +10,9 @@ return {
           'redefined-local',
         },
       },
+      format = {
+        enable = false,
+      },
       workspace = {
         checkThirdParty = false,
       },
