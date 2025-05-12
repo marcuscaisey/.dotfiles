@@ -18,3 +18,8 @@
 ((raw_string_literal_content) @injection.content
   (#match? @injection.content "edge_api_version\\s*\\=\\s*\"\\d\"\n")
   (#set! injection.language "python"))
+
+; Inject gotmpl into raw strings which contain {{.+?}}
+((raw_string_literal_content) @injection.content
+  (#match? @injection.content "\\{\\{.\{-1,}\\}\\}")
+  (#set! injection.language "gotmpl"))

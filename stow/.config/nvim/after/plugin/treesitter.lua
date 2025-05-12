@@ -24,6 +24,7 @@ configs.setup({
     'go',
     'gomod',
     'gosum',
+    'gotmpl',
     'gowork',
     'html',
     'java',
