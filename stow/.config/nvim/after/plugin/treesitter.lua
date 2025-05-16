@@ -50,9 +50,9 @@ configs.setup({
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = 'gsn',
-      node_incremental = 'gsn',
-      node_decremental = 'gsm',
+      init_selection = 'gn',
+      node_incremental = 'gn',
+      node_decremental = 'gm',
     },
   },
   indent = { enable = false },
