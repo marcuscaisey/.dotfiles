@@ -47,6 +47,14 @@ configs.setup({
   highlight = {
     enable = true,
   },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = 'gsn',
+      node_incremental = 'gsn',
+      node_decremental = 'gsm',
+    },
+  },
   indent = { enable = false },
   textobjects = {
     select = {
