@@ -32,7 +32,6 @@ packer.startup({
     use({ 'bkad/camelcasemotion' })
     use({ 'tpope/vim-fugitive' })
     use({ 'marcuscaisey/please.nvim' })
-    use({ 'yorickpeterse/nvim-pqf' })
     use({ 'marcuscaisey/olddirs.nvim', requires = { 'nvim-telescope/telescope.nvim' } })
     use({ 'marcuscaisey/lox' })
     use({ 'stevearc/oil.nvim' })
