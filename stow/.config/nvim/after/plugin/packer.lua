@@ -24,7 +24,7 @@ packer.startup({
     use({ 'kyazdani42/nvim-web-devicons' })
     use({ 'lewis6991/gitsigns.nvim' })
     use({ 'stevearc/dressing.nvim' })
-    use({ 'catppuccin/nvim', as = 'catppuccin' })
+    use({ 'catppuccin/nvim', commit = '82f3dcedc9acc242d2d4f98abca02e2f10a75248', as = 'catppuccin' })
     use({ 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } })
     use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', requires = { 'nvim-telescope/telescope.nvim' } })
     use({ 'vim-scripts/ReplaceWithRegister', opt = true })
