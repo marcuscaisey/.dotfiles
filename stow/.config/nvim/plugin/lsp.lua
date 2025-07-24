@@ -1,4 +1,5 @@
 local enabled_lsps = {
+  'basedpyright',
   'bashls',
   'clangd',
   'efm',
@@ -9,7 +10,6 @@ local enabled_lsps = {
   'lua_ls',
   'marksman',
   'please',
-  'pyright',
   'ts_ls',
   'vimls',
 }

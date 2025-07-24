@@ -6,6 +6,7 @@ end
 mason.setup()
 
 local tools = {
+  'basedpyright',
   'bash-language-server',
   'black',
   'clangd',
@@ -17,7 +18,6 @@ local tools = {
   'lua-language-server',
   'marksman',
   'prettierd',
-  'pyright',
   'stylua',
   'typescript-language-server',
   'vim-language-server',
