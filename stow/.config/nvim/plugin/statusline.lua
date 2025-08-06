@@ -3,6 +3,12 @@ if not ok then
   return
 end
 
+vim.g.statusline_git = ''
+vim.g.statusline_file = ''
+vim.g.statusline_lsp = ''
+vim.g.statusline_diagnostics = ''
+vim.g.statusline_location = ''
+
 vim.o.statusline = table.concat({
   ' ',
   '%(%{%g:statusline_git%}  %)',
