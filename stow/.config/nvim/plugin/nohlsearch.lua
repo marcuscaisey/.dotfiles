@@ -11,7 +11,7 @@ local function schedule_nohlsearch()
   timer:start(timeout_millis, 0, nohlsearch)
 end
 
-local augroup = vim.api.nvim_create_augroup('nohlsearch', { clear = true })
+local augroup = vim.api.nvim_create_augroup('nohlsearch', {})
 
 vim.api.nvim_create_autocmd('InsertEnter', {
   group = augroup,

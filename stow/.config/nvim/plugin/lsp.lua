@@ -32,22 +32,20 @@ if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
   })
 end
 
-local augroup = vim.api.nvim_create_augroup('lsp', { clear = true })
-
 vim.api.nvim_create_autocmd('LspAttach', {
-  group = augroup,
-  desc = 'Create codelens autocmd and format mapping',
+  group = vim.api.nvim_create_augroup('lsp_setup', {}),
+  desc = 'LSP setup',
   callback = function(args)
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
     if client:supports_method(vim.lsp.protocol.Methods.textDocument_codeLens) then
       vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'BufWritePost', 'CursorHold' }, {
+        group = vim.api.nvim_create_augroup('lsp_codelens_refresh', {}),
+        buffer = args.buf,
+        desc = 'Refresh codelenses',
         callback = function()
           vim.lsp.codelens.refresh({ bufnr = args.buf })
         end,
-        group = augroup,
-        buffer = args.buf,
-        desc = 'Refresh codelenses',
       })
     end
   end,

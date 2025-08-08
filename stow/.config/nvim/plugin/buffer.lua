@@ -1,7 +1,5 @@
-local augroup = vim.api.nvim_create_augroup('buffer', { clear = true })
-
 vim.api.nvim_create_autocmd('BufWinEnter', {
-  group = augroup,
+  group = vim.api.nvim_create_augroup('buffer_jump_to_last_position', {}),
   desc = 'Jump to last file position',
   callback = function(args)
     local pos = vim.api.nvim_buf_get_mark(args.buf, '"')
@@ -12,7 +10,7 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 })
 
 vim.api.nvim_create_autocmd('BufWritePre', {
-  group = augroup,
+  group = vim.api.nvim_create_augroup('buffer_trim_trailing_whitespace', {}),
   desc = 'Trim trailing whitespace',
   callback = function()
     local view = vim.fn.winsaveview()

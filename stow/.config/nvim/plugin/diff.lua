@@ -1,4 +1,4 @@
-local augroup = vim.api.nvim_create_augroup('diff', { clear = true })
+local augroup = vim.api.nvim_create_augroup('diff_diagnostics', {})
 vim.api.nvim_create_autocmd('VimEnter', {
   group = augroup,
   desc = 'Disable diagnostics in all windows with diff enabled',

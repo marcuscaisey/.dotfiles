@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd('BufEnter', {
-  group = vim.api.nvim_create_augroup('fugitive_yank_hash_map', { clear = true }),
+  group = vim.api.nvim_create_augroup('fugitive_map_yank_hash', {}),
   pattern = { 'fugitive:///*' },
   desc = 'Add mapping to Fugitive commit patch buffers to yank hash with <leader>y',
   callback = function()

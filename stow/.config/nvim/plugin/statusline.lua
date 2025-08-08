@@ -128,7 +128,7 @@ end
 
 vim.g.statusline_location = hl('StatusLine') .. '%11(%l:%v %p%%%)'
 
-local augroup = vim.api.nvim_create_augroup('statusline', { clear = true })
+local augroup = vim.api.nvim_create_augroup('statusline', {})
 
 vim.api.nvim_create_autocmd('BufEnter', {
   group = augroup,

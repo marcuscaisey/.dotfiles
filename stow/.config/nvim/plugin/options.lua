@@ -39,8 +39,7 @@ vim.filetype.add({
   },
 })
 
-local augroup = vim.api.nvim_create_augroup('options', { clear = true })
-
+local augroup = vim.api.nvim_create_augroup('options_auto_relativenumber', {})
 vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained', 'InsertLeave', 'WinEnter' }, {
   group = augroup,
   desc = 'Set relativenumber in focused window when not in insert mode',
