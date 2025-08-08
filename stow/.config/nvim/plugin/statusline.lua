@@ -176,7 +176,7 @@ vim.api.nvim_create_autocmd('LspDetach', {
   end,
 })
 vim.api.nvim_create_autocmd('LspProgress', {
-  group = augroup,
+  -- group = augroup,
   desc = 'Update g:statusline_lsp and redraw status line',
   ---@param args {data:{params:{value:lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd}}}
   callback = function(args)

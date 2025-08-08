@@ -34,7 +34,6 @@ vim.pack.add({
   'https://github.com/kosayoda/nvim-lightbulb',
   'https://github.com/saghen/blink.cmp',
   'https://github.com/kyazdani42/nvim-web-devicons',
-  'https://github.com/lewis6991/gitsigns.nvim',
   'https://github.com/stevearc/dressing.nvim',
   { src = 'https://github.com/catppuccin/nvim', version = '82f3dcedc9acc242d2d4f98abca02e2f10a75248', name = 'catppuccin' },
   'https://github.com/nvim-lua/plenary.nvim', -- Required for telescope.nvim
@@ -50,6 +49,7 @@ vim.pack.add({
   'https://github.com/jake-stewart/multicursor.nvim',
 })
 vim.pack.add({
+  'https://github.com/lewis6991/gitsigns.nvim',
   'https://github.com/vim-scripts/ReplaceWithRegister',
 }, { load = false })
 
