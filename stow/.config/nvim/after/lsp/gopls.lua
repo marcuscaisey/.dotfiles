@@ -107,23 +107,15 @@ return {
   end,
   root_dir = function(bufnr, cb)
     local plz_root = vim.fs.root(bufnr, '.plzconfig')
-    if plz_root and vim.fs.basename(plz_root) == 'src' then
-      vim.env.GOPATH = string.format('%s:%s/plz-out/go', vim.fs.dirname(plz_root), plz_root)
+    if plz_root then
       local goroot, err = plz_goroot(plz_root)
       if goroot then
         vim.env.GOROOT = goroot
       else
         vim.notify(string.format('Determining GOROOT for plz repo %s: %s', plz_root, err), vim.log.levels.WARN)
       end
-      cb(vim.fn.getcwd())
-      return
     end
 
-    local gowork_or_gomod_dir = vim.fs.root(bufnr, { 'go.work', 'go.mod' })
-    if gowork_or_gomod_dir then
-      cb(gowork_or_gomod_dir)
-    else
-      cb(vim.fn.getcwd())
-    end
+    cb(vim.fs.root(bufnr, { 'go.work', 'go.mod', '.git' }))
   end,
 }
