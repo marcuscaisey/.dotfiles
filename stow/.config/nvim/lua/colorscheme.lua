@@ -5,7 +5,19 @@ end
 local colors = require('catppuccin.utils.colors')
 
 catppuccin.setup({
-  flavour = 'mocha',
+  integrations = {
+    mason = true,
+    ---@diagnostic disable-next-line: missing-fields
+    native_lsp = {
+      underlines = {
+        errors = { 'undercurl' },
+        hints = { 'undercurl' },
+        warnings = { 'undercurl' },
+        information = { 'undercurl' },
+      },
+    },
+    nvim_surround = true,
+  },
   color_overrides = {
     mocha = {
       base = '#000000',
@@ -23,19 +35,7 @@ catppuccin.setup({
   custom_highlights = {
     CurSearch = { link = 'IncSearch' },
   },
-  integrations = {
-    mason = true,
-    ---@diagnostic disable-next-line: missing-fields
-    native_lsp = {
-      underlines = {
-        errors = { 'undercurl' },
-        hints = { 'undercurl' },
-        warnings = { 'undercurl' },
-        information = { 'undercurl' },
-      },
-    },
-    nvim_surround = true,
-  },
+  flavour = 'mocha',
 })
 
 for _, kind in ipairs(vim.lsp.protocol.CompletionItemKind) do
