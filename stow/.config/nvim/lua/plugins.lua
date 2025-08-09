@@ -1,6 +1,7 @@
 local post_install_cmds = {
-  ['blink.cmp'] = { 'cargo', 'build', '--release' },
+  ['blink.cmp'] = 'cargo build --release',
   ['telescope-fzf-native.nvim'] = { 'make' },
+  ['telescope-fzf-native.nvim'] = 'make',
 }
 
 vim.api.nvim_create_autocmd('PackChanged', {
@@ -13,12 +14,21 @@ vim.api.nvim_create_autocmd('PackChanged', {
     end
     for name, cmd in pairs(post_install_cmds) do
       if args.data.spec.name == name then
-        vim.notify('Building ' .. name, vim.log.levels.INFO)
-        local obj = vim.system(cmd, { cwd = args.data.path }):wait()
-        if obj.code == 0 then
-          vim.notify('Building ' .. name .. ' done', vim.log.levels.INFO)
+        vim.notify('Running ' .. name .. ' post-install command: ' .. cmd, vim.log.levels.INFO)
+        local ok = false
+        local err = '' ---@type string?
+        if vim.startswith(cmd, ':') then
+          ---@diagnostic disable-next-line: param-type-mismatch
+          ok, err = pcall(vim.cmd, cmd)
         else
-          vim.notify('Building ' .. name .. ' failed', vim.log.levels.ERROR)
+          local obj = vim.system(vim.split(cmd, ' '), { cwd = args.data.path }):wait()
+          ok = obj.code == 0
+          err = obj.stderr
+        end
+        if ok then
+          vim.notify(name .. ' post-install command successful', vim.log.levels.INFO)
+        else
+          vim.notify(name .. ' post-install command failed: ' .. err, vim.log.levels.ERROR)
         end
       end
     end
