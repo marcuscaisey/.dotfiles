@@ -91,7 +91,7 @@ return {
       callback = function()
         local params = vim.lsp.util.make_range_params(0, client.offset_encoding) ---@type lsp.CodeActionParams
         params.context = { only = { 'source.organizeImports' }, diagnostics = {} }
-        local resp = client:request_sync(vim.lsp.protocol.Methods.textDocument_codeAction, params, nil, bufnr)
+        local resp = client:request_sync('textDocument/codeAction', params, nil, bufnr)
         if not resp or not resp.result then
           return
         end
