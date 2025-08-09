@@ -39,7 +39,7 @@ catppuccin.setup({
 })
 
 for _, kind in ipairs(vim.lsp.protocol.CompletionItemKind) do
-  vim.api.nvim_set_hl(0, string.format('LspItemKind%s', kind), { link = string.format('BlinkCmpKind%s', kind) })
+  vim.api.nvim_set_hl(0, 'LspItemKind' .. kind, { link = 'BlinkCmpKind' .. kind })
 end
 
 vim.cmd.colorscheme('catppuccin')
