@@ -4,6 +4,7 @@ if not ok then
 end
 local colors = require('catppuccin.utils.colors')
 
+---@diagnostic disable-next-line: missing-fields
 catppuccin.setup({
   integrations = {
     mason = true,
@@ -21,6 +22,8 @@ catppuccin.setup({
   color_overrides = {
     mocha = {
       base = '#000000',
+      mantle = "#010101",
+      crust = "#020202",
     },
   },
   highlight_overrides = {
@@ -34,6 +37,8 @@ catppuccin.setup({
   },
   custom_highlights = {
     CurSearch = { link = 'IncSearch' },
+    TelescopeNormal = { link = 'Normal' },
+    Pmenu = { link = 'NormalFloat' },
   },
   flavour = 'mocha',
 })

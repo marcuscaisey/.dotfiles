@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
 
 vim.pack.add({
   'https://github.com/bkad/camelcasemotion',
-  { src = 'https://github.com/catppuccin/nvim', version = '82f3dcedc9acc242d2d4f98abca02e2f10a75248', name = 'catppuccin' },
+  { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
   'https://github.com/jake-stewart/multicursor.nvim',
   'https://github.com/kosayoda/nvim-lightbulb',
   'https://github.com/kyazdani42/nvim-web-devicons',
