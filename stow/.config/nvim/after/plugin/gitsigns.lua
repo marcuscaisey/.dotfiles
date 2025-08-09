@@ -1,5 +1,3 @@
-vim.cmd.packadd('gitsigns.nvim')
-
 local ok, gitsigns = pcall(require, 'gitsigns')
 if not ok then
   return
