@@ -1,6 +1,6 @@
 local post_install_cmds = {
   ['blink.cmp'] = 'cargo build --release',
-  ['telescope-fzf-native.nvim'] = { 'make' },
+  ['nvim-treesitter'] = ':TSUpdate',
   ['telescope-fzf-native.nvim'] = 'make',
 }
 
