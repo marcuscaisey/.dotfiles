@@ -71,10 +71,11 @@ end
 local function update_statusline_file(bufnr)
   local icon, hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(bufnr), nil, { default = true })
   local cwd = vim.fn.getcwd()
+  local filename = vim.fs.relpath(cwd, vim.api.nvim_buf_get_name(bufnr))
   if vim.env.HOME then
     cwd = cwd:gsub('^' .. vim.pesc(vim.env.HOME), '~')
   end
-  vim.g.statusline_file = hl(hl_group) .. icon .. ' ' .. hl('StatusLine') .. '%f %(%h%w%m%r %)' .. hl('StatusLineNC') .. cwd
+  vim.g.statusline_file = hl(hl_group) .. icon .. ' ' .. hl('StatusLine') .. filename .. ' %(%h%w%m%r %)' .. hl('StatusLineNC') .. cwd
 end
 
 local lsp_progress = nil ---@type string?
