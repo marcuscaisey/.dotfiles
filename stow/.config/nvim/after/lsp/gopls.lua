@@ -71,6 +71,26 @@ end
 
 ---@type vim.lsp.Config
 return {
+  cmd = function(dispatchers)
+    local filename = vim.api.nvim_buf_get_name(0)
+    local config = vim.lsp.config.gopls
+    local plz_root = vim.fs.root(filename, '.plzconfig')
+    if plz_root then
+      local goroot, err = plz_goroot(plz_root)
+      if goroot then
+        config = vim.deepcopy(config)
+        config.cmd_env = config.cmd_env or {}
+        config.cmd_env.GOROOT = goroot
+      else
+        vim.notify(string.format('Determining GOROOT for plz repo %s: %s', plz_root, err), vim.log.levels.WARN)
+      end
+    end
+    return vim.lsp.rpc.start({ 'gopls' }, dispatchers, {
+      cwd = config.cmd_cwd,
+      env = config.cmd_env,
+      detached = config.detached,
+    })
+  end,
   settings = {
     gopls = {
       directoryFilters = { '-plz-out' },
@@ -102,18 +122,5 @@ return {
         end
       end,
     })
-  end,
-  root_dir = function(bufnr, cb)
-    local plz_root = vim.fs.root(bufnr, '.plzconfig')
-    if plz_root then
-      local goroot, err = plz_goroot(plz_root)
-      if goroot then
-        vim.env.GOROOT = goroot
-      else
-        vim.notify(string.format('Determining GOROOT for plz repo %s: %s', plz_root, err), vim.log.levels.WARN)
-      end
-    end
-
-    cb(vim.fs.root(bufnr, { 'go.work', 'go.mod', '.git' }))
   end,
 }
