@@ -14,30 +14,27 @@ local function plz_goroot(plz_root)
     gotool = gotool:gsub('|go$', '')
     local gotool_output_res = vim.system({ 'plz', '--repo_root', plz_root, 'query', 'output', gotool }):wait()
     if gotool_output_res.code > 0 then
-      return nil, string.format('querying output of plugin.go.gotool target %s: %s', gotool, gotool_output_res.stderr)
+      return nil, string.format('querying output of plugin.go.gotool target "%s": %s', gotool, gotool_output_res.stderr)
     end
     local goroot = vim.fs.joinpath(plz_root, vim.trim(gotool_output_res.stdout))
     if not vim.uv.fs_stat(goroot) then
       vim.notify(
-        string.format('GOROOT for plz repo %s does not exist: %s. Building plugin.go.gotool target %s in background', plz_root, goroot, gotool),
+        string.format('GOROOT "%s" for plz repo "%s" does not exist. Building plugin.go.gotool target "%s".', goroot, plz_root, gotool),
         vim.log.levels.INFO
       )
-      vim.system({ 'plz', '--repo_root', plz_root, 'build', gotool }, nil, function(out)
-        vim.schedule(function()
-          if out.code == 0 then
-            vim.notify(string.format('built plugin.go.gotool target %s successfully', gotool), vim.log.levels.INFO)
-          else
-            vim.notify(string.format('building plugin.go.gotool target %s failed: %s', gotool, out.stderr), vim.log.levels.ERROR)
-          end
-        end)
-      end)
+      local out = vim.system({ 'plz', '--repo_root', plz_root, 'build', gotool }):wait()
+      if out.code == 0 then
+        vim.notify(string.format('Built plugin.go.gotool target "%s" successfully.', gotool), vim.log.levels.INFO)
+      else
+        return nil, string.format('building plugin.go.gotool target "%s": %s', gotool, out.stderr)
+      end
     end
     return goroot
   end
 
   if vim.startswith(gotool, '/') then
     if not vim.uv.fs_stat(gotool) then
-      return nil, string.format('plugin.go.gotool %s does not exist', gotool)
+      return nil, string.format('plugin.go.gotool "%s" does not exist', gotool)
     end
     local goroot_res = vim.system({ gotool, 'env', 'GOROOT' }):wait()
     if goroot_res.code == 0 then
@@ -66,7 +63,7 @@ local function plz_goroot(plz_root)
     end
   end
 
-  return nil, string.format('plugin.go.gotool %s not found in build.path %s', gotool, build_paths:gsub('\n', ':'))
+  return nil, string.format('plugin.go.gotool "%s" not found in build.path "%s"', gotool, build_paths:gsub('\n', ':'))
 end
 
 ---@type vim.lsp.Config
@@ -82,7 +79,7 @@ return {
         config.cmd_env = config.cmd_env or {}
         config.cmd_env.GOROOT = goroot
       else
-        vim.notify(string.format('Determining GOROOT for plz repo %s: %s', plz_root, err), vim.log.levels.WARN)
+        vim.notify(string.format('Determining GOROOT for plz repo "%s": %s', plz_root, err), vim.log.levels.WARN)
       end
     end
     return vim.lsp.rpc.start({ 'gopls' }, dispatchers, {
