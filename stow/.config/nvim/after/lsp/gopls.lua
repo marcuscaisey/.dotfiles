@@ -97,9 +97,6 @@ return {
       semanticTokenTypes = {
         string = false,
       },
-      codelenses = {
-        gc_details = true,
-      },
     },
   },
   on_attach = function(client, bufnr)
