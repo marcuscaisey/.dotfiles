@@ -223,6 +223,25 @@ export PATH=~/go/bin:$PATH
 
 
 ################################################################################
+#                                     nvm                                      #
+################################################################################
+NVM_DIR=~/.nvm
+if [[ -d $NVM_DIR ]]; then
+  source $NVM_DIR/bash_completion
+  lazy_cmds=(nvm node npm npx pnpm pnpx yarn corepack)
+  eval "
+    function $lazy_cmds {
+      for func in $lazy_cmds; do
+        unfunction \$func
+      done
+      source \$NVM_DIR/nvm.sh
+      \"\$0\" \"\$@\"
+    }
+  "
+fi
+
+
+################################################################################
 #                                     pipx                                     #
 ################################################################################
 export PATH=$PATH:~/.local/bin

@@ -120,6 +120,9 @@ clone_or_pull https://github.com/zsh-users/zsh-completions.git ~/.zsh-plugins/zs
 cecho "Installing tmux plugin manager"
 clone_or_pull https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+cecho "Installing nvm"
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+
 cecho "Installing pyenv"
 if [ ! -d ~/.pyenv ]; then
   curl https://pyenv.run | bash
