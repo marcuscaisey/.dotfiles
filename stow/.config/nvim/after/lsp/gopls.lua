@@ -20,7 +20,12 @@ local function plz_goroot(plz_root)
     local goroot = vim.fs.joinpath(plz_root, rel_goroot)
     if not vim.uv.fs_stat(goroot) then
       vim.notify(
-        string.format('GOROOT "%s" for Please repo "%s" does not exist. Building plugin.go.gotool target "%s" to create it.', rel_goroot, plz_root, gotool),
+        string.format(
+          'GOROOT "%s" for Please repo "%s" does not exist. Building plugin.go.gotool target "%s" to create it.',
+          rel_goroot,
+          plz_root,
+          gotool
+        ),
         vim.log.levels.INFO
       )
       local out = vim.system({ 'plz', '--repo_root', plz_root, 'build', gotool }):wait()
