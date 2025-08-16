@@ -23,3 +23,5 @@ vim.o.updatetime = 100
 
 vim.g.loaded_matchit = 1
 vim.g.mapleader = ' '
+
+vim.loader.enable()
