@@ -4,6 +4,7 @@ vim.o.completeopt = 'menuone,popup,noinsert,fuzzy'
 vim.o.cursorline = true
 vim.opt.diffopt:append('linematch:60')
 vim.o.expandtab = true
+vim.o.exrc = true
 vim.o.ignorecase = true
 vim.o.laststatus = 3
 vim.o.number = true
