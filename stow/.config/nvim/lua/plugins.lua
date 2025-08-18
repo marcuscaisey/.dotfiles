@@ -42,7 +42,8 @@ vim.pack.add({
   'https://github.com/kosayoda/nvim-lightbulb',
   'https://github.com/kyazdani42/nvim-web-devicons',
   'https://github.com/kylechui/nvim-surround',
-  'https://github.com/lewis6991/gitsigns.nvim',
+  -- Pin version until https://github.com/lewis6991/gitsigns.nvim/issues/1381 is fixed.
+  { src = 'https://github.com/lewis6991/gitsigns.nvim', version = '60676707b6a5fa42369e8ff40a481ca45987e0d0' },
   'https://github.com/marcuscaisey/lox',
   'https://github.com/marcuscaisey/olddirs.nvim',
   'https://github.com/marcuscaisey/please.nvim',
