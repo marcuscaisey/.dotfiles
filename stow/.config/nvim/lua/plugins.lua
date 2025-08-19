@@ -60,6 +60,6 @@ vim.pack.add({
   'https://github.com/stevearc/oil.nvim',
   'https://github.com/tpope/vim-fugitive',
   'https://github.com/vim-scripts/ReplaceWithRegister',
-}, { load = false })
+})
 
 vim.g.plugins_dir = vim.fs.joinpath(vim.fn.stdpath('data'), 'site', 'pack', 'core', 'opt')
