@@ -36,29 +36,29 @@ vim.api.nvim_create_autocmd('PackChanged', {
 })
 
 vim.pack.add({
-  'https://github.com/bkad/camelcasemotion',
+  { src = 'https://github.com/bkad/camelcasemotion' },
   { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
-  'https://github.com/jake-stewart/multicursor.nvim',
-  'https://github.com/kosayoda/nvim-lightbulb',
-  'https://github.com/kyazdani42/nvim-web-devicons',
-  'https://github.com/kylechui/nvim-surround',
+  { src = 'https://github.com/jake-stewart/multicursor.nvim' },
+  { src = 'https://github.com/kosayoda/nvim-lightbulb' },
+  { src = 'https://github.com/kyazdani42/nvim-web-devicons' },
+  { src = 'https://github.com/kylechui/nvim-surround' },
   -- Pin version until https://github.com/lewis6991/gitsigns.nvim/issues/1381 is fixed.
   { src = 'https://github.com/lewis6991/gitsigns.nvim', version = '60676707b6a5fa42369e8ff40a481ca45987e0d0' },
   { src = 'https://github.com/marcuscaisey/lox', data = { rtp = 'tree-sitter-lox' } },
-  'https://github.com/marcuscaisey/olddirs.nvim',
-  'https://github.com/marcuscaisey/please.nvim',
-  'https://github.com/mason-org/mason.nvim',
-  'https://github.com/neovim/nvim-lspconfig',
-  'https://github.com/nvim-lua/plenary.nvim', -- Required for telescope.nvim
-  'https://github.com/nvim-telescope/telescope-fzf-native.nvim',
-  'https://github.com/nvim-telescope/telescope.nvim',
-  'https://github.com/nvim-treesitter/nvim-treesitter',
-  'https://github.com/nvim-treesitter/nvim-treesitter-context',
-  'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
-  'https://github.com/saghen/blink.cmp',
-  'https://github.com/stevearc/dressing.nvim',
-  'https://github.com/stevearc/oil.nvim',
-  'https://github.com/tpope/vim-fugitive',
+  { src = 'https://github.com/marcuscaisey/olddirs.nvim' },
+  { src = 'https://github.com/marcuscaisey/please.nvim' },
+  { src = 'https://github.com/mason-org/mason.nvim' },
+  { src = 'https://github.com/neovim/nvim-lspconfig' },
+  { src = 'https://github.com/nvim-lua/plenary.nvim' }, -- Required for telescope.nvim
+  { src = 'https://github.com/nvim-telescope/telescope-fzf-native.nvim' },
+  { src = 'https://github.com/nvim-telescope/telescope.nvim' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
+  { src = 'https://github.com/saghen/blink.cmp' },
+  { src = 'https://github.com/stevearc/dressing.nvim' },
+  { src = 'https://github.com/stevearc/oil.nvim' },
+  { src = 'https://github.com/tpope/vim-fugitive' },
   { src = 'https://github.com/vim-scripts/ReplaceWithRegister', data = { opt = true } },
 }, {
   load = function(plug_data)
