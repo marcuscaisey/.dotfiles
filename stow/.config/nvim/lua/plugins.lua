@@ -44,7 +44,7 @@ vim.pack.add({
   'https://github.com/kylechui/nvim-surround',
   -- Pin version until https://github.com/lewis6991/gitsigns.nvim/issues/1381 is fixed.
   { src = 'https://github.com/lewis6991/gitsigns.nvim', version = '60676707b6a5fa42369e8ff40a481ca45987e0d0' },
-  'https://github.com/marcuscaisey/lox',
+  { src = 'https://github.com/marcuscaisey/lox', data = { rtp = 'tree-sitter-lox' } },
   'https://github.com/marcuscaisey/olddirs.nvim',
   'https://github.com/marcuscaisey/please.nvim',
   'https://github.com/mason-org/mason.nvim',
@@ -59,7 +59,16 @@ vim.pack.add({
   'https://github.com/stevearc/dressing.nvim',
   'https://github.com/stevearc/oil.nvim',
   'https://github.com/tpope/vim-fugitive',
-  'https://github.com/vim-scripts/ReplaceWithRegister',
+  { src = 'https://github.com/vim-scripts/ReplaceWithRegister', data = { opt = true } },
+}, {
+  load = function(plug_data)
+    plug_data.spec.data = plug_data.spec.data or {}
+    local data = plug_data.spec.data or {}
+    if not data.opt then
+      vim.cmd('packadd! ' .. plug_data.spec.name)
+    end
+    if data.rtp then
+      vim.opt.runtimepath:append(vim.fs.joinpath(plug_data.path, data.rtp))
+    end
+  end,
 })
-
-vim.g.plugins_dir = vim.fs.joinpath(vim.fn.stdpath('data'), 'site', 'pack', 'core', 'opt')
