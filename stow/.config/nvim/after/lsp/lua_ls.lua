@@ -2,6 +2,9 @@
 return {
   settings = {
     Lua = {
+      completion = {
+        callSnippet = 'Replace',
+      },
       diagnostics = {
         disable = {
           'redefined-local',
