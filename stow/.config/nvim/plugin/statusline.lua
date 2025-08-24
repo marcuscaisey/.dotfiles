@@ -88,19 +88,17 @@ local function update_statusline_file(bufnr)
 end
 
 local lsp_progress = nil ---@type string?
----@param progress lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd
-local function update_lsp_progress(progress)
-  if progress.kind == 'end' then
-    lsp_progress = nil
-  else
-    lsp_progress = vim.lsp.status():gsub('%%', '%%%%')
-  end
-end
 
----@param opts {bufnr:integer?, exclude_client_id:integer?}?
+---@param opts {bufnr:integer, exclude_client_id:integer?, progress:LSPWorkDoneProgress?}
 local function update_statusline_lsp(opts)
-  opts = opts or {}
   local result
+  if opts.progress then
+    if opts.progress.kind == 'end' then
+      lsp_progress = nil
+    else
+      lsp_progress = vim.lsp.status():gsub('%%', '%%%%')
+    end
+  end
   if lsp_progress then
     result = lsp_progress
   else
@@ -185,13 +183,15 @@ vim.api.nvim_create_autocmd('LspDetach', {
     vim.cmd.redrawstatus()
   end,
 })
+---@alias LSPWorkDoneProgress lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd
+---@class LspProgressCallbackArgs : vim.api.keyset.create_autocmd.callback_args
+---@field data {params:{value:LSPWorkDoneProgress}}
 vim.api.nvim_create_autocmd('LspProgress', {
   -- group = augroup,
   desc = 'Update g:statusline_lsp and redraw status line',
-  ---@param args {data:{params:{value:lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd}}}
+  ---@param args LspProgressCallbackArgs
   callback = function(args)
-    update_lsp_progress(args.data.params.value)
-    update_statusline_lsp()
+    update_statusline_lsp({ bufnr = args.buf, progress = args.data.params.value })
     vim.cmd.redrawstatus()
   end,
 })
