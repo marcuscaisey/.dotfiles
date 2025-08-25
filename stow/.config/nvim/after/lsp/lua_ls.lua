@@ -27,6 +27,7 @@ return {
       return
     end
 
+    local config_dir = vim.fn.stdpath('config')
     ---@diagnostic disable-next-line: param-type-mismatch
     config.settings.Lua = vim.tbl_deep_extend('force', config.settings.Lua, {
       runtime = {
@@ -34,7 +35,9 @@ return {
         version = 'LuaJIT',
       },
       workspace = {
-        library = vim.api.nvim_get_runtime_file('lua', true),
+        library = vim.tbl_filter(function(path)
+          return not vim.startswith(path, config_dir)
+        end, vim.api.nvim_get_runtime_file('lua', true)),
       },
     })
   end,
