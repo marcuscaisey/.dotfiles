@@ -2,7 +2,6 @@ vim.o.clipboard = 'unnamed'
 vim.o.colorcolumn = '+1'
 vim.o.completeopt = 'menuone,popup,noinsert,fuzzy'
 vim.o.cursorline = true
-vim.opt.diffopt:append('linematch:60')
 vim.o.expandtab = true
 vim.o.exrc = true
 vim.o.ignorecase = true
