@@ -87,6 +87,7 @@ local function update_statusline_file(bufnr)
   vim.g.statusline_file = hl(hl_group) .. icon .. ' ' .. hl('StatusLine') .. filename .. ' %(%h%w%m%r %)' .. hl('StatusLineNC') .. cwd
 end
 
+local lsp_progress_timer = assert(vim.uv.new_timer())
 local lsp_progress = nil ---@type string?
 
 ---@param opts {bufnr:integer, exclude_client_id:integer?, progress:LSPWorkDoneProgress?}
@@ -95,8 +96,15 @@ local function update_statusline_lsp(opts)
   if opts.progress then
     if opts.progress.kind == 'end' then
       lsp_progress = nil
+      lsp_progress_timer:stop()
     else
       lsp_progress = vim.lsp.status():gsub('%%', '%%%%')
+      lsp_progress_timer:start(500, 0, function()
+        update_statusline_lsp({ bufnr = opts.bufnr })
+        vim.schedule(function()
+          vim.cmd.redrawstatus()
+        end)
+      end)
     end
   end
   if lsp_progress then
