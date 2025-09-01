@@ -99,7 +99,7 @@ local function update_statusline_lsp(opts)
       lsp_progress_timer:stop()
     else
       lsp_progress = vim.lsp.status():gsub('%%', '%%%%')
-      lsp_progress_timer:start(500, 0, function()
+      lsp_progress_timer:start(5000, 0, function()
         lsp_progress = nil
         update_statusline_lsp({ bufnr = opts.bufnr })
         vim.schedule(function()
