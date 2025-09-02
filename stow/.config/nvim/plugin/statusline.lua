@@ -100,10 +100,12 @@ local function update_statusline_lsp(opts)
     else
       lsp_progress = vim.lsp.status():gsub('%%', '%%%%')
       lsp_progress_timer:start(5000, 0, function()
+        local msg = 'LSP progress not updated for 5s. Last progress report: ' .. lsp_progress
         lsp_progress = nil
         update_statusline_lsp({ bufnr = opts.bufnr })
         vim.schedule(function()
           vim.cmd.redrawstatus()
+          vim.notify(msg, vim.log.levels.WARN)
         end)
       end)
     end
