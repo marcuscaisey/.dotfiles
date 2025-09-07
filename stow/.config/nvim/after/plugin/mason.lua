@@ -11,6 +11,7 @@ local tools = {
   'black',
   'clangd',
   'efm',
+  'eslint-lsp',
   'golangci-lint-langserver',
   'gopls',
   'intelephense',

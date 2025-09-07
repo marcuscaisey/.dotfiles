@@ -3,6 +3,7 @@ local enabled_lsps = {
   'bashls',
   'clangd',
   'efm',
+  'eslint',
   'gopls',
   'intelephense',
   'jsonls',
