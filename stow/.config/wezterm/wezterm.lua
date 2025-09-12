@@ -20,4 +20,6 @@ config.hide_tab_bar_if_only_one_tab = true
 
 config.audible_bell = 'Disabled'
 
+config.quick_select_remove_styling = true
+
 return config
