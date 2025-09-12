@@ -120,6 +120,13 @@ clone_or_pull https://github.com/zsh-users/zsh-completions.git ~/.zsh-plugins/zs
 cecho "Installing tmux plugin manager"
 clone_or_pull https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+if osx; then
+  cecho "Installing tmux-256color terminfo"
+  "$(brew --prefix ncurses)"/bin/infocmp tmux-256color > /tmp/tmux-256color.info
+  tic -xve tmux-256color /tmp/tmux-256color.info
+  rm /tmp/tmux-256color.info
+fi
+
 cecho "Installing nvm"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 
