@@ -7,6 +7,7 @@ local enabled_lsps = {
   'golangci_lint_ls',
   'gopls',
   'intelephense',
+  'jdtls',
   'jsonls',
   'loxls',
   'lua_ls',
