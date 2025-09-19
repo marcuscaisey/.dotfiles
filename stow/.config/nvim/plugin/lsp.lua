@@ -2,6 +2,7 @@ local enabled_lsps = {
   'basedpyright',
   'bashls',
   'clangd',
+  'dartls',
   'efm',
   'eslint',
   'golangci_lint_ls',
