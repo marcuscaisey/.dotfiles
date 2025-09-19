@@ -4,6 +4,7 @@ local enabled_lsps = {
   'clangd',
   'efm',
   'eslint',
+  'golangci_lint_ls',
   'gopls',
   'intelephense',
   'jsonls',
@@ -14,9 +15,6 @@ local enabled_lsps = {
   'ts_ls',
   'vimls',
 }
-if vim.env.NVIM_DISABLE_GOLANGCI_LINT ~= 'true' then
-  table.insert(enabled_lsps, 'golangci_lint_ls')
-end
 vim.lsp.enable(enabled_lsps)
 
 if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
