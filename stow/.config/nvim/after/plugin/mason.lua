@@ -24,6 +24,7 @@ local tools = {
   'stylua',
   'typescript-language-server',
   'vim-language-server',
+  'yaml-language-server',
 }
 
 vim.api.nvim_create_user_command('MasonInstallTools', function()

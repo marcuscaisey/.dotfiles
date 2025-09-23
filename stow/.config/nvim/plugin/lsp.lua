@@ -15,6 +15,7 @@ local enabled_lsps = {
   'please',
   'ts_ls',
   'vimls',
+  'yamlls',
 }
 vim.lsp.enable(enabled_lsps)
 
