@@ -33,7 +33,7 @@ local function git_ref(root)
     local upstream_branch = vim.trim(upstream_branch_res.stdout)
     local remote_branch = upstream_branch:match('^origin/(.+)')
     if remote_branch then
-      return remote_branch
+      return vim.trim(vim.system({ 'git', 'rev-parse', remote_branch }):wait().stdout)
     end
   elseif not upstream_branch_res.stderr:match('HEAD does not point to a branch') then
     return nil, string.format('determining upstream branch: %s', upstream_branch_res.stderr)
