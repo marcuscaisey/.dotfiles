@@ -69,6 +69,8 @@ configs.setup({
         ['ac'] = '@call.outer',
         ['iv'] = '@assignment.inner',
         ['av'] = '@assignment.outer',
+        ['ib'] = '@block.inner',
+        ['ab'] = '@block.outer',
       },
       selection_modes = {
         ['@function.outer'] = 'V',
