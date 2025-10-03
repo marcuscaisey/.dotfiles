@@ -20,6 +20,10 @@ zle_highlight+=(paste:none)
 # Remove duplicates from $PATH and $path.
 typeset -U PATH path
 
+# Consider | to be part of a word so that it's not jumped over when using
+# ESC-f, ESC-b, ^W
+WORDCHARS="|$WORDCHARS"
+
 # Changing Directories
 setopt auto_cd # Change to directory without typing cd.
 setopt auto_pushd # Make cd push the old directory onto the directory stack.
