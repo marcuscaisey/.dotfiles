@@ -91,6 +91,7 @@ function _record_cmd_start() {
   _cmd_start_millis=$(_now_millis)
 }
 function _set_cmd_duration() {
+  exit_code=$?
   if [[ -v _cmd_start_millis ]]; then
     local duration_millis=$(( $(_now_millis) - $_cmd_start_millis ))
     unset _cmd_start_millis
@@ -100,7 +101,11 @@ function _set_cmd_duration() {
     else
       printf -v formatted_duration '%.1fs' 'duration_millis / 1000.0'
     fi
-    _cmd_duration="%F{8}${formatted_duration}%f"
+    color=8
+    if [[ ! $exit_code -eq 0 ]]; then
+      color=1
+    fi
+    _cmd_duration="%F{${color}}${formatted_duration}%f"
   else
     _cmd_duration=''
   fi
