@@ -1,0 +1,97 @@
+{
+  "plugins": {
+    "ReplaceWithRegister": {
+      "rev": "832efc2",
+      "src": "https://github.com/vim-scripts/ReplaceWithRegister"
+    },
+    "blink.cmp": {
+      "rev": "5037cfa",
+      "src": "https://github.com/saghen/blink.cmp"
+    },
+    "camelcasemotion": {
+      "rev": "e69b002",
+      "src": "https://github.com/bkad/camelcasemotion"
+    },
+    "catppuccin": {
+      "rev": "af58927",
+      "src": "https://github.com/catppuccin/nvim"
+    },
+    "dressing.nvim": {
+      "rev": "2d7c2db",
+      "src": "https://github.com/stevearc/dressing.nvim"
+    },
+    "gitsigns.nvim": {
+      "rev": "6067670",
+      "src": "https://github.com/lewis6991/gitsigns.nvim",
+      "version": "'60676707b6a5fa42369e8ff40a481ca45987e0d0'"
+    },
+    "lox": {
+      "rev": "8ca366b",
+      "src": "https://github.com/marcuscaisey/lox"
+    },
+    "mason.nvim": {
+      "rev": "ad7146a",
+      "src": "https://github.com/mason-org/mason.nvim"
+    },
+    "multicursor.nvim": {
+      "rev": "0c6ceae",
+      "src": "https://github.com/jake-stewart/multicursor.nvim"
+    },
+    "nvim-lightbulb": {
+      "rev": "aa3a8b0",
+      "src": "https://github.com/kosayoda/nvim-lightbulb"
+    },
+    "nvim-lspconfig": {
+      "rev": "ac98db2",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-surround": {
+      "rev": "75de178",
+      "src": "https://github.com/kylechui/nvim-surround"
+    },
+    "nvim-treesitter": {
+      "rev": "42fc28ba",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "nvim-treesitter-context": {
+      "rev": "41847d3",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
+    },
+    "nvim-treesitter-textobjects": {
+      "rev": "71385f1",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
+    },
+    "nvim-web-devicons": {
+      "rev": "b8221e4",
+      "src": "https://github.com/kyazdani42/nvim-web-devicons"
+    },
+    "oil.nvim": {
+      "rev": "200df01",
+      "src": "https://github.com/stevearc/oil.nvim"
+    },
+    "olddirs.nvim": {
+      "rev": "e2fa782",
+      "src": "https://github.com/marcuscaisey/olddirs.nvim"
+    },
+    "please.nvim": {
+      "rev": "52841cb",
+      "src": "https://github.com/marcuscaisey/please.nvim"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd522",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "telescope-fzf-native.nvim": {
+      "rev": "1f08ed6",
+      "src": "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
+    },
+    "telescope.nvim": {
+      "rev": "b4da76b",
+      "src": "https://github.com/nvim-telescope/telescope.nvim"
+    },
+    "vim-fugitive": {
+      "rev": "61b51c0",
+      "src": "https://github.com/tpope/vim-fugitive"
+    }
+  }
+}
