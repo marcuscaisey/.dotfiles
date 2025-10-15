@@ -80,3 +80,5 @@ vim.pack.add(specs, {
     end
   end,
 })
+
+vim.cmd.packadd('nvim.undotree')
