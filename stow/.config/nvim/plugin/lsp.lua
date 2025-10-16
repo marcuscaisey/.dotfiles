@@ -53,6 +53,43 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+local last_progress_echo_secs = 0
+---@alias LSPWorkDoneProgress lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd
+---@class LspProgressCallbackArgs : vim.api.keyset.create_autocmd.callback_args
+---@field data {client_id:integer, params:{value:LSPWorkDoneProgress}}
+vim.api.nvim_create_autocmd('LspProgress', {
+  group = vim.api.nvim_create_augroup('lsp_progress_echo', {}),
+  desc = 'Update g:statusline_lsp and redraw status line',
+  ---@param args LspProgressCallbackArgs
+  callback = function(args)
+    -- Debounce echoes to no more than 1/ms because vim._extui doesn't handle multiple messages in quick succession very
+    -- nicely.
+    local progress = args.data.params.value
+    local secs_since_last_echo = os.clock() - last_progress_echo_secs
+    if secs_since_last_echo < 0.001 then
+      if progress.kind == 'end' then
+        -- We always want to show the 'end' progress update so just wait 1ms.
+        vim.wait(1)
+      else
+        return
+      end
+    end
+
+    local msg = progress.message or ''
+    local status = 'running'
+    local percent = progress.percentage
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+    local title = string.format('[%s] %s', client.name, progress.title)
+    if progress.kind == 'end' then
+      msg = 'done'
+      status = 'success'
+    end
+
+    vim.api.nvim_echo({ { msg } }, false, { id = title, kind = 'progress', status = status, percent = percent, title = title })
+    last_progress_echo_secs = os.clock()
+  end,
+})
+
 if vim.env.NVIM_DISABLE_LSP_LOGGING == 'true' then
   vim.lsp.log.set_level(vim.log.levels.OFF)
 end
