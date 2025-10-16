@@ -19,14 +19,14 @@
     algorithm = histogram
 	mnemonicPrefix = true
     renames = true
-    tool = nvimdiff
+    tool = nvim_difftool
     colorMoved = default
 
 [difftool]
     trustExitCode = true
 
-[difftool "nvimdiff"]
-    cmd = nvim -d -c 'wincmd l' \"$LOCAL\" \"$REMOTE\"
+[difftool "nvim_difftool"]
+    cmd = nvim -c \"packadd nvim.difftool\" -c \"DiffTool $LOCAL $REMOTE\"
 
 [fetch]
     all = true
