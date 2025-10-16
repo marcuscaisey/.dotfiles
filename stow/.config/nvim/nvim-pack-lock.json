@@ -92,6 +92,10 @@
       "rev": "61b51c0",
       "src": "https://github.com/tpope/vim-fugitive"
     },
+    "vim-indent-object": {
+      "rev": "8ab36d5",
+      "src": "https://github.com/michaeljsmith/vim-indent-object"
+    },
     "vim-textobj-entire": {
       "rev": "64a856c",
       "src": "https://github.com/kana/vim-textobj-entire"

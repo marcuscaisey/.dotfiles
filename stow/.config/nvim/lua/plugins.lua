@@ -55,6 +55,7 @@ local specs = {
   { src = 'https://github.com/marcuscaisey/olddirs.nvim' },
   { src = 'https://github.com/marcuscaisey/please.nvim' },
   { src = 'https://github.com/mason-org/mason.nvim' },
+  { src = 'https://github.com/michaeljsmith/vim-indent-object' },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/nvim-lua/plenary.nvim' }, -- Required for telescope.nvim
   { src = 'https://github.com/nvim-telescope/telescope-fzf-native.nvim', data = { post_install = 'make' } },
