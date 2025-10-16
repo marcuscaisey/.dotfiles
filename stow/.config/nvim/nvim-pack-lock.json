@@ -5,7 +5,7 @@
       "src": "https://github.com/vim-scripts/ReplaceWithRegister"
     },
     "blink.cmp": {
-      "rev": "5037cfa",
+      "rev": "cb87357",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "camelcasemotion": {
@@ -66,7 +66,7 @@
       "src": "https://github.com/kyazdani42/nvim-web-devicons"
     },
     "oil.nvim": {
-      "rev": "200df01",
+      "rev": "7194872",
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "olddirs.nvim": {
