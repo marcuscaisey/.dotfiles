@@ -91,6 +91,14 @@
     "vim-fugitive": {
       "rev": "61b51c0",
       "src": "https://github.com/tpope/vim-fugitive"
+    },
+    "vim-textobj-entire": {
+      "rev": "64a856c",
+      "src": "https://github.com/kana/vim-textobj-entire"
+    },
+    "vim-textobj-user": {
+      "rev": "41a675d",
+      "src": "https://github.com/kana/vim-textobj-user"
     }
   }
 }

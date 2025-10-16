@@ -45,6 +45,8 @@ local specs = {
   { src = 'https://github.com/bkad/camelcasemotion' },
   { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
   { src = 'https://github.com/jake-stewart/multicursor.nvim' },
+  { src = 'https://github.com/kana/vim-textobj-entire' },
+  { src = 'https://github.com/kana/vim-textobj-user' }, -- Required for vim-textobj-entire
   { src = 'https://github.com/kosayoda/nvim-lightbulb' },
   { src = 'https://github.com/kyazdani42/nvim-web-devicons' },
   { src = 'https://github.com/kylechui/nvim-surround' },
