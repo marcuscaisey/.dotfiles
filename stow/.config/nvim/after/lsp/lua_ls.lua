@@ -27,20 +27,18 @@ return {
       return
     end
 
-    local config_dir = vim.fn.resolve(vim.fn.stdpath('config'))
-    local library = vim.api.nvim_get_runtime_file('lua', true)
-    if not vim.startswith(config_dir, config.root_dir) then
-      library = vim.tbl_filter(function(path)
-        return not vim.startswith(path, config_dir)
-      end, library)
-    end
+    local config_dir = vim.fn.stdpath('config')
     ---@diagnostic disable-next-line: param-type-mismatch
     config.settings.Lua = vim.tbl_deep_extend('force', config.settings.Lua, {
       runtime = {
         pathStrict = true,
         version = 'LuaJIT',
       },
-      workspace = { library = library },
+      workspace = {
+        library = vim.tbl_filter(function(path)
+          return not vim.startswith(path, config_dir)
+        end, vim.api.nvim_get_runtime_file('lua', true)),
+      },
     })
   end,
 }
