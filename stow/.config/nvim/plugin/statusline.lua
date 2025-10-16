@@ -5,7 +5,7 @@ end
 
 vim.g.statusline_git = ''
 vim.g.statusline_file = ''
-vim.g.statusline_lsp = ''
+vim.g.statusline_lsp_clients = ''
 vim.g.statusline_diagnostics = ''
 vim.g.statusline_location = ''
 
@@ -14,7 +14,7 @@ vim.o.statusline = table.concat({
   '%(%{%g:statusline_git%}  %)',
   '%{%g:statusline_file%}',
   '%=',
-  '%(%{%g:statusline_lsp%}  %)',
+  '%(%{%g:statusline_lsp_clients%}  %)',
   '%(%{%g:statusline_diagnostics%}  %)',
   '%{%g:statusline_location%}',
   ' ',
@@ -87,42 +87,16 @@ local function update_statusline_file(bufnr)
   vim.g.statusline_file = hl(hl_group) .. icon .. ' ' .. hl('StatusLine') .. filename .. ' %(%h%w%m%r %)' .. hl('StatusLineNC') .. cwd
 end
 
-local lsp_progress_timer = assert(vim.uv.new_timer())
-local lsp_progress = nil ---@type string?
-
----@param opts {bufnr:integer, exclude_client_id:integer?, progress:LSPWorkDoneProgress?}
-local function update_statusline_lsp(opts)
-  local result
-  if opts.progress then
-    if opts.progress.kind == 'end' then
-      lsp_progress = nil
-      lsp_progress_timer:stop()
-    else
-      lsp_progress = vim.lsp.status():gsub('%%', '%%%%')
-      lsp_progress_timer:start(5000, 0, function()
-        local msg = 'LSP progress not updated for 5s. Last progress report: ' .. lsp_progress
-        lsp_progress = nil
-        update_statusline_lsp({ bufnr = opts.bufnr })
-        vim.schedule(function()
-          vim.cmd.redrawstatus()
-          vim.notify(msg, vim.log.levels.WARN)
-        end)
-      end)
+---@param opts {bufnr:integer, exclude_client_id:integer?}
+local function update_statusline_lsp_clients(opts)
+  local clients = vim.lsp.get_clients({ bufnr = opts.bufnr })
+  local client_names = {}
+  for _, client in ipairs(clients) do
+    if client.id ~= opts.exclude_client_id then
+      table.insert(client_names, client.name)
     end
   end
-  if lsp_progress then
-    result = lsp_progress
-  else
-    local clients = vim.lsp.get_clients({ bufnr = opts.bufnr })
-    local client_names = {}
-    for _, client in ipairs(clients) do
-      if client.id ~= opts.exclude_client_id then
-        table.insert(client_names, client.name)
-      end
-    end
-    result = table.concat(client_names, ', ')
-  end
-  vim.g.statusline_lsp = hl('StatusLine') .. result
+  vim.g.statusline_lsp_clients = hl('StatusLine') .. table.concat(client_names, ', ')
 end
 
 local diagnostic_severity_hl_groups = {
@@ -155,7 +129,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
   callback = function(args)
     update_statusline_git()
     update_statusline_file(args.buf)
-    update_statusline_lsp({ bufnr = args.buf })
+    update_statusline_lsp_clients({ bufnr = args.buf })
     update_statusline_diagnostics(args.buf)
   end,
 })
@@ -180,29 +154,17 @@ vim.api.nvim_create_autocmd('DirChanged', {
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = augroup,
-  desc = 'Update g:statusline_lsp and redraw status line',
+  desc = 'Update g:statusline_lsp_clients and redraw status line',
   callback = function(args)
-    update_statusline_lsp({ bufnr = args.buf })
+    update_statusline_lsp_clients({ bufnr = args.buf })
     vim.cmd.redrawstatus()
   end,
 })
 vim.api.nvim_create_autocmd('LspDetach', {
   group = augroup,
-  desc = 'Update g:statusline_lsp and redraw status line',
+  desc = 'Update g:statusline_lsp_clients and redraw status line',
   callback = function(args)
-    update_statusline_lsp({ bufnr = args.buf, exclude_client_id = args.data.client_id })
-    vim.cmd.redrawstatus()
-  end,
-})
----@alias LSPWorkDoneProgress lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd
----@class LspProgressCallbackArgs : vim.api.keyset.create_autocmd.callback_args
----@field data {params:{value:LSPWorkDoneProgress}}
-vim.api.nvim_create_autocmd('LspProgress', {
-  group = augroup,
-  desc = 'Update g:statusline_lsp and redraw status line',
-  ---@param args LspProgressCallbackArgs
-  callback = function(args)
-    update_statusline_lsp({ bufnr = args.buf, progress = args.data.params.value })
+    update_statusline_lsp_clients({ bufnr = args.buf, exclude_client_id = args.data.client_id })
     vim.cmd.redrawstatus()
   end,
 })
