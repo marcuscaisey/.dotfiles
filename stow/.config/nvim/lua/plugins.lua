@@ -66,7 +66,6 @@ local specs = {
   { src = 'https://github.com/saghen/blink.cmp', data = { post_install = 'cargo build --release' } },
   { src = 'https://github.com/stevearc/dressing.nvim' },
   { src = 'https://github.com/stevearc/oil.nvim' },
-  { src = 'https://github.com/tpope/vim-fugitive' },
   { src = 'https://github.com/vim-scripts/ReplaceWithRegister', data = { defer = true } },
 }
 
