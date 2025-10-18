@@ -14,19 +14,19 @@ vim.keymap.set('n', 'N', 'Nzz')
 local quickfix_loclist_mappings = { '[q', ']q', '[Q', ']Q', '[<C-Q>', ']<C-Q>', '[l', ']l', '[l', ']l', '[<C-L>', ']<C-L>' }
 for _, keymap in ipairs(vim.api.nvim_get_keymap('n')) do
   if vim.list_contains(quickfix_loclist_mappings, keymap.lhs) then
-    local rhs ---@type function?
+    local rhs ---@type (function|string)?
+    local desc = keymap.desc
     if keymap.rhs then
-      function rhs()
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keymap.rhs, true, true, true), 'n', false)
-      end
+      rhs = keymap.rhs .. 'zz'
     elseif keymap.callback then
-      rhs = keymap.callback
+      rhs = function()
+        keymap.callback()
+        vim.cmd.normal('zz')
+      end
+      desc = string.format('%s zz', keymap.desc)
     end
     if rhs then
-      vim.keymap.set('n', keymap.lhs, function()
-        rhs()
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('zz', true, true, true), 'n', false)
-      end, { desc = string.format('%s + zz', keymap.desc) })
+      vim.keymap.set('n', keymap.lhs, rhs, { desc = desc })
     end
   end
 end
