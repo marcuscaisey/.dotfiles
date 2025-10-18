@@ -40,7 +40,6 @@ shared_pkgs=(
   ripgrep
   stow
   tmux
-  vifm
   zsh
 )
 
