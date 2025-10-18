@@ -171,10 +171,11 @@ vim.api.nvim_create_autocmd('LspDetach', {
 
 vim.api.nvim_create_autocmd('DiagnosticChanged', {
   group = augroup,
-  desc = 'Update g:statusline_diagnostics if diagnostics changed in current buffer',
+  desc = 'Update g:statusline_diagnostics and redraw status line if diagnostics changed in current buffer',
   callback = function(args)
     if args.buf == vim.api.nvim_get_current_buf() then
       update_statusline_diagnostics(args.buf)
+      vim.cmd.redrawstatus()
     end
   end,
 })
