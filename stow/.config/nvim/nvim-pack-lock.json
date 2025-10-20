@@ -5,7 +5,7 @@
       "src": "https://github.com/vim-scripts/ReplaceWithRegister"
     },
     "blink.cmp": {
-      "rev": "cb87357",
+      "rev": "2cb0a71",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "camelcasemotion": {
@@ -21,7 +21,7 @@
       "src": "https://github.com/stevearc/dressing.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "1ee5c1f",
+      "rev": "20ad441",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "lox": {
@@ -41,7 +41,7 @@
       "src": "https://github.com/kosayoda/nvim-lightbulb"
     },
     "nvim-lspconfig": {
-      "rev": "ac98db2",
+      "rev": "e5c61b0",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
@@ -57,7 +57,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "71385f1",
+      "rev": "a9742cb",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "nvim-web-devicons": {
@@ -65,7 +65,7 @@
       "src": "https://github.com/kyazdani42/nvim-web-devicons"
     },
     "oil.nvim": {
-      "rev": "7194872",
+      "rev": "7e1cd77",
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "olddirs.nvim": {
