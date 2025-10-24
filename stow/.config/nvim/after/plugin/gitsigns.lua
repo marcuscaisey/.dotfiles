@@ -42,6 +42,13 @@ vim.keymap.set('n', '<Leader>gc', function()
       return
     end
 
+    local added_files = vim.trim(vim.system({ 'git', 'ls-files', '--others', '--exclude-standard' }):wait().stdout)
+    if added_files ~= '' then
+      for filename in vim.gsplit(added_files, '\n') do
+        table.insert(qflist, { filename = filename, text = 'Added', lnum = 1, col = 0 })
+      end
+    end
+
     vim.fn.setqflist(qflist)
     vim.cmd.copen()
     vim.cmd.cfirst()
