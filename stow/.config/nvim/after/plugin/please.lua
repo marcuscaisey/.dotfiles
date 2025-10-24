@@ -1,4 +1,8 @@
-local please = require('please')
+local ok, please = pcall(require, 'please')
+if not ok then
+  return
+end
+
 vim.keymap.set('n', '<leader>pb', please.build)
 vim.keymap.set('n', '<leader>pr', please.run)
 vim.keymap.set('n', '<leader>pt', please.test)
