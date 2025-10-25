@@ -134,10 +134,14 @@ alias g='cd $(git rev-parse --show-toplevel)'
 #                                   General                                    #
 ################################################################################
 # Use Neovim as man pager.
-export MANPAGER='nvim +Man!'
+if whence nvim >/dev/null; then
+  export MANPAGER='nvim +Man!'
+fi
 
 # Use Neovim as default editor.
-export EDITOR=nvim
+if whence nvim >/dev/null; then
+  export EDITOR=nvim
+fi
 
 
 ################################################################################
