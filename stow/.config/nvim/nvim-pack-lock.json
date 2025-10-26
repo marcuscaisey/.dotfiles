@@ -13,7 +13,7 @@
       "src": "https://github.com/bkad/camelcasemotion"
     },
     "catppuccin": {
-      "rev": "af58927",
+      "rev": "8c4125e",
       "src": "https://github.com/catppuccin/nvim"
     },
     "dressing.nvim": {
@@ -41,11 +41,11 @@
       "src": "https://github.com/kosayoda/nvim-lightbulb"
     },
     "nvim-lspconfig": {
-      "rev": "ececa53",
+      "rev": "a9b2fb5",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
-      "rev": "0cadeb0",
+      "rev": "fcfa7e0",
       "src": "https://github.com/kylechui/nvim-surround"
     },
     "nvim-treesitter": {
@@ -61,7 +61,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "nvim-web-devicons": {
-      "rev": "b8221e4",
+      "rev": "8dcb311",
       "src": "https://github.com/kyazdani42/nvim-web-devicons"
     },
     "oil.nvim": {
