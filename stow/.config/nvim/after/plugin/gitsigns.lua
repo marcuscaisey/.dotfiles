@@ -36,17 +36,17 @@ vim.keymap.set('n', '<Leader>gc', function()
   ---@diagnostic disable-next-line: redundant-parameter
   gitsigns.setqflist('all', { open = false }, function()
     local qflist = vim.fn.getqflist()
-    if #qflist == 0 then
-      vim.notify('No Git changes', vim.log.levels.INFO)
-      vim.cmd.cclose()
-      return
-    end
-
     local added_files = vim.trim(vim.system({ 'git', 'ls-files', '--others', '--exclude-standard' }):wait().stdout)
     if added_files ~= '' then
       for filename in vim.gsplit(added_files, '\n') do
         table.insert(qflist, { filename = filename, text = 'Added', lnum = 1, col = 0 })
       end
+    end
+
+    if #qflist == 0 then
+      vim.notify('No Git changes', vim.log.levels.INFO)
+      vim.cmd.cclose()
+      return
     end
 
     vim.fn.setqflist(qflist)
