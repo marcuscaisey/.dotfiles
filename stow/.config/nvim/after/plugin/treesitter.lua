@@ -30,6 +30,7 @@ configs.setup({
     'java',
     'javascript',
     'json',
+    'jsonc',
     'lox',
     'perl',
     'php',
