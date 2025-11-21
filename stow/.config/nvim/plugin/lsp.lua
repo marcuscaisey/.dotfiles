@@ -26,9 +26,10 @@ if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
     desc = 'Wrap each language server command with the LSP devtools agent',
     callback = function()
       for _, name in ipairs(enabled_lsps) do
-        vim.lsp.config(name, {
-          cmd = { 'lsp-devtools', 'agent', '--', unpack(vim.lsp.config[name].cmd) },
-        })
+        local cmd = vim.lsp.config[name].cmd
+        if type(cmd) == 'table' then
+          vim.lsp.config(name, { cmd = { 'lsp-devtools', 'agent', '--', unpack(cmd) } })
+        end
       end
     end,
   })
