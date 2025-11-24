@@ -18,12 +18,11 @@ local enabled_lsps = {
   'vimls',
   'yamlls',
 }
-vim.lsp.enable(enabled_lsps)
 
 if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
   vim.api.nvim_create_autocmd('VimEnter', {
     group = vim.api.nvim_create_augroup('lsp_devtools_setup', {}),
-    desc = 'Wrap each language server command with the LSP devtools agent',
+    desc = 'Wrap each language server command with the LSP devtools agent and before enabling',
     callback = function()
       for _, name in ipairs(enabled_lsps) do
         local cmd = vim.lsp.config[name].cmd
@@ -31,8 +30,11 @@ if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
           vim.lsp.config(name, { cmd = { 'lsp-devtools', 'agent', '--', unpack(cmd) } })
         end
       end
+      vim.lsp.enable(enabled_lsps)
     end,
   })
+else
+  vim.lsp.enable(enabled_lsps)
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
