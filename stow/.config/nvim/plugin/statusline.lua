@@ -119,7 +119,7 @@ local function update_statusline_diagnostics(bufnr)
   vim.g.statusline_diagnostics = table.concat(result, ' ')
 end
 
-vim.g.statusline_location = hl('StatusLine') .. '%11(%l:%v %p%%%)'
+vim.g.statusline_location = hl('StatusLine') .. '%(%l:%v %p%%%)'
 
 local augroup = vim.api.nvim_create_augroup('statusline', {})
 
