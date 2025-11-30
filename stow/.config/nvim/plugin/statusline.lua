@@ -3,10 +3,16 @@ if not ok then
   return
 end
 
+---@param group string
+local function hl(group)
+  return '%#' .. group .. '#'
+end
+
 vim.g.statusline_git = ''
 vim.g.statusline_file = ''
 vim.g.statusline_lsp_clients = ''
 vim.g.statusline_location = ''
+vim.g.statusline_location = hl('StatusLine') .. '%(%l:%v %p%%%)'
 
 vim.o.statusline = table.concat({
   ' ',
@@ -18,11 +24,6 @@ vim.o.statusline = table.concat({
   '%{%g:statusline_location%}',
   ' ',
 })
-
----@param group string
-local function hl(group)
-  return '%#' .. group .. '#'
-end
 
 ---@type {name:string, hl_group:string, symbol:string}[]
 local git_status_sections = {
@@ -97,8 +98,6 @@ local function update_statusline_lsp_clients(opts)
   end
   vim.g.statusline_lsp_clients = hl('StatusLine') .. table.concat(client_names, ', ')
 end
-
-vim.g.statusline_location = hl('StatusLine') .. '%(%l:%v %p%%%)'
 
 local augroup = vim.api.nvim_create_augroup('statusline', {})
 
