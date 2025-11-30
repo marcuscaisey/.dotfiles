@@ -1,14 +1,18 @@
+local signs = {
+  [vim.diagnostic.severity.ERROR] = ' ',
+  [vim.diagnostic.severity.WARN] = ' ',
+  [vim.diagnostic.severity.INFO] = ' ',
+  [vim.diagnostic.severity.HINT] = '󰌵 ',
+}
 vim.diagnostic.config({
   virtual_text = {
     source = true,
   },
   signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = '',
-      [vim.diagnostic.severity.WARN] = '',
-      [vim.diagnostic.severity.INFO] = '',
-      [vim.diagnostic.severity.HINT] = '󰌵',
-    },
+    text = signs,
+  },
+  status = {
+    text = signs,
   },
   float = {
     source = true,

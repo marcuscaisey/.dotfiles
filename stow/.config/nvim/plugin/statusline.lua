@@ -6,7 +6,6 @@ end
 vim.g.statusline_git = ''
 vim.g.statusline_file = ''
 vim.g.statusline_lsp_clients = ''
-vim.g.statusline_diagnostics = ''
 vim.g.statusline_location = ''
 
 vim.o.statusline = table.concat({
@@ -15,7 +14,7 @@ vim.o.statusline = table.concat({
   '%{%g:statusline_file%}',
   '%=',
   '%(%{%g:statusline_lsp_clients%}  %)',
-  '%(%{%g:statusline_diagnostics%}  %)',
+  '%(%{%luaeval("vim.diagnostic.status()")%}  %)',
   '%{%g:statusline_location%}',
   ' ',
 })
@@ -99,38 +98,17 @@ local function update_statusline_lsp_clients(opts)
   vim.g.statusline_lsp_clients = hl('StatusLine') .. table.concat(client_names, ', ')
 end
 
-local diagnostic_severity_hl_groups = {
-  [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
-  [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
-  [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
-  [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
-}
-
-local diagnostic_severity_signs = vim.diagnostic.config().signs.text
-assert(diagnostic_severity_signs, 'Expected signs.text to be populated in vim.diagnostic.config()')
-
----@param bufnr integer
-local function update_statusline_diagnostics(bufnr)
-  local counts = vim.diagnostic.count(bufnr)
-  local result = {} ---@type string[]
-  for level, count in pairs(counts) do
-    table.insert(result, hl(diagnostic_severity_hl_groups[level]) .. diagnostic_severity_signs[level] .. ' ' .. count)
-  end
-  vim.g.statusline_diagnostics = table.concat(result, ' ')
-end
-
 vim.g.statusline_location = hl('StatusLine') .. '%(%l:%v %p%%%)'
 
 local augroup = vim.api.nvim_create_augroup('statusline', {})
 
 vim.api.nvim_create_autocmd('BufEnter', {
   group = augroup,
-  desc = 'Update g:statusline_git, g:statusline_file, g:statusline_lsp, g:statusline_diagnostics',
+  desc = 'Update g:statusline_git, g:statusline_file, g:statusline_lsp',
   callback = function(args)
     update_statusline_git()
     update_statusline_file(args.buf)
     update_statusline_lsp_clients({ bufnr = args.buf })
-    update_statusline_diagnostics(args.buf)
   end,
 })
 
@@ -166,16 +144,5 @@ vim.api.nvim_create_autocmd('LspDetach', {
   callback = function(args)
     update_statusline_lsp_clients({ bufnr = args.buf, exclude_client_id = args.data.client_id })
     vim.cmd.redrawstatus()
-  end,
-})
-
-vim.api.nvim_create_autocmd('DiagnosticChanged', {
-  group = augroup,
-  desc = 'Update g:statusline_diagnostics and redraw status line if diagnostics changed in current buffer',
-  callback = function(args)
-    if args.buf == vim.api.nvim_get_current_buf() then
-      update_statusline_diagnostics(args.buf)
-      vim.cmd.redrawstatus()
-    end
   end,
 })
