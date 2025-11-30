@@ -11,7 +11,7 @@ end
 vim.g.statusline_git = ''
 vim.g.statusline_file = ''
 vim.g.statusline_lsp_clients = ''
-vim.g.statusline_location = ''
+vim.g.statusline_diagnostics = '%{%luaeval("vim.diagnostic.status()")%}'
 vim.g.statusline_location = hl('StatusLine') .. '%(%l:%v %p%%%)'
 
 vim.o.statusline = table.concat({
@@ -20,7 +20,7 @@ vim.o.statusline = table.concat({
   '%{%g:statusline_file%}',
   '%=',
   '%(%{%g:statusline_lsp_clients%}  %)',
-  '%(%{%luaeval("vim.diagnostic.status()")%}  %)',
+  '%(%{%g:statusline_diagnostics%}  %)',
   '%{%g:statusline_location%}',
   ' ',
 })
