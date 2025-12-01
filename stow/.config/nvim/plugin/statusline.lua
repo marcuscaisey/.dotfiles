@@ -117,7 +117,7 @@ vim.api.nvim_create_autocmd('User', {
   desc = 'Update g:statusline_git and redraw status line',
   callback = function()
     update_statusline_git()
-    vim.cmd.redrawstatus()
+    vim.api.nvim__redraw({ statusline = true })
   end,
 })
 
@@ -134,7 +134,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'Update g:statusline_lsp_clients and redraw status line',
   callback = function(args)
     update_statusline_lsp_clients({ bufnr = args.buf })
-    vim.cmd.redrawstatus()
+    vim.api.nvim__redraw({ statusline = true })
   end,
 })
 vim.api.nvim_create_autocmd('LspDetach', {
@@ -142,6 +142,6 @@ vim.api.nvim_create_autocmd('LspDetach', {
   desc = 'Update g:statusline_lsp_clients and redraw status line',
   callback = function(args)
     update_statusline_lsp_clients({ bufnr = args.buf, exclude_client_id = args.data.client_id })
-    vim.cmd.redrawstatus()
+    vim.api.nvim__redraw({ statusline = true })
   end,
 })
