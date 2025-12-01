@@ -4,9 +4,28 @@ if not ok then
 end
 local actions = require('gitsigns.actions')
 
+---@type {name:string, hl_group:string, symbol:string}[]
+local status_sections = {
+  { name = 'added', hl_group = 'diffAdded', symbol = '+' },
+  { name = 'changed', hl_group = 'diffChanged', symbol = '~' },
+  { name = 'removed', hl_group = 'diffRemoved', symbol = '-' },
+}
+
 gitsigns.setup({
   numhl = true,
   attach_to_untracked = true,
+  ---@param status table<string,any>
+  ---@return string
+  status_formatter = function(status)
+    local status_txt = {}
+    for _, section in ipairs(status_sections) do
+      local count = status[section.name]
+      if count and count > 0 then
+        table.insert(status_txt, '%#' .. section.hl_group .. '#' .. section.symbol .. count)
+      end
+    end
+    return table.concat(status_txt, ' ')
+  end,
 })
 
 vim.keymap.set('n', ']c', function()
