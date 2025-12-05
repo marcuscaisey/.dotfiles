@@ -198,6 +198,7 @@ fi
 ################################################################################
 if [[ -f ~/.fzf.zsh ]]; then
   source ~/.fzf.zsh
+  source <(fzf --zsh)
 
   # Use fd for find instead of default find
   FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --exclude .git'
