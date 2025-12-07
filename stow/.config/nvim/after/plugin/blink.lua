@@ -32,5 +32,10 @@ blink.setup({
       auto_show_delay_ms = 0,
     },
   },
-  signature = { enabled = true },
+  signature = {
+    enabled = true,
+    trigger = {
+      show_on_insert = true,
+    },
+  },
 })
