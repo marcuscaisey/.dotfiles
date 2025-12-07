@@ -12,9 +12,6 @@ blink.setup({
     ['<C-Space>'] = {},
   },
   completion = {
-    accept = {
-      auto_brackets = { enabled = false },
-    },
     menu = {
       draw = {
         columns = { { 'label' }, { 'kind', 'source_name', gap = 1 } },
