@@ -73,7 +73,7 @@
       "src": "https://github.com/marcuscaisey/olddirs.nvim"
     },
     "please.nvim": {
-      "rev": "7f3abff",
+      "rev": "7f16edc1da0f8e3809d78cb46b9d6fb84155186c",
       "src": "https://github.com/marcuscaisey/please.nvim"
     },
     "plenary.nvim": {
