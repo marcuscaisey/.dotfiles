@@ -29,7 +29,6 @@ catppuccin.setup({
   highlight_overrides = {
     mocha = function(palette)
       return {
-        NormalFloat = { fg = palette.overlay2, bg = palette.surface0 },
         DiffChange = { bg = colors.darken(palette.blue, 0.15, palette.base) },
         IncSearch = { bg = palette.peach },
       }
@@ -37,8 +36,6 @@ catppuccin.setup({
   },
   custom_highlights = {
     CurSearch = { link = 'IncSearch' },
-    TelescopeNormal = { link = 'Normal' },
-    Pmenu = { link = 'NormalFloat' },
   },
   flavour = 'mocha',
 })

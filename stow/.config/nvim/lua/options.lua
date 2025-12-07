@@ -19,6 +19,7 @@ vim.o.splitright = true
 vim.o.swapfile = false
 vim.o.tabstop = 4
 vim.o.updatetime = 100
+vim.o.winborder = 'single'
 
 vim.g.loaded_matchit = 1
 vim.g.mapleader = ' '
