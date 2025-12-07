@@ -11,6 +11,13 @@ blink.setup({
     ['<C-K>'] = {},
     ['<C-Space>'] = {},
   },
+  fuzzy = {
+    frecency = { enabled = false },
+    use_proximity = false,
+  },
+  snippets = {
+    score_offset = 0,
+  },
   completion = {
     accept = {
       auto_brackets = { enabled = false },
