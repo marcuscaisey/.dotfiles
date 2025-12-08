@@ -19,6 +19,7 @@ configs.setup({
     'bash',
     'comment',
     'dart',
+    'diff',
     'git_rebase',
     'gitcommit',
     'go',
