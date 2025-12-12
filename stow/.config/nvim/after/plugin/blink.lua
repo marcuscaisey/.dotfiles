@@ -44,5 +44,8 @@ blink.setup({
     trigger = {
       show_on_insert = true,
     },
+    window = {
+      show_documentation = true,
+    },
   },
 })
