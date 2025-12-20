@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
   ---@param args PackChangedCallbackArgs
   callback = function(args)
     local spec = args.data.spec
-    if args.data.kind ~= 'update' or not spec.data or not spec.data.post_install then
+    if not (args.data.kind == 'update' or args.data.kind == 'install') or not spec.data or not spec.data.post_install then
       return
     end
     vim.notify('Running ' .. spec.name .. ' post-install command: ' .. spec.data.post_install, vim.log.levels.INFO)
