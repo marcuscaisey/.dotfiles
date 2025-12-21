@@ -52,7 +52,6 @@ vim.pack.add({
   { src = 'https://github.com/stevearc/dressing.nvim' },
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/tpope/vim-fugitive' },
-  { src = 'https://github.com/vim-scripts/ReplaceWithRegister' },
 })
 
 vim.pack.add({
