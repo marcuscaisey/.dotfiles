@@ -45,9 +45,9 @@ vim.pack.add({
   { src = 'https://github.com/nvim-lua/plenary.nvim' }, -- Required for telescope.nvim
   { src = 'https://github.com/nvim-telescope/telescope-fzf-native.nvim' },
   { src = 'https://github.com/nvim-telescope/telescope.nvim' },
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'master' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context', version = 'master' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects', version = 'master' },
   { src = 'https://github.com/saghen/blink.cmp' },
   { src = 'https://github.com/stevearc/dressing.nvim' },
   { src = 'https://github.com/stevearc/oil.nvim' },
