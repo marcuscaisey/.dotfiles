@@ -2,22 +2,26 @@ vim.api.nvim_create_autocmd('PackChanged', {
   group = vim.api.nvim_create_augroup('pack_post_install_commands', {}),
   desc = 'Run post installation commands',
   ---@class PackChangedCallbackArgs : vim.api.keyset.create_autocmd.callback_args
-  ---@field data {kind:'install'|'update'|'delete', spec:vim.pack.Spec, path:string}
+  ---@field data {active:boolean, kind:'install'|'update'|'delete', spec:vim.pack.Spec, path:string}
   ---@param args PackChangedCallbackArgs
   callback = function(args)
-    local spec = args.data.spec
-    local kind = args.data.kind
+    local active, kind, spec, path = args.data.active, args.data.kind, args.data.spec, args.data.path
     if not (kind == 'update' or kind == 'install') then
       return
     end
     if spec.name == 'telescope-fzf-native.nvim' then
-      local out = vim.system({ 'make' }, { cwd = args.data.path }):wait()
-      assert(out.code == 0, out.stderr)
+      vim.system({ 'make' }, { cwd = path }, function(out)
+        assert(out.code == 0, out.stderr)
+      end)
     elseif spec.name == 'nvim-treesitter' then
+      if not active then
+        vim.cmd.packadd('nvim-treesitter')
+      end
       vim.cmd.TSUpdate()
     elseif spec.name == 'blink.cmp' then
-      local out = vim.system({ 'cargo', 'build', '--release' }, { cwd = args.data.path }):wait()
-      assert(out.code == 0, out.stderr)
+      vim.system({ 'cargo', 'build', '--release' }, { cwd = path }, function(out)
+        assert(out.code == 0, out.stderr)
+      end)
     end
   end,
 })
