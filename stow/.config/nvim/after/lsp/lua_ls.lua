@@ -1,5 +1,6 @@
 ---@type vim.lsp.Config
 return {
+  root_markers = { '.luarc.json', '.luarc.jsonc' },
   settings = {
     Lua = {
       diagnostics = {
@@ -17,10 +18,10 @@ return {
   },
   ---@diagnostic disable-next-line: unused-local
   before_init = function(params, config)
-    if not config.root_dir then
-      return
-    end
-    if vim.uv.fs_stat(vim.fs.joinpath(config.root_dir, '.luarc.json')) or vim.uv.fs_stat(vim.fs.joinpath(config.root_dir, '.luarc.jsonc')) then
+    if
+      config.root_dir
+      and (vim.uv.fs_stat(vim.fs.joinpath(config.root_dir, '.luarc.json')) or vim.uv.fs_stat(vim.fs.joinpath(config.root_dir, '.luarc.jsonc')))
+    then
       return
     end
 
