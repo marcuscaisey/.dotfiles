@@ -10,18 +10,16 @@ vim.api.nvim_create_autocmd('PackChanged', {
       return
     end
     if spec.name == 'telescope-fzf-native.nvim' then
-      vim.system({ 'make' }, { cwd = path }, function(out)
-        assert(out.code == 0, out.stderr)
-      end)
+      local out = vim.system({ 'make' }, { cwd = path }):wait()
+      assert(out.code == 0, out.stderr)
     elseif spec.name == 'nvim-treesitter' then
       if not active then
         vim.cmd.packadd('nvim-treesitter')
       end
       vim.cmd.TSUpdate()
     elseif spec.name == 'blink.cmp' then
-      vim.system({ 'cargo', 'build', '--release' }, { cwd = path }, function(out)
-        assert(out.code == 0, out.stderr)
-      end)
+      local out = vim.system({ 'cargo', 'build', '--release' }, { cwd = path }):wait()
+      assert(out.code == 0, out.stderr)
     end
   end,
 })
