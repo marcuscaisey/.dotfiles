@@ -57,12 +57,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 local last_progress_echo_secs = 0
----@alias LSPWorkDoneProgress lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd
----@class LspProgressCallbackArgs : vim.api.keyset.create_autocmd.callback_args
----@field data {client_id:integer, params:{value:LSPWorkDoneProgress}}
 vim.api.nvim_create_autocmd('LspProgress', {
   group = vim.api.nvim_create_augroup('lsp_progress_echo', {}),
   desc = 'Update g:statusline_lsp and redraw status line',
+  ---@alias LSPWorkDoneProgress lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd
+  ---@class LspProgressCallbackArgs : vim.api.keyset.create_autocmd.callback_args
+  ---@field data {client_id:integer, params:{value:LSPWorkDoneProgress}}
   ---@param args LspProgressCallbackArgs
   callback = function(args)
     -- Debounce echoes to no more than 1/ms because vim._extui doesn't handle multiple messages in quick succession very
