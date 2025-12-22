@@ -1,105 +1,55 @@
-local ok, configs = pcall(require, 'nvim-treesitter.configs')
+local ok, treesitter = pcall(require, 'nvim-treesitter')
 if not ok then
   return
 end
-local parsers = require('nvim-treesitter.parsers')
 
-local parser_configs = parsers.get_parser_configs()
----@diagnostic disable-next-line: inject-field
-parser_configs.lox = {
-  install_info = {
-    url = '~/scratch/lox',
-    files = { 'tree-sitter-lox/src/parser.c' },
-  },
-}
+vim.api.nvim_create_autocmd('User', {
+  group = vim.api.nvim_create_augroup('nvim-treesitter_lox_setup', {}),
+  pattern = 'TSUpdate',
+  desc = 'Add lox to treesitter parsers',
+  callback = function()
+    local parsers = require('nvim-treesitter.parsers')
+    parsers.lox = {
+      ---@diagnostic disable-next-line: missing-fields
+      install_info = {
+        branch = 'master',
+        location = 'tree-sitter-lox',
+        path = '~/scratch/lox',
+        queries = 'tree-sitter-lox/queries/lox',
+      },
+      tier = 3,
+    }
+  end,
+})
 
----@diagnostic disable-next-line: missing-fields
-configs.setup({
-  ensure_installed = {
-    'bash',
-    'comment',
-    'dart',
-    'diff',
-    'git_rebase',
-    'gitcommit',
-    'go',
-    'gomod',
-    'gosum',
-    'gotmpl',
-    'gowork',
-    'html',
-    'java',
-    'javascript',
-    'json',
-    'jsonc',
-    'lox',
-    'perl',
-    'php',
-    'promql',
-    'proto',
-    'python',
-    'regex',
-    'ruby',
-    'scheme',
-    'sql',
-    'terraform',
-    'typescript',
-    'yaml',
-  },
-  highlight = {
-    enable = true,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = 'gn',
-      node_incremental = 'gn',
-      node_decremental = 'gm',
-    },
-  },
-  indent = { enable = false },
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = false,
-      keymaps = {
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ia'] = '@parameter.inner',
-        ['aa'] = '@parameter.outer',
-        ['ic'] = '@call.inner',
-        ['ac'] = '@call.outer',
-        ['iv'] = '@assignment.inner',
-        ['av'] = '@assignment.outer',
-        ['ib'] = '@block.inner',
-        ['ab'] = '@block.outer',
-      },
-      selection_modes = {
-        ['@function.outer'] = 'V',
-        ['@function.inner'] = 'V',
-      },
-    },
-    move = {
-      enable = true,
-      set_jumps = true,
-      goto_next_start = {
-        [']f'] = '@function.outer',
-        [']a'] = '@parameter.inner',
-        [']m'] = '@method.outer',
-      },
-      goto_next_end = {
-        [']F'] = '@function.outer',
-        [']M'] = '@method.outer',
-      },
-      goto_previous_start = {
-        ['[f'] = '@function.outer',
-        ['[a'] = '@parameter.inner',
-        ['[m'] = '@method.outer',
-      },
-      goto_previous_end = {
-        ['[F'] = '@function.outer',
-        ['[M'] = '@method.outer',
-      },
-    },
-  },
+treesitter.install({
+  'bash',
+  'comment',
+  'dart',
+  'diff',
+  'git_rebase',
+  'gitcommit',
+  'go',
+  'gomod',
+  'gosum',
+  'gotmpl',
+  'gowork',
+  'html',
+  'java',
+  'javascript',
+  'json',
+  'jsonc',
+  'lox',
+  'perl',
+  'php',
+  'promql',
+  'proto',
+  'python',
+  'regex',
+  'ruby',
+  'scheme',
+  'sql',
+  'terraform',
+  'typescript',
+  'yaml',
 })

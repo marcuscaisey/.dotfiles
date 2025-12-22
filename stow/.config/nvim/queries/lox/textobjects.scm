@@ -3,59 +3,43 @@
   body: (block
     .
     "{"
-    .
-    (_) @_start @_end
-    (_)? @_end
-    .
-    "}"
-    (#make-range! "function.inner" @_start @_end))) @function.outer
+    _+ @function.inner
+    "}")) @function.outer
 
 (function_expression
   body: (block
     .
     "{"
-    .
-    (_) @_start @_end
-    (_)? @_end
-    .
-    "}"
-    (#make-range! "function.inner" @_start @_end))) @function.outer
+    _+ @function.inner
+    "}")) @function.outer
 
 (method_declaration
   body: (block
     .
     "{"
-    .
-    (_) @_start @_end
-    (_)? @_end
-    .
-    "}"
-    (#make-range! "function.inner" @_start @_end))) @function.outer
+    _+ @function.inner
+    "}")) @function.outer
 
 ; parameters
 (parameter_list
-  "," @_start
+  "," @parameter.outer
   .
-  (identifier) @parameter.inner
-  (#make-range! "parameter.outer" @_start @parameter.inner))
+  (identifier) @parameter.inner @parameter.outer)
 
 (parameter_list
   .
-  (identifier) @parameter.inner
+  (identifier) @parameter.inner @parameter.outer
   .
-  ","? @_end
-  (#make-range! "parameter.outer" @parameter.inner @_end))
+  ","? @parameter.outer)
 
 ; arguments
 (argument_list
-  "," @_start
+  "," @parameter.outer
   .
-  (_) @parameter.inner
-  (#make-range! "parameter.outer" @_start @parameter.inner))
+  _ @parameter.inner @parameter.outer)
 
 (argument_list
   .
-  (_) @parameter.inner
+  _ @parameter.inner @parameter.outer
   .
-  ","? @_end
-  (#make-range! "parameter.outer" @parameter.inner @_end))
+  ","? @parameter.outer)
