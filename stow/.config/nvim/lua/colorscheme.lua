@@ -22,8 +22,8 @@ catppuccin.setup({
   color_overrides = {
     mocha = {
       base = '#000000',
-      mantle = "#010101",
-      crust = "#020202",
+      mantle = '#010101',
+      crust = '#020202',
     },
   },
   highlight_overrides = {
