@@ -34,7 +34,6 @@ vim.pack.add({
   { src = 'https://github.com/kyazdani42/nvim-web-devicons' },
   { src = 'https://github.com/kylechui/nvim-surround' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
-  { src = 'https://github.com/marcuscaisey/lox' },
   { src = 'https://github.com/marcuscaisey/olddirs.nvim' },
   { src = 'https://github.com/marcuscaisey/please.nvim' },
   { src = 'https://github.com/mason-org/mason.nvim' },
