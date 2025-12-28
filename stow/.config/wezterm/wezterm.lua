@@ -26,4 +26,6 @@ config.quick_select_patterns = {
 }
 config.quick_select_remove_styling = true
 
+config.send_composed_key_when_right_alt_is_pressed = false
+
 return config
