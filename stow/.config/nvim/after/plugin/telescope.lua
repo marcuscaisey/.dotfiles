@@ -172,21 +172,6 @@ telescope.setup({
         return true
       end,
     },
-    current_buffer_fuzzy_find = {
-      prompt_title = 'Current Buffer Fuzzy',
-      attach_mappings = function(_, map)
-        map({ 'i', 'n' }, '<C-T>', function(prompt_bufnr)
-          actions.close(prompt_bufnr)
-          builtin.live_grep({
-            search_dirs = { vim.api.nvim_buf_get_name(0) },
-            prompt_title = 'Current Buffer Live Grep',
-            default_text = state.get_current_line(),
-            path_display = { 'tail' },
-          })
-        end)
-        return true
-      end,
-    },
     buffers = {
       sort_mru = true,
       ignore_current_buffer = true,
@@ -234,7 +219,6 @@ telescope.load_extension('olddirs')
 vim.keymap.set('n', '<C-P>', builtin.find_files, { desc = 'telescope.builtin.find_files()' })
 vim.keymap.set('n', '<C-B>', builtin.buffers, { desc = 'telescope.builtin.buffers()' })
 vim.keymap.set('n', '<C-G>', builtin.live_grep, { desc = 'telescope.builtin.live_grep()' })
-vim.keymap.set('n', '<Leader>/', builtin.current_buffer_fuzzy_find, { desc = 'telescope.builtin.current_buffer_fuzzy_find()' })
 vim.keymap.set('n', '<Leader>ht', builtin.help_tags, { desc = 'telescope.builtin.help_tags()' })
 vim.keymap.set('n', '<Leader>of', builtin.oldfiles, { desc = 'telescope.builtin.oldfiles()' })
 vim.keymap.set('n', '<Leader>tt', builtin.builtin, { desc = 'telescope.builtin.builtin()' })
