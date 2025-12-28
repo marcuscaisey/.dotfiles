@@ -6,8 +6,8 @@ local colors = require('catppuccin.utils.colors')
 
 ---@diagnostic disable-next-line: missing-fields
 catppuccin.setup({
+  auto_integrations = true,
   integrations = {
-    mason = true,
     ---@diagnostic disable-next-line: missing-fields
     native_lsp = {
       underlines = {
@@ -17,7 +17,6 @@ catppuccin.setup({
         information = { 'undercurl' },
       },
     },
-    nvim_surround = true,
   },
   color_overrides = {
     mocha = {
