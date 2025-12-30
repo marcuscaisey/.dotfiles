@@ -8,6 +8,12 @@ fzf.setup({
   defaults = {
     copen = 'copen | cfirst',
   },
+  keymap = {
+    fzf = {
+      true,
+      ['ctrl-q'] = 'select-all+accept',
+    },
+  },
   actions = {
     files = {
       true,
