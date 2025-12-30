@@ -16,9 +16,9 @@
       "rev": "ce8d176faa4643e026e597ae3c31db59b63cef09",
       "src": "https://github.com/catppuccin/nvim"
     },
-    "dressing.nvim": {
-      "rev": "2d7c2db",
-      "src": "https://github.com/stevearc/dressing.nvim"
+    "fzf-lua": {
+      "rev": "a899e3e33c6c26ffeda5739fb6e7157cfc21ad6f",
+      "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitsigns.nvim": {
       "rev": "130beacf8a51f00aede9c31064c749136679a321",
@@ -80,14 +80,6 @@
     "plenary.nvim": {
       "rev": "b9fd522",
       "src": "https://github.com/nvim-lua/plenary.nvim"
-    },
-    "telescope-fzf-native.nvim": {
-      "rev": "6fea601bd2b694c6f2ae08a6c6fab14930c60e2c",
-      "src": "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
-    },
-    "telescope.nvim": {
-      "rev": "3f8109cd21abe9fdb274a09da1e3c176673254b4",
-      "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "vim-fugitive": {
       "rev": "61b51c0",

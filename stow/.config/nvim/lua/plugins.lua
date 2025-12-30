@@ -9,10 +9,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
     if not (kind == 'update' or kind == 'install') then
       return
     end
-    if spec.name == 'telescope-fzf-native.nvim' then
-      local out = vim.system({ 'make' }, { cwd = path }):wait()
-      assert(out.code == 0, out.stderr)
-    elseif spec.name == 'nvim-treesitter' then
+    if spec.name == 'nvim-treesitter' then
       if not active then
         vim.cmd.packadd('nvim-treesitter')
       end
@@ -27,6 +24,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
 vim.pack.add({
   { src = 'https://github.com/bkad/camelcasemotion' },
   { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
+  { src = 'https://github.com/ibhagwan/fzf-lua' },
   { src = 'https://github.com/jake-stewart/multicursor.nvim' },
   { src = 'https://github.com/kana/vim-textobj-entire' },
   { src = 'https://github.com/kana/vim-textobj-user' }, -- Required for vim-textobj-entire
@@ -39,14 +37,10 @@ vim.pack.add({
   { src = 'https://github.com/mason-org/mason.nvim' },
   { src = 'https://github.com/michaeljsmith/vim-indent-object' },
   { src = 'https://github.com/neovim/nvim-lspconfig' },
-  { src = 'https://github.com/nvim-lua/plenary.nvim' }, -- Required for telescope.nvim
-  { src = 'https://github.com/nvim-telescope/telescope-fzf-native.nvim' },
-  { src = 'https://github.com/nvim-telescope/telescope.nvim' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects', version = 'main' },
   { src = 'https://github.com/saghen/blink.cmp' },
-  { src = 'https://github.com/stevearc/dressing.nvim' },
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/tpope/vim-fugitive' },
 })

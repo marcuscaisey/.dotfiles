@@ -2,7 +2,7 @@ local ok, oil = pcall(require, 'oil')
 if not ok then
   return
 end
-local ok, telescope_builtin = pcall(require, 'telescope.builtin')
+local ok, fzf = pcall(require, 'fzf-lua')
 if not ok then
   return
 end
@@ -17,17 +17,9 @@ oil.setup({
     ['gp'] = 'actions.preview',
     ['<C-P>'] = {
       function()
-        local dir = oil.get_current_dir()
-        if not dir then
-          return
-        end
-        if vim.env.HOME then
-          dir = dir:gsub('^' .. vim.pesc(vim.env.HOME), '~')
-        end
-        telescope_builtin.find_files({
-          prompt_title = 'Find files in ' .. dir,
-          find_command = { 'fd', '--strip-cwd-prefix', '--follow', '--hidden', '--exclude', '.git' },
-          cwd = dir,
+        fzf.files({
+          fd_opts = fzf.defaults.files.fd_opts .. ' --type d',
+          cwd = oil.get_current_dir(),
         })
       end,
       mode = 'n',
@@ -36,17 +28,7 @@ oil.setup({
     },
     ['<C-G>'] = {
       function()
-        local dir = oil.get_current_dir()
-        if not dir then
-          return
-        end
-        if vim.env.HOME then
-          dir = dir:gsub('^' .. vim.pesc(vim.env.HOME), '~')
-        end
-        telescope_builtin.live_grep({
-          prompt_title = 'Live Grep in ' .. dir,
-          search_dirs = { dir },
-        })
+        fzf.live_grep({ cwd = oil.get_current_dir() })
       end,
       desc = 'Grep over files in the current directory',
     },

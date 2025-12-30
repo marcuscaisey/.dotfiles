@@ -35,7 +35,6 @@ catppuccin.setup({
   },
   custom_highlights = {
     CurSearch = { link = 'IncSearch' },
-    TelescopeSelection = { link = 'Visual' },
   },
   flavour = 'mocha',
 })
