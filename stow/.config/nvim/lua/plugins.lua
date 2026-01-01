@@ -43,10 +43,7 @@ vim.pack.add({
   { src = 'https://github.com/saghen/blink.cmp' },
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/tpope/vim-fugitive' },
-})
-
-vim.pack.add({
   { src = 'https://github.com/vim-scripts/ReplaceWithRegister' },
-}, { load = false })
+})
 
 vim.cmd.packadd('nvim.undotree')
