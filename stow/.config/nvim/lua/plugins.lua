@@ -21,14 +21,6 @@ vim.api.nvim_create_autocmd('PackChanged', {
   end,
 })
 
-vim.api.nvim_create_user_command('PackUpdate', function()
-  vim.pack.update()
-end, { desc = 'vim.pack.update()' })
-
-vim.api.nvim_create_user_command('PackRevert', function()
-  vim.pack.update(nil, { target = 'lockfile' })
-end, { desc = "vim.pack.update(nil, { target = 'lockfile' })" })
-
 vim.pack.add({
   { src = 'https://github.com/bkad/camelcasemotion' },
   { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
@@ -55,3 +47,10 @@ vim.pack.add({
 })
 
 vim.cmd.packadd('nvim.undotree')
+
+vim.api.nvim_create_user_command('PackUpdate', function(args)
+  vim.pack.update(#args.fargs > 0 and args.fargs or nil)
+end, { nargs = '*', complete = 'packadd', desc = 'Update the given plugins' })
+vim.api.nvim_create_user_command('PackRevert', function(args)
+  vim.pack.update(#args.fargs > 0 and args.fargs or nil, { target = 'lockfile' })
+end, { nargs = '*', complete = 'packadd', desc = 'Revert the given plugins to the versions specified in the lockfile' })
