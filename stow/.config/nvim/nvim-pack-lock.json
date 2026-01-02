@@ -77,10 +77,6 @@
       "rev": "2ab67e65e471653dca0b6292e3a8299c7cfb31c8",
       "src": "https://github.com/marcuscaisey/please.nvim"
     },
-    "plenary.nvim": {
-      "rev": "b9fd522",
-      "src": "https://github.com/nvim-lua/plenary.nvim"
-    },
     "vim-fugitive": {
       "rev": "61b51c0",
       "src": "https://github.com/tpope/vim-fugitive"
