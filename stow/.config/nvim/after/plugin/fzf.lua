@@ -37,6 +37,13 @@ fzf.setup({
     hidden = true,
     follow = true,
   },
+  helptags = {
+    -- Omit help file name
+    fzf_opts = vim.tbl_extend('force', fzf.defaults.fzf_opts, {
+      ['--delimiter'] = '\\s+',
+      ['--with-nth'] = '1',
+    }),
+  },
   lsp = {
     jump1 = false, -- Show the UI when result is a single entry.
     symbols = {
