@@ -24,14 +24,7 @@ blink.setup({
     },
     menu = {
       draw = {
-        columns = { { 'label' }, { 'kind', 'source_name', gap = 1 } },
-        components = {
-          source_name = {
-            text = function(ctx)
-              return '[' .. ctx.source_name .. ']'
-            end,
-          },
-        },
+        columns = { { 'label' }, { 'kind' } },
       },
     },
     documentation = {
