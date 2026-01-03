@@ -7,6 +7,9 @@ local _, olddirs = pcall(require, 'olddirs')
 fzf.setup({
   defaults = {
     copen = 'copen | cfirst',
+    fzf_opts = {
+      ['--cycle'] = true,
+    },
   },
   keymap = {
     fzf = {
