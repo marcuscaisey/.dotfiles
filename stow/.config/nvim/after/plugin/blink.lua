@@ -7,9 +7,7 @@ blink.setup({
   keymap = {
     ['<C-N>'] = { 'show', 'select_next', 'fallback_to_mappings' },
     ['<C-P>'] = { 'show', 'select_prev', 'fallback_to_mappings' },
-    ['<C-Y>'] = { 'select_and_accept', 'fallback_to_mappings' },
-    ['<C-K>'] = {},
-    ['<C-Space>'] = {},
+    ['<C-S>'] = { 'show_signature', 'hide_signature', 'fallback' },
   },
   fuzzy = {
     frecency = { enabled = false },
@@ -17,6 +15,12 @@ blink.setup({
   },
   snippets = {
     score_offset = 0,
+  },
+  signature = {
+    enabled = true,
+    trigger = {
+      enabled = false,
+    },
   },
   completion = {
     accept = {
