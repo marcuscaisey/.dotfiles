@@ -21,6 +21,9 @@ blink.setup({
     trigger = {
       enabled = false,
     },
+    window = {
+      show_documentation = true,
+    },
   },
   completion = {
     accept = {
