@@ -33,6 +33,7 @@ fzf.setup({
     },
   },
   files = {
+    fd_opts = '--strip-cwd-prefix ' .. fzf.defaults.files.fd_opts,
     follow = true,
   },
   grep = {
