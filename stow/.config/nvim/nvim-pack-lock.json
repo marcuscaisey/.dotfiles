@@ -24,10 +24,6 @@
       "rev": "130beacf8a51f00aede9c31064c749136679a321",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
-    "lox": {
-      "rev": "1a31a9c3880bfa28ad5c8628485686c5ef32e5d3",
-      "src": "https://github.com/marcuscaisey/lox"
-    },
     "mason.nvim": {
       "rev": "57e5a8addb8c71fb063ee4acda466c7cf6ad2800",
       "src": "https://github.com/mason-org/mason.nvim"
