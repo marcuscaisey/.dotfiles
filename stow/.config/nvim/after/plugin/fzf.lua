@@ -88,9 +88,8 @@ fzf.setup({
   olddirs = {
     git_repo_only = true,
   },
+  ui_select = true,
 })
-
-fzf.register_ui_select()
 
 vim.keymap.set('n', '<C-P>', fzf.files, { desc = 'fzf.files()' })
 vim.keymap.set('n', '<C-\\>', fzf.buffers, { desc = 'fzf.buffers()' })
