@@ -13,7 +13,7 @@ oil.setup({
     ['<C-p>'] = {
       function()
         fzf.files({
-          fd_opts = fzf.defaults.files.fd_opts .. ' --type d',
+          fd_opts = fzf.defaults.files.fd_opts .. ' --type d --strip-cwd-prefix',
           cwd = oil.get_current_dir(),
         })
       end,
