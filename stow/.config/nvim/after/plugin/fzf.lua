@@ -2,7 +2,7 @@ local ok, fzf = pcall(require, 'fzf-lua')
 if not ok then
   return
 end
-local _, olddirs = pcall(require, 'olddirs')
+local olddirs_exists, olddirs = pcall(require, 'olddirs')
 
 fzf.setup({
   defaults = {
@@ -97,7 +97,7 @@ vim.keymap.set('n', '<C-\\>', fzf.buffers, { desc = 'fzf.buffers()' })
 vim.keymap.set('n', '<C-G>', fzf.live_grep, { desc = 'fzf.live_grep()' })
 vim.keymap.set('n', '<F1>', fzf.help_tags, { desc = 'fzf.help_tags()' })
 vim.keymap.set('n', '<C-K>', fzf.oldfiles, { desc = 'fzf.oldfiles()' })
-if olddirs then
+if olddirs_exists then
   vim.keymap.set('n', '<C-J>', olddirs.fzf_picker, { desc = 'olddirs.fzf_picker' })
 end
 vim.keymap.set('n', '<Leader>zz', fzf.builtin, { desc = 'fzf.builtin()' })
