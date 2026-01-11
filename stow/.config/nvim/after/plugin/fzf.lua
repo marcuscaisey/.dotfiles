@@ -59,6 +59,8 @@ fzf.setup({
       symbol_fmt = function(s)
         return s
       end,
+    },
+    document_symbols = {
       -- Omit line and column
       fzf_opts = vim.tbl_extend('force', fzf.defaults.lsp.document_symbols.fzf_opts, {
         ['--delimiter'] = '\\t\\t',
@@ -102,6 +104,7 @@ end
 vim.keymap.set('n', '<Leader>zz', fzf.builtin, { desc = 'fzf.builtin()' })
 vim.keymap.set('n', '<Leader>zr', fzf.resume, { desc = 'fzf.resume()' })
 vim.keymap.set('n', 'gO', fzf.lsp_document_symbols, { desc = 'fzf.lsp_document_symbols()' })
+vim.keymap.set('n', 'gwO', fzf.lsp_live_workspace_symbols, { desc = 'fzf.lsp_live_workspace_symbols()' })
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('fzf_lsp_definitions_mappings', {}),
   desc = 'Add mappings for fzf.lsp_definitions if the client supports it',
