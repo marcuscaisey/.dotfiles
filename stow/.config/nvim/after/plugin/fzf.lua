@@ -2,6 +2,7 @@ local ok, fzf = pcall(require, 'fzf-lua')
 if not ok then
   return
 end
+local actions = require('fzf-lua.actions')
 local olddirs_exists, olddirs = pcall(require, 'olddirs')
 
 fzf.setup({
@@ -16,6 +17,7 @@ fzf.setup({
     fzf = {
       true,
       ['ctrl-q'] = 'select-all+accept',
+      ['ctrl-l'] = 'select-all+print(_file_sel_to_ll)+accept',
     },
   },
   actions = {
@@ -23,6 +25,7 @@ fzf.setup({
       true,
       -- Default alt-f mapping clobbers the one provided by fzf to jump to the next word.
       ['alt-f'] = false,
+      ['_file_sel_to_ll'] = actions.file_sel_to_ll,
     },
   },
   winopts = {
