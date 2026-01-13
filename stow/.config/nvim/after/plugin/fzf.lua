@@ -7,6 +7,7 @@ local olddirs_exists, olddirs = pcall(require, 'olddirs')
 fzf.setup({
   defaults = {
     copen = 'copen | cfirst',
+    lopen = 'lopen | lfirst',
     fzf_opts = {
       ['--cycle'] = true,
     },
