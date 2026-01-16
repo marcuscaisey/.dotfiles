@@ -100,6 +100,7 @@ fzf.setup({
 vim.keymap.set('n', '<C-P>', fzf.files, { desc = 'fzf.files()' })
 vim.keymap.set('n', '<C-\\>', fzf.buffers, { desc = 'fzf.buffers()' })
 vim.keymap.set('n', '<C-G>', fzf.live_grep, { desc = 'fzf.live_grep()' })
+vim.keymap.set('n', '<C-_>', fzf.grep_curbuf, { desc = 'fzf.grep_curbuf()' })
 vim.keymap.set('n', '<F1>', fzf.help_tags, { desc = 'fzf.help_tags()' })
 vim.keymap.set('n', '<C-K>', fzf.oldfiles, { desc = 'fzf.oldfiles()' })
 if olddirs_exists then
