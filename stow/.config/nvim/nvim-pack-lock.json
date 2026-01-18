@@ -5,7 +5,7 @@
       "src": "https://github.com/vim-scripts/ReplaceWithRegister"
     },
     "blink.cmp": {
-      "rev": "b1b77404ce3c8b11e8f35611a28176b944c41e29",
+      "rev": "820f1ddf634ec267412e403711bf74be26cac677",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "camelcasemotion": {
@@ -17,7 +17,7 @@
       "src": "https://github.com/catppuccin/nvim"
     },
     "fzf-lua": {
-      "rev": "578a11f9f7c5f4436b833731ccceeda9479562f0",
+      "rev": "abe5ecafebb4e24feb162384d5f492431036e791",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitsigns.nvim": {
@@ -45,7 +45,7 @@
       "src": "https://github.com/kylechui/nvim-surround"
     },
     "nvim-treesitter": {
-      "rev": "5a7e5638e7d220575b1c22c8a2e099b52231886e",
+      "rev": "d9a5fb8484374e8ed5d88dd9e0475a760c168d6a",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {
@@ -62,7 +62,7 @@
       "src": "https://github.com/kyazdani42/nvim-web-devicons"
     },
     "oil.nvim": {
-      "rev": "6b59a6cf623fa2245c7454ddb458df5bdb6615d3",
+      "rev": "f55b25e493a7df76371cfadd0ded5004cb9cd48a",
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "olddirs.nvim": {
