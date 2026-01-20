@@ -104,7 +104,7 @@ vim.keymap.set('n', '<Leader>yg', function()
     vim.notify(string.format('Yanking github URL: getting url of origin remote: %s', git_remote_result.stderr), vim.log.levels.ERROR)
     return
   end
-  if not base_url:match('^https//') then
+  if not base_url:match('^https://') then
     local user, repo = base_url:match('^git@github%.com:(.+)/(.+)%.git$')
     if not user then
       vim.notify(string.format('Yanking github URL: origin remote is not a HTTPS or SSH URL: %s', base_url), vim.log.levels.ERROR)
