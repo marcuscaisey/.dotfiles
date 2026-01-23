@@ -13,18 +13,8 @@ blink.setup({
     frecency = { enabled = false },
     use_proximity = false,
   },
-  snippets = {
-    score_offset = 0,
-  },
-  signature = {
-    enabled = true,
-    trigger = {
-      enabled = false,
-    },
-    window = {
-      show_documentation = true,
-    },
-  },
+  snippets = { score_offset = 0 },
+  signature = { enabled = true },
   completion = {
     accept = {
       auto_brackets = { enabled = false },
