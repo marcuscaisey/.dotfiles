@@ -17,11 +17,11 @@
       "src": "https://github.com/catppuccin/nvim"
     },
     "fzf-lua": {
-      "rev": "abe5ecafebb4e24feb162384d5f492431036e791",
+      "rev": "20e2d3099ba99f37f9a7c7d9ed2a9d83c3b20618",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitsigns.nvim": {
-      "rev": "42d6aed4e94e0f0bbced16bbdcc42f57673bd75e",
+      "rev": "abf82a65f185bd54adc0679f74b7d6e1ada690c9",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "mason.nvim": {
@@ -29,7 +29,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "multicursor.nvim": {
-      "rev": "c982cc8375f062e9f98e96a408e0f7ad0c80d4db",
+      "rev": "3b5c79c4eec52ff18ce69923156422c298b9ae5d",
       "src": "https://github.com/jake-stewart/multicursor.nvim"
     },
     "nvim-lightbulb": {
@@ -37,7 +37,7 @@
       "src": "https://github.com/kosayoda/nvim-lightbulb"
     },
     "nvim-lspconfig": {
-      "rev": "92ee7d42320edfbb81f3cad851314ab197fa324a",
+      "rev": "419b082102fa813739588dd82e19a8b6b2442855",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
@@ -45,7 +45,7 @@
       "src": "https://github.com/kylechui/nvim-surround"
     },
     "nvim-treesitter": {
-      "rev": "d9a5fb8484374e8ed5d88dd9e0475a760c168d6a",
+      "rev": "511e5ccf404f8a96ee31866b079fca033a8a7c4e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {
@@ -53,7 +53,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "baa6b4ec28c8be5e4a96f9b1b6ae9db85ec422f8",
+      "rev": "4d55f63252e04c5212daed958e4e940915ff16ce",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
