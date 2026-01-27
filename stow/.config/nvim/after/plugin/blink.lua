@@ -19,6 +19,7 @@ blink.setup({
     accept = {
       auto_brackets = { enabled = false },
     },
+    documentation = { auto_show = true },
     menu = {
       draw = {
         columns = { { 'label' }, { 'kind' } },
