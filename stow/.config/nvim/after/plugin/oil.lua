@@ -15,19 +15,41 @@ oil.setup({
         fzf.files({
           fd_opts = fzf.defaults.files.fd_opts .. ' --type d --strip-cwd-prefix',
           cwd = oil.get_current_dir(),
+          copen = function()
+            oil.close()
+            vim.cmd.copen()
+            vim.cmd.cfirst()
+          end,
+          lopen = function()
+            oil.close()
+            vim.cmd.lopen()
+            vim.cmd.lfirst()
+          end,
         })
       end,
       desc = 'Find files in the current directory',
     },
     ['<C-G>'] = {
       function()
-        fzf.live_grep({ cwd = oil.get_current_dir() })
+        fzf.live_grep({
+          cwd = oil.get_current_dir(),
+          copen = function()
+            oil.close()
+            vim.cmd.copen()
+            vim.cmd.cfirst()
+          end,
+          lopen = function()
+            oil.close()
+            vim.cmd.lopen()
+            vim.cmd.lfirst()
+          end,
+        })
       end,
       desc = 'Grep over files in the current directory',
     },
     ['_'] = 'actions.open_cwd',
     ['+'] = {
-      desc = "Open oil in the git repository root",
+      desc = 'Open oil in the git repository root',
       callback = function()
         local root = vim.fs.root(oil.get_current_dir() or '', '.git')
         if not root then
