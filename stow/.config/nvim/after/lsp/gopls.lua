@@ -27,7 +27,5 @@ return {
         end
       end,
     })
-    -- This doesn't work very well sometimes.
-    client.server_capabilities.semanticTokensProvider.range = false
   end,
 }
