@@ -39,7 +39,7 @@ vim.pack.add({
   { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects', version = 'main' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
   { src = 'https://github.com/saghen/blink.cmp' },
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/tpope/vim-fugitive' },

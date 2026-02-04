@@ -54,8 +54,7 @@
     },
     "nvim-treesitter-textobjects": {
       "rev": "a0e182ae21fda68c59d1f36c9ed45600aef50311",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-      "version": "'main'"
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "nvim-web-devicons": {
       "rev": "746ffbb17975ebd6c40142362eee1b0249969c5c",
