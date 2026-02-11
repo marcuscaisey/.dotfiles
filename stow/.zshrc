@@ -69,52 +69,7 @@ zstyle ':vcs_info:*' enable git # Disable all backends apart from git.
 zstyle ':vcs_info:*' max-exports 1 # Only set one vcs_info_msg_*_ variable.
 add-zsh-hook precmd vcs_info
 
-# Populate duration of last command in _cmd_duration.
-local _date_cmd=date
-local _mac_has_gdate=false
-if [[ $(uname) == "Darwin" ]] && whence gdate >/dev/null; then
-  _mac_has_gdate=true
-  # MacOS (BSD) date doesn't support %N so use GNU date instead.
-  _date_cmd=gdate
-fi
-if [[ $(uname) == "Linux" || $_mac_has_gdate == true ]]; then
-  function _now_millis() {
-    $_date_cmd +%s%3N
-  }
-else
-  # Fall back to slower perl if appropriate date command is not available.
-  function _now_millis() {
-    perl -MTime::HiRes=time -e 'printf("%d", time * 1000)'
-  }
-fi
-function _record_cmd_start() {
-  _cmd_start_millis=$(_now_millis)
-}
-function _set_cmd_duration() {
-  exit_code=$?
-  if [[ -v _cmd_start_millis ]]; then
-    local duration_millis=$(( $(_now_millis) - $_cmd_start_millis ))
-    unset _cmd_start_millis
-    local formatted_duration
-    if (( duration_millis < 1000 )); then
-      formatted_duration="${duration_millis}ms"
-    else
-      printf -v formatted_duration '%.1fs' 'duration_millis / 1000.0'
-    fi
-    color=8
-    if [[ ! $exit_code -eq 0 ]]; then
-      color=1
-    fi
-    _cmd_duration="%F{${color}}${formatted_duration}%f"
-  else
-    _cmd_duration=''
-  fi
-}
-add-zsh-hook preexec _record_cmd_start
-add-zsh-hook precmd _set_cmd_duration
-
 PROMPT='%B%F{blue}%1~%b%f${vcs_info_msg_0_} '
-RPROMPT='${_cmd_duration}'
 
 
 ################################################################################
