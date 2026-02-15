@@ -1,9 +1,5 @@
 {
   "plugins": {
-    "ReplaceWithRegister": {
-      "rev": "832efc2",
-      "src": "https://github.com/vim-scripts/ReplaceWithRegister"
-    },
     "blink.cmp": {
       "rev": "cd79f572971c58784ca72551af29af3a63da9168",
       "src": "https://github.com/saghen/blink.cmp"
@@ -79,6 +75,10 @@
     "vim-CountJump": {
       "rev": "5905c6bb1643035f409524bcb324e73bc67092a8",
       "src": "https://github.com/inkarkat/vim-CountJump"
+    },
+    "vim-ReplaceWithRegister": {
+      "rev": "a487af6efd1be3fc6fac8da47d00efc9d1f6f724",
+      "src": "https://github.com/inkarkat/vim-ReplaceWithRegister"
     },
     "vim-fugitive": {
       "rev": "61b51c0",

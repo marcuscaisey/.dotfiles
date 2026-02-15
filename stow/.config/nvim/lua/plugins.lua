@@ -28,6 +28,7 @@ vim.pack.add({
   { src = 'https://github.com/inkarkat/vim-ingo-library' }, -- Required for vim-CountJump
   { src = 'https://github.com/inkarkat/vim-ConflictMotions' }, -- Required for vim-ConflictMotions
   { src = 'https://github.com/inkarkat/vim-CountJump' }, -- Required for vim-ConflictMotions
+  { src = 'https://github.com/inkarkat/vim-ReplaceWithRegister' },
   { src = 'https://github.com/jake-stewart/multicursor.nvim' },
   { src = 'https://github.com/kana/vim-textobj-entire' },
   { src = 'https://github.com/kana/vim-textobj-user' }, -- Required for vim-textobj-entire
@@ -46,7 +47,6 @@ vim.pack.add({
   { src = 'https://github.com/saghen/blink.cmp' },
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/tpope/vim-fugitive' },
-  { src = 'https://github.com/vim-scripts/ReplaceWithRegister' },
 })
 -- Set so that ReplaceWithRegister doesn't create default mappings before we can override them in
 -- after/plugin/replacewithregister.lua

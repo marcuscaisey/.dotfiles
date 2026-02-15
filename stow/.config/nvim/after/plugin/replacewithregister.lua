@@ -4,4 +4,4 @@ vim.keymap.set('v', '<Leader>r', '<Plug>ReplaceWithRegisterVisual')
 
 -- Unset so that the plugin will be loaded when we call :packadd.
 vim.g.loaded_ReplaceWithRegister = nil
-vim.cmd.packadd('ReplaceWithRegister')
+vim.cmd.packadd('vim-ReplaceWithRegister')
