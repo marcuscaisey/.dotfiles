@@ -25,9 +25,3 @@ vim.api.nvim_create_autocmd('OptionSet', {
 
 vim.keymap.set('n', 'yod', '<Cmd>execute &diff ? "diffoff" : "diffthis"<CR>', { desc = 'Toggle diff', silent = true })
 vim.keymap.set('n', 'yoD', '<Cmd>diffoff!<CR>', { silent = true })
-vim.keymap.set({ 'n', 'x' }, ']n', function()
-  vim.fn.search([[^\(<\{7}\||\{7}\|=\{7}\|>\{7}\)]], 'W')
-end, { desc = 'Jump to next git conflict marker (<<<<<<<, |||||||, =======, >>>>>>>)' })
-vim.keymap.set({ 'n', 'x' }, '[n', function()
-  vim.fn.search([[^\(<\{7}\||\{7}\|=\{7}\|>\{7}\)]], 'bW')
-end, { desc = 'Jump to previous git conflict marker (<<<<<<<, |||||||, =======, >>>>>>>)' })
