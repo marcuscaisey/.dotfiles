@@ -67,29 +67,6 @@ vim.keymap.set('n', '<Leader>YY', function()
   yank(vim.api.nvim_buf_get_name(0))
 end, { desc = 'Yank the absolute path of the current buffer' })
 
-vim.keymap.set('n', '<Leader>ys', function()
-  local base_url = vim.env.SOURCEGRAPH_BASE_URL
-  if not base_url then
-    vim.notify('Yanking sourcegraph URL: SOURCEGRAPH_BASE_URL env var not set', vim.log.levels.ERROR)
-    return
-  end
-
-  local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }):wait().stdout)
-  local filepath = vim.api.nvim_buf_get_name(0)
-  local relative_filepath = vim.fs.relpath(git_root, filepath)
-
-  local git_ref, errmsg = git_ref(git_root)
-  if not git_ref then
-    vim.notify(string.format('Yanking sourcegraph URL: %s', errmsg), vim.log.levels.WARN)
-  end
-
-  local git_ref_segment = git_ref and '@' .. git_ref or ''
-  local line = unpack(vim.api.nvim_win_get_cursor(0))
-  local url = string.format('%s%s/-/blob/%s?L%d', base_url, git_ref_segment, relative_filepath, line)
-
-  yank(url)
-end, { desc = 'Yank the sourcegraph URL to the current position in the buffer' })
-
 vim.keymap.set('n', '<Leader>yg', function()
   local path = vim.api.nvim_buf_get_name(0)
   local git_root, errmsg = git_root(vim.api.nvim_buf_get_name(0))
