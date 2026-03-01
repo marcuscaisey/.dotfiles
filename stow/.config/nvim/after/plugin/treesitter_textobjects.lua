@@ -15,46 +15,56 @@ treesitter_textobjects.setup({
   },
 })
 
-vim.keymap.set({ 'x', 'o' }, 'af', function()
-  select.select_textobject('@function.outer', 'textobjects')
-end, { desc = [[nvim-treesitter-textobjects.select.select_textobject('@function.outer', 'textobjects')]] })
-vim.keymap.set({ 'x', 'o' }, 'if', function()
-  select.select_textobject('@function.inner', 'textobjects')
-end, { desc = [[nvim-treesitter-textobjects.select.select_textobject('@function.inner', 'textobjects')]] })
-vim.keymap.set({ 'x', 'o' }, 'ia', function()
-  select.select_textobject('@parameter.inner', 'textobjects')
-end, { desc = [[nvim-treesitter-textobjects.select.select_textobject('@parameter.inner', 'textobjects')]] })
-vim.keymap.set({ 'x', 'o' }, 'aa', function()
-  select.select_textobject('@parameter.outer', 'textobjects')
-end, { desc = [[nvim-treesitter-textobjects.select.select_textobject('@parameter.outer', 'textobjects')]] })
-vim.keymap.set({ 'x', 'o' }, 'ic', function()
-  select.select_textobject('@call.inner', 'textobjects')
-end, { desc = [[nvim-treesitter-textobjects.select.select_textobject('@call.inner', 'textobjects')]] })
-vim.keymap.set({ 'x', 'o' }, 'ac', function()
-  select.select_textobject('@call.outer', 'textobjects')
-end, { desc = [[nvim-treesitter-textobjects.select.select_textobject('@call.outer', 'textobjects')]] })
-vim.keymap.set({ 'x', 'o' }, 'iv', function()
-  select.select_textobject('@assignment.inner', 'textobjects')
-end, { desc = [[nvim-treesitter-textobjects.select.select_textobject('@assignment.inner', 'textobjects')]] })
-vim.keymap.set({ 'x', 'o' }, 'av', function()
-  select.select_textobject('@assignment.outer', 'textobjects')
-end, { desc = [[nvim-treesitter-textobjects.select.select_textobject('@assignment.outer', 'textobjects')]] })
-vim.keymap.set({ 'x', 'o' }, 'ib', function()
-  select.select_textobject('@block.inner', 'textobjects')
-end, { desc = [[nvim-treesitter-textobjects.select.select_textobject('@block.inner', 'textobjects')]] })
-vim.keymap.set({ 'x', 'o' }, 'ab', function()
-  select.select_textobject('@block.outer', 'textobjects')
-end, { desc = [[nvim-treesitter-textobjects.select.select_textobject('@block.outer', 'textobjects')]] })
+local select_keymaps = {
+  af = '@function.outer',
+  ['if'] = '@function.inner',
+  ia = '@parameter.inner',
+  aa = '@parameter.outer',
+  ic = '@call.inner',
+  ac = '@call.outer',
+  iv = '@assignment.inner',
+  av = '@assignment.outer',
+  ib = '@block.inner',
+  ab = '@block.outer',
+}
+local goto_next_start_keymaps = {
+  [']f'] = '@function.outer',
+  [']a'] = '@parameter.inner',
+  [']m'] = '@method.outer',
+}
+local goto_next_end_keymaps = {
+  [']F'] = '@function.outer',
+}
+local goto_previous_start_keymaps = {
+  ['[f'] = '@function.outer',
+  ['[a'] = '@parameter.inner',
+}
+local goto_previous_end_keymaps = {
+  ['[F'] = '@function.outer',
+}
 
-vim.keymap.set({ 'n', 'x', 'o' }, ']f', function()
-  move.goto_next_start('@function.outer', 'textobjects')
-end, { desc = [[nvim-treesitter-textobjects.move.goto_next_start('@function.outer', 'textobjects')]] })
-vim.keymap.set({ 'n', 'x', 'o' }, '[f', function()
-  move.goto_previous_start('@function.outer', 'textobjects')
-end, { desc = [[nvim-treesitter-textobjects.move.goto_previous_start('@function.outer', 'textobjects')]] })
-vim.keymap.set({ 'n', 'x', 'o' }, ']a', function()
-  move.goto_next_start('@parameter.inner', 'textobjects')
-end, { desc = [[nvim-treesitter-textobjects.move.goto_next_start('@parameter.inner', 'textobjects')]] })
-vim.keymap.set({ 'n', 'x', 'o' }, '[a', function()
-  move.goto_previous_start('@parameter.inner', 'textobjects')
-end, { desc = [[nvim-treesitter-textobjects.move.goto_previous_start('@parameter.inner', 'textobjects')]] })
+for lhs, query_group in pairs(select_keymaps) do
+  vim.keymap.set({ 'x', 'o' }, lhs, function()
+    select.select_textobject(query_group, 'textobjects')
+  end, { desc = string.format([[nvim-treesitter-textobjects.select.select_textobject('%s', 'textobjects')]], query_group) })
+end
+for lhs, query_group in pairs(goto_next_start_keymaps) do
+  vim.keymap.set({ 'n', 'x', 'o' }, lhs, function()
+    move.goto_next_start(query_group, 'textobjects')
+  end, { desc = string.format([[nvim-treesitter-textobjects.move.goto_next_start('%s', 'textobjects')]], query_group) })
+end
+for lhs, query_group in pairs(goto_next_end_keymaps) do
+  vim.keymap.set({ 'n', 'x', 'o' }, lhs, function()
+    move.goto_next_end(query_group, 'textobjects')
+  end, { desc = string.format([[nvim-treesitter-textobjects.move.goto_next_end('%s', 'textobjects')]], query_group) })
+end
+for lhs, query_group in pairs(goto_previous_start_keymaps) do
+  vim.keymap.set({ 'n', 'x', 'o' }, lhs, function()
+    move.goto_previous_start(query_group, 'textobjects')
+  end, { desc = string.format([[nvim-treesitter-textobjects.move.goto_previous_start('%s', 'textobjects')]], query_group) })
+end
+for lhs, query_group in pairs(goto_previous_end_keymaps) do
+  vim.keymap.set({ 'n', 'x', 'o' }, lhs, function()
+    move.goto_previous_end(query_group, 'textobjects')
+  end, { desc = string.format([[nvim-treesitter-textobjects.move.goto_previous_end('%s', 'textobjects')]], query_group) })
+end
