@@ -1,8 +1,8 @@
-require('vim._extui').enable({})
+require('vim._core.ui2').enable({})
 local extui_enabled = true
 vim.keymap.set('n', 'you', function()
   extui_enabled = not extui_enabled
-  require('vim._extui').enable({ enable = extui_enabled })
+  require('vim._core.ui2').enable({ enable = extui_enabled })
   print((extui_enabled and 'Enabled' or 'Disabled') .. ' extui')
 end, { desc = 'Toggle extui' })
 
