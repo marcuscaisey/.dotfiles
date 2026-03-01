@@ -71,26 +71,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.api.nvim_create_autocmd('LspProgress', {
   group = vim.api.nvim_create_augroup('lsp_progress_echo', {}),
   desc = 'Echo progress message',
-  ---@alias LSPWorkDoneProgress lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd
   ---@class LspProgressCallbackArgs : vim.api.keyset.create_autocmd.callback_args
-  ---@field data {client_id:integer, params:{value:LSPWorkDoneProgress}}
+  ---@field data {client_id:integer, params:{value:lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd}}
   ---@param args LspProgressCallbackArgs
   callback = function(args)
-    local progress = args.data.params.value
-    local msg = progress.message or ''
-    local status = 'running'
-    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-    local title = string.format('[%s] %s', client.name, progress.title)
-    if progress.kind == 'end' then
-      msg = 'done'
-      status = 'success'
-    end
-    vim.api.nvim_echo({ { msg } }, false, {
-      id = title,
+    local value = args.data.params.value
+    vim.api.nvim_echo({ { value.message or 'done' } }, false, {
+      id = 'lsp',
       kind = 'progress',
-      status = status,
-      percent = progress.percentage,
-      title = title,
+      title = value.title,
+      status = value.kind ~= 'end' and 'running' or 'success',
+      percent = value.percentage,
     })
   end,
 })
