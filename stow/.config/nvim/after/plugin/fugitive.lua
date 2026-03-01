@@ -18,4 +18,4 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
 })
 
-vim.keymap.set('n', '<Leader>gb', '<Cmd>Git blame<CR>', { desc = ':Git blame' })
+vim.keymap.set('n', '<Leader>gb', '<Cmd>Git blame<CR>')

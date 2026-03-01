@@ -66,4 +66,4 @@ oil.setup({
   },
 })
 
-vim.keymap.set('n', '-', oil.open, { desc = 'oil.open()' })
+vim.keymap.set('n', '-', '<Cmd>Oil<CR>')

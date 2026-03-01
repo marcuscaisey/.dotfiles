@@ -3,7 +3,6 @@ if not ok then
   return
 end
 local actions = require('fzf-lua.actions')
-local olddirs_exists, olddirs = pcall(require, 'olddirs')
 
 fzf.setup({
   defaults = {
@@ -80,19 +79,17 @@ fzf.setup({
   ui_select = true,
 })
 
-vim.keymap.set('n', '<C-P>', fzf.files, { desc = 'fzf.files()' })
-vim.keymap.set('n', '<C-\\>', fzf.buffers, { desc = 'fzf.buffers()' })
-vim.keymap.set('n', '<C-G>', fzf.live_grep, { desc = 'fzf.live_grep()' })
-vim.keymap.set('n', '<C-_>', fzf.grep_curbuf, { desc = 'fzf.grep_curbuf()' })
-vim.keymap.set('n', '<F1>', fzf.help_tags, { desc = 'fzf.help_tags()' })
-vim.keymap.set('n', '<C-K>', fzf.oldfiles, { desc = 'fzf.oldfiles()' })
-if olddirs_exists then
-  vim.keymap.set('n', '<C-J>', olddirs.fzf_picker, { desc = 'olddirs.fzf_picker' })
-end
-vim.keymap.set('n', '<Leader>zz', fzf.builtin, { desc = 'fzf.builtin()' })
-vim.keymap.set('n', '<Leader>zr', fzf.resume, { desc = 'fzf.resume()' })
-vim.keymap.set('n', 'gO', fzf.lsp_document_symbols, { desc = 'fzf.lsp_document_symbols()' })
-vim.keymap.set('n', 'gwO', fzf.lsp_live_workspace_symbols, { desc = 'fzf.lsp_live_workspace_symbols()' })
+vim.keymap.set('n', '<C-P>', '<Cmd>FzfLua files<CR>')
+vim.keymap.set('n', '<C-\\>', '<Cmd>FzfLua buffers<CR>')
+vim.keymap.set('n', '<C-G>', '<Cmd>FzfLua live_grep<CR>')
+vim.keymap.set('n', '<C-_>', '<Cmd>FzfLua grep_curbuf<CR>')
+vim.keymap.set('n', '<F1>', '<Cmd>FzfLua help_tags<CR>')
+vim.keymap.set('n', '<C-K>', '<Cmd>FzfLua oldfiles<CR>')
+vim.keymap.set('n', '<C-J>', '<Cmd>lua require("olddirs").fzf_picker()<CR>')
+vim.keymap.set('n', '<Leader>zz', '<Cmd>FzfLua builtin<CR>')
+vim.keymap.set('n', '<Leader>zr', '<Cmd>FzfLua resume<CR>')
+vim.keymap.set('n', 'gO', '<Cmd>FzfLua lsp_document_symbols<CR>')
+vim.keymap.set('n', 'gwO', '<Cmd>FzfLua lsp_live_workspace_symbols<CR>')
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('fzf_lsp_definitions_mappings', {}),
   desc = 'Add mappings for fzf.lsp_definitions if the client supports it',
@@ -100,12 +97,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
     if client:supports_method('textDocument/definition') then
-      vim.keymap.set('n', 'g]', fzf.lsp_definitions, { buffer = args.buf, desc = 'fzf.lsp_definitions()' })
-      vim.keymap.set('n', 'g<C-]>', function()
-        fzf.lsp_definitions({ jump1 = true })
-      end, { buffer = args.buf, desc = 'fzf.lsp_definitions({ jump1 = true })' })
+      vim.keymap.set('n', 'g]', '<Cmd>FzfLua lsp_definitions<CR>', { buffer = args.buf })
+      vim.keymap.set('n', 'g<C-]>', '<Cmd>FzfLua lsp_definitions jump1<CR>', { buffer = args.buf })
     end
   end,
 })
-vim.keymap.set('n', 'grr', fzf.lsp_references, { desc = 'fzf.lsp_references()' })
-vim.keymap.set('n', 'gri', fzf.lsp_implementations, { desc = 'fzf.lsp_implementations()' })
+vim.keymap.set('n', 'grr', '<Cmd>FzfLua lsp_references<CR>')
+vim.keymap.set('n', 'gri', '<Cmd>FzfLua lsp_implementations<CR>')

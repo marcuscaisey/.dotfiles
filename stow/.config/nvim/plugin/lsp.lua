@@ -93,5 +93,5 @@ if vim.env.NVIM_LSP_LOG_LEVEL then
   vim.lsp.log.set_level(vim.env.NVIM_LSP_LOG_LEVEL)
 end
 
-vim.keymap.set('n', 'grl', vim.lsp.codelens.run, { desc = 'vim.lsp.codelens.run()' })
-vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format, { desc = 'vim.lsp.buf.format()' })
+vim.keymap.set('n', 'grl', '<Cmd>lua vim.lsp.codelens.run()<CR>')
+vim.keymap.set('n', '<Leader>f', '<Cmd>lua vim.lsp.buf.format()<CR>')

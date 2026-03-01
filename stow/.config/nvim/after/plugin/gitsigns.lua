@@ -25,7 +25,7 @@ gitsigns.setup({
 })
 
 vim.keymap.set('n', ']c', '<Cmd>execute &diff ? "normal! ]c" : "Gitsigns nav_hunk next"<CR>')
-vim.keymap.set('n', '[c', '<Cmd>execute &diff ? "normal! ]c" : "Gitsigns nav_hunk prev"<CR>')
+vim.keymap.set('n', '[c', '<Cmd>execute &diff ? "normal! [c" : "Gitsigns nav_hunk prev"<CR>')
 vim.keymap.set({ 'n', 'v' }, '<Leader>hs', '<Cmd>Gitsigns stage_hunk<CR>')
 vim.keymap.set('n', '<Leader>hS', '<Cmd>Gitsigns stage_buffer<CR>')
 vim.keymap.set({ 'n', 'v' }, '<Leader>hr', '<Cmd>Gitsigns reset_hunk<CR>')

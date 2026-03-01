@@ -23,5 +23,5 @@ vim.api.nvim_create_autocmd('OptionSet', {
   end,
 })
 
-vim.keymap.set('n', 'yod', '<Cmd>execute &diff ? "diffoff" : "diffthis"<CR>', { desc = 'Toggle diff' })
+vim.keymap.set('n', 'yod', '<Cmd>execute &diff ? "diffoff" : "diffthis"<CR>')
 vim.keymap.set('n', 'yoD', '<Cmd>diffoff!<CR>')
