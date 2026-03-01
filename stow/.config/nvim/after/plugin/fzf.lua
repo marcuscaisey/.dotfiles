@@ -37,13 +37,10 @@ fzf.setup({
     },
   },
   files = {
-    fd_opts = '--strip-cwd-prefix ' .. fzf.defaults.files.fd_opts,
-    follow = true,
+    fd_opts = '--follow --strip-cwd-prefix ' .. fzf.defaults.files.fd_opts,
   },
   grep = {
-    rg_opts = '--glob=!.git ' .. fzf.defaults.grep.rg_opts,
-    hidden = true,
-    follow = true,
+    rg_opts = '--hidden --follow --glob=!.git ' .. fzf.defaults.grep.rg_opts,
   },
   helptags = {
     -- Omit help file name
