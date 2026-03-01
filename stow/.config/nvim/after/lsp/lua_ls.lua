@@ -2,6 +2,9 @@
 return {
   settings = {
     Lua = {
+      codeLens = {
+        enable = false
+      },
       diagnostics = {
         disable = {
           'redefined-local',
