@@ -64,17 +64,10 @@ fzf.setup({
   },
   oldfiles = {
     cwd_only = true,
-    winopts = {
-      title = ' Oldfiles (cwd only) ',
-    },
     actions = {
       ['alt-c'] = {
         fn = function(_, opts)
-          opts.__call_fn(vim.tbl_deep_extend('keep', {
-            resume = true,
-            cwd_only = not opts.cwd_only,
-            winopts = { title = ' Oldfiles ' .. (opts.cwd_only and '(all) ' or '(cwd only) ') },
-          }, opts.__call_opts or {}))
+          actions.toggle_opt(opts, 'cwd_only')
         end,
         desc = 'toggle-cwd-only',
         reuse = true,
