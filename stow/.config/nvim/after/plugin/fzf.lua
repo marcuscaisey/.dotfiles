@@ -42,13 +42,6 @@ fzf.setup({
   grep = {
     rg_opts = '--hidden --follow --glob=!.git ' .. fzf.defaults.grep.rg_opts,
   },
-  helptags = {
-    -- Omit help file name
-    fzf_opts = vim.tbl_extend('force', fzf.defaults.fzf_opts, {
-      ['--delimiter'] = '\\s+',
-      ['--with-nth'] = '1',
-    }),
-  },
   lsp = {
     jump1 = false, -- Show the UI when result is a single entry.
     symbols = {
