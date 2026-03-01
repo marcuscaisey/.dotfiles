@@ -1,4 +1,10 @@
-require('vim._core.ui2').enable({})
+require('vim._core.ui2').enable({
+  msg = {
+    targets = {
+      progress = 'msg',
+    },
+  },
+})
 local extui_enabled = true
 vim.keymap.set('n', 'you', function()
   extui_enabled = not extui_enabled
