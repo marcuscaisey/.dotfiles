@@ -37,7 +37,4 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave'
   end,
 })
 
-vim.keymap.set('n', 'yow', function()
-  vim.wo.wrap = not vim.wo.wrap
-  print((vim.wo.wrap and 'Enabled' or 'Disabled') .. ' line wrapping')
-end, { desc = 'Toggle line wrapping in the current window' })
+vim.keymap.set('n', 'yow', '<Cmd>setlocal wrap!<CR>')
