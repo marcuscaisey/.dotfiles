@@ -60,9 +60,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('lsp_codelens_refresh' .. args.buf, {}),
         buffer = args.buf,
         desc = 'Refresh codelenses',
-        callback = function()
-          vim.lsp.codelens.enable(true, { bufnr = args.buf })
-        end,
+        command = 'lua vim.lsp.codelens.enable(true, { bufnr = 0 })',
       })
     end
   end,

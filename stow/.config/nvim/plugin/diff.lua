@@ -14,13 +14,7 @@ vim.api.nvim_create_autocmd('OptionSet', {
   group = augroup,
   pattern = 'diff',
   desc = 'Toggle diagnostics when diff enabled and disabled',
-  callback = function()
-    if vim.v.option_new == '1' then
-      vim.diagnostic.enable(false, { bufnr = 0 })
-    else
-      vim.diagnostic.enable(true, { bufnr = 0 })
-    end
-  end,
+  command = "lua vim.diagnostic.enable(vim.v.option_new ~= '1', { bufnr = 0 })",
 })
 
 vim.keymap.set('n', 'yod', '<Cmd>execute &diff ? "diffoff" : "diffthis"<CR>')
