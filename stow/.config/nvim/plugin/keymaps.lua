@@ -10,25 +10,17 @@ vim.keymap.set('n', 'k', [[(v:count > 1 ? "m'" . v:count : "") . 'k']], { expr =
 
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
-
-local quickfix_loclist_mappings = { '[q', ']q', '[Q', ']Q', '[<C-Q>', ']<C-Q>', '[l', ']l', '[l', ']l', '[<C-L>', ']<C-L>' }
-for _, keymap in ipairs(vim.api.nvim_get_keymap('n')) do
-  if vim.list_contains(quickfix_loclist_mappings, keymap.lhs) then
-    local rhs ---@type (function|string)?
-    local desc = keymap.desc
-    if keymap.rhs then
-      rhs = keymap.rhs .. 'zz'
-    elseif keymap.callback then
-      rhs = function()
-        keymap.callback()
-        vim.cmd.normal('zz')
-      end
-      desc = string.format('%s zz', keymap.desc)
-    end
-    if rhs then
-      vim.keymap.set('n', keymap.lhs, rhs, { desc = desc })
-    end
-  end
-end
+vim.keymap.set('n', '[q', '<Cmd>cprevious | normal zz<CR>')
+vim.keymap.set('n', ']q', '<Cmd>cnext | normal zz<CR>')
+vim.keymap.set('n', '[Q', '<Cmd>cfirst | normal zz<CR>')
+vim.keymap.set('n', ']Q', '<Cmd>clast | normal zz<CR>')
+vim.keymap.set('n', '[<C-Q>', '<Cmd>cpfile | normal zz<CR>')
+vim.keymap.set('n', ']<C-Q>', '<Cmd>cnfile | normal zz<CR>')
+vim.keymap.set('n', '[l', '<Cmd>lprevious | normal zz<CR>')
+vim.keymap.set('n', ']l', '<Cmd>lnext | normal zz<CR>')
+vim.keymap.set('n', '[L', '<Cmd>lfirst | normal zz<CR>')
+vim.keymap.set('n', ']L', '<Cmd>llast | normal zz<CR>')
+vim.keymap.set('n', '[<C-L>', '<Cmd>lpfile | normal zz<CR>')
+vim.keymap.set('n', ']<C-L>', '<Cmd>lnfile | normal zz<CR>')
 
 vim.keymap.set('n', '<leader>re', '<Cmd>mksession! /tmp/session.vim | restart +wqa source /tmp/session.vim<CR>')
