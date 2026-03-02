@@ -18,6 +18,12 @@ return {
       },
     },
   },
+  root_markers = {
+    { '.emmyrc.json', '.luarc.json', '.luarc.jsonc' },
+    { 'lua' },
+    { '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml' },
+    { '.git' },
+  },
   ---@diagnostic disable-next-line: unused-local
   before_init = function(params, config)
     if not config.root_dir then
