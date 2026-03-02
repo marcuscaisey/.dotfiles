@@ -2,16 +2,13 @@ local ok, oil = pcall(require, 'oil')
 if not ok then
   return
 end
-local ok, fzf = pcall(require, 'fzf-lua')
-if not ok then
-  return
-end
 
 oil.setup({
   keymaps = {
     ['gp'] = 'actions.preview',
     ['<C-p>'] = {
       function()
+        local fzf = require('fzf-lua')
         fzf.files({
           fd_opts = fzf.defaults.files.fd_opts .. ' --type d --strip-cwd-prefix',
           cwd = oil.get_current_dir(),
@@ -31,6 +28,7 @@ oil.setup({
     },
     ['<C-G>'] = {
       function()
+        local fzf = require('fzf-lua')
         fzf.live_grep({
           cwd = oil.get_current_dir(),
           copen = function()
