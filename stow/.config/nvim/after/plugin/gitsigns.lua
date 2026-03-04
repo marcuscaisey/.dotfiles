@@ -29,7 +29,7 @@ vim.keymap.set('n', '[c', '<Cmd>execute &diff ? "normal! [c" : "Gitsigns nav_hun
 vim.keymap.set('n', '<Leader>hs', '<Cmd>Gitsigns stage_hunk<CR>')
 vim.keymap.set('v', '<Leader>hs', "<Cmd>lua require('gitsigns').stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })<CR>")
 vim.keymap.set('n', '<Leader>hS', '<Cmd>Gitsigns stage_buffer<CR>')
-vim.keymap.set('n', '<Leader>hr', '<Cmd>Gitsigns stage_hunk<CR>')
+vim.keymap.set('n', '<Leader>hr', '<Cmd>Gitsigns reset_hunk<CR>')
 vim.keymap.set('v', '<Leader>hr', "<Cmd>lua require('gitsigns').reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })<CR>")
 vim.keymap.set('n', '<Leader>hR', '<Cmd>Gitsigns reset_buffer<CR>')
 vim.keymap.set('n', '<Leader>hp', '<Cmd>Gitsigns preview_hunk_inline<CR>')
