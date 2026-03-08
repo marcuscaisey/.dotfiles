@@ -34,7 +34,6 @@ vim.keymap.set('v', '<Leader>hr', "<Cmd>lua require('gitsigns').reset_hunk({ vim
 vim.keymap.set('n', '<Leader>hR', '<Cmd>Gitsigns reset_buffer<CR>')
 vim.keymap.set('n', '<Leader>hp', '<Cmd>Gitsigns preview_hunk_inline<CR>')
 vim.keymap.set('n', '<Leader>gc', function()
-  ---@diagnostic disable-next-line: redundant-parameter
   gitsigns.setqflist('all', { open = false }, function()
     local qflist = vim.fn.getqflist()
     if #qflist == 0 then
