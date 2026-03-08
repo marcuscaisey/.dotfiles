@@ -4,11 +4,9 @@ if not ok then
 end
 local colors = require('catppuccin.utils.colors')
 
----@diagnostic disable-next-line: missing-fields
 catppuccin.setup({
   integrations = {
     mason = true,
-    ---@diagnostic disable-next-line: missing-fields
     native_lsp = {
       underlines = {
         errors = { 'undercurl' },
