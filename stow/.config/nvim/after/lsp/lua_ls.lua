@@ -34,7 +34,7 @@ return {
     end
 
     local plugin_name = vim.fs.basename(config.root_dir)
-    local config_dir = vim.fn.stdpath('config')
+    local config_dir = assert(vim.uv.fs_realpath(vim.fn.stdpath('config')))
     ---@diagnostic disable-next-line: param-type-mismatch
     config.settings.Lua = vim.tbl_deep_extend('force', config.settings.Lua, {
       runtime = {
@@ -44,7 +44,14 @@ return {
       },
       workspace = {
         library = vim.tbl_filter(function(path)
-          return not vim.startswith(path, config_dir) and not vim.endswith(path, vim.fs.joinpath(plugin_name, 'lua'))
+          path = assert(vim.uv.fs_realpath(path))
+          if vim.fs.relpath(config_dir, path) then
+            return false
+          end
+          if config.root_dir ~= config_dir and vim.fs.basename(path) == 'lua' and vim.fs.basename(vim.fs.dirname(path)) == plugin_name then
+            return false
+          end
+          return true
         end, vim.api.nvim_get_runtime_file('lua', true)),
       },
     })
