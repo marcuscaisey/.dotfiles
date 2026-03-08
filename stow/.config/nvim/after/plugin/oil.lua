@@ -12,16 +12,6 @@ oil.setup({
         fzf.files({
           fd_opts = fzf.defaults.files.fd_opts .. ' --type d --strip-cwd-prefix',
           cwd = oil.get_current_dir(),
-          copen = function()
-            oil.close()
-            vim.cmd.copen()
-            vim.cmd.cfirst()
-          end,
-          lopen = function()
-            oil.close()
-            vim.cmd.lopen()
-            vim.cmd.lfirst()
-          end,
         })
       end,
       desc = 'Find files in the current directory',
@@ -29,19 +19,7 @@ oil.setup({
     ['<C-G>'] = {
       function()
         local fzf = require('fzf-lua')
-        fzf.live_grep({
-          cwd = oil.get_current_dir(),
-          copen = function()
-            oil.close()
-            vim.cmd.copen()
-            vim.cmd.cfirst()
-          end,
-          lopen = function()
-            oil.close()
-            vim.cmd.lopen()
-            vim.cmd.lfirst()
-          end,
-        })
+        fzf.live_grep({ cwd = oil.get_current_dir() })
       end,
       desc = 'Grep over files in the current directory',
     },

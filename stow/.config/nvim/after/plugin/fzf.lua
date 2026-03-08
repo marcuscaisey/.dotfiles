@@ -5,8 +5,22 @@ end
 
 fzf.setup({
   defaults = {
-    copen = 'copen | cfirst',
-    lopen = 'lopen | lfirst',
+    copen = function()
+      if vim.bo.filetype == 'oil' then
+        local oil = require('oil')
+        oil.close()
+      end
+      vim.cmd.copen()
+      vim.cmd.cfirst()
+    end,
+    lopen = function()
+      if vim.bo.filetype == 'oil' then
+        local oil = require('oil')
+        oil.close()
+      end
+      vim.cmd.lopen()
+      vim.cmd.lfirst()
+    end,
     fzf_opts = {
       ['--cycle'] = true,
     },
