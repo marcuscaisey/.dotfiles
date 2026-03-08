@@ -2,7 +2,6 @@ local ok, fzf = pcall(require, 'fzf-lua')
 if not ok then
   return
 end
-local actions = require('fzf-lua.actions')
 
 fzf.setup({
   defaults = {
@@ -24,7 +23,7 @@ fzf.setup({
       true,
       -- Default alt-f mapping clobbers the one provided by fzf to jump to the next word.
       ['alt-f'] = false,
-      ['_file_sel_to_ll'] = actions.file_sel_to_ll,
+      ['_file_sel_to_ll'] = fzf.actions.file_sel_to_ll,
     },
   },
   winopts = {
@@ -66,7 +65,7 @@ fzf.setup({
     actions = {
       ['alt-c'] = {
         fn = function(_, opts)
-          actions.toggle_opt(opts, 'cwd_only')
+          fzf.actions.toggle_opt(opts, 'cwd_only')
         end,
         desc = 'toggle-cwd-only',
         reuse = true,
