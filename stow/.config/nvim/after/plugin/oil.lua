@@ -36,10 +36,7 @@ oil.setup({
     },
     ['~'] = { 'actions.cd', opts = { scope = 'win' }, desc = ':lcd to the current oil directory' },
   },
-  view_options = {
-    -- Show files and directories that start with "."
-    show_hidden = true,
-  },
+  view_options = { show_hidden = true },
 })
 
 vim.keymap.set('n', '-', '<Cmd>Oil<CR>')

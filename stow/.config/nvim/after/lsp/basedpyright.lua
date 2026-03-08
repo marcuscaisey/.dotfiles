@@ -2,9 +2,7 @@
 return {
   settings = {
     basedpyright = {
-      analysis = {
-        typeCheckingMode = 'basic',
-      },
+      analysis = { typeCheckingMode = 'basic' },
     },
   },
   ---@diagnostic disable-next-line: unused-local
@@ -16,9 +14,7 @@ return {
       ---@diagnostic disable-next-line: param-type-mismatch
       config.settings.basedpyright = vim.tbl_deep_extend('force', config.settings.basedpyright, {
         analysis = {
-          extraPaths = {
-            vim.fs.joinpath(config.root_dir, 'plz-out/python/venv'),
-          },
+          extraPaths = { vim.fs.joinpath(config.root_dir, 'plz-out/python/venv') },
           exclude = { 'plz-out' },
         },
       })

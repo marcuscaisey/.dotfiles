@@ -2,20 +2,12 @@
 return {
   settings = {
     Lua = {
-      codeLens = {
-        enable = false,
-      },
+      codeLens = { enable = false },
       diagnostics = {
-        disable = {
-          'redefined-local',
-        },
+        disable = { 'redefined-local' },
       },
-      format = {
-        enable = false,
-      },
-      workspace = {
-        checkThirdParty = false,
-      },
+      format = { enable = false },
+      workspace = { checkThirdParty = false },
     },
   },
   root_markers = {

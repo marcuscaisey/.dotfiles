@@ -21,9 +21,7 @@ fzf.setup({
       vim.cmd.lopen()
       vim.cmd.lfirst()
     end,
-    fzf_opts = {
-      ['--cycle'] = true,
-    },
+    fzf_opts = { ['--cycle'] = true },
   },
   keymap = {
     fzf = {
@@ -44,16 +42,10 @@ fzf.setup({
     width = 0.9,
     height = 0.9,
     ---@diagnostic disable-next-line: missing-fields
-    preview = {
-      horizontal = 'right:50%',
-    },
+    preview = { horizontal = 'right:50%' },
   },
-  files = {
-    fd_opts = '--follow --strip-cwd-prefix ' .. fzf.defaults.files.fd_opts,
-  },
-  grep = {
-    rg_opts = '--hidden --follow --glob=!.git ' .. fzf.defaults.grep.rg_opts,
-  },
+  files = { fd_opts = '--follow --strip-cwd-prefix ' .. fzf.defaults.files.fd_opts },
+  grep = { rg_opts = '--hidden --follow --glob=!.git ' .. fzf.defaults.grep.rg_opts },
   lsp = {
     jump1 = false, -- Show the UI when result is a single entry.
     symbols = {
@@ -86,9 +78,7 @@ fzf.setup({
       },
     },
   },
-  olddirs = {
-    git_repo_only = true,
-  },
+  olddirs = { git_repo_only = true },
   ui_select = true,
 })
 

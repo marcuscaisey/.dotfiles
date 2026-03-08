@@ -5,18 +5,10 @@ local signs = {
   [vim.diagnostic.severity.HINT] = '󰌵 ',
 }
 vim.diagnostic.config({
-  virtual_text = {
-    source = true,
-  },
-  signs = {
-    text = signs,
-  },
-  status = {
-    text = signs,
-  },
-  float = {
-    source = true,
-  },
+  virtual_text = { source = true },
+  signs = { text = signs },
+  status = { text = signs },
+  float = { source = true },
   severity_sort = true,
 })
 

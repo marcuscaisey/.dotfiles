@@ -4,9 +4,7 @@ return {
     gopls = {
       directoryFilters = { '-plz-out' },
       semanticTokens = true,
-      semanticTokenTypes = {
-        string = false,
-      },
+      semanticTokenTypes = { string = false },
     },
   },
   on_attach = function(client, bufnr)
