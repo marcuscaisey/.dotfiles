@@ -1,16 +1,16 @@
 local ok, treesitter_textobjects = pcall(require, 'nvim-treesitter-textobjects')
 if not ok then
-  return
+    return
 end
 
 treesitter_textobjects.setup({
-  select = {
-    lookahead = true,
-    selection_modes = {
-      ['@function.outer'] = 'V',
-      ['@function.inner'] = 'V',
+    select = {
+        lookahead = true,
+        selection_modes = {
+            ['@function.outer'] = 'V',
+            ['@function.inner'] = 'V',
+        },
     },
-  },
 })
 
 -- stylua: ignore start

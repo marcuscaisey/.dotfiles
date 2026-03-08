@@ -1,7 +1,7 @@
 local ok, lightbulb = pcall(require, 'nvim-lightbulb')
 if not ok then
-  return
+    return
 end
 lightbulb.setup({
-  autocmd = { enabled = true },
+    autocmd = { enabled = true },
 })

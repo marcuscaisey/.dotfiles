@@ -1,6 +1,6 @@
 local ok, multicursor = pcall(require, 'multicursor-nvim')
 if not ok then
-  return
+    return
 end
 
 multicursor.setup()

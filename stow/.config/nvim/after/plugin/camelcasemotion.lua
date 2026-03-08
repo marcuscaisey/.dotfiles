@@ -1,4 +1,4 @@
 if not vim.g.loaded_camelcasemotion then
-  return
+    return
 end
 vim.fn['camelcasemotion#CreateMotionMappings']('<leader>')
