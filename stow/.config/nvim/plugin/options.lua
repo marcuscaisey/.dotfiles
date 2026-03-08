@@ -1,4 +1,5 @@
-require('vim._core.ui2').enable({
+local ui2 = require('vim._core.ui2')
+ui2.enable({
   msg = {
     targets = {
       progress = 'msg',
