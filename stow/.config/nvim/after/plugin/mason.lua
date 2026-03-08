@@ -2,7 +2,6 @@ local ok, mason = pcall(require, 'mason')
 if not ok then
   return
 end
-local mason_registry = require('mason-registry')
 
 mason.setup()
 
@@ -28,6 +27,7 @@ local tools = {
 }
 
 vim.api.nvim_create_user_command('MasonInstallTools', function()
+  local mason_registry = require('mason-registry')
   local args = {}
   for _, tool in ipairs(tools) do
     if not mason_registry.is_installed(tool) then
