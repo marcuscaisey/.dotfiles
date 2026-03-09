@@ -91,5 +91,7 @@ if vim.env.NVIM_LSP_LOG_LEVEL then
     vim.lsp.log.set_level(vim.env.NVIM_LSP_LOG_LEVEL)
 end
 
+vim.api.nvim_create_user_command('LspLog', 'execute "tabnew " . luaeval("vim.lsp.log.get_filename()")', {})
+
 vim.keymap.set('n', 'grl', '<Cmd>lua vim.lsp.codelens.run()<CR>')
 vim.keymap.set('n', '<Leader>f', '<Cmd>lua vim.lsp.buf.format()<CR>')
