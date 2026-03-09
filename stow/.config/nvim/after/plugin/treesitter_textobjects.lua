@@ -10,6 +10,7 @@ treesitter_textobjects.setup({
             ['@function.outer'] = 'V',
             ['@function.inner'] = 'V',
         },
+        include_surrounding_whitespace = true,
     },
 })
 
