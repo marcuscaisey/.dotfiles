@@ -18,8 +18,6 @@ vim.keymap.set({ 'x', 'o' }, 'af', '<Cmd>lua require("nvim-treesitter-textobject
 vim.keymap.set({ 'x', 'o' }, 'if', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")<CR>')
 vim.keymap.set({ 'x', 'o' }, ']f', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")<CR>')
 vim.keymap.set({ 'x', 'o' }, '[f', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")<CR>')
-vim.keymap.set({ 'x', 'o' }, ']F', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")<CR>')
-vim.keymap.set({ 'x', 'o' }, '[F', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")<CR>')
 vim.keymap.set({ 'x', 'o' }, 'ia', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@parameter.inner", "textobjects")<CR>')
 vim.keymap.set({ 'x', 'o' }, 'aa', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@parameter.outer", "textobjects")<CR>')
 vim.keymap.set({ 'x', 'o' }, ']a', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_next_start("@parameter.inner", "textobjects")<CR>')
