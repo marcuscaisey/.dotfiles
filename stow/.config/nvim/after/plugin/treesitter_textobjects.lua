@@ -17,8 +17,10 @@ treesitter_textobjects.setup({
 -- stylua: ignore start
 vim.keymap.set({ 'x', 'o' }, 'af', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")<CR>')
 vim.keymap.set({ 'x', 'o' }, 'if', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")<CR>')
-vim.keymap.set({ 'n', 'x', 'o' }, ']f', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")<CR>')
-vim.keymap.set({ 'n', 'x', 'o' }, '[f', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")<CR>')
+vim.keymap.set({ 'n', 'x', 'o' }, ']]', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_next_start("@section.outer", "textobjects")<CR>')
+vim.keymap.set({ 'n', 'x', 'o' }, '][', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_next_end("@section.outer", "textobjects")<CR>')
+vim.keymap.set({ 'n', 'x', 'o' }, '[[', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_previous_start("@section.outer", "textobjects")<CR>')
+vim.keymap.set({ 'n', 'x', 'o' }, '[]', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_previous_end("@section.outer", "textobjects")<CR>')
 vim.keymap.set({ 'x', 'o' }, 'ia', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@parameter.inner", "textobjects")<CR>')
 vim.keymap.set({ 'x', 'o' }, 'aa', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@parameter.outer", "textobjects")<CR>')
 vim.keymap.set({ 'x', 'o' }, 'ac', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@call.outer", "textobjects")<CR>')

@@ -43,3 +43,10 @@
   _ @parameter.inner @parameter.outer
   .
   ","? @parameter.outer)
+
+; sections
+(source_file
+  [
+   (function_declaration)
+   (class_declaration)
+  ] @section.outer)
