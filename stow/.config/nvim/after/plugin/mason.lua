@@ -2,6 +2,7 @@ local ok, mason = pcall(require, 'mason')
 if not ok then
     return
 end
+local mason_registry = require('mason-registry')
 
 mason.setup()
 
@@ -26,17 +27,12 @@ local tools = {
     'yaml-language-server',
 }
 
-vim.api.nvim_create_user_command('MasonInstallTools', function()
-    local mason_registry = require('mason-registry')
-    local args = {}
-    for _, tool in ipairs(tools) do
-        if not mason_registry.is_installed(tool) then
-            table.insert(args, tool)
-        end
+local args = {}
+for _, tool in ipairs(tools) do
+    if not mason_registry.is_installed(tool) then
+        table.insert(args, tool)
     end
-    if #args == 0 then
-        vim.notify('All tools have already been installed')
-        return
-    end
+end
+if #args > 0 then
     vim.cmd.MasonInstall({ args = args })
-end, { desc = 'Install all tools with mason', force = true })
+end
