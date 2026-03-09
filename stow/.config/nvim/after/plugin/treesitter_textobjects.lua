@@ -28,5 +28,4 @@ vim.keymap.set({ 'x', 'o' }, 'ic', '<Cmd>lua require("nvim-treesitter-textobject
 vim.keymap.set({ 'x', 'o' }, 'ac', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@call.outer", "textobjects")<CR>')
 vim.keymap.set({ 'x', 'o' }, 'ib', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@block.inner", "textobjects")<CR>')
 vim.keymap.set({ 'x', 'o' }, 'ab', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@block.outer", "textobjects")<CR>')
-vim.keymap.set({ 'x', 'o' }, ']m', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_next_start("@method.outer", "textobjects")<CR>')
 -- stylua: ignore end
