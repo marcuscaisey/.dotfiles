@@ -1,7 +1,7 @@
 {
   "plugins": {
     "blink.cmp": {
-      "rev": "b650e976a927be6b46487a0a610b75af111376c5",
+      "rev": "e3523b949badd35ac8553bb975698f8d47b6debd",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "camelcasemotion": {
@@ -9,11 +9,11 @@
       "src": "https://github.com/bkad/camelcasemotion"
     },
     "catppuccin": {
-      "rev": "0a5de4da015a175f416d6ef1eda84661623e0500",
+      "rev": "12c004cde3f36cb1d57242f1e6aac46b09a0e5b4",
       "src": "https://github.com/catppuccin/nvim"
     },
     "fzf-lua": {
-      "rev": "cfc085749d9232373fc6d8cf3a964c5601a7816e",
+      "rev": "d9508cc1d05ffcdc91a32dfd38fc1013a56b20da",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitlinker.nvim": {
@@ -21,7 +21,7 @@
       "src": "https://github.com/linrongbin16/gitlinker.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "9f3c6dd7868bcc116e9c1c1929ce063b978fa519",
+      "rev": "7c4faa3540d0781a28588cafbd4dd187a28ac6e3",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "mason.nvim": {
@@ -29,7 +29,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "multicursor.nvim": {
-      "rev": "630dd29dd696bc977cb81d7dd2fa6bb280f60fc4",
+      "rev": "811681faf44d8031685614cc00a148cd3ece697c",
       "src": "https://github.com/jake-stewart/multicursor.nvim"
     },
     "nvim-lightbulb": {
@@ -37,23 +37,23 @@
       "src": "https://github.com/kosayoda/nvim-lightbulb"
     },
     "nvim-lspconfig": {
-      "rev": "a40d22e75d951ad2fcf236ceb013d88f81d2cc9a",
+      "rev": "d8bf4c47385340ab2029402201d4d7c9f99f437a",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
-      "rev": "ce4ad4a8909d7f4537803c8f09b79e78c49a6cc4",
+      "rev": "61319d4bd1c5e336e197defa15bd104c51f0fb29",
       "src": "https://github.com/kylechui/nvim-surround"
     },
     "nvim-treesitter": {
-      "rev": "957f86ae3f049ab6681ed64c05b05768fcaed0d2",
+      "rev": "5cb05e1b0fa3c469958a2b26f36b3fe930af221c",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {
-      "rev": "64dd4cf3f6fd0ab17622c5ce15c91fc539c3f24a",
+      "rev": "529ee357b8c03d76ff71233afed68fd0f5fe10b1",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "a0e182ae21fda68c59d1f36c9ed45600aef50311",
+      "rev": "4e91b5d0394329a229725b021a8ea217099826ef",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "nvim-web-devicons": {
@@ -65,7 +65,7 @@
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "olddirs.nvim": {
-      "rev": "81666147b27ba6c8ef7a2e2b9af15c36bbae7f28",
+      "rev": "a4c2ead724b5fc803f1a1a6def0de646796de188",
       "src": "https://github.com/marcuscaisey/olddirs.nvim"
     },
     "please.nvim": {
@@ -85,7 +85,7 @@
       "src": "https://github.com/inkarkat/vim-ReplaceWithRegister"
     },
     "vim-fugitive": {
-      "rev": "61b51c0",
+      "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
       "src": "https://github.com/tpope/vim-fugitive"
     },
     "vim-indent-object": {
