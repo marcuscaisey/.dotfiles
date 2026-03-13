@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd('PackChanged', {
-    group = vim.api.nvim_create_augroup('pack_post_install_commands', {}),
+    group = vim.api.nvim_create_augroup('pack.post_install_commands', {}),
     desc = 'Run post installation commands',
     ---@class PackChangedCallbackArgs : vim.api.keyset.create_autocmd.callback_args
     ---@field data {active:boolean, kind:'install'|'update'|'delete', spec:vim.pack.Spec, path:string}

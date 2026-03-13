@@ -21,7 +21,7 @@ local enabled_lsps = {
 
 if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
     vim.api.nvim_create_autocmd('VimEnter', {
-        group = vim.api.nvim_create_augroup('lsp_devtools_setup', {}),
+        group = vim.api.nvim_create_augroup('lsp.devtools_setup', {}),
         desc = 'Wrap each language server command with the LSP devtools agent and before enabling',
         callback = function()
             for _, name in ipairs(enabled_lsps) do
@@ -38,7 +38,7 @@ else
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('lsp_setup', {}),
+    group = vim.api.nvim_create_augroup('lsp.setup', {}),
     desc = 'LSP setup',
     callback = function(ev)
         local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         if client:supports_method('textDocument/codeLens') then
             vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'BufWritePost', 'CursorHold' }, {
-                group = vim.api.nvim_create_augroup('lsp_codelens_refresh' .. ev.buf, {}),
+                group = vim.api.nvim_create_augroup('lsp.codelens_refresh_' .. ev.buf, {}),
                 buffer = ev.buf,
                 desc = 'Refresh codelenses',
                 command = 'lua vim.lsp.codelens.enable(true, { bufnr = 0 })',
@@ -67,7 +67,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.api.nvim_create_autocmd('LspProgress', {
-    group = vim.api.nvim_create_augroup('lsp_progress_echo', {}),
+    group = vim.api.nvim_create_augroup('lsp.progress_echo', {}),
     desc = 'Echo progress message',
     ---@class LspProgressCallbackArgs : vim.api.keyset.create_autocmd.callback_args
     ---@field data {client_id:integer, params:{value:lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd}}

@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd('BufWritePost', {
-    group = vim.api.nvim_create_augroup('puku_format', {}),
+    group = vim.api.nvim_create_augroup('go.puku_format', {}),
     pattern = { '*.go' },
     desc = 'Run puku on saved file',
     callback = function(ev)

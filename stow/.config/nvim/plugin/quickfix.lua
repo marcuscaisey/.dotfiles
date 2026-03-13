@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd('QuickFixCmdPost', {
-    group = vim.api.nvim_create_augroup('quickfix_sort', {}),
+    group = vim.api.nvim_create_augroup('quickfix.sort', {}),
     pattern = '*',
     desc = 'Sort quickfix list items',
     callback = function()

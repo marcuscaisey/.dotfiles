@@ -82,7 +82,7 @@ function StatuslineDiagnostics()
 end
 
 vim.api.nvim_create_autocmd({ 'LspAttach', 'LspDetach' }, {
-    group = vim.api.nvim_create_augroup('statusline', {}),
+    group = vim.api.nvim_create_augroup('statusline.lsp_redraw', {}),
     desc = 'Redraw the statusline',
     command = 'redrawstatus',
 })

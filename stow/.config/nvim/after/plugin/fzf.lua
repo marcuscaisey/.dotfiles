@@ -94,7 +94,7 @@ vim.keymap.set('n', '<Leader>zr', '<Cmd>FzfLua resume<CR>')
 vim.keymap.set('n', 'gO', '<Cmd>FzfLua lsp_document_symbols<CR>')
 vim.keymap.set('n', 'gwO', '<Cmd>FzfLua lsp_live_workspace_symbols<CR>')
 vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('fzf_lsp_definitions_mappings', {}),
+    group = vim.api.nvim_create_augroup('fzf.lsp_definitions_mappings', {}),
     desc = 'Add mappings for fzf.lsp_definitions if the client supports it',
     ---@param ev vim.api.keyset.create_autocmd.callback_args
     callback = function(ev)

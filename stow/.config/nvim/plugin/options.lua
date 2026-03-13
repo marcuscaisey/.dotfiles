@@ -19,18 +19,18 @@ vim.filetype.add({
 })
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained', 'InsertLeave', 'WinEnter' }, {
-    group = vim.api.nvim_create_augroup('options_set_relativenumber', {}),
+    group = vim.api.nvim_create_augroup('options.set_relativenumber', {}),
     desc = 'Use relative line numbers in focused window when not in insert mode',
     command = "if mode() != 'i' | setlocal relativenumber | endif",
 })
 vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave' }, {
-    group = vim.api.nvim_create_augroup('options_unset_relativenumber', {}),
+    group = vim.api.nvim_create_augroup('options.unset_relativenumber', {}),
     desc = 'Use absolute line numbers in unfocused windows or when in insert mode',
     command = 'set norelativenumber',
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-    group = vim.api.nvim_create_augroup('remove_formatoptions', {}),
+    group = vim.api.nvim_create_augroup('options.remove_formatoptions', {}),
     desc = 'Remove c, r, and o from formatoptions after any ftplugin may have modified them',
     command = 'set formatoptions-=cro',
 })
