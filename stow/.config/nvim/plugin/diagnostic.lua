@@ -12,4 +12,4 @@ vim.diagnostic.config({
     severity_sort = true,
 })
 
-vim.keymap.set('n', 'yoe', '<Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>')
+vim.keymap.set('n', 'yoe', '<Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>', { desc = 'Toggle diagnostics' })

@@ -39,4 +39,4 @@ oil.setup({
     view_options = { show_hidden = true },
 })
 
-vim.keymap.set('n', '-', '<Cmd>Oil<CR>')
+vim.keymap.set('n', '-', '<Cmd>Oil<CR>', { desc = 'Open file explorer' })

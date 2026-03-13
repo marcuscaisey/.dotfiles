@@ -16,5 +16,5 @@ vim.api.nvim_create_autocmd('OptionSet', {
     command = "lua vim.diagnostic.enable(vim.v.option_new ~= '1', { bufnr = 0 })",
 })
 
-vim.keymap.set('n', 'yod', '<Cmd>execute &diff ? "diffoff" : "diffthis"<CR>')
-vim.keymap.set('n', 'yoD', '<Cmd>diffoff!<CR>')
+vim.keymap.set('n', 'yod', '<Cmd>execute &diff ? "diffoff" : "diffthis"<CR>', { desc = 'Toggle diff in window' })
+vim.keymap.set('n', 'yoD', '<Cmd>diffoff!<CR>', { desc = 'Switch off diff in all windows' })

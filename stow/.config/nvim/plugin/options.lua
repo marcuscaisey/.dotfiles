@@ -35,4 +35,4 @@ vim.api.nvim_create_autocmd('FileType', {
     command = 'set formatoptions-=cro',
 })
 
-vim.keymap.set('n', 'yow', '<Cmd>setlocal wrap!<CR>')
+vim.keymap.set('n', 'yow', '<Cmd>setlocal wrap!<CR>', { desc = 'Toggle line wrapping' })

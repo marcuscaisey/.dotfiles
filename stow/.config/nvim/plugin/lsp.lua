@@ -93,5 +93,6 @@ end
 
 vim.api.nvim_create_user_command('LspLog', 'execute "tabnew " . luaeval("vim.lsp.log.get_filename()")', {})
 
-vim.keymap.set('n', 'grl', '<Cmd>lua vim.lsp.codelens.run()<CR>')
-vim.keymap.set('n', '<Leader>f', '<Cmd>lua vim.lsp.buf.format()<CR>')
+vim.keymap.set('n', 'grl', '<Cmd>lua vim.lsp.codelens.run()<CR>', { desc = 'Execute codelens' })
+vim.keymap.set('n', '<Leader>f', '<Cmd>lua vim.lsp.buf.format()<CR>', { desc = 'Format buffer' })
+

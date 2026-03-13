@@ -82,28 +82,28 @@ fzf.setup({
     ui_select = true,
 })
 
-vim.keymap.set('n', '<C-P>', '<Cmd>FzfLua files<CR>')
-vim.keymap.set('n', '<C-\\>', '<Cmd>FzfLua buffers<CR>')
-vim.keymap.set('n', '<C-G>', '<Cmd>FzfLua live_grep<CR>')
-vim.keymap.set('n', '<C-_>', '<Cmd>FzfLua grep_curbuf<CR>')
-vim.keymap.set('n', '<F1>', '<Cmd>FzfLua help_tags<CR>')
-vim.keymap.set('n', '<C-K>', '<Cmd>FzfLua oldfiles<CR>')
-vim.keymap.set('n', '<C-J>', '<Cmd>lua require("olddirs").fzf_picker()<CR>')
-vim.keymap.set('n', '<Leader>zz', '<Cmd>FzfLua builtin<CR>')
-vim.keymap.set('n', '<Leader>zr', '<Cmd>FzfLua resume<CR>')
-vim.keymap.set('n', 'gO', '<Cmd>FzfLua lsp_document_symbols<CR>')
-vim.keymap.set('n', 'gwO', '<Cmd>FzfLua lsp_live_workspace_symbols<CR>')
+vim.keymap.set('n', '<C-P>', '<Cmd>FzfLua files<CR>', { desc = 'Find files' })
+vim.keymap.set('n', '<C-\\>', '<Cmd>FzfLua buffers<CR>', { desc = 'List buffers' })
+vim.keymap.set('n', '<C-G>', '<Cmd>FzfLua live_grep<CR>', { desc = 'Live grep' })
+vim.keymap.set('n', '<C-_>', '<Cmd>FzfLua grep_curbuf<CR>', { desc = 'Grep over current buffer' })
+vim.keymap.set('n', '<F1>', '<Cmd>FzfLua help_tags<CR>', { desc = 'Search through help tags' })
+vim.keymap.set('n', '<C-K>', '<Cmd>FzfLua oldfiles<CR>', { desc = 'List oldfiles' })
+vim.keymap.set('n', '<C-J>', '<Cmd>lua require("olddirs").fzf_picker()<CR>', { desc = 'List olddirs' })
+vim.keymap.set('n', '<Leader>zz', '<Cmd>FzfLua builtin<CR>', { desc = 'List builtin fzf pickers' })
+vim.keymap.set('n', '<Leader>zr', '<Cmd>FzfLua resume<CR>', { desc = 'Resume previous fzf picker' })
+vim.keymap.set('n', 'gO', '<Cmd>FzfLua lsp_document_symbols<CR>', { desc = 'List document symbols' })
+vim.keymap.set('n', 'gwO', '<Cmd>FzfLua lsp_live_workspace_symbols<CR>', { desc = 'List workspace symbols' })
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('fzf.lsp_definitions_mappings', {}),
-    desc = 'Add mappings for fzf.lsp_definitions if the client supports it',
+    desc = 'Add mappings for FzfLua lsp_definitions if the client supports it',
     ---@param ev vim.api.keyset.create_autocmd.callback_args
     callback = function(ev)
         local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
         if client:supports_method('textDocument/definition') then
-            vim.keymap.set('n', 'g]', '<Cmd>FzfLua lsp_definitions<CR>', { buffer = ev.buf })
-            vim.keymap.set('n', 'g<C-]>', '<Cmd>FzfLua lsp_definitions jump1<CR>', { buffer = ev.buf })
+            vim.keymap.set('n', 'g]', '<Cmd>FzfLua lsp_definitions<CR>', { buffer = 0, desc = 'Jump to definition (always show UI)' })
+            vim.keymap.set('n', 'g<C-]>', '<Cmd>FzfLua lsp_definitions jump1<CR>', { buffer = 0, desc = 'Jump to definition (show UI if multiple)' })
         end
     end,
 })
-vim.keymap.set('n', 'grr', '<Cmd>FzfLua lsp_references<CR>')
-vim.keymap.set('n', 'gri', '<Cmd>FzfLua lsp_implementations<CR>')
+vim.keymap.set('n', 'grr', '<Cmd>FzfLua lsp_references<CR>', { desc = 'List references' })
+vim.keymap.set('n', 'gri', '<Cmd>FzfLua lsp_implementations<CR>', { desc = 'List implementations' })
