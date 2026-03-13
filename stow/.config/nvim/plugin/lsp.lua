@@ -40,8 +40,8 @@ end
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp_setup', {}),
     desc = 'LSP setup',
-    callback = function(args)
-        local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+    callback = function(ev)
+        local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
 
         -- if client:supports_method('textDocument/completion') then
         --   vim.lsp.completion.enable(true, client.id, args.buf, {
@@ -57,8 +57,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         if client:supports_method('textDocument/codeLens') then
             vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'BufWritePost', 'CursorHold' }, {
-                group = vim.api.nvim_create_augroup('lsp_codelens_refresh' .. args.buf, {}),
-                buffer = args.buf,
+                group = vim.api.nvim_create_augroup('lsp_codelens_refresh' .. ev.buf, {}),
+                buffer = ev.buf,
                 desc = 'Refresh codelenses',
                 command = 'lua vim.lsp.codelens.enable(true, { bufnr = 0 })',
             })
@@ -71,9 +71,9 @@ vim.api.nvim_create_autocmd('LspProgress', {
     desc = 'Echo progress message',
     ---@class LspProgressCallbackArgs : vim.api.keyset.create_autocmd.callback_args
     ---@field data {client_id:integer, params:{value:lsp.WorkDoneProgressBegin|lsp.WorkDoneProgressReport|lsp.WorkDoneProgressEnd}}
-    ---@param args LspProgressCallbackArgs
-    callback = function(args)
-        local value = args.data.params.value
+    ---@param ev LspProgressCallbackArgs
+    callback = function(ev)
+        local value = ev.data.params.value
         vim.api.nvim_echo({ { value.message or 'done' } }, false, {
             id = 'lsp',
             kind = 'progress',

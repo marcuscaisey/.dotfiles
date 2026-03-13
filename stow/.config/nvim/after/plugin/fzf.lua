@@ -96,12 +96,12 @@ vim.keymap.set('n', 'gwO', '<Cmd>FzfLua lsp_live_workspace_symbols<CR>')
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('fzf_lsp_definitions_mappings', {}),
     desc = 'Add mappings for fzf.lsp_definitions if the client supports it',
-    ---@param args vim.api.keyset.create_autocmd.callback_args
-    callback = function(args)
-        local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+    ---@param ev vim.api.keyset.create_autocmd.callback_args
+    callback = function(ev)
+        local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
         if client:supports_method('textDocument/definition') then
-            vim.keymap.set('n', 'g]', '<Cmd>FzfLua lsp_definitions<CR>', { buffer = args.buf })
-            vim.keymap.set('n', 'g<C-]>', '<Cmd>FzfLua lsp_definitions jump1<CR>', { buffer = args.buf })
+            vim.keymap.set('n', 'g]', '<Cmd>FzfLua lsp_definitions<CR>', { buffer = ev.buf })
+            vim.keymap.set('n', 'g<C-]>', '<Cmd>FzfLua lsp_definitions jump1<CR>', { buffer = ev.buf })
         end
     end,
 })

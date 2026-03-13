@@ -3,9 +3,9 @@ vim.api.nvim_create_autocmd('PackChanged', {
     desc = 'Run post installation commands',
     ---@class PackChangedCallbackArgs : vim.api.keyset.create_autocmd.callback_args
     ---@field data {active:boolean, kind:'install'|'update'|'delete', spec:vim.pack.Spec, path:string}
-    ---@param args PackChangedCallbackArgs
-    callback = function(args)
-        local active, kind, spec, path = args.data.active, args.data.kind, args.data.spec, args.data.path
+    ---@param ev PackChangedCallbackArgs
+    callback = function(ev)
+        local active, kind, spec, path = ev.data.active, ev.data.kind, ev.data.spec, ev.data.path
         if not (kind == 'update' or kind == 'install') then
             return
         end
