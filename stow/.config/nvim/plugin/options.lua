@@ -18,15 +18,14 @@ vim.filetype.add({
     },
 })
 
-local augroup = vim.api.nvim_create_augroup('options_auto_relativenumber', {})
 vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained', 'InsertLeave', 'WinEnter' }, {
-    group = augroup,
-    desc = 'Set relativenumber in focused window when not in insert mode',
-    command = "if mode() != 'i' && &number | setlocal relativenumber | endif",
+    group = vim.api.nvim_create_augroup('options_set_relativenumber', {}),
+    desc = 'Use relative line numbers in focused window when not in insert mode',
+    command = "if mode() != 'i' | setlocal relativenumber | endif",
 })
 vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave' }, {
-    group = augroup,
-    desc = 'Unset relativenumber in unfocused windows or when in insert mode',
+    group = vim.api.nvim_create_augroup('options_unset_relativenumber', {}),
+    desc = 'Use absolute line numbers in unfocused windows or when in insert mode',
     command = 'set norelativenumber',
 })
 
