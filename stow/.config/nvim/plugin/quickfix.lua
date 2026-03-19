@@ -34,4 +34,4 @@ vim.keymap.set('n', ']L', '<Cmd>llast<CR>zz', { desc = 'Jump to previous locatio
 vim.keymap.set('n', '[<C-L>', '<Cmd>lpfile<CR>zz', { desc = 'Jump to location list entry in previous file' })
 vim.keymap.set('n', ']<C-L>', '<Cmd>lnfile<CR>zz', { desc = 'Jump to location list entry in next file' })
 vim.keymap.set('n', '<Leader>q', '<Cmd>execute getqflist({"winid": 0}).winid > 0 ? "cclose" : "copen"<CR>', { desc = 'Toggle quickfix list' })
-vim.keymap.set('n', '<Leader>l', '<Cmd>execute getloclist({"winid": 0}).winid > 0 ? "lclose" : "lopen"<CR>', { desc = 'Toggle location list' })
+vim.keymap.set('n', '<Leader>l', '<Cmd>execute getloclist(0, {"winid": 0}).winid > 0 ? "lclose" : "lopen"<CR>', { desc = 'Toggle location list' })
