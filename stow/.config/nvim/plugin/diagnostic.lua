@@ -7,7 +7,7 @@ local signs = {
 vim.diagnostic.config({
     virtual_text = { source = true },
     signs = { text = signs },
-    status = { text = signs },
+    status = { format = signs },
     float = { source = true },
     severity_sort = true,
 })
