@@ -37,6 +37,8 @@ else
     vim.lsp.enable(enabled_lsps)
 end
 
+vim.lsp.codelens.enable()
+
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp.setup', {}),
     desc = 'LSP setup',
@@ -54,15 +56,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         --   })
         --   vim.bo[args.buf].complete = 'o'
         -- end
-
-        if client:supports_method('textDocument/codeLens') then
-            vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'BufWritePost', 'CursorHold' }, {
-                group = vim.api.nvim_create_augroup('lsp.codelens_refresh_' .. ev.buf, {}),
-                buffer = ev.buf,
-                desc = 'Refresh codelenses',
-                command = 'lua vim.lsp.codelens.enable(true, { bufnr = 0 })',
-            })
-        end
     end,
 })
 
