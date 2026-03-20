@@ -14,7 +14,7 @@ vim.o.statusline = table.concat({
     '%{% v:lua.StatuslineFile() %}',
     '%=',
     '%(%{% v:lua.StatuslineLSPClients() %}  %)',
-    '%(%{% v:lua.StatuslineDiagnostics() %}  %)',
+    '%(%{% v:lua.vim.diagnostic.status() %}  %)',
     hl('StatusLine') .. '%(%l:%v %p%%%)',
     ' ',
 })
@@ -74,11 +74,6 @@ function StatuslineLSPClients()
         end
     end
     return hl('StatusLine') .. table.concat(client_names, ', ')
-end
-
----@return string
-function StatuslineDiagnostics()
-    return vim.diagnostic.status()
 end
 
 vim.api.nvim_create_autocmd({ 'LspAttach', 'LspDetach' }, {
