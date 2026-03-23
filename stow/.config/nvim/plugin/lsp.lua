@@ -46,15 +46,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
 
         -- if client:supports_method('textDocument/completion') then
-        --   vim.lsp.completion.enable(true, client.id, args.buf, {
-        --     convert = function(item)
-        --       return {
-        --         menu = vim.tbl_get(item, 'labelDetails', 'detail') or '',
-        --         kind_hlgroup = 'LspItemKind' .. vim.lsp.protocol.CompletionItemKind[item.kind],
-        --       }
-        --     end,
-        --   })
-        --   vim.bo[args.buf].complete = 'o'
+        --     vim.lsp.completion.enable(true, client.id, ev.buf, {
+        --         convert = function(item)
+        --             return {
+        --                 kind_hlgroup = 'LspItemKind' .. vim.lsp.protocol.CompletionItemKind[item.kind],
+        --             }
+        --         end,
+        --     })
+        --     vim.bo[ev.buf].complete = 'o'
         -- end
     end,
 })
