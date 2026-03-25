@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         --     vim.lsp.completion.enable(true, client.id, ev.buf, {
         --         convert = function(item)
         --             return {
-        --                 kind_hlgroup = 'LspItemKind' .. vim.lsp.protocol.CompletionItemKind[item.kind],
+        --                 kind_hlgroup = 'LspKind' .. vim.lsp.protocol.CompletionItemKind[item.kind],
         --             }
         --         end,
         --     })

@@ -16,6 +16,7 @@ catppuccin.setup({
             },
         },
         nvim_surround = true,
+        lsp_saga = true,
     },
     color_overrides = {
         mocha = {
@@ -38,8 +39,8 @@ catppuccin.setup({
     flavour = 'mocha',
 })
 
-for _, kind in ipairs(vim.lsp.protocol.CompletionItemKind) do
-    vim.api.nvim_set_hl(0, 'LspItemKind' .. kind, { link = 'BlinkCmpKind' .. kind })
-end
-
 vim.cmd.colorscheme('catppuccin')
+
+for _, kind in ipairs(vim.lsp.protocol.CompletionItemKind) do
+    vim.api.nvim_set_hl(0, 'LspKind' .. kind, { link = 'BlinkCmpKind' .. kind })
+end

@@ -51,7 +51,7 @@ fzf.setup({
         symbols = {
             symbol_style = 3, -- Omit kind icon
             symbol_hl = function(s)
-                return 'LspItemKind' .. s
+                return 'LspKind' .. s
             end,
             -- Default format surrounds symbol in []
             symbol_fmt = function(s)
