@@ -69,7 +69,7 @@ end
 function StatuslineLSPClients()
     local client_names = {}
     for _, client in ipairs(vim.lsp.get_clients()) do
-        if not client:is_stopped() then
+        if not client:is_stopped() and not vim.tbl_contains(client_names, client.name) then
             table.insert(client_names, client.name)
         end
     end
