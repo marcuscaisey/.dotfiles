@@ -1,4 +1,4 @@
-local enabled_lsps = {
+vim.lsp.enable({
     'basedpyright',
     'bashls',
     'clangd',
@@ -17,24 +17,17 @@ local enabled_lsps = {
     'ts_ls',
     'vimls',
     'yamlls',
-}
+})
 
 if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
-    vim.api.nvim_create_autocmd('VimEnter', {
-        group = vim.api.nvim_create_augroup('lsp.devtools_setup', {}),
-        desc = 'Wrap each language server command with the LSP devtools agent and before enabling',
-        callback = function()
-            for _, name in ipairs(enabled_lsps) do
-                local cmd = vim.lsp.config[name].cmd
-                if type(cmd) == 'table' then
-                    vim.lsp.config(name, { cmd = { 'lsp-devtools', 'agent', '--', unpack(cmd) } })
-                end
+    vim.schedule(function()
+        for _, config in ipairs(vim.lsp.get_configs({ enabled = true })) do
+            local cmd = config.cmd
+            if type(cmd) == 'table' then
+                vim.lsp.config(config.name, { cmd = { 'lsp-devtools', 'agent', '--', unpack(cmd) } })
             end
-            vim.lsp.enable(enabled_lsps)
-        end,
-    })
-else
-    vim.lsp.enable(enabled_lsps)
+        end
+    end)
 end
 
 vim.lsp.codelens.enable()
