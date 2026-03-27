@@ -6,22 +6,6 @@ end
 gitsigns.setup({
     numhl = true,
     attach_to_untracked = true,
-    ---@param status {added:integer, changed:integer, removed:integer}
-    ---@return string
-    status_formatter = function(status)
-        local added, changed, removed = status.added, status.changed, status.removed
-        local status_txt = {}
-        if added and added > 0 then
-            table.insert(status_txt, '%#GitSignsAdd#+' .. added)
-        end
-        if changed and changed > 0 then
-            table.insert(status_txt, '%#GitSignsChange#~' .. changed)
-        end
-        if removed and removed > 0 then
-            table.insert(status_txt, '%#GitSignsDelete#-' .. removed)
-        end
-        return table.concat(status_txt, ' ')
-    end,
 })
 
 vim.keymap.set('n', ']c', '<Cmd>execute &diff ? "normal! ]c" : "Gitsigns nav_hunk next"<CR>', { desc = 'Jump to next git hunk' })

@@ -3,81 +3,79 @@ if not ok then
     return
 end
 
----@param group string
-local function hl(group)
-    return '%#' .. group .. '#'
-end
-
 vim.o.statusline = table.concat({
     ' ',
-    '%(%{% v:lua.StatuslineGit() %}  %)',
-    '%{% v:lua.StatuslineFile() %}',
+    '%(%{% get(b:, "statusline_git", "") %}  %)',
+    '%{% get(g:, "statusline_file", "") %}',
     '%=',
-    '%(%{% v:lua.StatuslineLSPClients() %}  %)',
-    '%(%{% v:lua.vim.diagnostic.status() %}  %)',
-    hl('StatusLine') .. '%(%l:%v %p%%%)',
+    '%(%{% get(g:, "statusline_lsp_clients", "") %}  %)',
+    '%(%{% get(b:, "statusline_diagnostics", "") %}  %)',
+    '%#StatusLine#%(%l:%v %p%%%)',
     ' ',
 })
 
----@return string
-function StatuslineGit()
-    local gitsigns_head = vim.b.gitsigns_head ---@type string?
-    if not gitsigns_head then
-        return ''
-    end
-    if gitsigns_head ~= vim.b.prev_gitsigns_head then
-        vim.b.prev_gitsigns_head = gitsigns_head
-        vim.b.git_head = gitsigns_head
-        local current_branch = vim.trim(vim.system({ 'git', 'branch', '--show-current' }):wait().stdout)
-        if current_branch == '' then
-            -- If the current branch is empty, it means we are in a detached HEAD state.
-            local tag = vim.trim(vim.system({ 'git', 'describe', '--tags', '--exact-match', gitsigns_head }):wait().stdout)
-            if tag ~= '' then
-                vim.b.git_head = tag
-            end
+vim.api.nvim_create_autocmd('User', {
+    group = vim.api.nvim_create_augroup('statusline.git', {}),
+    desc = 'Update statusline git section',
+    pattern = 'GitSignsUpdate',
+    callback = function(ev)
+        if not ev.data then
+            return
         end
-    end
-    local icon, icon_gl_group = devicons.get_icon(nil, 'git')
-    local result = hl(icon_gl_group) .. icon .. ' ' .. hl('StatusLine') .. vim.b.git_head
-    if vim.b.gitsigns_status ~= '' then
-        result = result .. ' ' .. vim.b.gitsigns_status
-    end
-    return result
-end
+        local bufnr = ev.data.buffer
+        local status = vim.b[bufnr].gitsigns_status_dict
+        if not status then
+            return
+        end
+        local icon, icon_hl_group = devicons.get_icon(nil, 'git')
+        local parts = { ('%%#%s#%s %%#StatusLine#%s'):format(icon_hl_group, icon, status.head) }
+        if status.added and status.added > 0 then
+            table.insert(parts, '%#GitSignsAdd#+' .. status.added)
+        end
+        if status.changed and status.changed > 0 then
+            table.insert(parts, '%#GitSignsChange#~' .. status.changed)
+        end
+        if status.removed and status.removed > 0 then
+            table.insert(parts, '%#GitSignsDelete#-' .. status.removed)
+        end
+        vim.b[bufnr].statusline_git = table.concat(parts, ' ')
+        vim.cmd.redrawstatus()
+    end,
+})
 
----@return string
-function StatuslineFile()
-    local icon, hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(0), nil, { default = true })
-    local cwd = vim.fn.getcwd()
-    local filename = '%f'
-    -- %f is "Path to the file in the buffer, as typed or relative to current directory.". For normal buffers, construct
-    -- the filename to ensure that it's always relative to the cwd.
-    if vim.bo.buftype == '' then
-        filename = vim.api.nvim_buf_get_name(0)
-        filename = vim.fs.relpath(cwd, filename) or filename
-        if filename == '.' then
-            filename = '[No Name]'
-        end
-    end
-    if vim.env.HOME then
-        cwd = cwd:gsub('^' .. vim.pesc(vim.env.HOME), '~')
-    end
-    return hl(hl_group) .. icon .. ' ' .. hl('StatusLine') .. filename .. ' %(%h%w%m%r %)' .. hl('StatusLineNC') .. cwd
-end
 
----@return string
-function StatuslineLSPClients()
-    local client_names = {}
-    for _, client in ipairs(vim.lsp.get_clients()) do
-        if not client:is_stopped() and not vim.tbl_contains(client_names, client.name) then
-            table.insert(client_names, client.name)
-        end
-    end
-    return hl('StatusLine') .. table.concat(client_names, ', ')
-end
+vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
+    group = vim.api.nvim_create_augroup('statusline.file', {}),
+    desc = 'Update statusline file section',
+    callback = function()
+        local icon, icon_hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(0), nil, { default = true })
+        local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
+        vim.g.statusline_file = ('%%#%s#%s %%#StatusLine#%%f %%(%%h%%w%%m%%r %%)%%#StatusLineNC#%s'):format(icon_hl_group, icon, cwd)
+        vim.cmd.redrawstatus()
+    end,
+})
 
 vim.api.nvim_create_autocmd({ 'LspAttach', 'LspDetach' }, {
-    group = vim.api.nvim_create_augroup('statusline.lsp_redraw', {}),
-    desc = 'Redraw the statusline',
-    command = 'redrawstatus',
+    group = vim.api.nvim_create_augroup('statusline.lsp_clients', {}),
+    desc = 'Update statusline lsp clients section',
+    callback = function()
+        local client_names = {}
+        for _, client in ipairs(vim.lsp.get_clients()) do
+            if not client:is_stopped() and not vim.tbl_contains(client_names, client.name) then
+                table.insert(client_names, client.name)
+            end
+        end
+        vim.g.statusline_lsp_clients = '%#StatusLine#' .. table.concat(client_names, ', ')
+        vim.cmd.redrawstatus()
+    end,
+})
+
+vim.api.nvim_create_autocmd('DiagnosticChanged', {
+    group = vim.api.nvim_create_augroup('statusline.diagnostics', {}),
+    desc = 'Update statusline diagnostics section',
+    callback = function(ev)
+        local bufnr = ev.buf
+        vim.b[bufnr].statusline_diagnostics = vim.diagnostic.status(bufnr)
+        vim.cmd.redrawstatus()
+    end,
 })
