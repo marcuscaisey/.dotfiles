@@ -10,7 +10,7 @@ vim.o.statusline = table.concat({
     '%=',
     '%(%{% get(g:, "statusline_lsp_clients", "") %}  %)',
     '%(%{% get(b:, "statusline_diagnostics", "") %}  %)',
-    '%#StatusLine#%(%l:%v %p%%%)',
+    '%#StatusLine# %l:%v %p%%',
     ' ',
 })
 
@@ -65,7 +65,7 @@ vim.api.nvim_create_autocmd({ 'LspAttach', 'LspDetach' }, {
                 table.insert(client_names, client.name)
             end
         end
-        vim.g.statusline_lsp_clients = '%#StatusLine#' .. table.concat(client_names, ', ')
+        vim.g.statusline_lsp_clients = '%#StatusLine# ' .. table.concat(client_names, ', ')
         vim.cmd.redrawstatus()
     end,
 })
