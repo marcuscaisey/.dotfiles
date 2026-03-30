@@ -33,14 +33,16 @@ catppuccin.setup({
             }
         end,
     },
-    custom_highlights = {
-        CurSearch = { link = 'IncSearch' },
-    },
+    custom_highlights = function()
+        local highlights = {
+            CurSearch = { link = 'IncSearch' },
+        }
+        for _, kind in ipairs(vim.lsp.protocol.CompletionItemKind) do
+            highlights['LspKind' .. kind] = { link = 'BlinkCmpKind' .. kind }
+        end
+        return highlights
+    end,
     flavour = 'mocha',
 })
 
 vim.cmd.colorscheme('catppuccin')
-
-for _, kind in ipairs(vim.lsp.protocol.CompletionItemKind) do
-    vim.api.nvim_set_hl(0, 'LspKind' .. kind, { link = 'BlinkCmpKind' .. kind })
-end
