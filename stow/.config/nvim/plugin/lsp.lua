@@ -33,19 +33,17 @@ end
 vim.lsp.codelens.enable()
 
 vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('lsp.setup', {}),
-    desc = 'LSP setup',
+    group = vim.api.nvim_create_augroup('lsp.completion', {}),
+    desc = 'Enable completion if the server supports it',
     callback = function(ev)
         local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
-
-        -- if client:supports_method('textDocument/completion') then
-        --     vim.lsp.completion.enable(true, client.id, ev.buf, {
-        --         convert = function(item)
-        --             return { kind_hlgroup = 'LspKind' .. vim.lsp.protocol.CompletionItemKind[item.kind] }
-        --         end,
-        --     })
-        --     vim.bo[ev.buf].complete = 'o'
-        -- end
+        if client:supports_method('textDocument/completion') then
+            vim.lsp.completion.enable(true, client.id, ev.buf, {
+                convert = function(item)
+                    return { kind_hlgroup = 'LspKind' .. vim.lsp.protocol.CompletionItemKind[item.kind] }
+                end,
+            })
+        end
     end,
 })
 
