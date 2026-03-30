@@ -1,5 +1,3 @@
-vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Exit insert mode' })
-
 vim.keymap.set('n', '<C-W><', '<C-W>5<', { desc = 'Decrease window width by 5' })
 vim.keymap.set('n', '<C-W>>', '<C-W>5>', { desc = 'Increase window width by 5' })
 vim.keymap.set('n', '<C-W>-', '<C-W>5-', { desc = 'Decrease window height by 5' })
