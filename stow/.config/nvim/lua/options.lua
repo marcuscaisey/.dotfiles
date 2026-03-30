@@ -9,7 +9,6 @@ vim.o.exrc = true
 vim.o.ignorecase = true
 vim.o.laststatus = 3
 vim.o.number = true
-vim.o.pumborder = 'single'
 vim.o.pumheight = 10
 vim.o.relativenumber = true
 vim.o.scrolloff = 10
@@ -23,7 +22,6 @@ vim.o.splitright = true
 vim.o.swapfile = false
 vim.o.tabstop = 4
 vim.o.updatetime = 100
-vim.o.winborder = 'single'
 
 vim.g.mapleader = ' '
 
