@@ -18,13 +18,6 @@ catppuccin.setup({
         nvim_surround = true,
         lsp_saga = true,
     },
-    color_overrides = {
-        mocha = {
-            base = '#000000',
-            mantle = '#010101',
-            crust = '#020202',
-        },
-    },
     highlight_overrides = {
         mocha = function(palette)
             return {
