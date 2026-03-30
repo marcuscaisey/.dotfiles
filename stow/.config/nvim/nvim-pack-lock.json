@@ -1,9 +1,5 @@
 {
   "plugins": {
-    "blink.cmp": {
-      "rev": "e3523b949badd35ac8553bb975698f8d47b6debd",
-      "src": "https://github.com/saghen/blink.cmp"
-    },
     "camelcasemotion": {
       "rev": "e69b002",
       "src": "https://github.com/bkad/camelcasemotion"
