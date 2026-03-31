@@ -227,6 +227,7 @@ export PATH=$PATH:~/.local/bin
 ################################################################################
 #                                    Please                                    #
 ################################################################################
+export PATH=~/.please/bin:$PATH
 if whence plz >/dev/null; then
   source <(plz --completion_script 2>/dev/null)
 fi
