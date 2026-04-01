@@ -24,5 +24,3 @@ vim.o.tabstop = 4
 vim.o.updatetime = 100
 
 vim.g.mapleader = ' '
-
-vim.loader.enable()
