@@ -1,5 +1,5 @@
 vim.keymap.set('n', '<Leader>aa', '<Cmd>$argedit % | argdedupe | args<CR>', { desc = 'Add file to argument list' })
-vim.keymap.set('n', '<Leader>as', '<Cmd>args<CR>', { desc = 'List argument list' })
+vim.keymap.set('n', '<Leader>al', '<Cmd>args<CR>', { desc = 'List argument list' })
 vim.keymap.set('n', '<Leader>ac', '<Cmd>argdelete * | args<CR>', { desc = 'Clear argument list' })
 for i = 0, 9 do
     -- stylua: ignore start
