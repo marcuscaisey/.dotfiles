@@ -32,7 +32,12 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave'
 vim.api.nvim_create_autocmd('FileType', {
     group = vim.api.nvim_create_augroup('options.remove_formatoptions', {}),
     desc = 'Remove t, c, r, and o from formatoptions after any ftplugin may have modified them',
-    command = 'set formatoptions-=tcro',
+    callback = function()
+        vim.cmd('setlocal formatoptions-=t')
+        vim.cmd('setlocal formatoptions-=c')
+        vim.cmd('setlocal formatoptions-=r')
+        vim.cmd('setlocal formatoptions-=o')
+    end,
 })
 
 vim.keymap.set('n', 'yow', '<Cmd>setlocal wrap!<CR>', { desc = 'Toggle line wrapping' })
