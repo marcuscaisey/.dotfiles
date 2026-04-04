@@ -1,7 +1,7 @@
 vim.o.autocomplete = true
 vim.o.clipboard = 'unnamed'
 vim.o.colorcolumn = '+1'
-vim.o.complete = '.'
+vim.o.complete = 'o,.'
 vim.o.completeopt = 'fuzzy,menuone,noinsert,popup'
 vim.o.cursorline = true
 vim.o.expandtab = true
