@@ -19,8 +19,6 @@ vim.api.nvim_create_autocmd('QuickFixCmdPost', {
     end,
 })
 
-vim.keymap.set('n', 'n', 'nzz', { desc = 'Repeat the latest "/" or "?" [count] times' })
-vim.keymap.set('n', 'N', 'Nzz', { desc = 'Repeat the latest "/" or "?" [count] times in opposite direction' })
 vim.keymap.set('n', '[q', '<Cmd>execute "cprevious" . v:count1<CR>zz', { desc = 'Jump to [count] previous quickfix list entry' })
 vim.keymap.set('n', ']q', '<Cmd>execute "cnext " . v:count1<CR>zz', { desc = 'Jump to [count] next quickfix list entry' })
 vim.keymap.set('n', '[Q', '<Cmd>cfirst<CR>zz', { desc = 'Jump to first quickfix list entry' })
