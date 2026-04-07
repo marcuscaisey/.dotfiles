@@ -16,3 +16,18 @@ vim.api.nvim_create_autocmd('BufWritePost', {
         end)
     end,
 })
+
+vim.api.nvim_create_autocmd('BufWritePre', {
+    group = vim.api.nvim_create_augroup('go.organize_imports_', {}),
+    pattern = '*.go',
+    desc = 'Run source.organizeImports code action on save',
+    callback = function()
+        vim.lsp.buf.code_action({
+            context = {
+                only = { 'source.organizeImports' },
+                diagnostics = {},
+            },
+            apply = true,
+        })
+    end,
+})
