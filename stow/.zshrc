@@ -146,6 +146,7 @@ fi
 if [[ -d ~/.zsh-plugins/fast-syntax-highlighting ]]; then
   source ~/.zsh-plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 fi
+FAST_HIGHLIGHT[git-cmsg-len]=72
 
 
 ################################################################################
