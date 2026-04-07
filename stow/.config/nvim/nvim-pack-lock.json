@@ -65,7 +65,7 @@
       "src": "https://github.com/marcuscaisey/olddirs.nvim"
     },
     "please.nvim": {
-      "rev": "9704d8fb9c33c16de86cb6b203d3e8a64d90f7a2",
+      "rev": "7b32e802e9bfde7761932695adaf8df080eb3f43",
       "src": "https://github.com/marcuscaisey/please.nvim"
     },
     "vim-ConflictMotions": {
