@@ -44,22 +44,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 end,
             })
         end
-
-        if client:supports_method('textDocument/documentHighlight') then
-            local group = vim.api.nvim_create_augroup('lsp.document_highlight_' .. ev.buf, {})
-            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-                buffer = ev.buf,
-                command = 'lua vim.lsp.buf.document_highlight()',
-                desc = 'Highlight references under the cursor',
-                group = group,
-            })
-            vim.api.nvim_create_autocmd('CursorMoved', {
-                buffer = ev.buf,
-                command = 'lua vim.lsp.buf.clear_references()',
-                desc = 'Clear highlight references',
-                group = group,
-            })
-        end
     end,
 })
 
