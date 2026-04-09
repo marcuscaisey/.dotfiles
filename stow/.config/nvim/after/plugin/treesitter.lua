@@ -4,9 +4,9 @@ if not ok then
 end
 
 vim.api.nvim_create_autocmd('User', {
+    desc = 'Add lox to treesitter parsers',
     group = vim.api.nvim_create_augroup('nvim-treesitter.lox_setup', {}),
     pattern = 'TSUpdate',
-    desc = 'Add lox to treesitter parsers',
     callback = function()
         local parsers = require('nvim-treesitter.parsers')
         parsers.lox = {

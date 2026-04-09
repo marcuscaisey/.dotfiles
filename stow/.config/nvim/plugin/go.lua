@@ -1,7 +1,7 @@
 vim.api.nvim_create_autocmd('BufWritePost', {
-    group = vim.api.nvim_create_augroup('go.puku_format', {}),
-    pattern = { '*.go' },
     desc = 'Run puku on saved file',
+    group = vim.api.nvim_create_augroup('go.puku_format', {}),
+    pattern = '*.go',
     callback = function(ev)
         if not vim.fs.root(ev.match, '.plzconfig') then
             return
@@ -18,9 +18,9 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 vim.api.nvim_create_autocmd('BufWritePre', {
+    desc = 'Run source.organizeImports code action on save',
     group = vim.api.nvim_create_augroup('go.organize_imports_', {}),
     pattern = '*.go',
-    desc = 'Run source.organizeImports code action on save',
     callback = function()
         vim.lsp.buf.code_action({
             context = {

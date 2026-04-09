@@ -33,8 +33,8 @@ end
 vim.lsp.codelens.enable()
 
 vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('lsp.completion', {}),
     desc = 'Enable completion if the server supports it',
+    group = vim.api.nvim_create_augroup('lsp.completion', {}),
     callback = function(ev)
         local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
         if client:supports_method('textDocument/completion') then
@@ -48,8 +48,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.api.nvim_create_autocmd('LspProgress', {
-    group = vim.api.nvim_create_augroup('lsp.progress_echo', {}),
     desc = 'Echo progress message',
+    group = vim.api.nvim_create_augroup('lsp.progress_echo', {}),
     callback = function(ev)
         local value = ev.data.params.value
         vim.api.nvim_echo({ { value.message or 'done' } }, false, {

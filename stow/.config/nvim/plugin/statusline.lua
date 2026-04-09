@@ -15,8 +15,8 @@ vim.o.statusline = table.concat({
 })
 
 vim.api.nvim_create_autocmd('User', {
-    group = vim.api.nvim_create_augroup('statusline.git', {}),
     desc = 'Update statusline git section',
+    group = vim.api.nvim_create_augroup('statusline.git', {}),
     pattern = 'GitSignsUpdate',
     callback = function(ev)
         if not ev.data then
@@ -45,8 +45,8 @@ vim.api.nvim_create_autocmd('User', {
 
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
-    group = vim.api.nvim_create_augroup('statusline.file', {}),
     desc = 'Update statusline file section',
+    group = vim.api.nvim_create_augroup('statusline.file', {}),
     callback = function()
         local icon, icon_hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(0), nil, { default = true })
         local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
@@ -56,8 +56,8 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'LspAttach', 'LspDetach' }, {
-    group = vim.api.nvim_create_augroup('statusline.lsp_clients', {}),
     desc = 'Update statusline lsp clients section',
+    group = vim.api.nvim_create_augroup('statusline.lsp_clients', {}),
     callback = function()
         local client_names = {}
         for _, client in ipairs(vim.lsp.get_clients()) do
@@ -71,8 +71,8 @@ vim.api.nvim_create_autocmd({ 'LspAttach', 'LspDetach' }, {
 })
 
 vim.api.nvim_create_autocmd('DiagnosticChanged', {
-    group = vim.api.nvim_create_augroup('statusline.diagnostics', {}),
     desc = 'Update statusline diagnostics section',
+    group = vim.api.nvim_create_augroup('statusline.diagnostics', {}),
     callback = function(ev)
         local bufnr = ev.buf
         vim.b[bufnr].statusline_diagnostics = vim.diagnostic.status(bufnr)

@@ -94,9 +94,8 @@ vim.keymap.set('n', '<Leader>zr', '<Cmd>FzfLua resume<CR>', { desc = 'Resume pre
 vim.keymap.set('n', 'gO', '<Cmd>FzfLua lsp_document_symbols<CR>', { desc = 'List document symbols' })
 vim.keymap.set('n', 'gwO', '<Cmd>FzfLua lsp_live_workspace_symbols<CR>', { desc = 'List workspace symbols' })
 vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('fzf.lsp_definitions_mappings', {}),
     desc = 'Add mappings for FzfLua lsp_definitions if the client supports it',
-    ---@param ev vim.api.keyset.create_autocmd.callback_args
+    group = vim.api.nvim_create_augroup('fzf.lsp_definitions_mappings', {}),
     callback = function(ev)
         local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
         if client:supports_method('textDocument/definition') then
