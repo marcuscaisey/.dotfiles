@@ -100,7 +100,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
         if client:supports_method('textDocument/definition') then
             vim.keymap.set('n', 'g]', '<Cmd>FzfLua lsp_definitions<CR>', { buffer = 0, desc = 'Jump to definition (always show UI)' })
-            vim.keymap.set('n', 'g<C-]>', '<Cmd>FzfLua lsp_definitions jump1<CR>', { buffer = 0, desc = 'Jump to definition (show UI if multiple)' })
+            vim.keymap.set('n', 'g<C-]>', '<Cmd>FzfLua lsp_definitions jump1=true<CR>', { buffer = 0, desc = 'Jump to definition (show UI if many)' })
         end
     end,
 })
