@@ -19,15 +19,13 @@ vim.lsp.enable({
     'yamlls',
 })
 
-if vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'true' then
-    vim.schedule(function()
-        for _, config in ipairs(vim.lsp.get_configs({ enabled = true })) do
-            local cmd = config.cmd
-            if type(cmd) == 'table' then
-                vim.lsp.config(config.name, { cmd = { 'lsp-devtools', 'agent', '--', unpack(cmd) } })
-            end
+if vim.env.NVIM_ENABLE_LSP_DEVTOOLS then
+    for _, config in ipairs(vim.lsp.get_configs({ enabled = true })) do
+        local cmd = config.cmd
+        if type(cmd) == 'table' and (vim.env.NVIM_ENABLE_LSP_DEVTOOLS == config.name or vim.env.NVIM_ENABLE_LSP_DEVTOOLS == 'all') then
+            vim.lsp.config(config.name, { cmd = { 'lsp-devtools', 'agent', '--', unpack(cmd) } })
         end
-    end)
+    end
 end
 
 vim.lsp.codelens.enable()
