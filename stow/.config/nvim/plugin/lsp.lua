@@ -61,6 +61,4 @@ vim.api.nvim_create_autocmd('LspProgress', {
     end,
 })
 
-vim.api.nvim_create_user_command('LspLog', 'execute "tabnew " . luaeval("vim.lsp.log.get_filename()")', {})
-
 vim.keymap.set('n', '<Leader>f', '<Cmd>lua vim.lsp.buf.format()<CR>', { desc = 'Format buffer' })
