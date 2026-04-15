@@ -2,7 +2,6 @@
 return {
     settings = {
         gopls = {
-            directoryFilters = { '-plz-out' },
             semanticTokens = true,
             semanticTokenTypes = { string = false },
         },
