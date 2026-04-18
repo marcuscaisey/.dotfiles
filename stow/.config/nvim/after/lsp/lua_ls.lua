@@ -4,9 +4,8 @@ return {
     settings = {
         Lua = {
             codeLens = { enable = false },
-            diagnostics = {
-                disable = { 'redefined-local' },
-            },
+            completion = { showWord = 'Disable' },
+            diagnostics = { disable = { 'redefined-local' } },
             format = { enable = false },
             workspace = { checkThirdParty = false },
         },
