@@ -9,7 +9,7 @@
       "src": "https://github.com/catppuccin/nvim"
     },
     "fzf-lua": {
-      "rev": "3da04a92518453a1898d6bce213532eec73dcc27",
+      "rev": "fcabe3cb7cfa6bd5148ffac0188997196401937d",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitlinker.nvim": {
@@ -65,7 +65,7 @@
       "src": "https://github.com/marcuscaisey/olddirs.nvim"
     },
     "please.nvim": {
-      "rev": "5222c7483b1304d128dd3c29bb6d91e15bdb3230",
+      "rev": "c375ae00bad350c6b801a294f89e09570031e8ac",
       "src": "https://github.com/marcuscaisey/please.nvim"
     },
     "vim-ConflictMotions": {
