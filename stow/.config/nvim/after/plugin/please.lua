@@ -1,3 +1,12 @@
+local ok, please = pcall(require, 'please')
+if not ok then
+    return
+end
+
+please.setup({
+    puku_command = { 'puku' },
+})
+
 vim.keymap.set('n', '<leader>pb', '<Cmd>Please build<CR>', { desc = 'Build please target' })
 vim.keymap.set('n', '<leader>pr', '<Cmd>Please run<CR>', { desc = 'Run please target' })
 vim.keymap.set('n', '<leader>pt', '<Cmd>Please test<CR>', { desc = 'Test please target' })
