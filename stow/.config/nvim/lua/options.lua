@@ -22,6 +22,8 @@ vim.o.splitright = true
 vim.o.swapfile = false
 vim.o.tabstop = 4
 vim.o.updatetime = 100
+vim.o.wildmode = 'noselect:lastused,full'
+vim.o.wildoptions = 'fuzzy,pum'
 
 vim.g.mapleader = ' '
 
