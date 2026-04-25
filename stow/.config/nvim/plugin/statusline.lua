@@ -8,7 +8,7 @@ vim.o.statusline = table.concat({
     '%(%{% get(b:, "statusline_git", "") %}  %)',
     '%{% get(g:, "statusline_file", "") %}',
     '%=',
-    '%(%{% get(g:, "statusline_lsp_clients", "") %}  %)',
+    '%(%{% get(b:, "statusline_lsp_clients", "") %}  %)',
     '%(%{% get(b:, "statusline_diagnostics", "") %}  %)',
     '%#StatusLine# %l:%v %p%%',
     ' ',
@@ -43,7 +43,6 @@ vim.api.nvim_create_autocmd('User', {
     end,
 })
 
-
 vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
     desc = 'Update statusline file section',
     group = vim.api.nvim_create_augroup('statusline.file', {}),
@@ -58,14 +57,14 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
 vim.api.nvim_create_autocmd({ 'LspAttach', 'LspDetach' }, {
     desc = 'Update statusline lsp clients section',
     group = vim.api.nvim_create_augroup('statusline.lsp_clients', {}),
-    callback = function()
+    callback = function(ev)
         local client_names = {}
-        for _, client in ipairs(vim.lsp.get_clients()) do
+        for _, client in ipairs(vim.lsp.get_clients({ bufnr = ev.buf })) do
             if not client:is_stopped() and not vim.tbl_contains(client_names, client.name) then
                 table.insert(client_names, client.name)
             end
         end
-        vim.g.statusline_lsp_clients = '%#StatusLine# ' .. table.concat(client_names, ', ')
+        vim.b[ev.buf].statusline_lsp_clients = '%#StatusLine# ' .. table.concat(client_names, ', ')
         vim.cmd.redrawstatus()
     end,
 })
