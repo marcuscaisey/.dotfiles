@@ -3,10 +3,7 @@ if not ok then
     return
 end
 
-gitsigns.setup({
-    numhl = true,
-    attach_to_untracked = true,
-})
+gitsigns.setup({ attach_to_untracked = true })
 
 vim.keymap.set('n', ']c', '<Cmd>execute &diff ? "normal! ]c" : "Gitsigns nav_hunk next"<CR>', { desc = 'Jump to next git hunk' })
 vim.keymap.set('n', '[c', '<Cmd>execute &diff ? "normal! [c" : "Gitsigns nav_hunk prev"<CR>', { desc = 'Jump to previous git hunk' })
