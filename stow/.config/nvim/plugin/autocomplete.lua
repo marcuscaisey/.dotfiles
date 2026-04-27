@@ -4,8 +4,10 @@ vim.api.nvim_create_autocmd('InsertCharPre', {
     callback = function()
         if not vim.o.autocomplete and not vim.v.char:match('%s') then
             vim.o.autocomplete = true
-            local key = vim.api.nvim_replace_termcodes('<C-n>', true, false, true)
-            vim.api.nvim_feedkeys(key, 'n', false)
+            if vim.fn.pumvisible() ~= 1 then
+                local key = vim.api.nvim_replace_termcodes('<C-n>', true, false, true)
+                vim.api.nvim_feedkeys(key, 'n', false)
+            end
         end
     end,
 })
