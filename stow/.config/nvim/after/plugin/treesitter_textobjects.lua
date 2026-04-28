@@ -6,10 +6,7 @@ end
 treesitter_textobjects.setup({
     select = {
         lookahead = true,
-        selection_modes = {
-            ['@function.outer'] = 'V',
-            ['@function.inner'] = 'V',
-        },
+        selection_modes = { ['@function.outer'] = 'V', ['@function.inner'] = 'V' },
         include_surrounding_whitespace = function(args)
             return args.query_string == '@function.outer'
         end,

@@ -3,9 +3,7 @@ if not ok then
     return
 end
 
-please.setup({
-    puku_command = { 'puku' },
-})
+please.setup({ puku_command = { 'puku' } })
 
 vim.keymap.set('n', '<leader>pb', '<Cmd>Please build<CR>', { desc = 'Build please target' })
 vim.keymap.set('n', '<leader>pr', '<Cmd>Please run<CR>', { desc = 'Run please target' })

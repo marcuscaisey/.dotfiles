@@ -4,6 +4,4 @@ if not ok then
 end
 
 ---@diagnostic disable-next-line: missing-fields
-olddirs.setup({
-    limit = 500,
-})
+olddirs.setup({ limit = 500 })

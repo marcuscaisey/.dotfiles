@@ -3,8 +3,5 @@ if not ok then
     return
 end
 lightbulb.setup({
-    autocmd = {
-        enabled = true,
-        updatetime = -1,
-    },
+    autocmd = { enabled = true, updatetime = -1 },
 })
