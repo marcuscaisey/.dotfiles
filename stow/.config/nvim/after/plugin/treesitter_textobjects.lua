@@ -15,14 +15,14 @@ treesitter_textobjects.setup({
 
 -- stylua: ignore start
 vim.keymap.set({ 'x', 'o' }, 'af', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")<CR>', { desc = 'Select inside function' })
-vim.keymap.set({ 'x', 'o' }, 'if', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")<CR>', { desc = 'Select around function' })
+vim.keymap.set({ 'x', 'o' }, 'if', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")<CR>', { desc = 'Select a function' })
 vim.keymap.set({ 'n', 'x', 'o' }, ']]', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_next_start("@section.outer", "textobjects")<CR>', { desc = 'Jump to start of next section' })
 vim.keymap.set({ 'n', 'x', 'o' }, '][', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_next_end("@section.outer", "textobjects")<CR>', { desc = 'Jump to end of next sections' })
 vim.keymap.set({ 'n', 'x', 'o' }, '[[', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_previous_start("@section.outer", "textobjects")<CR>', { desc = 'Jump to start of previous section' })
 vim.keymap.set({ 'n', 'x', 'o' }, '[]', '<Cmd>lua require("nvim-treesitter-textobjects.move").goto_previous_end("@section.outer", "textobjects")<CR>', { desc = 'Jump to end of previous section' })
 vim.keymap.set({ 'x', 'o' }, 'ia', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@parameter.inner", "textobjects")<CR>', { desc = 'Select inside parameter' })
-vim.keymap.set({ 'x', 'o' }, 'aa', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@parameter.outer", "textobjects")<CR>', { desc = 'Select around parameter' })
-vim.keymap.set({ 'x', 'o' }, 'ac', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@call.outer", "textobjects")<CR>', { desc = 'Select around call' })
+vim.keymap.set({ 'x', 'o' }, 'aa', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@parameter.outer", "textobjects")<CR>', { desc = 'Select a parameter' })
+vim.keymap.set({ 'x', 'o' }, 'ac', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@call.outer", "textobjects")<CR>', { desc = 'Select a call' })
 vim.keymap.set({ 'x', 'o' }, 'ib', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@block.inner", "textobjects")<CR>', { desc = 'Select inside block' })
-vim.keymap.set({ 'x', 'o' }, 'ab', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@block.outer", "textobjects")<CR>', { desc = 'Select around block' })
+vim.keymap.set({ 'x', 'o' }, 'ab', '<Cmd>lua require("nvim-treesitter-textobjects.select").select_textobject("@block.outer", "textobjects")<CR>', { desc = 'Select a block' })
 -- stylua: ignore end
