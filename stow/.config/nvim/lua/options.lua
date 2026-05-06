@@ -1,3 +1,4 @@
+vim.o.autocomplete = true
 vim.o.clipboard = 'unnamed'
 vim.o.colorcolumn = '+1'
 vim.o.complete = '.'
