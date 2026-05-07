@@ -1,2 +1,2 @@
 vim.bo.expandtab = false
-vim.bo.textwidth = 120
+vim.bo.textwidth = 100

@@ -1,2 +1,2 @@
 vim.cmd('set formatoptions-=t')
-vim.bo.textwidth = 120
+vim.bo.textwidth = 100
