@@ -1,4 +1,5 @@
 local languages = {
+    html = { { formatCommand = 'prettierd ${INPUT}', formatStdin = true } },
     javascript = { { formatCommand = 'prettierd ${INPUT}', formatStdin = true } },
     lua = { { formatCommand = 'stylua --stdin-filepath=${INPUT} -', formatStdin = true } },
     markdown = { { formatCommand = 'prettierd ${INPUT}', formatStdin = true } },
