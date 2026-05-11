@@ -11,6 +11,8 @@ config.audible_bell = 'Disabled'
 config.quick_select_patterns = {
   -- Please build label
   [[//(?:\w+(?:/\w+)*)?:[\w\-#]+]],
+  -- Github issue number
+  [[#\d+]],
 }
 config.quick_select_remove_styling = true
 
