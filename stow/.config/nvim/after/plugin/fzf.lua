@@ -106,3 +106,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 vim.keymap.set('n', 'grr', '<Cmd>FzfLua lsp_references<CR>', { desc = 'List references' })
 vim.keymap.set('n', 'gri', '<Cmd>FzfLua lsp_implementations<CR>', { desc = 'List implementations' })
+vim.keymap.set('n', 'grt', '<Cmd>FzfLua lsp_typedefs<CR>', { desc = 'Jump to type definition' })
