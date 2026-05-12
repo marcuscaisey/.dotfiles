@@ -3,4 +3,4 @@ if not ok then
     return
 end
 
-treesitter_context.setup({ multiline_threshold = 1 })
+treesitter_context.setup()
