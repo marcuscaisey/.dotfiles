@@ -5,8 +5,8 @@ end
 
 gitsigns.setup({ attach_to_untracked = true })
 
-vim.keymap.set('n', ']c', '<Cmd>execute &diff ? "normal! ]c" : "Gitsigns nav_hunk next"<CR>', { desc = 'Jump to next git hunk' })
-vim.keymap.set('n', '[c', '<Cmd>execute &diff ? "normal! [c" : "Gitsigns nav_hunk prev"<CR>', { desc = 'Jump to previous git hunk' })
+vim.keymap.set('n', ']c', '<Cmd>execute &diff ? "normal! ]c" : "Gitsigns nav_hunk next --target=all"<CR>', { desc = 'Jump to next git hunk' })
+vim.keymap.set('n', '[c', '<Cmd>execute &diff ? "normal! [c" : "Gitsigns nav_hunk prev --target=all"<CR>', { desc = 'Jump to previous git hunk' })
 vim.keymap.set({ 'n', 'v' }, '<Leader>hs', ':Gitsigns stage_hunk<CR>', { desc = 'Stage git hunk', silent = true })
 vim.keymap.set('n', '<Leader>hS', '<Cmd>Gitsigns stage_buffer<CR>', { desc = 'Stage buffer git hunks' })
 vim.keymap.set({ 'n', 'v' }, '<Leader>hr', ':Gitsigns reset_hunk<CR>', { desc = 'Reset git hunk', silent = true })
