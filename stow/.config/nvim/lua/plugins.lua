@@ -27,8 +27,6 @@ vim.pack.add({
     { src = 'https://github.com/inkarkat/vim-ReplaceWithRegister' },
     { src = 'https://github.com/inkarkat/vim-ingo-library' }, -- Required for vim-CountJump
     { src = 'https://github.com/jake-stewart/multicursor.nvim' },
-    { src = 'https://github.com/kana/vim-textobj-entire' },
-    { src = 'https://github.com/kana/vim-textobj-user' }, -- Required for vim-textobj-entire
     { src = 'https://github.com/kosayoda/nvim-lightbulb' },
     { src = 'https://github.com/kyazdani42/nvim-web-devicons' },
     { src = 'https://github.com/kylechui/nvim-surround' },
