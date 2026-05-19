@@ -48,7 +48,3 @@ vim.pack.add({
 vim.g.loaded_ReplaceWithRegister = true
 
 vim.cmd.packadd('nvim.undotree')
-
-vim.api.nvim_create_user_command('PackUpdate', 'lua vim.pack.update()', {})
-vim.api.nvim_create_user_command('PackSync', 'lua vim.pack.update(nil, { target = "lockfile" })', {})
-vim.api.nvim_create_user_command('PackDelete', 'lua vim.pack.del({<f-args>})', { nargs = '+', complete = 'packadd' })
