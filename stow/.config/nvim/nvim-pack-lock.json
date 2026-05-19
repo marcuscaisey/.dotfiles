@@ -91,14 +91,6 @@
     "vim-ingo-library": {
       "rev": "700aec39d26beaf1173ce3a52df62486d60d7fdb",
       "src": "https://github.com/inkarkat/vim-ingo-library"
-    },
-    "vim-textobj-entire": {
-      "rev": "64a856c",
-      "src": "https://github.com/kana/vim-textobj-entire"
-    },
-    "vim-textobj-user": {
-      "rev": "41a675d",
-      "src": "https://github.com/kana/vim-textobj-user"
     }
   }
 }
