@@ -33,7 +33,7 @@
       "src": "https://github.com/kosayoda/nvim-lightbulb"
     },
     "nvim-lspconfig": {
-      "rev": "a4ed4e761c400849e8c9f8bda33e5083f890268c",
+      "rev": "6f76a3eeadc2ee235d74cd7d5319e95a261084af",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
@@ -53,7 +53,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "nvim-web-devicons": {
-      "rev": "0d7d35fa946837b8738b17c18d1faa1ac351e7f9",
+      "rev": "dfbfaa967a6f7ec50789bead7ef87e336c1fa63c",
       "src": "https://github.com/kyazdani42/nvim-web-devicons"
     },
     "oil.nvim": {
