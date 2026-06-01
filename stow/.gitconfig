@@ -31,6 +31,9 @@
 [fetch]
     all = true
 
+[init]
+	defaultBranch = main
+
 [interactive]
     diffFilter = delta --color-only
 
