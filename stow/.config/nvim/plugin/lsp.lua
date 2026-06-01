@@ -62,5 +62,3 @@ vim.api.nvim_create_autocmd('LspProgress', {
         })
     end,
 })
-
-vim.keymap.set('n', '<Leader>f', '<Cmd>lua vim.lsp.buf.format()<CR>', { desc = 'Format buffer' })
