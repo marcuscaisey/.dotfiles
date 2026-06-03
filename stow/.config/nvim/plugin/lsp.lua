@@ -14,6 +14,7 @@ vim.lsp.enable({
     'lua_ls',
     'marksman',
     'please',
+    'rust_analyzer',
     'ts_ls',
     'vimls',
     'yamlls',

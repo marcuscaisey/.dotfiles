@@ -21,6 +21,7 @@ local tools = {
     'lua-language-server',
     'marksman',
     'prettierd',
+    'rust-analyzer',
     'stylua',
     'typescript-language-server',
     'vim-language-server',
