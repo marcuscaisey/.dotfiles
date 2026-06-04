@@ -15,6 +15,7 @@ vim.lsp.enable({
     'marksman',
     'please',
     'rust_analyzer',
+    'stylua',
     'ts_ls',
     'vimls',
     'yamlls',
