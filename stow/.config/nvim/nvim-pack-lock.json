@@ -33,7 +33,7 @@
       "src": "https://github.com/kosayoda/nvim-lightbulb"
     },
     "nvim-lspconfig": {
-      "rev": "07dff35e7c95288861200b788ef32d6103f107f0",
+      "rev": "229b79051b380377664edc4cbd534930154921a1",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
