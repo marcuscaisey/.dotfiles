@@ -1,10 +1,8 @@
 ---@type vim.lsp.Config
 return {
-    settings = {
-        gopls = {
-            semanticTokens = true,
-            semanticTokenTypes = { string = false },
-        },
+    init_options = {
+        semanticTokens = true,
+        semanticTokenTypes = { string = false },
     },
     on_attach = function(client, bufnr)
         vim.api.nvim_create_autocmd('BufWritePre', {
