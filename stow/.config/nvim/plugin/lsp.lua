@@ -49,6 +49,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
+local original_formatexpr = vim.lsp.formatexpr
+---@diagnostic disable-next-line: duplicate-set-field
+vim.lsp.formatexpr = function(opts)
+    original_formatexpr(vim.tbl_deep_extend('keep', opts or {}, { timeout_ms = 5000 }))
+end
+
 vim.api.nvim_create_autocmd('LspProgress', {
     desc = 'Echo progress message',
     group = vim.api.nvim_create_augroup('lsp.progress_echo', {}),
