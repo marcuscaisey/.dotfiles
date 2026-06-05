@@ -4,7 +4,7 @@ vim.keymap.set('n', 'gq', function()
         group = vim.api.nvim_create_augroup('formatting.restore_cursor', {}),
         buf = 0,
         once = true,
-        desc = 'Restore cursor position after formatting',
+        desc = 'Restore view after formatting',
         callback = function()
             vim.fn.winrestview(view)
         end,
