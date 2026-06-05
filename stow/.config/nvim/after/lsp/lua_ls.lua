@@ -6,7 +6,6 @@ return {
             codeLens = { enable = false },
             completion = { showWord = 'Disable' },
             diagnostics = { disable = { 'redefined-local' } },
-            format = { enable = false },
             workspace = { checkThirdParty = false },
         },
     },
@@ -47,5 +46,10 @@ return {
                 end, vim.api.nvim_get_runtime_file('lua', true)),
             },
         })
+    end,
+    on_attach = function(client)
+        client.server_capabilities.documentFormattingProvider = nil
+        client.server_capabilities.documentRangeFormattingProvider = nil
+        client.server_capabilities.documentOnTypeFormattingProvider = nil
     end,
 }
