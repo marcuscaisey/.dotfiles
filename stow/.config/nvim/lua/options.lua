@@ -12,6 +12,7 @@ vim.o.number = true
 vim.o.pumheight = 10
 vim.o.relativenumber = true
 vim.o.scrolloff = 10
+vim.cmd('set sessionoptions+=globals')
 vim.o.shada = "'500"
 vim.o.shiftwidth = 4
 vim.cmd('set shortmess+=c')
