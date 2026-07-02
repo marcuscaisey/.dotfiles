@@ -12,16 +12,15 @@ return {
             callback = function()
                 local params = vim.lsp.util.make_range_params(0, client.offset_encoding) ---@type lsp.CodeActionParams
                 params.context = { only = { 'source.organizeImports' }, diagnostics = {} }
-                client:request('textDocument/codeAction', params, function(err, result)
-                    if err or not result then
-                        return
+                local resp = client:request_sync('textDocument/codeAction', params, 5000, bufnr)
+                if not resp or (resp and resp.err) then
+                    return
+                end
+                for _, code_action in pairs(resp.result) do
+                    if code_action.edit then
+                        vim.lsp.util.apply_workspace_edit(code_action.edit, client.offset_encoding)
                     end
-                    for _, code_action in pairs(result) do
-                        if code_action.edit then
-                            vim.lsp.util.apply_workspace_edit(code_action.edit, client.offset_encoding)
-                        end
-                    end
-                end, bufnr)
+                end
             end,
         })
         -- This doesn't work very well sometimes.
