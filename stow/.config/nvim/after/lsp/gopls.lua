@@ -13,7 +13,7 @@ return {
                 local params = vim.lsp.util.make_range_params(0, client.offset_encoding) ---@type lsp.CodeActionParams
                 params.context = { only = { 'source.organizeImports' }, diagnostics = {} }
                 local resp = client:request_sync('textDocument/codeAction', params, 5000, bufnr)
-                if not resp or (resp and resp.err) then
+                if not resp or resp.err or not resp.result then
                     return
                 end
                 for _, code_action in pairs(resp.result) do
@@ -23,7 +23,5 @@ return {
                 end
             end,
         })
-        -- This doesn't work very well sometimes.
-        client.server_capabilities.semanticTokensProvider.range = false
     end,
 }
