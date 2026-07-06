@@ -17,8 +17,8 @@ zle -N bracketed-paste bracketed-paste-magic
 # Disable highlighting pasted text.
 zle_highlight+=(paste:none)
 
-# Remove duplicates from $PATH and $path.
-typeset -U PATH path
+# Remove duplicates from $PATH, $path, $FPATH, and $fpath.
+typeset -U PATH path FPATH fpath
 
 # Consider | to be part of a word so that it's not jumped over when using
 # ESC-f, ESC-b, ^W
