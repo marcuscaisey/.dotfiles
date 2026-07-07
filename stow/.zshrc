@@ -27,7 +27,6 @@ WORDCHARS="|$WORDCHARS"
 # Changing Directories
 setopt auto_pushd # Make cd push the old directory onto the directory stack.
 setopt pushd_ignore_dups # Don't push duplicates onto the directory stack.
-setopt pushd_minus # Exchange meaning of +n and -n.
 
 # Completion
 zstyle ':completion:*' completer _complete _approximate # Fall back to approximate completion.
