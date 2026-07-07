@@ -25,7 +25,6 @@ typeset -U PATH path FPATH fpath
 WORDCHARS="|$WORDCHARS"
 
 # Changing Directories
-setopt auto_cd # Change to directory without typing cd.
 setopt auto_pushd # Make cd push the old directory onto the directory stack.
 setopt pushd_ignore_dups # Don't push duplicates onto the directory stack.
 setopt pushd_minus # Exchange meaning of +n and -n.
