@@ -29,7 +29,9 @@ setopt auto_pushd # Make cd push the old directory onto the directory stack.
 setopt pushd_ignore_dups # Don't push duplicates onto the directory stack.
 
 # Completion
-zstyle ':completion:*' completer _complete _approximate # Fall back to approximate completion.
+# First <TAB> lists completions, second inserts completion.
+# Fall back to approximate completion.
+zstyle ':completion:*' completer _list _complete _approximate
 zstyle ':completion:*' menu select # Use menu selection.
 zstyle ':completion:*' use-cache yes # Cache completions.
 setopt always_to_end # Move cursor to the end of a completed word.
