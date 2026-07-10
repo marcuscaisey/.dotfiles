@@ -76,7 +76,7 @@ PROMPT='%B%F{blue}%1~%b%f${vcs_info_msg_0_} '
 #                                   Aliases                                    #
 ################################################################################
 if whence eza >/dev/null; then
-  alias ls=eza
+    alias ls=eza
 fi
 alias oops='git add --update && git commit --no-edit --amend'
 alias yank="perl -pe 'chomp if eof' | tmux load-buffer -w -"
@@ -90,12 +90,12 @@ alias g='cd $(git rev-parse --show-toplevel)'
 ################################################################################
 # Use Neovim as man pager.
 if whence nvim >/dev/null; then
-  export MANPAGER='nvim +Man!'
+    export MANPAGER='nvim +Man!'
 fi
 
 # Use Neovim as default editor.
 if whence nvim >/dev/null; then
-  export EDITOR=nvim
+    export EDITOR=nvim
 fi
 
 
@@ -103,7 +103,7 @@ fi
 #                                   Homebrew                                   #
 ################################################################################
 if [[ -d /opt/homebrew/bin ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 
@@ -111,7 +111,7 @@ fi
 #                               zsh-completions                                #
 ################################################################################
 if [[ -d ~/.zsh-plugins/zsh-completions ]]; then
-  fpath=(~/.zsh-plugins/zsh-completions/src $fpath)
+    fpath=(~/.zsh-plugins/zsh-completions/src $fpath)
 fi
 
 
@@ -129,7 +129,7 @@ compinit
 #                                     Cargo                                    #
 ################################################################################
 if [[ -d ~/.cargo ]]; then
-  source ~/.cargo/env
+    source ~/.cargo/env
 fi
 
 
@@ -137,14 +137,14 @@ fi
 #                                    Delve                                     #
 ################################################################################
 if whence dlv >/dev/null; then
-  source <(dlv completion zsh)
+    source <(dlv completion zsh)
 fi
 
 ################################################################################
 #                           fast-syntax-highlighting                           #
 ################################################################################
 if [[ -d ~/.zsh-plugins/fast-syntax-highlighting ]]; then
-  source ~/.zsh-plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+    source ~/.zsh-plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 fi
 FAST_HIGHLIGHT[git-cmsg-len]=72
 
@@ -153,36 +153,36 @@ FAST_HIGHLIGHT[git-cmsg-len]=72
 #                                     fzf                                      #
 ################################################################################
 if [[ -f ~/.fzf.zsh ]]; then
-  source ~/.fzf.zsh
-  source <(fzf --zsh)
+    source ~/.fzf.zsh
+    source <(fzf --zsh)
 
-  # Use fd for find instead of default find
-  FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --exclude .git'
+    # Use fd for find instead of default find
+    FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --exclude .git'
 
-  # Use ~~ for completion trigger instead of **
-  FZF_COMPLETION_TRIGGER='~~'
+    # Use ~~ for completion trigger instead of **
+    FZF_COMPLETION_TRIGGER='~~'
 
-  # Use fd instead of the default find
-  _fzf_compgen_path() {
-      fd --hidden --exclude .git --strip-cwd-prefix .
-  }
+    # Use fd instead of the default find
+    _fzf_compgen_path() {
+        fd --hidden --exclude .git --strip-cwd-prefix .
+    }
 
-  # Use fd to generate the list for directory completion
-  _fzf_compgen_dir() {
-      fd --type d --hidden --exclude .git --strip-cwd-prefix .
-  }
+    # Use fd to generate the list for directory completion
+    _fzf_compgen_dir() {
+        fd --type d --hidden --exclude .git --strip-cwd-prefix .
+    }
 
-  # Use ctrl + t to fuzzy search all files/directories (excluding .git) with preview in current directory
-  FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
-  FZF_CTRL_T_OPTS="--preview 'if [ ! -d {} ]; then bat --color always --wrap never --pager never {}; else exa --classify --all --tree --level=2 --color always {}; fi'"
+    # Use ctrl + t to fuzzy search all files/directories (excluding .git) with preview in current directory
+    FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+    FZF_CTRL_T_OPTS="--preview 'if [ ! -d {} ]; then bat --color always --wrap never --pager never {}; else exa --classify --all --tree --level=2 --color always {}; fi'"
 
-  # Catppuccin theme
-  FZF_DEFAULT_OPTS=" \
-    --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
-    --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
-    --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
-    --color=selected-bg:#45475A \
-    --color=border:#6C7086,label:#CDD6F4"
+    # Catppuccin theme
+    FZF_DEFAULT_OPTS=" \
+        --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
+        --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
+        --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
+        --color=selected-bg:#45475A \
+        --color=border:#6C7086,label:#CDD6F4"
 fi
 
 
@@ -190,8 +190,8 @@ fi
 #                                     Git                                      #
 ################################################################################
 if [[ -v HOMEBREW_PREFIX ]]; then
-  # The completions installed with homebrew git are not very good
-  rm -f $HOMEBREW_PREFIX/share/zsh/site-functions/_git
+    # The completions installed with homebrew git are not very good
+    rm -f $HOMEBREW_PREFIX/share/zsh/site-functions/_git
 fi
 
 
@@ -206,16 +206,16 @@ export PATH=~/go/bin:$PATH
 ################################################################################
 NVM_DIR=~/.nvm
 if [[ -d $NVM_DIR ]]; then
-  source $NVM_DIR/bash_completion
-  default_version_path=$NVM_DIR/alias/default
-  if [[ -f $default_version_path ]]; then
-    export PATH="$NVM_DIR/versions/node/$(cat $default_version_path)/bin:$PATH"
-  fi
-  function nvm() {
-    unfunction nvm
-    source $NVM_DIR/nvm.sh
-    $0 $@
-  }
+    source $NVM_DIR/bash_completion
+    default_version_path=$NVM_DIR/alias/default
+    if [[ -f $default_version_path ]]; then
+        export PATH="$NVM_DIR/versions/node/$(cat $default_version_path)/bin:$PATH"
+    fi
+    function nvm() {
+        unfunction nvm
+        source $NVM_DIR/nvm.sh
+        $0 $@
+    }
 fi
 
 
@@ -230,7 +230,7 @@ export PATH=$PATH:~/.local/bin
 ################################################################################
 export PATH=~/.please/bin:$PATH
 if whence plz >/dev/null; then
-  source <(plz --completion_script 2>/dev/null)
+    source <(plz --completion_script 2>/dev/null)
 fi
 
 
@@ -239,15 +239,15 @@ fi
 ################################################################################
 PYENV_ROOT=~/.pyenv
 if [[ -d $PYENV_ROOT ]]; then
-  export PYENV_ROOT
-  export PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
-  source $PYENV_ROOT/completions/pyenv.zsh
-  # Lazy load to avoid slowing down shell startup.
-  function pyenv() {
-    unfunction pyenv
-    eval "$(pyenv init - zsh)"
-    pyenv $@
-  }
+    export PYENV_ROOT
+    export PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
+    source $PYENV_ROOT/completions/pyenv.zsh
+    # Lazy load to avoid slowing down shell startup.
+    function pyenv() {
+        unfunction pyenv
+        eval "$(pyenv init - zsh)"
+        pyenv $@
+    }
 fi
 
 
@@ -255,23 +255,23 @@ fi
 #                             zsh-autosuggestions                              #
 ################################################################################
 if [[ -d ~/.zsh-plugins/zsh-autosuggestions ]]; then
-  source ~/.zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-  # Disable suggestions for large buffers.
-  ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-  # Disable automatic widget re-binding on each precmd.
-  ZSH_AUTOSUGGEST_MANUAL_REBIND=true
+    source ~/.zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    # Disable suggestions for large buffers.
+    ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+    # Disable automatic widget re-binding on each precmd.
+    ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 
-  # Speed up pasting by disabling autosuggestions.
-  # https://github.com/zsh-users/zsh-autosuggestions/issues/238
-  pasteinit() {
-    OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
-    zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
-  }
-  pastefinish() {
-    zle -N self-insert $OLD_SELF_INSERT
-  }
-  zstyle :bracketed-paste-magic paste-init pasteinit
-  zstyle :bracketed-paste-magic paste-finish pastefinish
+    # Speed up pasting by disabling autosuggestions.
+    # https://github.com/zsh-users/zsh-autosuggestions/issues/238
+    pasteinit() {
+        OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+        zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+    }
+    pastefinish() {
+        zle -N self-insert $OLD_SELF_INSERT
+    }
+    zstyle :bracketed-paste-magic paste-init pasteinit
+    zstyle :bracketed-paste-magic paste-finish pastefinish
 fi
 
 
@@ -279,5 +279,5 @@ fi
 #                                 local zshrc                                  #
 ################################################################################
 if [[ -f ~/.zshrc.local ]]; then
-  source ~/.zshrc.local
+    source ~/.zshrc.local
 fi

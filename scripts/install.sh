@@ -5,62 +5,62 @@ set -euo pipefail
 # osx
 # Returns if we're running on osx
 osx() {
-  [ "$(uname)" = "Darwin" ]
+    [ "$(uname)" = "Darwin" ]
 }
 
 # linux
 # Returns if we're running on linux
 linux() {
-  [ "$(uname)" = "Linux" ]
+    [ "$(uname)" = "Linux" ]
 }
 
 # clone_or_pull <repository> <directory>
 # Clones a repository into a directory if it doesn't exist, otherwise pulls in the latest changes.
 clone_or_pull() {
-  if [ ! -d "$2" ]; then
-    git clone --depth 1 "$1" "$2"
-  else
-    git -C "$2" pull
-  fi
+    if [ ! -d "$2" ]; then
+        git clone --depth 1 "$1" "$2"
+    else
+        git -C "$2" pull
+    fi
 }
 
 # cecho <message>
 # Displays a line of text in a different colour each time its called.
 cecho() {
-  echo "$(tput setaf "${ci:-1}")$1$(tput sgr0)" && ci=$(( (${ci:-1} % 6) + 1 ))
+    echo "$(tput setaf "${ci:-1}")$1$(tput sgr0)" && ci=$(( (${ci:-1} % 6) + 1 ))
 }
 
 shared_pkgs=(
-  bat
-  cmake # nvim build dep
-  curl
-  eza
-  gettext # nvim build dep
-  git
-  ripgrep
-  stow
-  tmux
-  zsh
+    bat
+    cmake # nvim build dep
+    curl
+    eza
+    gettext # nvim build dep
+    git
+    ripgrep
+    stow
+    tmux
+    zsh
 )
 
 brew_pkgs=(
-  coreutils # gdate used in zsh prompt
-  fd
-  fzf
-  git-delta
-  ninja # nvim build dep
-  "${shared_pkgs[@]}"
+    coreutils # gdate used in zsh prompt
+    fd
+    fzf
+    git-delta
+    ninja # nvim build dep
+    "${shared_pkgs[@]}"
 )
 
 apt_pkgs=(
-  build-essential
-  fd-find
-  ninja-build  # nvim build dep
-  "${shared_pkgs[@]}"
+    build-essential
+    fd-find
+    ninja-build    # nvim build dep
+    "${shared_pkgs[@]}"
 )
 
 linux_cargo_pkgs=(
-  git-delta
+    git-delta
 )
 
 cecho "Installing rust"
@@ -71,41 +71,41 @@ cecho "Sourcing ~/.cargo/env"
 source ~/.cargo/env
 
 if osx; then
-  cecho "Installing homebrew"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    cecho "Installing homebrew"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  cecho "Updating list of available packages"
-  brew update
+    cecho "Updating list of available packages"
+    brew update
 
-  cecho "Installing ${brew_pkgs[*]}"
-  brew install "${brew_pkgs[@]}"
+    cecho "Installing ${brew_pkgs[*]}"
+    brew install "${brew_pkgs[@]}"
 fi
 
 if linux; then
-  cecho "Updating list of available packages"
-  sudo apt update
+    cecho "Updating list of available packages"
+    sudo apt update
 
-  cecho "Installing ${apt_pkgs[*]}"
-  sudo apt install -y "${apt_pkgs[@]}"
+    cecho "Installing ${apt_pkgs[*]}"
+    sudo apt install -y "${apt_pkgs[@]}"
 
-  cecho "Installing ${linux_cargo_pkgs[*]}"
-  cargo install "${linux_cargo_pkgs[@]}"
+    cecho "Installing ${linux_cargo_pkgs[*]}"
+    cargo install "${linux_cargo_pkgs[@]}"
 fi
 
 if linux; then
-  cecho "Linking fd to fdfind"
-  sudo ln -sfv "$(which fdfind)" /usr/local/bin/fd
+    cecho "Linking fd to fdfind"
+    sudo ln -sfv "$(which fdfind)" /usr/local/bin/fd
 
-  cecho "Linking bat to batcat"
-  sudo ln -sfv "$(which batcat)" /usr/local/bin/bat
+    cecho "Linking bat to batcat"
+    sudo ln -sfv "$(which batcat)" /usr/local/bin/bat
 fi
 
 if linux; then
-  cecho "Installing fzf"
-  clone_or_pull https://github.com/junegunn/fzf.git ~/.fzf
-  fzf_install=~/.fzf/install
+    cecho "Installing fzf"
+    clone_or_pull https://github.com/junegunn/fzf.git ~/.fzf
+    fzf_install=~/.fzf/install
 else
-  fzf_install="$(brew --prefix)/opt/fzf/install"
+    fzf_install="$(brew --prefix)/opt/fzf/install"
 fi
 
 cecho "Setting up fzf"
@@ -120,10 +120,10 @@ cecho "Installing tmux plugin manager"
 clone_or_pull https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 if osx; then
-  cecho "Installing tmux-256color terminfo"
-  "$(brew --prefix ncurses)"/bin/infocmp tmux-256color > /tmp/tmux-256color.info
-  tic -xve tmux-256color /tmp/tmux-256color.info
-  rm /tmp/tmux-256color.info
+    cecho "Installing tmux-256color terminfo"
+    "$(brew --prefix ncurses)"/bin/infocmp tmux-256color > /tmp/tmux-256color.info
+    tic -xve tmux-256color /tmp/tmux-256color.info
+    rm /tmp/tmux-256color.info
 fi
 
 cecho "Installing nvm"
@@ -131,9 +131,9 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 
 cecho "Installing pyenv"
 if [ ! -d ~/.pyenv ]; then
-  curl https://pyenv.run | bash
+    curl https://pyenv.run | bash
 else
-  ~/.pyenv/bin/pyenv update
+    ~/.pyenv/bin/pyenv update
 fi
 
 cecho "Installing nvim"
