@@ -34,6 +34,8 @@ setopt pushd_ignore_dups # Don't push duplicates onto the directory stack.
 zstyle ':completion:*' completer _list _complete _approximate
 zstyle ':completion:*' menu select # Use menu selection.
 zstyle ':completion:*' use-cache yes # Cache completions.
+zstyle ':completion:*' group-name '' # Group matches by type
+zstyle ':completion:*:descriptions' format '%B%d%b' # Describe what is being completed above matches
 setopt always_to_end # Move cursor to the end of a completed word.
 setopt complete_in_word # Allow completion within a word.
 setopt list_packed # Try to make completion list occupy less lines.
