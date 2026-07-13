@@ -231,7 +231,7 @@ export PATH=$PATH:~/.local/bin
 #                                  Playground                                  #
 ################################################################################
 function pg() {
-    ( cd ~/scratch/playground && go run ./pg "$@" )
+    ( cd ~/scratch/playground && go build -o build/pg ./pg && ./build/pg "$@" )
 }
 if whence pg >/dev/null; then
     source <(pg -completion-script zsh)
