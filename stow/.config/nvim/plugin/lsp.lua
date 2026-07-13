@@ -5,6 +5,7 @@ vim.lsp.enable({
     'dartls',
     'efm',
     'eslint',
+    'fish_lsp',
     'golangci_lint_ls',
     'gopls',
     'intelephense',

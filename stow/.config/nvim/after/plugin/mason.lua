@@ -13,6 +13,7 @@ local tools = {
     'clangd',
     'efm',
     'eslint-lsp',
+    'fish-lsp',
     'golangci-lint-langserver',
     'gopls',
     'intelephense',
