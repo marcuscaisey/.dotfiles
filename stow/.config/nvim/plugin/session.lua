@@ -5,7 +5,7 @@
 
 vim.api.nvim_create_autocmd('SessionWritePre', {
     desc = 'Save quickfix state',
-    group = vim.api.nvim_create_augroup('session.save_quickfix', {}),
+    group = vim.api.nvim_create_augroup('session.save_quickfix'),
     callback = function()
         local is_open = false
         if vim.fn.getqflist({ winid = 0 }).winid > 0 then
@@ -31,7 +31,7 @@ vim.api.nvim_create_autocmd('SessionWritePre', {
 
 vim.api.nvim_create_autocmd('SessionLoadPost', {
     desc = 'Restore quickfix state',
-    group = vim.api.nvim_create_augroup('session.restore_quickfix', {}),
+    group = vim.api.nvim_create_augroup('session.restore_quickfix'),
     callback = function()
         if not vim.g.QuickfixState then
             return

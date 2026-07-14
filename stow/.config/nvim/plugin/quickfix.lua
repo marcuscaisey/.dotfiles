@@ -1,6 +1,6 @@
 vim.api.nvim_create_autocmd('QuickFixCmdPost', {
     desc = 'Sort quickfix list items',
-    group = vim.api.nvim_create_augroup('quickfix.sort', {}),
+    group = vim.api.nvim_create_augroup('quickfix.sort'),
     callback = function()
         local qflist = vim.fn.getqflist()
         table.sort(qflist, function(a, b)

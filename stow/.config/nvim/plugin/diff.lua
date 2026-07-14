@@ -1,6 +1,6 @@
 vim.api.nvim_create_autocmd('VimEnter', {
     desc = 'Disable diagnostics in all windows with diff enabled',
-    group = vim.api.nvim_create_augroup('diff.disable_diagnostics', {}),
+    group = vim.api.nvim_create_augroup('diff.disable_diagnostics'),
     callback = function()
         for _, winid in ipairs(vim.api.nvim_list_wins()) do
             if vim.wo[winid].diff then
@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
 })
 vim.api.nvim_create_autocmd('OptionSet', {
     desc = 'Toggle diagnostics when diff enabled and disabled',
-    group = vim.api.nvim_create_augroup('diff.toggle_diagnostics', {}),
+    group = vim.api.nvim_create_augroup('diff.toggle_diagnostics'),
     pattern = 'diff',
     command = "lua vim.diagnostic.enable(vim.v.option_new ~= '1', { bufnr = 0 })",
 })

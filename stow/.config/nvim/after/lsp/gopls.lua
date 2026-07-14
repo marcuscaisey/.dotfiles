@@ -6,7 +6,7 @@ return {
     },
     on_attach = function(client, bufnr)
         vim.api.nvim_create_autocmd('BufWritePre', {
-            group = vim.api.nvim_create_augroup('gopls.organize_imports_' .. bufnr, {}),
+            group = vim.api.nvim_create_augroup('gopls.organize_imports_' .. bufnr),
             buffer = bufnr,
             desc = 'Run gopls source.organizeImports code action',
             callback = function()
