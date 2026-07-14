@@ -3,6 +3,7 @@ return {
     init_options = {
         semanticTokens = true,
         semanticTokenTypes = { string = false },
+        templateExtensions = { '.tmpl' },
     },
     on_attach = function(client, bufnr)
         vim.api.nvim_create_autocmd('BufWritePre', {
