@@ -8,11 +8,9 @@ ui2.enable({
 vim.filetype.add({
     extension = {
         lox = 'lox',
-        vifm = 'vim',
         ebnf = 'ebnf',
     },
     filename = {
-        vifmrc = 'vim',
         ['new-commit'] = 'gitcommit',
     },
 })
