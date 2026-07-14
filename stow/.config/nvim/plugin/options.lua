@@ -10,7 +10,6 @@ vim.filetype.add({
         lox = 'lox',
         vifm = 'vim',
         ebnf = 'ebnf',
-        tmpl = 'gotmpl',
     },
     filename = {
         vifmrc = 'vim',
