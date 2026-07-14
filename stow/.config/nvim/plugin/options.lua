@@ -9,6 +9,15 @@ vim.filetype.add({
     extension = {
         lox = 'lox',
         ebnf = 'ebnf',
+        tmpl = function(path)
+            local filetype = 'gotmpl'
+            local actual_filename = path:gsub('%.tmpl$', '')
+            local actual_filetype = vim.filetype.match({ filename = actual_filename })
+            if actual_filetype then
+                filetype = string.format('%s.%s', actual_filetype, filetype)
+            end
+            return filetype
+        end,
     },
     filename = {
         ['new-commit'] = 'gitcommit',

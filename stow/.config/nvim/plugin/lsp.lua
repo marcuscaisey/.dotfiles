@@ -72,4 +72,40 @@ vim.api.nvim_create_autocmd('LspProgress', {
     end,
 })
 
+--- Copied from $VIMRUNTIME/runtime/lua/vim/lsp.lua
+--- @param bufnr integer
+--- @param config vim.lsp.Config
+local function start_config(bufnr, config)
+    return vim.lsp.start(config, {
+        bufnr = bufnr,
+        reuse_client = config.reuse_client,
+        _root_markers = config.root_markers,
+    })
+end
+
+vim.api.nvim_create_autocmd('FileType', {
+    desc = "When 'filetype' is set to foo.gotmpl, start the servers for filetypes foo and gotmpl",
+    group = vim.api.nvim_create_augroup('lsp.gotmpl_servers'),
+    pattern = '*.gotmpl',
+    callback = function(ev)
+        for filetype in vim.gsplit(ev.match, '.', { plain = true }) do
+            for _, config in ipairs(vim.lsp.get_configs({ enabled = true })) do
+                if vim.list_contains(config.filetypes, filetype) then
+                    vim.lsp.start(config, { bufnr = ev.buf })
+                    if type(config.root_dir) == 'function' then
+                        config.root_dir(ev.buf, function(root_dir)
+                            config.root_dir = root_dir
+                            vim.schedule(function()
+                                start_config(ev.buf, config)
+                            end)
+                        end)
+                    else
+                        start_config(ev.buf, config)
+                    end
+                end
+            end
+        end
+    end,
+})
+
 vim.keymap.set('n', '<Leader>f', '<Cmd>lua vim.lsp.buf.format()<CR>', { desc = 'Format buffer' })
