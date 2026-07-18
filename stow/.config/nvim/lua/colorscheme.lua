@@ -5,16 +5,16 @@ end
 local colors = require('catppuccin.utils.colors')
 
 catppuccin.setup({
+    lsp_styles = {
+        underlines = {
+            errors = { 'undercurl' },
+            hints = { 'undercurl' },
+            warnings = { 'undercurl' },
+            information = { 'undercurl' },
+        },
+    },
     integrations = {
         mason = true,
-        native_lsp = {
-            underlines = {
-                errors = { 'undercurl' },
-                hints = { 'undercurl' },
-                warnings = { 'undercurl' },
-                information = { 'undercurl' },
-            },
-        },
         nvim_surround = true,
         lsp_saga = true,
     },
