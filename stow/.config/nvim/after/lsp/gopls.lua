@@ -1,6 +1,7 @@
 ---@type vim.lsp.Config
 return {
     init_options = {
+        completeFunctionCalls = false,
         semanticTokens = true,
         semanticTokenTypes = { string = false },
         templateExtensions = { '.tmpl' },
