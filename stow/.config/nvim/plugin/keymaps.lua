@@ -10,5 +10,3 @@ vim.keymap.set('n', 'n', 'nzz', { desc = 'Repeat the latest "/" or "?" [count] t
 vim.keymap.set('n', 'N', 'Nzz', { desc = 'Repeat the latest "/" or "?" [count] times in opposite direction' })
 
 vim.keymap.set('i', '<CR>', 'pumvisible() ? "<C-E><CR>" : "<CR>"', { desc = 'Close popup menu if visible, then <CR>', expr = true })
-
-vim.keymap.set('n', 'ZR', '<Cmd>restart<CR>', { desc = 'Restart neovim' })
