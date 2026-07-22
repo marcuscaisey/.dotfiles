@@ -228,12 +228,12 @@ export PATH=$PATH:~/.local/bin
 ################################################################################
 #                                  Playground                                  #
 ################################################################################
-function pg() {
-    ( cd ~/scratch/playground && go build -o build/pg ./pg && ./build/pg "$@" )
-}
-if whence pg >/dev/null; then
-    source <(pg -completion-script zsh)
+if ! whence pg >/dev/null; then
+    function pg() {
+        ( cd ~/scratch/playground && go build -o build/pg ./pg && ./build/pg "$@" )
+    }
 fi
+source <(pg -completion-script zsh)
 
 
 ################################################################################
