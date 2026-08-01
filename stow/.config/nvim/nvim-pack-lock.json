@@ -4,6 +4,10 @@
       "rev": "e69b002",
       "src": "https://github.com/bkad/camelcasemotion"
     },
+    "canola.nvim": {
+      "rev": "608cd79544c3adc853d0400f1f540e4f2aa4c024",
+      "src": "https://github.com/barrettruth/canola.nvim"
+    },
     "catppuccin": {
       "rev": "e068ab5f8261f23f6f71ffd8791ae40315b77b9c",
       "src": "https://github.com/catppuccin/nvim"
@@ -55,10 +59,6 @@
     "nvim-web-devicons": {
       "rev": "dad71387de386a946b123079d0e53f23028f3abd",
       "src": "https://github.com/kyazdani42/nvim-web-devicons"
-    },
-    "oil.nvim": {
-      "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
-      "src": "https://github.com/stevearc/oil.nvim"
     },
     "olddirs.nvim": {
       "rev": "a4c2ead724b5fc803f1a1a6def0de646796de188",
