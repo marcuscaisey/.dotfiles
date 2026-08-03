@@ -13,7 +13,7 @@
       "src": "https://github.com/catppuccin/nvim"
     },
     "fzf-lua": {
-      "rev": "39da6060d53659acf3ec118200bc48721b29b8fd",
+      "rev": "28440c741e927592877514fba3db21eb188caec8",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitlinker.nvim": {
@@ -21,7 +21,7 @@
       "src": "https://github.com/linrongbin16/gitlinker.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "eb60cc7b94c46005237fd34170d76f3a089a90aa",
+      "rev": "31d6fb2d618bca1482b9f274751ead5f03461408",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "mason.nvim": {
@@ -37,7 +37,7 @@
       "src": "https://github.com/kosayoda/nvim-lightbulb"
     },
     "nvim-lspconfig": {
-      "rev": "292f44408498103c47996ff5c18fd366293840d8",
+      "rev": "1c0d8f70dbc8827263eedc3cf7021ceba0f68689",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
@@ -45,19 +45,19 @@
       "src": "https://github.com/kylechui/nvim-surround"
     },
     "nvim-treesitter": {
-      "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
+      "rev": "7b6cc8949f9999c5ed91436cbe24aa5f99c42025",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {
-      "rev": "b311b30818951d01f7b4bf650521b868b3fece16",
+      "rev": "f3061339b8eaf9fda873600bc425b8d2d8502533",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "851e865342e5a4cb1ae23d31caf6e991e1c99f1e",
+      "rev": "898ee307df58f854d11cd7edd06472574d48014e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "nvim-web-devicons": {
-      "rev": "dad71387de386a946b123079d0e53f23028f3abd",
+      "rev": "2ae6958df7ced50baac5035cec0c15799eedfbf7",
       "src": "https://github.com/kyazdani42/nvim-web-devicons"
     },
     "olddirs.nvim": {
@@ -65,7 +65,7 @@
       "src": "https://github.com/marcuscaisey/olddirs.nvim"
     },
     "please.nvim": {
-      "rev": "109eab4727fb89c405bbfa5569b53df48014acc1",
+      "rev": "3a92b0727dab0b4349a41e3d18cb023f4fb61acd",
       "src": "https://github.com/marcuscaisey/please.nvim"
     },
     "vim-ConflictMotions": {
@@ -89,7 +89,7 @@
       "src": "https://github.com/michaeljsmith/vim-indent-object"
     },
     "vim-ingo-library": {
-      "rev": "700aec39d26beaf1173ce3a52df62486d60d7fdb",
+      "rev": "443d3d6d8f49a04c666c5b6a5e355fb7ac36111d",
       "src": "https://github.com/inkarkat/vim-ingo-library"
     }
   }
