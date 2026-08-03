@@ -13,7 +13,10 @@ catppuccin.setup({
             information = { 'undercurl' },
         },
     },
-    integrations = { lsp_saga = true },
+    integrations = {
+        lsp_saga = true,
+        blink_cmp = true,
+    },
     highlight_overrides = {
         mocha = function(palette)
             return {
