@@ -79,7 +79,7 @@ fzf.setup({
         },
     },
     olddirs = { git_repo_only = true },
-    ui_select = true,
+    ui_select = {},
 })
 
 vim.keymap.set('n', '<C-P>', '<Cmd>FzfLua files<CR>', { desc = 'Find files' })
