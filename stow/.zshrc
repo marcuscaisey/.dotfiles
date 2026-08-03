@@ -230,7 +230,7 @@ export PATH=$PATH:~/.local/bin
 ################################################################################
 if ! whence pg >/dev/null; then
     function pg() {
-        ( cd ~/scratch/playground && go build -o build/pg ./pg && ./build/pg "$@" )
+        ( cd ~/scratch/playground && go build -o build/pg ./cmd/pg && ./build/pg "$@" )
     }
 fi
 source <(pg -completion-script zsh)
