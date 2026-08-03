@@ -13,11 +13,7 @@ catppuccin.setup({
             information = { 'undercurl' },
         },
     },
-    integrations = {
-        mason = true,
-        nvim_surround = true,
-        lsp_saga = true,
-    },
+    integrations = { lsp_saga = true },
     highlight_overrides = {
         mocha = function(palette)
             return {
