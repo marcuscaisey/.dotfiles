@@ -85,7 +85,7 @@
       "src": "https://github.com/michaeljsmith/vim-indent-object"
     },
     "vim-ingo-library": {
-      "rev": "443d3d6d8f49a04c666c5b6a5e355fb7ac36111d",
+      "rev": "24a0f55ca25663fb53df61a09fee256c96fdd94a",
       "src": "https://github.com/inkarkat/vim-ingo-library"
     }
   }
