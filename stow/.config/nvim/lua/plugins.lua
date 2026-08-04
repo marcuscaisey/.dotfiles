@@ -11,9 +11,6 @@ vim.api.nvim_create_autocmd('PackChanged', {
                 vim.cmd.packadd('nvim-treesitter')
             end
             vim.cmd.TSUpdate()
-        elseif spec.name == 'blink.cmp' then
-            local out = vim.system({ 'cargo', 'build', '--release' }, { cwd = path }):wait()
-            assert(out.code == 0, out.stderr)
         end
     end,
 })
