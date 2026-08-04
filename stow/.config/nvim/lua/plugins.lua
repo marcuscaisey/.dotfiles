@@ -16,6 +16,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
 })
 
 vim.pack.add({
+    { src = 'https://github.com/barrettruth/canola.nvim' },
     { src = 'https://github.com/bkad/camelcasemotion' },
     { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
     { src = 'https://github.com/ibhagwan/fzf-lua' },
@@ -37,7 +38,6 @@ vim.pack.add({
     { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
     { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
     { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
-    { src = 'https://github.com/barrettruth/canola.nvim' },
 })
 -- Set so that ReplaceWithRegister doesn't create default mappings before we can override them in
 -- after/plugin/replacewithregister.lua
