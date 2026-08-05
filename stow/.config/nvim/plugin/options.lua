@@ -7,6 +7,7 @@ ui2.enable({
 
 vim.filetype.add({
     extension = {
+        alfredappearance = 'json',
         lox = 'lox',
         ebnf = 'ebnf',
         tmpl = function(path)
