@@ -44,7 +44,7 @@ shared_pkgs=(
 )
 
 brew_pkgs=(
-    coreutils # gdate used in zsh prompt
+    coreutils # provides gdircolors
     fd
     fzf
     git-delta
@@ -135,6 +135,9 @@ clone_or_pull https://github.com/neovim/neovim ~/scratch/neovim
 make -C ~/scratch/neovim CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=/opt/neovim
 sudo make -C ~/scratch/neovim install
 sudo ln -sfv /opt/neovim/bin/nvim /usr/local/bin/nvim
+
+cecho "Installing Nord theme dircolors"
+curl --output ~/.dir_colors https://raw.githubusercontent.com/nordtheme/dircolors/refs/heads/develop/src/dir_colors
 
 cecho "Moving .zshrc -> .zshrc.old"
 mv -iv ~/.zshrc ~/.zshrc.old
