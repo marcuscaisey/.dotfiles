@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
     callback = function()
         local icon, icon_hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(0), nil, { default = true })
         local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
-        vim.g.statusline_file = ('%%#%s#%s %%#StatusLine#%%f %%(%%h%%w%%m%%r %%)%%#Directory#(%:)'):format(icon_hl_group, icon, cwd)
+        vim.g.statusline_file = ('%%#%s#%s %%#StatusLine#%%f %%(%%h%%w%%m%%r %%)%%#Directory#(%s)'):format(icon_hl_group, icon, cwd)
         vim.cmd.redrawstatus()
     end,
 })
