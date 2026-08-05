@@ -1,40 +1,14 @@
-local ok, catppuccin = pcall(require, 'catppuccin')
+local ok, nord = pcall(require, 'nord')
 if not ok then
     return
 end
-local colors = require('catppuccin.utils.colors')
 
-catppuccin.setup({
-    lsp_styles = {
-        underlines = {
-            errors = { 'undercurl' },
-            hints = { 'undercurl' },
-            warnings = { 'undercurl' },
-            information = { 'undercurl' },
-        },
-    },
-    integrations = {
-        lsp_saga = true,
-        blink_cmp = true,
-    },
-    highlight_overrides = {
-        mocha = function(palette)
-            return {
-                DiffChange = { bg = colors.darken(palette.blue, 0.15, palette.base) },
-                IncSearch = { bg = palette.peach },
-            }
-        end,
-    },
-    custom_highlights = function()
-        local highlights = {
-            CurSearch = { link = 'IncSearch' },
-        }
+nord.setup({
+    on_highlights = function(highlights)
         for _, kind in ipairs(vim.lsp.protocol.CompletionItemKind) do
             highlights['LspKind' .. kind] = { link = 'BlinkCmpKind' .. kind }
         end
-        return highlights
     end,
-    flavour = 'mocha',
 })
 
-vim.cmd.colorscheme('catppuccin-nvim')
+vim.cmd.colorscheme('nord')

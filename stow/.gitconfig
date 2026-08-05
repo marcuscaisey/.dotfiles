@@ -13,7 +13,7 @@
 [delta]
     navigate = true
     line-numbers = true
-    syntax-theme = Catppuccin-mocha
+    syntax-theme = Nord
 
 [diff]
     algorithm = histogram

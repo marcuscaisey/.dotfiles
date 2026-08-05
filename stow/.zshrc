@@ -176,13 +176,12 @@ if [[ -f ~/.fzf.zsh ]]; then
     FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
     FZF_CTRL_T_OPTS="--preview 'if [ ! -d {} ]; then bat --color always --wrap never --pager never {}; else exa --classify --all --tree --level=2 --color always {}; fi'"
 
-    # Catppuccin theme
+    # Nord theme
     FZF_DEFAULT_OPTS=" \
-        --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
-        --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
-        --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
-        --color=selected-bg:#45475A \
-        --color=border:#6C7086,label:#CDD6F4"
+        --color=fg:#e5e9f0,bg:#3b4252,hl:#81a1c1 \
+        --color=fg+:#e5e9f0,bg+:#3b4252,hl+:#81a1c1 \
+        --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac \
+        --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b"
 fi
 
 
