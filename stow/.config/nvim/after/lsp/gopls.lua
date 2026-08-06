@@ -3,7 +3,10 @@ return {
     init_options = {
         completeFunctionCalls = false,
         semanticTokens = true,
-        semanticTokenTypes = { string = false },
+        semanticTokenTypes = {
+            comment = false,
+            string = false,
+        },
         templateExtensions = { '.tmpl' },
     },
     on_attach = function(client, bufnr)
