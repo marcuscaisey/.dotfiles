@@ -1,13 +1,16 @@
 ---@type vim.lsp.Config
 return {
-    init_options = {
-        completeFunctionCalls = false,
-        semanticTokens = true,
-        semanticTokenTypes = {
-            comment = false,
-            string = false,
+    ---@type lspconfig.settings.gopls
+    settings = {
+        gopls = {
+            completeFunctionCalls = false,
+            semanticTokens = true,
+            semanticTokenTypes = {
+                comment = false,
+                string = false,
+            },
+            templateExtensions = { '.tmpl' },
         },
-        templateExtensions = { '.tmpl' },
     },
     on_attach = function(client, bufnr)
         vim.api.nvim_create_autocmd('BufWritePre', {
