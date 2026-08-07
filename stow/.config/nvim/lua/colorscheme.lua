@@ -10,6 +10,7 @@ nord.setup({
             highlights['LspKind' .. kind] = { link = 'BlinkCmpKind' .. kind }
         end
 		highlights.TreesitterContext = { fg = highlights.Normal.fg, bg = colors.polar_night.bright }
+        highlights.NormalFloat.bg = colors.polar_night.bright
     end,
 })
 
