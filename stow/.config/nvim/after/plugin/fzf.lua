@@ -45,7 +45,7 @@ fzf.setup({
         preview = { horizontal = 'right:50%' },
     },
     files = { fd_opts = '--strip-cwd-prefix ' .. fzf.defaults.files.fd_opts },
-    grep = { rg_opts = '--hidden --glob=!.git ' .. fzf.defaults.grep.rg_opts },
+    grep = { rg_opts = '--hidden --glob=!.git --only-matching ' .. fzf.defaults.grep.rg_opts },
     lsp = {
         jump1 = false, -- Show the UI when result is a single entry.
         symbols = {
