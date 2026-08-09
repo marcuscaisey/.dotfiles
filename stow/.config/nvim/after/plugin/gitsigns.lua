@@ -14,7 +14,6 @@ vim.keymap.set('n', '<Leader>hS', '<Cmd>Gitsigns stage_buffer<CR>', { desc = 'St
 vim.keymap.set({ 'n', 'v' }, '<Leader>hr', ':Gitsigns reset_hunk<CR>', { desc = 'Reset git hunk', silent = true })
 vim.keymap.set('n', '<Leader>hR', '<Cmd>Gitsigns reset_buffer<CR>', { desc = 'Reset buffer git hunks' })
 vim.keymap.set('n', '<Leader>hp', '<Cmd>Gitsigns preview_hunk_inline<CR>', { desc = 'Preview git hunk' })
-vim.keymap.set('n', '<Leader>gb', '<Cmd>Gitsigns blame<CR>', { desc = 'Run git blame' })
 vim.keymap.set('n', '<Leader>gc', function()
     gitsigns.setqflist('all', { open = false }, function()
         local qflist = vim.fn.getqflist()
