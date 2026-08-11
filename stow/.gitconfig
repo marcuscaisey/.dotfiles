@@ -71,4 +71,4 @@
     autoUpdate = true
 
 [tag]
-    sort = version:refname
+    sort = -version:refname
