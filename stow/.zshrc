@@ -103,13 +103,13 @@ fi
 #                                   Homebrew                                   #
 ################################################################################
 brew=/opt/homebrew/bin/brew
-cached_shellenv=${XDG_CACHE_HOME:-$HOME/.cache}/brew-shellenv.zsh
+brew_shellenv=~/.cache/brew_shellenv.zsh
 if [[ -x $brew ]]; then
-    if [[ ! -f $cached_shellenv || $brew -nt $cached_shellenv ]]; then
-        mkdir -p ${cached_shellenv:h}
-        $brew shellenv >$cached_shellenv
+    if [[ ! -f $brew_shellenv || $brew -nt $brew_shellenv ]]; then
+        mkdir -p ${brew_shellenv:h}
+        $brew shellenv >$brew_shellenv
     fi
-    source $cached_shellenv
+    source $brew_shellenv
 fi
 
 
