@@ -243,8 +243,8 @@ if ! whence pg >/dev/null; then
     function pg() {
         ( cd ~/scratch/playground && go build -o build/pg ./cmd/pg && ./build/pg "$@" )
     }
+    source <(pg -completion-script zsh)
 fi
-source <(pg -completion-script zsh)
 
 
 ################################################################################
