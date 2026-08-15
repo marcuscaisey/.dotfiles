@@ -181,9 +181,9 @@ fi
 ################################################################################
 #                                     Git                                      #
 ################################################################################
-if [[ -v HOMEBREW_PREFIX ]]; then
+if [[ -f $HOMEBREW_PREFIX/share/zsh/site-functions/_git ]]; then
     # The completions installed with homebrew git are not very good
-    rm -f $HOMEBREW_PREFIX/share/zsh/site-functions/_git
+    rm $HOMEBREW_PREFIX/share/zsh/site-functions/_git
 fi
 
 
