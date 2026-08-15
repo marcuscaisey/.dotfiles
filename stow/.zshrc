@@ -102,8 +102,14 @@ fi
 ################################################################################
 #                                   Homebrew                                   #
 ################################################################################
-if [[ -d /opt/homebrew/bin ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+brew=/opt/homebrew/bin/brew
+cached_shellenv=${XDG_CACHE_HOME:-$HOME/.cache}/brew-shellenv.zsh
+if [[ -x $brew ]]; then
+    if [[ ! -f $cached_shellenv || $brew -nt $cached_shellenv ]]; then
+        mkdir -p ${cached_shellenv:h}
+        $brew shellenv >$cached_shellenv
+    fi
+    source $cached_shellenv
 fi
 
 
