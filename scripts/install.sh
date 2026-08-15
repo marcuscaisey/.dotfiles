@@ -55,6 +55,7 @@ brew_pkgs=(
 apt_pkgs=(
     build-essential
     fd-find
+    fzf
     ninja-build    # nvim build dep
     "${shared_pkgs[@]}"
 )
@@ -99,17 +100,6 @@ if linux; then
     cecho "Linking bat to batcat"
     sudo ln -sfv "$(which batcat)" /usr/local/bin/bat
 fi
-
-if linux; then
-    cecho "Installing fzf"
-    clone_or_pull https://github.com/junegunn/fzf.git ~/.fzf
-    fzf_install=~/.fzf/install
-else
-    fzf_install="$(brew --prefix)/opt/fzf/install"
-fi
-
-cecho "Setting up fzf"
-$fzf_install --key-bindings --no-completion --no-update-rc
 
 cecho "Installing ZSH plugins: fast-syntax-highlighting, zsh-autosuggestions, zsh-completions"
 clone_or_pull https://github.com/zsh-users/zsh-autosuggestions ~/.zsh-plugins/zsh-autosuggestions
