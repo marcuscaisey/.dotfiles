@@ -214,13 +214,7 @@ fi
 ################################################################################
 #                                     Nord                                     #
 ################################################################################
-if [[ -r ~/.dir_colors ]]; then
-    if whence dircolors >/dev/null; then
-        eval $(dircolors ~/.dir_colors)
-    elif whence gdircolors >/dev/null; then
-        eval $(gdircolors ~/.dir_colors)
-    fi
-fi
+source ~/.dotfiles/nord.zsh
 
 
 ################################################################################
