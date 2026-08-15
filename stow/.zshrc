@@ -152,30 +152,23 @@ FAST_HIGHLIGHT[git-cmsg-len]=72
 ################################################################################
 #                                     fzf                                      #
 ################################################################################
-if [[ -f ~/.fzf.zsh ]]; then
-    source ~/.fzf.zsh
+if whence fzf >/dev/null; then
     source <(fzf --zsh)
-
     # Use fd for find instead of default find
     FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --exclude .git'
-
     # Use ~~ for completion trigger instead of **
     FZF_COMPLETION_TRIGGER='~~'
-
     # Use fd instead of the default find
     _fzf_compgen_path() {
         fd --hidden --exclude .git --strip-cwd-prefix .
     }
-
     # Use fd to generate the list for directory completion
     _fzf_compgen_dir() {
         fd --type d --hidden --exclude .git --strip-cwd-prefix .
     }
-
     # Use ctrl + t to fuzzy search all files/directories (excluding .git) with preview in current directory
     FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
     FZF_CTRL_T_OPTS="--preview 'if [ ! -d {} ]; then bat --color always --wrap never --pager never {}; else exa --classify --all --tree --level=2 --color always {}; fi'"
-
     # Nord theme
     FZF_DEFAULT_OPTS=" \
         --color=fg:#e5e9f0,bg:#3b4252,hl:#81a1c1 \
