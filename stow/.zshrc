@@ -154,8 +154,13 @@ fi
 ################################################################################
 #                                     fzf                                      #
 ################################################################################
-if whence fzf >/dev/null; then
-    source <(fzf --zsh)
+if fzf=$(whence fzf 2>/dev/null); then
+    fzf_zsh=~/.cache/fzf.zsh
+    if [[ ! -f $fzf_zsh || $fzf -nt $fzf_zsh ]]; then
+        mkdir -p ${fzf_zsh:h}
+        $fzf --zsh >$fzf_zsh
+    fi
+    source $fzf_zsh
     # Use fd for find instead of default find
     FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --exclude .git'
     # Use ~~ for completion trigger instead of **
