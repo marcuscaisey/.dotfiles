@@ -140,15 +140,6 @@ fi
 
 
 ################################################################################
-#                           fast-syntax-highlighting                           #
-################################################################################
-if [[ -d ~/.zsh-plugins/fast-syntax-highlighting ]]; then
-    source ~/.zsh-plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-fi
-FAST_HIGHLIGHT[git-cmsg-len]=72
-
-
-################################################################################
 #                                     fzf                                      #
 ################################################################################
 if whence fzf >/dev/null; then
@@ -293,4 +284,12 @@ fi
 ################################################################################
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
+fi
+
+
+################################################################################
+#                           zsh-syntax-highlighting                            #
+################################################################################
+if [[ -d ~/.zsh-plugins/zsh-syntax-highlighting ]]; then
+    source ~/.zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi

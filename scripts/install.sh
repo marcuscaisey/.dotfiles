@@ -101,9 +101,9 @@ if linux; then
     sudo ln -sfv "$(which batcat)" /usr/local/bin/bat
 fi
 
-cecho "Installing ZSH plugins: fast-syntax-highlighting, zsh-autosuggestions, zsh-completions"
+cecho "Installing ZSH plugins: zsh-syntax-highlighting, zsh-autosuggestions, zsh-completions"
 clone_or_pull https://github.com/zsh-users/zsh-autosuggestions ~/.zsh-plugins/zsh-autosuggestions
-clone_or_pull https://github.com/zdharma-continuum/fast-syntax-highlighting ~/.zsh-plugins/fast-syntax-highlighting
+clone_or_pull https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh-plugins/zsh-syntax-highlighting
 clone_or_pull https://github.com/zsh-users/zsh-completions.git ~/.zsh-plugins/zsh-completions
 
 cecho "Installing tmux plugin manager"
