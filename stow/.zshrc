@@ -157,11 +157,46 @@ fi
 ################################################################################
 #                                   compsys                                    #
 ################################################################################
-autoload -Uz compinit
 # Initialise completion system.
 # Anything that modifies fpath must be done before this.
 # Anything that requires compdef must be done after this.
-compinit -u
+
+# Taken from https://github.com/zimfw/completion/blob/master/init.zsh
+# Slightly faster than compinit at checking whether ~/.zcompdump needs to be
+# regenerated
+() {
+    builtin emulate -L zsh -o EXTENDED_GLOB
+    # Check if dumpfile is up-to-date by comparing the full path and
+    # last modification time of all the completion functions in fpath.
+    local zdumpfile=~/.zcompdump zold_dat LC_ALL=C
+    local -a zmtimes
+    local -i zdump_dat=1
+    local -r zcomps=(${^fpath}/^([^_]*|*~|*.zwc)(N))
+    if (( ${#zcomps} )); then
+        zmodload -F zsh/stat b:zstat && zstat -A zmtimes +mtime ${zcomps} || return 1
+    fi
+    local -r znew_dat=${ZSH_VERSION}$'\0'${(pj:\0:)zcomps}$'\0'${(pj:\0:)zmtimes}
+    if [[ -e ${zdumpfile}.dat ]]; then
+        zmodload -F zsh/system b:sysread && sysread -s ${#znew_dat} zold_dat <${zdumpfile}.dat || return 1
+        [[ ${zold_dat} == ${znew_dat} ]] && zdump_dat=0
+    fi
+    if (( zdump_dat )); then
+        command rm -f \
+            "$zdumpfile" \
+            "${zdumpfile}.dat" \
+            "${zdumpfile}.zwc" \
+            "${zdumpfile}.zwc.old" || return 1
+    fi
+
+    # Load and initialize the completion system
+    autoload -Uz compinit && compinit -C -d ${zdumpfile} && [[ -e ${zdumpfile} ]] || return 1
+
+    if [[ ! ${zdumpfile}.dat -nt ${zdumpfile} ]]; then
+        >! ${zdumpfile}.dat <<<${znew_dat}
+    fi
+    # Compile the completion dumpfile; significant speedup
+    [[ ! ${zdumpfile}.zwc -nt ${zdumpfile} ]] && zcompile ${zdumpfile}
+}
 
 
 ################################################################################
