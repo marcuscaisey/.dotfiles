@@ -203,7 +203,7 @@ if [[ -d $NVM_DIR ]]; then
     source $NVM_DIR/bash_completion
     default_version_path=$NVM_DIR/alias/default
     if [[ -f $default_version_path ]]; then
-        export PATH="$NVM_DIR/versions/node/$(cat $default_version_path)/bin:$PATH"
+        export PATH="$NVM_DIR/versions/node/$(<$default_version_path)/bin:$PATH"
     fi
     function nvm() {
         unfunction nvm
