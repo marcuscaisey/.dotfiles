@@ -58,18 +58,19 @@ setopt prompt_subst # Allow command substitution in prompts.
 ################################################################################
 #                                    Prompt                                    #
 ################################################################################
+update_git_prompt() {
+    local ref
+    if ref=$(git symbolic-ref --quiet --short HEAD 2>/dev/null) ||
+       ref=$(git rev-parse --short HEAD 2>/dev/null); then
+        git_prompt=" %B(%F{216}${ref}%b%f)%b"
+    else
+        git_prompt=
+    fi
+}
 autoload -Uz add-zsh-hook
+add-zsh-hook precmd update_git_prompt
 
-# Populate git status in vcs_info_msg_0_.
-autoload -Uz vcs_info
-vcs_info_format=' %B(%F{216}%b%f)%%b'
-zstyle ':vcs_info:*' formats $vcs_info_format
-zstyle ':vcs_info:*' actionformats $vcs_info_format
-zstyle ':vcs_info:*' enable git # Disable all backends apart from git.
-zstyle ':vcs_info:*' max-exports 1 # Only set one vcs_info_msg_*_ variable.
-add-zsh-hook precmd vcs_info
-
-PROMPT='%B%F{blue}%1~%b%f${vcs_info_msg_0_} '
+PROMPT='%B%F{blue}%1~%b%f${git_prompt} '
 
 
 ################################################################################
