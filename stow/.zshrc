@@ -246,10 +246,10 @@ fi
 ################################################################################
 export PATH="$HOME/.please/bin:$PATH"
 plz_zsh=~/.cache/plz.zsh
-if plz=$(whence plz >/dev/null); then
+if plz=$(whence plz 2>/dev/null); then
     if [[ ! -f $plz_zsh || $plz -nt $plz_zsh ]]; then
         mkdir -p ${plz_zsh:h}
-        plz --completion_script >$plz_zsh
+        $plz --completion_script >$plz_zsh
     fi
     source $plz_zsh
 fi
