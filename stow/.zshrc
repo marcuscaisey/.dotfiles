@@ -59,13 +59,33 @@ setopt prompt_subst # Allow command substitution in prompts.
 #                                    Prompt                                    #
 ################################################################################
 update_git_prompt() {
-    local ref
-    if ref=$(git symbolic-ref --quiet --short HEAD 2>/dev/null) ||
-       ref=$(git rev-parse --short HEAD 2>/dev/null); then
-        git_prompt=" %B(%F{216}${ref}%b%f)%b"
-    else
-        git_prompt=
+    local dir=$PWD git_dir head ref
+    while [[ $dir != / ]]; do
+        if [[ -f $dir/.git/HEAD ]]; then
+            git_dir=$dir/.git
+            break
+        elif [[ -f $dir/.git ]]; then
+            # Worktrees/submodules have a .git file rather than directory
+            local line
+            IFS= read -r line <$dir/.git
+            git_dir=${line#git_dir: }
+            [[ $git_dir != /* ]] && git_dir=$dir/$git_dir
+            break
+        fi
+        dir=${dir:h}
+    done
+    if [[ -z $git_dir ]]; then
+        git_prompt=''
+        return
     fi
+    IFS= read -r head <$git_dir/HEAD
+    if [[ $head == 'ref: refs/heads/'* ]]; then
+        ref=${head#ref: refs/heads/}
+    else
+        # Detached HEAD
+        ref=${head[1,7]}
+    fi
+    git_prompt=" %B(%F{216}${ref}%f)%b"
 }
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd update_git_prompt
