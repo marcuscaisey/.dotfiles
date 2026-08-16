@@ -128,7 +128,6 @@ autoload -Uz compinit
 # Initialise completion system.
 # Anything that modifies fpath must be done before this.
 # Anything that requires compdef must be done after this.
-compinit
 compinit -u
 
 
