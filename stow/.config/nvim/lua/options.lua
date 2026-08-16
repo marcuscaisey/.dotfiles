@@ -1,4 +1,5 @@
 vim.o.autocomplete = true
+vim.o.autocompletedelay = 250
 vim.o.clipboard = 'unnamed'
 vim.o.colorcolumn = '+1'
 vim.o.complete = '.'
