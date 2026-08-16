@@ -98,6 +98,10 @@ if whence nvim >/dev/null; then
     export EDITOR=nvim
 fi
 
+# Ghostty sets this itself which conflicts with brew shellenv setting it below.
+# Unset it here and then add ghostty's path to it after we've set up homebrew.
+unset MANPATH
+
 
 ################################################################################
 #                                   Homebrew                                   #
@@ -110,6 +114,14 @@ if [[ -x $brew ]]; then
         $brew shellenv >$brew_shellenv
     fi
     source $brew_shellenv
+fi
+
+
+################################################################################
+#                                   ghostty                                    #
+################################################################################
+if ghostty=$(whence ghostty 2>/dev/null); then
+    export MANPATH=$MANPATH:${ghostty:h:h}/Resources/man
 fi
 
 
