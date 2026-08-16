@@ -27,6 +27,7 @@ local tools = {
     'typescript-language-server',
     'vim-language-server',
     'yaml-language-server',
+    'zls',
 }
 
 local args = {}

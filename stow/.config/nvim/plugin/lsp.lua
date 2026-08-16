@@ -20,6 +20,7 @@ vim.lsp.enable({
     'ts_ls',
     'vimls',
     'yamlls',
+    'zls',
 })
 
 if vim.env.NVIM_ENABLE_LSP_DEVTOOLS then
