@@ -10,3 +10,7 @@ vim.keymap.set('n', 'n', 'nzz', { desc = 'Repeat the latest "/" or "?" [count] t
 vim.keymap.set('n', 'N', 'Nzz', { desc = 'Repeat the latest "/" or "?" [count] times in opposite direction' })
 
 vim.keymap.set('i', '<CR>', 'pumvisible() ? "<C-E><CR>" : "<CR>"', { desc = 'Close popup menu if visible, then <CR>', expr = true })
+vim.keymap.set('i', '<C-Y>', 'pumvisible() && complete_info().selected == -1 ? "<C-N><C-Y>" : "<C-Y>"', {
+    desc = 'Select the first popup menu item if visisble, then <C-Y>',
+    expr = true,
+})
