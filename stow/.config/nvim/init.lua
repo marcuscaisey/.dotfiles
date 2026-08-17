@@ -310,7 +310,7 @@ vim.api.nvim_create_autocmd('CmdlineChanged', {
 
 vim.keymap.set('i', '<CR>', 'pumvisible() ? "<C-E><CR>" : "<CR>"', { desc = 'Close popup menu if visible, then <CR>', expr = true })
 vim.keymap.set('i', '<C-Y>', 'pumvisible() && complete_info().selected == -1 ? "<C-N><C-Y>" : "<C-Y>"', {
-    desc = 'Select the first popup menu item if visisble, then <C-Y>',
+    desc = 'Select the first popup item if nothing is selected, then <C-Y>',
     expr = true,
 })
 
