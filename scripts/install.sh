@@ -107,7 +107,7 @@ clone_or_pull https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh-plugin
 clone_or_pull https://github.com/zsh-users/zsh-completions.git ~/.zsh-plugins/zsh-completions
 
 cecho "Installing tmux plugin manager"
-clone_or_pull https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+clone_or_pull https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
 
 cecho "Installing nvm"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
