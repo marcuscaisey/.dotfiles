@@ -345,11 +345,6 @@ vim.keymap.set('n', 'yoe', '<Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is
 --------------------------------------------------------------------------------
 -- Status Line
 --------------------------------------------------------------------------------
-local ok, devicons = pcall(require, 'nvim-web-devicons')
-if not ok then
-    return
-end
-
 vim.o.statusline = table.concat({
     ' ',
     '%(%{% get(b:, "statusline_git", "") %}  %)',
@@ -374,7 +369,13 @@ vim.api.nvim_create_autocmd('User', {
         if not status then
             return
         end
-        local icon, icon_hl_group = devicons.get_icon(nil, 'git')
+        local icon = ''
+        local icon_hl_group = ''
+        local ok, devicons = pcall(require, 'nvim-web-devicons')
+        if ok then
+            icon, icon_hl_group = devicons.get_icon(nil, 'git')
+        end
+
         local parts = { ('%%#%s#%s %%#StatusLine#%s'):format(icon_hl_group, icon, status.head) }
         if status.added and status.added > 0 then
             table.insert(parts, '%#GitSignsAdd#+' .. status.added)
@@ -394,7 +395,12 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
     desc = 'Update statusline file section',
     group = vim.api.nvim_create_augroup('statusline.file'),
     callback = function()
-        local icon, icon_hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(0), nil, { default = true })
+        local icon = ''
+        local icon_hl_group = ''
+        local ok, devicons = pcall(require, 'nvim-web-devicons')
+        if ok then
+            icon, icon_hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(0), nil, { default = true })
+        end
         local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
         vim.g.statusline_file = ('%%#%s#%s %%#StatusLine#%%f %%(%%h%%w%%m%%r %%)%%#qfLineNr#%s'):format(icon_hl_group, icon, cwd)
         vim.cmd.redrawstatus()
