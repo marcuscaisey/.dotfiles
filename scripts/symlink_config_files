@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-# Convenience script for symlinking all of the config files in the stow
+# Convenience script for symlinking all of the config files in the home
 # directory so that you don't have to run the install script to add new config.
-stow -vv --target ~ --dir ~/.dotfiles --restow stow
+stow -vv --target ~ --dir ~/.dotfiles --restow home

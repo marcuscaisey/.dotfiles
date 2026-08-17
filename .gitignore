@@ -1,9 +1,9 @@
 *.swp
 *.swo
 .ccls-cache
-stow/.config/vifm/vifm-help.txt
-stow/.config/vifm/vifminfo.json
-stow/.config/vifm/scripts
-stow/.config/k9s/config.yaml
-stow/.config/k9s/aliases.yaml
-stow/.config/nvim/plugin/packer_compiled.lua
+home/.config/vifm/vifm-help.txt
+home/.config/vifm/vifminfo.json
+home/.config/vifm/scripts
+home/.config/k9s/config.yaml
+home/.config/k9s/aliases.yaml
+home/.config/nvim/plugin/packer_compiled.lua
