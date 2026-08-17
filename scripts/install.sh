@@ -132,8 +132,8 @@ curl --output ~/.dir_colors https://raw.githubusercontent.com/nordtheme/dircolor
 cecho "Moving .zshrc -> .zshrc.old"
 mv -iv ~/.zshrc ~/.zshrc.old
 
-cecho "Restowing config files"
-~/.dotfiles/scripts/restow.sh
+cecho "Symlinking config files"
+~/.dotfiles/scripts/symlink_config_files
 
 cecho "Updating bat theme cache"
 bat cache --build
