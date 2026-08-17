@@ -102,9 +102,9 @@ if linux; then
 fi
 
 cecho "Installing ZSH plugins: zsh-syntax-highlighting, zsh-autosuggestions, zsh-completions"
-clone_or_pull https://github.com/zsh-users/zsh-autosuggestions ~/.zsh-plugins/zsh-autosuggestions
-clone_or_pull https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh-plugins/zsh-syntax-highlighting
-clone_or_pull https://github.com/zsh-users/zsh-completions.git ~/.zsh-plugins/zsh-completions
+clone_or_pull https://github.com/zsh-users/zsh-autosuggestions ~/.local/share/zsh/plugins/zsh-autosuggestions
+clone_or_pull https://github.com/zsh-users/zsh-syntax-highlighting ~/.local/share/zsh/plugins/zsh-syntax-highlighting
+clone_or_pull https://github.com/zsh-users/zsh-completions.git ~/.local/share/zsh/plugins/zsh-completions
 
 cecho "Installing tmux plugin manager"
 clone_or_pull https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm

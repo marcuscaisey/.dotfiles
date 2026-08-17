@@ -149,8 +149,8 @@ fi
 ################################################################################
 #                               zsh-completions                                #
 ################################################################################
-if [[ -d ~/.zsh-plugins/zsh-completions ]]; then
-    fpath=(~/.zsh-plugins/zsh-completions/src $fpath)
+if [[ -d ~/.local/share/zsh/plugins/zsh-completions ]]; then
+    fpath=(~/.local/share/zsh/plugins/zsh-completions/src $fpath)
 fi
 
 
@@ -331,8 +331,8 @@ fi
 ################################################################################
 #                             zsh-autosuggestions                              #
 ################################################################################
-if [[ -d ~/.zsh-plugins/zsh-autosuggestions ]]; then
-    source ~/.zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [[ -d ~/.local/share/zsh/plugins/zsh-autosuggestions ]]; then
+    source ~/.local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
     # Disable suggestions for large buffers.
     ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
     # Disable automatic widget re-binding on each precmd.
@@ -363,6 +363,6 @@ fi
 ################################################################################
 #                           zsh-syntax-highlighting                            #
 ################################################################################
-if [[ -d ~/.zsh-plugins/zsh-syntax-highlighting ]]; then
-    source ~/.zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ -d ~/.local/share/zsh/plugins/zsh-syntax-highlighting ]]; then
+    source ~/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
