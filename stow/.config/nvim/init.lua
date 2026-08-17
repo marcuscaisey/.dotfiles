@@ -313,6 +313,16 @@ vim.keymap.set('i', '<C-Y>', 'pumvisible() && complete_info().selected == -1 ? "
     desc = 'Select the first popup item if nothing is selected, then <C-Y>',
     expr = true,
 })
+vim.keymap.set('i', '<C-N>', 'pumvisible() ? "<Down>" : "<C-N>"', {
+    desc = "Select the next match, as if CTRL-N was used, but don't insert it",
+    expr = true,
+    replace_keycodes = false,
+})
+vim.keymap.set('i', '<C-P>', 'pumvisible() ? "<Up>" : "<C-P>"', {
+    desc = "Select the previous match, as if CTRL-P was used, but don't insert it",
+    expr = true,
+    replace_keycodes = false,
+})
 
 --------------------------------------------------------------------------------
 -- Diagnostics
