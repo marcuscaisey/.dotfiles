@@ -75,7 +75,7 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
-vim.keymap.set('n', 'yow', '<Cmd>setlocal wrap!<CR>', { desc = 'Toggle line wrapping' })
+vim.keymap.set('n', 'yow', '<Cmd>setlocal wrap!<CR>')
 
 -------------------------------------------------------------------------------
 -- Plugins
@@ -151,28 +151,31 @@ end
 -------------------------------------------------------------------------------
 vim.g.mapleader = ' '
 
-vim.keymap.set('n', '<C-W><', '<C-W>5<', { desc = 'Decrease window width by 5' })
-vim.keymap.set('n', '<C-W>>', '<C-W>5>', { desc = 'Increase window width by 5' })
-vim.keymap.set('n', '<C-W>-', '<C-W>5-', { desc = 'Decrease window height by 5' })
-vim.keymap.set('n', '<C-W>+', '<C-W>5+', { desc = 'Increase window height by 5' })
+-- Increase/decrease window size in increments of 5
+vim.keymap.set('n', '<C-W><', '<C-W>5<')
+vim.keymap.set('n', '<C-W>>', '<C-W>5>')
+vim.keymap.set('n', '<C-W>-', '<C-W>5-')
+vim.keymap.set('n', '<C-W>+', '<C-W>5+')
 
-vim.keymap.set('n', 'j', [[(v:count > 1 ? "m'" . v:count : "") . 'j']], { desc = '[count] lines downward linewise', expr = true })
-vim.keymap.set('n', 'k', [[(v:count > 1 ? "m'" . v:count : "") . 'k']], { desc = '[count] lines upward linewise', expr = true })
+-- [count]j and [count]k motions are added to the jump list when count > 1
+vim.keymap.set('n', 'j', [[(v:count > 1 ? "m'" . v:count : "") . 'j']], { expr = true })
+vim.keymap.set('n', 'k', [[(v:count > 1 ? "m'" . v:count : "") . 'k']], { expr = true })
 
-vim.keymap.set('n', 'n', 'nzz', { desc = 'Repeat the latest "/" or "?" [count] times' })
-vim.keymap.set('n', 'N', 'Nzz', { desc = 'Repeat the latest "/" or "?" [count] times in opposite direction' })
-vim.keymap.set('n', '[q', '<Cmd>execute "cprevious" . v:count1<CR>zz', { desc = 'Jump to [count] previous quickfix list entry' })
-vim.keymap.set('n', ']q', '<Cmd>execute "cnext " . v:count1<CR>zz', { desc = 'Jump to [count] next quickfix list entry' })
-vim.keymap.set('n', '[Q', '<Cmd>cfirst<CR>zz', { desc = 'Jump to first quickfix list entry' })
-vim.keymap.set('n', ']Q', '<Cmd>clast<CR>zz', { desc = 'Jump to previous quickfix list entry' })
-vim.keymap.set('n', '[<C-Q>', '<Cmd>cpfile<CR>zz', { desc = 'Jump to quickfix list entry in previous file' })
-vim.keymap.set('n', ']<C-Q>', '<Cmd>cnfile<CR>zz', { desc = 'Jump to quickfix list entry in next file' })
-vim.keymap.set('n', '[l', '<Cmd>execute "lprevious" . v:count1<CR>zz', { desc = 'Jump to [count] previous location list entry' })
-vim.keymap.set('n', ']l', '<Cmd>execute "lnext " . v:count1<CR>zz', { desc = 'Jump to [count] next location list entry' })
-vim.keymap.set('n', '[L', '<Cmd>lfirst<CR>zz', { desc = 'Jump to first location list entry' })
-vim.keymap.set('n', ']L', '<Cmd>llast<CR>zz', { desc = 'Jump to previous location list entry' })
-vim.keymap.set('n', '[<C-L>', '<Cmd>lpfile<CR>zz', { desc = 'Jump to location list entry in previous file' })
-vim.keymap.set('n', ']<C-L>', '<Cmd>lnfile<CR>zz', { desc = 'Jump to location list entry in next file' })
+-- Center the cursor line in the window after a bunch of operations which jump
+vim.keymap.set('n', 'n', 'nzz')
+vim.keymap.set('n', 'N', 'Nzz')
+vim.keymap.set('n', '[q', '<Cmd>execute "cprevious" . v:count1<CR>zz')
+vim.keymap.set('n', ']q', '<Cmd>execute "cnext " . v:count1<CR>zz')
+vim.keymap.set('n', '[Q', '<Cmd>cfirst<CR>zz')
+vim.keymap.set('n', ']Q', '<Cmd>clast<CR>zz')
+vim.keymap.set('n', '[<C-Q>', '<Cmd>cpfile<CR>zz')
+vim.keymap.set('n', ']<C-Q>', '<Cmd>cnfile<CR>zz')
+vim.keymap.set('n', '[l', '<Cmd>execute "lprevious" . v:count1<CR>zz')
+vim.keymap.set('n', ']l', '<Cmd>execute "lnext " . v:count1<CR>zz')
+vim.keymap.set('n', '[L', '<Cmd>lfirst<CR>zz')
+vim.keymap.set('n', ']L', '<Cmd>llast<CR>zz')
+vim.keymap.set('n', '[<C-L>', '<Cmd>lpfile<CR>zz')
+vim.keymap.set('n', ']<C-L>', '<Cmd>lnfile<CR>zz')
 
 --------------------------------------------------------------------------------
 -- LSP
@@ -306,21 +309,13 @@ vim.api.nvim_create_autocmd('CmdlineChanged', {
     command = 'call wildtrigger()',
 })
 
-vim.keymap.set('i', '<CR>', 'pumvisible() ? "<C-E><CR>" : "<CR>"', { desc = 'Close popup menu if visible, then <CR>', expr = true })
-vim.keymap.set('i', '<C-Y>', 'pumvisible() && complete_info().selected == -1 ? "<C-N><C-Y>" : "<C-Y>"', {
-    desc = 'Select the first popup item if nothing is selected, then <C-Y>',
-    expr = true,
-})
-vim.keymap.set('i', '<C-N>', 'pumvisible() ? "<Down>" : "<C-N>"', {
-    desc = "Select the next match, as if CTRL-N was used, but don't insert it",
-    expr = true,
-    replace_keycodes = false,
-})
-vim.keymap.set('i', '<C-P>', 'pumvisible() ? "<Up>" : "<C-P>"', {
-    desc = "Select the previous match, as if CTRL-P was used, but don't insert it",
-    expr = true,
-    replace_keycodes = false,
-})
+-- <CR> closes the popup menu instead of accepting the current selection
+vim.keymap.set('i', '<CR>', 'pumvisible() ? "<C-E><CR>" : "<CR>"', { expr = true })
+-- <C-Y> accepts the first item if nothing is selected
+vim.keymap.set('i', '<C-Y>', 'pumvisible() && complete_info().selected == -1 ? "<C-N><C-Y>" : "<C-Y>"', { expr = true })
+-- <C-N> and <C-P> select items withouting inserting them
+vim.keymap.set('i', '<C-N>', 'pumvisible() ? "<Down>" : "<C-N>"', { expr = true, replace_keycodes = false })
+vim.keymap.set('i', '<C-P>', 'pumvisible() ? "<Up>" : "<C-P>"', { expr = true, replace_keycodes = false })
 
 --------------------------------------------------------------------------------
 -- Diagnostics
@@ -338,7 +333,7 @@ vim.diagnostic.config({
     severity_sort = true,
 })
 
-vim.keymap.set('n', 'yoe', '<Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>', { desc = 'Toggle diagnostics' })
+vim.keymap.set('n', 'yoe', '<Cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>')
 
 --------------------------------------------------------------------------------
 -- Status Line
@@ -453,19 +448,17 @@ vim.api.nvim_create_autocmd('QuickFixCmdPost', {
     end,
 })
 
-vim.keymap.set('n', '<Leader>q', '<Cmd>execute getqflist({"winid": 0}).winid > 0 ? "cclose" : "copen"<CR>', { desc = 'Toggle quickfix list' })
-vim.keymap.set('n', '<Leader>l', '<Cmd>execute getloclist(0, {"winid": 0}).winid > 0 ? "lclose" : "lopen"<CR>', { desc = 'Toggle location list' })
+vim.keymap.set('n', '<Leader>q', '<Cmd>execute getqflist({"winid": 0}).winid > 0 ? "cclose" : "copen"<CR>')
+vim.keymap.set('n', '<Leader>l', '<Cmd>execute getloclist(0, {"winid": 0}).winid > 0 ? "lclose" : "lopen"<CR>')
 
 --------------------------------------------------------------------------------
 -- Argument List
 --------------------------------------------------------------------------------
-vim.keymap.set('n', '<Leader>aa', '<Cmd>$argedit % | argdedupe | args<CR>', { desc = 'Add file to argument list' })
-vim.keymap.set('n', '<Leader>AA', '<Cmd>args<CR>', { desc = 'List argument list' })
-vim.keymap.set('n', '<Leader>ac', '<Cmd>argdelete * | args<CR>', { desc = 'Clear argument list' })
+vim.keymap.set('n', '<Leader>aa', '<Cmd>$argedit % | argdedupe | args<CR>')
+vim.keymap.set('n', '<Leader>AA', '<Cmd>args<CR>')
+vim.keymap.set('n', '<Leader>ac', '<Cmd>argdelete * | args<CR>')
 for i = 0, 9 do
-    -- stylua: ignore start
-    vim.keymap.set('n', string.format('<Leader>%d', i), string.format('<Cmd>argument %d | args<CR>', i), { desc = string.format('Jump to file %d in argument list', i) })
-    -- stylua: ignore end
+    vim.keymap.set('n', string.format('<Leader>%d', i), string.format('<Cmd>argument %d | args<CR>', i))
 end
 
 --------------------------------------------------------------------------------
@@ -557,8 +550,8 @@ vim.api.nvim_create_autocmd('OptionSet', {
     command = "lua vim.diagnostic.enable(vim.v.option_new ~= '1', { bufnr = 0 })",
 })
 
-vim.keymap.set('n', 'yod', '<Cmd>execute &diff ? "diffoff" : "diffthis"<CR>', { desc = 'Toggle diff in window' })
-vim.keymap.set('n', 'yoD', '<Cmd>diffoff!<CR>', { desc = 'Switch off diff in all windows' })
+vim.keymap.set('n', 'yod', '<Cmd>execute &diff ? "diffoff" : "diffthis"<CR>')
+vim.keymap.set('n', 'yoD', '<Cmd>diffoff!<CR>')
 
 --------------------------------------------------------------------------------
 -- Miscellaneous
