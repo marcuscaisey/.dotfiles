@@ -122,9 +122,8 @@ fi
 cecho "Installing nvim"
 mkdir -p ~/scratch
 clone_or_pull https://github.com/neovim/neovim ~/scratch/neovim
-make -C ~/scratch/neovim CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=/opt/neovim
+make -C ~/scratch/neovim CMAKE_BUILD_TYPE=RelWithDebInfo
 sudo make -C ~/scratch/neovim install
-sudo ln -sfv /opt/neovim/bin/nvim /usr/local/bin/nvim
 
 cecho "Installing Nord theme dircolors"
 curl --output ~/.dir_colors https://raw.githubusercontent.com/nordtheme/dircolors/refs/heads/develop/src/dir_colors
