@@ -137,6 +137,8 @@ if [[ -x $brew ]]; then
     source $brew_shellenv
 fi
 
+export TERMINFO_DIRS=$HOMEBREW_PREFIX/opt/ncurses/share/terminfo:
+
 
 ################################################################################
 #                                   ghostty                                    #
