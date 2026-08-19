@@ -37,7 +37,7 @@
       "src": "https://github.com/kosayoda/nvim-lightbulb"
     },
     "nvim-lspconfig": {
-      "rev": "6fc041976833841cc9d991f45193533fe2a2e09b",
+      "rev": "bff1bd61cb1455040533201ca1edf1e84efa578f",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
@@ -65,7 +65,7 @@
       "src": "https://github.com/marcuscaisey/olddirs.nvim"
     },
     "please.nvim": {
-      "rev": "3a92b0727dab0b4349a41e3d18cb023f4fb61acd",
+      "rev": "3ee1b50eb15f9ba6878d6af497b491717266ebf8",
       "src": "https://github.com/marcuscaisey/please.nvim"
     },
     "vim-ConflictMotions": {
