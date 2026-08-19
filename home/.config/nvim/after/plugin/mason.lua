@@ -21,7 +21,7 @@ local tools = {
     'json-lsp',
     'lua-language-server',
     'marksman',
-    'prettierd',
+    'oxfmt',
     'rust-analyzer',
     'stylua',
     'typescript-language-server',

@@ -1,9 +1,5 @@
 local languages = {
-    html = { { formatCommand = 'prettierd ${INPUT}', formatStdin = true } },
-    javascript = { { formatCommand = 'prettierd ${INPUT}', formatStdin = true } },
-    markdown = { { formatCommand = 'prettierd ${INPUT}', formatStdin = true } },
     python = { { formatCommand = 'black --stdin-filename=${INPUT} --quiet -', formatStdin = true } },
-    typescript = { { formatCommand = 'prettierd ${INPUT}', formatStdin = true } },
 }
 
 ---@type vim.lsp.Config

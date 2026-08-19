@@ -196,6 +196,7 @@ vim.lsp.enable({
     'loxls',
     'lua_ls',
     'marksman',
+    'oxfmt',
     'please',
     'rust_analyzer',
     'stylua',
