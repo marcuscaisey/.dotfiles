@@ -185,7 +185,6 @@ vim.lsp.enable({
     'bashls',
     'clangd',
     'dartls',
-    'efm',
     'eslint',
     'fish_lsp',
     'golangci_lint_ls',

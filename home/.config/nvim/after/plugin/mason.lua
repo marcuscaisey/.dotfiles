@@ -10,7 +10,6 @@ local tools = {
     'basedpyright',
     'bash-language-server',
     'clangd',
-    'efm',
     'eslint-lsp',
     'fish-lsp',
     'golangci-lint-langserver',
