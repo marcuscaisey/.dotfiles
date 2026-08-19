@@ -1,5 +1,4 @@
 local languages = {
-    python = { { formatCommand = 'black --stdin-filename=${INPUT} --quiet -', formatStdin = true } },
 }
 
 ---@type vim.lsp.Config

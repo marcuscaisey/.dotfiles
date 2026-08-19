@@ -9,7 +9,6 @@ mason.setup()
 local tools = {
     'basedpyright',
     'bash-language-server',
-    'black',
     'clangd',
     'efm',
     'eslint-lsp',
@@ -22,6 +21,7 @@ local tools = {
     'lua-language-server',
     'marksman',
     'oxfmt',
+    'ruff',
     'rust-analyzer',
     'stylua',
     'typescript-language-server',

@@ -198,6 +198,7 @@ vim.lsp.enable({
     'marksman',
     'oxfmt',
     'please',
+    'ruff',
     'rust_analyzer',
     'stylua',
     'ts_ls',
