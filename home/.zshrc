@@ -20,9 +20,11 @@ zle_highlight+=(paste:none)
 # Remove duplicates from $PATH, $path, $FPATH, and $fpath.
 typeset -U PATH path FPATH fpath
 
-# Consider | to be part of a word so that it's not jumped over when using
-# ESC-f, ESC-b, ^W
+# Don't jump over | with ESC-f, ESC-b, ^W, etc
 WORDCHARS="|$WORDCHARS"
+
+# Delete backwards until = with ^W
+WORDCHARS=${WORDCHARS/=/}
 
 # Changing Directories
 setopt auto_pushd # Make cd push the old directory onto the directory stack.
