@@ -296,7 +296,6 @@ vim.api.nvim_create_autocmd('FileType', {
 -- Completion
 -------------------------------------------------------------------------------
 vim.o.autocomplete = true
-vim.o.autocompletedelay = 250
 vim.o.complete = '.'
 vim.o.completeopt = 'fuzzy,menuone,noinsert,popup'
 vim.cmd('set shortmess+=c')
