@@ -37,7 +37,7 @@
       "src": "https://github.com/kosayoda/nvim-lightbulb"
     },
     "nvim-lspconfig": {
-      "rev": "bff1bd61cb1455040533201ca1edf1e84efa578f",
+      "rev": "221c43884319e791519f0d6c94a7f2fbcd653278",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
@@ -45,7 +45,7 @@
       "src": "https://github.com/kylechui/nvim-surround"
     },
     "nvim-treesitter": {
-      "rev": "074aa4422bf029908338e855d0c0f71470a971bb",
+      "rev": "e82ef6ae2c3eeb96c6916b29917f96bf630b2cdb",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {
@@ -89,7 +89,7 @@
       "src": "https://github.com/michaeljsmith/vim-indent-object"
     },
     "vim-ingo-library": {
-      "rev": "24a0f55ca25663fb53df61a09fee256c96fdd94a",
+      "rev": "18adf54012ce8e015df01e379752d5c4d15c9bb5",
       "src": "https://github.com/inkarkat/vim-ingo-library"
     }
   }
