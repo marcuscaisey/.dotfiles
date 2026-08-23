@@ -140,6 +140,7 @@ if ok then
             end
             highlights.TreesitterContext = { fg = highlights.Normal.fg, bg = colors.polar_night.bright }
             highlights.NormalFloat.bg = colors.polar_night.bright
+            highlights.StatusLineDirectory = { fg = colors.frost.artic_water }
         end,
     })
     vim.cmd.colorscheme('nord')
@@ -392,7 +393,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
             filetype_icon = '%#' .. icon_hl_group .. '#' .. icon .. ' '
         end
         local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
-        vim.g.statusline_file = filetype_icon .. '%#StatusLine#%f %(%h%w%m%r %)%#qfLineNr#' .. cwd
+        vim.g.statusline_file = filetype_icon .. '%#StatusLine#%f %(%h%w%m%r %)%#StatusLineDirectory#' .. cwd
         vim.cmd.redrawstatus()
     end,
 })
