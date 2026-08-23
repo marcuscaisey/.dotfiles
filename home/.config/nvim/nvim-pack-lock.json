@@ -4,10 +4,6 @@
       "rev": "e69b002",
       "src": "https://github.com/bkad/camelcasemotion"
     },
-    "canola.nvim": {
-      "rev": "608cd79544c3adc853d0400f1f540e4f2aa4c024",
-      "src": "https://github.com/barrettruth/canola.nvim"
-    },
     "fzf-lua": {
       "rev": "05e44d38de0a79c11fba5f7bf8138791b1dbdd1e",
       "src": "https://github.com/ibhagwan/fzf-lua"

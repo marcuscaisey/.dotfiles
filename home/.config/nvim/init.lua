@@ -98,7 +98,6 @@ vim.api.nvim_create_autocmd('PackChanged', {
 })
 
 vim.pack.add({
-    { src = 'https://github.com/barrettruth/canola.nvim' },
     { src = 'https://github.com/bkad/camelcasemotion' },
     { src = 'https://github.com/gbprod/nord.nvim' },
     { src = 'https://github.com/ibhagwan/fzf-lua' },
