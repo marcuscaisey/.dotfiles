@@ -392,7 +392,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
             icon, icon_hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(0), nil, { default = true })
         end
         local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
-        vim.g.statusline_file = ('%%#%s#%s %%#StatusLine#%%f %%(%%h%%w%%m%%r %%)%%#qfLineNr#%s'):format(icon_hl_group, icon, cwd)
+        vim.g.statusline_file = '%#' .. icon_hl_group .. '#' .. icon .. ' %#StatusLine#%f %(%h%w%m%r %)%#qfLineNr#' .. cwd
         vim.cmd.redrawstatus()
     end,
 })
