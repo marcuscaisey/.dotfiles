@@ -164,7 +164,7 @@ vim.keymap.set('n', 'k', [[(v:count > 1 ? "m'" . v:count : "") . 'k']], { expr =
 -- Center the cursor line in the window after a bunch of operations which jump
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
-vim.keymap.set('n', '[q', '<Cmd>execute "cprevious" . v:count1<CR>zz')
+vim.keymap.set('n', '[q', '<Cmd>execute "cprevious " . v:count1<CR>zz')
 vim.keymap.set('n', ']q', '<Cmd>execute "cnext " . v:count1<CR>zz')
 vim.keymap.set('n', '[Q', '<Cmd>cfirst<CR>zz')
 vim.keymap.set('n', ']Q', '<Cmd>clast<CR>zz')
