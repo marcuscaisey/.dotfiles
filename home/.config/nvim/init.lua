@@ -352,6 +352,7 @@ vim.o.statusline = table.concat({
     ' ',
 })
 
+vim.api.nvim_set_hl(0, 'StatusLineGitIcon', { ctermfg = 196, fg = '#f14c28' })
 vim.api.nvim_create_autocmd('User', {
     desc = 'Update statusline git section',
     group = vim.api.nvim_create_augroup('statusline.git'),
@@ -365,14 +366,7 @@ vim.api.nvim_create_autocmd('User', {
         if not status then
             return
         end
-        local icon = ''
-        local icon_hl_group = ''
-        local ok, devicons = pcall(require, 'nvim-web-devicons')
-        if ok then
-            icon, icon_hl_group = devicons.get_icon(nil, 'git')
-        end
-
-        local parts = { ('%%#%s#%s %%#StatusLine#%s'):format(icon_hl_group, icon, status.head) }
+        local parts = { '%#StatusLineGitIcon# %#StatusLine#' .. status.head }
         if status.added and status.added > 0 then
             table.insert(parts, '%#GitSignsAdd#+' .. status.added)
         end
