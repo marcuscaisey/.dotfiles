@@ -413,7 +413,7 @@ vim.api.nvim_create_autocmd({ 'LspAttach', 'LspDetach' }, {
                 table.insert(client_names, client.name)
             end
         end
-        vim.b[ev.buf].statusline_lsp_clients = '%#StatusLine# ' .. table.concat(client_names, ', ')
+        vim.b[ev.buf].statusline_lsp_clients = '%#StatusLine#  ' .. table.concat(client_names, ', ')
         vim.cmd.redrawstatus()
     end,
 })
