@@ -385,14 +385,14 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
     desc = 'Update statusline file section',
     group = vim.api.nvim_create_augroup('statusline.file'),
     callback = function()
-        local icon = ''
-        local icon_hl_group = ''
+        local filetype_icon = ''
         local ok, devicons = pcall(require, 'nvim-web-devicons')
         if ok then
-            icon, icon_hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(0), nil, { default = true })
+            local icon, icon_hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(0), nil, { default = true })
+            filetype_icon = '%#' .. icon_hl_group .. '#' .. icon .. ' '
         end
         local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
-        vim.g.statusline_file = '%#' .. icon_hl_group .. '#' .. icon .. ' %#StatusLine#%f %(%h%w%m%r %)%#qfLineNr#' .. cwd
+        vim.g.statusline_file = filetype_icon .. '%#StatusLine#%f %(%h%w%m%r %)%#qfLineNr#' .. cwd
         vim.cmd.redrawstatus()
     end,
 })
