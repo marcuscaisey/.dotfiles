@@ -217,7 +217,7 @@ end
 vim.lsp.codelens.enable()
 
 vim.api.nvim_create_autocmd('LspAttach', {
-    desc = 'Enable completion if the server supports it',
+    desc = 'Enable completion and set buffer directory to root directory',
     group = vim.api.nvim_create_augroup('lsp.completion'),
     callback = function(ev)
         local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
@@ -229,6 +229,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 autotrigger = true,
             })
             vim.bo[ev.buf].complete = 'o'
+
+            if client.root_dir then
+                vim.cmd.bcd(client.root_dir)
+            end
         end
     end,
 })
@@ -600,6 +604,17 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter', 'BufNewFile' }, {
                 return f ~= ev.file
             end, vim.v.oldfiles)
             vim.v.oldfiles = { ev.file, unpack(rest) }
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd('BufReadPost', {
+    desc = 'Set buffer directory to git root',
+    group = vim.api.nvim_create_augroup('buffer.set_buffer_working_directory'),
+    callback = function(ev)
+        local root = vim.fs.root(ev.buf, '.git')
+        if root then
+            vim.cmd.bcd(root)
         end
     end,
 })
