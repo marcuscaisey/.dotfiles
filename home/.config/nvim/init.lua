@@ -393,7 +393,10 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
             filetype_icon = '%#' .. icon_hl_group .. '#' .. icon .. ' '
         end
         local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
-        vim.g.statusline_file = filetype_icon .. '%#StatusLine#%f %(%h%w%m%r %)%#StatusLineDirectory#' .. cwd
+        vim.g.statusline_file = filetype_icon .. '%#StatusLine#%f %(%h%w%m%r %)'
+        if vim.bo.filetype ~= 'directory' then
+            vim.g.statusline_file = vim.g.statusline_file .. '%#StatusLineDirectory#' .. cwd
+        end
         vim.cmd.redrawstatus()
     end,
 })
