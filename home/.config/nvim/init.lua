@@ -658,3 +658,36 @@ end, { desc = 'Yank the path of the current buffer relative to the git root' })
 vim.keymap.set('n', '<Leader>YY', function()
     yank(vim.api.nvim_buf_get_name(0))
 end, { desc = 'Yank the absolute path of the current buffer' })
+
+local dir_classify_ns = vim.api.nvim_create_namespace('dir.classify')
+local filetype_glyphs = { fifo = '|', socket = '=', char = '%', block = '#' }
+vim.api.nvim_set_decoration_provider(dir_classify_ns, {
+    on_win = function(_, _, buf)
+        return vim.bo[buf].filetype == 'directory'
+    end,
+    ---@type fun(_: "range", winid: integer, bufnr: integer, start_row: integer, start_col: integer, end_row: integer, end_col: integer): number
+    on_range = function(_, _, bufnr, start_row)
+        local dir = vim.api.nvim_buf_get_name(bufnr)
+        local name = vim.api.nvim_buf_get_lines(bufnr, start_row, start_row + 1, true)[1]
+        local path = vim.fs.joinpath(dir, (name:gsub('/$', '')))
+        local stat = vim.uv.fs_lstat(path) or {}
+        local exe = stat.type == 'file' and bit.band(stat.mode, tonumber('111', 8)) ~= 0
+        local char = filetype_glyphs[stat.type] or (exe and '*')
+        if char then
+            vim.api.nvim_buf_set_extmark(bufnr, dir_classify_ns, start_row, #name, {
+                virt_text = { { char, 'Dimmed' } },
+                virt_text_pos = 'overlay',
+                ephemeral = true,
+            })
+        end
+        if stat.type == 'link' then
+            local target = vim.uv.fs_readlink(path) or '?'
+            vim.api.nvim_buf_set_extmark(bufnr, dir_classify_ns, start_row, 0, {
+                virt_text = { { '-> ' .. target, 'Dimmed' } },
+                virt_text_pos = 'eol',
+                ephemeral = true,
+            })
+        end
+        return start_row + 1
+    end,
+})
