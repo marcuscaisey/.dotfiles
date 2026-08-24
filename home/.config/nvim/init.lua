@@ -218,7 +218,7 @@ end
 vim.lsp.codelens.enable()
 
 vim.api.nvim_create_autocmd('LspAttach', {
-    desc = 'Enable completion and set buffer directory to root directory',
+    desc = 'Enable completion',
     group = vim.api.nvim_create_augroup('lsp.completion'),
     callback = function(ev)
         local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
@@ -230,10 +230,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 autotrigger = true,
             })
             vim.bo[ev.buf].complete = 'o'
-
-            if client.root_dir then
-                vim.cmd.bcd(client.root_dir)
-            end
         end
     end,
 })
