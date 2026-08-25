@@ -119,6 +119,7 @@ vim.pack.add({
     { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
     { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
     { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
+    { src = 'https://github.com/tpope/vim-eunuch' },
     { src = 'https://github.com/tpope/vim-fugitive' },
 })
 -- Set so that ReplaceWithRegister doesn't create default mappings before we can override them in
