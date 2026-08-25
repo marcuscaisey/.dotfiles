@@ -22,9 +22,10 @@ typeset -U PATH path FPATH fpath
 
 # Don't jump over | with ESC-f, ESC-b, ^W, etc
 WORDCHARS="|$WORDCHARS"
-
 # Delete backwards until = with ^W
 WORDCHARS=${WORDCHARS/=/}
+# Delete backwards until / with ^W
+WORDCHARS=${WORDCHARS/\//}
 
 # Changing Directories
 setopt auto_pushd # Make cd push the old directory onto the directory stack.
