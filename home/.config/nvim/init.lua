@@ -1,5 +1,6 @@
 require('my.plugins') -- Load first so plugins are available to files below
 require('my.colorscheme')
+require('my.dir')
 require('my.keymaps')
 require('my.lsp')
 require('my.misc')
