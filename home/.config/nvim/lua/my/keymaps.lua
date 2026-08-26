@@ -1,5 +1,3 @@
-vim.g.mapleader = ' '
-
 -- Increase/decrease window size in increments of 5
 vim.keymap.set('n', '<C-W><', '<C-W>5<')
 vim.keymap.set('n', '<C-W>>', '<C-W>5>')
