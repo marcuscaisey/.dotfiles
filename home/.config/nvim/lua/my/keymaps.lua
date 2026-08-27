@@ -84,13 +84,16 @@ end, { desc = 'Yank the absolute path of the current buffer' })
 -- Stop cursor from being moved to top of buffer after gq
 vim.keymap.set('n', 'gq', function()
     local view = vim.fn.winsaveview()
-    vim.api.nvim_create_autocmd('CursorMoved', {
-        group = vim.api.nvim_create_augroup('my.formatting.restore_cursor'),
+    vim.api.nvim_create_autocmd('CmdAtom', {
+        group = vim.api.nvim_create_augroup('my.formatting.restore_view'),
         buf = 0,
         once = true,
         desc = 'Restore view after formatting',
-        callback = function()
-            vim.fn.winrestview(view)
+        callback = function(ev)
+            local data = ev.data ---@type vim.event.cmdatom.data
+            if data.type == 'operator' and data.operator == 'gq' and data.pos then
+                vim.fn.winrestview(view)
+            end
         end,
     })
     return 'gq'
