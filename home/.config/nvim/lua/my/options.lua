@@ -1,3 +1,4 @@
+vim.loader.enable()
 vim.g.mapleader = ' '
 vim.opt.autocomplete = true
 vim.opt.clipboard = 'unnamed'
