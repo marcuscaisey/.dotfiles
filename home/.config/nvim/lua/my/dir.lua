@@ -62,61 +62,71 @@ for item in vim.gsplit(vim.env.LS_COLORS or '', ':') do
     ::continue::
 end
 
-local ns = vim.api.nvim_create_namespace('my.dir.highlight')
-vim.api.nvim_set_decoration_provider(ns, {
-    on_win = function(_, _, buf)
-        return vim.bo[buf].filetype == 'directory'
-    end,
-    ---@type fun(_: "range", winid: integer, bufnr: integer, start_row: integer, start_col: integer, end_row: integer, end_col: integer): number
-    on_range = function(_, _, bufnr, start_row)
-        local ret = start_row + 1
-
+local ns = vim.api.nvim_create_namespace('my.dir.decorate')
+vim.api.nvim_create_autocmd('User', {
+    desc = 'Decorate the directory buffer',
+    group = vim.api.nvim_create_augroup('my.dir.decorate'),
+    pattern = 'DirReadPost',
+    callback = function(args)
+        local bufnr = args.buf
+        vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
         local dir = vim.api.nvim_buf_get_name(bufnr)
-        local name = vim.api.nvim_buf_get_lines(bufnr, start_row, start_row + 1, true)[1]
-        local path = vim.fs.joinpath(dir, (name:gsub('/$', '')))
-        local stat = vim.uv.fs_lstat(path)
-        if not stat then
-            return ret
-        end
-        local hl_group = file_type_hl_group(stat)
-        if hl_group then
-            vim.api.nvim_buf_set_extmark(bufnr, ns, start_row, 0, {
-                end_row = start_row,
-                end_col = #name,
-                hl_group = hl_group,
-                ephemeral = true,
-            })
-        end
-        if stat.type ~= 'link' then
-            return ret
-        end
+        local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+        for i, name in ipairs(lines) do
+            local row = i - 1
 
-        local arrow_hl_group = 'DirBufferBrokenLinkArrow'
-        local target_hl_group = 'DirBufferBrokenLinkTarget'
-        local target = vim.uv.fs_readlink(path)
-        if target then
-            local stat = vim.uv.fs_lstat(vim.fs.abspath(target, { cwd = dir }))
-            if stat then
-                if stat.type == 'directory' then
-                    target = target .. '/'
-                end
-                arrow_hl_group = 'Dimmed'
-                target_hl_group = file_type_hl_group(stat) or 'Dimmed'
+            local ok, devicons = pcall(require, 'nvim-web-devicons')
+            if ok and not name:match('/$') then
+                local icon, icon_hl_group = devicons.get_icon(name, nil, { default = true })
+                vim.api.nvim_buf_set_extmark(bufnr, ns, row, 0, {
+                    virt_text = {
+                        { icon .. ' ', icon_hl_group },
+                    },
+                    virt_text_pos = 'inline',
+                })
             end
-        else
-            target = '?'
-        end
-        vim.api.nvim_buf_set_extmark(bufnr, ns, start_row, 0, {
-            virt_text = { { '->', arrow_hl_group } },
-            virt_text_pos = 'eol',
-            ephemeral = true,
-        })
-        vim.api.nvim_buf_set_extmark(bufnr, ns, start_row, 0, {
-            virt_text = { { target, target_hl_group } },
-            virt_text_pos = 'eol',
-            ephemeral = true,
-        })
 
-        return ret
+            local path = vim.fs.joinpath(dir, (name:gsub('/$', '')))
+            local stat = vim.uv.fs_lstat(path)
+            if not stat then
+                goto continue
+            end
+            local hl_group = file_type_hl_group(stat)
+            if hl_group then
+                vim.api.nvim_buf_set_extmark(bufnr, ns, row, 0, {
+                    end_row = row,
+                    end_col = #name,
+                    hl_group = hl_group,
+                })
+            end
+            if stat.type ~= 'link' then
+                goto continue
+            end
+
+            local arrow_hl_group = 'DirBufferBrokenLinkArrow'
+            local target_hl_group = 'DirBufferBrokenLinkTarget'
+            local target = vim.uv.fs_readlink(path)
+            if target then
+                local stat = vim.uv.fs_lstat(vim.fs.abspath(target, { cwd = dir }))
+                if stat then
+                    if stat.type == 'directory' then
+                        target = target .. '/'
+                    end
+                    arrow_hl_group = 'Dimmed'
+                    target_hl_group = file_type_hl_group(stat) or 'Dimmed'
+                end
+            else
+                target = '?'
+            end
+            vim.api.nvim_buf_set_extmark(bufnr, ns, row, 0, {
+                virt_text = {
+                    { '-> ', arrow_hl_group },
+                    { target, target_hl_group },
+                },
+                virt_text_pos = 'eol',
+            })
+
+            ::continue::
+        end
     end,
 })
