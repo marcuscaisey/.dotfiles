@@ -37,7 +37,7 @@ vim.lsp.codelens.enable()
 
 vim.api.nvim_create_autocmd('LspAttach', {
     desc = 'Enable completion',
-    group = vim.api.nvim_create_augroup('lsp.completion'),
+    group = vim.api.nvim_create_augroup('my.lsp.completion'),
     callback = function(ev)
         local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
         if client:supports_method('textDocument/completion') then
@@ -60,7 +60,7 @@ end
 
 vim.api.nvim_create_autocmd('LspProgress', {
     desc = 'Echo progress message',
-    group = vim.api.nvim_create_augroup('lsp.progress_echo'),
+    group = vim.api.nvim_create_augroup('my.lsp.progress_echo'),
     callback = function(ev)
         local value = ev.data.params.value
         vim.api.nvim_echo({ { value.message or 'done' } }, false, {
@@ -87,7 +87,7 @@ end
 
 vim.api.nvim_create_autocmd('FileType', {
     desc = "When 'filetype' is set to foo.gotmpl, start the servers for filetypes foo and gotmpl",
-    group = vim.api.nvim_create_augroup('lsp.gotmpl_servers'),
+    group = vim.api.nvim_create_augroup('my.lsp.gotmpl_servers'),
     pattern = '*.gotmpl',
     callback = function(ev)
         for filetype in vim.gsplit(ev.match, '.', { plain = true }) do

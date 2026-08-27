@@ -85,7 +85,7 @@ end, { desc = 'Yank the absolute path of the current buffer' })
 vim.keymap.set('n', 'gq', function()
     local view = vim.fn.winsaveview()
     vim.api.nvim_create_autocmd('CursorMoved', {
-        group = vim.api.nvim_create_augroup('formatting.restore_cursor'),
+        group = vim.api.nvim_create_augroup('my.formatting.restore_cursor'),
         buf = 0,
         once = true,
         desc = 'Restore view after formatting',
