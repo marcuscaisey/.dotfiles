@@ -34,6 +34,20 @@ fzf.setup({
     grep = { rg_opts = '--hidden --glob=!.git --only-matching ' .. fzf.defaults.grep.rg_opts },
     lsp = {
         jump1 = false, -- Show the UI when result is a single entry.
+        jump1_action = function(selected, opts)
+            fzf.actions.file_edit(selected, opts)
+            vim.schedule(function()
+                vim.cmd('normal! zt')
+            end)
+        end,
+        actions = {
+            ['enter'] = function(selected, opts)
+                fzf.actions.file_edit(selected, opts)
+                vim.schedule(function()
+                    vim.cmd('normal! zt')
+                end)
+            end,
+        },
         symbols = {
             symbol_style = 3, -- Omit kind icon
             symbol_hl = function(s)
