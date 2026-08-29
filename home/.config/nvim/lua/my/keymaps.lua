@@ -9,20 +9,17 @@ vim.keymap.set('n', 'j', [[(v:count > 1 ? "m'" . v:count : "") . 'j']], { expr =
 vim.keymap.set('n', 'k', [[(v:count > 1 ? "m'" . v:count : "") . 'k']], { expr = true })
 
 -- Center the cursor line in the window after a bunch of operations which jump
-vim.keymap.set('n', 'n', 'nzz')
-vim.keymap.set('n', 'N', 'Nzz')
-vim.keymap.set('n', '[q', '<Cmd>execute "cprevious " . v:count1<CR>zz')
-vim.keymap.set('n', ']q', '<Cmd>execute "cnext " . v:count1<CR>zz')
-vim.keymap.set('n', '[Q', '<Cmd>cfirst<CR>zz')
-vim.keymap.set('n', ']Q', '<Cmd>clast<CR>zz')
-vim.keymap.set('n', '[<C-Q>', '<Cmd>cpfile<CR>zz')
-vim.keymap.set('n', ']<C-Q>', '<Cmd>cnfile<CR>zz')
-vim.keymap.set('n', '[l', '<Cmd>execute "lprevious" . v:count1<CR>zz')
-vim.keymap.set('n', ']l', '<Cmd>execute "lnext " . v:count1<CR>zz')
-vim.keymap.set('n', '[L', '<Cmd>lfirst<CR>zz')
-vim.keymap.set('n', ']L', '<Cmd>llast<CR>zz')
-vim.keymap.set('n', '[<C-L>', '<Cmd>lpfile<CR>zz')
-vim.keymap.set('n', ']<C-L>', '<Cmd>lnfile<CR>zz')
+local post_jump_zz_keymaps = { 'n', 'N', '[q', ']q', '[Q', ']Q', '[<C-Q>', ']<C-Q>', '[l', ']l', '[L', ']L', '[<C-L>', ']<C-L>' }
+vim.api.nvim_create_autocmd('CmdAtom', {
+    group = vim.api.nvim_create_augroup('my.keymaps.post_jump_zz'),
+    desc = string.format('Center the cursor line in the window after %s', table.concat(post_jump_zz_keymaps, ', ')),
+    callback = function(ev)
+        local data = ev.data ---@type vim.event.cmdatom.data
+        if vim.list_contains(post_jump_zz_keymaps, data.lhs) then
+            vim.cmd('normal! zz')
+        end
+    end,
+})
 
 -- Toggle options
 vim.keymap.set('n', 'yow', '<Cmd>setlocal wrap!<CR>')
