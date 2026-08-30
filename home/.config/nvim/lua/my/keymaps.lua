@@ -31,11 +31,6 @@ vim.keymap.set('n', 'yoD', '<Cmd>diffoff!<CR>')
 
 -- <CR> closes the popup menu instead of accepting the current selection
 vim.keymap.set('i', '<CR>', 'pumvisible() ? "<C-E><CR>" : "<CR>"', { expr = true })
--- <C-Y> accepts the first item if nothing is selected
-vim.keymap.set('i', '<C-Y>', 'pumvisible() && complete_info().selected == -1 ? "<C-N><C-Y>" : "<C-Y>"', { expr = true })
--- <C-N> and <C-P> select items withouting inserting them
-vim.keymap.set('i', '<C-N>', 'pumvisible() ? "<Down>" : "<C-N>"', { expr = true, replace_keycodes = false })
-vim.keymap.set('i', '<C-P>', 'pumvisible() ? "<Up>" : "<C-P>"', { expr = true, replace_keycodes = false })
 
 -- Toggle quickfix / location list
 vim.keymap.set('n', '<Leader>q', '<Cmd>execute getqflist({"winid": 0}).winid > 0 ? "cclose" : "copen"<CR>')

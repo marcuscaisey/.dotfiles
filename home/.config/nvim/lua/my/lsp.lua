@@ -35,23 +35,6 @@ end
 
 vim.lsp.codelens.enable()
 
-vim.api.nvim_create_autocmd('LspAttach', {
-    desc = 'Enable completion',
-    group = vim.api.nvim_create_augroup('my.lsp.completion'),
-    callback = function(ev)
-        local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
-        if client:supports_method('textDocument/completion') then
-            vim.lsp.completion.enable(true, client.id, ev.buf, {
-                convert = function(item)
-                    return { kind_hlgroup = 'LspKind' .. vim.lsp.protocol.CompletionItemKind[item.kind] }
-                end,
-                autotrigger = true,
-            })
-            vim.bo[ev.buf].complete = 'o'
-        end
-    end,
-})
-
 local original_formatexpr = vim.lsp.formatexpr
 ---@diagnostic disable-next-line: duplicate-set-field
 vim.lsp.formatexpr = function(opts)
