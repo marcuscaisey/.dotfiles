@@ -42,6 +42,9 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
     desc = 'Update statusline file section',
     group = vim.api.nvim_create_augroup('my.statusline.file'),
     callback = function()
+        if vim.bo.buftype ~= '' then
+            return
+        end
         local filetype_icon = ''
         local ok, devicons = pcall(require, 'nvim-web-devicons')
         if ok then
