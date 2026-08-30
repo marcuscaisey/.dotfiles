@@ -8,29 +8,16 @@ vim.keymap.set('n', '<C-W>+', '<C-W>5+')
 vim.keymap.set('n', 'j', [[(v:count > 1 ? "m'" . v:count : "") . 'j']], { expr = true })
 vim.keymap.set('n', 'k', [[(v:count > 1 ? "m'" . v:count : "") . 'k']], { expr = true })
 
-local post_jump_zz_keymaps = { 'n', 'N', '[q', ']q', '[Q', ']Q', '[<C-Q>', ']<C-Q>', '[l', ']l', '[L', ']L', '[<C-L>', ']<C-L>' }
+local post_jump_zz_keymaps =
+    { 'n', 'N', '[q', ']q', '[Q', ']Q', '[<C-Q>', ']<C-Q>', '[l', ']l', '[L', ']L', '[<C-L>', ']<C-L>', '<C-]>', 'g]', 'g<C-]>' }
 vim.api.nvim_create_autocmd('CmdAtom', {
     group = vim.api.nvim_create_augroup('my.keymaps.post_jump_zz'),
     desc = string.format('Redraw cursor line at center of window after %s', table.concat(post_jump_zz_keymaps, ', ')),
     callback = function(ev)
         local data = ev.data ---@type vim.event.cmdatom.data
-        if vim.list_contains(post_jump_zz_keymaps, vim.fn.keytrans(data.lhs)) then
+        if vim.list_contains(post_jump_zz_keymaps, data.cmd or vim.fn.keytrans(data.lhs)) then
             vim.schedule(function()
                 vim.cmd('normal! zz')
-            end)
-        end
-    end,
-})
-
-local post_jump_zt_keymaps = { '<C-]>', 'g]', 'g<C-]>' }
-vim.api.nvim_create_autocmd('CmdAtom', {
-    group = vim.api.nvim_create_augroup('my.keymaps.post_jump_zt'),
-    desc = string.format('Redraw cursor line at top of window after %s', table.concat(post_jump_zt_keymaps, ', ')),
-    callback = function(ev)
-        local data = ev.data ---@type vim.event.cmdatom.data
-        if vim.list_contains(post_jump_zt_keymaps, data.cmd) then
-            vim.schedule(function()
-                vim.cmd('normal! zt')
             end)
         end
     end,

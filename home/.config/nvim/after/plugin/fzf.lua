@@ -37,14 +37,14 @@ fzf.setup({
         jump1_action = function(selected, opts)
             fzf.actions.file_edit(selected, opts)
             vim.schedule(function()
-                vim.cmd('normal! zt')
+                vim.cmd('normal! zz')
             end)
         end,
         actions = {
             ['enter'] = function(selected, opts)
                 fzf.actions.file_edit_or_qf(selected, opts)
                 vim.schedule(function()
-                    vim.cmd('normal! zt')
+                    vim.cmd('normal! zz')
                 end)
             end,
         },
