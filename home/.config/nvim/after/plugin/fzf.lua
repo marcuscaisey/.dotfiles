@@ -42,7 +42,7 @@ fzf.setup({
         end,
         actions = {
             ['enter'] = function(selected, opts)
-                fzf.actions.file_edit(selected, opts)
+                fzf.actions.file_edit_or_qf(selected, opts)
                 vim.schedule(function()
                     vim.cmd('normal! zt')
                 end)
