@@ -2,8 +2,23 @@ local ok, mini_completion = pcall(require, 'mini.completion')
 if not ok then
     return
 end
+
 mini_completion.setup({
-    lsp_completion = { source_func = 'omnifunc', auto_setup = false },
+    lsp_completion = {
+        source_func = 'omnifunc',
+        auto_setup = false,
+        ---@param items table Array of items from LSP response.
+        ---@param base string Base for which completion is done. See |complete-functions|.
+        ---@param opts table?
+        ---@return table
+        process_items = function(items, base, opts)
+            items = MiniCompletion.default_process_items(items, base, opts)
+            for _, item in ipairs(items) do
+                item.kind_hlgroup = 'LspKind' .. vim.lsp.protocol.CompletionItemKind[item.kind]
+            end
+            return items
+        end,
+    },
     mappings = { force_twostep = '<C-N>' },
 })
 
