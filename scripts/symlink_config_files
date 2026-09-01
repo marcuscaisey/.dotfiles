@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+# osx
+# Returns if we're running on osx
+osx() {
+    [ "$(uname)" = "Darwin" ]
+}
+
 # Convenience script for symlinking all of the config files in the home
 # directory so that you don't have to run the install script to add new config.
 stow -vv --target ~ --dir ~/.dotfiles --restow home
+
+if osx; then
+    ln -sfv ~/.config/clangd ~/Library/Preferences
+fi
