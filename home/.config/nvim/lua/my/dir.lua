@@ -72,6 +72,9 @@ vim.api.nvim_create_autocmd('User', {
         vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
         local dir = vim.api.nvim_buf_get_name(bufnr)
         local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+        if vim.deep_equal(lines, { '' }) then
+            return
+        end
         for i, name in ipairs(lines) do
             local row = i - 1
 
