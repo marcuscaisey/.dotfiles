@@ -40,6 +40,7 @@ vim.pack.add({
     { src = 'https://github.com/michaeljsmith/vim-indent-object' },
     { src = 'https://github.com/neovim/nvim-lspconfig' },
     { src = 'https://github.com/nvim-mini/mini.completion' },
+    { src = 'https://github.com/nvim-mini/mini.splitjoin' },
     { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
     { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
     { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },

@@ -24,6 +24,10 @@
       "rev": "d2a2b2a2b5350b713ade3bb744df39eee7d4229b",
       "src": "https://github.com/nvim-mini/mini.completion"
     },
+    "mini.splitjoin": {
+      "rev": "9301717c7612ccb72e89629df89416585dd54c9b",
+      "src": "https://github.com/nvim-mini/mini.splitjoin"
+    },
     "multicursor.nvim": {
       "rev": "704b99f10a72cc05d370cfeb294ff83412a8ab55",
       "src": "https://github.com/jake-stewart/multicursor.nvim"
