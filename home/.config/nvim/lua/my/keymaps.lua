@@ -44,6 +44,15 @@ for i = 0, 9 do
     vim.keymap.set('n', string.format('<Leader>%d', i), string.format('<Cmd>argument %d | args<CR>', i))
 end
 
+vim.keymap.set({ 'n', 'x' }, ']n', [[/^\(<\{7}<\@!\||\{7}|\@!\|=\{7}=\@!\|>\{7}>\@!\)<CR>]], {
+    silent = true,
+    desc = 'Jump to next git conflict marker (<<<<<<<, |||||||, =======, >>>>>>>)',
+})
+vim.keymap.set({ 'n', 'x' }, '[n', [[?^\(<\{7}<\@!\||\{7}|\@!\|=\{7}=\@!\|>\{7}>\@!\)<CR>]], {
+    silent = true,
+    desc = 'Jump to previous git conflict marker (<<<<<<<, |||||||, =======, >>>>>>>)',
+})
+
 ---@param s string
 local function yank(s)
     vim.fn.setreg('"', s)

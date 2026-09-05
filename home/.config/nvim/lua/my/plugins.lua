@@ -24,10 +24,7 @@ vim.pack.add({
     { src = 'https://github.com/bkad/camelcasemotion' },
     { src = 'https://github.com/gbprod/nord.nvim' },
     { src = 'https://github.com/ibhagwan/fzf-lua' },
-    { src = 'https://github.com/inkarkat/vim-ConflictMotions' },
-    { src = 'https://github.com/inkarkat/vim-CountJump' }, -- Required for vim-ConflictMotions
     { src = 'https://github.com/inkarkat/vim-ReplaceWithRegister' },
-    { src = 'https://github.com/inkarkat/vim-ingo-library' }, -- Required for vim-CountJump
     { src = 'https://github.com/kosayoda/nvim-lightbulb' },
     { src = 'https://github.com/kyazdani42/nvim-web-devicons' },
     { src = 'https://github.com/kylechui/nvim-surround' },

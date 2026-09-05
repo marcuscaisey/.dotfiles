@@ -68,14 +68,6 @@
       "rev": "35c3e2737758112ff3e7403acd7fab87a8925d06",
       "src": "https://github.com/marcuscaisey/please.nvim"
     },
-    "vim-ConflictMotions": {
-      "rev": "237d8c0d5fa27e567b14c3308f7de7295a3306ed",
-      "src": "https://github.com/inkarkat/vim-ConflictMotions"
-    },
-    "vim-CountJump": {
-      "rev": "5905c6bb1643035f409524bcb324e73bc67092a8",
-      "src": "https://github.com/inkarkat/vim-CountJump"
-    },
     "vim-ReplaceWithRegister": {
       "rev": "a487af6efd1be3fc6fac8da47d00efc9d1f6f724",
       "src": "https://github.com/inkarkat/vim-ReplaceWithRegister"
@@ -91,10 +83,6 @@
     "vim-indent-object": {
       "rev": "8ab36d5",
       "src": "https://github.com/michaeljsmith/vim-indent-object"
-    },
-    "vim-ingo-library": {
-      "rev": "18adf54012ce8e015df01e379752d5c4d15c9bb5",
-      "src": "https://github.com/inkarkat/vim-ingo-library"
     }
   }
 }
