@@ -19,7 +19,6 @@ mini_completion.setup({
             return items
         end,
     },
-    mappings = { force_twostep = '<C-N>' },
 })
 
 vim.lsp.config('*', { capabilities = MiniCompletion.get_lsp_capabilities() })
