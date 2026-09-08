@@ -38,6 +38,7 @@ vim.api.nvim_create_autocmd('User', {
     end,
 })
 
+vim.api.nvim_set_hl(0, 'StatusLineDefaultFileIcon', { ctermfg = 66, fg = '#6d8086' })
 vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
     desc = 'Update statusline file section',
     group = vim.api.nvim_create_augroup('my.statusline.file'),
@@ -45,16 +46,19 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
         if vim.bo.buftype == 'terminal' then
             return
         end
-        local filetype_icon = ''
-        local ok, devicons = pcall(require, 'nvim-web-devicons')
-        if ok then
-            local icon, icon_hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(0), nil, { default = true })
-            filetype_icon = '%#' .. icon_hl_group .. '#' .. icon .. ' '
-        end
-        local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
-        vim.g.statusline_file = filetype_icon .. '%#StatusLine#%f '
-        if vim.bo.filetype ~= 'directory' then
-            vim.g.statusline_file = vim.g.statusline_file .. '%(%h%w%m%r %)%#StatusLineDirectory#' .. cwd
+        if vim.bo.filetype == 'directory' then
+            vim.g.statusline_file = '%#StatusLine# %f '
+        else
+            local icon, icon_hl_group
+            local ok, devicons = pcall(require, 'nvim-web-devicons')
+            if ok then
+                icon, icon_hl_group = devicons.get_icon(vim.api.nvim_buf_get_name(0), nil, { default = true })
+            else
+                icon = ''
+                icon_hl_group = 'StatusLineDefaultFileIcon'
+            end
+            local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
+            vim.g.statusline_file = '%#' .. icon_hl_group .. '#' .. icon .. ' %#StatusLine#%f %(%h%w%m%r %)%#StatusLineDirectory#' .. cwd
         end
         vim.cmd.redrawstatus()
     end,
