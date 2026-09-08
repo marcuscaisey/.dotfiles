@@ -62,6 +62,8 @@ for item in vim.gsplit(vim.env.LS_COLORS or '', ':') do
     ::continue::
 end
 
+vim.api.nvim_set_hl(0, 'DirBufferDefaultFileIcon', { ctermfg = 66, fg = '#6d8086' })
+
 local ns = vim.api.nvim_create_namespace('my.dir.decorate')
 vim.api.nvim_create_autocmd('User', {
     desc = 'Decorate the directory buffer',
@@ -78,13 +80,22 @@ vim.api.nvim_create_autocmd('User', {
         for i, name in ipairs(lines) do
             local row = i - 1
 
-            local ok, devicons = pcall(require, 'nvim-web-devicons')
-            if ok and not name:match('/$') then
-                local icon, icon_hl_group = devicons.get_icon(name, nil, { default = true })
+            if name:match('/$') then
                 vim.api.nvim_buf_set_extmark(bufnr, ns, row, 0, {
-                    virt_text = {
-                        { icon .. ' ', icon_hl_group },
-                    },
+                    virt_text = { { ' ', 'Directory' } },
+                    virt_text_pos = 'inline',
+                })
+            else
+                local icon, icon_hl_group
+                local ok, devicons = pcall(require, 'nvim-web-devicons')
+                if ok then
+                    icon, icon_hl_group = devicons.get_icon(name, nil, { default = true })
+                else
+                    icon = ''
+                    icon_hl_group = 'DirBufferDefaultFileIcon'
+                end
+                vim.api.nvim_buf_set_extmark(bufnr, ns, row, 0, {
+                    virt_text = { { icon .. ' ', icon_hl_group } },
                     virt_text_pos = 'inline',
                 })
             end
