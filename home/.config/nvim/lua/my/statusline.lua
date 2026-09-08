@@ -58,7 +58,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
                 icon_hl_group = 'StatusLineDefaultFileIcon'
             end
             local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
-            vim.g.statusline_file = '%#' .. icon_hl_group .. '#' .. icon .. ' %#StatusLine#%f %(%h%w%m%r %)%#StatusLineDirectory#' .. cwd
+            vim.g.statusline_file = '%#' .. icon_hl_group .. '#' .. icon .. ' %#StatusLine#%f %(%h%w%m%r %)%#StatusLineDirectory#' .. cwd .. '/'
         end
         vim.cmd.redrawstatus()
     end,
