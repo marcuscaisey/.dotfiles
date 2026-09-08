@@ -47,7 +47,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
             return
         end
         if vim.bo.filetype == 'directory' then
-            vim.g.statusline_file = '%#StatusLine# %f '
+            vim.g.statusline_file = '%#Directory# %#StatusLine#%f '
         else
             local icon, icon_hl_group
             local ok, devicons = pcall(require, 'nvim-web-devicons')
