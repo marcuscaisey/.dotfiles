@@ -42,7 +42,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
     desc = 'Update statusline file section',
     group = vim.api.nvim_create_augroup('my.statusline.file'),
     callback = function()
-        if vim.bo.buftype ~= '' then
+        if vim.bo.buftype == 'terminal' then
             return
         end
         local filetype_icon = ''
