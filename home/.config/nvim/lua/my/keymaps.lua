@@ -44,11 +44,12 @@ for i = 0, 9 do
     vim.keymap.set('n', string.format('<Leader>%d', i), string.format('<Cmd>argument %d | args<CR>', i))
 end
 
-vim.keymap.set({ 'n', 'x' }, ']n', [[/^\(<\{7}<\@!\||\{7}|\@!\|=\{7}=\@!\|>\{7}>\@!\)<CR>]], {
+local conflict_marker_pattern = [[^\(<\{7}<\@!\||\{7}|\@!\|=\{7}=\@!\|>\{7}>\@!\)]]
+vim.keymap.set({ 'n', 'x' }, ']n', string.format("<Cmd>call search('%s', 's')<CR>", conflict_marker_pattern), {
     silent = true,
     desc = 'Jump to next git conflict marker (<<<<<<<, |||||||, =======, >>>>>>>)',
 })
-vim.keymap.set({ 'n', 'x' }, '[n', [[?^\(<\{7}<\@!\||\{7}|\@!\|=\{7}=\@!\|>\{7}>\@!\)<CR>]], {
+vim.keymap.set({ 'n', 'x' }, '[n', string.format("<Cmd>call search('%s', 'sb')<CR>", conflict_marker_pattern), {
     silent = true,
     desc = 'Jump to previous git conflict marker (<<<<<<<, |||||||, =======, >>>>>>>)',
 })
