@@ -186,7 +186,12 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     group = vim.api.nvim_create_augroup('my.buffer.set_buffer_working_directory'),
     callback = function(ev)
         local root = vim.fs.root(ev.buf, '.git')
-        if root then
+        if not root then
+            return
+        end
+        local cwd = vim.fn.getcwd()
+        local root_is_parent = vim.fs.relpath(root, cwd) ~= nil
+        if not root_is_parent then
             vim.cmd.bcd(root)
         end
     end,
