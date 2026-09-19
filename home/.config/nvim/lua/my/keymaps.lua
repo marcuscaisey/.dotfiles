@@ -96,3 +96,5 @@ vim.keymap.set('n', 'gq', function()
     end
     return 'g@'
 end, { expr = true })
+
+vim.keymap.set('n', '<Leader>c', '<Cmd>execute "edit %:r." . (expand("%:e") == "h" ? "c" : "h")<CR>')
