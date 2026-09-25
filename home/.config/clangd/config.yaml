@@ -1,2 +1,5 @@
 Completion:
   ArgumentLists: None
+Diagnostics:
+  Includes:
+    MissingIncludes: Strict
