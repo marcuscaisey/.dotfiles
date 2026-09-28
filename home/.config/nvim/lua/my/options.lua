@@ -7,6 +7,7 @@ vim.opt.completeopt = 'fuzzy,menuone,noinsert,nosort,popup'
 vim.opt.cursorline = true
 vim.opt.expandtab = true
 vim.opt.exrc = true
+vim.opt.follow = true
 vim.opt.ignorecase = true
 vim.opt.laststatus = 3
 vim.opt.number = true
