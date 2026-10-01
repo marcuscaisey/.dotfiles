@@ -112,6 +112,7 @@ vim.api.nvim_create_autocmd('SessionLoadPost', {
             vim.fn.setqflist({}, ' ', { items = state.items, idx = state.idx })
             if state.is_open then
                 vim.cmd.copen()
+                vim.cmd('wincmd p')
             end
         end
     end,
