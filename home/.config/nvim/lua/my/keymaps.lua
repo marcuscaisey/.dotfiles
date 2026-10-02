@@ -99,4 +99,6 @@ end, { expr = true })
 
 vim.keymap.set('n', '<Leader>c', '<Cmd>execute "edit %:r." . (expand("%:e") == "h" ? "c" : "h")<CR>')
 
+-- Replace :Man and :help on the commandline with commands which will open them in the current window
 vim.keymap.set('ca', 'Man', [[getcmdtype() == ":" && getcmdline() == "Man" ? "hide Man" : "Man"]], { expr = true })
+vim.keymap.set('ca', 'help', [[getcmdtype() == ":" && getcmdline() == "help" ? "enew | :set buftype=help | help" : "help"]], { expr = true })
