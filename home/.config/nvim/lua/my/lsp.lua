@@ -128,6 +128,7 @@ vim.api.nvim_create_user_command('LspInspect', function(args)
         return { 'lsp-devtools', 'agent', '--port', port, '--', unpack(original_cmd) }
     end
     local config = vim.deepcopy(client.config)
+    config.name = config.name .. '-lsp-inspect'
     if type(config.cmd) == 'function' then
         local original_start = vim.lsp.rpc.start
         --- @param cmd string[] Command to start the LSP server.
