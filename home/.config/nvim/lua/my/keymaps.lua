@@ -103,4 +103,5 @@ vim.keymap.set('n', '<Leader>c', '<Cmd>execute "edit %:r." . (expand("%:e") == "
 vim.keymap.set('ca', 'Man', [[getcmdtype() == ":" && getcmdline() == "Man" ? "hide Man" : "Man"]], { expr = true })
 vim.keymap.set('ca', 'help', [[getcmdtype() == ":" && getcmdline() == "help" ? "enew | :set buftype=help | help" : "help"]], { expr = true })
 
+vim.keymap.set('n', '-', '<Plug>(nvim-dir-up)')
 vim.keymap.set('n', 'g-', '<Cmd>execute "edit " . v:lua.vim.fs.root(0, ".git")<CR>')
