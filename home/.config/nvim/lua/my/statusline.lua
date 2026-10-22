@@ -42,7 +42,7 @@ vim.api.nvim_set_hl(0, 'StatusLineDefaultFileIcon', { ctermfg = 66, fg = '#6d808
 vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
     desc = 'Update statusline file section',
     group = vim.api.nvim_create_augroup('my.statusline.file'),
-    callback = function()
+    callback = function(ev)
         if vim.bo.buftype == 'terminal' then
             return
         end
@@ -57,8 +57,42 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
                 icon = ''
                 icon_hl_group = 'StatusLineDefaultFileIcon'
             end
-            local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
-            vim.g.statusline_file = '%#' .. icon_hl_group .. '#' .. icon .. ' %#StatusLine#%f %(%h%w%m%r %)%#StatusLineDirectory#' .. cwd .. '/'
+
+            local cwd = vim.fn.getcwd()
+            local filename = vim.api.nvim_buf_get_name(ev.buf)
+
+            local git_root = vim.fs.root(ev.buf, '.git')
+            local in_git_root = git_root and vim.fs.relpath(git_root, filename)
+            if in_git_root then
+                -- vim.fs.relpath(base, target) returns nil if base is not a parent of target so we
+                -- need to do some extra work to build the relative filename if the file is in the
+                -- git root but not in the current directory.
+                local base_dir = cwd
+                local base_dir_rel_path = ''
+                while base_dir do
+                    local rel_to_base_dir = vim.fs.relpath(base_dir, filename)
+                    if rel_to_base_dir then
+                        filename = vim.fs.joinpath(base_dir_rel_path, rel_to_base_dir)
+                        break
+                    end
+                    base_dir = vim.fs.dirname(base_dir)
+                    base_dir_rel_path = vim.fs.joinpath(base_dir_rel_path, '..')
+                end
+            end
+
+            local formatted_cwd = vim.fn.fnamemodify(cwd, ':~')
+            vim.g.statusline_file = (
+                '%#'
+                .. icon_hl_group
+                .. '#'
+                .. icon
+                .. ' %#StatusLine#'
+                .. filename
+                .. ' %(%h%w%m%r %)'
+                .. '%#StatusLineDirectory#'
+                .. formatted_cwd
+                .. '/'
+            )
         end
         vim.cmd.redrawstatus()
     end,
