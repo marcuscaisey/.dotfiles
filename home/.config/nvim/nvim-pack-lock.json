@@ -9,11 +9,11 @@
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitlinker.nvim": {
-      "rev": "cc6a52ee2b5d3639ce5c5d6c97bcc8e98d1c5980",
+      "rev": "b710fe0e0c997236104f43db49905ab67f8d1f64",
       "src": "https://github.com/linrongbin16/gitlinker.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "36a091f28cdef8c560770d3bce787ddbeb66464b",
+      "rev": "683137003522aebd6948358334164a6ba2ca7cd5",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "mason.nvim": {
@@ -21,11 +21,11 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.completion": {
-      "rev": "4d77cdecc81f0e971288de16a012574f9ebbdeb9",
+      "rev": "ace27587795b84ae6a83b9bc7ff63aec0eebc252",
       "src": "https://github.com/nvim-mini/mini.completion"
     },
     "mini.splitjoin": {
-      "rev": "9301717c7612ccb72e89629df89416585dd54c9b",
+      "rev": "be4536a1b8608a482dfac7aec5ce91b1c2f9bdab",
       "src": "https://github.com/nvim-mini/mini.splitjoin"
     },
     "nord.nvim": {
@@ -37,7 +37,7 @@
       "src": "https://github.com/kosayoda/nvim-lightbulb"
     },
     "nvim-lspconfig": {
-      "rev": "6d27c288ff951e1e94cb5f91c800adeddf0dc0c2",
+      "rev": "77b7432d4770d23b277d37923e5a08a442d8bb07",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
@@ -45,7 +45,7 @@
       "src": "https://github.com/kylechui/nvim-surround"
     },
     "nvim-treesitter": {
-      "rev": "1a4f47b03dfe92d28de7d5654c67327ef008c9e6",
+      "rev": "29212d826054bb2948fa9d3a99eca9bf6a050eb2",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {
@@ -57,7 +57,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "nvim-web-devicons": {
-      "rev": "58447c1fca354bbf184425e4a8d01deecbd6f3c4",
+      "rev": "ec309a0eaff6ea967e58c275996155ab5c16938d",
       "src": "https://github.com/kyazdani42/nvim-web-devicons"
     },
     "olddirs.nvim": {
@@ -65,7 +65,7 @@
       "src": "https://github.com/marcuscaisey/olddirs.nvim"
     },
     "please.nvim": {
-      "rev": "35c3e2737758112ff3e7403acd7fab87a8925d06",
+      "rev": "7fdedc5fef59cc9c5c93415d06e80578b109caf1",
       "src": "https://github.com/marcuscaisey/please.nvim"
     },
     "vim-ReplaceWithRegister": {
