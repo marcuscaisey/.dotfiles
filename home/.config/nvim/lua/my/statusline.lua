@@ -38,6 +38,24 @@ vim.api.nvim_create_autocmd('User', {
     end,
 })
 
+---@param base string
+---@param target string
+---@return string
+local function relative_path(base, target)
+    -- We can't just use vim.fs.relpath(base, target) because it returns nil if base is not a parent
+    -- of target
+    local path_to_base = ''
+    while base do
+        local path_relative_to_base = vim.fs.relpath(base, target)
+        if path_relative_to_base then
+            return vim.fs.joinpath(path_to_base, path_relative_to_base)
+        end
+        base = vim.fs.dirname(base)
+        path_to_base = vim.fs.joinpath(path_to_base, '..')
+    end
+    return ''
+end
+
 vim.api.nvim_set_hl(0, 'StatusLineDefaultFileIcon', { ctermfg = 66, fg = '#6d8086' })
 vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
     desc = 'Update statusline file section',
@@ -61,23 +79,14 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'DirChanged' }, {
             local cwd = vim.fn.getcwd()
             local filename = vim.api.nvim_buf_get_name(ev.buf)
 
-            local git_root = vim.fs.root(ev.buf, '.git')
-            local in_git_root = git_root and vim.fs.relpath(git_root, filename)
-            if in_git_root then
-                -- vim.fs.relpath(base, target) returns nil if base is not a parent of target so we
-                -- need to do some extra work to build the relative filename if the file is in the
-                -- git root but not in the current directory.
-                local base_dir = cwd
-                local base_dir_rel_path = ''
-                while base_dir do
-                    local rel_to_base_dir = vim.fs.relpath(base_dir, filename)
-                    if rel_to_base_dir then
-                        filename = vim.fs.joinpath(base_dir_rel_path, rel_to_base_dir)
-                        break
-                    end
-                    base_dir = vim.fs.dirname(base_dir)
-                    base_dir_rel_path = vim.fs.joinpath(base_dir_rel_path, '..')
+            if filename ~= '' then
+                local git_root = vim.fs.root(ev.buf, '.git')
+                local in_git_root = git_root and vim.fs.relpath(git_root, filename)
+                if in_git_root then
+                    filename = relative_path(cwd, filename)
                 end
+            else
+                filename = '[No Name]'
             end
 
             local formatted_cwd = vim.fn.fnamemodify(cwd, ':~')
